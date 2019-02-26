@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuthProvider xmlns="http://soap.sforce.com/2006/04/metadata">
+    <authorizeUrl>https://claritystep.eu.auth0.com/authorize</authorizeUrl>
+    <consumerKey>lUCSjO0tsdSXktG8gDpHyabTzKFaRGMT</consumerKey>
+    <consumerSecret>Lgnl8OxX1BGEW2zNZgbNXKSFBGLlNa16T0QGHrUjrvy9S/IxIL4yG90BKb+IGWH9fBVI8dshxXfcsyN+Ix2B23BBGPdiC2rX</consumerSecret>
+    <defaultScopes>refresh_token full</defaultScopes>
+    <friendlyName>ClaritySurveys</friendlyName>
+    <includeOrgIdInIdentifier>false</includeOrgIdInIdentifier>
+    <providerType>OpenIdConnect</providerType>
+    <sendAccessTokenInHeader>true</sendAccessTokenInHeader>
+    <sendClientCredentialsInHeader>false</sendClientCredentialsInHeader>
+    <tokenUrl>https://claritystep.eu.auth0.com/oauth/token</tokenUrl>
+</AuthProvider>
