@@ -2,7 +2,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app",
             "isDirectory": true,
             "isMetadataFile": false,
@@ -17,7 +17,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main",
             "isDirectory": true,
             "isMetadataFile": false,
@@ -32,7 +32,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default",
             "isDirectory": true,
             "isMetadataFile": false,
@@ -47,7 +47,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/aura",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/aura",
             "isDirectory": true,
             "isMetadataFile": false,
@@ -62,7 +62,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/authproviders",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/authproviders",
             "isDirectory": true,
             "isMetadataFile": false,
@@ -77,7 +77,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/authproviders/ClaritySurveys.authprovider-meta.xml",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/authproviders/ClaritySurveys.authprovider-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
@@ -92,7 +92,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes",
             "isDirectory": true,
             "isMetadataFile": false,
@@ -107,7 +107,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes/ClaritySurvey.cls",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes/ClaritySurvey.cls",
             "isDirectory": false,
             "isMetadataFile": false,
@@ -122,7 +122,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes/ClaritySurvey.cls-meta.xml",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes/ClaritySurvey.cls-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
@@ -137,7 +137,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes/ClaritySurveyHandler.cls",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes/ClaritySurveyHandler.cls",
             "isDirectory": false,
             "isMetadataFile": false,
@@ -152,7 +152,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes/ClaritySurveyHandler.cls-meta.xml",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes/ClaritySurveyHandler.cls-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
@@ -167,7 +167,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes/ClaritySurveyRequest.cls",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes/ClaritySurveyRequest.cls",
             "isDirectory": false,
             "isMetadataFile": false,
@@ -182,7 +182,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes/ClaritySurveyRequest.cls-meta.xml",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/classes/ClaritySurveyRequest.cls-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
@@ -197,7 +197,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/flows",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/flows",
             "isDirectory": true,
             "isMetadataFile": false,
@@ -212,7 +212,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/flows/Send_Survey_on_Case_Close.flow-meta.xml",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/flows/Send_Survey_on_Case_Close.flow-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
@@ -227,7 +227,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/layouts",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/layouts",
             "isDirectory": true,
             "isMetadataFile": false,
@@ -242,7 +242,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/layouts/Clarity_Survey_Response__c-Clarity Survey Response Layout.layout-meta.xml",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/layouts/Clarity_Survey_Response__c-Clarity Survey Response Layout.layout-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
@@ -257,7 +257,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/namedCredentials",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/namedCredentials",
             "isDirectory": true,
             "isMetadataFile": false,
@@ -272,7 +272,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/namedCredentials/ClaritySurvey.namedCredential-meta.xml",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/namedCredentials/ClaritySurvey.namedCredential-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
@@ -287,7 +287,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/objects",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/objects",
             "isDirectory": true,
             "isMetadataFile": false,
@@ -302,7 +302,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/objects/Clarity_Survey_Response__c",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/objects/Clarity_Survey_Response__c",
             "isDirectory": true,
             "isMetadataFile": false,
@@ -317,7 +317,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/objects/Clarity_Survey_Response__c/Clarity_Survey_Response__c.object-meta.xml",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/objects/Clarity_Survey_Response__c/Clarity_Survey_Response__c.object-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
@@ -332,7 +332,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/objects/Clarity_Survey_Response__c/fields",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/objects/Clarity_Survey_Response__c/fields",
             "isDirectory": true,
             "isMetadataFile": false,
@@ -347,7 +347,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/objects/Clarity_Survey_Response__c/fields/Status__c.field-meta.xml",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/objects/Clarity_Survey_Response__c/fields/Status__c.field-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
@@ -362,7 +362,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/profiles",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/profiles",
             "isDirectory": true,
             "isMetadataFile": false,
@@ -377,7 +377,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/profiles/Admin.profile-meta.xml",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/profiles/Admin.profile-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
@@ -392,7 +392,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/profiles/Custom%3A Marketing Profile.profile-meta.xml",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/profiles/Custom%3A Marketing Profile.profile-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
@@ -407,7 +407,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/profiles/Custom%3A Sales Profile.profile-meta.xml",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/profiles/Custom%3A Sales Profile.profile-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
@@ -422,7 +422,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/profiles/Custom%3A Support Profile.profile-meta.xml",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org/force-app/main/default/profiles/Custom%3A Support Profile.profile-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
@@ -437,7 +437,7 @@
     [
         "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org",
         {
-            "state": "n",
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/surveys/clarity-scratch-org",
             "isDirectory": true,
             "isMetadataFile": false,
