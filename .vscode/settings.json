@@ -7,5 +7,7 @@
     },
     "terminal.integrated.env.windows": {
         "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
-    }
+    },
+    "html.suggest.angular1": false,
+    "html.suggest.ionic": false
 }

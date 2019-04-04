@@ -1,13 +1,19 @@
 # SFDX  App
 
 ## Dev, Build and Test
-sfdx force:org:create --definitionfile my-org-def.json --setdefaultusername --setalias my-scratch-org
+sfdx force:org:list
+
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-scratch-org
 
 sfdx force:alias:set YourAlias=username@example.com
 
-sfdx force:user:password:generate --targetusername <username>
+sfdx force:user:password:generate --targetusername test-cvhixsrduu8h@example.com
 
-sfdx force:user:display --targetusername test-5u8qp76fkbyv@example.com
+sfdx force:user:display --targetusername test-cvhixsrduu8h@example.com
+
+sfdx force:config:set defaultusername=test-cvhixsrduu8h@example.com
+
+sfdx force:source:push
 
 ## Resources
 

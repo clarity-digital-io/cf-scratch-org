@@ -5,13 +5,13 @@ public class ClaritySurveyRequest {
 
         HttpRequest req = new HttpRequest(); 
         
-        ClaritySurvey__mdt clarityCallout = [SELECT APIKey__c, Endpoint__c FROM ClaritySurvey__mdt];
+        //ClaritySurvey__mdt clarityCallout = [SELECT APIKey__c, Endpoint__c FROM ClaritySurvey__mdt];
 
-        req.setEndpoint(clarityCallout.Endpoint__c);
+        //req.setEndpoint(clarityCallout.Endpoint__c);
         req.setMethod('POST');
         req.setHeader('Content-Type', 'application/json');
         //req.setHeader('client-id', clarityCallout.ClientId__c); 
-        req.setHeader('api-key', clarityCallout.APIKey__c); 
+        //req.setHeader('api-key', clarityCallout.APIKey__c); 
         req.setBody(records);
 
         sendRequest(req); 
