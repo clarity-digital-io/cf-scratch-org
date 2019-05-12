@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#000000</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>Build, Manage, Automate, and Connect Forms</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>true</isNavPersonalizationDisabled>
+    <label>Clarity Forms</label>
+    <navType>Console</navType>
+    <tabs>Clarity_Form__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Clarity_Forms_UtilityBar</utilityBar>
+    <workspaceConfig>
+        <mappings>
+            <tab>Clarity_Form__c</tab>
+        </mappings>
+    </workspaceConfig>
+</CustomApplication>
