@@ -1,40 +1,20 @@
 global with sharing class ClarityFormBuilder {
 	
-    public class Question {
-        public String title { get; set; }
-        public Integer order  { get; set; }
-        public String type  { get; set; }
-        public String formId  { get; set; }
-    }
-
     @RemoteAction
     global static List<String> save(String sQuestions){
 
         List<String> saved = new List<String>(); 
 
-        List<Question> parsedQuestions = (List<Question>)JSON.deserialize(sQuestions, List<Question>.class);
+        List<Clarity_Form_Question__c> parsedQuestions = (List<Clarity_Form_Question__c>)JSON.deserialize(sQuestions, List<Clarity_Form_Question__c>.class);
 
-        List<Clarity_Form_Question__c> clarityQuestions = new List<Clarity_Form_Question__c>(); 
+        List<Database.UpsertResult> results = Database.upsert(parsedQuestions, true); 
 
-        for(Question question : parsedQuestions) {
-
-            Clarity_Form_Question__c newQuestion = new Clarity_Form_Question__c(
-                Clarity_Form__c = question.formId,
-                Title__c        = question.title, 
-                Type__c         = question.type, 
-                Order__c        = question.order
-            );
-            
-            clarityQuestions.add(newQuestion); 
-
-        }
-
-        List<Database.SaveResult> results = Database.insert(clarityQuestions, true); 
-
-        for(Database.SaveResult result : results) {
+        for(Database.UpsertResult result : results) {
 
             if(result.isSuccess()) {
-                saved.add(result.getId());
+                if(result.isCreated()) {
+                    saved.add(result.getId());
+                }
             }
 
         }
@@ -58,4 +38,32 @@ global with sharing class ClarityFormBuilder {
         return result.getId(); 
 
     }
+
+    @RemoteAction
+    global static List<Clarity_Form_Question__c> getQuestions(String recordId){
+
+        Clarity_Form__c form = [SELECT Id, Name, Status__c FROM Clarity_Form__c WHERE Id =: recordId LIMIT 1];
+
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c 
+            FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
+
+        return questions; 
+
+    }
+
+    @RemoteAction
+    global static String saveQuestion(String sQuestion) {
+
+        Clarity_Form_Question__c parsedQuestion = (Clarity_Form_Question__c)JSON.deserialize(sQuestion, Clarity_Form_Question__c.class);
+
+        Database.SaveResult result = Database.update(parsedQuestion, true); 
+
+        if(!result.isSuccess()) {
+            System.debug('error');
+        }
+        
+        return result.getId();
+
+    }
+
 }

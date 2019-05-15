@@ -11,9 +11,9 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Multiple Choice</fullName>
+                <fullName>MultipleChoice</fullName>
                 <default>false</default>
-                <label>Multiple Choice</label>
+                <label>MultipleChoice</label>
             </value>
             <value>
                 <fullName>Comment</fullName>
@@ -36,9 +36,9 @@
                 <label>Ranking</label>
             </value>
             <value>
-                <fullName>Net Promoter Score</fullName>
+                <fullName>NetPromoterScore</fullName>
                 <default>false</default>
-                <label>Net Promoter Score</label>
+                <label>NetPromoterScore</label>
             </value>
             <value>
                 <fullName>Slider</fullName>
@@ -71,9 +71,9 @@
                 <label>Lookup</label>
             </value>
             <value>
-                <fullName>Record Group</fullName>
+                <fullName>RecordGroup</fullName>
                 <default>false</default>
-                <label>Record Group</label>
+                <label>RecordGroup</label>
             </value>
             <value>
                 <fullName>Image</fullName>

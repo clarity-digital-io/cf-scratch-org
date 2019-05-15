@@ -1,3 +1,4 @@
-<aura:component implements="flexipage:availableForAllPageTypes,lightning:actionOverride">
-    <lightning:container src="{!$Resource.ClarityFormsApp + '/index.html'}" />
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:actionOverride,force:hasRecordId">
+    <aura:attribute access="global" name="recordId" type="String" required="true" default=""/>
+    <lightning:container src="{!$Resource.ClarityFormsApp + '/index.html?recordId=' + v.recordId}" />
 </aura:component>
