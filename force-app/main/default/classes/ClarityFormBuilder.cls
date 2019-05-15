@@ -44,8 +44,8 @@ global with sharing class ClarityFormBuilder {
 
         Clarity_Form__c form = [SELECT Id, Name, Status__c FROM Clarity_Form__c WHERE Id =: recordId LIMIT 1];
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c 
-            FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c,
+            (SELECT Id, Label__c FROM Clarity_Form_Question_Options__r) FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         return questions; 
 
@@ -57,6 +57,21 @@ global with sharing class ClarityFormBuilder {
         Clarity_Form_Question__c parsedQuestion = (Clarity_Form_Question__c)JSON.deserialize(sQuestion, Clarity_Form_Question__c.class);
 
         Database.SaveResult result = Database.update(parsedQuestion, true); 
+
+        if(!result.isSuccess()) {
+            System.debug('error');
+        }
+        
+        return result.getId();
+
+    }
+
+    @RemoteAction
+    global static String saveQuestionOption(String sQuestionOption) {
+
+        Clarity_Form_Question_Option__c parsedQuestionOption = (Clarity_Form_Question_Option__c)JSON.deserialize(sQuestionOption, Clarity_Form_Question_Option__c.class);
+
+        Database.SaveResult result = Database.update(parsedQuestionOption, true); 
 
         if(!result.isSuccess()) {
             System.debug('error');

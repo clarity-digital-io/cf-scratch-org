@@ -283,10 +283,10 @@
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsApp/bundle.js",
             "isDirectory": false,
             "isMetadataFile": false,
-            "size": 297744,
-            "modifiedTime": 1557918325114,
-            "changeTime": 1557918325115,
-            "contentHash": "def69337e56ee5a6721ce6911b1354ad3663c5fe"
+            "size": 298185,
+            "modifiedTime": 1557930953082,
+            "changeTime": 1557930953083,
+            "contentHash": "957fa82b6654c2020d9fce61c7663b10614268c6"
         }
     ],
     [
@@ -334,7 +334,7 @@
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsApp",
             "isDirectory": true,
             "size": 256,
-            "modifiedTime": 1557918325113,
+            "modifiedTime": 1557930953081,
             "changeTime": 1557670238602,
             "contentHash": "a29ce3f1ac93ad1a6af95717eb5bbafa2b913ec6",
             "isMetadataFile": false,
@@ -669,14 +669,14 @@
     [
         "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormBuilder.cls",
         {
-            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormBuilder.cls",
             "isDirectory": false,
+            "size": 2403,
+            "modifiedTime": 1557929866490,
+            "changeTime": 1557929866490,
+            "contentHash": "fc1544037d2b8026d1fada9c5d6f2ae6bc4c4f6c",
             "isMetadataFile": false,
-            "size": 1872,
-            "modifiedTime": 1557918301018,
-            "changeTime": 1557918301018,
-            "contentHash": "ff29d0d7636740ebe6794137ee2642c47ec9feda"
+            "state": "u"
         }
     ],
     [
@@ -851,14 +851,14 @@
     [
         "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/objects/Clarity_Form__c/fields",
         {
-            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/objects/Clarity_Form__c/fields",
             "isDirectory": true,
-            "isMetadataFile": false,
             "size": 96,
             "modifiedTime": 1557918476753,
             "changeTime": 1557918476753,
-            "contentHash": "7546daeafe8869d18b37d2b8437a616c539efbd2"
+            "contentHash": "7546daeafe8869d18b37d2b8437a616c539efbd2",
+            "isMetadataFile": false,
+            "state": "u"
         }
     ],
     [
