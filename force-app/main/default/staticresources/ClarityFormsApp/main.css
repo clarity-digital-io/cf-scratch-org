@@ -6,7 +6,7 @@
 @font-face {
     font-family: 'Salesforce Sans';
     font-weight: 900;
-    src: url('assets/fonts/SalesforceSans-Bold.ttf');
+    src: url('assets/fonts/SalesforceSans-Bold.ttf');   
 }
 
 html {
@@ -19,7 +19,7 @@ body {
 }
 
 #app {
-    border-bottom: 5px solid #000;
+    border-bottom: 2px solid #000;
 }
 
 ul {
