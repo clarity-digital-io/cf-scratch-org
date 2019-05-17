@@ -1,4 +1,42 @@
-# SFDX  App
+# Clarity Forms Salesforce App
+
+## Custom Objects
+
+### Clarity Form (Clarity_Form__c)
+
+Name
+OwnerId
+Status__c (Draft, Published)
+
+### Clarity Form Question (Clarity_Form_Question__c)
+
+Name
+Order__c
+Required__c
+Title__c
+Initial__c 
+Type__c (MultipleChoice, Comment, Star, Dropdown, Ranking, Slider, Date, Email, Payment, RecordGroup, Lookup)
+
+### Clarity Form Question Option (Clarity_Form_Question_Option__c)
+
+Clarity_Form_Question__c
+Name
+Label__c
+
+### Clarity Form Response (Clarity_Form_Response__c)
+
+OwnerId
+Clarity_Form__c
+Completion__c (70%)
+Status__c (New, In Progress, Submitted)
+Time__c (2:30)
+
+### Clarity Form Answer (Clarity_Form_Answer__c)
+
+Clarity_Form_Question__c
+Record__c (LookupId to record created)
+Answer__c 
+
 
 ## Dev, Build and Test
 sfdx force:org:list
@@ -24,4 +62,6 @@ sfdx force:source:push
 ## Issues
 
 
-## clarity-survey-salesforce-mp
+## clarity-scratch-org 
+
+
