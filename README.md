@@ -7,6 +7,10 @@
 Name
 OwnerId
 Status__c (Draft, Published)
+Background_Color__c
+Question_Color__c
+Button_Color__c
+Font_Family__c
 
 ### Clarity Form Question (Clarity_Form_Question__c)
 
@@ -16,6 +20,21 @@ Required__c
 Title__c
 Initial__c 
 Type__c (MultipleChoice, Comment, Star, Dropdown, Ranking, Slider, Date, Email, Payment, RecordGroup, Lookup)
+
+### Clarity Form Flow Design (Clarity_Form_Flow_Design__c) (On Change or Form Submission )
+
+Clarity_Form_Question__c
+Active__c 
+Form_Submission__c 
+Values__c 
+
+### Clarity Form Flow (Clarity_Form_Flow__c) (Created From ) (Batch Job to delete)
+
+Clarity_Form_Question__c
+Clarity_Form_Flow_Design__c
+User
+Value__c 
+CreatedDate
 
 ### Clarity Form Question Option (Clarity_Form_Question_Option__c)
 
@@ -36,7 +55,6 @@ Time__c (2:30)
 Clarity_Form_Question__c
 Record__c (LookupId to record created)
 Answer__c 
-
 
 ## Dev, Build and Test
 sfdx force:org:list

@@ -34,10 +34,10 @@
         {
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default",
             "isDirectory": true,
-            "size": 480,
-            "modifiedTime": 1557650009355,
-            "changeTime": 1557650009355,
-            "contentHash": "88bdfcfa4554caeee8e17bc19e86023250252095",
+            "size": 512,
+            "modifiedTime": 1558109526087,
+            "changeTime": 1558109526087,
+            "contentHash": "2ee31223f9357bb15c3859f782a0b72262f214f0",
             "isMetadataFile": false,
             "state": "u"
         }
@@ -321,7 +321,7 @@
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsApp",
             "isDirectory": true,
             "size": 256,
-            "modifiedTime": 1558046019110,
+            "modifiedTime": 1558104933115,
             "changeTime": 1558027843748,
             "contentHash": "a29ce3f1ac93ad1a6af95717eb5bbafa2b913ec6",
             "isMetadataFile": false,
@@ -385,10 +385,10 @@
         {
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/aura/ClarityFormsBuilder/ClarityFormsBuilder.cmp",
             "isDirectory": false,
-            "size": 322,
-            "modifiedTime": 1558027484016,
-            "changeTime": 1558026935150,
-            "contentHash": "7478d6200c5509fd0f285c1a108d242403fe8921",
+            "size": 402,
+            "modifiedTime": 1558109036085,
+            "changeTime": 1558109036085,
+            "contentHash": "dad449c43bba0578758dbc3b1b3b4fb16c5d5aa0",
             "isMetadataFile": false,
             "state": "u"
         }
@@ -409,14 +409,14 @@
     [
         "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/aura/ClarityFormsBuilder/ClarityFormsBuilderController.js",
         {
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/aura/ClarityFormsBuilder/ClarityFormsBuilderController.js",
             "isDirectory": false,
-            "size": 60,
-            "modifiedTime": 1557604462786,
-            "changeTime": 1557604462786,
-            "contentHash": "9fc7736232d1d9d7a40c4cea1d6b22e712d8f8b1",
             "isMetadataFile": false,
-            "state": "u"
+            "size": 376,
+            "modifiedTime": 1558111372951,
+            "changeTime": 1558111372951,
+            "contentHash": "b262914eedc4118a95c6649d18b77f5732e68550"
         }
     ],
     [
@@ -903,14 +903,79 @@
     [
         "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsApp/bundle.js",
         {
-            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsApp/bundle.js",
             "isDirectory": false,
+            "size": 447791,
+            "modifiedTime": 1558104933116,
+            "changeTime": 1558104933123,
+            "contentHash": "d4dc6c838db8370670f565df641e7fcc0235a4f4",
             "isMetadataFile": false,
-            "size": 447912,
-            "modifiedTime": 1558046019111,
-            "changeTime": 1558046019112,
-            "contentHash": "1ae99dba0c3f979ccf043eed5bf7a7e3c0a10cfb"
+            "state": "u"
+        }
+    ],
+    [
+        "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc",
+        {
+            "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc",
+            "isDirectory": true,
+            "size": 96,
+            "modifiedTime": 1558109549026,
+            "changeTime": 1558109549026,
+            "contentHash": "27690ffe3f4d017840877762319a3fa3f8662862",
+            "isMetadataFile": false,
+            "state": "u"
+        }
+    ],
+    [
+        "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/clarityForm",
+        {
+            "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/clarityForm",
+            "isDirectory": true,
+            "size": 160,
+            "modifiedTime": 1558109549027,
+            "changeTime": 1558109549027,
+            "contentHash": "2cf956c3c0c2853c4ae729e77b0af20d7067d901",
+            "isMetadataFile": false,
+            "state": "u"
+        }
+    ],
+    [
+        "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/clarityForm/clarityForm.html",
+        {
+            "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/clarityForm/clarityForm.html",
+            "isDirectory": false,
+            "size": 311,
+            "modifiedTime": 1558110762264,
+            "changeTime": 1558110762264,
+            "contentHash": "7370b68224894ea36930868027b9816896bb817c",
+            "isMetadataFile": false,
+            "state": "u"
+        }
+    ],
+    [
+        "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/clarityForm/clarityForm.js",
+        {
+            "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/clarityForm/clarityForm.js",
+            "isDirectory": false,
+            "size": 216,
+            "modifiedTime": 1558110783128,
+            "changeTime": 1558110783128,
+            "contentHash": "6dba63f70dd49d8f15309a6bc8327d658b6b828f",
+            "isMetadataFile": false,
+            "state": "u"
+        }
+    ],
+    [
+        "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/clarityForm/clarityForm.js-meta.xml",
+        {
+            "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/clarityForm/clarityForm.js-meta.xml",
+            "isDirectory": false,
+            "size": 390,
+            "modifiedTime": 1558110741146,
+            "changeTime": 1558110741146,
+            "contentHash": "69dc41e6f3c1a1fcedbe2d7e8312874e448a5125",
+            "isMetadataFile": true,
+            "state": "u"
         }
     ]
 ]
