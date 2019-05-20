@@ -6,12 +6,15 @@
 
 		if(name == 'Preview') {
 
-			var navService = cmp.find("navService");
+			let navService = cmp.find("navService");
 			
-			var pageReference = {
-				type: 'standard__navItemPage',
+			let pageReference = {
+				type: 'standard__component',
 				attributes: {
-					apiName: 'Clarity_Form_Preview'
+					componentName: 'c__ClarityFormsPreview'
+				},
+				state : {
+					recordId : cmp.get('v.recordId')
 				}
 			};
 

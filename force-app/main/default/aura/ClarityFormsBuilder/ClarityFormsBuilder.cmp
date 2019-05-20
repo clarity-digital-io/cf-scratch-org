@@ -1,5 +1,5 @@
 <aura:component implements="flexipage:availableForAllPageTypes,lightning:actionOverride,force:hasRecordId">
     <lightning:navigation aura:id="navService"/>
-    <aura:attribute access="global" name="recordId" type="String" required="true" default=""/>
+     <aura:attribute access="global" name="recordId" type="String" required="true" default=""/>
     <lightning:container src="{!$Resource.ClarityFormsApp + '/index.html?recordId=' + v.recordId}" onmessage="{!c.handleMessage}" />
 </aura:component>

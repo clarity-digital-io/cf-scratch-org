@@ -1,44 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
-    <applicationVisibilities>
-        <application>Clarity_Forms</application>
-        <default>false</default>
-        <visible>false</visible>
-    </applicationVisibilities>
-    <classAccesses>
-        <apexClass>ClarityFormBuilder</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
     <custom>true</custom>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Clarity_Form_Question__c.Title__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form_Question__c.Type__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form__c.Status__c</field>
+        <field>Clarity_Form_Question_Option__c.Label__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <layoutAssignments>
-        <layout>Clarity_Form_Question__c-Clarity Form Question Layout</layout>
+        <layout>Clarity_Form_Question_Option__c-Clarity Form Question Option Layout</layout>
     </layoutAssignments>
-    <layoutAssignments>
-        <layout>Clarity_Form__c-Clarity Form Layout</layout>
-    </layoutAssignments>
-    <tabVisibilities>
-        <tab>Builder</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
-        <tab>Clarity_Form__c</tab>
-        <visibility>DefaultOff</visibility>
-    </tabVisibilities>
     <userLicense>Salesforce</userLicense>
     <userPermissions>
         <enabled>true</enabled>

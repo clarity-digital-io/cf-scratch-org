@@ -9,7 +9,25 @@
         <apexClass>ClarityFormBuilder</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>ClarityFormPreview</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ClarityFormService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <custom>false</custom>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Question_Option__c.Clarity_Form_Question__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Question_Option__c.Label__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form_Question__c.Required__c</field>
@@ -31,11 +49,23 @@
         <readable>true</readable>
     </fieldPermissions>
     <layoutAssignments>
+        <layout>Clarity_Form_Question_Option__c-Clarity Form Question Option Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Clarity_Form_Question__c-Clarity Form Question Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form__c-Clarity Form Layout</layout>
     </layoutAssignments>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Clarity_Form_Question_Option__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
@@ -55,12 +85,8 @@
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <tabVisibilities>
-        <tab>Builder</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
         <tab>Clarity_Form__c</tab>
-        <visibility>DefaultOff</visibility>
+        <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>
     <userPermissions>
