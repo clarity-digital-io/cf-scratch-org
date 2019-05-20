@@ -1,0 +1,21 @@
+<template>
+    <template if:true={form}>
+        <lightning-card title={form.Name} icon-name="custom:custom14">
+                <div class="slds-m-around_medium">
+                    <ul class="slds-m-around_medium">
+                        <template for:each={questions} for:item="question">
+                            <c-question 
+                                id={question.Id} 
+                                title={question.Title__c} 
+                                type={question.Type__c}
+                                required={question.Required__c}
+                                options={question.Clarity_Form_Question_Options__r}
+                                key={question.Id} 
+                            >
+                            </c-question> 
+                        </template>
+                    </ul>
+                </div>
+        </lightning-card>
+    </template>
+</template>
