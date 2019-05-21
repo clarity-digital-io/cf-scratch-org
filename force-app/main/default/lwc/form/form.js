@@ -17,7 +17,7 @@ export default class ClarityForm extends LightningElement {
         preview({ recordId: this.recordId })
             .then(result => {
                 this.form = result['Form'][0];
-                this.questions = sort(result['Questions']);
+                this.questions = sortQuestions(result['Questions']);
             })
             .catch(error => {
                 this.error = error; 
@@ -27,15 +27,39 @@ export default class ClarityForm extends LightningElement {
 
 }
 
-const sort = (result) => {
+const sortQuestions = (result) => {
 
-    return result.sort((a, b) => {
+    let questions = result.sort((a, b) => {
         if(a.Order__c < b.Order__c) {
             return -1; 
         }
         if(a.Order__c > b.Order__c) {
             return 1; 
         }
+    })
+
+    return questions.map(question => {
+
+        let nQuestion = question.Clarity_Form_Question_Options__r != null && question.Clarity_Form_Question_Options__r.length ? 
+            { ...question, Clarity_Form_Question_Options__r: transformOptions(question.Clarity_Form_Question_Options__r) } :
+            question;
+
+        return nQuestion;
+
+    });
+
+}
+
+
+const transformOptions = (options) => {
+
+    return options.map(option => {
+
+        return {
+            value : option.Id, 
+            label : option.Label__c 
+        }
+
     });
 
 }

@@ -111,4 +111,30 @@ global with sharing class ClarityFormBuilder {
         return results;
     }
 
+    @RemoteAction 
+    global static List<Clarity_Form_Question__c> deleteQuestion(String sQuestions, String sDeleteQuestionId) {
+
+        Clarity_Form_Question__c questionToDelete = [SELECT Id FROM Clarity_Form_Question__c WHERE Id =: sDeleteQuestionId];
+
+        Database.DeleteResult result = Database.delete(questionToDelete, true);
+
+        if(!result.isSuccess()) {
+            System.debug('error: ' + result.getErrors());
+        }
+        
+        List<Clarity_Form_Question__c> parsedQuestions = (List<Clarity_Form_Question__c>)JSON.deserialize(sQuestions, List<Clarity_Form_Question__c>.class);
+
+        List<Database.SaveResult> results = Database.update(parsedQuestions, true); 
+
+        for(Database.SaveResult sResult : results) {
+
+            if(!sResult.isSuccess()) {
+                System.debug('error');
+            }
+
+        }
+
+        return parsedQuestions;
+    }
+
 }

@@ -17,6 +17,12 @@ export default class ClarityFormQuestion extends LightningElement {
     @api id
     @api options
 
+    handleChange(event) {
+        // Get the string of the "value" attribute on the selected option
+        const selectedOption = event.detail.value;
+        alert(`Option selected with value: ${selectedOption}`);
+    }
+
     render() {
         switch (this.type) {
             case 'MultipleChoice':
@@ -67,17 +73,3 @@ export default class ClarityFormQuestion extends LightningElement {
         }
     }
 }
-
-// @track statusOptions = [
-//     {value: 'new', label: 'New'},
-//     {value: 'in-progress', label: 'In Progress'},
-//     {value: 'finished', label: 'Finished'}
-// ];
-
-// @track value = 'new';
-
-// handleChange(event) {
-//     // Get the string of the "value" attribute on the selected option
-//     const selectedOption = event.detail.value;
-//     alert(`Option selected with value: ${selectedOption}`);
-// }
