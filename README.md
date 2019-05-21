@@ -21,20 +21,19 @@ Title__c
 Initial__c 
 Type__c (MultipleChoice, Comment, Star, Dropdown, Ranking, Slider, Date, Email, Payment, RecordGroup, Lookup)
 
-### Clarity Form Flow Design (Clarity_Form_Flow_Design__c) (On Change or Form Submission )
+### Clarity Form Question Flow Design (Clarity_Form_Question_Flow_Design__c) (On Change or Form Submission )
 
 Clarity_Form_Question__c
 Active__c 
 Form_Submission__c 
 Values__c 
 
-### Clarity Form Flow (Clarity_Form_Flow__c) (Created From ) (Batch Job to delete)
+### Clarity Form Question Flow (Clarity_Form_Question_Flow__c) (Created From ) (Batch Job to delete)
 
 Clarity_Form_Question__c
 Clarity_Form_Flow_Design__c
 User
 Value__c 
-CreatedDate
 
 ### Clarity Form Question Option (Clarity_Form_Question_Option__c)
 

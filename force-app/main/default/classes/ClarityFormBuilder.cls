@@ -137,4 +137,19 @@ global with sharing class ClarityFormBuilder {
         return parsedQuestions;
     }
 
+    @RemoteAction
+    global static List<Clarity_Form_Flow_Design__c> saveFlowDesign(String sFlowDesign) {
+
+        Clarity_Form_Flow_Design__c parsedFlowDesign = (Clarity_Form_Flow_Design__c)JSON.deserialize(sFlowDesign, Clarity_Form_Flow_Design__c.class);
+    
+        Database.UpsertResult result = Database.upsert(parsedFlowDesign, true); 
+
+        if(!result.isSuccess()) {
+           System.debug('log error: '); 
+        }
+
+        return result.getId(); 
+        
+    }
+
 }
