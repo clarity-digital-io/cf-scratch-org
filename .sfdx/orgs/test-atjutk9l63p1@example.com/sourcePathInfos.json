@@ -205,10 +205,10 @@
         {
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormPreview.cls",
             "isDirectory": false,
-            "size": 851,
-            "modifiedTime": 1558609701786,
-            "changeTime": 1558609701786,
-            "contentHash": "cd758c50bfa721afebd9983c3a0a45c94eac98ef",
+            "size": 993,
+            "modifiedTime": 1558616361581,
+            "changeTime": 1558616361581,
+            "contentHash": "847f6122ef748d0f71245fa6b75c06f62744696b",
             "isMetadataFile": false,
             "state": "u",
             "isWorkspace": false
@@ -1306,14 +1306,14 @@
     [
         "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/question/question.js",
         {
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/question/question.js",
             "isDirectory": false,
-            "size": 2198,
-            "modifiedTime": 1558611974046,
-            "changeTime": 1558611974046,
-            "contentHash": "dc271387c4f7648680cdb1ff3137fd9f9748cda3",
             "isMetadataFile": false,
-            "state": "u"
+            "size": 2750,
+            "modifiedTime": 1558616517613,
+            "changeTime": 1558616517613,
+            "contentHash": "304772048126867676cd5ca093c98ca359d04a47"
         }
     ],
     [
@@ -1384,14 +1384,14 @@
     [
         "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/form/form.js",
         {
-            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/form/form.js",
             "isDirectory": false,
-            "isMetadataFile": false,
             "size": 1557,
             "modifiedTime": 1558612053475,
             "changeTime": 1558612053475,
-            "contentHash": "5d359312a51fc156555ae9cfa296047843f974d1"
+            "contentHash": "5d359312a51fc156555ae9cfa296047843f974d1",
+            "isMetadataFile": false,
+            "state": "u"
         }
     ],
     [

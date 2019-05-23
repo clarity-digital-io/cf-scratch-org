@@ -1,4 +1,7 @@
 import { LightningElement, api } from 'lwc';
+import preview from '@salesforce/apex/ClarityFormPreview.preview';
+import publishFlow from '@salesforce/apex/ClarityFormPreview.publishFlow';
+
 import combobox from './combobox.html';
 import textarea from './textarea.html';
 import multiplechoice from './multiplechoice.html';
@@ -19,11 +22,13 @@ export default class ClarityFormQuestion extends LightningElement {
     @api flow
 
     handleChange(event) {
-        // Get the string of the "value" attribute on the selected option
+
         const selectedOption = event.detail.value;
-        console.log('flow', this.id, selectedOption); 
-        console.log('flow', this.flow);
-        alert(`Option selected with value: ${JSON.stringify(this.options)}`);
+
+        if(this.flow.Active__c && !this.flow.Form_Submission) {
+            createFlow(this.id, this.options, selectedOption); 
+        }
+            
     }
 
     render() {
@@ -76,3 +81,24 @@ export default class ClarityFormQuestion extends LightningElement {
         }
     }
 }
+
+const createFlow = (questionId, options, selectedOption) => {
+    
+    let option = options.find(option => option.value == selectedOption);
+
+    if(option.flow) {
+
+        let questionFlow = { Value__c : option.label, Clarity_Form_Question__c: questionId };
+
+        publishFlow({ questionFlow: JSON.stringify(questionFlow) })
+            .then(result => {
+                console.log(result);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+    } 
+
+}
+

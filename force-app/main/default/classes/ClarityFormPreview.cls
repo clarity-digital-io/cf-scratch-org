@@ -19,4 +19,11 @@ public with sharing class ClarityFormPreview {
 
     }
 
+    @AuraEnabled
+    public static void publishFlow(Clarity_Form_Question_Flow__c questionFlow){
+        System.debug(questionFlow);
+    }
+
 }
+
+
