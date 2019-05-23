@@ -40,9 +40,12 @@ const sortQuestions = (result) => {
 
     return questions.map(question => {
 
-        let nQuestion = question.Clarity_Form_Question_Options__r != null && question.Clarity_Form_Question_Options__r.length ? 
-            { ...question, Clarity_Form_Question_Options__r: transformOptions(question.Clarity_Form_Question_Options__r) } :
-            question;
+        let options = question.Clarity_Form_Question_Options__r;
+
+        let nQuestion = { 
+            ...question, 
+            Clarity_Form_Question_Options__r: options != null && options.length ? transformOptions(options) : question 
+        };
 
         return nQuestion;
 

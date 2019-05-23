@@ -16,10 +16,12 @@ export default class ClarityFormQuestion extends LightningElement {
     @api required
     @api id
     @api options
+    @api flow
 
     handleChange(event) {
         // Get the string of the "value" attribute on the selected option
         const selectedOption = event.detail.value;
+        console.log('flow', flow); 
         alert(`Option selected with value: ${selectedOption}`);
     }
 
