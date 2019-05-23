@@ -52,9 +52,9 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<Clarity_Form_Question_Option__c> getQuestionOptions(String sQuestionId){
+    global static List<Clarity_Form_Question_Option__c> getQuestionOptions(String sQuestionId) {
 
-        List<Clarity_Form_Question_Option__c> options = [SELECT Id, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
+        List<Clarity_Form_Question_Option__c> options = [SELECT Id, Active_Flow__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
 
         return options; 
 
@@ -137,10 +137,32 @@ global with sharing class ClarityFormBuilder {
         return parsedQuestions;
     }
 
-    @RemoteAction
-    global static List<Clarity_Form_Flow_Design__c> saveFlowDesign(String sFlowDesign) {
+    @RemoteAction 
+    global static Map<String, List<sObject>> getQuestionEditDetails(String sQuestionId) {
 
-        Clarity_Form_Flow_Design__c parsedFlowDesign = (Clarity_Form_Flow_Design__c)JSON.deserialize(sFlowDesign, Clarity_Form_Flow_Design__c.class);
+        Clarity_Form_Question_Flow_Design__c flowDesign = [SELECT Id, Active__c, Form_Submission__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Flow_Design__c WHERE Clarity_Form_Question__c =: sQuestionId LIMIT 1];
+
+        List<Clarity_Form_Question_Option__c> questionOptions = [SELECT Id, Active_Flow__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
+
+        Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
+        
+        List<sObject> options = new List<sObject>(); 
+        options.addAll(questionOptions);
+
+        List<sObject> flow = new List<sObject>(); 
+        flow.add(flowDesign);
+
+        results.put('Options', options);
+        results.put('FlowDesign', flow);
+
+        return results;
+
+    }
+
+    @RemoteAction
+    global static Map<String, List<sObject>> saveFlowDesign(String sQuestionOptions, String sFlowDesign) {
+
+        Clarity_Form_Question_Flow_Design__c parsedFlowDesign = (Clarity_Form_Question_Flow_Design__c)JSON.deserialize(sFlowDesign, Clarity_Form_Question_Flow_Design__c.class);
     
         Database.UpsertResult result = Database.upsert(parsedFlowDesign, true); 
 
@@ -148,7 +170,33 @@ global with sharing class ClarityFormBuilder {
            System.debug('log error: '); 
         }
 
-        return result.getId(); 
+        List<Clarity_Form_Question_Option__c> parsedQuestionOptions = (List<Clarity_Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, List<Clarity_Form_Question_Option__c>.class);
+
+        List<Database.UpsertResult> resultOptions = Database.upsert(parsedQuestionOptions, true); 
+        
+        for(Database.UpsertResult resultOption : resultOptions) {
+
+            if(!resultOption.isSuccess()) {
+
+                System.debug('error: ' + resultOption.getErrors());
+
+            }
+
+        }
+
+        List<sObject> options = new List<sObject>(); 
+        options.addAll(parsedQuestionOptions);
+
+        List<sObject> flow = new List<sObject>(); 
+        flow.add(parsedFlowDesign);
+
+        Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
+
+        results.put('Options', options);
+        results.put('FlowDesign', flow);
+
+
+        return results;
         
     }
 
