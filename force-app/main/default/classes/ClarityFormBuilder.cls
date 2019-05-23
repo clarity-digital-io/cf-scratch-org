@@ -160,7 +160,7 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static Map<String, List<sObject>> saveFlowDesign(String sQuestionOptions, String sFlowDesign) {
+    global static Map<String, List<sObject>> saveFlowDesign(String sFlowDesign, String sQuestionOptions) {
 
         Clarity_Form_Question_Flow_Design__c parsedFlowDesign = (Clarity_Form_Question_Flow_Design__c)JSON.deserialize(sFlowDesign, Clarity_Form_Question_Flow_Design__c.class);
     
