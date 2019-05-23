@@ -44,9 +44,10 @@ const sortQuestions = (result) => {
 
         let nQuestion = { 
             ...question, 
-            Clarity_Form_Question_Options__r: options != null && options.length ? transformOptions(options) : question 
+            Clarity_Form_Question_Flow_Designs__r: question.Clarity_Form_Question_Flow_Designs__r[0], 
+            Clarity_Form_Question_Options__r: options != null && options.length ? transformOptions(options) : [] 
         };
-
+        console.log(nQuestion);
         return nQuestion;
 
     });
@@ -60,7 +61,8 @@ const transformOptions = (options) => {
 
         return {
             value : option.Id, 
-            label : option.Label__c 
+            label : option.Label__c, 
+            flow  : option.Active_Flow__c
         }
 
     });
