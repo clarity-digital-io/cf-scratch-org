@@ -26,6 +26,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>LookupSearchResult</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>QuestionFlowDesigns</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>TriggerException</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -37,11 +45,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form_Question_Flow_Design__c.Active__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Clarity_Form_Question_Flow_Design__c.Clarity_Form_Question__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -77,6 +80,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form_Question_Option__c.Label__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Question__c.Lookup__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

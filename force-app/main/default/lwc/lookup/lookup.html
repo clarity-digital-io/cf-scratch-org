@@ -1,3 +1,8 @@
 <template>
-    
+
+    <c-lightning-lookup selection={initialSelection} errors={errors}
+        onsearch={handleSearch} onselectionchange={handleSelectionChange}
+        label={title} placeholder="Search Salesforce" is-multi-entry={isMultiEntry}>
+    </c-lightning-lookup>
+
 </template>

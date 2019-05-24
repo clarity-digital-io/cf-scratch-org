@@ -71,7 +71,16 @@
 
     <template if:true={lookup}>
         <div class="slds-m-vertical_medium">
-            lookup!
+            <c-lookup
+                id={id} 
+                title={title} 
+                type={type}
+                required={required}
+                options={options}
+                flow={flow}
+                key={id} 
+            >
+            </c-lookup>
         </div>
     </template>
 
