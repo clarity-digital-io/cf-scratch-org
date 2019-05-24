@@ -20,8 +20,13 @@ public with sharing class ClarityFormPreview {
     }
 
     @AuraEnabled
-    public static void publishFlow(Clarity_Form_Question_Flow__c questionFlow){
+    public static void publishFlow(String questionFlow) {
         System.debug(questionFlow);
+    }
+
+    @AuraEnabled(Cacheable=true)
+    public static String search(String searchTerm, List<String> selectedIds) {
+        return '';
     }
 
 }

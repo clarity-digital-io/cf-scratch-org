@@ -1,0 +1,96 @@
+<template>
+    
+    <template if:true={multiplechoice}>
+        <div class="slds-m-vertical_medium">
+            <c-multiple-choice 
+                id={id} 
+                title={title} 
+                type={type}
+                required={required}
+                options={options}
+                flow={flow}
+                key={id} 
+            >
+            </c-multiple-choice>
+        </div>
+    </template>
+
+    <template if:true={comment}>
+        <div class="slds-m-vertical_medium">
+            comment!
+        </div>
+    </template>
+
+    <template if:true={dropdown}>
+        <div class="slds-m-vertical_medium">
+            dropdown!
+        </div>
+    </template>
+
+    <template if:true={ranking}>
+        <div class="slds-m-vertical_medium">
+            ranking!
+        </div>
+    </template>
+
+    <template if:true={netpromoterscore}>
+        <div class="slds-m-vertical_medium">
+            netpromoterscore!
+        </div>
+    </template>
+
+    <template if:true={slider}>
+        <div class="slds-m-vertical_medium">
+            slider!
+        </div>
+    </template>
+
+    <template if:true={date}>
+        <div class="slds-m-vertical_medium">
+            date!
+        </div>
+    </template>
+
+    <template if:true={email}>
+        <div class="slds-m-vertical_medium">
+            email!
+        </div>
+    </template>
+
+    <template if:true={payment}>
+        <div class="slds-m-vertical_medium">
+            payment!
+        </div>
+    </template>
+
+    <template if:true={number}>
+        <div class="slds-m-vertical_medium">
+            number!
+        </div>
+    </template>
+
+    <template if:true={lookup}>
+        <div class="slds-m-vertical_medium">
+            lookup!
+        </div>
+    </template>
+
+    <template if:true={recordgroup}>
+        <div class="slds-m-vertical_medium">
+            recordgroup!
+        </div>
+    </template>
+
+    <template if:true={image}>
+        <div class="slds-m-vertical_medium">
+            image!
+        </div>
+    </template>
+
+    <template if:true={checkbox}>
+        <div class="slds-m-vertical_medium">
+            checkbox!
+        </div>
+    </template>
+
+</template>

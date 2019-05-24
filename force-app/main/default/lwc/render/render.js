@@ -1,0 +1,45 @@
+import { LightningElement, api } from 'lwc';
+
+export default class ClarityFormRender extends LightningElement {
+
+    @api multiplechoice;
+    @api comment;
+    @api dropdown;
+    @api ranking;
+    @api netpromoterscore;
+    @api slider;
+    @api date;
+    @api email;
+    @api payment;
+    @api number;
+    @api lookup;
+    @api recordgroup;
+    @api image;
+    @api checkbox;
+
+    @api type
+    @api title
+    @api required
+    @api id
+    @api options
+    @api flow
+
+    connectedCallback() {
+
+        this.multiplechoice = this.type == 'MultipleChoice' ? true : false;
+        this.comment = this.type == 'Comment' ? true : false;
+        this.dropdown = this.type == 'Dropdown' ? true : false;
+        this.ranking = this.type == 'Ranking' ? true : false;
+        this.netpromoterscore = this.type == 'NetPromoterScore' ? true : false;
+        this.slider = this.type == 'Slider' ? true : false;
+        this.date = this.type == 'Date' ? true : false;
+        this.email = this.type == 'Email' ? true : false;
+        this.payment = this.type == 'Payment' ? true : false;
+        this.number = this.type == 'Number' ? true : false;
+        this.lookup = this.type == 'Lookup' ? true : false;
+        this.recordgroup = this.type == 'RecordGroup' ? true : false;
+        this.image = this.type == 'Image' ? true : false;
+        this.checkbox = this.type == 'Checkbox' ? true : false;
+
+    }
+}

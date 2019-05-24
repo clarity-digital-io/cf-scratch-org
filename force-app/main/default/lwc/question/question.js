@@ -1,5 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import preview from '@salesforce/apex/ClarityFormPreview.preview';
+
 import publishFlow from '@salesforce/apex/ClarityFormPreview.publishFlow';
 
 import combobox from './combobox.html';
@@ -10,6 +10,7 @@ import slider from './slider.html';
 import date from './date.html';
 import email from './email.html';
 import checkbox from './checkbox.html';
+import lookup from './lookup.html';
 import error from './error.html';
 
 export default class ClarityFormQuestion extends LightningElement {
@@ -64,7 +65,7 @@ export default class ClarityFormQuestion extends LightningElement {
                 return number;
                 break;
             case 'Lookup':
-                return error;
+                return lookup;
                 break;
             case 'RecordGroup':
                 return error;
@@ -88,9 +89,9 @@ const createFlow = (questionId, options, selectedOption) => {
 
     if(option.flow) {
 
-        let questionFlow = { Value__c : option.label, Clarity_Form_Question__c: questionId };
+        let flow = { Value__c : option.label, Clarity_Form_Question__c: questionId };
 
-        publishFlow({ questionFlow: JSON.stringify(questionFlow) })
+        publishFlow({ questionFlow: JSON.stringify(flow) })
             .then(result => {
                 console.log(result);
             })

@@ -200,4 +200,21 @@ global with sharing class ClarityFormBuilder {
         
     }
 
+    @RemoteAction
+    global static List<String> getLookupsAvailable() {
+
+        List<String> lookups = new List<String>(); 
+
+        Map<String, Schema.SObjectType> sObjectsAvailable = Schema.getGlobalDescribe();
+
+        for(Schema.SObjectType so : sObjectsAvailable.values()) {
+
+            lookups.add(so.getDescribe().getName());
+        
+        }
+
+        return lookups; 
+
+    }
+
 }
