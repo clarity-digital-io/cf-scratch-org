@@ -18,6 +18,7 @@ export default class ClarityFormRender extends LightningElement {
     @api checkbox;
 
     @api type
+    @api lookupobject
     @api title
     @api required
     @api id

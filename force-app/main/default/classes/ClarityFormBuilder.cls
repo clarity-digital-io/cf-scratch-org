@@ -22,6 +22,29 @@ global with sharing class ClarityFormBuilder {
         return saved; 
     }
 
+    @RemoteAction
+    global static void startup(String formId) {
+        
+        Clarity_Form__c form = null;
+
+        if(formId == null) {
+
+            form = new Clarity_Form__c(Name = 'Clarity Form'); 
+            
+            Database.SaveResult result = Database.insert(form); 
+
+            if(!result.isSuccess()) System.debug('throw error'); // throw error
+
+        } else {
+
+            form = [SELECT Id, Name FROM Clarity_Form__c WHERE Id =: formId];
+
+        }
+
+        return form; 
+
+    }
+
     @RemoteAction 
     global static String createForm(){
 
@@ -200,8 +223,7 @@ global with sharing class ClarityFormBuilder {
         
     }
 
-    @RemoteAction
-    global static List<String> getLookupsAvailable() {
+    private static List<String> getLookupsAvailable() {
 
         List<String> lookups = new List<String>(); 
 

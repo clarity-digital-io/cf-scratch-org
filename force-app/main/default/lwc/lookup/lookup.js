@@ -5,13 +5,10 @@ import lookupSearch from '@salesforce/apex/ClarityFormPreview.search';
 
 export default class Lookup extends LightningElement {
     
-    // Use alerts instead of toast to notify user
+    @api lookupobject;
     @api notifyViaAlerts = false;
-    
     @track isMultiEntry = false;
-
     @track initialSelection = [];
-
     @track errors = [];
 
     handleLookupTypeChange(event) {
@@ -21,6 +18,8 @@ export default class Lookup extends LightningElement {
     }
 
     handleSearch(event) {
+        console.log('original', this.lookupobject)
+        console.log(JSON.stringify(event.detail));
         lookupSearch(event.detail)
             .then(results => {
                 this.template.querySelector('c-lightning-lookup').setSearchResults(results);

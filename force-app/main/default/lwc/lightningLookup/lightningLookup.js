@@ -1,10 +1,11 @@
 import { LightningElement, track, api } from 'lwc';
 
-const MINIMAL_SEARCH_TERM_LENGTH = 2; // Min number of chars required to search
-const SEARCH_DELAY = 300; // Wait 300 ms after user stops typing then, peform search
+const MINIMAL_SEARCH_TERM_LENGTH = 2; 
+const SEARCH_DELAY = 300; 
 
 export default class LightningLookup extends LightningElement {
 
+    @api lookupobject;
     @api label;
     @api selection = [];
     @api placeholder = '';
@@ -69,9 +70,11 @@ export default class LightningLookup extends LightningElement {
                     const searchEvent = new CustomEvent('search', {
                         detail: {
                             searchTerm: this.cleanSearchTerm,
+                            lookupObject: this.lookupobject, 
                             selectedIds: this.selection.map(element => element.id)
                         }
                     });
+                    console.log(this.lookupobject, this.label);
                     this.dispatchEvent(searchEvent);
                 }
                 this.searchThrottlingTimeout = null;

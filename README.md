@@ -55,6 +55,26 @@ Clarity_Form_Question__c
 Record__c (LookupId to record created)
 Answer__c 
 
+### Clarity Form Question Logic 
+
+Clarity_Form_Question__c
+Action__c
+Field__c
+Operator__c
+Type__c
+Value__c
+
+SHOW 
+
+When
+
+FIELD           OPERATOR            TYPE            VALUE
+Prefills        EQUALS              REFERENCE       Opportunity.Probability  
+Question1       GREATER THAN        REFERENCE       Opportunity.Probability
+Question2       EQUALS              String          'Option 1'
+
+
+
 ## Dev, Build and Test
 sfdx force:org:list
 

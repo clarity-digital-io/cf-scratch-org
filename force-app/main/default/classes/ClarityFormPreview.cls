@@ -12,7 +12,7 @@ public with sharing class ClarityFormPreview {
         List<Clarity_Form_Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
-            Title__c, Order__c, Required__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
+            Title__c, Order__c, Required__c, Lookup__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         formDetails.put('Form', new List<sObject>{ form });
         formDetails.put('Questions', questions);
@@ -31,28 +31,18 @@ public with sharing class ClarityFormPreview {
 
         searchTerm += '*';
 
-        String searchString = 'FIND ' + searchTerm + ' IN ALL FIELDS RETURNING ' + lookupObject + '(Id, Name)';
+        String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + 'ACCOUNT' + ' (Id, Name)';
 
         List<List<sObject>> searchResults = search.query(searchString);
 
         List<LookupSearchResult> results = new List<LookupSearchResult>();
 
+        String recordIcon = 'standard:' + lookupObject.toLowerCase();
 
-        String accountIcon = 'standard:account';
+        List<sObject> records = ((List<sObject>) searchResults[0]);
 
-        Account [] accounts = ((List<Account>) searchResults[0]);
-
-        for (Account account : accounts) {
-            results.add(new LookupSearchResult(account.Id, 'Account', accountIcon, account.Name, 'Account • '+ account.BillingCity));
-        }
-
-
-        String opptyIcon = 'standard:opportunity';
-
-        Opportunity [] opptys = ((List<Opportunity>) searchResults[1]);
-
-        for (Opportunity oppty : opptys) {
-            results.add(new LookupSearchResult(oppty.Id, 'Opportunity', opptyIcon, oppty.Name, 'Opportunity • '+ oppty.StageName));
+        for (sObject record : records) {
+            results.add(new LookupSearchResult(record.Id, 'Account', recordIcon, (String)record.get('Name'), lookupObject));
         }
 
         return results;
