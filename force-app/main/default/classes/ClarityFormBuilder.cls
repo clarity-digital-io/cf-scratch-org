@@ -23,11 +23,11 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static void startup(String formId) {
+    global static Clarity_Form__c startup(String formId) {
         
         Clarity_Form__c form = null;
 
-        if(formId == null) {
+        if(formId == '') {
 
             form = new Clarity_Form__c(Name = 'Clarity Form'); 
             
@@ -45,29 +45,12 @@ global with sharing class ClarityFormBuilder {
 
     }
 
-    @RemoteAction 
-    global static String createForm(){
-
-        Clarity_Form__c form = new Clarity_Form__c(
-            Name = 'Clarity Form'
-        );
-
-        Database.SaveResult result = Database.insert(form); 
-
-        if(!result.isSuccess()) {
-            //throw error
-        }
-
-        return result.getId(); 
-
-    }
-
     @RemoteAction
     global static List<Clarity_Form_Question__c> getQuestions(String recordId){
 
         Clarity_Form__c form = [SELECT Id, Name, Status__c FROM Clarity_Form__c WHERE Id =: recordId LIMIT 1];
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c 
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c, Lookup__c 
             FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         return questions; 
@@ -127,7 +110,7 @@ global with sharing class ClarityFormBuilder {
         
         List<sObject> options = new List<sObject>(); 
         options.addAll(parsedQuestionOptions);
-
+        
         results.put('Question', new List<sObject> { parsedQuestion });
         results.put('Options', options);
 
@@ -167,6 +150,8 @@ global with sharing class ClarityFormBuilder {
 
         List<Clarity_Form_Question_Option__c> questionOptions = [SELECT Id, Active_Flow__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
 
+        List<Clarity_Form_Question_Criteria__c> criteria = [SELECT Id, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__c WHERE Clarity_Form_Question__c =: sQuestionId];
+
         Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
         
         List<sObject> options = new List<sObject>(); 
@@ -175,6 +160,7 @@ global with sharing class ClarityFormBuilder {
         List<sObject> flow = new List<sObject>(); 
         flow.add(flowDesign);
 
+        results.put('Criteria', criteria);
         results.put('Options', options);
         results.put('FlowDesign', flow);
 
@@ -223,7 +209,8 @@ global with sharing class ClarityFormBuilder {
         
     }
 
-    private static List<String> getLookupsAvailable() {
+    @RemoteAction
+    global static List<String> getLookupsAvailable() {
 
         List<String> lookups = new List<String>(); 
 
@@ -236,6 +223,36 @@ global with sharing class ClarityFormBuilder {
         }
 
         return lookups; 
+
+    }
+
+    @RemoteAction
+    global static List<String> getRecordGroupRequiredFields(String objectType) {
+
+        SObjectType sObjType = ((SObject)Type.forName(objectType).newInstance()).getSObjectType();
+
+        Schema.DescribeSObjectResult result = sObjType.getDescribe();
+
+        Map<String, Schema.SObjectField> fields = result.fields.getMap();
+
+        List<String> requiredFields = new List<String>();
+
+        for(String fieldName : fields.keySet()) { 
+
+            Schema.SObjectField field = fields.get(fieldName);
+
+            Schema.DescribeFieldResult fieldResult = field.getDescribe();
+
+            Boolean isFieldReq  = fieldResult.isNillable();
+            Boolean isFieldCreateable = fieldResult.isCreateable(); 
+
+            if(!isFieldReq && isFieldCreateable) {
+                requiredFields.add(fieldName);
+            }
+
+        }
+
+        return requiredFields; 
 
     }
 

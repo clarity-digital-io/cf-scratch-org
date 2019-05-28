@@ -31,7 +31,7 @@ public with sharing class ClarityFormPreview {
 
         searchTerm += '*';
 
-        String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + 'ACCOUNT' + ' (Id, Name)';
+        String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + lookupObject + ' (Id)';
 
         List<List<sObject>> searchResults = search.query(searchString);
 
@@ -42,7 +42,7 @@ public with sharing class ClarityFormPreview {
         List<sObject> records = ((List<sObject>) searchResults[0]);
 
         for (sObject record : records) {
-            results.add(new LookupSearchResult(record.Id, 'Account', recordIcon, (String)record.get('Name'), lookupObject));
+            results.add(new LookupSearchResult(record.Id, lookupObject, recordIcon, (String)record.get('Id'), lookupObject));
         }
 
         return results;

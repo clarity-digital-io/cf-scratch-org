@@ -1,6 +1,6 @@
 ({
     doInit: function(cmp) {
-
+        console.log('recordId', cmp.get("v.pageReference").state.recordId);
         cmp.set('v.recordId', cmp.get("v.pageReference").state.recordId);
 
         let workspaceAPI = cmp.find("workspace");

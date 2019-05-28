@@ -55,10 +55,9 @@ Clarity_Form_Question__c
 Record__c (LookupId to record created)
 Answer__c 
 
-### Clarity Form Question Logic 
+### Clarity Form Question Criteria 
 
 Clarity_Form_Question__c
-Action__c
 Field__c
 Operator__c
 Type__c
@@ -69,7 +68,7 @@ SHOW
 When
 
 FIELD           OPERATOR            TYPE            VALUE
-Prefills        EQUALS              REFERENCE       Opportunity.Probability  
+Initial         EQUALS              REFERENCE       Opportunity.Probability  
 Question1       GREATER THAN        REFERENCE       Opportunity.Probability
 Question2       EQUALS              String          'Option 1'
 
@@ -80,13 +79,13 @@ sfdx force:org:list
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-scratch-org
 
-sfdx force:alias:set YourAlias=test-atjutk9l63p1@example.com
+sfdx force:alias:set YourAlias=test-92m1pykushmx@example.com
 
-sfdx force:user:password:generate --targetusername test-atjutk9l63p1@example.com
+sfdx force:user:password:generate --targetusername test-92m1pykushmx@example.com
 
-sfdx force:user:display --targetusername test-atjutk9l63p1@example.com
+sfdx force:user:display --targetusername test-92m1pykushmx@example.com
 
-sfdx force:config:set defaultusername=test-atjutk9l63p1@example.com
+sfdx force:config:set defaultusername=test-92m1pykushmx@example.com
 
 sfdx force:source:push
 

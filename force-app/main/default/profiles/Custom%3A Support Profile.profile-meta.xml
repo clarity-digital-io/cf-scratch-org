@@ -17,15 +17,54 @@
         <apexClass>ClarityFormService</apexClass>
         <enabled>false</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>Clarity_Form_QuestionTriggerHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ITrigger</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>LookupSearchResult</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>QuestionFlowDesigns</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>TriggerException</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>TriggerFactory</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
     <custom>true</custom>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Clarity_Form_Question_Flow_Design__c.Active__c</field>
+        <field>Clarity_Form_Question_Criteria__c.Field__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Clarity_Form_Question_Flow_Design__c.Clarity_Form_Question__c</field>
+        <field>Clarity_Form_Question_Criteria__c.Operator__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Question_Criteria__c.Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Question_Criteria__c.Value__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Question_Flow_Design__c.Active__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -65,6 +104,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form_Question__c.Lookup__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form_Question__c.Required__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -83,6 +127,9 @@
         <field>Clarity_Form__c.Status__c</field>
         <readable>false</readable>
     </fieldPermissions>
+    <layoutAssignments>
+        <layout>Clarity_Form_Question_Criteria__c-Clarity Form Question Criteria Layout</layout>
+    </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Question_Flow_Design__c-Clarity Form Question Flow Design Layout</layout>
     </layoutAssignments>
