@@ -41,6 +41,11 @@ Clarity_Form_Question__c
 Name
 Label__c
 
+### Clarity Form Question Record Field (Clarity_Form_Question_Record_Field__c)
+
+Clarity_Form_Question__c
+Field__c
+
 ### Clarity Form Response (Clarity_Form_Response__c)
 
 OwnerId

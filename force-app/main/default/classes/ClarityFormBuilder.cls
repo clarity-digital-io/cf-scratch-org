@@ -210,7 +210,7 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<String> getLookupsAvailable() {
+    global static List<String> getSObjectsAvailable() {
 
         List<String> lookups = new List<String>(); 
 
@@ -227,7 +227,7 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<String> getRecordGroupRequiredFields(String objectType) {
+    global static Map<String, Map<String, String>> getRecordGroupFields(String objectType) {
 
         SObjectType sObjType = ((SObject)Type.forName(objectType).newInstance()).getSObjectType();
 
@@ -235,7 +235,10 @@ global with sharing class ClarityFormBuilder {
 
         Map<String, Schema.SObjectField> fields = result.fields.getMap();
 
-        List<String> requiredFields = new List<String>();
+        Map<String, Map<String, String>> requiredFields = new Map<String, Map<String, String>>();
+
+        requiredFields.put('Required', new Map<String, String>());
+        requiredFields.put('NotRequired', new Map<String, String>());
 
         for(String fieldName : fields.keySet()) { 
 
@@ -243,11 +246,19 @@ global with sharing class ClarityFormBuilder {
 
             Schema.DescribeFieldResult fieldResult = field.getDescribe();
 
+            Schema.DisplayType type = fieldResult.getType();
+
             Boolean isFieldReq  = fieldResult.isNillable();
             Boolean isFieldCreateable = fieldResult.isCreateable(); 
 
             if(!isFieldReq && isFieldCreateable) {
-                requiredFields.add(fieldName);
+
+                requiredFields.get('Required').put('' + field, '' + type);
+
+            } else if(isFieldCreateable) {
+
+                requiredFields.get('NotRequired').put('' + field, '' + type);
+
             }
 
         }
