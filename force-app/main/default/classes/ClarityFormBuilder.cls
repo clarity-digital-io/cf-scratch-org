@@ -34,6 +34,12 @@ global with sharing class ClarityFormBuilder {
             Database.SaveResult result = Database.insert(form); 
 
             if(!result.isSuccess()) System.debug('throw error'); // throw error
+            
+            Clarity_Form_Response__c response = new Clarity_Form_Response__c(Status__c = 'Preview', Clarity_Form__c = form.Id);
+
+            Database.SaveResult resultResponse = Database.insert(response); 
+
+            if(!resultResponse.isSuccess()) System.debug('throw error'); // throw error
 
         } else {
 
@@ -50,7 +56,7 @@ global with sharing class ClarityFormBuilder {
 
         Clarity_Form__c form = [SELECT Id, Name, Status__c FROM Clarity_Form__c WHERE Id =: recordId LIMIT 1];
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c, Lookup__c 
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
             FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         return questions; 

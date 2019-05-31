@@ -56,11 +56,6 @@
                 <label>Email</label>
             </value>
             <value>
-                <fullName>Payment</fullName>
-                <default>false</default>
-                <label>Payment</label>
-            </value>
-            <value>
                 <fullName>Number</fullName>
                 <default>false</default>
                 <label>Number</label>
@@ -84,6 +79,11 @@
                 <fullName>Checkbox</fullName>
                 <default>false</default>
                 <label>Checkbox</label>
+            </value>
+            <value>
+                <fullName>Attachments</fullName>
+                <default>false</default>
+                <label>Attachments</label>
             </value>
         </valueSetDefinition>
     </valueSet>

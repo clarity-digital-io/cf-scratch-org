@@ -5,6 +5,7 @@ export default class ClarityForm extends LightningElement {
     
     @api recordId;
     @track form;
+    @track formresponseid; 
     @track questions;
     @track error;
 
@@ -16,6 +17,7 @@ export default class ClarityForm extends LightningElement {
 
         preview({ recordId: this.recordId })
             .then(result => {
+                this.formresponseid = result['FormResponse'][0].Id;
                 this.form = result['Form'][0];
                 this.questions = sortQuestions(result['Questions']);
             })

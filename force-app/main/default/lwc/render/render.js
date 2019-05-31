@@ -20,6 +20,7 @@ export default class ClarityFormRender extends LightningElement {
     @api esignature;
 
     @api type
+    @api formresponseid
     @api lookupobject
     @api title
     @api required

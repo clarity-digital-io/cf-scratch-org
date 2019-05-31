@@ -104,7 +104,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Clarity_Form_Question_Record_Field__c.Field_c__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Clarity_Form_Question__c.Lookup__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Question__c.Record_Group__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -120,6 +130,21 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form_Question__c.Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Response__c.Completion__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Response__c.OwnerId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Response__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -140,7 +165,13 @@
         <layout>Clarity_Form_Question_Option__c-Clarity Form Question Option Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Clarity_Form_Question_Record_Field__c-Clarity Form Question Record Field Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Clarity_Form_Question__c-Clarity Form Question Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Clarity_Form_Response__c-Clarity Form Response Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form__c-Clarity Form Layout</layout>
@@ -187,7 +218,25 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
+        <object>Clarity_Form_Question_Record_Field__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
         <object>Clarity_Form_Question__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Clarity_Form_Response__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>

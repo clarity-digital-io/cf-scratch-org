@@ -6,6 +6,7 @@
                         <template for:each={questions} for:item="question">
                             <c-render 
                                 id={question.Id} 
+                                formresponseid={formresponseid}
                                 title={question.Title__c} 
                                 type={question.Type__c}
                                 lookupobject={question.Lookup__c}

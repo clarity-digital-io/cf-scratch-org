@@ -2,6 +2,7 @@ import { LightningElement, api } from 'lwc';
 
 export default class Attachments extends LightningElement {
 
+    @api formresponseid
     @api type
     @api title
     @api required
