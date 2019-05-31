@@ -114,6 +114,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Clarity_Form_Question__c.Max_Length__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Question__c.Prefill_Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Clarity_Form_Question__c.Record_Group__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -172,6 +182,10 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Response__c-Clarity Form Response Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Clarity_Form_Response__c-Clarity Form Response Layout</layout>
+        <recordType>Clarity_Form_Response__c.Preview</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form__c-Clarity Form Layout</layout>

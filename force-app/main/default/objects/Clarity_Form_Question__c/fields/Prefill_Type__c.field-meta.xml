@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Status__c</fullName>
+    <fullName>Prefill_Type__c</fullName>
     <externalId>false</externalId>
-    <label>Status</label>
+    <label>Prefill Type</label>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
@@ -11,29 +11,24 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>New</fullName>
-                <default>true</default>
-                <label>New</label>
+                <fullName>Initial</fullName>
+                <default>false</default>
+                <label>Initial</label>
             </value>
             <value>
-                <fullName>In Progress</fullName>
+                <fullName>Text</fullName>
                 <default>false</default>
-                <label>In Progress</label>
+                <label>Text</label>
             </value>
             <value>
-                <fullName>Submitted</fullName>
+                <fullName>Recall</fullName>
                 <default>false</default>
-                <label>Submitted</label>
+                <label>Recall</label>
             </value>
             <value>
-                <fullName>Locked</fullName>
+                <fullName>URL Query Parameter</fullName>
                 <default>false</default>
-                <label>Locked</label>
-            </value>
-            <value>
-                <fullName>Preview</fullName>
-                <default>false</default>
-                <label>Preview</label>
+                <label>URL Query Parameter</label>
             </value>
         </valueSetDefinition>
     </valueSet>
