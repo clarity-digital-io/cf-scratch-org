@@ -103,4 +103,25 @@
         </div>
     </template>
 
+    <template if:true={attachments}>
+        <div class="slds-m-vertical_medium">
+            <c-attachments
+                id={id} 
+                title={title} 
+                type={type}
+                required={required}
+                options={options}
+                flow={flow}
+                key={id} 
+            >
+            </c-attachments>        
+        </div>
+    </template>
+
+    <template if:true={esignature}>
+        <div class="slds-m-vertical_medium">
+            esignature!
+        </div>
+    </template>
+
 </template>
