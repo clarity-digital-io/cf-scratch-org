@@ -119,6 +119,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Clarity_Form_Question__c.Max_Range__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Question__c.Min_Range__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Clarity_Form_Question__c.Prefill_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -130,6 +140,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form_Question__c.Required__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Question__c.Step__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
