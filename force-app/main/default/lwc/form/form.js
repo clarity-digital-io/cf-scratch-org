@@ -27,6 +27,7 @@ export default class ClarityForm extends LightningElement {
 
     }
 
+
 }
 
 const sortQuestions = (result) => {
@@ -55,7 +56,6 @@ const sortQuestions = (result) => {
     });
 
 }
-
 
 const transformOptions = (options) => {
 

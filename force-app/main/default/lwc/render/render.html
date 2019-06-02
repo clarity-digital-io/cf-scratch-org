@@ -55,6 +55,7 @@
                 required={required}
                 minrange={minrange}
                 maxrange={maxrange}
+                flow={flow}
                 key={id}
             >
             </c-slider>
@@ -63,7 +64,15 @@
 
     <template if:true={date}>
         <div class="slds-m-vertical_medium">
-            date!
+            <c-date
+                id={id} 
+                title={title} 
+                required={required}
+                key={id}                
+                flow={flow}
+
+            >
+            </c-date>
         </div>
     </template>
 
