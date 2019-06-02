@@ -94,8 +94,7 @@ sfdx force:config:set defaultusername=test-92m1pykushmx@example.com
 
 sfdx force:source:push
 
-sfdx force:lightning:component:create --type lwc -n lookup -d force-app/main/default/lwc
-
+sfdx force:lightning:component:create --type lwc -n comment -d force-app/main/default/lwc
 ## Resources
 
 

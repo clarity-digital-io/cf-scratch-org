@@ -17,7 +17,15 @@
 
     <template if:true={comment}>
         <div class="slds-m-vertical_medium">
-            comment!
+            <c-comment
+                id={id} 
+                title={title} 
+                type={type}
+                required={required}
+                maxlength={maxlength}
+                key={id}
+            >    
+            </c-comment>
         </div>
     </template>
 
