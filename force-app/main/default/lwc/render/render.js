@@ -22,9 +22,10 @@ export default class ClarityFormRender extends LightningElement {
     @api type
     @api formresponseid
     @api lookupobject
+    @api recordgroupobject;
     @api title
     @api required
-    @api maxlength
+    @api maxLength
     @api maxrange
     @api minrange
     @api step

@@ -18,8 +18,7 @@ export default class Lookup extends LightningElement {
     }
 
     handleSearch(event) {
-        console.log('original', this.lookupobject)
-        console.log(JSON.stringify(event.detail));
+
         lookupSearch(event.detail)
             .then(results => {
                 this.template.querySelector('c-lightning-lookup').setSearchResults(results);
@@ -30,6 +29,7 @@ export default class Lookup extends LightningElement {
                 console.error('Lookup error', JSON.stringify(error));
                 this.errors = [error];
             });
+
     }
 
     handleSelectionChange() {
@@ -57,11 +57,8 @@ export default class Lookup extends LightningElement {
 
     notifyUser(title, message, variant) {
         if (this.notifyViaAlerts){
-            // Notify via alert
-            // eslint-disable-next-line no-alert
             alert(`${title}\n${message}`);
         } else {
-            // Notify via toast
             const toastEvent = new ShowToastEvent({ title, message, variant });
             this.dispatchEvent(toastEvent);
         }

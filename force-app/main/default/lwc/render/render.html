@@ -1,5 +1,5 @@
 <template>
-    
+
     <template if:true={multiplechoice}>
         <div class="slds-m-vertical_medium">
             <c-multiple-choice 
@@ -22,7 +22,7 @@
                 title={title} 
                 type={type}
                 required={required}
-                maxlength={maxlength}
+                maxlength={maxLength}
                 key={id}
             >    
             </c-comment>
@@ -49,7 +49,15 @@
 
     <template if:true={slider}>
         <div class="slds-m-vertical_medium">
-            slider!
+            <c-slider
+                id={id} 
+                title={title} 
+                required={required}
+                minrange={minrange}
+                maxrange={maxrange}
+                key={id}
+            >
+            </c-slider>
         </div>
     </template>
 
@@ -61,7 +69,15 @@
 
     <template if:true={email}>
         <div class="slds-m-vertical_medium">
-            email!
+            <c-email
+                id={id} 
+                title={title} 
+                type={type}
+                required={required}
+                flow={flow}
+                key={id} 
+            >
+            </c-email>
         </div>
     </template>
 
@@ -95,7 +111,17 @@
 
     <template if:true={recordgroup}>
         <div class="slds-m-vertical_medium">
-            recordgroup!
+            <c-recordgroup
+                id={id} 
+                title={title} 
+                type={type}
+                recordgroupobject={recordgroupobject}
+                required={required}
+                options={options}
+                flow={flow}
+                key={id} 
+            >
+            </c-recordgroup>
         </div>
     </template>
 
