@@ -27,7 +27,9 @@ export default class ClarityForm extends LightningElement {
 
     }
 
-
+    formsave(event) {
+        console.log('1save', JSON.stringify(event.detail));
+    }
 }
 
 const sortQuestions = (result) => {

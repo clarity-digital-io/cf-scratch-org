@@ -52,4 +52,14 @@ export default class ClarityFormRender extends LightningElement {
         this.attachments = this.type == 'Attachments' ? true : false;        
         this.esignature = this.type == 'eSignature' ? true : false;
     }
+
+    save(event) {
+        console.log('save', JSON.stringify(event.detail));
+
+        // Creates the event with the contact ID data.
+        const selectedEvent = new CustomEvent('formsave', { detail: event.detail });
+
+        // Dispatches the event.
+        this.dispatchEvent(selectedEvent);
+    }
 }
