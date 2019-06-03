@@ -94,7 +94,12 @@ sfdx force:user:display --targetusername test-2d0fitecf6q2@example.com
 
 sfdx force:source:push
 
-sfdx force:lightning:component:create --type lwc -n date -d force-app/main/default/lwc
+sfdx force:lightning:component:create --type lwc -n dropdown -d force-app/main/default/lwc
+sfdx force:lightning:component:create --type lwc -n checkbox -d force-app/main/default/lwc
+sfdx force:lightning:component:create --type lwc -n number -d force-app/main/default/lwc
+sfdx force:lightning:component:create --type lwc -n nps -d force-app/main/default/lwc
+sfdx force:lightning:component:create --type lwc -n ranking -d force-app/main/default/lwc
+
 ## Resources
 
 

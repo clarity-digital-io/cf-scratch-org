@@ -6,8 +6,17 @@ export default class Date extends LightningElement {
     @api title
     @api required
     @api id
-    @api flow
 
     @api value
+
+    blurHandler(event) {
+        console.log('changeHandler', JSON.stringify(event.detail), event.target.value)
+
+        event.preventDefault();
+
+        const selectedEvent = new CustomEvent('save', { detail: { value: event.target.value, id: this.id, save: true }});
+
+        this.dispatchEvent(selectedEvent);
+    }
 
 }

@@ -22,11 +22,10 @@ export default class Lookup extends LightningElement {
         lookupSearch(event.detail)
             .then(results => {
                 this.template.querySelector('c-lightning-lookup').setSearchResults(results);
+                sendEvent(this.template.querySelector('c-lightning-lookup').getSelection());
             })
             .catch(error => {
                 this.notifyUser('Lookup Error', 'An error occured while searching with the lookup field.', 'error');
-                // eslint-disable-next-line no-console
-                console.error('Lookup error', JSON.stringify(error));
                 this.errors = [error];
             });
 
@@ -36,31 +35,22 @@ export default class Lookup extends LightningElement {
         this.errors = [];
     }
 
-    handleSubmit() {
-        this.checkForErrors();
-        if (this.errors.length === 0) {
-            this.notifyUser('Success', 'The form was submitted.', 'success');
-        }
-    }
-
-    checkForErrors() {
-        const selection = this.template.querySelector('c-lookup').getSelection();
-        if (selection.length === 0) {
-            this.errors = [
-                { message: 'You must make a selection before submitting!' },
-                { message: 'Please make a selection and try again.' }
-            ];
-        } else {
-            this.errors = [];
-        }
-    }
-
     notifyUser(title, message, variant) {
-        if (this.notifyViaAlerts){
-            alert(`${title}\n${message}`);
-        } else {
-            const toastEvent = new ShowToastEvent({ title, message, variant });
-            this.dispatchEvent(toastEvent);
-        }
+
+        const toastEvent = new ShowToastEvent({ title, message, variant });
+        this.dispatchEvent(toastEvent);
+
+    }
+
+    sendEvent(selection) {
+
+        console.log('sendEvent', JSON.stringify(selection))
+    
+        // event.preventDefault();
+
+        // const selectedEvent = new CustomEvent('save', { detail: { value: event.target.value, id: this.id, save: true }});
+
+        // this.dispatchEvent(selectedEvent);
+    
     }
 }

@@ -9,37 +9,16 @@ export default class ClarityFormMultipleChoice extends LightningElement {
     @api required
     @api id
     @api options
-    @api flow
 
-    handleChange(event) {
+    changeHandler(event) {
+        console.log('changeHandler', JSON.stringify(event.detail), event.target.value)
 
-        const selectedOption = event.detail.value;
+        event.preventDefault();
 
-        if(this.flow.Active__c && !this.flow.Form_Submission) {
-            createFlow(this.id, this.options, selectedOption); 
-        }
-            
+        const selectedEvent = new CustomEvent('save', { detail: { value: event.target.value, id: this.id, save: true }});
+
+        this.dispatchEvent(selectedEvent);
     }
-
 }
 
-const createFlow = (questionId, options, selectedOption) => {
-    
-    let option = options.find(option => option.value == selectedOption);
-
-    if(option.flow) {
-
-        let flow = { Value__c : option.label, Clarity_Form_Question__c: questionId };
-
-        publishFlow({ questionFlow: JSON.stringify(flow) })
-            .then(result => {
-                console.log(result);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-
-    } 
-
-}
 

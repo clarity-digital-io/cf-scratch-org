@@ -1,5 +1,6 @@
 import { LightningElement, track, api, wire } from 'lwc';
 import preview from '@salesforce/apex/ClarityFormPreview.preview';
+import publishFlow from '@salesforce/apex/ClarityFormPreview.publishFlow';
 
 export default class ClarityForm extends LightningElement {
     
@@ -28,8 +29,19 @@ export default class ClarityForm extends LightningElement {
     }
 
     formsave(event) {
-        console.log('1save', JSON.stringify(event.detail));
+        console.log(JSON.stringify(event.detail));
     }
+
+    handleChange(event) {
+
+        const selectedOption = event.detail.value;
+
+        if(this.flow.Active__c && !this.flow.Form_Submission) {
+            createFlow(this.id, this.options, selectedOption); 
+        }
+            
+    }
+
 }
 
 const sortQuestions = (result) => {
@@ -72,3 +84,24 @@ const transformOptions = (options) => {
     });
 
 }
+
+const createFlow = (questionId, options, selectedOption) => {
+    
+    let option = options.find(option => option.value == selectedOption);
+
+    if(option.flow) {
+
+        let flow = { Value__c : option.label, Clarity_Form_Question__c: questionId };
+
+        publishFlow({ questionFlow: JSON.stringify(flow) })
+            .then(result => {
+                console.log(result);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+    } 
+
+}
+

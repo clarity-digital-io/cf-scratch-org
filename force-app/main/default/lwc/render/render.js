@@ -54,12 +54,7 @@ export default class ClarityFormRender extends LightningElement {
     }
 
     save(event) {
-        console.log('save', JSON.stringify(event.detail));
-
-        // Creates the event with the contact ID data.
         const selectedEvent = new CustomEvent('formsave', { detail: event.detail });
-
-        // Dispatches the event.
         this.dispatchEvent(selectedEvent);
     }
 }

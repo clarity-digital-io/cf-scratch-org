@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 
-export default class Email extends LightningElement {
+export default class Number extends LightningElement {
 
     @api type
     @api title
@@ -10,7 +10,7 @@ export default class Email extends LightningElement {
     @api value
 
     blurHandler(event) {
-        console.log('changeHandler', JSON.stringify(event.detail), event.target.value)
+        console.log('blurHandler', JSON.stringify(event.detail), event.target.value)
 
         event.preventDefault();
 

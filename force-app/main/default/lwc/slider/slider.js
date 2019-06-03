@@ -9,13 +9,19 @@ export default class Slider extends LightningElement {
     @api step
     @api required
     @api id
-    @api options
-    @api flow
 
     @api value
 
-    handleChange(event) {
-        console.log(event.target.value);
+    changeHandler(event) {
+
+        console.log('changeHandler', JSON.stringify(event.detail), event.target.value)
+
+        event.preventDefault();
+
+        const selectedEvent = new CustomEvent('save', { detail: { value: event.target.value, id: this.id, save: true }});
+
+        this.dispatchEvent(selectedEvent);
+
     }
 
 }

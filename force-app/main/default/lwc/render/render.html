@@ -2,13 +2,13 @@
 
     <template if:true={multiplechoice}>
         <div class="slds-m-vertical_medium">
-            <c-multiple-choice 
+            <c-multiple-choice
+                onsave={save}
                 id={id} 
                 title={title} 
                 type={type}
                 required={required}
                 options={options}
-                flow={flow}
                 key={id} 
             >
             </c-multiple-choice>
@@ -18,6 +18,7 @@
     <template if:true={comment}>
         <div class="slds-m-vertical_medium">
             <c-comment
+                onsave={save}
                 id={id} 
                 title={title} 
                 type={type}
@@ -31,19 +32,48 @@
 
     <template if:true={dropdown}>
         <div class="slds-m-vertical_medium">
-            dropdown!
+            <c-dropdown
+                onsave={save}
+                id={id} 
+                title={title} 
+                type={type}
+                required={required}
+                options={options}
+                flow={flow}
+                key={id} 
+            >
+            </c-dropdown>
         </div>
     </template>
 
     <template if:true={ranking}>
         <div class="slds-m-vertical_medium">
-            ranking!
+            <c-ranking
+                onsave={save}
+                id={id} 
+                title={title} 
+                type={type}
+                required={required}
+                options={options}
+                flow={flow}
+                key={id} 
+            >
+            </c-ranking>
         </div>
     </template>
 
     <template if:true={netpromoterscore}>
         <div class="slds-m-vertical_medium">
-            netpromoterscore!
+            <c-nps
+                onsave={save}
+                id={id} 
+                title={title} 
+                type={type}
+                required={required}
+                options={options}
+                key={id} 
+            >
+            </c-nps>
         </div>
     </template>
 
@@ -51,11 +81,11 @@
         <div class="slds-m-vertical_medium">
             <c-slider
                 id={id} 
+                onsave={save}
                 title={title} 
                 required={required}
                 minrange={minrange}
                 maxrange={maxrange}
-                flow={flow}
                 key={id}
             >
             </c-slider>
@@ -68,9 +98,7 @@
                 id={id} 
                 title={title} 
                 required={required}
-                key={id}                
-                flow={flow}
-
+                key={id}
             >
             </c-date>
         </div>
@@ -84,7 +112,6 @@
                 title={title} 
                 type={type}
                 required={required}
-                flow={flow}
                 key={id} 
             >
             </c-email>
@@ -99,20 +126,29 @@
 
     <template if:true={number}>
         <div class="slds-m-vertical_medium">
-            number!
+            <c-number
+                onsave={save}
+                id={id} 
+                title={title} 
+                type={type}
+                required={required}
+                options={options}
+                key={id} 
+            >
+            </c-number>
         </div>
     </template>
 
     <template if:true={lookup}>
         <div class="slds-m-vertical_medium">
             <c-lookup
+                onsave={save}
                 id={id} 
                 title={title} 
                 lookupobject={lookupobject}
                 type={type}
                 required={required}
                 options={options}
-                flow={flow}
                 key={id} 
             >
             </c-lookup>
@@ -122,13 +158,12 @@
     <template if:true={recordgroup}>
         <div class="slds-m-vertical_medium">
             <c-recordgroup
+                onsave={save}
                 id={id} 
                 title={title} 
                 type={type}
                 recordgroupobject={recordgroupobject}
                 required={required}
-                options={options}
-                flow={flow}
                 key={id} 
             >
             </c-recordgroup>
@@ -143,20 +178,28 @@
 
     <template if:true={checkbox}>
         <div class="slds-m-vertical_medium">
-            checkbox!
+               <c-checkbox
+                onsave={save}
+                id={id} 
+                title={title} 
+                type={type}
+                required={required}
+                options={options}
+                key={id} 
+            >
+            </c-checkbox>
         </div>
     </template>
 
     <template if:true={attachments}>
         <div class="slds-m-vertical_medium">
             <c-attachments
+                onsave={save}
                 id={id} 
                 formresponseid={formresponseid}
                 title={title} 
                 type={type}
                 required={required}
-                options={options}
-                flow={flow}
                 key={id} 
             >
             </c-attachments>        

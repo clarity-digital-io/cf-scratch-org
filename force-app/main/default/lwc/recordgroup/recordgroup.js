@@ -31,6 +31,10 @@ export default class Recordgroup extends LightningElement {
 
         this.dispatchEvent(evt);
         this.closeModal();
+
+        const selectedEvent = new CustomEvent('save', { detail: { value: value, id: event.detail.id, save: false }});
+        this.dispatchEvent(selectedEvent);
+        
     }
 
     openModal() {    
