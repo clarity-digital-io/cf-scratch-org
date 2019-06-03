@@ -88,9 +88,9 @@ sfdx force:alias:set YourAlias=test-2d0fitecf6q2@example.com
 
 sfdx force:user:password:generate --targetusername test-2d0fitecf6q2@example.com
 
-sfdx force:user:display --targetusername test-2d0fitecf6q2@example.com
-
 sfdx force:config:set defaultusername=test-2d0fitecf6q2@example.com
+
+sfdx force:user:display --targetusername test-2d0fitecf6q2@example.com
 
 sfdx force:source:push
 
