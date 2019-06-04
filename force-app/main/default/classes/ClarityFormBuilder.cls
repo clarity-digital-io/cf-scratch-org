@@ -273,4 +273,15 @@ global with sharing class ClarityFormBuilder {
 
     }
 
+    @RemoteAction
+    global static List<User> getUsers(String searchTerm){
+
+        String searchKey = '%' + searchTerm + '%';
+        
+        List<User> users = [SELECT Id, Username FROM User WHERE Username LIKE :searchTerm LIMIT 20];
+
+        return users;
+
+    }
+
 }

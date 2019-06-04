@@ -32,10 +32,9 @@ export default class ClarityForm extends LightningElement {
     }
 
     formsave({ detail }) {
-        console.log('detail', detail);
 
         let clean = this.cleanAnswers({ Id: null, Answer__c: detail.Answer__c, Clarity_Form_Question__c: detail.Clarity_Form_Question__c, Clarity_Form_Response__c: this.formresponseid });
-        console.log('clean', clean);
+
         detail.save ? this.save(clean) : null;
 
     }
@@ -43,23 +42,23 @@ export default class ClarityForm extends LightningElement {
     cleanAnswers(detail) {
 
         let match = this.answers.find(answer => answer.Clarity_Form_Question__c == detail.Clarity_Form_Question__c); 
-        console.log('match', match, 'deta', detail);
+
         return match != null ? { ...match, Answer__c: detail.Answer__c } : detail; 
 
     }
 
     save(clean) {
-        console.log('this.answers0', JSON.stringify(this.answers), clean);
+        console.log('clean', clean);
+
+        let match = this.answers.find(answer => answer.Clarity_Form_Question__c == clean.Clarity_Form_Question__c); 
+
+        if(match != undefined && match.Answer__c == clean.Answer__c) return; 
 
         saveAnswer({ answer: JSON.stringify(clean) })
             .then(result => {
-                console.log('where is result')
                 console.log(result);
-                console.log('this.answers2', JSON.stringify(this.answers));
-                let match = this.answers.find(answer => answer.Clarity_Form_Question__c == clean.Clarity_Form_Question__c); 
-
-                match != null ? 
-                    this.answers.map(answer => {
+                match ? 
+                    this.answers = this.answers.map(answer => {
 
                         if(answer.Clarity_Form_Question__c == result.Clarity_Form_Question__c) {
                             return result; 
@@ -68,7 +67,7 @@ export default class ClarityForm extends LightningElement {
                         return answer; 
 
                     }) :
-                    this.answers.concat([result]) 
+                    this.answers = this.answers.concat([result])
 
             })
             .catch(error => {
