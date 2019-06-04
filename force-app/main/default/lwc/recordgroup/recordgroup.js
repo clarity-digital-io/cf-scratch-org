@@ -32,7 +32,7 @@ export default class Recordgroup extends LightningElement {
         this.dispatchEvent(evt);
         this.closeModal();
 
-        const selectedEvent = new CustomEvent('save', { detail: { value: value, id: event.detail.id, save: false }});
+        const selectedEvent = new CustomEvent('save', { detail: { Answer__c: value, Clarity_Form_Question__c: this.questionid, save: false }});
         this.dispatchEvent(selectedEvent);
         
     }

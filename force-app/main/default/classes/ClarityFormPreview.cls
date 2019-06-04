@@ -14,7 +14,28 @@ public with sharing class ClarityFormPreview {
         List<Clarity_Form_Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
+            (SELECT Id FROM Clarity_Form_Answers__r),
             Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
+
+        List<Clarity_Form_Answer__c> answers = new List<Clarity_Form_Answer__c>();
+
+        for(Clarity_Form_Question__c question : questions) {
+            answers.addAll(question.Clarity_Form_Answers__r);
+        }
+
+        if(answers.size() > 0) {
+            
+            List<Database.DeleteResult> deleteResults = Database.delete(answers);
+
+            for(Database.DeleteResult result : deleteResults) {
+
+                if(!result.isSuccess()) {
+                    System.debug('error deleting');
+                }
+
+            }
+
+        }
 
         formDetails.put('FormResponse', new List<sObject>{ response });
         formDetails.put('Form', new List<sObject>{ form });
@@ -22,6 +43,23 @@ public with sharing class ClarityFormPreview {
 
         return formDetails; 
 
+    }
+
+    @AuraEnabled
+    public static Clarity_Form_Answer__c saveAnswer(String answer){
+        
+        Clarity_Form_Answer__c parsedAnswer = (Clarity_Form_Answer__c)JSON.deserialize(answer, Clarity_Form_Answer__c.class);
+
+        Database.UpsertResult result = Database.upsert(parsedAnswer, true); 
+
+        if(!result.isSuccess()) {
+
+            System.debug('error: ' + result.getErrors());
+
+        }
+
+        return parsedAnswer;
+        
     }
 
     @AuraEnabled

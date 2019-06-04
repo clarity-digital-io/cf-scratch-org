@@ -6,7 +6,7 @@ export default class Attachments extends LightningElement {
     @api type
     @api title
     @api required
-    @api id
+    @api questionid
 
     get acceptedFormats() {
         return ['.pdf', '.png'];
@@ -15,7 +15,7 @@ export default class Attachments extends LightningElement {
     handleUploadFinished(event) {
         const uploadedFiles = event.detail.files;
 
-        const selectedEvent = new CustomEvent('save', { detail: { value: uploadedFiles, id: this.id, save: false }});
+        const selectedEvent = new CustomEvent('save', { detail: { Answer__c: uploadedFiles, Clarity_Form_Question__c: this.questionid }});
 
         this.dispatchEvent(selectedEvent);
     }

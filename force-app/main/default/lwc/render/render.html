@@ -4,12 +4,13 @@
         <div class="slds-m-vertical_medium">
             <c-multiple-choice
                 onsave={save}
-                id={id} 
+                questionid={questionid} 
                 title={title} 
                 type={type}
                 required={required}
                 options={options}
                 key={id} 
+                flow={flow}
             >
             </c-multiple-choice>
         </div>
@@ -19,12 +20,13 @@
         <div class="slds-m-vertical_medium">
             <c-comment
                 onsave={save}
-                id={id} 
+                questionid={questionid} 
                 title={title} 
                 type={type}
                 required={required}
                 maxlength={maxLength}
                 key={id}
+                flow={flow}
             >    
             </c-comment>
         </div>
@@ -34,7 +36,7 @@
         <div class="slds-m-vertical_medium">
             <c-dropdown
                 onsave={save}
-                id={id} 
+                questionid={questionid} 
                 title={title} 
                 type={type}
                 required={required}
@@ -50,13 +52,13 @@
         <div class="slds-m-vertical_medium">
             <c-ranking
                 onsave={save}
-                id={id} 
+                questionid={questionid} 
                 title={title} 
                 type={type}
                 required={required}
                 options={options}
                 flow={flow}
-                key={id} 
+                key={id}
             >
             </c-ranking>
         </div>
@@ -66,12 +68,13 @@
         <div class="slds-m-vertical_medium">
             <c-nps
                 onsave={save}
-                id={id} 
+                questionid={questionid} 
                 title={title} 
                 type={type}
                 required={required}
                 options={options}
-                key={id} 
+                key={id}
+                flow={flow} 
             >
             </c-nps>
         </div>
@@ -80,13 +83,14 @@
     <template if:true={slider}>
         <div class="slds-m-vertical_medium">
             <c-slider
-                id={id} 
+                questionid={questionid} 
                 onsave={save}
                 title={title} 
                 required={required}
                 minrange={minrange}
                 maxrange={maxrange}
                 key={id}
+                flow={flow}
             >
             </c-slider>
         </div>
@@ -95,10 +99,11 @@
     <template if:true={date}>
         <div class="slds-m-vertical_medium">
             <c-date
-                id={id} 
+                questionid={questionid} 
                 title={title} 
                 required={required}
                 key={id}
+                flow={flow}
             >
             </c-date>
         </div>
@@ -108,11 +113,12 @@
         <div class="slds-m-vertical_medium">
             <c-email
                 onsave={save}
-                id={id} 
+                questionid={questionid} 
                 title={title} 
                 type={type}
                 required={required}
                 key={id} 
+                flow={flow}
             >
             </c-email>
         </div>
@@ -128,12 +134,13 @@
         <div class="slds-m-vertical_medium">
             <c-number
                 onsave={save}
-                id={id} 
+                questionid={questionid} 
                 title={title} 
                 type={type}
                 required={required}
                 options={options}
                 key={id} 
+                flow={flow}
             >
             </c-number>
         </div>
@@ -143,13 +150,14 @@
         <div class="slds-m-vertical_medium">
             <c-lookup
                 onsave={save}
-                id={id} 
+                questionid={questionid} 
                 title={title} 
                 lookupobject={lookupobject}
                 type={type}
                 required={required}
                 options={options}
-                key={id} 
+                key={id}
+                flow={flow} 
             >
             </c-lookup>
         </div>
@@ -159,12 +167,13 @@
         <div class="slds-m-vertical_medium">
             <c-recordgroup
                 onsave={save}
-                id={id} 
+                questionid={questionid} 
                 title={title} 
                 type={type}
                 recordgroupobject={recordgroupobject}
                 required={required}
-                key={id} 
+                key={id}
+                flow={flow}
             >
             </c-recordgroup>
         </div>
@@ -180,12 +189,13 @@
         <div class="slds-m-vertical_medium">
                <c-checkbox
                 onsave={save}
-                id={id} 
+                questionid={questionid} 
                 title={title} 
                 type={type}
                 required={required}
                 options={options}
-                key={id} 
+                key={id}
+                flow={flow}
             >
             </c-checkbox>
         </div>
@@ -195,12 +205,13 @@
         <div class="slds-m-vertical_medium">
             <c-attachments
                 onsave={save}
-                id={id} 
+                questionid={questionid} 
                 formresponseid={formresponseid}
                 title={title} 
                 type={type}
                 required={required}
-                key={id} 
+                key={id}
+                flow={flow}
             >
             </c-attachments>        
         </div>

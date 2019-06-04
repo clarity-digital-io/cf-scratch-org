@@ -984,11 +984,11 @@
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/form/form.js",
             "isDirectory": false,
             "isMetadataFile": false,
-            "size": 4128,
-            "modifiedTime": 1559599664579,
-            "changeTime": 1559599664579,
+            "size": 4072,
+            "modifiedTime": 1559599488344,
+            "changeTime": 1559599488344,
             "isWorkspace": false,
-            "contentHash": "98151f54f37aafbddefd43521f313e1cf11faba3"
+            "contentHash": "2f9a65de34d5eeef1420a7f317d133b97a66e248"
         }
     ],
     [

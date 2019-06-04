@@ -5,6 +5,7 @@ import lookupSearch from '@salesforce/apex/ClarityFormPreview.search';
 
 export default class Lookup extends LightningElement {
     
+    @api questionid
     @api lookupobject;
     @api notifyViaAlerts = false;
     @track isMultiEntry = false;
@@ -48,7 +49,7 @@ export default class Lookup extends LightningElement {
     
         // event.preventDefault();
 
-        // const selectedEvent = new CustomEvent('save', { detail: { value: event.target.value, id: this.id, save: true }});
+        // const selectedEvent = new CustomEvent('save', { detail: { Answer__c: event.target.value, Clarity_Form_Question__c: this.questionid, save: true }});
 
         // this.dispatchEvent(selectedEvent);
     

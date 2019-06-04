@@ -5,7 +5,7 @@ export default class Dropdown extends LightningElement {
     @api type
     @api title
     @api required
-    @api id
+    @api questionid
     @api options
 
     changeHandler(event) {
@@ -13,7 +13,7 @@ export default class Dropdown extends LightningElement {
 
         event.preventDefault();
 
-        const selectedEvent = new CustomEvent('save', { detail: { value: event.target.value, id: this.id, save: true }});
+        const selectedEvent = new CustomEvent('save', { detail: { Answer__c: event.target.value, Clarity_Form_Question__c: this.questionid, save: true }});
 
         this.dispatchEvent(selectedEvent);
     }

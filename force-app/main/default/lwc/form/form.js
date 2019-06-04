@@ -1,14 +1,17 @@
-import { LightningElement, track, api, wire } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 import preview from '@salesforce/apex/ClarityFormPreview.preview';
 import publishFlow from '@salesforce/apex/ClarityFormPreview.publishFlow';
+import saveAnswer from '@salesforce/apex/ClarityFormPreview.saveAnswer';
 
 export default class ClarityForm extends LightningElement {
     
     @api recordId;
+
     @track form;
     @track formresponseid; 
     @track questions;
     @track error;
+    @track answers = [];
 
     constructor() {
         super(); 
@@ -28,11 +31,53 @@ export default class ClarityForm extends LightningElement {
 
     }
 
-    formsave(event) {
-        console.log(JSON.stringify(event.detail));
+    formsave({ detail }) {
+        console.log('detail', detail);
+
+        let clean = this.cleanAnswers({ Id: null, Answer__c: detail.Answer__c, Clarity_Form_Question__c: detail.Clarity_Form_Question__c, Clarity_Form_Response__c: this.formresponseid });
+        console.log('clean', clean);
+        detail.save ? this.save(clean) : null;
+
     }
 
-    handleChange(event) {
+    cleanAnswers(detail) {
+
+        let match = this.answers.find(answer => answer.Clarity_Form_Question__c == detail.Clarity_Form_Question__c); 
+        console.log('match', match, 'deta', detail);
+        return match != null ? { ...match, Answer__c: detail.Answer__c } : detail; 
+
+    }
+
+    save(clean) {
+        console.log('this.answers0', JSON.stringify(this.answers), clean);
+
+        saveAnswer({ answer: JSON.stringify(clean) })
+            .then(result => {
+                console.log('where is result')
+                console.log(result);
+                console.log('this.answers2', JSON.stringify(this.answers));
+                let match = this.answers.find(answer => answer.Clarity_Form_Question__c == clean.Clarity_Form_Question__c); 
+
+                match != null ? 
+                    this.answers.map(answer => {
+
+                        if(answer.Clarity_Form_Question__c == result.Clarity_Form_Question__c) {
+                            return result; 
+                        } 
+        
+                        return answer; 
+
+                    }) :
+                    this.answers.concat([result]) 
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+    }
+
+    flowHandler(event) {
 
         const selectedOption = event.detail.value;
 

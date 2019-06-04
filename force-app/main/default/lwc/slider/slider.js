@@ -8,7 +8,7 @@ export default class Slider extends LightningElement {
     @api maxrange
     @api step
     @api required
-    @api id
+    @api questionid
 
     @api value
 
@@ -18,7 +18,7 @@ export default class Slider extends LightningElement {
 
         event.preventDefault();
 
-        const selectedEvent = new CustomEvent('save', { detail: { value: event.target.value, id: this.id, save: true }});
+        const selectedEvent = new CustomEvent('save', { detail: { Answer__c: event.target.value, Clarity_Form_Question__c: this.questionid, save: true }});
 
         this.dispatchEvent(selectedEvent);
 
