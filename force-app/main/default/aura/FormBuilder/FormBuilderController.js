@@ -1,4 +1,12 @@
 ({
+	doInit: function(cmp) {
+		
+		if(cmp.get('v.recordId') == '') {
+            cmp.set('v.recordId', cmp.get("v.pageReference").state.recordId);
+		}
+		
+	},
+	
 	handleMessage : function(cmp, event, helper) {
 		let message = event.getParams();
 
@@ -13,7 +21,7 @@
 			let pageReference = {
 				type: 'standard__component',
 				attributes: {
-					componentName: 'c__ClarityFormsPreview'
+					componentName: 'c__FormPreview'
 				},
 				state : {
 					recordId : cmp.get('v.recordId') || formId

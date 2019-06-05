@@ -277,8 +277,8 @@ global with sharing class ClarityFormBuilder {
     global static List<User> getUsers(String searchTerm){
 
         String searchKey = '%' + searchTerm + '%';
-        
-        List<User> users = [SELECT Id, Username FROM User WHERE Username LIKE :searchTerm LIMIT 20];
+
+        List<User> users = [SELECT Id, Name FROM User WHERE Name LIKE :searchKey LIMIT 20];
 
         return users;
 

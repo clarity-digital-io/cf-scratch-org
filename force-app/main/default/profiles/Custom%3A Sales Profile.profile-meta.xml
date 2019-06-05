@@ -219,6 +219,10 @@
         <layout>Clarity_Form__c-Clarity Form Layout</layout>
     </layoutAssignments>
     <tabVisibilities>
+        <tab>Clarity_Form_Response__c</tab>
+        <visibility>DefaultOff</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Clarity_Form__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>

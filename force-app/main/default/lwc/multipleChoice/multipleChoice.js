@@ -1,7 +1,5 @@
 import { LightningElement, api } from 'lwc';
 
-import publishFlow from '@salesforce/apex/ClarityFormPreview.publishFlow';
-
 export default class ClarityFormMultipleChoice extends LightningElement {
 
     @api type

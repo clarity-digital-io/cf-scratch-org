@@ -18,7 +18,7 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>Edit</actionName>
-        <content>ClarityFormsBuilder</content>
+        <content>FormBuilder</content>
         <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>LightningComponent</type>
@@ -29,7 +29,7 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>New</actionName>
-        <content>ClarityFormsBuilder</content>
+        <content>FormBuilder</content>
         <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>LightningComponent</type>

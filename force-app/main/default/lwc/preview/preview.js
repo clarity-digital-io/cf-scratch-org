@@ -1,10 +1,9 @@
 import { LightningElement, track, api } from 'lwc';
-import create from '@salesforce/apex/ClarityFormResponse.create';
+import preview from '@salesforce/apex/ClarityFormResponse.preview';
 import publishFlow from '@salesforce/apex/ClarityFormResponse.publishFlow';
 import saveAnswer from '@salesforce/apex/ClarityFormResponse.saveAnswer';
-import submit from '@salesforce/apex/ClarityFormResponse.submit';
 
-export default class Form extends LightningElement {
+export default class Preview extends LightningElement {
     
     @api recordId;
 
@@ -20,7 +19,7 @@ export default class Form extends LightningElement {
 
     connectedCallback() {
 
-        create({ recordId: this.recordId })
+        preview({ recordId: this.recordId })
             .then(result => {
                 this.formresponseid = result['FormResponse'][0].Id;
                 this.form = result['Form'][0];
@@ -77,22 +76,6 @@ export default class Form extends LightningElement {
 
     }
 
-    cancelHandler() {
-
-    }
-
-    submitHandler() {
-
-        submit({ formResponseId: this.formresponseid })
-            .then(result => {
-                console.log(result);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-
-    }
-
     flowHandler(event) {
 
         const selectedOption = event.detail.value;
@@ -125,7 +108,7 @@ const sortQuestions = (result) => {
             Clarity_Form_Question_Flow_Designs__r: question.Clarity_Form_Question_Flow_Designs__r[0], 
             Clarity_Form_Question_Options__r: options != null && options.length ? transformOptions(options) : [] 
         };
-
+        console.log(nQuestion);
         return nQuestion;
 
     });

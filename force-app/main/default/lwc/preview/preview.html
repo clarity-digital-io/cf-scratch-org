@@ -1,6 +1,6 @@
 <template>
     <template if:true={form}>
-        <lightning-card title={form.Name} icon-name="custom:custom14">
+        <lightning-card title="Preview" icon-name="custom:custom14">
                 <div class="slds-m-around_medium">
                     <ul class="slds-m-around_medium">
 
@@ -36,8 +36,8 @@
                     </ul>
                 </div>
                 <p slot="footer">
-                    <lightning-button variant="neutral" label="Cancel" title="Base action" onclick={cancelHandler} class="slds-m-left_x-small"></lightning-button>
-                    <lightning-button variant="brand" label="Submit" title="Base action" onclick={submitHandler} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button variant="neutral" label="Cancel" title="Base action" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Submit" title="Base action" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
                 </p>
         </lightning-card>
     </template>

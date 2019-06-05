@@ -1,0 +1,8 @@
+<aura:component access="global" implements="force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes" >
+    <lightning:workspaceAPI aura:id="workspace" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="String" required="true" default="default" />
+
+    <c:form recordId="{!v.recordId}" />
+
+</aura:component>	
