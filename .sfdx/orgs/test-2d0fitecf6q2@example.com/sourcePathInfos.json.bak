@@ -475,14 +475,12 @@
         {
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/layouts/Clarity_Form_Response__c-Clarity Form Response Layout.layout-meta.xml",
             "isDirectory": false,
-            "size": 2716,
-            "modifiedTime": 1559335737381,
-            "changeTime": 1559335737381,
-            "contentHash": "d2086bed60a4d4f90bb47d6a1187dec80e69cb78",
+            "size": 2988,
+            "modifiedTime": 1559748465117,
+            "changeTime": 1559748465117,
+            "contentHash": "29c37815825a44a1678a855f3b729affbcc83656",
             "isMetadataFile": true,
-            "state": "u",
-            "isWorkspace": false,
-            "isArtifactRoot": false
+            "state": "u"
         }
     ],
     [
@@ -763,29 +761,29 @@
     [
         "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/form/form.html",
         {
-            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/form/form.html",
             "isDirectory": false,
-            "isMetadataFile": false,
             "size": 2224,
             "modifiedTime": 1559746091773,
             "changeTime": 1559746091773,
-            "isWorkspace": false,
-            "contentHash": "0bb78c9ee4d2a58d2c17db67bd0ba27f1140866c"
+            "contentHash": "0bb78c9ee4d2a58d2c17db67bd0ba27f1140866c",
+            "isMetadataFile": false,
+            "state": "u",
+            "isWorkspace": false
         }
     ],
     [
         "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/form/form.js",
         {
-            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/form/form.js",
             "isDirectory": false,
+            "size": 4623,
+            "modifiedTime": 1559748123111,
+            "changeTime": 1559748123111,
+            "contentHash": "b81f89da6a2253bf1af808d7b4482d7e463e7656",
             "isMetadataFile": false,
-            "size": 4240,
-            "modifiedTime": 1559746554748,
-            "changeTime": 1559746554748,
-            "isWorkspace": false,
-            "contentHash": "3982ac8b596a582b36c861c0264c5638cea14b43"
+            "state": "u",
+            "isWorkspace": false
         }
     ],
     [
@@ -2266,10 +2264,10 @@
         {
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/profiles/Admin.profile-meta.xml",
             "isDirectory": false,
-            "size": 29767,
-            "modifiedTime": 1559736876784,
-            "changeTime": 1559736876784,
-            "contentHash": "58bd6ee4cc1505f7251a5bfdf51a10deabe9d102",
+            "size": 29880,
+            "modifiedTime": 1559748465163,
+            "changeTime": 1559748465163,
+            "contentHash": "53445299ec79f02ffd3782e2f7a4d51156445042",
             "isMetadataFile": true,
             "state": "u"
         }
@@ -3061,14 +3059,14 @@
     [
         "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormResponse.cls",
         {
-            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormResponse.cls",
             "isDirectory": false,
+            "size": 4761,
+            "modifiedTime": 1559747156109,
+            "changeTime": 1559747156109,
+            "contentHash": "8bb52cdf5e22494124a9afda2d6d1c11b0d0ed4c",
             "isMetadataFile": false,
-            "size": 4835,
-            "modifiedTime": 1559746635620,
-            "changeTime": 1559746635620,
-            "contentHash": "d95dee3481c656a349656a8fe30a89773a1d3116"
+            "state": "u"
         }
     ],
     [
@@ -3360,14 +3358,14 @@
     [
         "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/aura/FormResponse/FormResponse.cmp",
         {
+            "state": "u",
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/aura/FormResponse/FormResponse.cmp",
             "isDirectory": false,
-            "size": 440,
-            "modifiedTime": 1559745772664,
-            "changeTime": 1559745772664,
-            "contentHash": "bc6992b7df0bd6a06f22c83fb852451aa9c11df2",
             "isMetadataFile": false,
-            "state": "u"
+            "size": 480,
+            "modifiedTime": 1559752339969,
+            "changeTime": 1559752339969,
+            "contentHash": "a29857dba9f8e21f9c3f966a28968bb3303c9e0f"
         }
     ],
     [

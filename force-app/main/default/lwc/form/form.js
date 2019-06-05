@@ -1,4 +1,6 @@
 import { LightningElement, track, api } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+
 import create from '@salesforce/apex/ClarityFormResponse.create';
 import publishFlow from '@salesforce/apex/ClarityFormResponse.publishFlow';
 import saveAnswer from '@salesforce/apex/ClarityFormResponse.saveAnswer';
@@ -85,7 +87,11 @@ export default class Form extends LightningElement {
 
         submit({ formResponseId: this.formresponseid })
             .then(result => {
-                console.log(result);
+                
+                console.log(result);        
+
+                this.notifyUser('Form Response Submitted', 'Your form response has been submitted. Thank you!', 'success');
+
             })
             .catch(error => {
                 console.log(error);
@@ -101,6 +107,11 @@ export default class Form extends LightningElement {
             createFlow(this.id, this.options, selectedOption); 
         }
             
+    }
+
+    notifyUser(title, message, variant){
+        const toastEvent = new ShowToastEvent({ title, message, variant });
+        this.dispatchEvent(toastEvent);
     }
 
 }
