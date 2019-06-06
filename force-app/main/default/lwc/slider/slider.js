@@ -14,8 +14,6 @@ export default class Slider extends LightningElement {
 
     changeHandler(event) {
 
-        console.log('changeHandler', JSON.stringify(event.detail), event.target.value)
-
         event.preventDefault();
 
         const selectedEvent = new CustomEvent('save', { detail: { Answer__c: event.target.value, Clarity_Form_Question__c: this.questionid, save: true }});

@@ -34,7 +34,6 @@ export default class ClarityFormRender extends LightningElement {
     @api flow
 
     connectedCallback() {
-        console.log('quesitonId: ', this.questionid);
         this.multiplechoice = this.type == 'MultipleChoice' ? true : false;
         this.comment = this.type == 'Comment' ? true : false;
         this.dropdown = this.type == 'Dropdown' ? true : false;

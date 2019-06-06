@@ -23,7 +23,7 @@ public with sharing class ClarityFormResponse {
 
         Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
 
-        Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c WHERE Id =: recordId AND Status__c = 'Published' Limit 1];
+        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c FROM Clarity_Form__c WHERE Id =: recordId AND Status__c = 'Published' Limit 1];
         
         Clarity_Form_Response__c response = new Clarity_Form_Response__c(
             Status__c       = 'New', 
@@ -53,13 +53,14 @@ public with sharing class ClarityFormResponse {
 
         Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
 
-        Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c WHERE Id =: recordId Limit 1];
+        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c FROM Clarity_Form__c WHERE Id =: recordId Limit 1];
         
         Clarity_Form_Response__c response = [SELECT Id, (SELECT Id FROM Clarity_Form_Answers__r) FROM Clarity_Form_Response__c WHERE Status__c = 'Preview' AND Clarity_Form__c =: form.Id];
 
         List<Clarity_Form_Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
+            (SELECT Id, Field__c, Operator__c, Type__c, Value__c FROM Clarity_Form_Question_Criteria__r), 
             Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         List<Clarity_Form_Answer__c> answers = new List<Clarity_Form_Answer__c>();

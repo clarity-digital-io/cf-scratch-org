@@ -1,3 +1,11 @@
 <template>
-    <lightning-input onblur={blurHandler} type="text" name="email" label={title} value={value} required={required}></lightning-input>
+
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="text-input-id-1">{title}</label>
+            <div class="slds-form-element__control">
+                <input onblur={blurHandler} placeholder='Input a valid Email' type="email" id="text-input-id-1" name="email" value={value} required={required} class="slds-input" />
+            </div>
+        </div>
+        
+    <!-- <lightning-input onblur={blurHandler} type="text" name="email" label={title} value={value} required={required}></lightning-input> -->
 </template>

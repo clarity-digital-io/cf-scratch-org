@@ -51,7 +51,6 @@ export default class Form extends LightningElement {
     }
 
     save(clean) {
-        console.log('clean', clean);
 
         let match = this.answers.find(answer => answer.Clarity_Form_Question__c == clean.Clarity_Form_Question__c); 
 

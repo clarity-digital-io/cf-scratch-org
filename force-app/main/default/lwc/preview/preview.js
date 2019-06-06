@@ -12,10 +12,7 @@ export default class Preview extends LightningElement {
     @track questions;
     @track error;
     @track answers = [];
-
-    constructor() {
-        super(); 
-    }
+    @track rendered = false;
 
     connectedCallback() {
 
@@ -23,11 +20,27 @@ export default class Preview extends LightningElement {
             .then(result => {
                 this.formresponseid = result['FormResponse'][0].Id;
                 this.form = result['Form'][0];
+                this.styling = this.form.Clarity_Form_Style__r;
                 this.questions = sortQuestions(result['Questions']);
+                this.criteria = this.questions.Clarity_Form_Question_Criteria__r;
+                console.log(this.criteria); 
             })
             .catch(error => {
                 this.error = error; 
             })
+
+    }
+
+    renderedCallback() {
+        /*
+            Custom Styling for Card Background, Card Title, and Border
+        */
+        if(this.form != null) {
+            this.template.querySelector("article.slds-card").style.backgroundColor = this.styling.Background_Color__c ? this.styling.Background_Color__c : '#fff';
+            this.template.querySelector("article.slds-card").style.border = 'none';
+            this.template.querySelector("div.slds-media__body").style.color = this.styling.Color__c ? this.styling.Color__c : '#000';
+            this.rendered = true; 
+        }
 
     }
 

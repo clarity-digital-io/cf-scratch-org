@@ -1,6 +1,5 @@
 ({
     doInit: function(cmp) {
-        console.log('record', cmp.get('v.recordId'));
 
         if(cmp.get('v.recordId') == 'default') {
             cmp.set('v.recordId', cmp.get("v.pageReference").state.recordId);
@@ -24,6 +23,7 @@
         .catch(function(error) {
             console.log(error);
         });
+
     }
     
 })

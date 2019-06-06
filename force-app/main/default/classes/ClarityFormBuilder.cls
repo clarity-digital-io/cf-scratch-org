@@ -29,23 +29,25 @@ global with sharing class ClarityFormBuilder {
 
         if(formId == '') {
 
-            form = new Clarity_Form__c(Name = 'Clarity Form'); 
+            Clarity_Form_Style__c styling = [SELECT Id, Background_Color__c, Color__c FROM Clarity_Form_Style__c WHERE Name = 'Classic'];
+
+            Clarity_Form__c newForm = new Clarity_Form__c(Name = 'Clarity Form', Clarity_Form_Style__c = styling.Id); 
             
-            Database.SaveResult result = Database.insert(form); 
+            Database.SaveResult result = Database.insert(newForm); 
 
             if(!result.isSuccess()) System.debug('throw error'); // throw error
             
-            Clarity_Form_Response__c response = new Clarity_Form_Response__c(Status__c = 'Preview', Clarity_Form__c = form.Id);
+            Clarity_Form_Response__c response = new Clarity_Form_Response__c(Status__c = 'Preview', Clarity_Form__c = newForm.Id);
 
             Database.SaveResult resultResponse = Database.insert(response); 
 
             if(!resultResponse.isSuccess()) System.debug('throw error'); // throw error
 
-        } else {
+            formId = newForm.Id;
 
-            form = [SELECT Id, Name FROM Clarity_Form__c WHERE Id =: formId];
-
-        }
+        } 
+        
+        form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c FROM Clarity_Form__c WHERE Id =: formId];
 
         return form; 
 

@@ -101,7 +101,7 @@ sfdx force:lightning:component:create --type lwc -n nps -d force-app/main/defaul
 sfdx force:lightning:component:create --type lwc -n ranking -d force-app/main/default/lwc
 sfdx force:lightning:component:create --type lwc -n form -d force-app/main/default/lwc
 
-sfdx force:lightning:component:create --type lwc -n useform -d force-app/main/default/lwc
+sfdx force:lightning:component:create --type lwc -n card -d force-app/main/default/lwc
 
 sfdx force:apex:class:create -n ClarityFormResponse -d force-app/main/default/classes
 
