@@ -5,6 +5,12 @@
 
 @font-face {
     font-family: 'Salesforce Sans';
+    font-weight: 100;
+    src: url('assets/fonts/SalesforceSans-Thin.ttf');   
+}
+
+@font-face {
+    font-family: 'Salesforce Sans';
     font-weight: 900;
     src: url('assets/fonts/SalesforceSans-Bold.ttf');   
 }
