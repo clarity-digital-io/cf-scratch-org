@@ -23,13 +23,14 @@
             </div>
             <div class="slds-card__body slds-card__body_inner">
                 
-                    <div class="slds-m-around_medium">
-                            <ul class="slds-m-around_medium">
-            
-                                <div class="slds-grid slds-wrap slds-gutters">
-            
-                                    <template for:each={questions} for:item="question">
-            
+                <div class="slds-m-around_medium">
+                    <ul class="slds-m-around_medium">
+    
+                        <div class="slds-grid slds-wrap slds-gutters">
+    
+                            <template for:each={questions} for:item="question">
+                                
+                                <template if:true={question.Show}>
                                     <div key={question.Id} class="slds-col slds-size_1-of-1 slds-large-size_6-of-12">
                                         <c-render 
                                             onformsave={formsave}
@@ -50,13 +51,14 @@
                                         >
                                         </c-render> 
                                     </div>
-            
-                                    </template>
-            
-                                </div>
-            
-                            </ul>
+                                </template>
+                                
+                            </template>
+    
                         </div>
+    
+                    </ul>
+                </div>
 
             </div>
             <footer class="slds-card__footer">
