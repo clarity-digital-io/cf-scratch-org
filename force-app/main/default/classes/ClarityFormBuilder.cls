@@ -276,13 +276,20 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<User> getUsers(String searchTerm){
+    global static List<sObject> getUsers(String searchTerm){
+
+        List<sObject> results = new List<sObject>(); 
 
         String searchKey = '%' + searchTerm + '%';
 
-        List<User> users = [SELECT Id, Name FROM User WHERE Name LIKE :searchKey LIMIT 20];
+        List<sObject> users = (List<sObject>)[SELECT Id, Name, UserName FROM User WHERE Name LIKE :searchKey OR UserName LIKE :searchKey LIMIT 20];
 
-        return users;
+        List<sObject> queue = (List<sObject>)[SELECT Id, Name FROM Group WHERE Name LIKE :searchKey AND Type = 'Queue' LIMIT 20];
+
+        results.addAll(users);
+        results.addAll(queue);
+
+        return results;
 
     }
 
