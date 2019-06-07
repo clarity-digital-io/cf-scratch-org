@@ -68,10 +68,12 @@ export default class Preview extends LightningElement {
                 if(this.criteriaControlled.get(question.Id) != null) {
 
                     let conditions = this.criteriaControlled.get(question.Id);
-                    console.log(conditions[0].Value, detail.Answer__c, question);
+                    console.log('conditions', conditions);
+                    let show = applyConditionLogic(detail, question.Logic__c, conditions, this.answers);
+                    console.log('show', show);
                     return { 
                         ...question, 
-                        Show: conditions[0].Value == detail.Answer__c ? true : false
+                        Show: show
                     }
 
                 } else {
@@ -129,6 +131,40 @@ export default class Preview extends LightningElement {
             
     }
 
+}
+
+const applyConditionLogic = (detail, logic, conditions, answers) => {
+    
+    if(conditions.length == 1) {
+        return conditions[0].Value == detail.Answer__c ? true : false;
+    }
+
+    switch (logic) {
+        case 'ALL':
+            console.log('logic', logic);
+            return conditions.reduce((final, c) => {
+                console.log('final', final, 'c', c, 'answers', answers);
+                let answer = '';
+
+                if(c.QuestionId == detail.Clarity_Form_Question__c) {
+                    console.log('first', detail.Answer__c)
+                    answer = detail.Answer__c; 
+                } else {
+                    console.log('second', answers.find(answer => answer.Clarity_Form_Question__c == c.QuestionId))
+                    //answer = answers.find(answer => answer.Clarity_Form_Question__c == c.QuestionId).Answer__c;
+                }
+
+                final = c.Value == answer ? true : false; 
+
+            }, false);
+            break;
+        case 'ANY':
+            return false; 
+            break;
+        default:
+            return false; 
+            break;
+    }
 }
 
 const getCriteriaControlled = (questions) => {
