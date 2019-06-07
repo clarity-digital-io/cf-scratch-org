@@ -211,6 +211,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Clarity_Form_Question__c.Logic__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Clarity_Form_Question__c.Lookup__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -508,6 +513,10 @@
     </pageAccesses>
     <tabVisibilities>
         <tab>Clarity_Form_Response__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Clarity_Form_Style__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>

@@ -211,6 +211,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form_Question__c.Logic__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form_Question__c.Lookup__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -282,6 +287,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Clarity_Form_Style__c.Color__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form__c.Clarity_Form_Style__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -413,6 +423,10 @@
     </pageAccesses>
     <tabVisibilities>
         <tab>Clarity_Form_Response__c</tab>
+        <visibility>DefaultOff</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Clarity_Form_Style__c</tab>
         <visibility>DefaultOff</visibility>
     </tabVisibilities>
     <tabVisibilities>
