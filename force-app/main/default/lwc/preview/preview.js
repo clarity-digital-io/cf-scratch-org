@@ -141,15 +141,17 @@ const applyConditionLogic = (detail, logic, conditions, answers) => {
 
     switch (logic) {
         case 'ALL':
-            console.log('logic', logic);
             return conditions.reduce((final, c) => {
-                console.log('final', final, 'c', c, 'answers', answers);
+
                 let answer = '';
 
                 if(c.QuestionId == detail.Clarity_Form_Question__c) {
-                    console.log('first', detail.Answer__c)
                     answer = detail.Answer__c; 
                 } else {
+
+                    //let answers = answers.find(answer => answer.Clarity_Form_Question__c == c.QuestionId) == undefined =
+
+
                     console.log('second', answers.find(answer => answer.Clarity_Form_Question__c == c.QuestionId))
                     //answer = answers.find(answer => answer.Clarity_Form_Question__c == c.QuestionId).Answer__c;
                 }

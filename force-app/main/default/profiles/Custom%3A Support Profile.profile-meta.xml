@@ -146,6 +146,41 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form_Assignment_Rule__c.Field_Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Assignment_Rule__c.Field__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Assignment_Rule__c.Operator__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Assignment_Rule__c.Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Assignment_Rule__c.Value__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Assignment__c.Assign__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Assignment__c.Default_Assign__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form_Question_Criteria__c.Field__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -291,6 +326,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form__c.Clarity_Form_Assignment__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form__c.Clarity_Form_Style__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -301,6 +341,12 @@
     </fieldPermissions>
     <layoutAssignments>
         <layout>Clarity_Form_Answer__c-Clarity Form Answer Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Clarity_Form_Assignment_Rule__c-Clarity Form Assignment Rule Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Clarity_Form_Assignment__c-Clarity Form Assignment Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Question_Criteria__c-Clarity Form Question Criteria Layout</layout>

@@ -47,7 +47,9 @@ global with sharing class ClarityFormBuilder {
 
         } 
         
-        form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c FROM Clarity_Form__c WHERE Id =: formId];
+        form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, Clarity_Form_Assignment__c, 
+            Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
+            FROM Clarity_Form__c WHERE Id =: formId];
 
         return form; 
 
@@ -272,6 +274,73 @@ global with sharing class ClarityFormBuilder {
         }
 
         return requiredFields; 
+
+    }
+
+    @RemoteAction
+    global static Clarity_Form_Assignment__c createAssignment(String name, String formId) {
+
+        Clarity_Form_Assignment__c assignment = new Clarity_Form_Assignment__c(Name = name);
+
+        Database.SaveResult assignmentResult = Database.insert(assignment, true); 
+
+        if(!assignmentResult.isSuccess()) {
+            System.debug('error');
+        }
+
+        Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c WHERE Id =: formId];
+        form.Clarity_Form_Assignment__c = assignment.Id; 
+        
+        Database.SaveResult formResult = Database.update(form); 
+
+        if(!formResult.isSuccess()) {
+            System.debug('error');
+        }
+
+        return assignment; 
+
+    }
+
+    @RemoteAction
+    global static List<Clarity_Form_Assignment_Rule__c> getAssignmentRules(String formAssignmentId) {
+
+        List<Clarity_Form_Assignment_Rule__c> rules = [SELECT Id FROM Clarity_Form_Assignment_Rule__c WHERE Clarity_Form_Assignment__c = :formAssignmentId];
+
+        return rules; 
+
+    }
+
+    @RemoteAction
+    global static List<Clarity_Form_Assignment_Rule__c> saveAssignmentRules(String formAssignmentId, String userId, String sFormAssignmentRules) {
+
+        Clarity_Form_Assignment__c assignment = [SELECT Id, Assign__c, Default_Assign__c FROM Clarity_Form_Assignment__c WHERE Id = :formAssignmentId LIMIT 1];
+
+        assignment.Assign__c = userId; 
+        assignment.Default_Assign__c = userId; 
+
+        Database.SaveResult assignmentResult = Database.update(assignment, true); 
+
+        if(!assignmentResult.isSuccess()) {
+            System.debug('error');
+        }
+
+        List<Clarity_Form_Assignment_Rule__c> parsedAssignmentRules = (List<Clarity_Form_Assignment_Rule__c>)JSON.deserialize(sFormAssignmentRules, List<Clarity_Form_Assignment_Rule__c>.class);
+
+        for(Clarity_Form_Assignment_Rule__c rule : parsedAssignmentRules) {
+            rule.Clarity_Form_Assignment__c = assignment.Id; 
+        }
+
+        List<Database.UpsertResult> results = Database.upsert(parsedAssignmentRules, true); 
+
+        for(Database.UpsertResult result : results) {
+
+            if(!result.isSuccess()) {
+                System.debug('error');
+            }
+
+        }
+
+        return parsedAssignmentRules; 
 
     }
 

@@ -7,10 +7,32 @@
 Name
 OwnerId
 Status__c (Draft, Published)
+Clarity_Form_Style__c
+Clarity_Form_Assignment__c
+
+### Clarity Form Style (Clarity_Form_Style__c)
+
+Name
 Background_Color__c
 Question_Color__c
 Button_Color__c
 Font_Family__c
+
+## Clarity Form Assignment (Clarity_Form_Assignment__c)
+
+Name
+Assign__c
+Default_Assign__c
+
+### Clarity Form Assignment Rule (Clarity_Form_Assignment_Rule__c)
+
+Name
+Clarity_Form_Assignment__c
+Field__c
+Field_Type__c
+Operator__c
+Type__c
+Value__c
 
 ### Clarity Form Question (Clarity_Form_Question__c)
 

@@ -52,12 +52,12 @@
     <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <label>Clarity Form Question Flow Design</label>
+    <label>Clarity Form Assignment Rule</label>
     <nameField>
-        <label>Clarity Form Question Flow Design Name</label>
+        <label>Clarity Form Assignment Rule Name</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Clarity Form Question Flow Designs</pluralLabel>
+    <pluralLabel>Clarity Form Assignment Rules</pluralLabel>
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>

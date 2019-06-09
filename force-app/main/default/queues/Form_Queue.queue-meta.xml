@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Form Queue</name>
+    <queueMembers>
+        <users>
+            <user>customer_service@sandbox-clarityforms-developer-edition.cs64.force.com</user>
+            <user>insightssecurity@00d0q0000001zeieae.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Clarity_Form__c</sobjectType>
+    </queueSobject>
+</Queue>
