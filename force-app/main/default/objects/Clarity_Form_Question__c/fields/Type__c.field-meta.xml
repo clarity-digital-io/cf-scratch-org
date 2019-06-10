@@ -85,6 +85,11 @@
                 <default>false</default>
                 <label>Attachments</label>
             </value>
+            <value>
+                <fullName>ConnectedObject</fullName>
+                <default>false</default>
+                <label>ConnectedObject</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

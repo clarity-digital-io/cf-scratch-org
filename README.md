@@ -106,22 +106,17 @@ sfdx force:org:list
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-scratch-org
 
-sfdx force:alias:set YourAlias=test-2d0fitecf6q2@example.com
+sfdx force:alias:set YourAlias=test-le0seqk5om2j@example.com
 
-sfdx force:user:password:generate --targetusername test-2d0fitecf6q2@example.com
+sfdx force:user:password:generate --targetusername test-le0seqk5om2j@example.com
 
-sfdx force:config:set defaultusername=test-2d0fitecf6q2@example.com
+sfdx force:config:set defaultusername=test-le0seqk5om2j@example.com
 
-sfdx force:user:display --targetusername test-2d0fitecf6q2@example.com
+sfdx force:user:display --targetusername test-le0seqk5om2j@example.com
 
 sfdx force:source:push
 
-sfdx force:lightning:component:create --type lwc -n dropdown -d force-app/main/default/lwc
-sfdx force:lightning:component:create --type lwc -n checkbox -d force-app/main/default/lwc
-sfdx force:lightning:component:create --type lwc -n number -d force-app/main/default/lwc
-sfdx force:lightning:component:create --type lwc -n nps -d force-app/main/default/lwc
-sfdx force:lightning:component:create --type lwc -n ranking -d force-app/main/default/lwc
-sfdx force:lightning:component:create --type lwc -n form -d force-app/main/default/lwc
+## commonly used commands
 
 sfdx force:lightning:component:create --type lwc -n card -d force-app/main/default/lwc
 
