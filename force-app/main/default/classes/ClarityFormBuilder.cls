@@ -47,12 +47,27 @@ global with sharing class ClarityFormBuilder {
 
         } 
         
-        form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, Clarity_Form_Assignment__c, 
-            Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
+        form = [SELECT Id, Name, Limit__c, End_Date__c, Connected_Object__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
+            Clarity_Form_Assignment__c, Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
             FROM Clarity_Form__c WHERE Id =: formId];
 
         return form; 
 
+    }
+
+    @RemoteAction
+    global static Clarity_Form__c updateForm(String sForm) {
+
+        Clarity_Form__c parsedForm = (Clarity_Form__c)JSON.deserialize(sForm, Clarity_Form__c.class);
+
+        Database.SaveResult result = Database.update(parsedForm, true); 
+
+        if(!result.isSuccess()) {
+            System.debug('error');
+        }
+
+        return parsedForm;
+    
     }
 
     @RemoteAction
@@ -237,7 +252,7 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static Map<String, Map<String, String>> getRecordGroupFields(String objectType) {
+    global static Map<String, Map<String, String>> getSObjectFields(String objectType) {
 
         SObjectType sObjType = ((SObject)Type.forName(objectType).newInstance()).getSObjectType();
 
