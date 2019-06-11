@@ -3562,7 +3562,7 @@
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsApp",
             "isDirectory": true,
             "size": 288,
-            "modifiedTime": 1560237898239,
+            "modifiedTime": 1560238187121,
             "changeTime": 1560173314210,
             "contentHash": "0a91f9ee91a19c2739b53a11e8c661fa27bfeb03",
             "isMetadataFile": false,
@@ -3698,11 +3698,11 @@
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsApp/bundle.js",
             "isDirectory": false,
             "isMetadataFile": false,
-            "size": 490337,
-            "modifiedTime": 1560237898242,
-            "changeTime": 1560237898243,
+            "size": 490301,
+            "modifiedTime": 1560238187122,
+            "changeTime": 1560238187123,
             "isWorkspace": false,
-            "contentHash": "152f57631892cf9a5da83cfb49d5e064f051aba0"
+            "contentHash": "54b842ba0ec7385d1ff96a836b007ba9b7be3d49"
         }
     ],
     [
