@@ -134,4 +134,11 @@ sfdx force:apex:class:create -n ClarityFormResponse -d force-app/main/default/cl
 
 ## clarity-scratch-org 
 
+## Use Cases
+Digital Signatures Approval Process
+Add filtering on the Lookups by Record Type and other fields
+Add RecordType select RecordType
+***Decrease bundle.js below 400kb
+
+
 
