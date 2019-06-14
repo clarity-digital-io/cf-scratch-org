@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 
-export default class ClarityFormMultipleChoice extends LightningElement {
+export default class Multiplechoice extends LightningElement {
 
     @api type
     @api title
@@ -16,5 +16,3 @@ export default class ClarityFormMultipleChoice extends LightningElement {
         this.dispatchEvent(selectedEvent);
     }
 }
-
-

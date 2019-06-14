@@ -17,13 +17,4 @@ export default class Email extends LightningElement {
         this.dispatchEvent(selectedEvent);
     }
 
-    renderedCallback() {
-
-        if(this.questionid != null) {
-            console.log(this.template.querySelectorAll("*"));
-            this.template.querySelector("label.slds-form-element__label").style.color = '#fff';
-        }
-
-    }
-
 }

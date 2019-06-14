@@ -2,7 +2,7 @@
 
     <template if:true={multiplechoice}>
         <div class="slds-m-vertical_medium">
-            <c-multiple-choice
+            <c-multiplechoice
                 onsave={save}
                 questionid={questionid} 
                 title={title} 
@@ -12,7 +12,7 @@
                 key={id} 
                 flow={flow}
             >
-            </c-multiple-choice>
+            </c-multiplechoice>
         </div>
     </template>
 
@@ -164,7 +164,7 @@
         </div>
     </template>
 
-    <!-- <template if:true={connectedobject}>
+    <template if:true={connectedobject}>
         <div class="slds-m-vertical_medium">
             <c-connectedobject
                 onsave={save}
@@ -178,7 +178,7 @@
             >
             </c-connectedobject>
         </div>
-    </template> -->
+    </template>
 
     <template if:true={recordgroup}>
         <div class="slds-m-vertical_medium">

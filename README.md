@@ -118,7 +118,7 @@ sfdx force:source:push
 
 ## commonly used commands
 
-sfdx force:lightning:component:create --type lwc -n card -d force-app/main/default/lwc
+sfdx force:lightning:component:create --type lwc -n multiplechoice -d force-app/main/default/lwc
 
 sfdx force:apex:class:create -n ClarityFormResponse -d force-app/main/default/classes
 

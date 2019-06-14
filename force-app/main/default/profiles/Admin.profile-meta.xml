@@ -85,11 +85,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Clarity_Form_Question_Connected_Field__c.Field__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Clarity_Form_Question_Criteria__c.Field__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -106,6 +101,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form_Question_Criteria__c.Value__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Question_Filter__c.Field_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -150,7 +150,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Clarity_Form_Question_Record_Field__c.Field_c__c</field>
+        <field>Clarity_Form_Question__c.Connected_Object__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -191,6 +191,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form_Question__c.Required__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Question__c.Salesforce_Object__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -273,10 +278,10 @@
         <layout>Clarity_Form_Assignment__c-Clarity Form Assignment Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Clarity_Form_Question_Connected_Field__c-Clarity Form Question Connected Field Layout</layout>
+        <layout>Clarity_Form_Question_Criteria__c-Clarity Form Question Criteria Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Clarity_Form_Question_Criteria__c-Clarity Form Question Criteria Layout</layout>
+        <layout>Clarity_Form_Question_Filter__c-Clarity Form Question Filter Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Question_Flow_Design__c-Clarity Form Question Flow Design Layout</layout>
@@ -286,9 +291,6 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Question_Option__c-Clarity Form Question Option Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Clarity_Form_Question_Record_Field__c-Clarity Form Question Record Field Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Question__c-Clarity Form Question Layout</layout>
@@ -339,7 +341,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>Clarity_Form_Question_Connected_Field__c</object>
+        <object>Clarity_Form_Question_Criteria__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -348,7 +350,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>Clarity_Form_Question_Criteria__c</object>
+        <object>Clarity_Form_Question_Filter__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -376,15 +378,6 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
         <object>Clarity_Form_Question_Option__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Clarity_Form_Question_Record_Field__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>

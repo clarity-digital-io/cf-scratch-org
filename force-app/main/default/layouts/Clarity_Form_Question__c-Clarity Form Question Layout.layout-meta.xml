@@ -36,10 +36,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Record_Group__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Max_Length__c</field>
             </layoutItems>
             <layoutItems>
@@ -61,6 +57,18 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Logic__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Connected_Object__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Record_Group__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Salesforce_Object__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>
@@ -112,11 +120,19 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Clarity_Form_Question_Record_Field__c.Clarity_Form_Question__c</relatedList>
+        <relatedList>Clarity_Form_Answer__c.Clarity_Form_Question__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Clarity_Form_Answer__c.Clarity_Form_Question__c</relatedList>
+        <relatedList>Clarity_Form_Question_Filter__c.Clarity_Form_Question__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Clarity_Form_Question__c.Connected_Object__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Clarity_Form_Question__c.Record_Group__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

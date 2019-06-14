@@ -1,9 +1,9 @@
-public with sharing class ClarityFormResponse {
+global with sharing class ClarityFormResponse {
 
     private final static Integer MAX_RESULTS = 5;
     
-    @AuraEnabled
-    public static String submit(String formResponseId) {
+    @RemoteAction
+    global static String submit(String formResponseId) {
 
         Clarity_Form_Response__c response = [SELECT Id, Status__c FROM Clarity_Form_Response__c WHERE Id =: formResponseId AND Status__c != 'Submitted' Limit 1];
 
@@ -18,8 +18,8 @@ public with sharing class ClarityFormResponse {
 
     }
 
-    @AuraEnabled
-    public static Map<String, List<sObject>> create(String recordId) {
+    @RemoteAction
+    global static Map<String, List<sObject>> create(String recordId) {
 
         Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
 
@@ -48,14 +48,14 @@ public with sharing class ClarityFormResponse {
 
     }
 
-    @AuraEnabled
-    public static Map<String, List<sObject>> preview(String recordId) {
+    @RemoteAction
+    global static Map<String, List<sObject>> preview(String recordId) {
 
         Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
 
         Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c FROM Clarity_Form__c WHERE Id =: recordId Limit 1];
         
-        Clarity_Form_Response__c response = [SELECT Id, (SELECT Id FROM Clarity_Form_Answers__r) FROM Clarity_Form_Response__c WHERE Status__c = 'Preview' AND Clarity_Form__c =: form.Id];
+        Clarity_Form_Response__c response = [SELECT Id, (SELECT Id, Clarity_Form_Question__c, Answer__c FROM Clarity_Form_Answers__r) FROM Clarity_Form_Response__c WHERE Status__c = 'Preview' AND Clarity_Form__c =: form.Id];
 
         List<Clarity_Form_Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
@@ -63,24 +63,7 @@ public with sharing class ClarityFormResponse {
             (SELECT Id, Field__c, Operator__c, Type__c, Value__c FROM Clarity_Form_Question_Criteria__r), 
             Logic__c, Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
-        List<Clarity_Form_Answer__c> answers = new List<Clarity_Form_Answer__c>();
-
-        answers.addAll(response.Clarity_Form_Answers__r);
-
-        if(answers.size() > 0) {
-            
-            List<Database.DeleteResult> deleteResults = Database.delete(answers);
-
-            for(Database.DeleteResult result : deleteResults) {
-
-                if(!result.isSuccess()) {
-                    System.debug('error deleting');
-                }
-
-            }
-
-        }
-
+        formDetails.put('Answers', response.Clarity_Form_Answers__r);
         formDetails.put('FormResponse', new List<sObject>{ response });
         formDetails.put('Form', new List<sObject>{ form });
         formDetails.put('Questions', questions);
@@ -89,8 +72,8 @@ public with sharing class ClarityFormResponse {
 
     }
 
-    @AuraEnabled
-    public static Clarity_Form_Answer__c saveAnswer(String answer){
+    @RemoteAction
+    global static Clarity_Form_Answer__c saveAnswer(String answer){
         
         Clarity_Form_Answer__c parsedAnswer = (Clarity_Form_Answer__c)JSON.deserialize(answer, Clarity_Form_Answer__c.class);
 
@@ -106,13 +89,13 @@ public with sharing class ClarityFormResponse {
         
     }
 
-    @AuraEnabled
-    public static void publishFlow(String questionFlow) {
+    @RemoteAction
+    global static void publishFlow(String questionFlow) {
         System.debug(questionFlow);
     }
 
-    @AuraEnabled(Cacheable=true)
-    public static List<LookupSearchResult> search(String searchTerm, String lookupObject, List<String> selectedIds) {
+    @RemoteAction 
+    global static List<LookupResult> search(String searchTerm, String lookupObject, String questionId) {
 
         searchTerm += '*';
 
@@ -120,17 +103,34 @@ public with sharing class ClarityFormResponse {
 
         List<List<sObject>> searchResults = search.query(searchString);
 
-        List<LookupSearchResult> results = new List<LookupSearchResult>();
+        List<LookupResult> results = new List<LookupResult>();
 
         String recordIcon = 'standard:' + lookupObject.toLowerCase();
 
         List<sObject> records = ((List<sObject>) searchResults[0]);
 
         for (sObject record : records) {
-            results.add(new LookupSearchResult(record.Id, lookupObject, recordIcon, (String)record.get('Id'), lookupObject));
+            System.debug('record: ' + record);
+            results.add(new LookupResult(record.Id, lookupObject, (String)record.get('Id'), lookupObject));
         }
 
         return results;
+    }
+
+    global class LookupResult {
+
+        private Id id;
+        private String type;
+        private String label;
+        private String subTitle;
+
+        public LookupResult(Id id, String type, String label, String subTitle) {
+            this.id = id;
+            this.type = type;
+            this.label = label;
+            this.subTitle = subTitle;
+        }
+
     }
 
 }

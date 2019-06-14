@@ -17,7 +17,8 @@ export default class ClarityFormRender extends LightningElement {
     @api image;
     @api checkbox;
     @api attachments;
-    @api esignature;
+    @api digitalsignature;
+    @api connectedobject
 
     @api type
     @api formresponseid
@@ -48,8 +49,9 @@ export default class ClarityFormRender extends LightningElement {
         this.recordgroup = this.type == 'RecordGroup' ? true : false;
         this.image = this.type == 'Image' ? true : false;
         this.checkbox = this.type == 'Checkbox' ? true : false;
-        this.attachments = this.type == 'Attachments' ? true : false;        
-        this.esignature = this.type == 'eSignature' ? true : false;
+        this.attachments = this.type == 'Attachments' ? true : false; 
+        this.connectedobject = this.type == 'ConnectedObject' ? true : false;       
+        this.digitalsignature = this.type == 'DigitalSignature' ? true : false;
     }
 
     save(event) {

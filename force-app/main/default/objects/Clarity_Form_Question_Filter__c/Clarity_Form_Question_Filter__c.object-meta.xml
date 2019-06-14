@@ -52,12 +52,12 @@
     <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <label>Clarity Form Question Connected Field</label>
+    <label>Clarity Form Question Filter</label>
     <nameField>
-        <label>Clarity Form Question Connected Field Name</label>
+        <label>Clarity Form Question Filter Name</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Clarity Form Question Connected Fields</pluralLabel>
+    <pluralLabel>Clarity Form Question Filters</pluralLabel>
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>

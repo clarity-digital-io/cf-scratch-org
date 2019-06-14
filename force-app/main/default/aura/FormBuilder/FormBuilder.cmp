@@ -5,5 +5,5 @@
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
 
      <aura:attribute access="global" name="recordId" type="String" required="true" default=""/>
-    <lightning:container src="{!$Resource.ClarityFormsApp + '/index.html?recordId=' + v.recordId}" onmessage="{!c.handleMessage}" />
+    <lightning:container src="{!$Resource.ClarityFormsBuilder + '/index.html?recordId=' + v.recordId}" onmessage="{!c.handleMessage}" />
 </aura:component>

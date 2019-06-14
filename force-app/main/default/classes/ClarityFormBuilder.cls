@@ -47,7 +47,7 @@ global with sharing class ClarityFormBuilder {
 
         } 
         
-        form = [SELECT Id, Name, Limit__c, End_Date__c, Connected_Object__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
+        form = [SELECT Id, Name, Limit__c, End_Date__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
             Clarity_Form_Assignment__c, Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
             FROM Clarity_Form__c WHERE Id =: formId];
 
@@ -75,7 +75,7 @@ global with sharing class ClarityFormBuilder {
 
         Clarity_Form__c form = [SELECT Id, Name, Status__c FROM Clarity_Form__c WHERE Id =: recordId LIMIT 1];
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Record_Group__c, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
             FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         return questions; 
@@ -171,23 +171,17 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction 
     global static Map<String, List<sObject>> getQuestionEditDetails(String sQuestionId) {
 
-        Clarity_Form_Question_Flow_Design__c flowDesign = [SELECT Id, Active__c, Form_Submission__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Flow_Design__c WHERE Clarity_Form_Question__c =: sQuestionId LIMIT 1];
+        List<Clarity_Form_Question_Flow_Design__c> flowDesign = [SELECT Id, Active__c, Form_Submission__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Flow_Design__c WHERE Clarity_Form_Question__c =: sQuestionId LIMIT 1];
 
         List<Clarity_Form_Question_Option__c> questionOptions = [SELECT Id, Active_Flow__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
 
         List<Clarity_Form_Question_Criteria__c> criteria = [SELECT Id, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__c WHERE Clarity_Form_Question__c =: sQuestionId];
 
         Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
-        
-        List<sObject> options = new List<sObject>(); 
-        options.addAll(questionOptions);
-
-        List<sObject> flow = new List<sObject>(); 
-        flow.add(flowDesign);
 
         results.put('Criteria', criteria);
-        results.put('Options', options);
-        results.put('FlowDesign', flow);
+        results.put('Options', questionOptions);
+        results.put('FlowDesign', flowDesign);
 
         return results;
 
