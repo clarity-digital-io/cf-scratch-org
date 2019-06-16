@@ -26,19 +26,29 @@
                 <label>Less than</label>
             </value>
             <value>
-                <fullName>Greater than or Equal to</fullName>
+                <fullName>Is Greater than or equal to</fullName>
                 <default>false</default>
-                <label>Greater than or Equal to</label>
+                <label>Is Greater than or equal to</label>
             </value>
             <value>
-                <fullName>Less than or Equal to</fullName>
+                <fullName>Is Less than or equal to</fullName>
                 <default>false</default>
-                <label>Less than or Equal to</label>
+                <label>Is Less than or equal to</label>
             </value>
             <value>
                 <fullName>Is not</fullName>
                 <default>false</default>
                 <label>Is not</label>
+            </value>
+            <value>
+                <fullName>Is Not Null</fullName>
+                <default>false</default>
+                <label>Is Not Null</label>
+            </value>
+            <value>
+                <fullName>Not Equal</fullName>
+                <default>false</default>
+                <label>Not Equal</label>
             </value>
         </valueSetDefinition>
     </valueSet>

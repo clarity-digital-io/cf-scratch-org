@@ -4,7 +4,7 @@
         <template if:true={isPublished}>
 
             <lightning-button-group slot="actions">
-                <lightning-button disabled label="Edit Form" onclick={editForm} icon-name="utility:insert_template"></lightning-button>
+                <lightning-button disabled label="Form Builder" onclick={editForm} icon-name="utility:insert_template"></lightning-button>
                 <lightning-button label="Create Form Response" onclick={createResponse} icon-name="utility:insert_template"></lightning-button>
             </lightning-button-group>
 
@@ -15,7 +15,7 @@
         <template if:false={isPublished}>
 
             <lightning-button-group slot="actions">
-                <lightning-button label="Edit Form" onclick={editForm} icon-name="utility:insert_template"></lightning-button>
+                <lightning-button label="Form Builder" onclick={editForm} icon-name="utility:insert_template"></lightning-button>
                 <lightning-button disabled label="Create Form Response" onclick={createResponse} icon-name="utility:insert_template"></lightning-button>
             </lightning-button-group>
 

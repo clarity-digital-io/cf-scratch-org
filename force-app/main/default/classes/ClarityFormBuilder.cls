@@ -29,7 +29,11 @@ global with sharing class ClarityFormBuilder {
 
         if(formId == '') {
 
-            Clarity_Form_Style__c styling = [SELECT Id, Background_Color__c, Color__c FROM Clarity_Form_Style__c WHERE Name = 'Classic'];
+            Clarity_Form_Style__c styling = new Clarity_Form_Style__c(Name = 'Clarity Form Styling', Background_Color__c = '#FFF', Color__c = '#333');
+
+            Database.SaveResult stylingResult = Database.insert(styling); 
+
+            if(!stylingResult.isSuccess()) System.debug('throw error'); // throw error
 
             Clarity_Form__c newForm = new Clarity_Form__c(Name = 'Clarity Form', Clarity_Form_Style__c = styling.Id); 
             
@@ -51,6 +55,8 @@ global with sharing class ClarityFormBuilder {
             Clarity_Form_Assignment__c, Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
             FROM Clarity_Form__c WHERE Id =: formId];
 
+        
+
         return form; 
 
     }
@@ -68,6 +74,52 @@ global with sharing class ClarityFormBuilder {
 
         return parsedForm;
     
+    }
+
+    @RemoteAction
+    global static Clarity_Form_Style__c updateDesign(String sDesign, String file) {
+
+        Clarity_Form_Style__c parsedStyle = (Clarity_Form_Style__c)JSON.deserialize(sDesign, Clarity_Form_Style__c.class);
+
+        Database.SaveResult result = Database.update(parsedStyle, true); 
+
+        if(!result.isSuccess()) {
+            System.debug('error');
+        }
+
+        if(file != '') {
+            ContentVersion content = new ContentVersion();
+            content.ContentLocation = 'S'; 
+            content.PathOnClient = parsedStyle.Name + 'Background.png';
+            content.Title = parsedStyle.Name + ' Background'; 
+            content.VersionData = EncodingUtil.base64Decode(file); // converting your binary string to Blog
+
+            Database.SaveResult contentResult = Database.insert(content, true); 
+
+            if(!contentResult.isSuccess()) {
+                System.debug('error');
+            }
+
+            //we should delete any related to this record
+
+            Id documentId = [SELECT ContentDocumentId FROM ContentVersion WHERE Id =:content.Id].ContentDocumentId;
+
+            ContentDocumentLink documentLink = new ContentDocumentLink();
+            documentLink.ContentDocumentId = documentId;
+            documentLink.LinkedEntityId = parsedStyle.Id; 
+            documentLink.ShareType = 'I'; 
+            documentLink.Visibility = 'AllUsers';
+            
+            Database.SaveResult documentResult = Database.insert(documentLink, true); 
+
+            if(!documentResult.isSuccess()) {
+                System.debug('error');
+            }
+
+        }
+
+        return parsedStyle;
+
     }
 
     @RemoteAction
@@ -175,7 +227,7 @@ global with sharing class ClarityFormBuilder {
 
         List<Clarity_Form_Question_Option__c> questionOptions = [SELECT Id, Active_Flow__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
 
-        List<Clarity_Form_Question_Criteria__c> criteria = [SELECT Id, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__c WHERE Clarity_Form_Question__c =: sQuestionId];
+        List<Clarity_Form_Question_Criteria__c> criteria = [SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__c WHERE Clarity_Form_Question__c =: sQuestionId];
 
         Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
 
@@ -223,6 +275,53 @@ global with sharing class ClarityFormBuilder {
         results.put('Options', options);
         results.put('FlowDesign', flow);
 
+        return results;
+        
+    }
+
+    @RemoteAction
+    global static Map<String, List<sObject>> savQuestionWithCriteria(String sQuestion, String sCriteria) {
+
+        Clarity_Form_Question__c parsedQuestion = (Clarity_Form_Question__c)JSON.deserialize(sQuestion, Clarity_Form_Question__c.class);
+
+        Database.SaveResult resultQuestion = Database.update(parsedQuestion, true); 
+
+        if(!resultQuestion.isSuccess()) {
+            System.debug('error');
+        }
+
+        List<Clarity_Form_Question_Criteria__c> currentCriteria = [SELECT Id FROM Clarity_Form_Question_Criteria__c WHERE Clarity_Form_Question__c =: parsedQuestion.Id];
+
+        List<Database.DeleteResult> resultCriteriaDelete = Database.delete(currentCriteria, true); 
+
+        for(Database.DeleteResult criteriaDelete : resultCriteriaDelete) {
+
+            if(!criteriaDelete.isSuccess()) {
+
+                System.debug('error: ' + criteriaDelete.getErrors());
+
+            }
+
+        }
+
+        List<Clarity_Form_Question_Criteria__c> parsedCriteria = (List<Clarity_Form_Question_Criteria__c>)JSON.deserialize(sCriteria, List<Clarity_Form_Question_Criteria__c>.class);
+
+        List<Database.SaveResult> resultCriteria = Database.insert(parsedCriteria, true); 
+
+        for(Database.SaveResult newCriteria : resultCriteria) {
+
+            if(!newCriteria.isSuccess()) {
+
+                System.debug('error: ' + newCriteria.getErrors());
+
+            }
+
+        }
+
+        Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
+
+        results.put('Criteria', parsedCriteria);
+        results.put('Question', new List<sObject> { parsedQuestion });
 
         return results;
         

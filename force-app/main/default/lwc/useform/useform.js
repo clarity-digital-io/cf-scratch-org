@@ -24,14 +24,14 @@ export default class Useform extends NavigationMixin(LightningElement) {
     }
 
     editForm() {
-
+        console.log('this.recordId', this.recordId); 
         this[NavigationMixin.Navigate]({
             type: "standard__component",
             attributes: {
-                componentName: "c__FormBuilder"
+                componentName: "c__FormBuilder", 
             },
             state: {
-                recordId: this.recordId
+                c__recordId: this.recordId
             }
         });
 
