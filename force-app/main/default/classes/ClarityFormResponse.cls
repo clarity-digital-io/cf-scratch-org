@@ -60,7 +60,7 @@ global with sharing class ClarityFormResponse {
         List<Clarity_Form_Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
-            (SELECT Id, Field__c, Operator__c, Type__c, Value__c FROM Clarity_Form_Question_Criteria__r), 
+            (SELECT Id, Clarity_Form_Question__c, Field__c, Operator__c, Type__c, Value__c FROM Clarity_Form_Question_Criteria__r), 
             Page__c, Logic__c, Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         formDetails.put('Answers', response.Clarity_Form_Answers__r);
