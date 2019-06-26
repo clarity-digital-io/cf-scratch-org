@@ -117,6 +117,27 @@ global with sharing class ClarityFormResponse {
         return results;
     }
 
+    @RemoteAction 
+    global static Id createRecord(String sObject, Map<String, String> records) {
+        //OpportunityLineItem
+        Schema.SObjectType convertType = Schema.getGlobalDescribe().get(sObject);
+
+        Sobject genericObject = convertType.newSObject();
+
+        genericObject.OpportunityId = ''; 
+
+        Database.UpsertResult result = Database.upsert(genericObject, true); 
+
+        if(!result.isSuccess()) {
+
+            System.debug('error: ' + result.getErrors());
+
+        }
+
+        return result.Id; 
+
+    }
+
     global class LookupResult {
 
         private Id id;
@@ -132,5 +153,5 @@ global with sharing class ClarityFormResponse {
         }
 
     }
-
+    
 }

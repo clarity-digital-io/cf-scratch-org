@@ -39,7 +39,7 @@
 		let formId = message.payload.value; 
 
 		if(name == 'Preview') {
-
+			console.log('BUILDER: ', cmp.get('v.recordId'), formId);
 			let navService = cmp.find("navService");
 			
 			let pageReference = {
@@ -47,8 +47,8 @@
 				attributes: {
 					componentName: 'c__FormPreview'
 				},
-				state : {
-					recordId : cmp.get('v.recordId') || formId
+				state: {
+					c__recordId: cmp.get('v.recordId') || formId
 				}
 			};
 

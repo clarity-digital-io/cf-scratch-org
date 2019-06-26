@@ -85,7 +85,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Clarity_Form_Question_Criteria__c.Field_Type_c__c</field>
+        <field>Clarity_Form_Question_Criteria__c.Field_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

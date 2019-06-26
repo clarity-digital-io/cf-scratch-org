@@ -4,6 +4,8 @@
 
 package.xml
 AppSwitcher.appMenu
-**/jsconfig.json
+force-app/main/default/lwc/preview
+force-app/main/default/lwc/form
 
+**/jsconfig.json
 **/.eslintrc.json

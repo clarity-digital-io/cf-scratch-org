@@ -4,6 +4,6 @@
     <aura:attribute name="recordId" type="String" required="true" default="default" access="global"/>
     <aura:attribute name="Form" type="String" required="true" default="default" access="global" />
 
-    <c:form recordId="{!v.recordId}" />
+    <!-- <c:form recordId="{!v.recordId}" /> -->
 
 </aura:component>	
