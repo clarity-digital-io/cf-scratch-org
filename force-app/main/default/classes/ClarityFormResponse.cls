@@ -118,13 +118,19 @@ global with sharing class ClarityFormResponse {
     }
 
     @RemoteAction 
-    global static Id createRecord(String sObject, Map<String, String> records) {
-        //OpportunityLineItem
-        Schema.SObjectType convertType = Schema.getGlobalDescribe().get(sObject);
+    global static String createRecord(String sObjectName, String records) {
 
-        Sobject genericObject = convertType.newSObject();
+        Schema.SObjectType convertType = Schema.getGlobalDescribe().get(sObjectName);
 
-        genericObject.OpportunityId = ''; 
+        List<Record> recordFields = (List<Record>)JSON.deserialize(records, List<Record>.class);
+
+        sObject genericObject = convertType.newSObject();
+
+        for(Record record : recordFields) {
+
+            genericObject.put(record.field, record.value);
+
+        }
 
         Database.UpsertResult result = Database.upsert(genericObject, true); 
 
@@ -134,7 +140,13 @@ global with sharing class ClarityFormResponse {
 
         }
 
-        return result.Id; 
+        return JSON.serialize(genericObject); 
+    }
+
+    global class Record {
+
+        public String field; 
+        public Object value; 
 
     }
 

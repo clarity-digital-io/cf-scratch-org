@@ -4079,11 +4079,11 @@
             "sourcePath": "/Users/efigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsBuilder/bundle.js",
             "isDirectory": false,
             "isMetadataFile": false,
-            "size": 495190,
-            "modifiedTime": 1561522924296,
-            "changeTime": 1561522924296,
+            "size": 495106,
+            "modifiedTime": 1561522723942,
+            "changeTime": 1561522723942,
             "isWorkspace": false,
-            "contentHash": "b8f8451a8b8ff2d68d1cee7237913be124f96eba"
+            "contentHash": "fbe4b3fdda2ad8d899fa5afab0dec88a735df83e"
         }
     ],
     [
