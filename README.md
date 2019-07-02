@@ -106,13 +106,13 @@ sfdx force:org:list
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-scratch-org
 
-sfdx force:alias:set YourAlias=test-sqbikhle4g9p@example.com
+sfdx force:alias:set YourAlias=test-71ma7ewtbpfq@example.com
 
-sfdx force:user:password:generate --targetusername test-sqbikhle4g9p@example.com
+sfdx force:user:password:generate --targetusername test-71ma7ewtbpfq@example.com
 
-sfdx force:config:set defaultusername=test-sqbikhle4g9p@example.com
+sfdx force:config:set defaultusername=test-71ma7ewtbpfq@example.com
 
-sfdx force:user:display --targetusername test-sqbikhle4g9p@example.com
+sfdx force:user:display --targetusername test-71ma7ewtbpfq@example.com
 
 sfdx force:source:push
 

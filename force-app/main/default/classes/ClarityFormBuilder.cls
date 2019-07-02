@@ -55,8 +55,6 @@ global with sharing class ClarityFormBuilder {
             Clarity_Form_Assignment__c, Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
             FROM Clarity_Form__c WHERE Id =: formId];
 
-        
-
         return form; 
 
     }
@@ -81,18 +79,13 @@ global with sharing class ClarityFormBuilder {
 
         Clarity_Form_Style__c parsedStyle = (Clarity_Form_Style__c)JSON.deserialize(sDesign, Clarity_Form_Style__c.class);
 
-        Database.SaveResult result = Database.update(parsedStyle, true); 
-
-        if(!result.isSuccess()) {
-            System.debug('error');
-        }
-
         if(file != '') {
+
             ContentVersion content = new ContentVersion();
             content.ContentLocation = 'S'; 
             content.PathOnClient = parsedStyle.Name + 'Background.png';
             content.Title = parsedStyle.Name + ' Background'; 
-            content.VersionData = EncodingUtil.base64Decode(file); // converting your binary string to Blog
+            content.VersionData = EncodingUtil.base64Decode(file); // converting your binary string to Blob
 
             Database.SaveResult contentResult = Database.insert(content, true); 
 
@@ -113,6 +106,26 @@ global with sharing class ClarityFormBuilder {
             Database.SaveResult documentResult = Database.insert(documentLink, true); 
 
             if(!documentResult.isSuccess()) {
+                System.debug('error');
+            }
+
+            //Attach to Clarity Form Style
+
+            parsedStyle.Background_Image__c = documentId;
+
+            Database.SaveResult result = Database.update(parsedStyle, true); 
+
+            if(!result.isSuccess()) {
+                System.debug('error');
+            }
+            
+        } else {
+
+            parsedStyle.Background_Image__c = '';
+
+            Database.SaveResult result = Database.update(parsedStyle, true); 
+
+            if(!result.isSuccess()) {
                 System.debug('error');
             }
 
