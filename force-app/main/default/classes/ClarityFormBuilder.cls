@@ -51,7 +51,7 @@ global with sharing class ClarityFormBuilder {
 
         } 
         
-        form = [SELECT Id, Name, Limit__c, End_Date__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
+        form = [SELECT Id, Name, Limit__c, End_Date__c,  Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
             Clarity_Form_Assignment__c, Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
             FROM Clarity_Form__c WHERE Id =: formId];
 
@@ -118,7 +118,7 @@ global with sharing class ClarityFormBuilder {
             if(!result.isSuccess()) {
                 System.debug('error');
             }
-            
+
         } else {
 
             parsedStyle.Background_Image__c = '';
