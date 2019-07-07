@@ -2,9 +2,16 @@
     doInit: function(cmp) {
 
         if(cmp.get('v.recordId') == 'default') {
-            cmp.set('v.recordId', cmp.get("v.pageReference").state.c__recordId);
+
+            if(cmp.get("v.pageReference") != null) {
+                cmp.set('v.recordId', cmp.get("v.pageReference").state.c__recordId);
+            } else {
+                cmp.set('v.recordId', 'a0B4F000001WlTvUAK');
+                return; 
+            }
+
         }
-        console.log('cmp.get', cmp.get('v.recordId'));
+
         let workspaceAPI = cmp.find("workspace");
 
         workspaceAPI.getTabInfo().then(function(response) {

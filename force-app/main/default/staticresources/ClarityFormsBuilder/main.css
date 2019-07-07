@@ -38,11 +38,12 @@
 
 html {
     background: none !important; 
-    font-family: 'Salesforce Sans' !important;
+    font-family: 'Salesforce Sans', Arial, sans-serif;
+    color: #333 !important; 
 }
 
-span {
-    font-family: 'Salesforce Sans' !important;
+.slds-form-element__label {
+    color: #333 !important; 
 }
 
 body {
@@ -52,4 +53,8 @@ body {
 ul {
     padding: 0; 
     margin: 0; 
+}
+
+span {
+    font-family: 'Salesforce Sans' !important;
 }

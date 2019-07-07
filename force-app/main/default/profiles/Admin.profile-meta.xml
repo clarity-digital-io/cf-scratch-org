@@ -205,6 +205,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Clarity_Form_Question__c.Salesforce_Field__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Clarity_Form_Question__c.Salesforce_Object__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -256,6 +261,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form_Style__c.Color__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Style__c.Multi_Page__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

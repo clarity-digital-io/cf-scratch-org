@@ -51,7 +51,7 @@ global with sharing class ClarityFormBuilder {
 
         } 
         
-        form = [SELECT Id, Name, Limit__c, End_Date__c,  Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
+        form = [SELECT Id, Name, Limit__c, End_Date__c, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
             Clarity_Form_Assignment__c, Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
             FROM Clarity_Form__c WHERE Id =: formId];
 
@@ -138,10 +138,8 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static List<Clarity_Form_Question__c> getQuestions(String recordId){
 
-        Clarity_Form__c form = [SELECT Id, Name, Status__c FROM Clarity_Form__c WHERE Id =: recordId LIMIT 1];
-
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Record_Group__c, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
-            FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
+            FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: recordId];
 
         return questions; 
 
@@ -379,6 +377,9 @@ global with sharing class ClarityFormBuilder {
 
             Schema.DisplayType type = fieldResult.getType();
 
+            List <Schema.sObjectType> reference = fieldResult.getReferenceTo();
+            System.debug('fieldResult: ' + fieldResult); 
+            System.debug('reference: ' + reference); 
             Boolean isFieldReq  = fieldResult.isNillable();
             Boolean isFieldCreateable = fieldResult.isCreateable(); 
 
@@ -462,6 +463,37 @@ global with sharing class ClarityFormBuilder {
         }
 
         return parsedAssignmentRules; 
+
+    }
+
+    @RemoteAction
+    global static List<Clarity_Form_Question__c> saveRecordGroupFields(String sRecordGroupFields, String relatedRecordGroupId) {
+
+        List<Clarity_Form_Question__c> recordFieldsToDelete = [SELECT Id FROM Clarity_Form_Question__c WHERE Record_Group__c =: relatedRecordGroupId]; 
+
+        List<Database.DeleteResult> deleteResults = Database.delete(recordFieldsToDelete, true);
+
+        for(Database.DeleteResult deleteResult : deleteResults) {
+            
+            if(!deleteResult.isSuccess()) {
+                System.debug('error: ' + deleteResult.getErrors());
+            }
+
+        }
+
+        List<Clarity_Form_Question__c> parsedRecordGroupFields = (List<Clarity_Form_Question__c>)JSON.deserialize(sRecordGroupFields, List<Clarity_Form_Question__c>.class);
+
+        List<Database.UpsertResult> resultRecordFields = Database.upsert(parsedRecordGroupFields, true); 
+
+        for(Database.UpsertResult result : resultRecordFields) {
+
+            if(!result.isSuccess()) {
+                System.debug('error: ' + result.getErrors());
+            }
+
+        }
+
+        return parsedRecordGroupFields; 
 
     }
 

@@ -106,13 +106,13 @@ sfdx force:org:list
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-scratch-org
 
-sfdx force:alias:set YourAlias=test-71ma7ewtbpfq@example.com
+sfdx force:alias:set YourAlias=test-pj39mi8jqayt@example.com
 
-sfdx force:user:password:generate --targetusername test-71ma7ewtbpfq@example.com
+sfdx force:user:password:generate --targetusername test-pj39mi8jqayt@example.com
 
-sfdx force:config:set defaultusername=test-71ma7ewtbpfq@example.com
+sfdx force:config:set defaultusername=test-pj39mi8jqayt@example.com
 
-sfdx force:user:display --targetusername test-71ma7ewtbpfq@example.com
+sfdx force:user:display --targetusername test-pj39mi8jqayt@example.com
 
 sfdx force:source:push
 
@@ -120,7 +120,7 @@ sfdx force:source:push
 
 sfdx force:lightning:component:create --type lwc -n multiplechoice -d force-app/main/default/lwc
 
-sfdx force:apex:class:create -n ClarityFormResponse -d force-app/main/default/classes
+sfdx force:apex:class:create -n ClarityFormService -d force-app/main/default/classes
 
 
 ## Resources

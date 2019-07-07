@@ -1,4 +1,4 @@
-.THIS .slds-card__body {
-    margin-bottom: 0rem;
-    height: 68vh;
+.THIS iframe {
+    border-radius: 4px; 
+    height: 100vh;
 }

@@ -53,3 +53,18 @@ ul {
     padding: 0; 
     margin: 0; 
 }
+
+.slds-form-element__label {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    display: inline-block;
+    color: #3e3e3c;
+    font-size: 1.15em;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500 !important;
+}
