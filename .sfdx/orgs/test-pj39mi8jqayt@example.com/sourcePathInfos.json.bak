@@ -4016,11 +4016,11 @@
             "sourcePath": "/Users/benefigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsResponse/bundle.js",
             "isDirectory": false,
             "isMetadataFile": false,
-            "size": 529206,
-            "modifiedTime": 1562512854140,
-            "changeTime": 1562512854140,
+            "size": 529186,
+            "modifiedTime": 1562512777409,
+            "changeTime": 1562512777409,
             "isWorkspace": false,
-            "contentHash": "5e1aff1eed2ecc5632d81beb3c487391e7a77f40"
+            "contentHash": "1dbe15e3a29ff751690b2a64980ce5bf32233983"
         }
     ],
     [
