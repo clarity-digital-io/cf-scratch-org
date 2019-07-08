@@ -14,6 +14,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>ClarityFormService</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>Clarity_Form_QuestionTriggerHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -85,6 +89,26 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form_Connection_Field__c.Salesforce_Field__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Connection__c.Active__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Connection__c.Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Question_Criteria__c.Field_Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form_Question_Criteria__c.Field__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -150,6 +174,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form_Question__c.Connected_Object__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form_Question__c.Logic__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -175,6 +204,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form_Question__c.Page__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form_Question__c.Prefill_Type__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -186,6 +220,16 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Clarity_Form_Question__c.Required__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Question__c.Salesforce_Field__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Question__c.Salesforce_Object__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -225,7 +269,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form_Style__c.Background_Image__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Style__c.Button_Color__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form_Style__c.Color__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Style__c.Multi_Page__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -255,6 +314,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form__c.Multi_Page__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form__c.Status__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -266,6 +330,12 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Assignment__c-Clarity Form Assignment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Clarity_Form_Connection_Field__c-Clarity Form Connection Field Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Clarity_Form_Connection__c-Clarity Form Connection Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Question_Criteria__c-Clarity Form Question Criteria Layout</layout>

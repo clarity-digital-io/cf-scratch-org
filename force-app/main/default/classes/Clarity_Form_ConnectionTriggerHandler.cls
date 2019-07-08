@@ -1,20 +1,20 @@
 /**
 * @author efigenio.ben@clarityforms.io
 * @company Clarity Forms
-* @date 05/16/2019
+* @date 07/07/2019
 *
-* @group Clarity_Form_Question__c
+* @group Clarity_Form_Connection__c
 *
-* @description Clarity_Form_Question Trigger Handler for the Clarity_Form_Question SObject. This class implements the ITrigger
+* @description Clarity_Form_Connection Trigger Handler for the Clarity_Form_Connection SObject. This class implements the ITrigger
 *  Please check ITrigger and TriggerFactory to understand the order execution and methods used
 */
-public class Clarity_Form_QuestionTriggerHandler implements ITrigger {
+public class Clarity_Form_ConnectionTriggerHandler implements ITrigger {
     
     /*******************************************************************************************************
-	* @description List of flow designs to be updated in the andFinally method
+	* @description List of fields to be deleted in the andFinally method
 	*/
-	private List<Clarity_Form_Question_Flow_Design__c> flowDesignsToBeCreated = new List<Clarity_Form_Question_Flow_Design__c>();
-
+	private List<Clarity_Form_Connection_Field__c> fieldsToBeDeleted = new List<Clarity_Form_Connection_Field__c>();
+    
     /*******************************************************************************************************
 	* @description This method is called prior to execution of a BEFORE trigger. Use this to cache
 	* any data required into maps prior execution of the trigger.
@@ -80,10 +80,6 @@ public class Clarity_Form_QuestionTriggerHandler implements ITrigger {
 	*/
 	public void afterInsert(SObject so) {
 
-        Clarity_Form_Question__c cf = (Clarity_Form_Question__c) so; 
-
-        QuestionFlowDesigns.execute(flowDesignsToBeCreated, cf);
-
 	}
 
 	/*******************************************************************************************************
@@ -91,6 +87,12 @@ public class Clarity_Form_QuestionTriggerHandler implements ITrigger {
 	* trigger.
 	*/
 	public void afterUpdate(SObject oldSo, SObject so) {
+
+        Clarity_Form_Connection__c oldConnection = (Clarity_Form_Connection__c) so; 
+
+        Clarity_Form_Connection__c newConnection = (Clarity_Form_Connection__c) so; 
+
+        ConnectionFieldValidation.execute(fieldsToBeDeleted, oldConnection, newConnection);
 
 	}
 
@@ -107,8 +109,10 @@ public class Clarity_Form_QuestionTriggerHandler implements ITrigger {
     * method to accomplish any final operations such as creation or updates of other records.
     */
 	public void andFinally() {
-		if (!flowDesignsToBeCreated.isEmpty()) {
-            insert flowDesignsToBeCreated; 
+
+		if (!fieldsToBeDeleted.isEmpty()) {
+            delete fieldsToBeDeleted; 
 		}
+
 	}
 }

@@ -120,7 +120,9 @@ sfdx force:source:push
 
 sfdx force:lightning:component:create --type lwc -n multiplechoice -d force-app/main/default/lwc
 
-sfdx force:apex:class:create -n ClarityFormService -d force-app/main/default/classes
+sfdx force:apex:trigger:create -n ClarityFormConnectionTrigger -d force-app/main/default/triggers
+
+sfdx force:apex:class:create -n ConnectionFieldValidation -d force-app/main/default/classes
 
 
 ## Resources

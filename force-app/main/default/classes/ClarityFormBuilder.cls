@@ -498,6 +498,45 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
+    global static List<Clarity_Form_Connection__c> getConnections(String formId){
+
+        List<Clarity_Form_Connection__c> connections = [SELECT Id, Active__c, Salesforce_Object__c FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: formId];
+
+        return connections; 
+        
+    }
+
+    @RemoteAction
+    global static List<Clarity_Form_Connection_Field__c> getConnectionFieldMapping(String connectionId) {
+
+        List<Clarity_Form_Connection_Field__c> fields = [SELECT Id, Clarity_Form_Connection__c, Salesforce_Field__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Field__c WHERE Clarity_Form_Connection__c =: connectionId];
+        
+        return fields; 
+
+    }
+
+    @RemoteAction
+    global static List<Clarity_Form_Connection__c> saveConnections(String sConnections, String formId) {
+
+        List<Clarity_Form_Connection__c> parsedConnections = (List<Clarity_Form_Connection__c>)JSON.deserialize(sConnections, List<Clarity_Form_Connection__c>.class);
+
+        List<Database.UpsertResult> results = Database.upsert(parsedConnections, true); 
+
+        for(Database.UpsertResult result : results) {
+
+            if(!result.isSuccess()) {
+
+                System.debug('error: ' + result.getErrors());
+
+            }
+
+        }
+
+        return parsedConnections; 
+
+    }
+
+    @RemoteAction
     global static List<sObject> getUsers(String searchTerm){
 
         List<sObject> results = new List<sObject>(); 

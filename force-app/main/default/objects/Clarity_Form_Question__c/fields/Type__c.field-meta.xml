@@ -190,6 +190,16 @@
                 <default>false</default>
                 <label>STRING</label>
             </value>
+            <value>
+                <fullName>PageBreak</fullName>
+                <default>false</default>
+                <label>PageBreak</label>
+            </value>
+            <value>
+                <fullName>Text</fullName>
+                <default>false</default>
+                <label>Text</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
