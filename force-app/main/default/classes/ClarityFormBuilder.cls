@@ -75,6 +75,15 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
+    global static List<Clarity_Form_Style__c> getDesigns() {
+
+        List<Clarity_Form_Style__c> designs = [SELECT Id, Multi_Page__c, Background_Image__c, Background_Color__c, Button_Color__c, Color__c FROM Clarity_Form_Style__c];
+
+        return designs; 
+        
+    }
+
+    @RemoteAction
     global static Clarity_Form_Style__c updateDesign(String sDesign, String file) {
 
         Clarity_Form_Style__c parsedStyle = (Clarity_Form_Style__c)JSON.deserialize(sDesign, Clarity_Form_Style__c.class);
