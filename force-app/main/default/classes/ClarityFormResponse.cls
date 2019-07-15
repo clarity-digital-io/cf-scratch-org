@@ -12,7 +12,7 @@ global with sharing class ClarityFormResponse {
         Database.SaveResult result = Database.update(response);
 
         if(!result.isSuccess())
-            System.debug('error deleting');
+            System.debug('error submitting form response');
 
         return 'Success'; 
 

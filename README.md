@@ -99,31 +99,44 @@ Initial         EQUALS              REFERENCE       Opportunity.Probability
 Question1       GREATER THAN        REFERENCE       Opportunity.Probability
 Question2       EQUALS              String          'Option 1'
 
+### Clarity Form Response Submit 
 
+On Submit
+
+After Clearing UI Validation Checks (Required and Others...)
+
+Checks Required
+
+- Input Flows
+- Assignments
+- Connections
 
 ## Dev, Build and Test
+sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-hub-org
+
 sfdx force:org:list
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-scratch-org
 
-sfdx force:alias:set YourAlias=test-pj39mi8jqayt@example.com
+sfdx force:alias:set dev=test-ir3xksuh3fi6@example.com
 
-sfdx force:user:password:generate --targetusername test-pj39mi8jqayt@example.com
+sfdx force:user:password:generate --targetusername dev
 
-sfdx force:config:set defaultusername=test-pj39mi8jqayt@example.com
+sfdx force:config:set defaultusername=dev
 
-sfdx force:user:display --targetusername test-pj39mi8jqayt@example.com
+sfdx force:user:display --targetusername dev
 
 sfdx force:source:push
 
 ## commonly used commands
 
-sfdx force:lightning:component:create --type lwc -n multiplechoice -d force-app/main/default/lwc
+sfdx force:apex:trigger:create -n ClarityFormResponseTrigger -d force-app/main/default/triggers
 
-sfdx force:apex:trigger:create -n ClarityFormConnectionTrigger -d force-app/main/default/triggers
+sfdx force:apex:class:create -n Clarity_Form_ResponseTriggerHandler -d force-app/main/default/classes
 
-sfdx force:apex:class:create -n ConnectionFieldValidation -d force-app/main/default/classes
+sfdx force:apex:class:create -n ConnectionRecordProcess -d force-app/main/default/classes
 
+sfdx force:apex:class:create -n ConnectionRecordProcessTest -d force-app/main/default/classes
 
 ## Resources
 

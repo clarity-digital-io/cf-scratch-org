@@ -4,7 +4,6 @@
     <label>Clarity Forms</label>
     <oauthConfig>
         <callbackUrl>https://insomania.rest</callbackUrl>
-        <consumerKey>3MVG9Xjf0O2Peyd4J0VWz0D.JvL060zx7VaJimzQ1UOOm9kl5kGcjgSx6ljhkwdIc6X3WlkGIxm_q.sC.jyE0</consumerKey>
         <scopes>Full</scopes>
         <scopes>RefreshToken</scopes>
     </oauthConfig>

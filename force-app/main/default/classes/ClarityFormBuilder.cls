@@ -386,9 +386,6 @@ global with sharing class ClarityFormBuilder {
 
             Schema.DisplayType type = fieldResult.getType();
 
-            List <Schema.sObjectType> reference = fieldResult.getReferenceTo();
-            System.debug('fieldResult: ' + fieldResult); 
-            System.debug('reference: ' + reference); 
             Boolean isFieldReq  = fieldResult.isNillable();
             Boolean isFieldCreateable = fieldResult.isCreateable(); 
 
@@ -516,11 +513,45 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<Clarity_Form_Connection_Field__c> getConnectionFieldMapping(String connectionId) {
+    global static Map<String, List<Object>> getConnectionFieldMapping(String connectionId, String objectType) {
 
-        List<Clarity_Form_Connection_Field__c> fields = [SELECT Id, Clarity_Form_Connection__c, Salesforce_Field__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Field__c WHERE Clarity_Form_Connection__c =: connectionId];
+        Map<String, List<Object>> fieldMapping = new Map<String, List<Object>>(); 
+
+        List<Clarity_Form_Connection_Field__c> connectionFields = [SELECT Id, Clarity_Form_Connection__c, Custom_Value__c, Salesforce_Field__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Field__c WHERE Clarity_Form_Connection__c =: connectionId];
         
-        return fields; 
+        SObjectType sObjType = ((SObject)Type.forName(objectType).newInstance()).getSObjectType();
+
+        Schema.DescribeSObjectResult result = sObjType.getDescribe();
+
+        Map<String, Schema.SObjectField> fields = result.fields.getMap();      
+
+        List<String> sObjectFields = new List<String>();   
+
+        for(String fieldName : fields.keySet()) { 
+
+            Schema.SObjectField field = fields.get(fieldName);
+
+            Schema.DescribeFieldResult fieldResult = field.getDescribe();
+
+            Schema.DisplayType type = fieldResult.getType();
+
+            List <Schema.sObjectType> reference = fieldResult.getReferenceTo();
+
+            Boolean isFieldReq  = fieldResult.isNillable();
+            Boolean isFieldCreateable = fieldResult.isCreateable(); 
+
+            if(!isFieldReq && isFieldCreateable) {
+
+                sObjectFields.add('' + field);
+
+            } 
+
+        }
+
+        fieldMapping.put('Mapping', connectionFields);
+        fieldMapping.put('Fields', sObjectFields);
+
+        return fieldMapping;
 
     }
 
@@ -543,6 +574,43 @@ global with sharing class ClarityFormBuilder {
 
         return parsedConnections; 
 
+    }
+
+    @RemoteAction
+    global static List<Clarity_Form_Connection_Field__c> saveActiveFieldConnections(String sActiveConnectionFields, String connectionId) {
+
+        List<Clarity_Form_Connection_Field__c> connection = [SELECT Id FROM Clarity_Form_Connection_Field__c WHERE Clarity_Form_Connection__c =: connectionId];
+
+        List<Database.DeleteResult> resultConnectionDelete = Database.delete(connection, true); 
+
+        for(Database.DeleteResult connectionDelete : resultConnectionDelete) {
+
+            if(!connectionDelete.isSuccess()) {
+
+                System.debug('error: ' + connectionDelete.getErrors());
+
+            }
+
+        }
+
+        List<Clarity_Form_Connection_Field__c> parsedConnectionFields = (List<Clarity_Form_Connection_Field__c>)JSON.deserialize(sActiveConnectionFields, List<Clarity_Form_Connection_Field__c>.class);
+
+        if(parsedConnectionFields.size() > 0) {
+
+            List<Database.UpsertResult> results = Database.upsert(parsedConnectionFields, true); 
+
+            for(Database.UpsertResult result : results) {
+
+                if(!result.isSuccess()) {
+
+                    System.debug('error: ' + result.getErrors());
+
+                }
+            }
+
+        }
+
+        return parsedConnectionFields; 
     }
 
     @RemoteAction
