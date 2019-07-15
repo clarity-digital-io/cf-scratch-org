@@ -75,160 +75,61 @@ public class ConnectionRecordProcess {
         set; 
     }
 
-    public static void execute(Clarity_Form_Response__c oldResponse, Clarity_Form_Response__c response) {
-        
-        if(oldResponse.Status__c == 'Submitted' || response.Status__c != 'Submitted') return; 
-        
-        if(Connections.get(response.Clarity_Form__c) == null) return; 
-        
-        List<Clarity_Form_Connection__c> connections = Connections.get(response.Clarity_Form__c);
+    private static Map<Id, Map<Id, Clarity_Form_Connection_Process__c>> ResponseConnectionProcess {
+        get {
+            if(ResponseConnectionProcess == null) {
+                
+                ResponseConnectionProcess = new Map<Id, Map<Id, Clarity_Form_Connection_Process__c>>(); 
 
-        if(connections.size() == 0)
-            return; 
+                List<Clarity_Form_Connection_Process__c> connectionProcess = new List<Clarity_Form_Connection_Process__c>();
 
-        Map<Id, Clarity_Form_Answer__c> answersByQuestions = ResponseAnswers.get(response.Id);
+                for(Clarity_Form_Response__c response : (List<Clarity_Form_Response__c>)Trigger.new) {
 
-        //System.enqueueJob(new CreateConnectionRecords(connections, answers));
-        Map<String, Id> storedResults = new Map<String, Id>();
-        
-        createConnectionRecords(0, connections, answersByQuestions, storedResults); 
+                    List<Clarity_Form_Connection__c> allConnections = Connections.get(response.Clarity_Form__c);
 
-    }
+                    ResponseConnectionProcess.put(response.Id, new Map<Id, Clarity_Form_Connection_Process__c>());
 
-    public static void createConnectionRecords(Integer order, List<Clarity_Form_Connection__c> connections, Map<Id, Clarity_Form_Answer__c> answersByQuestion, Map<String, Id> storedResults) {
+                    for(Clarity_Form_Connection__c connection : allConnections) {
 
-        List<Clarity_Form_Connection_Field__c> fields = [SELECT Id, Clarity_Form_Connection__c, Custom_Value__c, Salesforce_Field__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Field__c WHERE Clarity_Form_Connection__c =: connections[order].Id];
+                        Clarity_Form_Connection_Process__c process = new Clarity_Form_Connection_Process__c(
+                            Clarity_Form_Connection__c      = connection.Id, 
+                            Clarity_Form_Response__c        = response.Id, 
+                            Status__c                       = 'In Progress'
+                        );
+                        
+                        connectionProcess.add(process);
 
-        if(fields.size() > 0) {
-
-            Schema.SObjectType convertType = Schema.getGlobalDescribe().get(connections[order].Salesforce_Object__c);
-            
-            Map<String, Schema.SObjectField> sObjectFields = convertType.getDescribe().fields.getMap();
-
-            SObject genericObject = convertType.newSObject();
-
-            for(Clarity_Form_Connection_Field__c field : fields) {
-
-                String dirtyAnswer;
-
-                if(field.Clarity_Form_Question__c != null) {
-
-                    dirtyAnswer = answersByQuestion.get(field.Clarity_Form_Question__c) != null ? answersByQuestion.get(field.Clarity_Form_Question__c).Answer__c : ''; 
-
-
-                } else if(field.Custom_Value__c != null) {
-
-                    dirtyAnswer = field.Custom_Value__c;
-
-                    if(storedResults.get((String)dirtyAnswer) != null) {
-
-                        dirtyAnswer = Id.valueOf(storedResults.get((String)dirtyAnswer)); 
+                        ResponseConnectionProcess.get(response.Id).put(connection.Id, process); 
 
                     }
 
                 }
-                                    
-                Schema.DisplayType display = sObjectFields.get(field.Salesforce_Field__c).getDescribe().getType();
 
-                Object cleanType = cleanType(display, dirtyAnswer);
-
-                genericObject.put(field.Salesforce_Field__c, cleanType);
+                insert connectionProcess;
 
             }
 
-            Database.UpsertResult record = Database.upsert(genericObject, true); 
-
-            if(record.isSuccess()) {
-
-                storedResults.put(connections[order].Result_Holder__c, record.getId());
-
-            } else {
-
-                System.debug('error (Update Clarity_Form_Connection_Process__c to Failed or Sucess with Link to Record Id): ' + record.getErrors());
-
-            }
-            
+            return ResponseConnectionProcess;
         }
-
-        if(connections.size() >= order + 1) 
-            createConnectionRecords(order + 1, connections, answersByQuestion, storedResults);
-
+        set;
     }
 
-    public static Object cleanType(Schema.DisplayType display, String dirtyAnswer) {
-
-        Object cleanValue;
+    public static void execute(Clarity_Form_Response__c oldResponse, Clarity_Form_Response__c response) {
         
-        System.debug('Schema.DisplayType: ' + display); 
+        if(oldResponse.Status__c == 'Submitted' || response.Status__c != 'Submitted') return; 
+                
+        if(Connections.get(response.Clarity_Form__c) == null ||  Connections.get(response.Clarity_Form__c).size() == 0) return; 
 
-        System.debug('dirtyAnswer: ' + dirtyAnswer); 
+        List<Clarity_Form_Connection__c> connections = Connections.get(response.Clarity_Form__c);
 
-        if(display == Schema.DisplayType.Boolean) {
-            return Boolean.valueOf(dirtyAnswer);
-        }
-        if(display == Schema.DisplayType.Combobox) {
-            return String.valueOf(dirtyAnswer);
-        }
-        if(display == Schema.DisplayType.Currency) {
-            Decimal c = Decimal.valueOf(dirtyAnswer);
-            return c.setScale(8, RoundingMode.HALF_EVEN);
-        }
-        if(display == Schema.DisplayType.Date) {
-            return Date.parse(dirtyAnswer);  
-        }
-        if(display == Schema.DisplayType.DateTime) {
-            return Datetime.valueOf(dirtyAnswer);
-        }
-        if(display == Schema.DisplayType.Double) {
-            return Decimal.valueOf(dirtyAnswer);
-        }
-        if(display == Schema.DisplayType.Email) {
-            return String.valueOf(dirtyAnswer);
-        }
-        if(display == Schema.DisplayType.ID) {
-            try {
-                cleanValue = Id.valueOf(dirtyAnswer);
-            } catch (Exception e) {}
-            return cleanValue;
-        }
-        if(display == Schema.DisplayType.Integer) {
-            return Integer.valueOf(dirtyAnswer);
-        }
-        if(display == Schema.DisplayType.Long) {
-            return Long.valueOf(dirtyAnswer); 
-        }
-        if(display == Schema.DisplayType.MultiPicklist) {
-            return String.valueOf(dirtyAnswer);
-        }
-        if(display == Schema.DisplayType.Percent) {
-            return Double.valueOf(dirtyAnswer);
-        }
-        if(display == Schema.DisplayType.Phone) {
-            return String.valueOf(dirtyAnswer);
-        }
-        if(display == Schema.DisplayType.Picklist) {
-            return String.valueOf(dirtyAnswer);
-        }
-        if(display == Schema.DisplayType.Reference) {
-            return Id.valueOf(dirtyAnswer);
-        }
-        if(display == Schema.DisplayType.String) {
-            return String.valueOf(dirtyAnswer);
-        }
-        if(display == Schema.DisplayType.TextArea) {
-            return String.valueOf(dirtyAnswer);
-        }
-        if(display == Schema.DisplayType.Time) {
-            DateTime dt = Datetime.valueOf(dirtyAnswer);
-            return Time.newInstance(dt.hour(), dt.minute(), dt.second(), dt.millisecond());
-        }
-        if(display == Schema.DisplayType.URL) {
-            return String.valueOf(dirtyAnswer);
-        }
+        Map<Id, Clarity_Form_Answer__c> answersByQuestions = ResponseAnswers.get(response.Id);
 
-        return String.valueOf(dirtyAnswer);
+        Map<Id, Clarity_Form_Connection_Process__c> processByConnections = ResponseConnectionProcess.get(response.Id); 
 
-    
+        Map<String, Id> storedResults = new Map<String, Id>();
+
+        System.enqueueJob(new ConnectionCreateJob(0, connections, answersByQuestions, processByConnections, storedResults));
+
     }
 
 }

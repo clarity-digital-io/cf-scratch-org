@@ -138,6 +138,10 @@ sfdx force:apex:class:create -n ConnectionRecordProcess -d force-app/main/defaul
 
 sfdx force:apex:class:create -n ConnectionRecordProcessTest -d force-app/main/default/classes
 
+sfdx force:apex:class:create -n ConnectionCreateJob -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n ClarityTestDataFactory -d force-app/main/default/classes
+
 ## Resources
 
 
