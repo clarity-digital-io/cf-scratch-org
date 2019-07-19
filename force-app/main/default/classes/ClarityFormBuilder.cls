@@ -144,10 +144,27 @@ global with sharing class ClarityFormBuilder {
 
     }
 
+    @RemoteAction 
+    global static List<Clarity_Form_Question__c> deletePage(String recordId, String page) {
+
+        List<Clarity_Form_Question__c> questionsToDelete = [SELECT Id, Page__c, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
+            FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: recordId AND Page__c =: Decimal.valueOf(page)];
+
+        List<Database.DeleteResult> deleteResults = Database.delete(questionsToDelete, true); 
+
+        for(Database.DeleteResult result : deleteResults) {
+            if(!result.isSuccess()) {
+                System.debug('delete fail');
+            }
+        }
+
+        return getQuestions(recordId); 
+    }
+
     @RemoteAction
     global static List<Clarity_Form_Question__c> getQuestions(String recordId){
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Page__c, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
             FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: recordId];
 
         return questions; 
@@ -178,17 +195,64 @@ global with sharing class ClarityFormBuilder {
 
     }
 
+    // @RemoteAction
+    // global static  Map<String, List<sObject>> saveQuestionWithPictureOptions(String sQuestion, String sQuestionOptions) {
+
+    //     List<Clarity_Form_Question_Option__c> parsedQuestionOptions = (List<Clarity_Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, List<Clarity_Form_Question_Option__c>.class);
+
+    //     for(Clarity_Form_Question_Option__c option : parsedQuestionOptions) {
+    //         Map<String, Object> optionFields = new Map<String, Object>( option.getPopulatedFieldsAsMap() );
+    //     }
+        
+    //     Map<String, List<sObject>> = saveQuestionWithOptions(sQuestion, sQuestionOptions); 
+
+    // }
+
+
     @RemoteAction
     global static Map<String, List<sObject>> saveQuestionWithOptions(String sQuestion, String sQuestionOptions) {
 
         Clarity_Form_Question__c parsedQuestion = (Clarity_Form_Question__c)JSON.deserialize(sQuestion, Clarity_Form_Question__c.class);
 
-        List<Clarity_Form_Question_Option__c> parsedQuestionOptions = (List<Clarity_Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, List<Clarity_Form_Question_Option__c>.class);
-
         Database.SaveResult resultQuestion = Database.update(parsedQuestion, true); 
 
         if(!resultQuestion.isSuccess()) {
             System.debug('error');
+        }
+
+        List<Clarity_Form_Question_Option__c> currentOptions = [SELECT Id, Active_Flow__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: parsedQuestion.Id];
+
+        List<Clarity_Form_Question_Option__c> parsedQuestionOptions = (List<Clarity_Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, List<Clarity_Form_Question_Option__c>.class);
+
+        Map<Id, Clarity_Form_Question_Option__c> updatedQuestionOptionsById = new Map<Id, Clarity_Form_Question_Option__c>();
+
+        for(Clarity_Form_Question_Option__c o : parsedQuestionOptions) {
+            updatedQuestionOptionsById.put(o.Id, o); 
+        }
+
+        List<Clarity_Form_Question_Option__c> notFoundInParsedQuestionOptions = new List<Clarity_Form_Question_Option__c>();
+
+        for(Clarity_Form_Question_Option__c currentOption : currentOptions) {
+
+            if(updatedQuestionOptionsById.get(currentOption.Id) == null) {
+                notFoundInParsedQuestionOptions.add(currentOption); 
+            }
+
+        }
+
+        if(notFoundInParsedQuestionOptions.size() > 0) {
+            
+            List<Database.DeleteResult> deleteOptions = Database.delete(notFoundInParsedQuestionOptions, true);
+
+            for(Database.DeleteResult deleteOption : deleteOptions) {
+
+                if(!deleteOption.isSuccess()) {
+
+                    System.debug('error: ' + deleteOption.getErrors());
+
+                }
+
+            }
         }
 
         List<Database.UpsertResult> resultOptions = Database.upsert(parsedQuestionOptions, true); 
@@ -212,6 +276,7 @@ global with sharing class ClarityFormBuilder {
         results.put('Options', options);
 
         return results;
+
     }
 
     @RemoteAction 
@@ -245,7 +310,7 @@ global with sharing class ClarityFormBuilder {
 
         List<Clarity_Form_Question_Flow_Design__c> flowDesign = [SELECT Id, Active__c, Form_Submission__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Flow_Design__c WHERE Clarity_Form_Question__c =: sQuestionId LIMIT 1];
 
-        List<Clarity_Form_Question_Option__c> questionOptions = [SELECT Id, Active_Flow__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
+        List<Clarity_Form_Question_Option__c> questionOptions = [SELECT Id, Active_Flow__c, Choice_Image__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
 
         List<Clarity_Form_Question_Criteria__c> criteria = [SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__c WHERE Clarity_Form_Question__c =: sQuestionId];
 

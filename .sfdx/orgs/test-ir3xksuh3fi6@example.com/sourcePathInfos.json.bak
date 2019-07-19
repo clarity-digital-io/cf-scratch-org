@@ -378,10 +378,10 @@
         {
             "sourcePath": "/Users/benefigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormBuilder.cls",
             "isDirectory": false,
-            "size": 21643,
-            "modifiedTime": 1563076772624,
-            "changeTime": 1563076772624,
-            "contentHash": "0ee717ebc25084e008f89b8459ec196d1b947716",
+            "size": 23584,
+            "modifiedTime": 1563408157447,
+            "changeTime": 1563408157447,
+            "contentHash": "4577e053cc581dee756f0845c6fcb31c57192321",
             "isMetadataFile": false,
             "state": "u",
             "isWorkspace": false
@@ -4213,15 +4213,15 @@
     [
         "/Users/benefigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsBuilder/bundle.js",
         {
+            "state": "u",
             "sourcePath": "/Users/benefigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsBuilder/bundle.js",
             "isDirectory": false,
-            "size": 524114,
-            "modifiedTime": 1563073374438,
-            "changeTime": 1563072511460,
-            "contentHash": "3e437e2e356f8372194ae4a322e74cac6ff5d7d3",
             "isMetadataFile": false,
-            "state": "u",
-            "isWorkspace": false
+            "size": 530227,
+            "modifiedTime": 1563499693928,
+            "changeTime": 1563499693928,
+            "isWorkspace": false,
+            "contentHash": "a817e34f374707b5b823fcb529a88f5dd6d06368"
         }
     ],
     [
@@ -4439,14 +4439,13 @@
         {
             "sourcePath": "/Users/benefigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsResponse/bundle.js",
             "isDirectory": false,
-            "size": 529206,
-            "modifiedTime": 1562512854140,
-            "changeTime": 1562512854140,
-            "contentHash": "5e1aff1eed2ecc5632d81beb3c487391e7a77f40",
+            "size": 530375,
+            "modifiedTime": 1563331951050,
+            "changeTime": 1563331951050,
+            "contentHash": "2fad015b73f40f862fae784807117889a3e99c55",
             "isMetadataFile": false,
             "state": "u",
-            "isWorkspace": false,
-            "isArtifactRoot": false
+            "isWorkspace": false
         }
     ],
     [
@@ -4752,14 +4751,14 @@
     [
         "/Users/benefigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ConnectionRecordProcessTest.cls",
         {
-            "state": "u",
             "sourcePath": "/Users/benefigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ConnectionRecordProcessTest.cls",
             "isDirectory": false,
-            "isMetadataFile": false,
             "size": 8354,
             "modifiedTime": 1563212756126,
             "changeTime": 1563212756126,
-            "contentHash": "b1e20128ffabaff18f62e98c37ba31ab6df3698c"
+            "contentHash": "b1e20128ffabaff18f62e98c37ba31ab6df3698c",
+            "isMetadataFile": false,
+            "state": "u"
         }
     ],
     [
@@ -4781,8 +4780,8 @@
             "sourcePath": "/Users/benefigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ConnectionCreateJob.cls",
             "isDirectory": false,
             "size": 6641,
-            "modifiedTime": 1563211225242,
-            "changeTime": 1563211225242,
+            "modifiedTime": 1563213121174,
+            "changeTime": 1563213121174,
             "contentHash": "38750e9e985166205e969d037b25d2cd4ee19dc5",
             "isMetadataFile": false,
             "state": "u"
@@ -4806,10 +4805,10 @@
         {
             "sourcePath": "/Users/benefigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityTestDataFactory.cls",
             "isDirectory": false,
-            "size": 4531,
-            "modifiedTime": 1563212324819,
-            "changeTime": 1563209025109,
-            "contentHash": "208f7e64b6567a6d9d25293dfc5e075a653ae792",
+            "size": 4538,
+            "modifiedTime": 1563213048722,
+            "changeTime": 1563213048722,
+            "contentHash": "20b597fab7b0b9403b9ae729ff2c3d26ae476aad",
             "isMetadataFile": false,
             "state": "u"
         }
