@@ -144,23 +144,6 @@ global with sharing class ClarityFormBuilder {
 
     }
 
-    @RemoteAction 
-    global static List<Clarity_Form_Question__c> deletePage(String recordId, String page) {
-
-        List<Clarity_Form_Question__c> questionsToDelete = [SELECT Id, Page__c, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
-            FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: recordId AND Page__c =: Decimal.valueOf(page)];
-
-        List<Database.DeleteResult> deleteResults = Database.delete(questionsToDelete, true); 
-
-        for(Database.DeleteResult result : deleteResults) {
-            if(!result.isSuccess()) {
-                System.debug('delete fail');
-            }
-        }
-
-        return getQuestions(recordId); 
-    }
-
     @RemoteAction
     global static List<Clarity_Form_Question__c> getQuestions(String recordId){
 
@@ -276,6 +259,43 @@ global with sharing class ClarityFormBuilder {
         results.put('Options', options);
 
         return results;
+
+    }
+
+    @RemoteAction 
+    global static List<Clarity_Form_Question__c> pageDelete(String sQuestions, String sDetails) {
+
+        List<String> details = (List<String>)JSON.deserialize(sDetails, List<String>.class);
+
+        Double page = Double.valueOf(details[0]); 
+        String recordId = details[1];
+
+        List<Clarity_Form_Question__c> questionsToDelete = [SELECT Id, Page__c, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
+            FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: recordId AND Page__c =: page];
+
+        List<Database.DeleteResult> deleteResults = Database.delete(questionsToDelete, true); 
+
+        for(Database.DeleteResult result : deleteResults) {
+            if(!result.isSuccess()) {
+                System.debug('delete fail');
+            }
+        }
+        
+        List<Clarity_Form_Question__c> parsedQuestions = (List<Clarity_Form_Question__c>)JSON.deserialize(sQuestions, List<Clarity_Form_Question__c>.class);
+
+        if(parsedQuestions.size() > 0) {
+            List<Database.SaveResult> results = Database.update(parsedQuestions, true); 
+
+            for(Database.SaveResult sResult : results) {
+
+                if(!sResult.isSuccess()) {
+                    System.debug('error');
+                }
+
+            }
+        }
+
+        return parsedQuestions; 
 
     }
 
@@ -504,12 +524,9 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<Clarity_Form_Assignment_Rule__c> saveAssignmentRules(String formAssignmentId, String userId, String sFormAssignmentRules) {
+    global static List<Clarity_Form_Assignment_Rule__c> saveAssignmentRules(String sFormAssignment, String sFormAssignmentRules) {
 
-        Clarity_Form_Assignment__c assignment = [SELECT Id, Assign__c, Default_Assign__c FROM Clarity_Form_Assignment__c WHERE Id = :formAssignmentId LIMIT 1];
-
-        assignment.Assign__c = userId; 
-        assignment.Default_Assign__c = userId; 
+        Clarity_Form_Assignment__c assignment = (Clarity_Form_Assignment__c)JSON.deserialize(sFormAssignment, Clarity_Form_Assignment__c.class); 
 
         Database.SaveResult assignmentResult = Database.update(assignment, true); 
 
