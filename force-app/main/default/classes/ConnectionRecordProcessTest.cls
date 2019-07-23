@@ -6,7 +6,7 @@ public class ConnectionRecordProcessTest {
                 
         Clarity_Form__c form = ClarityTestDataFactory.generateForm();
 
-        List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(form, 10);
+        List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(form);
 
     }
 
@@ -19,7 +19,7 @@ public class ConnectionRecordProcessTest {
 
         List<Clarity_Form_Connection__c> connections = ClarityTestDataFactory.generateConnections(form,  new List<String>{ 'Opportunity' });
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Title__c FROM Clarity_Form_Question__c];
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment'];
 
         ClarityTestDataFactory.generateConnectionFields(connections[0], new Map<String, Id>{'ForecastCategoryName' =>  questions[0].Id });
 
@@ -64,7 +64,7 @@ public class ConnectionRecordProcessTest {
 
         Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Title__c FROM Clarity_Form_Question__c];
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment'];
 
         ClarityTestDataFactory.generateAnswers(response, questions);
 
@@ -104,7 +104,7 @@ public class ConnectionRecordProcessTest {
 
         Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Title__c FROM Clarity_Form_Question__c];
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment'];
 
         ClarityTestDataFactory.generateAnswers(response, questions);
 
@@ -141,7 +141,7 @@ public class ConnectionRecordProcessTest {
 
         List<Clarity_Form_Connection__c> connections = ClarityTestDataFactory.generateConnections(form,  new List<String>{ 'Opportunity' });
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Title__c FROM Clarity_Form_Question__c];
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment'];
 
         ClarityTestDataFactory.generateConnectionFields(connections[0], new Map<String, String>{ 'Name' => questions[0].Id });
 
@@ -192,7 +192,7 @@ public class ConnectionRecordProcessTest {
 
         Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Title__c FROM Clarity_Form_Question__c];
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment'];
 
         ClarityTestDataFactory.generateAnswers(response, questions);
 

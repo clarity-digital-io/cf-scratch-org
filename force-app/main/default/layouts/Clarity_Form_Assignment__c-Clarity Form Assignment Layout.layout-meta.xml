@@ -18,6 +18,10 @@
                 <behavior>Edit</behavior>
                 <field>Default_Assign__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Logic__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

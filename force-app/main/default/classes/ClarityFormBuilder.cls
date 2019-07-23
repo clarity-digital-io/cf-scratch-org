@@ -200,7 +200,7 @@ global with sharing class ClarityFormBuilder {
         Database.SaveResult resultQuestion = Database.update(parsedQuestion, true); 
 
         if(!resultQuestion.isSuccess()) {
-            System.debug('error');
+            System.debug('error result');
         }
 
         List<Clarity_Form_Question_Option__c> currentOptions = [SELECT Id, Active_Flow__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: parsedQuestion.Id];

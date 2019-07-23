@@ -118,7 +118,7 @@ sfdx force:org:list
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-scratch-org
 
-sfdx force:alias:set dev=test-ir3xksuh3fi6@example.com
+sfdx force:alias:set dev=test-fwr9co8vknuz@example.com
 
 sfdx force:user:password:generate --targetusername dev
 
@@ -127,6 +127,8 @@ sfdx force:config:set defaultusername=dev
 sfdx force:user:display --targetusername dev
 
 sfdx force:source:push
+
+sfdx force:org:open
 
 ## commonly used commands
 
@@ -141,6 +143,14 @@ sfdx force:apex:class:create -n ConnectionRecordProcessTest -d force-app/main/de
 sfdx force:apex:class:create -n ConnectionCreateJob -d force-app/main/default/classes
 
 sfdx force:apex:class:create -n ClarityTestDataFactory -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n FormResponseAssignment -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n FormResponseAssignmentTest -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n CreateResponseAnswers -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n CreateResponseAnswersTest -d force-app/main/default/classes
 
 ## Resources
 

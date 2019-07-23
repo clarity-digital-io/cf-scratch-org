@@ -18,6 +18,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>ClarityTestDataFactory</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>Clarity_Form_ConnectionTriggerHandler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -26,7 +30,31 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>Clarity_Form_ResponseTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ConnectionCreateJob</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ConnectionFieldValidation</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ConnectionRecordProcess</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ConnectionRecordProcessTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FormResponseAssignment</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FormResponseAssignmentTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -97,12 +125,37 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Clarity_Form_Assignment__c.Logic__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Connection_Field__c.Custom_Value__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Clarity_Form_Connection_Field__c.Salesforce_Field__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Clarity_Form_Connection_Process__c.Salesforce_Connection_Object__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Connection_Process__c.Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Clarity_Form_Connection__c.Active__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Connection__c.Result_Holder__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -168,6 +221,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form_Question_Option__c.Active_Flow__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Question_Option__c.Choice_Image__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -343,6 +401,9 @@
         <layout>Clarity_Form_Connection_Field__c-Clarity Form Connection Field Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Clarity_Form_Connection_Process__c-Clarity Form Connection Process Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Clarity_Form_Connection__c-Clarity Form Connection Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -410,6 +471,15 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
         <object>Clarity_Form_Connection_Field__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Clarity_Form_Connection_Process__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>

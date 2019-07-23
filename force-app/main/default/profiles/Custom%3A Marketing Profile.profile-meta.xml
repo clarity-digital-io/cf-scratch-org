@@ -18,7 +18,43 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>ClarityTestDataFactory</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Clarity_Form_ConnectionTriggerHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>Clarity_Form_QuestionTriggerHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Clarity_Form_ResponseTriggerHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ConnectionCreateJob</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ConnectionFieldValidation</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ConnectionRecordProcess</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ConnectionRecordProcessTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FormResponseAssignment</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FormResponseAssignmentTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -89,12 +125,37 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form_Assignment__c.Logic__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Connection_Field__c.Custom_Value__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form_Connection_Field__c.Salesforce_Field__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form_Connection_Process__c.Salesforce_Connection_Object__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Connection_Process__c.Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form_Connection__c.Active__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Connection__c.Result_Holder__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -160,6 +221,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Clarity_Form_Question_Option__c.Active_Flow__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Question_Option__c.Choice_Image__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -333,6 +399,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Connection_Field__c-Clarity Form Connection Field Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Clarity_Form_Connection_Process__c-Clarity Form Connection Process Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Connection__c-Clarity Form Connection Layout</layout>

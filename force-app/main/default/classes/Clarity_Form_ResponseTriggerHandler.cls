@@ -11,6 +11,11 @@
 public class Clarity_Form_ResponseTriggerHandler implements ITrigger {
     
     /*******************************************************************************************************
+	* @description List of answers to be inserted in the andFinally method
+	*/
+	private List<Clarity_Form_Answer__c> answersToBeCreated = new List<Clarity_Form_Answer__c>();
+
+    /*******************************************************************************************************
 	* @description This method is called prior to execution of a BEFORE trigger. Use this to cache
 	* any data required into maps prior execution of the trigger.
 	*/
@@ -58,6 +63,12 @@ public class Clarity_Form_ResponseTriggerHandler implements ITrigger {
 	*/
 	public void beforeUpdate(SObject oldSo, SObject so) {
 
+        Clarity_Form_Response__c oldResponse = (Clarity_Form_Response__c) oldSo; 
+
+        Clarity_Form_Response__c newResponse = (Clarity_Form_Response__c) so; 
+
+		FormResponseAssignment.execute(oldResponse, newResponse);
+
 	}
 
 	/*******************************************************************************************************
@@ -74,6 +85,10 @@ public class Clarity_Form_ResponseTriggerHandler implements ITrigger {
 	* has modified any values. The record is 'read only' by this point.
 	*/
 	public void afterInsert(SObject so) {
+
+		Clarity_Form_Response__c newResponse = (Clarity_Form_Response__c) so; 
+
+        CreateResponseAnswers.execute(answersToBeCreated, newResponse); 
 
 	}
 
@@ -104,6 +119,8 @@ public class Clarity_Form_ResponseTriggerHandler implements ITrigger {
     * method to accomplish any final operations such as creation or updates of other records.
     */
 	public void andFinally() {
-
+		if (!answersToBeCreated.isEmpty()) {
+            insert answersToBeCreated; 
+		}
 	}
 }
