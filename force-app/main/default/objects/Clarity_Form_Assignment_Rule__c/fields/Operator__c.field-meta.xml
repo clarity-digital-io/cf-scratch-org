@@ -21,9 +21,9 @@
                 <label>Not Equal</label>
             </value>
             <value>
-                <fullName>Is Null</fullName>
+                <fullName>Is Not Null</fullName>
                 <default>false</default>
-                <label>Is Null</label>
+                <label>Is Not Null</label>
             </value>
         </valueSetDefinition>
     </valueSet>

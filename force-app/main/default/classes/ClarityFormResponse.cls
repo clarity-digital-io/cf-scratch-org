@@ -64,6 +64,9 @@ global with sharing class ClarityFormResponse {
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
             Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
+        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, Clarity_Form_Question__c FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
+
+        formDetails.put('Answers', answers);
         formDetails.put('FormResponse', new List<sObject>{ response });
         formDetails.put('Form', new List<sObject>{ form });
         formDetails.put('Questions', questions);
@@ -77,7 +80,7 @@ global with sharing class ClarityFormResponse {
         
         Clarity_Form_Answer__c parsedAnswer = (Clarity_Form_Answer__c)JSON.deserialize(answer, Clarity_Form_Answer__c.class);
 
-        Database.UpsertResult result = Database.upsert(parsedAnswer, true); 
+        Database.SaveResult result = Database.update(parsedAnswer, true); 
 
         if(!result.isSuccess()) {
 
@@ -118,7 +121,7 @@ global with sharing class ClarityFormResponse {
     }
 
     @RemoteAction 
-    global static String createRecord(String sObjectName, String records) {
+    global static sObject createRecord(String recordGroupId, String sObjectName, String records) {
 
         Schema.SObjectType convertType = Schema.getGlobalDescribe().get(sObjectName);
 
@@ -140,7 +143,19 @@ global with sharing class ClarityFormResponse {
 
         }
 
-        return JSON.serialize(genericObject); 
+        Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
+            Clarity_Form_Question__c = recordGroupId,
+            Record__c                = result.getId()
+        );
+
+        Database.UpsertResult resultAnswer = Database.upsert(answer, true); 
+
+        if(!resultAnswer.isSuccess()) {
+
+            System.debug('error: ' + resultAnswer.getErrors());
+
+        }
+        return genericObject;
     }
 
     global class Record {

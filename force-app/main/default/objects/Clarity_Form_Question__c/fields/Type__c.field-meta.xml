@@ -191,14 +191,14 @@
                 <label>STRING</label>
             </value>
             <value>
-                <fullName>PageBreak</fullName>
+                <fullName>FreeText</fullName>
                 <default>false</default>
-                <label>PageBreak</label>
+                <label>FreeText</label>
             </value>
             <value>
-                <fullName>Text</fullName>
+                <fullName>Picture Choice</fullName>
                 <default>false</default>
-                <label>Text</label>
+                <label>Picture Choice</label>
             </value>
         </valueSetDefinition>
     </valueSet>
