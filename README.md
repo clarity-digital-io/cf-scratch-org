@@ -118,39 +118,33 @@ sfdx force:org:list
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-scratch-org
 
-sfdx force:alias:set dev=test-fwr9co8vknuz@example.com
-
-sfdx force:user:password:generate --targetusername dev
+sfdx force:alias:set dev=test-f8d3cxy7bv6u@example.com
 
 sfdx force:config:set defaultusername=dev
-
-sfdx force:user:display --targetusername dev
 
 sfdx force:source:push
 
 sfdx force:org:open
 
+sfdx force:user:password:generate --targetusername dev
+
+sfdx force:user:display --targetusername dev
+
 ## commonly used commands
 
 sfdx force:apex:trigger:create -n ClarityFormResponseTrigger -d force-app/main/default/triggers
 
-sfdx force:apex:class:create -n Clarity_Form_ResponseTriggerHandler -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n ConnectionRecordProcess -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n ConnectionRecordProcessTest -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n ConnectionCreateJob -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n ClarityTestDataFactory -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n FormResponseAssignment -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n FormResponseAssignmentTest -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n CreateResponseAnswers -d force-app/main/default/classes
-
 sfdx force:apex:class:create -n CreateResponseAnswersTest -d force-app/main/default/classes
+
+sfdx force:lightning:component:create --type aura -n FormResponseTable -d force-app/main/default/aura
+
+sfdx force:lightning:component:create --type aura -n FormResponseTimeline -d force-app/main/default/aura
+
+sfdx force:lightning:component:create --type aura -n FormResponseModalFooter -d force-app/main/default/aura
+
+sfdx force:lightning:event:create -n FormResponseEvent -d force-app/main/default/aura
+
+sfdx force:apex:class:create -n FormResponseController -d force-app/main/default/classes
 
 ## Resources
 
@@ -166,7 +160,14 @@ sfdx force:apex:class:create -n CreateResponseAnswersTest -d force-app/main/defa
 ## Use Cases
 Digital Signatures Approval Process
 Add filtering on the Lookups by Record Type and other fields
-Add RecordType select RecordType
+Add RecordType select on Record Group
+
+Timeline
+
+ResponsesTable
+
+FormResponse - (New, Edit, Submitted, Locked)
+
 ***Decrease bundle.js below 400kb
 
 

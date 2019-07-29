@@ -1,12 +1,11 @@
 <aura:component access="global" implements="lightning:availableForFlowScreens,force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes" >
 
-    <!-- <c:preview recordId="{!v.recordId}" /> -->
-
     <lightning:workspaceAPI aura:id="workspace" />
     <lightning:navigation aura:id="navService"/>
+
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:attribute access="global" name="recordId" type="String" required="true" default="default"/>
 
-    <lightning:container src="{!$Resource.ClarityFormsResponse + '/index.html?recordId=' + v.recordId}" onmessage="{!c.handleMessage}" />
+    <lightning:container src="{!$Resource.ClarityFormsResponse + '/index.html?formId=' + v.recordId}" onmessage="{!c.handleMessage}" />
 
 </aura:component>

@@ -43,11 +43,11 @@ global with sharing class ClarityFormResponse {
     }
 
     @RemoteAction
-    global static Map<String, List<sObject>> create(String recordId) {
+    global static Map<String, List<sObject>> create(String formName) {
 
         Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
 
-        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c FROM Clarity_Form__c WHERE Id =: recordId AND Status__c = 'Published' Limit 1];
+        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c FROM Clarity_Form__c WHERE Name =: formName AND Status__c = 'Published' Limit 1];
         
         Clarity_Form_Response__c response = new Clarity_Form_Response__c(
             Status__c       = 'New', 
@@ -64,9 +64,36 @@ global with sharing class ClarityFormResponse {
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
             Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
-        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, Clarity_Form_Question__c FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
+        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, Clarity_Form_Response__c, Clarity_Form_Question__c 
+            FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
 
         formDetails.put('Answers', answers);
+        formDetails.put('FormResponse', new List<sObject>{ response });
+        formDetails.put('Form', new List<sObject>{ form });
+        formDetails.put('Questions', questions);
+
+        return formDetails; 
+
+    }
+
+    @RemoteAction
+    global static Map<String, List<sObject>> edit(String responseId) {
+
+        Clarity_Form_Response__c response = [SELECT Id, Status__c, Clarity_Form__c, (SELECT Id, Answer__c, Clarity_Form_Response__c, Clarity_Form_Question__c 
+            FROM Clarity_Form_Answers__r) FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
+
+        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c 
+            FROM Clarity_Form__c WHERE Status__c = 'Published' AND Id =: response.Clarity_Form__c Limit 1];
+
+        List<Clarity_Form_Question__c> questions = [SELECT Id, 
+            (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
+            (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
+            Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c 
+            FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: response.Clarity_Form__c];
+
+        Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
+
+        formDetails.put('Answers', response.Clarity_Form_Answers__r);
         formDetails.put('FormResponse', new List<sObject>{ response });
         formDetails.put('Form', new List<sObject>{ form });
         formDetails.put('Questions', questions);

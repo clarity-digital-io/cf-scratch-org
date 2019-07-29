@@ -1,9 +1,10 @@
-<aura:component access="global" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes" >
-    <lightning:workspaceAPI aura:id="workspace" />
+<aura:component access="global" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
+    
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
-    <aura:attribute name="recordId" type="String" required="true" default="default" access="global"/>
-    <aura:attribute name="Form" type="String" required="true" default="default" access="global" />
 
-    <!-- <c:form recordId="{!v.recordId}" /> -->
+    <aura:attribute name="recordId" type="String" default="default" access="global" />
+    <aura:attribute name="formName" type="String" required="true" default="default" access="global" />
+
+    <lightning:container src="{!$Resource.ClarityFormsResponse + '/index.html?formName=' + v.formName + '&amp;recordId=' + v.recordId}" onmessage="{!c.handleMessage}" />
 
 </aura:component>	

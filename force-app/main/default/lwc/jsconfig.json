@@ -3,60 +3,6 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
-            "c/attachments": [
-                "attachments/attachments.js"
-            ],
-            "c/card": [
-                "card/card.js"
-            ],
-            "c/checkbox": [
-                "checkbox/checkbox.js"
-            ],
-            "c/comment": [
-                "comment/comment.js"
-            ],
-            "c/connectedobject": [
-                "connectedobject/connectedobject.js"
-            ],
-            "c/date": [
-                "date/date.js"
-            ],
-            "c/dropdown": [
-                "dropdown/dropdown.js"
-            ],
-            "c/email": [
-                "email/email.js"
-            ],
-            "c/form": [
-                "form/form.js"
-            ],
-            "c/lightningLookup": [
-                "lightningLookup/lightningLookup.js"
-            ],
-            "c/lookup": [
-                "lookup/lookup.js"
-            ],
-            "c/nps": [
-                "nps/nps.js"
-            ],
-            "c/number": [
-                "number/number.js"
-            ],
-            "c/preview": [
-                "preview/preview.js"
-            ],
-            "c/ranking": [
-                "ranking/ranking.js"
-            ],
-            "c/recordgroup": [
-                "recordgroup/recordgroup.js"
-            ],
-            "c/render": [
-                "render/render.js"
-            ],
-            "c/slider": [
-                "slider/slider.js"
-            ],
             "c/useform": [
                 "useform/useform.js"
             ]

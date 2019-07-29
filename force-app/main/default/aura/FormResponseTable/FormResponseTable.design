@@ -1,0 +1,5 @@
+<design:component label="Clarity Form Responses Table">
+
+    <design:attribute name="formName" label="Form Name" description="Name of the Clarity Form you want to use" />
+
+</design:component>

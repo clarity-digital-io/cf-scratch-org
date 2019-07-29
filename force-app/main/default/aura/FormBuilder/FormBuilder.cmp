@@ -1,4 +1,4 @@
-<aura:component implements="lightning:actionOverride,force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
+<aura:component implements="lightning:actionOverride,force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable">
     
     <lightning:workspaceAPI aura:id="workspace" />
     <lightning:navigation aura:id="navService"/>
