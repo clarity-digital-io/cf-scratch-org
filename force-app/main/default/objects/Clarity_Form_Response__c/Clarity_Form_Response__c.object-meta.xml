@@ -54,8 +54,9 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Clarity Form Response</label>
     <nameField>
+        <displayFormat>CFR-{0000}</displayFormat>
         <label>Clarity Form Response Name</label>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Clarity Form Responses</pluralLabel>
     <searchLayouts/>

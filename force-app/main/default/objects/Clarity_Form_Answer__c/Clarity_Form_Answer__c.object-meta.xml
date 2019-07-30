@@ -54,8 +54,9 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Clarity Form Answer</label>
     <nameField>
+        <displayFormat>CFA-{0000}</displayFormat>
         <label>Clarity Form Answer Name</label>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Clarity Form Answers</pluralLabel>
     <searchLayouts/>

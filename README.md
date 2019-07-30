@@ -142,6 +142,8 @@ sfdx force:lightning:component:create --type aura -n FormResponseTimeline -d for
 
 sfdx force:lightning:component:create --type aura -n FormResponseModalFooter -d force-app/main/default/aura
 
+sfdx force:lightning:component:create --type aura -n FormResponseSummary -d force-app/main/default/aura
+
 sfdx force:lightning:event:create -n FormResponseEvent -d force-app/main/default/aura
 
 sfdx force:apex:class:create -n FormResponseController -d force-app/main/default/classes

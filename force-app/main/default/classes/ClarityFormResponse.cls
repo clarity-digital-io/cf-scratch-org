@@ -47,7 +47,7 @@ global with sharing class ClarityFormResponse {
 
         Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
 
-        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c FROM Clarity_Form__c WHERE Name =: formName AND Status__c = 'Published' Limit 1];
+        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c FROM Clarity_Form__c WHERE Name =: formName Limit 1];
         
         Clarity_Form_Response__c response = new Clarity_Form_Response__c(
             Status__c       = 'New', 

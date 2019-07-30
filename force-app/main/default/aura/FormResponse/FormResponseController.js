@@ -3,14 +3,24 @@
         
         if(cmp.get('v.recordId') == 'default') {
             let pageRef = cmp.get("v.pageReference");
-            let recordId = pageRef.state.c__recordId;
-            cmp.set('v.recordId', recordId)
+
+            if(pageRef) {
+                let recordId = pageRef.state.c__recordId;
+                cmp.set('v.formId', recordId)
+            } else {
+                cmp.set('v.formId', 'new');
+            }
+
         }
 
         if(cmp.get('v.formName') == 'default') {
             let pageRef = cmp.get("v.pageReference");
-            let formName = pageRef.state.c__formName;
-            cmp.set('v.formName', formName)
+
+            if(pageRef) {
+                let formName = pageRef.state.c__formName;
+                cmp.set('v.formName', formName)
+            }
+
         }
 
     }

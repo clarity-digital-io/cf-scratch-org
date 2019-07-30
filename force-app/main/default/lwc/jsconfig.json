@@ -2,11 +2,7 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "baseUrl": ".",
-        "paths": {
-            "c/useform": [
-                "useform/useform.js"
-            ]
-        }
+        "paths": {}
     },
     "include": [
         "**/*",

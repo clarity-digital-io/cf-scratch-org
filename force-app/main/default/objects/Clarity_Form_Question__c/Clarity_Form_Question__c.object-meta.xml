@@ -54,8 +54,9 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Clarity Form Question</label>
     <nameField>
+        <displayFormat>CFQ-{0000}</displayFormat>
         <label>Clarity Form Question Name</label>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Clarity Form Questions</pluralLabel>
     <searchLayouts/>

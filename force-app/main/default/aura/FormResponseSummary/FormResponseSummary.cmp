@@ -1,0 +1,68 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionwithoutheader,lightning:actionOverride">
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="String" default="default" />
+    <aura:attribute name="detail" type="Object" default="{}" />
+
+    <div class="slds-page-header slds-page-header_record-home">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <lightning:icon iconName="standard:template" alternativeText="Clarity Forms" />
+                    </div>
+                <div class="slds-media__body">
+                    <div class="slds-page-header__name">
+                        <div class="slds-page-header__name-title">
+                            <h1>
+                                <span>Clarity Form</span>
+                                <span class="slds-page-header__title slds-truncate" title="Clarity QA Form">Clarity QA Form</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-page-header__col-actions">
+            <div class="slds-page-header__controls">
+                <div class="slds-page-header__control">
+                    <lightning:buttonGroup>
+                        <lightning:button iconName="utility:insert_template" onclick="{!c.edit}" label="Form Builder" />
+                        <lightning:button iconName="action:clone" label="Clone" onclick="{!c.clone}" />
+                        <lightning:button iconName="action:delete" label="Delete" onclick="{!c.delete}" />
+                    </lightning:buttonGroup>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slds-page-header__row slds-page-header__row_gutters">
+        <div class="slds-page-header__col-details">
+            <ul class="slds-page-header__detail-row">
+                <li class="slds-page-header__detail-block">
+                    <div class="slds-text-title slds-truncate" title="Status">Status</div>
+                    <div class="slds-truncate" title="Draft">Draft</div>
+                </li>
+                <li class="slds-page-header__detail-block">
+                    <div class="slds-text-title slds-truncate" title="Respones">Responses Completed</div>
+                    <div class="slds-truncate" title="0">0</div>
+                </li>
+                <li class="slds-page-header__detail-block">
+                    <div class="slds-text-title slds-truncate" title="Completion Rate">Completion Rate</div>
+                    <div class="slds-truncate" title="0%">0%</div>
+                </li>
+                <li class="slds-page-header__detail-block">
+                    <div class="slds-text-title slds-truncate" title="Started">Responses Started</div>
+                    <div class="slds-truncate" title="0%">0</div>
+                </li>
+                <li class="slds-page-header__detail-block">
+                    <div class="slds-text-title slds-truncate" title="Average Time to Complete">Average Time to Complete</div>
+                    <div class="slds-truncate" title="00:00">00:00</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+
+    <lightning:navigation aura:id="navService"/>
+
+</aura:component>
