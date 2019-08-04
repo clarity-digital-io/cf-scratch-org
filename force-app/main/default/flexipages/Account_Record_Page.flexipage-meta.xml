@@ -66,7 +66,7 @@
         <componentInstances>
             <componentInstanceProperties>
                 <name>formName</name>
-                <value>Clarity QA Form</value>
+                <value>Clarity Form</value>
             </componentInstanceProperties>
             <componentName>FormResponseTable</componentName>
         </componentInstances>

@@ -114,11 +114,11 @@ Checks Required
 ## Dev, Build and Test
 sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-hub-org
 
-sfdx force:org:list
+sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-scratch-org
 
-sfdx force:alias:set dev=test-f8d3cxy7bv6u@example.com
+sfdx force:alias:set dev=test-h4rjcvxvjhkz@example.com
 
 sfdx force:config:set defaultusername=dev
 
@@ -148,6 +148,12 @@ sfdx force:lightning:event:create -n FormResponseEvent -d force-app/main/default
 
 sfdx force:apex:class:create -n FormResponseController -d force-app/main/default/classes
 
+sfdx force:apex:class:create -n ClarityFormsMobileController -d force-app/main/default/classes
+sfdx force:apex:class:create -n ClarityFormsExternalController -d force-app/main/default/classes
+sfdx force:apex:class:create -n ClarityFormsOfflineController -d force-app/main/default/classes
+sfdx force:apex:class:create -n ClarityFormsService -d force-app/main/default/classes
+
+
 ## Resources
 
 
@@ -171,6 +177,4 @@ ResponsesTable
 FormResponse - (New, Edit, Submitted, Locked)
 
 ***Decrease bundle.js below 400kb
-
-
 

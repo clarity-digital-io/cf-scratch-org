@@ -3,7 +3,7 @@
     <contactEmail>efigenio.ben@clarityforms.com</contactEmail>
     <label>Clarity Forms</label>
     <oauthConfig>
-        <callbackUrl>https://insomania.rest</callbackUrl>
+        <callbackUrl>https://auth.expo.io/@befigenio/clarity-mobile-fs</callbackUrl>
         <scopes>Full</scopes>
         <scopes>RefreshToken</scopes>
     </oauthConfig>

@@ -27,50 +27,22 @@ global with sharing class ClarityFormResponse {
     }
 
     @RemoteAction
-    global static String submit(String formResponseId) {
+    global static List<String> submit(String formResponseId) {
 
-        Clarity_Form_Response__c response = [SELECT Id, Status__c FROM Clarity_Form_Response__c WHERE Id =: formResponseId AND Status__c != 'Submitted' Limit 1];
+        List<String> success = ClarityFormsService.submit(new List<String>{ formResponseId });
 
-        response.Status__c = 'Submitted'; 
-
-        Database.SaveResult result = Database.update(response);
-
-        if(!result.isSuccess())
-            System.debug('error submitting form response');
-
-        return 'Success'; 
-
+        return success; 
+        
     }
 
     @RemoteAction
     global static Map<String, List<sObject>> create(String formName) {
 
-        Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
+        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Button_Color__c, 
+            Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
+            FROM Clarity_Form__c WHERE Name =: formName Limit 1];
 
-        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c FROM Clarity_Form__c WHERE Name =: formName Limit 1];
-        
-        Clarity_Form_Response__c response = new Clarity_Form_Response__c(
-            Status__c       = 'New', 
-            Clarity_Form__c = form.Id
-        );
-
-        Database.SaveResult result = Database.insert(response);
-
-        if(!result.isSuccess())
-            System.debug('error creating new repsonse');
-
-        List<Clarity_Form_Question__c> questions = [SELECT Id, 
-            (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
-            (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
-            Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
-
-        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, Clarity_Form_Response__c, Clarity_Form_Question__c 
-            FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
-
-        formDetails.put('Answers', answers);
-        formDetails.put('FormResponse', new List<sObject>{ response });
-        formDetails.put('Form', new List<sObject>{ form });
-        formDetails.put('Questions', questions);
+        Map<String, List<sObject>> formDetails = ClarityFormsService.getForm(form.Id);
 
         return formDetails; 
 
@@ -79,43 +51,20 @@ global with sharing class ClarityFormResponse {
     @RemoteAction
     global static Map<String, List<sObject>> edit(String responseId) {
 
-        Clarity_Form_Response__c response = [SELECT Id, Status__c, Clarity_Form__c, (SELECT Id, Answer__c, Clarity_Form_Response__c, Clarity_Form_Question__c 
-            FROM Clarity_Form_Answers__r) FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
+        Clarity_Form_Response__c response = [SELECT Id FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
 
-        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c 
-            FROM Clarity_Form__c WHERE Status__c = 'Published' AND Id =: response.Clarity_Form__c Limit 1];
-
-        List<Clarity_Form_Question__c> questions = [SELECT Id, 
-            (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
-            (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
-            Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c 
-            FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: response.Clarity_Form__c];
-
-        Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
-
-        formDetails.put('Answers', response.Clarity_Form_Answers__r);
-        formDetails.put('FormResponse', new List<sObject>{ response });
-        formDetails.put('Form', new List<sObject>{ form });
-        formDetails.put('Questions', questions);
+        Map<String, List<sObject>> formDetails = ClarityFormsService.getForm(response.Clarity_Form__c);
 
         return formDetails; 
 
     }
 
     @RemoteAction
-    global static Clarity_Form_Answer__c saveAnswer(String answer){
-        
-        Clarity_Form_Answer__c parsedAnswer = (Clarity_Form_Answer__c)JSON.deserialize(answer, Clarity_Form_Answer__c.class);
+    global static List<Clarity_Form_Answer__c> saveAnswer(String answer){
 
-        Database.SaveResult result = Database.update(parsedAnswer, true); 
+        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(new List<String>{ answer }); 
 
-        if(!result.isSuccess()) {
-
-            System.debug('error: ' + result.getErrors());
-
-        }
-
-        return parsedAnswer;
+        return savedAnswers;
         
     }
 

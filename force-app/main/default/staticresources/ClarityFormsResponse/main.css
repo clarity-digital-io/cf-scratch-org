@@ -1,41 +1,3 @@
-@font-face {
-    font-family: 'Salesforce Sans';
-    src: url('assets/fonts/SalesforceSans-Regular.ttf');
-}
-
-
-@font-face {
-    font-family: 'Salesforce Sans';
-    font-weight: 100;
-    src: url('assets/fonts/SalesforceSans-Light.ttf');   
-}
-
-@font-face {
-    font-family: 'Salesforce Sans';
-    font-weight: 300;
-    src: url('assets/fonts/SalesforceSans-Thin.ttf');   
-}
-
-
-@font-face {
-    font-family: 'Salesforce Sans';
-    font-weight: 500;
-    src: url('assets/fonts/SalesforceSans-Regular.ttf');
-}
-
-@font-face {
-    font-family: 'Salesforce Sans';
-    font-weight: 700;
-    src: url('assets/fonts/SalesforceSans-Bold.ttf');   
-}
-
-
-@font-face {
-    font-family: 'Salesforce Sans';
-    font-weight: 900;
-    src: url('assets/fonts/SalesforceSans-Bold.ttf');   
-}
-
 html {
     background: none !important; 
     font-family: 'Salesforce Sans' !important;
@@ -52,19 +14,4 @@ body {
 ul {
     padding: 0; 
     margin: 0; 
-}
-
-.slds-form-element__label {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-    display: inline-block;
-    color: #3e3e3c;
-    font-size: 1.15em;
-    padding-right: 1rem;
-    padding-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: 500 !important;
 }

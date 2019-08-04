@@ -14,7 +14,7 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ClarityFormService</apexClass>
+        <apexClass>ClarityFormsService</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>

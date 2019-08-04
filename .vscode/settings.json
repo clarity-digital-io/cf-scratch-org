@@ -10,5 +10,5 @@
     },
     "html.suggest.angular1": false,
     "html.suggest.ionic": false,
-    "eslint.nodePath": "/Users/benefigenio/.vscode/extensions/salesforce.salesforcedx-vscode-lwc-46.7.0/node_modules"
+    "eslint.nodePath": "/Users/benefigenio/.vscode/extensions/salesforce.salesforcedx-vscode-lwc-46.8.0/node_modules"
 }
