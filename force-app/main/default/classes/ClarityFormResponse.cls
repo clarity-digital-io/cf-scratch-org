@@ -69,6 +69,15 @@ global with sharing class ClarityFormResponse {
     }
 
     @RemoteAction
+    global static List<Clarity_Form_Answer__c> saveAnswerImage(String answerImages) {
+
+        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.upload(answerImages); 
+
+        return savedAnswers;   
+
+    }
+
+    @RemoteAction
     global static void publishFlow(String questionFlow) {
         System.debug(questionFlow);
     }

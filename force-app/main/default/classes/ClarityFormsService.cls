@@ -157,4 +157,120 @@ public with sharing class ClarityFormsService {
 
     }
 
+    public static List<Clarity_Form_Answer__c> upload(String sFileAnswers) {
+
+        Map<String, List<String>> parsedFileAnswers = (Map<String, List<String>>)JSON.deserialize(sFileAnswers, Map<String, List<String>>.class);
+
+        Map<String, String> answerResponseIds = new Map<String, String>();
+
+        Map<Id, Clarity_Form_Answer__c> answerIds = new Map<Id, Clarity_Form_Answer__c>([SELECT Id, Clarity_Form_Response__c FROM Clarity_Form_Answer__c WHERE Id IN :parsedFileAnswers.keySet()]);
+
+        for(Id answerId : answerIds.keySet()) {
+            
+            Clarity_Form_Answer__c answer = answerIds.get(answerId);
+            answerResponseIds.put(answerId, answer.Clarity_Form_Response__c);
+
+        }
+
+        Map<String, ContentVersion> contentsByAnswer = new Map<String, ContentVersion>();
+
+        for(String answerId : parsedFileAnswers.keySet()) {
+
+            List<String> files = parsedFileAnswers.get(answerId); 
+            String responseId = answerResponseIds.get(answerId); 
+
+            for(String file : files) {
+
+                ContentVersion content = new ContentVersion(
+                    ContentLocation = 'S', 
+                    PathOnClient    = 'Image.jpeg',
+                    Origin          = 'H', 
+                    Title           = 'Image',
+                    VersionData     = EncodingUtil.base64Decode(file) // converting your binary string to Blob
+                );
+
+                contentsByAnswer.put(answerId, content);
+
+            }
+
+        }
+
+        List<Database.SaveResult> contentResults = Database.insert(contentsByAnswer.values(), true); 
+
+        for(Database.SaveResult contentResult : contentResults) {
+
+            if(!contentResult.isSuccess()) {
+                System.debug('error');
+            }
+
+        }
+
+        Map<Id, String> answerIdByContentVersionId = new Map<Id, String>(); 
+
+        for(String answerId : contentsByAnswer.keySet()) {
+
+            ContentVersion cv = contentsByAnswer.get(answerId); 
+
+            answerIdByContentVersionId.put(cv.Id, answerId); 
+
+        }
+
+        Map<Id, ContentVersion> createdContentVersions = new Map<Id, ContentVersion>([SELECT Id, Title, ContentSize, ContentDocumentId FROM ContentVersion WHERE Id IN :answerIdByContentVersionId.keySet()]);
+
+        List<ContentDocumentLink> links = new List<ContentDocumentLink>(); 
+
+        List<Clarity_Form_Answer__c> answers = new List<Clarity_Form_Answer__c>(); 
+
+        for(Id cvId : createdContentVersions.keySet()) {
+
+            String answerId = answerIdByContentVersionId.get(cvId); 
+
+            String responseId = answerResponseIds.get(answerId); 
+
+            Clarity_Form_Answer__c answer = answerIds.get(answerId); 
+
+            answer.ContentDocument__c = cvId; 
+
+            answers.add(answer);
+
+            ContentDocumentLink formLink = new ContentDocumentLink(
+                ContentDocumentId   = cvId, //Add ContentDocumentId
+                LinkedEntityId      = responseId, //Add attachment parentId
+                ShareType           = 'V', //V - Viewer permission. C - Collaborator permission. I - Inferred permission.
+                Visibility          = 'AllUsers' //AllUsers, InternalUsers, SharedUsers
+            );
+
+            links.add(formLink); 
+
+            ContentDocumentLink answerLink = new ContentDocumentLink(
+                ContentDocumentId   = cvId, //Add ContentDocumentId
+                LinkedEntityId      = answerId, //Add attachment parentId
+                ShareType           = 'V', //V - Viewer permission. C - Collaborator permission. I - Inferred permission.
+                Visibility          = 'InternalUsers' //AllUsers, InternalUsers, SharedUsers
+            );
+        
+            links.add(answerLink); 
+
+        }
+
+        List<Database.SaveResult> formLinkResults = Database.insert(links, true); 
+
+        for(Database.SaveResult formLinkResult : formLinkResults) {
+            if(!formLinkResult.isSuccess()) {
+                System.debug('error');
+            }
+        }
+
+        List<Database.SaveResult> updateResults = Database.update(answers, true); 
+
+        for(Database.SaveResult updateResult : updateResults) {
+            if(!updateResult.isSuccess()) {
+                System.debug('error');
+            }
+        }
+
+        return answers; 
+
+    }
+
 }
