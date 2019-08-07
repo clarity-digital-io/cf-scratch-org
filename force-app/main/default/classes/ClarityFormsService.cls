@@ -49,13 +49,40 @@ public with sharing class ClarityFormsService {
         
     }
 
-    public static Map<String, List<sObject>> getForm(String formId) {
+    public static Map<String, List<sObject>> edit(String responseId) {
+
+        Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
+
+        Clarity_Form_Response__c response = [SELECT Id, Clarity_Form__c, Status__c, OwnerId__c 
+            FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
+
+        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Button_Color__c, 
+            Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
+            FROM Clarity_Form__c WHERE Id =: response.Clarity_Form__c LIMIT 1];
+
+        List<Clarity_Form_Question__c> questions = [SELECT Id, 
+            (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
+            (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
+            Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
+
+        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
+            FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
+
+        formDetails.put('Form', new List<sObject>{ form });
+        formDetails.put('FormResponse', new List<sObject>{ response });
+        formDetails.put('Questions', questions);
+        formDetails.put('Answers', answers);
+
+        return formDetails; 
+    }
+
+    public static Map<String, List<sObject>> create(String formName) {
 
         Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
 
         Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Button_Color__c, 
             Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
-            FROM Clarity_Form__c WHERE Id =: formId LIMIT 1];
+            FROM Clarity_Form__c WHERE Name =: formName LIMIT 1];
         
         List<Clarity_Form_Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
@@ -64,15 +91,17 @@ public with sharing class ClarityFormsService {
 
         Clarity_Form_Response__c response = new Clarity_Form_Response__c(
             Status__c       = 'New', 
-            Clarity_Form__c = form.Id
+            Clarity_Form__c = form.Id,
+            OwnerId__c      = UserInfo.getUserId()
         );
 
         Database.SaveResult result = Database.insert(response);
 
-        if(!result.isSuccess())
+        if(!result.isSuccess()) {
             System.debug('error creating new repsonse');
+        }
 
-        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, Clarity_Form_Response__c, Clarity_Form_Question__c 
+        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
             FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
 
         formDetails.put('Form', new List<sObject>{ form });
@@ -159,43 +188,51 @@ public with sharing class ClarityFormsService {
 
     public static List<Clarity_Form_Answer__c> upload(String sFileAnswers) {
 
-        Map<String, List<String>> parsedFileAnswers = (Map<String, List<String>>)JSON.deserialize(sFileAnswers, Map<String, List<String>>.class);
+        Map<String, Map<String, List<String>>> parsedFileAnswers = (Map<String, Map<String, List<String>>>)JSON.deserialize(sFileAnswers, Map<String, Map<String, List<String>>>.class);
 
-        Map<String, String> answerResponseIds = new Map<String, String>();
+        Map<String, String> questionResponseIds = new Map<String, String>();
 
-        Map<Id, Clarity_Form_Answer__c> answerIds = new Map<Id, Clarity_Form_Answer__c>([SELECT Id, Clarity_Form_Response__c FROM Clarity_Form_Answer__c WHERE Id IN :parsedFileAnswers.keySet()]);
+        for(Id responseId : parsedFileAnswers.keySet()) {
 
-        for(Id answerId : answerIds.keySet()) {
+            Map<String, List<String>> questionImages = parsedFileAnswers.get(responseId); 
+
+            for(String questionId : questionImages.keySet()) {
+                questionResponseIds.put(questionId, responseId);
+            }
             
-            Clarity_Form_Answer__c answer = answerIds.get(answerId);
-            answerResponseIds.put(answerId, answer.Clarity_Form_Response__c);
-
         }
 
-        Map<String, ContentVersion> contentsByAnswer = new Map<String, ContentVersion>();
+        Map<Id, Clarity_Form_Response__c> responses = new Map<Id, Clarity_Form_Response__c>([SELECT Id, OwnerId__c FROM Clarity_Form_Response__c WHERE Id IN :parsedFileAnswers.keySet()]); 
 
-        for(String answerId : parsedFileAnswers.keySet()) {
+        Map<String, ContentVersion> contentsByQuestion = new Map<String, ContentVersion>();
 
-            List<String> files = parsedFileAnswers.get(answerId); 
-            String responseId = answerResponseIds.get(answerId); 
+        for(String responseId : parsedFileAnswers.keySet()) {
 
-            for(String file : files) {
+            Map<String, List<String>> imagesByQuestions = parsedFileAnswers.get(responseId); 
 
-                ContentVersion content = new ContentVersion(
-                    ContentLocation = 'S', 
-                    PathOnClient    = 'Image.jpeg',
-                    Origin          = 'H', 
-                    Title           = 'Image',
-                    VersionData     = EncodingUtil.base64Decode(file) // converting your binary string to Blob
-                );
+            for(String questionId : imagesByQuestions.keySet()) {
 
-                contentsByAnswer.put(answerId, content);
+                List<String> files = imagesByQuestions.get(questionId); 
+
+                for(String file : files) {
+
+                    ContentVersion content = new ContentVersion(
+                        ContentLocation = 'S', 
+                        PathOnClient    = 'Image.jpeg',
+                        Origin          = 'H', 
+                        Title           = 'Image',
+                        VersionData     = EncodingUtil.base64Decode(file) // converting your binary string to Blob
+                    );
+
+                    contentsByQuestion.put(questionId, content);
+
+                }
 
             }
 
         }
 
-        List<Database.SaveResult> contentResults = Database.insert(contentsByAnswer.values(), true); 
+        List<Database.SaveResult> contentResults = Database.insert(contentsByQuestion.values(), true); 
 
         for(Database.SaveResult contentResult : contentResults) {
 
@@ -205,36 +242,64 @@ public with sharing class ClarityFormsService {
 
         }
 
-        Map<Id, String> answerIdByContentVersionId = new Map<Id, String>(); 
+        for(String questionId : contentsByQuestion.keySet()) {
 
-        for(String answerId : contentsByAnswer.keySet()) {
+            ContentVersion cv = contentsByQuestion.get(questionId); 
 
-            ContentVersion cv = contentsByAnswer.get(answerId); 
+            String responseId = questionResponseIds.get(questionId);
 
-            answerIdByContentVersionId.put(cv.Id, answerId); 
+            Clarity_Form_Response__c response = responses.get(responseId); 
+
+            cv.OwnerId = response.OwnerId__c; 
+
+            contentsByQuestion.put(questionId, cv); 
 
         }
 
-        Map<Id, ContentVersion> createdContentVersions = new Map<Id, ContentVersion>([SELECT Id, Title, ContentSize, ContentDocumentId FROM ContentVersion WHERE Id IN :answerIdByContentVersionId.keySet()]);
+        List<Database.SaveResult> updateContentResults = Database.update(contentsByQuestion.values(), true); 
+
+        for(Database.SaveResult updateContentResult : updateContentResults) {
+
+            if(!updateContentResult.isSuccess()) {
+                System.debug('error');
+            }
+
+        }
+
+        Map<Id, String> questionIdByContentVersionId = new Map<Id, String>(); 
+
+        for(String questionId : contentsByQuestion.keySet()) {
+
+            ContentVersion cv = contentsByQuestion.get(questionId); 
+
+            questionIdByContentVersionId.put(cv.Id, questionId); 
+
+        }
+
+        Map<Id, ContentVersion> createdContentVersions = new Map<Id, ContentVersion>([SELECT Id, Title, ContentSize, ContentDocumentId FROM ContentVersion WHERE Id IN :questionIdByContentVersionId.keySet()]);
 
         List<ContentDocumentLink> links = new List<ContentDocumentLink>(); 
 
-        List<Clarity_Form_Answer__c> answers = new List<Clarity_Form_Answer__c>(); 
+        Map<Id, Clarity_Form_Answer__c> answersByContentVersion = new Map<Id, Clarity_Form_Answer__c>(); 
 
         for(Id cvId : createdContentVersions.keySet()) {
 
-            String answerId = answerIdByContentVersionId.get(cvId); 
+            ContentVersion cv = createdContentVersions.get(cvId); 
 
-            String responseId = answerResponseIds.get(answerId); 
+            String questionId = questionIdByContentVersionId.get(cvId); 
 
-            Clarity_Form_Answer__c answer = answerIds.get(answerId); 
+            String responseId = questionResponseIds.get(questionId); 
 
-            answer.ContentDocument__c = cvId; 
+            Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
+                ContentDocument__c = cv.ContentDocumentId,
+                Clarity_Form_Question__c = questionId,
+                Clarity_Form_Response__c = responseId
+            );
 
-            answers.add(answer);
+            answersByContentVersion.put(cvId, answer);
 
             ContentDocumentLink formLink = new ContentDocumentLink(
-                ContentDocumentId   = cvId, //Add ContentDocumentId
+                ContentDocumentId   = cv.ContentDocumentId, //Add ContentDocumentId
                 LinkedEntityId      = responseId, //Add attachment parentId
                 ShareType           = 'V', //V - Viewer permission. C - Collaborator permission. I - Inferred permission.
                 Visibility          = 'AllUsers' //AllUsers, InternalUsers, SharedUsers
@@ -242,11 +307,27 @@ public with sharing class ClarityFormsService {
 
             links.add(formLink); 
 
+        }
+
+        List<Database.SaveResult> answerResults = Database.insert(answersByContentVersion.values(), true); 
+
+        for(Database.SaveResult answerResult : answerResults) {
+            if(!answerResult.isSuccess()) {
+                System.debug('error');
+            }
+        }
+
+        for(Id cvId : answersByContentVersion.keySet()) {
+
+            ContentVersion cv = createdContentVersions.get(cvId); 
+            
+            Clarity_Form_Answer__c answer = answersByContentVersion.get(cvId); 
+            
             ContentDocumentLink answerLink = new ContentDocumentLink(
-                ContentDocumentId   = cvId, //Add ContentDocumentId
-                LinkedEntityId      = answerId, //Add attachment parentId
+                ContentDocumentId   = cv.ContentDocumentId, //Add ContentDocumentId
+                LinkedEntityId      = answer.Id, //Add attachment parentId
                 ShareType           = 'V', //V - Viewer permission. C - Collaborator permission. I - Inferred permission.
-                Visibility          = 'InternalUsers' //AllUsers, InternalUsers, SharedUsers
+                Visibility          = 'AllUsers' //AllUsers, InternalUsers, SharedUsers
             );
         
             links.add(answerLink); 
@@ -261,15 +342,7 @@ public with sharing class ClarityFormsService {
             }
         }
 
-        List<Database.SaveResult> updateResults = Database.update(answers, true); 
-
-        for(Database.SaveResult updateResult : updateResults) {
-            if(!updateResult.isSuccess()) {
-                System.debug('error');
-            }
-        }
-
-        return answers; 
+        return answersByContentVersion.values(); 
 
     }
 

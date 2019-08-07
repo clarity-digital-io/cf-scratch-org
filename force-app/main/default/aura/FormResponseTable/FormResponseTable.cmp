@@ -59,7 +59,7 @@
                                         <td data-label="Action">
                                             <div class="slds-truncate" title="">
                                                 <lightning:button label="Edit" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
-                                                <lightning:button label="Delete" value="{!response.id}" variant="destructive" />
+                                                <lightning:button label="Delete" value="{!response.id}" variant="destructive" onclick="{!c.handleDeleteFormResponse}" />
                                             </div>
                                         </td>
                     

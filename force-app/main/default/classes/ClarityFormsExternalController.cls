@@ -10,7 +10,7 @@ global with sharing class ClarityFormsExternalController {
 
         String formId = req.requestURI.substring(req.requestURI.lastIndexOf('/') + 1);
 
-        Map<String, List<sObject>> form = ClarityFormsService.getForm(formId);
+        Map<String, List<sObject>> form = ClarityFormsService.create(formId);
 
         return form;
 

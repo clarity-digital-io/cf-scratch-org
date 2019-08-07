@@ -111,5 +111,50 @@
 
         navLink.navigate(pageRef, true);
 
+    },
+    handleDeleteFormResponse: function(cmp, event, helper) {
+
+        let id = event.getSource().get("v.value");
+
+        cmp.set('v.loading', true);
+
+        let action = cmp.get("c.deleteFormResponse");
+
+        action.setParams({
+            responseId: id
+        });
+
+		action.setCallback(this, function (response) {
+
+			let state = response.getState();
+
+			if (state === "SUCCESS") {
+
+                cmp.set('v.loading', false);
+
+                let deletedId = response.getReturnValue(); 
+
+                let data = cmp.get('v.data');
+
+                let responses = data.filter(response => response.Id != deletedId);
+
+                cmp.set('v.data', responses);
+
+                cmp.set('v.loading', false);
+
+			} else if (state === "ERROR") {
+
+				let errors = response.getError();
+
+                cmp.find('notifLib').showToast({
+                    "variant": "error",
+                    "title"  : "Error!",
+                    "message": response.getError()
+                });
+
+			}
+
+		});
+
     }
 })

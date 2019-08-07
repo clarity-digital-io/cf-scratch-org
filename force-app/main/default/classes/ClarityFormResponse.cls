@@ -38,11 +38,7 @@ global with sharing class ClarityFormResponse {
     @RemoteAction
     global static Map<String, List<sObject>> create(String formName) {
 
-        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Button_Color__c, 
-            Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
-            FROM Clarity_Form__c WHERE Name =: formName Limit 1];
-
-        Map<String, List<sObject>> formDetails = ClarityFormsService.getForm(form.Id);
+        Map<String, List<sObject>> formDetails = ClarityFormsService.create(formName);
 
         return formDetails; 
 
@@ -51,9 +47,7 @@ global with sharing class ClarityFormResponse {
     @RemoteAction
     global static Map<String, List<sObject>> edit(String responseId) {
 
-        Clarity_Form_Response__c response = [SELECT Id FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
-
-        Map<String, List<sObject>> formDetails = ClarityFormsService.getForm(response.Clarity_Form__c);
+        Map<String, List<sObject>> formDetails = ClarityFormsService.edit(responseId);
 
         return formDetails; 
 
