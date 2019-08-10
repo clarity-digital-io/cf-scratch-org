@@ -136,13 +136,15 @@
 
                 let data = cmp.get('v.data');
 
-                let responses = data.filter(response => response.Id != deletedId);
+                let responses = data.filter(r => r.Id != deletedId);
 
                 cmp.set('v.data', responses);
 
                 cmp.set('v.loading', false);
 
 			} else if (state === "ERROR") {
+
+                cmp.set('v.loading', false);
 
 				let errors = response.getError();
 

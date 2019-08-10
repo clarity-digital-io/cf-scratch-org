@@ -11,9 +11,9 @@ public with sharing class FormResponseController {
     }
 
     @AuraEnabled
-    public static Id deleteFormResponse(String responseId){
+    public static String deleteFormResponse(String responseId){
         
-        Clarity_Form_Response__c response = [SELECT Id, Name FROM Clarity_Form_Response__c WHERE Id =: responseId];
+        Clarity_Form_Response__c response = [SELECT Id, Name FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
 
         Database.DeleteResult result = Database.delete(response, true); 
 
@@ -21,7 +21,7 @@ public with sharing class FormResponseController {
             throw new AuraHandledException('Unable to delete response: ' + response.Name);
         }
 
-        return result.getId();
+        return responseId;
     }
 
 }
