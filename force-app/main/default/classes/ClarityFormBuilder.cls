@@ -51,7 +51,7 @@ global with sharing class ClarityFormBuilder {
 
         } 
         
-        form = [SELECT Id, Name, Limit__c, End_Date__c, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
+        form = [SELECT Id, Name, Limit__c, End_Date__c, Clarity_Form_Style__r.Name, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
             Clarity_Form_Assignment__c, Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
             FROM Clarity_Form__c WHERE Id =: formId];
 
@@ -77,7 +77,7 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static List<Clarity_Form_Style__c> getDesigns() {
 
-        List<Clarity_Form_Style__c> designs = [SELECT Id, Multi_Page__c, Background_Image__c, Background_Color__c, Button_Color__c, Color__c FROM Clarity_Form_Style__c];
+        List<Clarity_Form_Style__c> designs = [SELECT Id, Multi_Page__c, Name, Background_Image__c, Background_Color__c, Button_Color__c, Color__c FROM Clarity_Form_Style__c];
 
         return designs; 
         
@@ -90,6 +90,12 @@ global with sharing class ClarityFormBuilder {
 
         if(file != '') {
 
+            Database.UpsertResult initialResult = Database.upsert(parsedStyle, true); 
+
+            if(!initialResult.isSuccess()) {
+                System.debug('error');
+            }
+
             ContentVersion content = new ContentVersion();
             content.ContentLocation = 'S'; 
             content.PathOnClient = parsedStyle.Name + 'Background.png';
@@ -101,8 +107,6 @@ global with sharing class ClarityFormBuilder {
             if(!contentResult.isSuccess()) {
                 System.debug('error');
             }
-
-            //we should delete any related to this record
 
             Id documentId = [SELECT ContentDocumentId FROM ContentVersion WHERE Id =:content.Id].ContentDocumentId;
 
@@ -129,8 +133,6 @@ global with sharing class ClarityFormBuilder {
             }
 
         } else {
-
-            parsedStyle.Background_Image__c = '';
 
             Database.SaveResult result = Database.update(parsedStyle, true); 
 

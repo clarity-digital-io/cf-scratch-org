@@ -118,7 +118,7 @@ sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-scratch-org
 
-sfdx force:alias:set dev=test-h4rjcvxvjhkz@example.com
+sfdx force:alias:set dev=test-k8unqfmpgemu@example.com
 
 sfdx force:config:set defaultusername=dev
 
