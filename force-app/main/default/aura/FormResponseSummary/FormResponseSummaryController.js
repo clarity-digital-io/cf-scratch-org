@@ -1,7 +1,26 @@
 ({
     doInit: function(cmp, event, helper) {
 
+        let action = cmp.get("c.getForm");
+
+        action.setParams({
+            recordId: cmp.get("v.recordId")
+        });
+
+		action.setCallback(this, function (response) {
+
+            let state = response.getState();
         
+            if (state === "SUCCESS") {
+            
+                var form = response.getReturnValue();
+                
+                cmp.set('v.form', form); 
+
+            }
+        }); 
+
+        $A.enqueueAction(action);
 
     },
     edit: function(cmp, event, helper) {

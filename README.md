@@ -118,7 +118,7 @@ sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-scratch-org
 
-sfdx force:alias:set dev=test-k8unqfmpgemu@example.com
+sfdx force:alias:set dev=test-milqttivpx6u@example.com
 
 sfdx force:config:set defaultusername=dev
 
@@ -169,12 +169,8 @@ sfdx force:apex:class:create -n ClarityFormsService -d force-app/main/default/cl
 Digital Signatures Approval Process
 Add filtering on the Lookups by Record Type and other fields
 Add RecordType select on Record Group
-
 Timeline
-
 ResponsesTable
-
 FormResponse - (New, Edit, Submitted, Locked)
 
-***Decrease bundle.js below 400kb
 

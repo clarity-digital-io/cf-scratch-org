@@ -5,10 +5,7 @@
 
             if(cmp.get("v.pageReference") != null) {
                 cmp.set('v.recordId', cmp.get("v.pageReference").state.c__recordId);
-            } else {
-                cmp.set('v.recordId', 'a0B4F000001WlTvUAK');
-                return; 
-            }
+            } 
 
         }
 

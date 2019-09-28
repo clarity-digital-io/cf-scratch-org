@@ -1,6 +1,15 @@
 public with sharing class FormResponseController {
     
     @AuraEnabled
+    public static Clarity_Form__c getForm(String recordId) {
+
+        Clarity_Form__c form = [SELECT Id, Status__c, Name FROM Clarity_Form__c Limit 1]; 
+
+        return form; 
+
+    }
+
+    @AuraEnabled
     public static List<Clarity_Form_Response__c> getFormResponses(String name){
 
         List<Clarity_Form_Response__c> responses = [SELECT Id, Status__c, Completion__c, CreatedDate, Submitted_Date__c 
