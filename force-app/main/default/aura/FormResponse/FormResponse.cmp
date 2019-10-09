@@ -2,13 +2,15 @@
     
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
 
-    <aura:attribute name="formId" type="String" default="new" />
-    <aura:attribute name="recordId" type="String" default="new" />
+    <aura:attribute name="formId" type="String" default="default" />
+    <aura:attribute name="preview" type="String" default="false" />
 
+    <aura:attribute name="recordId" type="String" default="default" />
     <aura:attribute name="formName" type="String" required="true" default="default" access="global" />
 
-    <lightning:container src="{!$Resource.ClarityFormsResponse + '/index.html?formName=' + v.formName + '&amp;formId=' + v.formId}" onmessage="{!c.handleMessage}" />
+    <lightning:container src="{!$Resource.ClarityFormsResponse + '/index.html?recordId=' + v.recordId + '&amp;formName=' + v.formName + '&amp;formId=' + v.formId + '&amp;preview=' + v.preview }" onmessage="{!c.handleMessage}" />
 
     <lightning:navigation aura:id="navService"/>
+    <lightning:workspaceAPI aura:id="workspace" />
 
 </aura:component>	

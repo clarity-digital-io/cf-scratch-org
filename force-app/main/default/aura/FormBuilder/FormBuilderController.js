@@ -1,6 +1,6 @@
 ({
 	doInit: function(cmp) {
-
+		console.log('recordId', cmp.get('v.recordId'));
 		if(cmp.get('v.recordId') == '') {
             cmp.set('v.recordId', cmp.get("v.pageReference").state.c__recordId);
 		}
@@ -38,22 +38,19 @@
 
 		let formId = message.payload.value; 
 
-		if(name == 'Preview') {
-			console.log('BUILDER: ', cmp.get('v.recordId'), formId);
-			let navService = cmp.find("navService");
-			
-			let pageReference = {
-				type: 'standard__component',
-				attributes: {
-					componentName: 'c__FormPreview'
-				},
-				state: {
-					c__recordId: cmp.get('v.recordId') || formId
-				}
-			};
+		let navService = cmp.find("navService");
+		
+		let pageReference = {
+			type: 'standard__component',
+			attributes: {
+				componentName: 'c__FormResponse'
+			},
+			state: {
+				c__formId  : formId, 
+				c__preview : 'true'
+			}
+		};
 
-			navService.navigate(pageReference);
-
-		}
+		navService.navigate(pageReference);
 	}
 })
