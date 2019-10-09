@@ -4,6 +4,7 @@
     <aura:attribute name="recordId" type="String" default="default" />
     <aura:attribute name="detail" type="Object" default="{}" />
     <aura:attribute name="form" type="Clarity_Form__c" />
+    <aura:attribute name="responses" type ="list"/>
 
     <div class="slds-page-header slds-page-header_record-home">
         <div class="slds-page-header__row">
@@ -16,7 +17,7 @@
                     <div class="slds-page-header__name">
                         <div class="slds-page-header__name-title">
                             <h1>
-                                <span>Clarity Form2</span>
+                                <span>Clarity Form</span>
                                 <span class="slds-page-header__title slds-truncate" title="Clarity QA Form">Clarity QA Form</span>
                             </h1>
                         </div>
@@ -55,11 +56,20 @@
                     <div class="slds-text-title slds-truncate" title="Started">Responses Started</div>
                     <div class="slds-truncate" title="0%">{!v.form.Respones_Started__c}</div>
                 </li>
-                
+            
             </ul>
+            <div style="height: 100px">
+                <lightning:datatable
+                        keyField="id"
+                        data="{! v.data }"
+                        columns="{! v.columns }"
+                        hideCheckboxColumn="true"/>
+                        TEST 
+            </div>
         </div>
     </div>
     </div>
+    
 
     <lightning:navigation aura:id="navService"/>
 

@@ -47,3 +47,11 @@
 
     }
 })
+
+
+//Josue Code //  
+({
+    init: function (cmp, event, helper) {
+        cmp.set('v.columns', [
+            {label: 'Name', fieldName: 'name', type: 'text'}]
+        )}})
