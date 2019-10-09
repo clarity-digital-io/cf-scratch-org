@@ -1,6 +1,8 @@
 ({
     doInit: function(cmp, event, helper) {
 
+        cmp.set('v.columns', [{label: 'Name', fieldName: 'Name', type: 'text'}]);
+
         let action = cmp.get("c.getForm");
 
         action.setParams({
@@ -16,6 +18,12 @@
                 var form = response.getReturnValue();
                 
                 cmp.set('v.form', form); 
+
+                let data = form.Clarity_Form_Responses__r.map(res => {
+                    return { Name: res.Name, Status__c: res.Status__c }
+                });
+
+                cmp.set('v.data', data);
 
             }
         }); 
@@ -47,11 +55,3 @@
 
     }
 })
-
-
-//Josue Code //  
-({
-    init: function (cmp, event, helper) {
-        cmp.set('v.columns', [
-            {label: 'Name', fieldName: 'name', type: 'text'}]
-        )}})
