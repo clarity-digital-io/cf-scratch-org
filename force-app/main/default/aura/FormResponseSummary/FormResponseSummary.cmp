@@ -3,6 +3,8 @@
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:attribute name="recordId" type="String" default="default" />
     <aura:attribute name="detail" type="Object" default="{}" />
+    <aura:attribute name="form" type="Clarity_Form__c" />
+    <aura:attribute name="responses" type ="list"/>
 
     <div class="slds-page-header slds-page-header_record-home">
         <div class="slds-page-header__row">
@@ -40,28 +42,34 @@
             <ul class="slds-page-header__detail-row">
                 <li class="slds-page-header__detail-block">
                     <div class="slds-text-title slds-truncate" title="Status">Status</div>
-                    <div class="slds-truncate" title="Draft">Draft</div>
+                    <div class="slds-truncate" title="Draft">{!v.form.Status__c}</div>
                 </li>
                 <li class="slds-page-header__detail-block">
                     <div class="slds-text-title slds-truncate" title="Respones">Responses Completed</div>
-                    <div class="slds-truncate" title="0">0</div>
+                    <div class="slds-truncate" title="0">{!v.form.Responses_Completed__c}</div>
                 </li>
                 <li class="slds-page-header__detail-block">
                     <div class="slds-text-title slds-truncate" title="Completion Rate">Completion Rate</div>
-                    <div class="slds-truncate" title="0%">0%</div>
+                    <div class="slds-truncate" title="0%">{!v.form.Completion_Rate__}</div>
                 </li>
                 <li class="slds-page-header__detail-block">
                     <div class="slds-text-title slds-truncate" title="Started">Responses Started</div>
-                    <div class="slds-truncate" title="0%">0</div>
+                    <div class="slds-truncate" title="0%">{!v.form.Respones_Started__c}</div>
                 </li>
-                <li class="slds-page-header__detail-block">
-                    <div class="slds-text-title slds-truncate" title="Average Time to Complete">Average Time to Complete</div>
-                    <div class="slds-truncate" title="00:00">00:00</div>
-                </li>
+            
             </ul>
+            <div style="height: 100px">
+                <lightning:datatable
+                        keyField="id"
+                        data="{! v.data }"
+                        columns="{! v.columns }"
+                        hideCheckboxColumn="true"/>
+                        TEST 
+            </div>
         </div>
     </div>
     </div>
+    
 
     <lightning:navigation aura:id="navService"/>
 
