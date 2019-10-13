@@ -634,11 +634,9 @@ global with sharing class ClarityFormBuilder {
             Schema.DisplayType type = fieldResult.getType();
 
             List <Schema.sObjectType> reference = fieldResult.getReferenceTo();
-
-            Boolean isFieldReq  = fieldResult.isNillable();
             Boolean isFieldCreateable = fieldResult.isCreateable(); 
 
-            if(!isFieldReq && isFieldCreateable) {
+            if(isFieldCreateable) {
 
                 sObjectFields.add('' + field);
 

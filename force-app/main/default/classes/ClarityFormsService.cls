@@ -67,14 +67,16 @@ public with sharing class ClarityFormsService {
         List<Clarity_Form_Connection_Field__c> mappingFields = new List<Clarity_Form_Connection_Field__c>(); 
         List<Clarity_Form_Connection_Field__c> prefillFields = new List<Clarity_Form_Connection_Field__c>(); 
 
-        for(Clarity_Form_Connection_Field__c connectionField : connectionFields) {
-            if(connectionField.PreFill__c) {
-                prefillFields.add(connectionField);
-            } else {
-                mappingFields.add(connectionField);
+        for(Clarity_Form_Connection__c connection : connections) {
+            for(Clarity_Form_Connection_Field__c connectionField : connection.Clarity_Form_Connection_Fields__r) {
+                if(connectionField.PreFill__c) {
+                    prefillFields.add(connectionField);
+                } else {
+                    mappingFields.add(connectionField);
+                }
             }
         }
-
+        
         List<Clarity_Form_Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
@@ -108,11 +110,13 @@ public with sharing class ClarityFormsService {
         List<Clarity_Form_Connection_Field__c> mappingFields = new List<Clarity_Form_Connection_Field__c>(); 
         List<Clarity_Form_Connection_Field__c> prefillFields = new List<Clarity_Form_Connection_Field__c>(); 
 
-        for(Clarity_Form_Connection_Field__c connectionField : connectionFields) {
-            if(connectionField.PreFill__c) {
-                prefillFields.add(connectionField);
-            } else {
-                mappingFields.add(connectionField);
+        for(Clarity_Form_Connection__c connection : connections) {
+            for(Clarity_Form_Connection_Field__c connectionField : connection.Clarity_Form_Connection_Fields__r) {
+                if(connectionField.PreFill__c) {
+                    prefillFields.add(connectionField);
+                } else {
+                    mappingFields.add(connectionField);
+                }
             }
         }
         
