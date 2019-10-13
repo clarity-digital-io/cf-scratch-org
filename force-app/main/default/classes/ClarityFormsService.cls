@@ -60,6 +60,21 @@ public with sharing class ClarityFormsService {
             Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
             FROM Clarity_Form__c WHERE Id =: response.Clarity_Form__c LIMIT 1];
 
+        List<Clarity_Form_Connection__c> connections = [SELECT Id, Salesforce_Object__c, New__c, 
+            (SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
+            FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: form.Id];
+
+        List<Clarity_Form_Connection_Field__c> mappingFields = new List<Clarity_Form_Connection_Field__c>(); 
+        List<Clarity_Form_Connection_Field__c> prefillFields = new List<Clarity_Form_Connection_Field__c>(); 
+
+        for(Clarity_Form_Connection_Field__c connectionField : connectionFields) {
+            if(connectionField.PreFill__c) {
+                prefillFields.add(connectionField);
+            } else {
+                mappingFields.add(connectionField);
+            }
+        }
+
         List<Clarity_Form_Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
@@ -70,6 +85,8 @@ public with sharing class ClarityFormsService {
 
         formDetails.put('Form', new List<sObject>{ form });
         formDetails.put('FormResponse', new List<sObject>{ response });
+        formDetails.put('Mapping', mappingFields);
+        formDetails.put('Prefills', prefillFields);
         formDetails.put('Questions', questions);
         formDetails.put('Answers', answers);
 
@@ -83,6 +100,21 @@ public with sharing class ClarityFormsService {
         Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Button_Color__c, 
             Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
             FROM Clarity_Form__c WHERE Name =: formName LIMIT 1];
+
+        List<Clarity_Form_Connection__c> connections = [SELECT Id, Salesforce_Object__c, New__c, 
+            (SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
+            FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: form.Id];
+
+        List<Clarity_Form_Connection_Field__c> mappingFields = new List<Clarity_Form_Connection_Field__c>(); 
+        List<Clarity_Form_Connection_Field__c> prefillFields = new List<Clarity_Form_Connection_Field__c>(); 
+
+        for(Clarity_Form_Connection_Field__c connectionField : connectionFields) {
+            if(connectionField.PreFill__c) {
+                prefillFields.add(connectionField);
+            } else {
+                mappingFields.add(connectionField);
+            }
+        }
         
         List<Clarity_Form_Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
@@ -106,6 +138,8 @@ public with sharing class ClarityFormsService {
 
         formDetails.put('Form', new List<sObject>{ form });
         formDetails.put('FormResponse', new List<sObject>{ response });
+        formDetails.put('Mapping', mappingFields);
+        formDetails.put('Prefills', prefillFields);
         formDetails.put('Questions', questions);
         formDetails.put('Answers', answers);
 
