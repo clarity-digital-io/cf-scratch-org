@@ -16,10 +16,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Active__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Type__c</field>
             </layoutItems>
             <layoutItems>
@@ -29,6 +25,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Result_Holder__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>New__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>

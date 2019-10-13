@@ -591,7 +591,7 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static List<Clarity_Form_Connection__c> getConnections(String formId){
 
-        List<Clarity_Form_Connection__c> connections = [SELECT Id, Active__c, Salesforce_Object__c FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: formId];
+        List<Clarity_Form_Connection__c> connections = [SELECT Id, New__c, Salesforce_Object__c FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: formId];
 
         return connections; 
         
@@ -602,7 +602,20 @@ global with sharing class ClarityFormBuilder {
 
         Map<String, List<Object>> fieldMapping = new Map<String, List<Object>>(); 
 
-        List<Clarity_Form_Connection_Field__c> connectionFields = [SELECT Id, Clarity_Form_Connection__c, Custom_Value__c, Salesforce_Field__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Field__c WHERE Clarity_Form_Connection__c =: connectionId];
+        List<Clarity_Form_Connection_Field__c> connectionFields = [SELECT Id, Clarity_Form_Connection__c, Custom_Value__c, 
+            Salesforce_Field__c, Clarity_Form_Question__c, PreFill__c 
+            FROM Clarity_Form_Connection_Field__c WHERE Clarity_Form_Connection__c =: connectionId];
+
+        List<Clarity_Form_Connection_Field__c> mappingFields = new List<Clarity_Form_Connection_Field__c>(); 
+        List<Clarity_Form_Connection_Field__c> prefillFields = new List<Clarity_Form_Connection_Field__c>(); 
+
+        for(Clarity_Form_Connection_Field__c connectionField : connectionFields) {
+            if(connectionField.PreFill__c) {
+                prefillFields.add(connectionField);
+            } else {
+                mappingFields.add(connectionField);
+            }
+        }
         
         SObjectType sObjType = ((SObject)Type.forName(objectType).newInstance()).getSObjectType();
 
@@ -633,7 +646,8 @@ global with sharing class ClarityFormBuilder {
 
         }
 
-        fieldMapping.put('Mapping', connectionFields);
+        fieldMapping.put('Mapping', mappingFields);
+        fieldMapping.put('Prefills', prefillFields);
         fieldMapping.put('Fields', sObjectFields);
 
         return fieldMapping;

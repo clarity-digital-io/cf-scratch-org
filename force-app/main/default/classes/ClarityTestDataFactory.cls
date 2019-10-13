@@ -147,7 +147,7 @@ public class ClarityTestDataFactory {
                 Clarity_Form__c      = form.Id, 
                 Salesforce_Object__c = salesForceObject, 
                 Type__c              = 'Create', 
-                Active__c            = true, 
+                New__c               = true, 
                 Result_Holder__c     = '{Connection_' + salesForceObject + '}'
             );
 
