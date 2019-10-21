@@ -14,9 +14,7 @@ global with sharing class ClarityFormResponse {
     @RemoteAction
     global static Map<String, List<sObject>> preview(String formId) {
 
-        Clarity_Form_Response__c response = [SELECT Id FROM Clarity_Form_Response__c WHERE Status__c = 'Preview' AND Clarity_Form__c =: formId Limit 1];
-
-        Map<String, List<sObject>> formDetails = ClarityFormsService.edit(response.Id);
+        Map<String, List<sObject>> formDetails = ClarityFormsService.create((Id)formId);
 
         return formDetails; 
 

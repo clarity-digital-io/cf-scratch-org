@@ -20,7 +20,7 @@
                 cmp.set('v.form', form); 
 
                 let data = form.Clarity_Form_Responses__r.map(res => {
-                    return { Name: res.Name, Status__c: res.Status__c }
+                    return { name: res.Name, status: res.Status__c, completed: '', start: res.CreatedDate, submittedDate: '' }
                 });
 
                 cmp.set('v.data', data);

@@ -78,14 +78,14 @@
     handleNewFormResponseTab: function(cmp, event, helper) {
 
         let navLink = cmp.find("navService");
-
+        console.log('CF', cmp.get("v.formName"));
         let pageRef = {
             type: "standard__component",
             attributes: {
                 componentName: "c__FormResponse"    
             },    
             state: {
-                c__formName: cmp.get("v.formName")    
+                c__formName: cmp.get("v.formName")
             }
         }
 

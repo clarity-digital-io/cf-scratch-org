@@ -49,7 +49,7 @@ public with sharing class ClarityFormsService {
         
     }
 
-    public static Map<String, List<sObject>> edit(String responseId) {
+    public static Map<String, List<sObject>> edit(Id responseId) {
 
         Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
 
@@ -76,10 +76,11 @@ public with sharing class ClarityFormsService {
                 }
             }
         }
-        
+
         List<Clarity_Form_Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
+            (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__r),
             Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
@@ -87,6 +88,8 @@ public with sharing class ClarityFormsService {
 
         formDetails.put('Form', new List<sObject>{ form });
         formDetails.put('FormResponse', new List<sObject>{ response });
+        formDetails.put('Connections', connections);
+        formDetails.put('ResponseConnections', new List<sObject>());
         formDetails.put('Mapping', mappingFields);
         formDetails.put('Prefills', prefillFields);
         formDetails.put('Questions', questions);
@@ -95,13 +98,62 @@ public with sharing class ClarityFormsService {
         return formDetails; 
     }
 
-    public static Map<String, List<sObject>> create(String formName) {
+    public static  Map<String, List<sObject>> create(Id formId) {
 
-        Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
+        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Button_Color__c, 
+            Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
+            FROM Clarity_Form__c WHERE Id =: formId LIMIT 1];
+
+        List<Clarity_Form_Response__c> oldResponses = [SELECT Id, Clarity_Form__c, Status__c, OwnerId__c 
+            FROM Clarity_Form_Response__c WHERE Clarity_Form__c =: formId];
+
+        if(oldResponses.size() > 0) {
+
+            List<Database.DeleteResult> deleteOldResponses = Database.delete(oldResponses, true);
+
+        }
+
+        Clarity_Form_Response__c response = new Clarity_Form_Response__c(
+            Status__c       = 'Preview', 
+            Clarity_Form__c = form.Id,
+            OwnerId__c      = UserInfo.getUserId()
+        );
+
+        Database.SaveResult result = Database.insert(response);
+
+        if(!result.isSuccess()) {
+            System.debug('error creating new repsonse');
+        }
+
+        return create(form, response); 
+
+    } 
+
+    public static  Map<String, List<sObject>> create(String formName) {
 
         Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Button_Color__c, 
             Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
             FROM Clarity_Form__c WHERE Name =: formName LIMIT 1];
+
+        Clarity_Form_Response__c response = new Clarity_Form_Response__c(
+            Status__c       = 'New', 
+            Clarity_Form__c = form.Id,
+            OwnerId__c      = UserInfo.getUserId()
+        );
+
+        Database.SaveResult result = Database.insert(response);
+
+        if(!result.isSuccess()) {
+            System.debug('error creating new repsonse');
+        }
+
+        return create(form, response); 
+
+    }  
+
+    public static Map<String, List<sObject>> create(Clarity_Form__c form, Clarity_Form_Response__c response) {
+
+        Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
 
         List<Clarity_Form_Connection__c> connections = [SELECT Id, Salesforce_Object__c, New__c, 
             (SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
@@ -125,23 +177,13 @@ public with sharing class ClarityFormsService {
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
             Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
-        Clarity_Form_Response__c response = new Clarity_Form_Response__c(
-            Status__c       = 'New', 
-            Clarity_Form__c = form.Id,
-            OwnerId__c      = UserInfo.getUserId()
-        );
-
-        Database.SaveResult result = Database.insert(response);
-
-        if(!result.isSuccess()) {
-            System.debug('error creating new repsonse');
-        }
-
         List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
             FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
 
         formDetails.put('Form', new List<sObject>{ form });
         formDetails.put('FormResponse', new List<sObject>{ response });
+        formDetails.put('Connections', connections);
+        formDetails.put('ResponseConnections', new List<sObject>());
         formDetails.put('Mapping', mappingFields);
         formDetails.put('Prefills', prefillFields);
         formDetails.put('Questions', questions);
@@ -192,9 +234,9 @@ public with sharing class ClarityFormsService {
 
         }
 
-        List<Database.SaveResult> results = Database.update(parsedAnswers, true); 
+        List<Database.UpsertResult> results = Database.upsert(parsedAnswers, true); 
 
-        for(Database.SaveResult result : results) {
+        for(Database.UpsertResult result : results) {
             
             if(!result.isSuccess()) {
 
@@ -382,6 +424,44 @@ public with sharing class ClarityFormsService {
 
         return answersByContentVersion.values(); 
 
+    }
+
+    public static List<sObject> getSObjectConnections(List<Clarity_Form_Connection__c> connections) {
+
+        return new List<sObject>(); 
+
+    }
+
+    public static Map<String, sObject> applyExistingConnections(String records) {
+
+        List<Connection> connectionsRequired = (List<Connection>)JSON.deserialize(records, List<Connection>.class);
+
+        Map<String, sObject> connectionResults = new Map<String, sObject>(); 
+
+        for(Connection c : connectionsRequired) {
+
+            List<String> sFields = new List<String>(); 
+
+            for(Clarity_Form_Connection_Field__c field : c.Fields) {
+                sFields.add(field.Salesforce_Field__c); 
+            }
+
+            String joinedFields = String.join(sFields, ', ');
+
+            joinedFields = joinedFields.removeEnd(',');
+
+            sObject result = Database.query('SELECT ' + joinedFields + 'FROM ' + c.SalesforceObject + ' WHERE Id =: ' + c.RecordId + ' LIMIT 1');
+            //set salesforce as key
+            connectionResults.put(c.SalesforceObject, result); 
+        }
+
+        return connectionResults; 
+    }
+
+    public class Connection {
+        public String RecordId; 
+        public String SalesforceObject;
+        public List<Clarity_Form_Connection_Field__c> Fields;
     }
 
 }

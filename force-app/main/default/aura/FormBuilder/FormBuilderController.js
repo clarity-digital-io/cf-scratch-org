@@ -38,19 +38,24 @@
 
 		let formId = message.payload.value; 
 
-		let navService = cmp.find("navService");
-		
-		let pageReference = {
-			type: 'standard__component',
-			attributes: {
-				componentName: 'c__FormResponse'
-			},
-			state: {
-				c__formId  : formId, 
-				c__preview : 'true'
-			}
-		};
+		if(name == 'Preview') {
 
-		navService.navigate(pageReference);
+			let navService = cmp.find("navService");
+		
+			let pageReference = {
+				type: 'standard__component',
+				attributes: {
+					componentName: 'c__FormResponse'
+				},
+				state: {
+					c__formId  : formId, 
+					c__preview : 'true'
+				}
+			};
+	
+			navService.navigate(pageReference);
+
+		} 
+
 	}
 })

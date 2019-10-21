@@ -118,7 +118,7 @@ sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-scratch-org
 
-sfdx force:alias:set dev=test-grm9qtleeifd@example.com
+sfdx force:alias:set dev=test-r0tby2z7eml2@example.com
 
 sfdx force:config:set defaultusername=dev
 
@@ -152,6 +152,7 @@ sfdx force:apex:class:create -n ClarityFormsMobileController -d force-app/main/d
 sfdx force:apex:class:create -n ClarityFormsExternalController -d force-app/main/default/classes
 sfdx force:apex:class:create -n ClarityFormsOfflineController -d force-app/main/default/classes
 sfdx force:apex:class:create -n ClarityFormsService -d force-app/main/default/classes
+sfdx force:apex:class:create -n AuditLogService -d force-app/main/default/classes
 
 
 ## Resources

@@ -189,11 +189,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Clarity_Form_Connection__c.Active__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Clarity_Form_Connection__c.Result_Holder__c</field>
         <readable>false</readable>
     </fieldPermissions>

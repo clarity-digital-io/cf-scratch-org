@@ -35,23 +35,17 @@ global with sharing class ClarityFormBuilder {
 
             if(!stylingResult.isSuccess()) System.debug('throw error'); // throw error
 
-            Clarity_Form__c newForm = new Clarity_Form__c(Name = 'Clarity Form', Clarity_Form_Style__c = styling.Id); 
+            Clarity_Form__c newForm = new Clarity_Form__c(Label__c = 'Clarity Form', Clarity_Form_Style__c = styling.Id); 
             
             Database.SaveResult result = Database.insert(newForm); 
 
             if(!result.isSuccess()) System.debug('throw error'); // throw error
-            
-            Clarity_Form_Response__c response = new Clarity_Form_Response__c(Status__c = 'Preview', Clarity_Form__c = newForm.Id);
-
-            Database.SaveResult resultResponse = Database.insert(response); 
-
-            if(!resultResponse.isSuccess()) System.debug('throw error'); // throw error
 
             formId = newForm.Id;
 
         } 
         
-        form = [SELECT Id, Name, Limit__c, End_Date__c, Clarity_Form_Style__r.Name, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
+        form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__r.Name, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
             Clarity_Form_Assignment__c, Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
             FROM Clarity_Form__c WHERE Id =: formId];
 
@@ -674,7 +668,9 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<Clarity_Form_Connection_Field__c> saveActiveFieldConnections(String sActiveConnectionFields, String connectionId) {
+    global static Map<String, List<Object>> saveActiveFieldConnections(String sActiveConnectionFields, String connectionId) {
+
+        Map<String, List<Object>> fieldMapping = new Map<String, List<Object>>(); 
 
         List<Clarity_Form_Connection_Field__c> connection = [SELECT Id FROM Clarity_Form_Connection_Field__c WHERE Clarity_Form_Connection__c =: connectionId];
 
@@ -707,7 +703,21 @@ global with sharing class ClarityFormBuilder {
 
         }
 
-        return parsedConnectionFields; 
+        List<Clarity_Form_Connection_Field__c> mappingFields = new List<Clarity_Form_Connection_Field__c>(); 
+        List<Clarity_Form_Connection_Field__c> prefillFields = new List<Clarity_Form_Connection_Field__c>(); 
+
+        for(Clarity_Form_Connection_Field__c connectionField : parsedConnectionFields) {
+            if(connectionField.PreFill__c) {
+                prefillFields.add(connectionField);
+            } else {
+                mappingFields.add(connectionField);
+            }
+        }
+        
+        fieldMapping.put('Mapping', mappingFields);
+        fieldMapping.put('Prefills', prefillFields);
+
+        return fieldMapping; 
     }
 
     @RemoteAction
@@ -726,6 +736,28 @@ global with sharing class ClarityFormBuilder {
 
         return results;
 
+    }
+
+    @RemoteAction
+    global static String updateStatus(String formId, String status) {
+
+        Map<String, Object> result = new Map<String, Object>(); 
+
+        Clarity_Form__c form = [SELECT Id, Status__c FROM Clarity_Form__c WHERE Id =: formId]; 
+
+        form.Status__c = status;
+
+        Database.SaveResult formResult = Database.update(form, true);
+
+        if(formResult.isSuccess()) {
+            result.put('Status', 'Success'); 
+        } else {
+            result.put('Status', 'Error'); 
+        }
+
+        result.put('Form', form); 
+
+        return JSON.serialize(result); 
     }
 
 }
