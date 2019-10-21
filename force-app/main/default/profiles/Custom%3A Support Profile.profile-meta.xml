@@ -6,6 +6,10 @@
         <visible>false</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>AuditLogBuilderService</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ClarityFormBuilder</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -164,12 +168,37 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form_Audit_Log__c.Action__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Audit_Log__c.Log__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Audit_Log__c.Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Audit_Log__c.sObject__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form_Connection_Field__c.Clarity_Form_Question__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Clarity_Form_Connection_Field__c.Custom_Value__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Connection_Field__c.PreFill__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -185,6 +214,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Clarity_Form_Connection_Process__c.Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Connection__c.New__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -279,6 +313,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form_Question__c.FreeText_Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form_Question__c.Logic__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -345,6 +384,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Clarity_Form_Question__c.Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Response_Connection__c.Record__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -419,6 +463,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form__c.Label__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form__c.Limit__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -462,6 +511,9 @@
         <layout>Clarity_Form_Assignment__c-Clarity Form Assignment Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Clarity_Form_Audit_Log__c-Clarity Form Audit Log Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Clarity_Form_Connection_Field__c-Clarity Form Connection Field Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -487,6 +539,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Question__c-Clarity Form Question Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Clarity_Form_Response_Connection__c-Clarity Form Response Connection Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Response__c-Clarity Form Response Layout</layout>

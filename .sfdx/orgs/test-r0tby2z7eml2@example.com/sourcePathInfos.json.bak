@@ -514,11 +514,11 @@
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/aura/FormResponseSummary/FormResponseSummary.cmp",
             "isDirectory": false,
             "isMetadataFile": false,
-            "size": 7911,
-            "modifiedTime": 1571626680207,
-            "changeTime": 1571626680207,
+            "size": 7905,
+            "modifiedTime": 1571626819440,
+            "changeTime": 1571626819440,
             "isWorkspace": false,
-            "contentHash": "1f464756b30c8a397b548dd5ce7ec3099276c30d"
+            "contentHash": "9768d7d8f9e89b3eac6bdfa3742677829e88f7c2"
         }
     ],
     [

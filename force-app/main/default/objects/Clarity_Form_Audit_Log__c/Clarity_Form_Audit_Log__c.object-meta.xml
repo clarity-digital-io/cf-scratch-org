@@ -26,10 +26,7 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>New</actionName>
-        <content>FormBuilder</content>
-        <formFactor>Large</formFactor>
-        <skipRecordTypeSelect>false</skipRecordTypeSelect>
-        <type>LightningComponent</type>
+        <type>Default</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>SaveEdit</actionName>
@@ -41,32 +38,26 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <comment>Action override created by Lightning App Builder during activation.</comment>
-        <content>Clarity_Form_Overview</content>
-        <formFactor>Large</formFactor>
-        <skipRecordTypeSelect>false</skipRecordTypeSelect>
-        <type>Flexipage</type>
+        <type>Default</type>
     </actionOverrides>
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Forms designed by Salesforce Administrators.</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
     <enableReports>false</enableReports>
-    <enableSearch>true</enableSearch>
+    <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <label>Clarity Form</label>
+    <label>Clarity Form Audit Log</label>
     <nameField>
-        <displayFormat>CF-{0000}</displayFormat>
-        <label>Clarity Forms Name</label>
-        <type>AutoNumber</type>
+        <label>Clarity Form Audit Log Name</label>
+        <type>Text</type>
     </nameField>
-    <pluralLabel>Clarity Forms</pluralLabel>
+    <pluralLabel>Clarity Form Audit Logs</pluralLabel>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

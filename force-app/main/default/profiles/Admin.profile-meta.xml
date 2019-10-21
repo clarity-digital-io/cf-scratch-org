@@ -6,6 +6,10 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>AuditLogBuilderService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ClarityFormBuilder</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -160,6 +164,26 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form_Assignment__c.Logic__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Audit_Log__c.Action__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Audit_Log__c.Log__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Audit_Log__c.Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Audit_Log__c.sObject__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -364,6 +388,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Clarity_Form_Response_Connection__c.Record__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Clarity_Form_Response__c.Completion__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -434,6 +463,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Clarity_Form__c.Label__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Clarity_Form__c.Limit__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -477,6 +511,9 @@
         <layout>Clarity_Form_Assignment__c-Clarity Form Assignment Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Clarity_Form_Audit_Log__c-Clarity Form Audit Log Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Clarity_Form_Connection_Field__c-Clarity Form Connection Field Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -502,6 +539,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Question__c-Clarity Form Question Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Clarity_Form_Response_Connection__c-Clarity Form Response Connection Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Response__c-Clarity Form Response Layout</layout>
@@ -544,6 +584,15 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
         <object>Clarity_Form_Assignment__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Clarity_Form_Audit_Log__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -625,6 +674,15 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
         <object>Clarity_Form_Question__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Clarity_Form_Response_Connection__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
