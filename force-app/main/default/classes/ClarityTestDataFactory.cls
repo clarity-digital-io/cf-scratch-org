@@ -48,7 +48,7 @@ public class ClarityTestDataFactory {
 
     public static Clarity_Form__c generateForm(){
 
-        Clarity_Form__c form = new Clarity_Form__c(Name = 'Clarity Form', Status__c = 'Draft'); 
+        Clarity_Form__c form = new Clarity_Form__c(Label__c = 'Clarity Form', Status__c = 'Draft'); 
 
         insert form; 
 
