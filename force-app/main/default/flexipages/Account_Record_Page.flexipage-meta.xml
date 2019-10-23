@@ -70,7 +70,7 @@
         <componentInstances>
             <componentInstanceProperties>
                 <name>formName</name>
-                <value>CF-0001</value>
+                <value>CF-0000</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>useRecordId</name>
