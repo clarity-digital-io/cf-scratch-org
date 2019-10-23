@@ -32,16 +32,14 @@
     [
         "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default",
         {
+            "state": "u",
             "sourcePath": "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default",
             "isDirectory": true,
-            "size": 608,
-            "modifiedTime": 1570060586009,
-            "changeTime": 1570060586009,
-            "contentHash": "04ad0a70a0b9b8cad68f49bc25457488e3855eb2",
             "isMetadataFile": false,
-            "state": "u",
-            "isWorkspace": false,
-            "isArtifactRoot": false
+            "size": 640,
+            "modifiedTime": 1571792236782,
+            "changeTime": 1571792236782,
+            "contentHash": "2db95962f6d494f519c5f3452dd89553034f670c"
         }
     ],
     [
@@ -62,14 +60,14 @@
     [
         "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/applications/Clarity_Forms.app-meta.xml",
         {
-            "state": "u",
             "sourcePath": "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/applications/Clarity_Forms.app-meta.xml",
             "isDirectory": false,
-            "isMetadataFile": true,
             "size": 1582,
             "modifiedTime": 1571791831734,
             "changeTime": 1571791831734,
-            "contentHash": "dec21566c46a8c1ddde6ac222591aa11b7eebf3f"
+            "contentHash": "dec21566c46a8c1ddde6ac222591aa11b7eebf3f",
+            "isMetadataFile": true,
+            "state": "u"
         }
     ],
     [
@@ -1500,14 +1498,14 @@
     [
         "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/flexipages/Account_Record_Page.flexipage-meta.xml",
         {
-            "state": "u",
             "sourcePath": "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/flexipages/Account_Record_Page.flexipage-meta.xml",
             "isDirectory": false,
-            "isMetadataFile": true,
             "size": 8185,
             "modifiedTime": 1571791831729,
             "changeTime": 1571791831729,
-            "contentHash": "f018ca6ac501cf2f911781d6b5b8d6c8b7dfb936"
+            "contentHash": "f018ca6ac501cf2f911781d6b5b8d6c8b7dfb936",
+            "isMetadataFile": true,
+            "state": "u"
         }
     ],
     [
@@ -4138,14 +4136,14 @@
     [
         "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/objects/Clarity_Form_Response__c/Clarity_Form_Response__c.object-meta.xml",
         {
-            "state": "u",
             "sourcePath": "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/objects/Clarity_Form_Response__c/Clarity_Form_Response__c.object-meta.xml",
             "isDirectory": false,
-            "isMetadataFile": true,
             "size": 2166,
             "modifiedTime": 1571791831712,
             "changeTime": 1571791831712,
-            "contentHash": "0c2611af83dde19b019261a1906c6761236d7cb8"
+            "contentHash": "0c2611af83dde19b019261a1906c6761236d7cb8",
+            "isMetadataFile": true,
+            "state": "u"
         }
     ],
     [
@@ -4406,14 +4404,14 @@
     [
         "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/objects/Clarity_Form__c/Clarity_Form__c.object-meta.xml",
         {
-            "state": "u",
             "sourcePath": "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/objects/Clarity_Form__c/Clarity_Form__c.object-meta.xml",
             "isDirectory": false,
-            "isMetadataFile": true,
             "size": 2597,
             "modifiedTime": 1571791831689,
             "changeTime": 1571791831689,
-            "contentHash": "563aa5f386c633bdc7acc977ad6f3446c33784d1"
+            "contentHash": "563aa5f386c633bdc7acc977ad6f3446c33784d1",
+            "isMetadataFile": true,
+            "state": "u"
         }
     ],
     [
@@ -4887,7 +4885,7 @@
             "sourcePath": "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsBuilder",
             "isDirectory": true,
             "size": 256,
-            "modifiedTime": 1571786634650,
+            "modifiedTime": 1571792046870,
             "changeTime": 1571786634650,
             "contentHash": "a29ce3f1ac93ad1a6af95717eb5bbafa2b913ec6",
             "isMetadataFile": false,
@@ -5112,7 +5110,7 @@
             "sourcePath": "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsResponse",
             "isDirectory": true,
             "size": 224,
-            "modifiedTime": 1571786910097,
+            "modifiedTime": 1571792046892,
             "changeTime": 1571786634667,
             "contentHash": "6c138d30faa134d44fbc914712fcaafbdf83327f",
             "isMetadataFile": false,
@@ -5389,6 +5387,45 @@
             "state": "u",
             "isWorkspace": true,
             "isArtifactRoot": false
+        }
+    ],
+    [
+        "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/reports/unfiled$public/Clarity_Forms_Responses_FAB.report-meta.xml",
+        {
+            "state": "u",
+            "sourcePath": "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/reports/unfiled$public/Clarity_Forms_Responses_FAB.report-meta.xml",
+            "isDirectory": false,
+            "isMetadataFile": true,
+            "size": 3270,
+            "modifiedTime": 1571792236786,
+            "changeTime": 1571792236786,
+            "contentHash": "ff8b7b236e63fdd6edc2e9abbb054def2b64414a"
+        }
+    ],
+    [
+        "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/reports/unfiled$public",
+        {
+            "state": "u",
+            "sourcePath": "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/reports/unfiled$public",
+            "isDirectory": true,
+            "isMetadataFile": false,
+            "size": 96,
+            "modifiedTime": 1571792236786,
+            "changeTime": 1571792236786,
+            "contentHash": "80f4556552f0941cfa17bf1a1c55b289cfac58e6"
+        }
+    ],
+    [
+        "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/reports",
+        {
+            "state": "u",
+            "sourcePath": "/Users/josueefigenio/Sandbox/forms/clarity-scratch-org/force-app/main/default/reports",
+            "isDirectory": true,
+            "isMetadataFile": false,
+            "size": 96,
+            "modifiedTime": 1571792236783,
+            "changeTime": 1571792236783,
+            "contentHash": "36b4ca4c5731877fa01de2265bc0e080036f21b0"
         }
     ]
 ]
