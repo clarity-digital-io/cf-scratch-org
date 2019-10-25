@@ -447,7 +447,7 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static Map<String, Map<String, String>> getSObjectFields(String objectType) {
+    global static Map<String, Map<String, Map<String, String>>> getSObjectFields(String objectType) {
 
         SObjectType sObjType = ((SObject)Type.forName(objectType).newInstance()).getSObjectType();
 
@@ -455,16 +455,26 @@ global with sharing class ClarityFormBuilder {
 
         Map<String, Schema.SObjectField> fields = result.fields.getMap();
 
-        Map<String, Map<String, String>> requiredFields = new Map<String, Map<String, String>>();
+        Map<String, Map<String, Map<String, String>>> requiredFields = new Map<String, Map<String, Map<String, String>>>();
 
-        requiredFields.put('Required', new Map<String, String>());
-        requiredFields.put('NotRequired', new Map<String, String>());
+        requiredFields.put('Required', new Map<String, Map<String, String>>());
+        requiredFields.put('NotRequired', new Map<String, Map<String, String>>());
 
         for(String fieldName : fields.keySet()) { 
 
             Schema.SObjectField field = fields.get(fieldName);
 
             Schema.DescribeFieldResult fieldResult = field.getDescribe();
+
+            String relationshipName = fieldResult.getRelationshipName();
+
+            String referenceName = null; 
+
+            if(relationshipName != null) {
+                for(Schema.SObjectType reference : fieldResult.getReferenceTo()) {
+                    referenceName = reference.getDescribe().getName();
+                }
+            }
 
             Schema.DisplayType type = fieldResult.getType();
 
@@ -473,11 +483,11 @@ global with sharing class ClarityFormBuilder {
 
             if(!isFieldReq && isFieldCreateable) {
 
-                requiredFields.get('Required').put('' + field, '' + type);
+                requiredFields.get('Required').put('' + field, new Map<String, String>{ '' + type => '' + referenceName });
 
             } else if(isFieldCreateable) {
 
-                requiredFields.get('NotRequired').put('' + field, '' + type);
+                requiredFields.get('NotRequired').put('' + field, new Map<String, String>{ '' + type => '' + referenceName });
 
             }
 
@@ -739,7 +749,7 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static String updateStatus(String formId, String status) {
+    global static Map<String, Object> updateStatus(String formId, String status) {
 
         Map<String, Object> result = new Map<String, Object>(); 
 
@@ -757,7 +767,7 @@ global with sharing class ClarityFormBuilder {
 
         result.put('Form', form); 
 
-        return JSON.serialize(result); 
+        return result;
     }
 
 }

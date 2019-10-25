@@ -62,11 +62,15 @@ global with sharing class ClarityFormResponse {
     }
 
     @RemoteAction 
-    global static List<LookupResult> search(String searchTerm, String lookupObject, String questionId) {
+    global static List<LookupResult> search(List<String> searchItems) {
+
+        String searchTerm = searchItems[0];
+        String lookupObject = searchItems[1];
+        String questionId = searchItems[2]; 
 
         searchTerm += '*';
 
-        String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + lookupObject + ' (Id)';
+        String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + lookupObject + ' (Id, Name)';
 
         List<List<sObject>> searchResults = search.query(searchString);
 
@@ -78,14 +82,18 @@ global with sharing class ClarityFormResponse {
 
         for (sObject record : records) {
             System.debug('record: ' + record);
-            results.add(new LookupResult(record.Id, lookupObject, (String)record.get('Id'), lookupObject));
+            results.add(new LookupResult(record.Id, lookupObject, (String)record.get('Name'), lookupObject));
         }
 
         return results;
     }
 
     @RemoteAction 
-    global static sObject createRecord(String recordGroupId, String sObjectName, String records) {
+    global static sObject createRecord(List<String> recordValues) {
+
+        String recordGroupId = recordValues[0]; 
+        String sObjectName = recordValues[1];
+        String records = recordValues[2];
 
         Schema.SObjectType convertType = Schema.getGlobalDescribe().get(sObjectName);
 
@@ -119,13 +127,29 @@ global with sharing class ClarityFormResponse {
             System.debug('error: ' + resultAnswer.getErrors());
 
         }
+
         return genericObject;
+
+    }
+
+    @RemoteAction
+    global static Map<String, Map<String, Map<String, String>>> getRecordGroupPicklist(List<String> sPicklistQuestionIds) {
+
+        List<Clarity_Form_Question__c> picklistQuestions = [SELECT Id, Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, 
+            Record_Group__r.Salesforce_Object__c, Salesforce_Field__c, Type__c FROM Clarity_Form_Question__c WHERE ID IN :sPicklistQuestionIds];
+
+        Map<String, List<String>> rcp = ClarityFormsService.filterRecordGroupPicklist(picklistQuestions);
+
+        Map<String, Map<String, Map<String, String>>> values = ClarityFormsService.getSalesforcePicklistValues(rcp);
+
+        return values; 
+
     }
 
     global class Record {
 
         public String field; 
-        public Object value; 
+        public String value; 
 
     }
 

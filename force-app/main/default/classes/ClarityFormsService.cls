@@ -81,7 +81,7 @@ public with sharing class ClarityFormsService {
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
             (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__r),
-            Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
+            Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
             FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
@@ -175,7 +175,7 @@ public with sharing class ClarityFormsService {
         List<Clarity_Form_Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
-            Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
+            Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
             FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
@@ -456,6 +456,63 @@ public with sharing class ClarityFormsService {
         }
 
         return connectionResults; 
+    }
+
+    public static Map<String, List<String>> filterRecordGroupPicklist(List<Clarity_Form_Question__c> questions) {
+
+        Map<String, List<String>> salesforceObjectFields = new Map<String, List<String>>(); 
+
+        for(Clarity_Form_Question__c question : questions) {
+            if(question.Record_Group__c != null && question.Type__c == 'PICKLIST') {
+
+                if(salesforceObjectFields.get(question.Record_Group__r.Salesforce_Object__c) != null) {
+                    salesforceObjectFields.get(question.Record_Group__r.Salesforce_Object__c).add(question.Salesforce_Field__c);
+                } else {
+                    salesforceObjectFields.put(question.Record_Group__r.Salesforce_Object__c, new List<String>{ question.Salesforce_Field__c });
+                }
+
+            }
+        }
+
+        return salesforceObjectFields;
+    }
+
+    public static Map<String, Map<String, Map<String, String>>> getSalesforcePicklistValues(Map<String, List<String>> salesforceObjectFields) {
+        
+        Map<String, Map<String, Map<String, String>>> values = new Map<String, Map<String, Map<String, String>>>(); 
+
+        List<String> salesforceObjects = new List<String>(salesforceObjectFields.keySet());
+
+        List<Schema.DescribeSobjectResult> results = Schema.describeSObjects(salesforceObjects);
+
+        for(Schema.DescribeSobjectResult res : results) {
+
+            List<String> fields = salesforceObjectFields.get(res.getName()); 
+
+            Map<String, Map<String, String>> fieldPicklistValues = new Map<String, Map<String, String>>(); 
+
+            for(String field : fields) {
+
+                List<Schema.PicklistEntry> entries = res.fields.getMap().get(field).getDescribe().getPicklistValues();
+                
+                Map<String, String> picklistValues = new Map<String, String>();
+
+                for(Schema.PicklistEntry entry : entries) {
+	                if (entry.isActive()) {
+                        picklistValues.put(entry.getValue(), entry.getLabel());
+                    }
+                }
+
+                fieldPicklistValues.put(field, picklistValues);
+
+            }
+
+            values.put(res.getName(), fieldPicklistValues);
+
+        }
+
+        return values;
+
     }
 
     public class Connection {
