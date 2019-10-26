@@ -4,7 +4,7 @@
         cmp.set('v.columns', [{label: 'Name', fieldName: 'Name', type: 'text'}]);
 
         let action = cmp.get("c.getForm");
-
+        console.log('cmp.get("v.recordId")', cmp.get("v.recordId")); 
         action.setParams({
             recordId: cmp.get("v.recordId")
         });
@@ -16,7 +16,7 @@
             if (state === "SUCCESS") {
             
                 var form = response.getReturnValue();
-                
+                console.log('form', form);
                 cmp.set('v.form', form); 
 
                 let data = form.Clarity_Form_Responses__r.map(res => {
@@ -57,18 +57,15 @@
     handleNewFormResponse: function(cmp, event, helper) {
 
         $A.createComponents([
-            ["c:FormResponse", { "formName": cmp.get("v.formName") }], 
-            ["c:FormResponseModalFooter"]
+            ["c:FormResponse", { "formName": cmp.get("v.formName") }]
         ],
         function(components, status) {
             if (status === "SUCCESS") {
 
                 let formResponse = components[0];
-                let formResponseModalFooter = components[1];
 
                 cmp.find('overlayLib').showCustomModal({
                     header: cmp.get("v.formName"),
-                    footer: formResponseModalFooter,
                     cssClass: "clarityModal",
                     body: formResponse, 
                     showCloseButton: true
@@ -99,20 +96,23 @@
 
         let recordId = event.getSource().get("v.value");
 
-        let navLink = cmp.find("navService");
+        $A.createComponents([
+            ["c:FormResponse", { "formName": cmp.get("v.formName"), "recordId": recordId }]
+        ],
+        function(components, status) {
+            if (status === "SUCCESS") {
 
-        let pageRef = {
-            type: "standard__component",
-            attributes: {
-                componentName: "c__FormResponse"    
-            },    
-            state: {
-                c__formName: cmp.get("v.formName"),
-                c__recordId: recordId
+                let formResponse = components[0];
+
+                cmp.find('overlayLib').showCustomModal({
+                    header: cmp.get("v.formName"),
+                    cssClass: "clarityModal",
+                    body: formResponse, 
+                    showCloseButton: true
+                })
+
             }
-        }
-
-        navLink.navigate(pageRef, true);
+        });
 
     },
     handleDeleteFormResponse: function(cmp, event, helper) {

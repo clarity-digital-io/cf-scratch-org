@@ -1,7 +1,0 @@
-<aura:component implements="force:hasRecordId,force:lightningQuickActionwithoutheader,lightning:actionOverride">
-    <aura:registerevent name="formResponseEvent" type="c:FormResponseEvent"></aura:registerevent>
-
-    <lightning:overlayLibrary aura:id="overlayLib"/>
-    <lightning:button name="save" label="Save" onclick="{!c.handleSave}" />
-    <lightning:button name="submit" label="Submit" variant="brand" onclick="{!c.handleSubmit}" />
-</aura:component>

@@ -12,5 +12,6 @@
 
     <lightning:navigation aura:id="navService"/>
     <lightning:workspaceAPI aura:id="workspace" />
+    <lightning:overlayLibrary aura:id="overlayLib"/>
 
 </aura:component>	

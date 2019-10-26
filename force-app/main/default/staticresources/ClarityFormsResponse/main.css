@@ -1,14 +1,15 @@
 html {
     background: none !important; 
-    font-family: 'Salesforce Sans' !important;
+    font-family: 'Salesforce Sans', BlinkMacSystemFont !important;
 }
 
-span {
-    font-family: 'Salesforce Sans' !important;
+span, button {
+    font-family: 'Salesforce Sans', BlinkMacSystemFont !important;
 }
 
 body {
     margin: 0; 
+    font-family: 'Salesforce Sans', BlinkMacSystemFont !important;
 }
 
 ul {

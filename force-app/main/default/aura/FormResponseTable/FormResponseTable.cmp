@@ -1,4 +1,4 @@
-<aura:component controller="FormResponseController" access="global" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
+<aura:component controller="FormResponseController" access="global" implements="force:lightningQuickActionWithoutHeader,forceCommunity:availableForAllPageTypes,force:hasRecordId,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
     
     <lightning:navigation aura:id="navService"/>
     <aura:attribute name="formName" type="String" required="true" default="default" />
@@ -11,7 +11,7 @@
 
     <lightning:card class="slds-card_boundary" title="{!v.formName}" iconName="standard:account" >
         <aura:set attribute="actions">
-            <lightning:button label="New Form Response" onclick="{!c.handleNewFormResponseTab}" />
+            <lightning:button label="New Form Response" onclick="{!c.handleNewFormResponse}" />
         </aura:set>
         <div class="slds-m-horizontal_none">
 
@@ -60,8 +60,11 @@
                                         
                                     <td data-label="Action">
                                         <div class="slds-truncate" title="">
-                                            <lightning:button label="Edit" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
-                                            <lightning:button label="Delete" value="{!response.id}" variant="destructive" onclick="{!c.handleDeleteFormResponse}" />
+
+                                                <lightning:button disabled="{!response.Submitted != 'Submitted'}" variant="brand" label="View" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
+                                                <lightning:button disabled="{!response.Submitted == 'Submitted'}" label="Edit" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
+                                                <lightning:button disabled="{!response.Submitted == 'Submitted'}" label="Delete" value="{!response.id}" variant="destructive" onclick="{!c.handleDeleteFormResponse}" />
+
                                         </div>
                                     </td>
                 

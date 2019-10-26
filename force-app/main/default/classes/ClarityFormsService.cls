@@ -57,7 +57,7 @@ public with sharing class ClarityFormsService {
             FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
 
         Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Button_Color__c, 
-            Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
+            Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
             FROM Clarity_Form__c WHERE Id =: response.Clarity_Form__c LIMIT 1];
 
         List<Clarity_Form_Connection__c> connections = [SELECT Id, Salesforce_Object__c, New__c, 
@@ -81,7 +81,8 @@ public with sharing class ClarityFormsService {
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
             (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__r),
-            Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
+            Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, 
+            Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
             FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
@@ -101,7 +102,7 @@ public with sharing class ClarityFormsService {
     public static  Map<String, List<sObject>> create(Id formId) {
 
         Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Button_Color__c, 
-            Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
+            Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
             FROM Clarity_Form__c WHERE Id =: formId LIMIT 1];
 
         List<Clarity_Form_Response__c> oldResponses = [SELECT Id, Clarity_Form__c, Status__c, OwnerId__c 
@@ -132,7 +133,7 @@ public with sharing class ClarityFormsService {
     public static  Map<String, List<sObject>> create(String formName) {
 
         Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Button_Color__c, 
-            Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
+            Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
             FROM Clarity_Form__c WHERE Name =: formName LIMIT 1];
 
         Clarity_Form_Response__c response = new Clarity_Form_Response__c(
@@ -175,7 +176,8 @@ public with sharing class ClarityFormsService {
         List<Clarity_Form_Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
-            Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
+            Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, 
+            Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
             FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];

@@ -1,5 +1,7 @@
 <aura:component implements="lightning:actionOverride,force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable">
     
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+
     <lightning:workspaceAPI aura:id="workspace" />
     <lightning:navigation aura:id="navService"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>

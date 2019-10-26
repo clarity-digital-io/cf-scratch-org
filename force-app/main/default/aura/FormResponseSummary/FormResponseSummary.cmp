@@ -1,7 +1,6 @@
 <aura:component controller="FormResponseController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionwithoutheader,lightning:actionOverride">
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
-    <aura:attribute name="recordId" type="String" default="default" />
     <aura:attribute name="detail" type="Object" default="{}" />
     <aura:attribute name="form" type="Clarity_Form__c" />
     <aura:attribute name="responses" type ="list"/>
@@ -21,7 +20,7 @@
                         <div class="slds-page-header__name-title">
                             <h1>
                                 <span>Clarity Form</span>
-                                <span class="slds-page-header__title slds-truncate" title="Clarity QA Form">Clarity QA Form</span>
+                                <span class="slds-page-header__title slds-truncate" title="{!v.form.Name}">{!v.form.Name}</span>
                             </h1>
                         </div>
                     </div>
@@ -32,6 +31,11 @@
             <div class="slds-page-header__controls">
                 <div class="slds-page-header__control">
                     <lightning:buttonGroup>
+
+                        <aura:if isTrue="{!v.form.Status__c == 'Published'}">
+                            <lightning:button label="New Form Response" onclick="{!c.handleNewFormResponse}" />
+                        </aura:if>
+
                         <lightning:button iconName="utility:insert_template" onclick="{!c.edit}" label="Form Builder" />
                         <lightning:button iconName="action:clone" label="Clone" onclick="{!c.clone}" />
                         <lightning:button iconName="action:delete" label="Delete" onclick="{!c.delete}" />
@@ -120,8 +124,11 @@
                                             
                                         <td data-label="Action">
                                             <div class="slds-truncate" title="">
-                                                <lightning:button label="Edit" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
-                                                <lightning:button label="Delete" value="{!response.id}" variant="destructive" onclick="{!c.handleDeleteFormResponse}" />
+
+                                                <lightning:button disabled="{!response.Submitted != 'Submitted'}" variant="brand" label="View" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
+                                                <lightning:button disabled="{!response.Submitted == 'Submitted'}" label="Edit" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
+                                                <lightning:button disabled="{!response.Submitted == 'Submitted'}" label="Delete" value="{!response.id}" variant="destructive" onclick="{!c.handleDeleteFormResponse}" />    
+
                                             </div>
                                         </td>
                     

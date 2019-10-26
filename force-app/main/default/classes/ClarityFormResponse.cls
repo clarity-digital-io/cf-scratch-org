@@ -3,7 +3,9 @@ global with sharing class ClarityFormResponse {
     private final static Integer MAX_RESULTS = 5;
 
     @RemoteAction
-    global static List<String> submit(String formResponseId) {
+    global static List<String> submit(String answerImages, String formResponseId) {
+
+        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.upload(answerImages); 
 
         List<String> success = ClarityFormsService.submit(new List<String>{ formResponseId });
 

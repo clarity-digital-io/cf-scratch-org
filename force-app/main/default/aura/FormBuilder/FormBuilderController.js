@@ -40,20 +40,38 @@
 
 		if(name == 'Preview') {
 
-			let navService = cmp.find("navService");
+			// let navService = cmp.find("navService");
 		
-			let pageReference = {
-				type: 'standard__component',
-				attributes: {
-					componentName: 'c__FormResponse'
-				},
-				state: {
-					c__formId  : formId, 
-					c__preview : 'true'
-				}
-			};
+			// let pageReference = {
+			// 	type: 'standard__component',
+			// 	attributes: {
+			// 		componentName: 'c__FormResponse'
+			// 	},
+			// 	state: {
+			// 		c__formId  : formId, 
+			// 		c__preview : 'true'
+			// 	}
+			// };
 	
-			navService.navigate(pageReference);
+			// navService.navigate(pageReference);
+
+			$A.createComponents([
+				["c:FormResponse", { "formId": formId, preview: true }]
+			],
+			function(components, status) {
+				if (status === "SUCCESS") {
+	
+					let formResponse = components[0];
+	
+					cmp.find('overlayLib').showCustomModal({
+						header: cmp.get("v.formName"),
+						cssClass: "clarityModal",
+						body: formResponse, 
+						showCloseButton: true
+					})
+	
+				}
+			});
 
 		} 
 
