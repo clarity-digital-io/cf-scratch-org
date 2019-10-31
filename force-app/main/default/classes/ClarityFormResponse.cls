@@ -93,9 +93,10 @@ global with sharing class ClarityFormResponse {
     @RemoteAction 
     global static sObject createRecord(List<String> recordValues) {
 
-        String recordGroupId = recordValues[0]; 
-        String sObjectName = recordValues[1];
-        String records = recordValues[2];
+        String responseId = recordValues[0]; 
+        String recordGroupId = recordValues[1]; 
+        String sObjectName = recordValues[2];
+        String records = recordValues[3];
 
         Schema.SObjectType convertType = Schema.getGlobalDescribe().get(sObjectName);
 
@@ -118,6 +119,7 @@ global with sharing class ClarityFormResponse {
         }
 
         Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
+            Clarity_Form_Response__c = responseId, 
             Clarity_Form_Question__c = recordGroupId,
             Record__c                = result.getId()
         );

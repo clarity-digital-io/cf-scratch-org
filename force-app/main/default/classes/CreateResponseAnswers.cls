@@ -22,7 +22,7 @@ public class CreateResponseAnswers {
                     formIds.add(response.Clarity_Form__c);
                 }
 
-                List<Clarity_Form_Question__c> questions = [SELECT Id, Clarity_Form__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c IN :formIds];
+                List<Clarity_Form_Question__c> questions = [SELECT Id, Record_Group__c, Type__c, Clarity_Form__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c IN :formIds];
 
                 for(Clarity_Form_Question__c question : questions) { 
 
@@ -54,12 +54,14 @@ public class CreateResponseAnswers {
         List<Clarity_Form_Question__c> questions = FormQuestions.get(response.Clarity_Form__c); 
 
         for(Clarity_Form_Question__c question : questions) {
-            Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
-                Clarity_Form_Response__c = response.Id, 
-                Clarity_Form_Question__c = question.Id
-            );
 
-            answersToBeCreated.add(answer);
+            if(question.Record_Group__c != null || (question.Type__c == 'RecordGroup' || question.Type__c == 'FreeText')) {
+                Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
+                    Clarity_Form_Response__c = response.Id, 
+                    Clarity_Form_Question__c = question.Id
+                );
+                answersToBeCreated.add(answer);
+            }
         }
 
     }

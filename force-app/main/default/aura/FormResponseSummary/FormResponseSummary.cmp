@@ -33,7 +33,7 @@
                     <lightning:buttonGroup>
 
                         <aura:if isTrue="{!v.form.Status__c == 'Published'}">
-                            <lightning:button label="New Form Response" onclick="{!c.handleNewFormResponse}" />
+                            <lightning:button label="New Form Response" onclick="{!c.handleNewFormResponseTab}" />
                         </aura:if>
 
                         <lightning:button iconName="utility:insert_template" onclick="{!c.edit}" label="Form Builder" />

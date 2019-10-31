@@ -480,12 +480,13 @@ global with sharing class ClarityFormBuilder {
 
             Boolean isFieldReq  = fieldResult.isNillable();
             Boolean isFieldCreateable = fieldResult.isCreateable(); 
+            Boolean isDefaultedOnCreate = fieldResult.isDefaultedOnCreate();
 
-            if(!isFieldReq && isFieldCreateable) {
+            if(!isFieldReq && isFieldCreateable && !isDefaultedOnCreate) {
 
                 requiredFields.get('Required').put('' + field, new Map<String, String>{ '' + type => '' + referenceName });
 
-            } else if(isFieldCreateable) {
+            } else if(isFieldCreateable && !isDefaultedOnCreate) {
 
                 requiredFields.get('NotRequired').put('' + field, new Map<String, String>{ '' + type => '' + referenceName });
 
