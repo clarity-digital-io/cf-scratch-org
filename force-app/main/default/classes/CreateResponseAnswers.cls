@@ -55,7 +55,7 @@ public class CreateResponseAnswers {
 
         for(Clarity_Form_Question__c question : questions) {
 
-            if(question.Record_Group__c != null || (question.Type__c == 'RecordGroup' || question.Type__c == 'FreeText')) {
+            if(question.Record_Group__c == null && question.Type__c != 'RecordGroup' && question.Type__c != 'FreeText') {
                 Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
                     Clarity_Form_Response__c = response.Id, 
                     Clarity_Form_Question__c = question.Id

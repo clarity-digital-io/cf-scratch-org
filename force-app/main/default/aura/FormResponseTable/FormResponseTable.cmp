@@ -1,4 +1,4 @@
-<aura:component controller="FormResponseController" access="global" implements="force:lightningQuickActionWithoutHeader,forceCommunity:availableForAllPageTypes,force:hasRecordId,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
+<aura:component controller="FormController" access="global" implements="force:lightningQuickActionWithoutHeader,forceCommunity:availableForAllPageTypes,force:hasRecordId,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
     
     <lightning:navigation aura:id="navService"/>
     <aura:attribute name="formName" type="String" required="true" default="default" />
@@ -34,7 +34,6 @@
                         <th class="" scope="col">
                             <div class="slds-truncate" title="Actions">Actions</div>
                         </th>
-        
                     </tr>
         
                 </thead>

@@ -106,7 +106,16 @@ global with sharing class ClarityFormResponse {
 
         for(Record record : recordFields) {
 
-            genericObject.put(record.field, record.value);
+            if(record.type == 'Date') {
+
+                Date value = Date.parse(record.value); 
+                genericObject.put(record.field, value);
+
+            } else {
+                
+                genericObject.put(record.field, record.value);
+
+            }
 
         }
 
@@ -154,6 +163,7 @@ global with sharing class ClarityFormResponse {
 
         public String field; 
         public String value; 
+        public String type; 
 
     }
 

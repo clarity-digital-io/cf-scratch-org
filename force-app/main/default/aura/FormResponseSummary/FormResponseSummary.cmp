@@ -1,4 +1,4 @@
-<aura:component controller="FormResponseController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionwithoutheader,lightning:actionOverride">
+<aura:component controller="FormController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionwithoutheader,lightning:actionOverride">
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:attribute name="detail" type="Object" default="{}" />
@@ -33,7 +33,10 @@
                     <lightning:buttonGroup>
 
                         <aura:if isTrue="{!v.form.Status__c == 'Published'}">
-                            <lightning:button label="New Form Response" onclick="{!c.handleNewFormResponseTab}" />
+                            <lightning:button label="New Form Response" onclick="{!c.handleNewFormResponse}" />
+                            <aura:set attribute="else">
+                                <lightning:button label="Publish Form" onclick="{!c.handlePublishForm}" />
+                            </aura:set>
                         </aura:if>
 
                         <lightning:button iconName="utility:insert_template" onclick="{!c.edit}" label="Form Builder" />

@@ -153,6 +153,7 @@ sfdx force:apex:class:create -n ClarityFormsExternalController -d force-app/main
 sfdx force:apex:class:create -n ClarityFormsOfflineController -d force-app/main/default/classes
 sfdx force:apex:class:create -n ClarityFormsService -d force-app/main/default/classes
 sfdx force:apex:class:create -n AuditLogService -d force-app/main/default/classes
+sfdx force:apex:class:create -n FormController -d force-app/main/default/classes
 
 
 ## Resources

@@ -84,7 +84,7 @@ public with sharing class ClarityFormsService {
             Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, 
             Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
-        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
+        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, Date_Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
             FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
 
         formDetails.put('Form', new List<sObject>{ form });
@@ -179,7 +179,7 @@ public with sharing class ClarityFormsService {
             Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, 
             Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
-        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
+        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, Date_Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
             FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
 
         formDetails.put('Form', new List<sObject>{ form });
@@ -286,7 +286,7 @@ public with sharing class ClarityFormsService {
 
         Map<Id, Clarity_Form_Response__c> responses = new Map<Id, Clarity_Form_Response__c>([SELECT Id, OwnerId__c FROM Clarity_Form_Response__c WHERE Id IN :parsedFileAnswers.keySet()]); 
 
-        Map<String, ContentVersion> contentsByQuestion = new Map<String, ContentVersion>();
+        Map<String, List<ContentVersion>> contentsByQuestion = new Map<String, List<ContentVersion>>();
 
         for(String responseId : parsedFileAnswers.keySet()) {
 
@@ -306,7 +306,15 @@ public with sharing class ClarityFormsService {
                         VersionData     = EncodingUtil.base64Decode(file) // converting your binary string to Blob
                     );
 
-                    contentsByQuestion.put(questionId, content);
+                    if(contentsByQuestion.get(questionId) != null) {
+
+                        contentsByQuestion.get(questionId).add(content);
+
+                    } else {
+                    
+                        contentsByQuestion.put(questionId, new List<ContentVersion> { content });
+
+                    }
 
                 }
 
@@ -314,7 +322,13 @@ public with sharing class ClarityFormsService {
 
         }
 
-        List<Database.SaveResult> contentResults = Database.insert(contentsByQuestion.values(), true); 
+        List<ContentVersion> cvSaves = new List<ContentVersion>();
+
+        for(List<ContentVersion> cvs : contentsByQuestion.values()) {
+            cvSaves.addAll(cvs);
+        }
+
+        List<Database.SaveResult> contentResults = Database.insert(cvSaves, true); 
 
         for(Database.SaveResult contentResult : contentResults) {
 
@@ -324,21 +338,26 @@ public with sharing class ClarityFormsService {
 
         }
 
+        List<ContentVersion> cvUpdates = new List<ContentVersion>();
+
         for(String questionId : contentsByQuestion.keySet()) {
 
-            ContentVersion cv = contentsByQuestion.get(questionId); 
+            List<ContentVersion> cvs = contentsByQuestion.get(questionId); 
 
             String responseId = questionResponseIds.get(questionId);
 
             Clarity_Form_Response__c response = responses.get(responseId); 
 
-            cv.OwnerId = response.OwnerId__c; 
+            for(ContentVersion cv : cvs) {
+                cv.OwnerId = response.OwnerId__c; 
+                cvUpdates.add(cv); 
+            }
 
-            contentsByQuestion.put(questionId, cv); 
+            contentsByQuestion.put(questionId, cvs); 
 
         }
 
-        List<Database.SaveResult> updateContentResults = Database.update(contentsByQuestion.values(), true); 
+        List<Database.SaveResult> updateContentResults = Database.update(cvUpdates, true); 
 
         for(Database.SaveResult updateContentResult : updateContentResults) {
 
@@ -352,9 +371,11 @@ public with sharing class ClarityFormsService {
 
         for(String questionId : contentsByQuestion.keySet()) {
 
-            ContentVersion cv = contentsByQuestion.get(questionId); 
+            List<ContentVersion> cvs = contentsByQuestion.get(questionId); 
 
-            questionIdByContentVersionId.put(cv.Id, questionId); 
+            for(ContentVersion cv : cvs) {
+                questionIdByContentVersionId.put(cv.Id, questionId); 
+            }
 
         }
 
