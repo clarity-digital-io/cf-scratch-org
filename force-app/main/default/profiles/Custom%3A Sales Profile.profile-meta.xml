@@ -82,7 +82,7 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>FormResponseController</apexClass>
+        <apexClass>FormController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -124,6 +124,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Clarity_Form_Answer__c.Record__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Answer__c.Date_Answer__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

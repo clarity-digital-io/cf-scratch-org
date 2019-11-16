@@ -136,7 +136,7 @@
         let pageRef = {
             type: "standard__component",
             attributes: {
-                componentName: "c__FormResponse"    
+                componentName: "c__FormResponseView"    
             },    
             state: {
                 c__formName: cmp.get("v.form.Name")
@@ -194,7 +194,7 @@
                 let data = cmp.get('v.data');
 
                 let responses = data.filter(r => r.Id != deletedId);
-
+                console.log('responses', responses); 
                 cmp.set('v.data', responses);
 
                 cmp.set('v.loading', false);

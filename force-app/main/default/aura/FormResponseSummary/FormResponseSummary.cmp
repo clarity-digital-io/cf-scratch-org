@@ -53,20 +53,7 @@
                 <li class="slds-page-header__detail-block">
                     <div class="slds-text-title slds-truncate" title="Status">Status</div>
                     <div class="slds-truncate" title="Draft">{!v.form.Status__c}</div>
-                </li>
-                <li class="slds-page-header__detail-block">
-                    <div class="slds-text-title slds-truncate" title="Respones">Responses Completed</div>
-                    <div class="slds-truncate" title="0">{!v.form.Responses_Completed__c}</div>
-                </li>
-                <li class="slds-page-header__detail-block">
-                    <div class="slds-text-title slds-truncate" title="Completion Rate">Completion Rate</div>
-                    <div class="slds-truncate" title="0%">{!v.form.Completion_Rate__}</div>
-                </li>
-                <li class="slds-page-header__detail-block">
-                    <div class="slds-text-title slds-truncate" title="Started">Responses Started</div>
-                    <div class="slds-truncate" title="0%">{!v.form.Respones_Started__c}</div>
-                </li>
-            
+                </li>            
             </ul>
         </div>
     </div>
@@ -128,9 +115,9 @@
                                         <td data-label="Action">
                                             <div class="slds-truncate" title="">
 
-                                                <lightning:button disabled="{!response.Submitted != 'Submitted'}" variant="brand" label="View" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
-                                                <lightning:button disabled="{!response.Submitted == 'Submitted'}" label="Edit" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
-                                                <lightning:button disabled="{!response.Submitted == 'Submitted'}" label="Delete" value="{!response.id}" variant="destructive" onclick="{!c.handleDeleteFormResponse}" />    
+                                                <lightning:button disabled="{!response.status == 'New'}" variant="brand" label="View" value="{!response.id}" onclick="{!c.handleNewFormResponseTab}" />
+                                                <lightning:button disabled="{!response.status == 'Submitted'}" label="Edit" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
+                                                <lightning:button label="Delete" value="{!response.id}" variant="destructive" onclick="{!c.handleDeleteFormResponse}" />    
 
                                             </div>
                                         </td>

@@ -118,7 +118,7 @@ sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-forms-org
 
-sfdx force:alias:set forms=test-oiviuonzwt8t@example.com
+sfdx force:alias:set forms=test-vv7smmwe0aeu@example.com
 
 sfdx force:config:set defaultusername=forms
 
@@ -143,6 +143,8 @@ sfdx force:lightning:component:create --type aura -n FormResponseTimeline -d for
 sfdx force:lightning:component:create --type aura -n FormResponseModalFooter -d force-app/main/default/aura
 
 sfdx force:lightning:component:create --type aura -n FormResponseSummary -d force-app/main/default/aura
+
+sfdx force:lightning:component:create --type aura -n FormResponseView -d force-app/main/default/aura
 
 sfdx force:lightning:event:create -n FormResponseEvent -d force-app/main/default/aura
 

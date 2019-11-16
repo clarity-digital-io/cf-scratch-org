@@ -382,7 +382,7 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static Map<String, List<sObject>> savQuestionWithCriteria(String sQuestion, String sCriteria) {
+    global static Map<String, List<sObject>> saveQuestionWithCriteria(String sQuestion, String sCriteria) {
 
         Clarity_Form_Question__c parsedQuestion = (Clarity_Form_Question__c)JSON.deserialize(sQuestion, Clarity_Form_Question__c.class);
 
