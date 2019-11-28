@@ -76,7 +76,7 @@ public class ConnectionRecordProcessTest {
         
         Test.stopTest(); 
 
-        List<Clarity_Form_Connection_Process__c> connectionProcess = [SELECT Id, Status__c FROM Clarity_Form_Connection_Process__c]; 
+        List<Clarity_Form_Connection_Process__c> connectionProcess = [SELECT Id, Salesforce_Connection_Object__c, Status__c FROM Clarity_Form_Connection_Process__c]; 
 
         for(Clarity_Form_Connection_Process__c process : connectionProcess) {
             System.assertEquals('Success', process.Status__c); 
@@ -104,9 +104,10 @@ public class ConnectionRecordProcessTest {
 
         Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment'];
+        Clarity_Form_Question__c question = [SELECT Id, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment' LIMIT 1];
 
-        ClarityTestDataFactory.generateAnswers(response, questions);
+        //update on answer creation
+        ClarityTestDataFactory.updateAnswer(response, question);
 
         Test.startTest();       
             
@@ -124,11 +125,11 @@ public class ConnectionRecordProcessTest {
 
         List<Opportunity> opportunities = [SELECT Id FROM Opportunity];
 
-        System.assertEquals(opportunities.size(), 1);
+        System.assertEquals(1, opportunities.size());
 
         List<Contact> contacts = [SELECT Id FROM Contact];
 
-        System.assertEquals(contacts.size(), 1);
+        System.assertEquals(1, contacts.size());
 
     }
 

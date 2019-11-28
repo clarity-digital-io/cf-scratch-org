@@ -1,5 +1,20 @@
 <aura:component access="global" implements="forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
-    
+
+    <aura:html tag="style">
+        .slds-modal__container{ 
+          height : auto; 
+          width: 80%; 
+          max-width: 100vh; 
+        } 
+        .modal-body{ 
+          height : 90vh !important; 
+          max-height: 70vh !important; 
+        } 
+        .slds-modal__footer{ 
+          display: inline !important; 
+        }
+     </aura:html>
+
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
 
     <aura:attribute name="formId" type="String" default="default" />

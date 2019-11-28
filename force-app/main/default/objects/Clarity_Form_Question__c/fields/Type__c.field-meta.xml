@@ -205,6 +205,11 @@
                 <default>false</default>
                 <label>PictureChoice</label>
             </value>
+            <value>
+                <fullName>InputField</fullName>
+                <default>false</default>
+                <label>InputField</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

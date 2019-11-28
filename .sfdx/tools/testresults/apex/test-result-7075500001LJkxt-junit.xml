@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2019-11-22T08:14:14-06:00" hostname="https://efficiency-energy-4546-dev-ed.cs41.my.salesforce.com" tests="1" failures="0"  errors="0"  time="1.31">
+        <properties>
+            <property name="outcome" value="Passed"/>
+            <property name="testsRan" value="1"/>
+            <property name="passing" value="1"/>
+            <property name="failing" value="0"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="100%"/>
+            <property name="failRate" value="0%"/>
+            <property name="testStartTime" value="Nov 22, 2019 8:14 AM"/>
+            <property name="testExecutionTime" value="1.31 s"/>
+            <property name="testTotalTime" value="1.31 s"/>
+            <property name="commandTime" value="5.04 s"/>
+            <property name="hostname" value="https://efficiency-energy-4546-dev-ed.cs41.my.salesforce.com"/>
+            <property name="orgId" value="00D550000007L8REAU"/>
+            <property name="username" value="test-ny6k239xml1j@example.com"/>
+            <property name="testRunId" value="7075500001LJkxT"/>
+            <property name="userId" value="00555000003vDL9AAM"/>
+        </properties>
+        <testcase name="shouldAssignFormToUserCreated" classname="FormResponseAssignmentTest" time="1.31">
+        </testcase>
+    </testsuite>
+</testsuites>

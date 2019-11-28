@@ -1,0 +1,53 @@
+=== Test Reports
+FORMAT  FILE
+──────  ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+txt     /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result.txt
+txt     /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-run-id.txt
+junit   /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7075500001LJlDY-junit.xml
+json    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7075500001LJlDY.json
+
+=== Test Results
+TEST NAME                                                                           OUTCOME  MESSAGE                                                                                                       RUNTIME (MS)
+──────────────────────────────────────────────────────────────────────────────────  ───────  ────────────────────────────────────────────────────────────────────────────────────────────────────────────  ────────────
+ConnectionRecordProcessTest.shouldCreateMultipleConnectionsFromCustomValues         Fail     System.AssertException: Assertion Failed: Expected: 1, Actual: 0                                              328
+                                                                                             Class.ConnectionRecordProcessTest.shouldCreateMultipleConnectionsFromCustomValues: line 128, column 1
+ConnectionRecordProcessTest.shouldCreateMultipleConnectionsWithAppropriateStoreIds  Fail     System.AssertException: Assertion Failed: Expected: 0, Actual: 1                                              265
+                                                                                             Class.ConnectionRecordProcessTest.shouldCreateMultipleConnectionsWithAppropriateStoreIds: line 216, column 1
+ConnectionRecordProcessTest.shouldCreateOpportunityConnectionFromCustomValue        Fail     System.AssertException: Assertion Failed: Expected: 0, Actual: 1                                              191
+                                                                                             Class.ConnectionRecordProcessTest.shouldCreateOpportunityConnectionFromCustomValue: line 87, column 1
+ConnectionRecordProcessTest.shouldCreateOpportunityConnectionFromQuestionValue      Fail     System.AssertException: Assertion Failed: Expected: 1, Actual: 0                                              205
+                                                                                             Class.ConnectionRecordProcessTest.shouldCreateOpportunityConnectionFromQuestionValue: line 173, column 1
+ConnectionRecordProcessTest.shouldUpdateProcessToFailed                             Pass                                                                                                                   182
+
+=== Failures
+FULLNAME                                                                            MESSAGE
+──────────────────────────────────────────────────────────────────────────────────  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ConnectionRecordProcessTest.shouldCreateMultipleConnectionsFromCustomValues         System.AssertException: Assertion Failed: Expected: 1, Actual: 0
+                                                                                    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ConnectionRecordProcessTest.cls:128:1
+ConnectionRecordProcessTest.shouldCreateMultipleConnectionsWithAppropriateStoreIds  System.AssertException: Assertion Failed: Expected: 0, Actual: 1
+                                                                                    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ConnectionRecordProcessTest.cls:216:1
+ConnectionRecordProcessTest.shouldCreateOpportunityConnectionFromCustomValue        System.AssertException: Assertion Failed: Expected: 0, Actual: 1
+                                                                                    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ConnectionRecordProcessTest.cls:87:1
+ConnectionRecordProcessTest.shouldCreateOpportunityConnectionFromQuestionValue      System.AssertException: Assertion Failed: Expected: 1, Actual: 0
+                                                                                    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ConnectionRecordProcessTest.cls:173:1
+
+=== Test Summary
+NAME                 VALUE
+───────────────────  ─────────────────────────────────────────────────────────────
+Outcome              Failed
+Tests Ran            5
+Passing              1
+Failing              4
+Skipped              0
+Pass Rate            20%
+Fail Rate            80%
+Test Start Time      Nov 22, 2019 8:27 AM
+Test Execution Time  1171 ms
+Test Total Time      1171 ms
+Command Time         4668 ms
+Hostname             https://efficiency-energy-4546-dev-ed.cs41.my.salesforce.com
+Org Id               00D550000007L8REAU
+Username             test-ny6k239xml1j@example.com
+Test Run Id          7075500001LJlDY
+User Id              00555000003vDL9AAM
+

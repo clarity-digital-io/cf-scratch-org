@@ -1,0 +1,46 @@
+{
+    "summary": {
+        "outcome": "Passed",
+        "testsRan": 1,
+        "passing": 1,
+        "failing": 0,
+        "skipped": 0,
+        "passRate": "100%",
+        "failRate": "0%",
+        "testStartTime": "Nov 19, 2019 5:30 PM",
+        "testExecutionTime": "266 ms",
+        "testTotalTime": "266 ms",
+        "commandTime": "3704 ms",
+        "hostname": "https://business-force-3201-dev-ed.cs79.my.salesforce.com",
+        "orgId": "00D1h0000005VYKEA2",
+        "username": "test-vv7smmwe0aeu@example.com",
+        "testRunId": "7071h00000jQyGy",
+        "userId": "0051h000002oYq0AAE"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M1h000003H8ZkEAK"
+            },
+            "Id": "07M1h000003H8ZkEAK",
+            "QueueItemId": "7091h000000Ntr4AAC",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7071h00000jQyGyAAK",
+            "MethodName": "shouldCreateAnswersOnResponseCreate",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p1h000001I8yVAAS"
+                },
+                "Id": "01p1h000001I8yVAAS",
+                "Name": "CreateResponseAnswersTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 266,
+            "FullName": "CreateResponseAnswersTest.shouldCreateAnswersOnResponseCreate"
+        }
+    ]
+}

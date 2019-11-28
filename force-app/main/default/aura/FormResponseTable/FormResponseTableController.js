@@ -1,12 +1,47 @@
 ({  
     init: function(cmp, event, helper) {
 
+        cmp.set('v.columns', [
+            {label: 'Name', fieldName: 'name', type: 'text'},
+            {label: 'Status', fieldName: 'status', type: 'text'}, 
+            {label: 'Percentage Complete', fieldName: 'completed', type: 'text'},
+            {label: 'Start Date', fieldName: 'start', type: 'date'}, 
+            {label: 'Submitted Date', fieldName: 'submittedDate', type: 'date'}, 
+            {type: "button", typeAttributes: {
+                label: 'View',
+                name: 'View',
+                title: 'View',
+                variant: 'Brand',
+                disabled: false,
+                value: 'view',
+                iconPosition: 'left'
+            }},
+            {type: "button", typeAttributes: {
+                label: 'Edit',
+                name: 'Edit',
+                title: 'Edit',
+                disabled: false,
+                value: 'edit',
+                iconPosition: 'left'
+            }},
+            {type: "button", typeAttributes: {
+                label: 'Delete',
+                name: 'Delete',
+                title: 'Delete',
+                variant: 'Destructive',
+                disabled: false,
+                value: 'delete',
+                iconPosition: 'left'
+            }}
+        ])
+
         cmp.set('v.loading', true);
 
         let action = cmp.get("c.getFormResponses");
 
         action.setParams({
-            name: cmp.get("v.formName")
+            formId  : cmp.get("v.formId"),
+            name    : cmp.get("v.formName") ? cmp.get("v.formName") : ''
         })
 
 		action.setCallback(this, function (response) {
@@ -23,6 +58,7 @@
 
                 let responses = data.map(response => {
                     return {
+                        name          : response.Name,
                         status        : response.Status__c, 
                         completed     : response.Completion__c ? response.Completion__c : '0%',
                         start         : response.CreatedDate, 
@@ -51,112 +87,23 @@
 
         $A.enqueueAction(action);
     },
-    handleNewFormResponse: function(cmp, event, helper) {
+    viewRecord: function(cmp, event, helper) {
 
-        $A.createComponents([
-            ["c:FormResponse", { "formName": cmp.get("v.formName") }]
-        ],
-        function(components, status) {
-            if (status === "SUCCESS") {
+        var recordId = event.getParam('row').Id;
+        var actionName = event.getParam('action').name;
 
-                let formResponse = components[0];
-
-                cmp.find('overlayLib').showCustomModal({
-                    header: cmp.get("v.formName"),
-                    cssClass: "clarityModal",
-                    body: formResponse, 
-                    showCloseButton: true
-                })
-
-            }
-        });
-
-    }, 
-    handleNewFormResponseTab: function(cmp, event, helper) {
-
-        let navLink = cmp.find("navService");
-        console.log('CF', cmp.get("v.formName"));
-        let pageRef = {
-            type: "standard__component",
-            attributes: {
-                componentName: "c__FormResponse"    
-            },    
-            state: {
-                c__formName: cmp.get("v.formName")
-            }
+        switch (actionName) {
+            case 'view':
+                helper.handleViewResponse(cmp, event, recordId);
+                break;
+            case 'edit':
+                helper.handleEditResponse(cmp, event, recordId);
+                break;
+            case 'delete':
+                helper.handleDeleteResponse(cmp, event, recordId);
+                break;    
+            default:
+                break;
         }
-
-        navLink.navigate(pageRef, true);
-
-    },
-    handleEditFormResponse: function(cmp, event, helper) {
-
-        let recordId = event.getSource().get("v.value");
-
-        $A.createComponents([
-            ["c:FormResponse", { "formName": cmp.get("v.formName"), "recordId": recordId }]
-        ],
-        function(components, status) {
-            if (status === "SUCCESS") {
-
-                let formResponse = components[0];
-
-                cmp.find('overlayLib').showCustomModal({
-                    header: cmp.get("v.formName"),
-                    cssClass: "clarityModal",
-                    body: formResponse, 
-                    showCloseButton: true
-                })
-
-            }
-        });
-
-    },
-    handleDeleteFormResponse: function(cmp, event, helper) {
-
-        let id = event.getSource().get("v.value");
-
-        cmp.set('v.loading', true);
-
-        let action = cmp.get("c.deleteFormResponse");
-
-        action.setParams({
-            responseId: id
-        });
-
-		action.setCallback(this, function (response) {
-
-			let state = response.getState();
-
-			if (state === "SUCCESS") {
-
-                cmp.set('v.loading', false);
-
-                let deletedId = response.getReturnValue(); 
-
-                let data = cmp.get('v.data');
-
-                let responses = data.filter(r => r.Id != deletedId);
-
-                cmp.set('v.data', responses);
-
-                cmp.set('v.loading', false);
-
-			} else if (state === "ERROR") {
-
-                cmp.set('v.loading', false);
-
-				let errors = response.getError();
-
-                cmp.find('notifLib').showToast({
-                    "variant": "error",
-                    "title"  : "Error!",
-                    "message": response.getError()
-                });
-
-			}
-
-		});
-
     }
 })

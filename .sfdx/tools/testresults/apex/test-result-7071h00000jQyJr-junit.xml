@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2019-11-19T17:34:29-06:00" hostname="https://business-force-3201-dev-ed.cs79.my.salesforce.com" tests="5" failures="4"  errors="0"  time="1.22">
+        <properties>
+            <property name="outcome" value="Failed"/>
+            <property name="testsRan" value="5"/>
+            <property name="passing" value="1"/>
+            <property name="failing" value="4"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="20%"/>
+            <property name="failRate" value="80%"/>
+            <property name="testStartTime" value="Nov 19, 2019 5:34 PM"/>
+            <property name="testExecutionTime" value="1.22 s"/>
+            <property name="testTotalTime" value="1.22 s"/>
+            <property name="commandTime" value="5.05 s"/>
+            <property name="hostname" value="https://business-force-3201-dev-ed.cs79.my.salesforce.com"/>
+            <property name="orgId" value="00D1h0000005VYKEA2"/>
+            <property name="username" value="test-vv7smmwe0aeu@example.com"/>
+            <property name="testRunId" value="7071h00000jQyJr"/>
+            <property name="userId" value="0051h000002oYq0AAE"/>
+        </properties>
+        <testcase name="shouldCreateMultipleConnectionsFromCustomValues" classname="ConnectionRecordProcessTest" time="0.33">
+            <failure message="System.AssertException: Assertion Failed: Expected: 0, Actual: 1"><![CDATA[Class.ConnectionRecordProcessTest.shouldCreateMultipleConnectionsFromCustomValues: line 127, column 1]]></failure>
+        </testcase>
+        <testcase name="shouldCreateMultipleConnectionsWithAppropriateStoreIds" classname="ConnectionRecordProcessTest" time="0.25">
+            <failure message="System.AssertException: Assertion Failed: Expected: 0, Actual: 1"><![CDATA[Class.ConnectionRecordProcessTest.shouldCreateMultipleConnectionsWithAppropriateStoreIds: line 215, column 1]]></failure>
+        </testcase>
+        <testcase name="shouldCreateOpportunityConnectionFromCustomValue" classname="ConnectionRecordProcessTest" time="0.22">
+            <failure message="System.AssertException: Assertion Failed: Expected: 0, Actual: 1"><![CDATA[Class.ConnectionRecordProcessTest.shouldCreateOpportunityConnectionFromCustomValue: line 87, column 1]]></failure>
+        </testcase>
+        <testcase name="shouldCreateOpportunityConnectionFromQuestionValue" classname="ConnectionRecordProcessTest" time="0.22">
+            <failure message="System.AssertException: Assertion Failed: Expected: 1, Actual: 0"><![CDATA[Class.ConnectionRecordProcessTest.shouldCreateOpportunityConnectionFromQuestionValue: line 172, column 1]]></failure>
+        </testcase>
+        <testcase name="shouldUpdateProcessToFailed" classname="ConnectionRecordProcessTest" time="0.21">
+        </testcase>
+    </testsuite>
+</testsuites>

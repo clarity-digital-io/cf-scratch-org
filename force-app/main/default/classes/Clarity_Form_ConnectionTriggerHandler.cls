@@ -1,5 +1,5 @@
 /**
-* @author efigenio.ben@clarityforms.io
+* @author ben@clarityforms.io
 * @company Clarity Forms
 * @date 07/07/2019
 *

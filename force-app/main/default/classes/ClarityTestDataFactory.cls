@@ -1,14 +1,4 @@
 public class ClarityTestDataFactory {
-    
-    public static void generateGroup() {
-
-        // Group group = new Group(Name = 'Test Group');
-
-        // insert group;
-
-        // return group; 
-        
-    }
 
     public static User generateUser() {
 
@@ -87,10 +77,6 @@ public class ClarityTestDataFactory {
         insert questions;
 
         return questions;
-
-    }
-
-    public static void generateAutomation(Clarity_Form_Question__c question){
 
     }
 
@@ -237,7 +223,17 @@ public class ClarityTestDataFactory {
         insert answers; 
 
     }
+    
+    public static void updateAnswer(Clarity_Form_Response__c response, Clarity_Form_Question__c question){
 
+        Clarity_Form_Answer__c answer = [SELECT Id FROM Clarity_Form_Answer__c WHERE Clarity_Form_Question__c =: question.Id LIMIT 1];
+
+        answer.Answer__c = 'Answer for: ' + question.Title__c;
+
+        update answer; 
+
+    }
+    
     private static List<String> Types {
         get {
 

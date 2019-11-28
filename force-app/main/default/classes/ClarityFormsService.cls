@@ -49,6 +49,130 @@ public with sharing class ClarityFormsService {
         
     }
 
+    // public static Id clone(Id recordId) {
+
+    //     Clarity_Form__c form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__c, Clarity_Form_Assignment__c     
+    //         FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
+
+    //     List<Clarity_Form_Connection__c> connections = [SELECT Id, Salesforce_Object__c, New__c, 
+    //         (SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
+    //         FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: form.Id];
+
+    //     List<Clarity_Form_Question__c> questions = [SELECT Id, 
+    //         (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
+    //         (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
+    //         (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__r),
+    //         Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, 
+    //         Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
+
+    //     Clarity_Form__c newForm = form.clone(false); 
+
+    //     Database.SaveResult result = Database.insert(newForm, true); 
+
+    //     if(!result.isSuccess()) {
+    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+    //     }
+
+    //     List<Clarity_Form_Connection__c> newConnections = new List<Clarity_Form_Connection__c>(); 
+
+    //     List<Clarity_Form_Connection_Field__c> newConnectionFields = new List<Clarity_Form_Connection_Field__c>(); 
+
+    //     for(Clarity_Form_Connection__c connection : connections) {
+
+    //         Clarity_Form_Connection__c newConnection = connection.clone(false); 
+    //         newConnection.Clarity_Form__c = newForm.Id;
+
+    //         newConnections.add(newConnection); 
+
+    //         for(Clarity_Form_Connection_Field__c field : connection.Clarity_Form_Connection_Fields__r) {
+
+    //             Clarity_Form_Connection_Field__c newField = field.clone(false); 
+    //             newField.Clarity_Form_Connection__c = newConnection;
+    //             newConnectionFields.add(newField); 
+
+    //         }
+
+    //     }
+
+    //     List<Clarity_Form_Question__c> newQuestions = new List<Clarity_Form_Question__c>(); 
+
+    //     List<Clarity_Form_Question_Option__c> newOptions = new List<Clarity_Form_Question_Option__c>(); 
+
+    //     List<Clarity_Form_Question_Flow_Design__c> newDesigns = new List<Clarity_Form_Question_Flow_Design__c>(); 
+
+    //     List<Clarity_Form_Question_Criteria__c> newCriterias = new List<Clarity_Form_Question_Criteria__c>(); 
+
+    //     for(Clarity_Form_Question__c question : questions) {
+
+    //         Clarity_Form_Question__c newQuestion = question.clone(false); 
+    //         newQuestion.Clarity_Form__c = newForm.Id; 
+
+    //         newQuestions.add(newQuestion); 
+
+    //         for(Clarity_Form_Question_Option__c option : question.Clarity_Form_Question_Options__r) {
+
+    //             Clarity_Form_Question_Option__c newOption = option.clone(false);
+    //             newOption.Clarity_Form_Question__c = newQuestion;
+    //             newOptions.add(newOption);
+
+    //         }
+
+    //         for(Clarity_Form_Question_Flow_Design__c design : question.Clarity_Form_Question_Flow_Designs__r) {
+
+    //             Clarity_Form_Question_Flow_Design__c newDesign = design.clone(false); 
+    //             newDesign.Clarity_Form_Question__c = newQuestion;
+    //             newDesigns.add(newOption);
+
+    //         }
+
+    //         for(Clarity_Form_Question_Criteria__c criteria : question.Clarity_Form_Question_Criteria__r) {
+
+    //             Clarity_Form_Question_Criteria__c newCriteria = criteria.clone(false); 
+    //             newCriteria.Clarity_Form_Question__c = newQuestion;
+    //             newCriteria.add(newOption);
+
+    //         }
+
+    //     }
+
+    //     Database.SaveResult resultConnections = Database.insert(newConnections, true);
+
+    //     if(!resultConnections.isSuccess()) {
+    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+    //     }
+
+    //     Database.SaveResult resultConnectionFields = Database.insert(newConnectionFields, true); 
+
+    //     if(!resultConnectionFields.isSuccess()) {
+    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+    //     }
+
+    //     Database.SaveResult resultQuestions = Database.insert(newQuestions, true); 
+
+    //     if(!resultQuestions.isSuccess()) {
+    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+    //     }
+
+    //     Database.SaveResult resultOptions = Database.insert(newOptions, true); 
+
+    //     if(!resultOptions.isSuccess()) {
+    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+    //     }
+
+    //     Database.SaveResult resultDesigns = Database.insert(newDesigns, true); 
+
+    //     if(!resultDesigns.isSuccess()) {
+    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+    //     }
+
+    //     Database.SaveResult resultCriterias = Database.insert(newCriterias, true); 
+
+    //     if(!resultCriterias.isSuccess()) {
+    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+    //     }
+
+    // }
+
     public static Map<String, List<sObject>> edit(Id responseId) {
 
         Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
@@ -225,16 +349,9 @@ public with sharing class ClarityFormsService {
 
     }
 
-    public static List<Clarity_Form_Answer__c> save(List<String> answers) {
+    public static List<Clarity_Form_Answer__c> save(String answers) {
 
-        List<Clarity_Form_Answer__c> parsedAnswers = new List<Clarity_Form_Answer__c>();
-
-        for(String answer : answers) {
-            
-            Clarity_Form_Answer__c parsedAnswer = (Clarity_Form_Answer__c)JSON.deserialize(answer, Clarity_Form_Answer__c.class);
-            parsedAnswers.add(parsedAnswer); 
-
-        }
+        List<Clarity_Form_Answer__c> parsedAnswers = (List<Clarity_Form_Answer__c>)JSON.deserialize(answers, List<Clarity_Form_Answer__c>.class);
 
         List<Database.UpsertResult> results = Database.upsert(parsedAnswers, true); 
 
@@ -303,6 +420,7 @@ public with sharing class ClarityFormsService {
                         PathOnClient    = 'Image.jpeg',
                         Origin          = 'H', 
                         Title           = 'Image',
+                        Clarity_Form_Response__c = responseId,
                         VersionData     = EncodingUtil.base64Decode(file) // converting your binary string to Blob
                     );
 

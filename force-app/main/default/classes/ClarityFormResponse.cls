@@ -3,17 +3,6 @@ global with sharing class ClarityFormResponse {
     private final static Integer MAX_RESULTS = 5;
 
     @RemoteAction
-    global static List<String> submit(String answerImages, String formResponseId) {
-
-        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.upload(answerImages); 
-
-        List<String> success = ClarityFormsService.submit(new List<String>{ formResponseId });
-
-        return success; 
-        
-    }
-
-    @RemoteAction
     global static Map<String, List<sObject>> preview(String formId) {
 
         Map<String, List<sObject>> formDetails = ClarityFormsService.create((Id)formId);
@@ -43,19 +32,34 @@ global with sharing class ClarityFormResponse {
     @RemoteAction
     global static List<Clarity_Form_Answer__c> saveAnswer(String answer){
 
-        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(new List<String>{ answer }); 
+        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(answer); 
 
         return savedAnswers;
         
     }
 
     @RemoteAction
-    global static List<Clarity_Form_Answer__c> saveAnswerImage(String answerImages) {
+    global static List<Clarity_Form_Answer__c> saveAnswerImage(String answerImages, String answers) {
 
-        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.upload(answerImages); 
+        List<Clarity_Form_Answer__c> savedAnswerImages = ClarityFormsService.upload(answerImages); 
 
-        return savedAnswers;   
+        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(answers); 
 
+        return savedAnswerImages;   
+
+    }
+
+    @RemoteAction
+    global static List<String> submit(String answerImages, String answers, String formResponseId) {
+
+        List<Clarity_Form_Answer__c> savedAnswerImages = ClarityFormsService.upload(answerImages); 
+
+        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(answers); 
+
+        List<String> success = ClarityFormsService.submit(new List<String>{ formResponseId });
+
+        return success; 
+        
     }
 
     @RemoteAction

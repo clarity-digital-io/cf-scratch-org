@@ -6,79 +6,86 @@
     <aura:attribute name="data" type="List" default="[]"/>
     <aura:attribute name="useRecordId" type="Boolean" default="false"/>
     <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="formId" type="String" />
 
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
 
-    <lightning:card class="slds-card_boundary" title="{!v.formName}" iconName="standard:account" >
-        <aura:set attribute="actions">
-            <lightning:button label="New Form Response" onclick="{!c.handleNewFormResponse}" />
-        </aura:set>
-        <div class="slds-m-horizontal_none">
+    <!-- <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+        <thead>
 
-            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
-                <thead>
+            <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Name">Name</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Status">Status</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Completed">Questions Complete</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Start Date">Start Date</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Submitted Date">Submitted Date</div>
+                </th> 
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Actions">Actions</div>
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+
+            <aura:if isTrue="{! v.loading }">
+                <lightning:spinner variant="brand" size="small" alternativeText="Loading" />
+                <aura:set attribute="else">
+                    <aura:iteration items="{!v.data}" var="response">
+                        <tr>
+                            <td data-label="Name">
+                                <div class="slds-truncate" title="{!response.name}">{!response.name}</div>
+                            </td>
+                            <td data-label="Status">
+                                <div class="slds-truncate" title="{!response.status}">{!response.status}</div>
+                            </td>
+                            <td data-label="Completed">
+                                <div class="slds-truncate" title="{!response.completed}">{!response.completed}</div>
+                            </td>
+                            <td data-label="Start Date">
+                                <div class="slds-truncate" title="{!response.start}">{!response.start}</div>
+                            </td>
+                            <td data-label="Submitted Date">
+                                <div class="slds-truncate" title="{!response.submittedDate}">{!response.submittedDate}</div>
+                            </td>
+
+                            <td data-label="Action">
+                                <div class="slds-truncate" title="">
+
+                                    <lightning:button disabled="{!response.status == 'New'}" variant="brand" label="View" value="{!response.id}" onclick="{!c.handleViewResponse}" />
+                                    <lightning:button disabled="{!response.status == 'Submitted'}" label="Edit" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
+                                    <lightning:button label="Delete" value="{!response.id}" variant="destructive" onclick="{!c.handleDeleteFormResponse}" />    
+
+                                </div>
+                            </td>
         
-                    <tr class="slds-line-height_reset">
-                        <th class="" scope="col">
-                            <div class="slds-truncate" title="Status">Status</div>
-                        </th>
-                        <th class="" scope="col">
-                            <div class="slds-truncate" title="Completed">Questions Complete</div>
-                        </th>
-                        <th class="" scope="col">
-                            <div class="slds-truncate" title="Start Date">Start Date</div>
-                        </th>
-                        <th class="" scope="col">
-                            <div class="slds-truncate" title="Submitted Date">Submitted Date</div>
-                        </th> 
-                        <th class="" scope="col">
-                            <div class="slds-truncate" title="Actions">Actions</div>
-                        </th>
-                    </tr>
-        
-                </thead>
-                <tbody>
-        
-                    <aura:if isTrue="{! v.loading }">
-                        <lightning:spinner variant="brand" size="small" alternativeText="Loading" />
-                        <aura:set attribute="else">
-                            <aura:iteration items="{!v.data}" var="response">
-                                <tr>
-                                    <td data-label="Status">
-                                        <div class="slds-truncate" title="{!response.status}">{!response.status}</div>
-                                    </td>
-                                    <td data-label="Completed">
-                                        <div class="slds-truncate" title="{!response.completed}">{!response.completed}</div>
-                                    </td>
-                                    <td data-label="Start Date">
-                                        <div class="slds-truncate" title="{!response.start}">{!response.start}</div>
-                                    </td>
-                                    <td data-label="Submitted Date">
-                                        <div class="slds-truncate" title="{!response.submittedDate}">{!response.submittedDate}</div>
-                                    </td>
-                                        
-                                    <td data-label="Action">
-                                        <div class="slds-truncate" title="">
+                        </tr>
+                    </aura:iteration>
+                </aura:set>
+            </aura:if>
 
-                                                <lightning:button disabled="{!response.Submitted != 'Submitted'}" variant="brand" label="View" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
-                                                <lightning:button disabled="{!response.Submitted == 'Submitted'}" label="Edit" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
-                                                <lightning:button disabled="{!response.Submitted == 'Submitted'}" label="Delete" value="{!response.id}" variant="destructive" onclick="{!c.handleDeleteFormResponse}" />
+        </tbody>
 
-                                        </div>
-                                    </td>
-                
-                                </tr>
-                            </aura:iteration>
-                        </aura:set>
-                    </aura:if>
-        
-                </tbody>
+    </table> -->
 
-            </table>
+    <aura:attribute name="columns" type="List"/>
 
-        </div>
-    </lightning:card>
+    <lightning:datatable
+        keyField="id"
+        data="{! v.data }"
+        columns="{! v.columns }"
+        onrowaction="{!c.viewRecord}" />
 
     <lightning:overlayLibrary aura:id="overlayLib"/>
+    <lightning:workspaceAPI aura:id="workspace" />
 
 </aura:component>	

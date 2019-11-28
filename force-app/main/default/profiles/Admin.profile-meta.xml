@@ -74,15 +74,19 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FormController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FormControllerTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>FormResponseAssignment</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>FormResponseAssignmentTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>FormController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -123,12 +127,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Clarity_Form_Answer__c.Record__c</field>
+        <field>Clarity_Form_Answer__c.Date_Answer__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Clarity_Form_Answer__c.Date_Answer__c</field>
+        <field>Clarity_Form_Answer__c.Record__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

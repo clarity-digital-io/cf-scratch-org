@@ -55,6 +55,10 @@ public class Clarity_Form_ResponseTriggerHandler implements ITrigger {
 	*/
 	public void beforeInsert(SObject so) {
 
+        Clarity_Form_Response__c response = (Clarity_Form_Response__c) so; 
+
+		FormResponseLimits.execute(response);
+
 	}
 
 	/*******************************************************************************************************

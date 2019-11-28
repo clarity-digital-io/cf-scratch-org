@@ -1,0 +1,142 @@
+{
+    "summary": {
+        "outcome": "Failed",
+        "testsRan": 5,
+        "passing": 1,
+        "failing": 4,
+        "skipped": 0,
+        "passRate": "20%",
+        "failRate": "80%",
+        "testStartTime": "Nov 22, 2019 8:14 AM",
+        "testExecutionTime": "1545 ms",
+        "testTotalTime": "1545 ms",
+        "commandTime": "5806 ms",
+        "hostname": "https://efficiency-energy-4546-dev-ed.cs41.my.salesforce.com",
+        "orgId": "00D550000007L8REAU",
+        "username": "test-ny6k239xml1j@example.com",
+        "testRunId": "7075500001LJl10",
+        "userId": "00555000003vDL9AAM"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M55000005GZ1pEAG"
+            },
+            "Id": "07M55000005GZ1pEAG",
+            "QueueItemId": "70955000000Zmn1AAC",
+            "StackTrace": "Class.ConnectionRecordProcessTest.shouldCreateMultipleConnectionsFromCustomValues: line 130, column 1",
+            "Message": "System.AssertException: Assertion Failed: Expected: 1, Actual: 0",
+            "AsyncApexJobId": "7075500001LJl10AAD",
+            "MethodName": "shouldCreateMultipleConnectionsFromCustomValues",
+            "Outcome": "Fail",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p55000001UAHqAAO"
+                },
+                "Id": "01p55000001UAHqAAO",
+                "Name": "ConnectionRecordProcessTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 453,
+            "FullName": "ConnectionRecordProcessTest.shouldCreateMultipleConnectionsFromCustomValues"
+        },
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M55000005GZ1qEAG"
+            },
+            "Id": "07M55000005GZ1qEAG",
+            "QueueItemId": "70955000000Zmn1AAC",
+            "StackTrace": "Class.ConnectionRecordProcessTest.shouldCreateMultipleConnectionsWithAppropriateStoreIds: line 218, column 1",
+            "Message": "System.AssertException: Assertion Failed: Expected: 0, Actual: 1",
+            "AsyncApexJobId": "7075500001LJl10AAD",
+            "MethodName": "shouldCreateMultipleConnectionsWithAppropriateStoreIds",
+            "Outcome": "Fail",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p55000001UAHqAAO"
+                },
+                "Id": "01p55000001UAHqAAO",
+                "Name": "ConnectionRecordProcessTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 312,
+            "FullName": "ConnectionRecordProcessTest.shouldCreateMultipleConnectionsWithAppropriateStoreIds"
+        },
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M55000005GZ1rEAG"
+            },
+            "Id": "07M55000005GZ1rEAG",
+            "QueueItemId": "70955000000Zmn1AAC",
+            "StackTrace": "Class.ConnectionRecordProcessTest.shouldCreateOpportunityConnectionFromCustomValue: line 87, column 1",
+            "Message": "System.AssertException: Assertion Failed: Expected: 0, Actual: 1",
+            "AsyncApexJobId": "7075500001LJl10AAD",
+            "MethodName": "shouldCreateOpportunityConnectionFromCustomValue",
+            "Outcome": "Fail",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p55000001UAHqAAO"
+                },
+                "Id": "01p55000001UAHqAAO",
+                "Name": "ConnectionRecordProcessTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 269,
+            "FullName": "ConnectionRecordProcessTest.shouldCreateOpportunityConnectionFromCustomValue"
+        },
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M55000005GZ1sEAG"
+            },
+            "Id": "07M55000005GZ1sEAG",
+            "QueueItemId": "70955000000Zmn1AAC",
+            "StackTrace": "Class.ConnectionRecordProcessTest.shouldCreateOpportunityConnectionFromQuestionValue: line 175, column 1",
+            "Message": "System.AssertException: Assertion Failed: Expected: 1, Actual: 0",
+            "AsyncApexJobId": "7075500001LJl10AAD",
+            "MethodName": "shouldCreateOpportunityConnectionFromQuestionValue",
+            "Outcome": "Fail",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p55000001UAHqAAO"
+                },
+                "Id": "01p55000001UAHqAAO",
+                "Name": "ConnectionRecordProcessTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 261,
+            "FullName": "ConnectionRecordProcessTest.shouldCreateOpportunityConnectionFromQuestionValue"
+        },
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M55000005GZ1tEAG"
+            },
+            "Id": "07M55000005GZ1tEAG",
+            "QueueItemId": "70955000000Zmn1AAC",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7075500001LJl10AAD",
+            "MethodName": "shouldUpdateProcessToFailed",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p55000001UAHqAAO"
+                },
+                "Id": "01p55000001UAHqAAO",
+                "Name": "ConnectionRecordProcessTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 250,
+            "FullName": "ConnectionRecordProcessTest.shouldUpdateProcessToFailed"
+        }
+    ]
+}

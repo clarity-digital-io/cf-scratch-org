@@ -15,19 +15,19 @@ public class FormResponseAssignmentTest {
 
         Clarity_Form__c form = [SELECT Id, Status__c FROM Clarity_Form__c];
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c, Title__c FROM Clarity_Form_Question__c];
+        Clarity_Form_Question__c question = [SELECT Id, Type__c, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment' LIMIT 1];
 
         User u = ClarityTestDataFactory.generateUser();
 
         Clarity_Form_Assignment__c assignment = ClarityTestDataFactory.generateAssignment(form, u, 'AND');
 
-        ClarityTestDataFactory.generateAssignmentRules(assignment.Id, questions, 'Comment');
+        ClarityTestDataFactory.generateAssignmentRules(assignment.Id, new List<Clarity_Form_Question__c> { question }, 'Comment');
 
         ClarityTestDataFactory.publishForm(form);
 
         Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
 
-        ClarityTestDataFactory.generateAnswers(response, questions);
+        ClarityTestDataFactory.updateAnswer(response, question);
 
         System.assertEquals(response.OwnerId__c, null);
 
@@ -44,40 +44,5 @@ public class FormResponseAssignmentTest {
         System.assertEquals(submittedResponse.OwnerId__c, u.Id);
 
     }
-
-    // @isTest
-    // public static void shouldAssignFormToGroupCreated(){
-
-    //     Clarity_Form__c form = [SELECT Id, Status__c FROM Clarity_Form__c];
-
-    //     List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c, Title__c FROM Clarity_Form_Question__c];
-
-    //     Group g = ClarityTestDataFactory.generateGroup();
-
-    //     Clarity_Form_Assignment__c assignment = ClarityTestDataFactory.generateAssignment(form, u, 'AND');
-
-    //     ClarityTestDataFactory.generateAssignmentRules(assignment.Id, questions, 'Comment');
-
-    //     ClarityTestDataFactory.publishForm(form);
-
-    //     Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
-
-    //     ClarityTestDataFactory.generateAnswers(response, questions);
-
-    //     System.assertEquals(response.OwnerId__c, null);
-
-    //     Test.startTest();       
-            
-    //         response.Status__c = 'Submitted'; 
-
-    //         update response; 
-        
-    //     Test.stopTest(); 
-
-    //     Clarity_Form_Response__c submittedResponse = [SELECT Id, OwnerId__c FROM Clarity_Form_Response__c Limit 1];
-
-    //     System.assertEquals(submittedResponse.OwnerId__c, u.Id);
-
-    // }
 
 }

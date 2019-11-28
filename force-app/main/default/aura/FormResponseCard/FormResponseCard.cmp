@@ -1,0 +1,24 @@
+<aura:component controller="FormController" access="global" implements="force:lightningQuickActionWithoutHeader,forceCommunity:availableForAllPageTypes,force:hasRecordId,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
+    
+    <lightning:navigation aura:id="navService"/>
+    <aura:attribute name="formName" type="String" required="true" default="default" />
+    <aura:attribute name="loading" type="Boolean" default="false" />
+    <aura:attribute name="data" type="List" default="[]"/>
+    <aura:attribute name="useRecordId" type="Boolean" default="false"/>
+    <aura:attribute name="recordId" type="String" />
+
+    <lightning:card class="slds-card_boundary" title="{!v.formName}" iconName="standard:account" >
+        <aura:set attribute="actions">
+            <lightning:button label="New Form Response" onclick="{!c.handleNewFormResponse}" />
+        </aura:set>
+        <div class="slds-m-horizontal_none">
+
+            <c:FormResponseTable formName="{!v.formName}" />
+
+        </div>
+    </lightning:card>
+
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <lightning:workspaceAPI aura:id="workspace" />
+
+</aura:component>	

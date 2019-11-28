@@ -7,6 +7,7 @@
     <aura:attribute name="data" type="Object"/>
     <aura:attribute name="columns" type="List"/>
     <aura:attribute name="loading" type="Boolean"/>
+    <aura:attribute name="recordId" type="String"/>
 
     <div class="slds-page-header slds-page-header_record-home">
         <div class="slds-page-header__row">
@@ -63,81 +64,20 @@
     <div class="slds-m-top_x-small slds-tabs_card slds-tabs_card slds-tabs_card">
         <lightning:tabset selectedTabId="responses">
             <lightning:tab label="Responses" id="responses">
-                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
-                    <thead>
-            
-                        <tr class="slds-line-height_reset">
-                            <th class="" scope="col">
-                                <div class="slds-truncate" title="Name">Name</div>
-                            </th>
-                            <th class="" scope="col">
-                                <div class="slds-truncate" title="Status">Status</div>
-                            </th>
-                            <th class="" scope="col">
-                                <div class="slds-truncate" title="Completed">Questions Complete</div>
-                            </th>
-                            <th class="" scope="col">
-                                <div class="slds-truncate" title="Start Date">Start Date</div>
-                            </th>
-                            <th class="" scope="col">
-                                <div class="slds-truncate" title="Submitted Date">Submitted Date</div>
-                            </th> 
-                            <th class="" scope="col">
-                                <div class="slds-truncate" title="Actions">Actions</div>
-                            </th>
-            
-                        </tr>
-            
-                    </thead>
-                    <tbody>
-            
-                        <aura:if isTrue="{! v.loading }">
-                            <lightning:spinner variant="brand" size="small" alternativeText="Loading" />
-                            <aura:set attribute="else">
-                                <aura:iteration items="{!v.data}" var="response">
-                                    <tr>
-                                        <td data-label="Name">
-                                            <div class="slds-truncate" title="{!response.name}">{!response.name}</div>
-                                        </td>
-                                        <td data-label="Status">
-                                            <div class="slds-truncate" title="{!response.status}">{!response.status}</div>
-                                        </td>
-                                        <td data-label="Completed">
-                                            <div class="slds-truncate" title="{!response.completed}">{!response.completed}</div>
-                                        </td>
-                                        <td data-label="Start Date">
-                                            <div class="slds-truncate" title="{!response.start}">{!response.start}</div>
-                                        </td>
-                                        <td data-label="Submitted Date">
-                                            <div class="slds-truncate" title="{!response.submittedDate}">{!response.submittedDate}</div>
-                                        </td>
-                                            
-                                        <td data-label="Action">
-                                            <div class="slds-truncate" title="">
 
-                                                <lightning:button disabled="{!response.status == 'New'}" variant="brand" label="View" value="{!response.id}" onclick="{!c.handleNewFormResponseTab}" />
-                                                <lightning:button disabled="{!response.status == 'Submitted'}" label="Edit" value="{!response.id}" onclick="{!c.handleEditFormResponse}" />
-                                                <lightning:button label="Delete" value="{!response.id}" variant="destructive" onclick="{!c.handleDeleteFormResponse}" />    
+                <c:FormResponseTable formId="{!v.recordId}" />
 
-                                            </div>
-                                        </td>
-                    
-                                    </tr>
-                                </aura:iteration>
-                            </aura:set>
-                        </aura:if>
-            
-                    </tbody>
-    
-                </table>
             </lightning:tab>
-            <lightning:tab label="Timeline" id="timeline">
-                Timeline
+            <lightning:tab label="Results" id="results">
+                
+                <c:FormAnswersTable recordId="{!v.recordId}" />
+            
             </lightning:tab>
         </lightning:tabset>
     </div>
     
-    
+    <lightning:workspaceAPI aura:id="workspace" />
+
     <lightning:navigation aura:id="navService"/>
     <lightning:overlayLibrary aura:id="overlayLib"/>
 
