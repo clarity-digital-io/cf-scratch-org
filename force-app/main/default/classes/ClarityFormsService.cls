@@ -319,7 +319,7 @@ public with sharing class ClarityFormsService {
         
     }
 
-    public static List<String> submit(List<String> responseIds) {
+    public static List<String> updateStatus(List<String> responseIds, String status) {
 
         List<String> success = new List<String>(); 
 
@@ -329,7 +329,7 @@ public with sharing class ClarityFormsService {
 
         for(Clarity_Form_Response__c response : responses.values()) {
         
-            response.Status__c = 'Submitted'; 
+            response.Status__c = status; 
             responsesUpdated.add(response); 
 
         }
@@ -369,7 +369,7 @@ public with sharing class ClarityFormsService {
 
     }
 
-    public static List<String> prepareAnswers(Map<String, List<String>> sAnswers) {
+    public static String prepareAnswers(Map<String, List<String>> sAnswers) {
 
         List<String> allAnswers = new List<String>(); 
 
@@ -381,7 +381,7 @@ public with sharing class ClarityFormsService {
 
         }
 
-        return allAnswers;
+        return JSON.serialize(allAnswers);
 
     }
 

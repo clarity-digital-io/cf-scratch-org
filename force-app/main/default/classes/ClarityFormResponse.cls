@@ -39,24 +39,34 @@ global with sharing class ClarityFormResponse {
     }
 
     @RemoteAction
-    global static List<Clarity_Form_Answer__c> saveAnswerImage(String answerImages, String answers) {
+    global static List<String> save(List<String> answerValues) {
+
+        String answerImages = answerValues[0];
+        String answers = answerValues[1];
+        String formResponseId = answerValues[2]; 
 
         List<Clarity_Form_Answer__c> savedAnswerImages = ClarityFormsService.upload(answerImages); 
 
         List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(answers); 
 
-        return savedAnswerImages;   
+        List<String> success = ClarityFormsService.updateStatus(new List<String>{ formResponseId }, 'In Progress');
+
+        return success; 
 
     }
 
     @RemoteAction
-    global static List<String> submit(String answerImages, String answers, String formResponseId) {
+    global static List<String> submit(List<String> answerValues) {
+
+        String answerImages = answerValues[0];
+        String answers = answerValues[1];
+        String formResponseId = answerValues[2]; 
 
         List<Clarity_Form_Answer__c> savedAnswerImages = ClarityFormsService.upload(answerImages); 
 
         List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(answers); 
 
-        List<String> success = ClarityFormsService.submit(new List<String>{ formResponseId });
+        List<String> success = ClarityFormsService.updateStatus(new List<String>{ formResponseId }, 'Submitted');
 
         return success; 
         

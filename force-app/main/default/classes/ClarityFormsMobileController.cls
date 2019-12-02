@@ -25,7 +25,7 @@ global with sharing class ClarityFormsMobileController {
 
         Map<String, List<String>> sAnswers = (Map<String, List<String>>)JSON.deserialize(body, Map<String, List<String>>.class);
         
-        List<String> saveAnswers = ClarityFormsService.prepareAnswers(sAnswers); 
+        String saveAnswers = ClarityFormsService.prepareAnswers(sAnswers); 
 
         List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(saveAnswers); 
 
@@ -44,7 +44,7 @@ global with sharing class ClarityFormsMobileController {
 
         List<String> responseIds = (List<String>)JSON.deserialize(body, List<String>.class);
 
-        List<String> success = ClarityFormsService.submit(responseIds);
+        List<String> success = ClarityFormsService.updateStatus(responseIds, 'Submitted');
 
         return success; 
 

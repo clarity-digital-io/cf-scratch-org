@@ -44,6 +44,14 @@
 
             cmp.find("overlayLib").notifyClose();
 
+            var formEvent = $A.get("e.c:formResponseEvent");
+
+            formEvent.setParams({
+                formId: cmp.get('v.formId')
+            })
+
+            formEvent.fire();
+
 		} 
 
 	}

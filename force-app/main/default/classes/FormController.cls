@@ -117,7 +117,7 @@ public with sharing class FormController {
         for(Clarity_Form_Question__c question : form.Clarity_Form_Questions__r) {
 
             Map<String, String> column = buildColumn(question);
-            if(column.size() > 0) {
+            if(column.size() > 0 ) {
                 columns.add(column); 
             }
 
@@ -128,9 +128,9 @@ public with sharing class FormController {
         List<Map<String, String>> rows = new List<Map<String, String>>();
 
         List<Clarity_Form_Response__c> responses = [SELECT Id, Name, 
-            (SELECT Id, ContentDocument__c, Date_Answer__c, Answer__c, Clarity_Form_Question__c, 
+            (SELECT Id, ContentDocument__c, Date_Answer__c, Answer__c, Record__c, Clarity_Form_Question__c, 
             Clarity_Form_Question__r.Type__c, Clarity_Form_Question__r.Name 
-            FROM Clarity_Form_Answers__r) FROM Clarity_Form_Response__c WHERE Clarity_Form__c =: recordId];
+            FROM Clarity_Form_Answers__r) FROM Clarity_Form_Response__c WHERE Clarity_Form__c =: recordId AND Status__c != 'Preview'];
 
         for(Clarity_Form_Response__c response : responses) {
             
@@ -192,6 +192,9 @@ public with sharing class FormController {
             }
             when 'Date' {
                 return answer.Date_Answer__c != null ? answer.Date_Answer__c.format() : '';
+            }
+            when 'RecordGroup' {
+                return answer.Record__c;
             }
             when else {
                 return answer.Answer__c;

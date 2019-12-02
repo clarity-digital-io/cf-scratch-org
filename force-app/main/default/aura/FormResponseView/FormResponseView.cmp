@@ -1,4 +1,4 @@
-<aura:component access="global" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
+<aura:component access="global" implements="force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
 
     <aura:html tag="style">
         .slds-modal__container{ 
@@ -14,13 +14,10 @@
           display: inline !important; 
         }
      </aura:html>
-    <aura:attribute name="formId" type="String" default="default" />
-    <aura:attribute name="preview" type="String" default="false" />
 
     <aura:attribute name="recordId" type="String" default="default" />
-    <aura:attribute name="formName" type="String" required="true" default="default" access="global" />
 
-    <lightning:container src="{!$Resource.ClarityFormsResponse + '/index.html?recordId=' + v.recordId + '&amp;formName=' + v.formName + '&amp;formId=' + v.formId + '&amp;preview=' + v.preview }" onmessage="{!c.handleMessage}" />
+    <lightning:container src="{!$Resource.ClarityFormsResponse + '/index.html?recordId=' + v.recordId}" onmessage="{!c.handleMessage}" />
 
     <lightning:navigation aura:id="navService"/>
     <lightning:workspaceAPI aura:id="workspace" />
