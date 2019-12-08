@@ -645,9 +645,11 @@ global with sharing class ClarityFormBuilder {
 
                 sObjectFields.add('' + field);
 
-            } 
+            }
 
         }
+
+        sObjectFields.add('Id');
 
         fieldMapping.put('Mapping', mappingFields);
         fieldMapping.put('Prefills', prefillFields);
@@ -698,7 +700,7 @@ global with sharing class ClarityFormBuilder {
         }
 
         List<Clarity_Form_Connection_Field__c> parsedConnectionFields = (List<Clarity_Form_Connection_Field__c>)JSON.deserialize(sActiveConnectionFields, List<Clarity_Form_Connection_Field__c>.class);
-
+    
         if(parsedConnectionFields.size() > 0) {
 
             List<Database.UpsertResult> results = Database.upsert(parsedConnectionFields, true); 

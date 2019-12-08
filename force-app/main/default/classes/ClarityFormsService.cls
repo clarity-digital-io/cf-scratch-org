@@ -190,8 +190,16 @@ public with sharing class ClarityFormsService {
 
             Clarity_Form_Response_Connection__c responseConnection = responseConnectionById.get(formConnection.Id); 
 
+            Map<String, Clarity_Form_Connection_Field__c> uniqueFields = new Map<String, Clarity_Form_Connection_Field__c>(); 
+
             for(Clarity_Form_Connection_Field__c field : formConnection.Clarity_Form_Connection_Fields__r) {
-                sFields.add(field.Salesforce_Field__c); 
+                uniqueFields.put(field.Salesforce_Field__c, field);
+            }
+
+            for(Clarity_Form_Connection_Field__c field : uniqueFields.values()) {
+                if(field.Salesforce_Field__c != 'Id' && field.Salesforce_Field__c != 'Name') {
+                    sFields.add(field.Salesforce_Field__c);
+                }
             }
 
             String joinedFields = '';
@@ -204,7 +212,7 @@ public with sharing class ClarityFormsService {
 
             String record = responseConnection.Record__c;
 
-            sObject result = Database.query('SELECT Id' + joinedFields + ' FROM ' + formConnection.Salesforce_Object__c + ' WHERE Id = :record LIMIT 1');
+            sObject result = Database.query('SELECT Id, Name ' + joinedFields + ' FROM ' + formConnection.Salesforce_Object__c + ' WHERE Id = :record LIMIT 1');
 
             records.add(result);
         }
@@ -358,7 +366,7 @@ public with sharing class ClarityFormsService {
 
         List<Clarity_Form_Connection__c> formConnections = [SELECT Id, Salesforce_Object__c, New__c, 
             (SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
-            FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: form.Id];
+            FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: form.Id AND New__c = false];
 
         List<Clarity_Form_Connection_Field__c> mappingFields = new List<Clarity_Form_Connection_Field__c>(); 
         List<Clarity_Form_Connection_Field__c> prefillFields = new List<Clarity_Form_Connection_Field__c>(); 

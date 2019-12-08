@@ -121,6 +121,8 @@ public class ConnectionRecordProcess {
         if(Connections.get(response.Clarity_Form__c) == null ||  Connections.get(response.Clarity_Form__c).size() == 0) return; 
 
         List<Clarity_Form_Connection__c> connections = Connections.get(response.Clarity_Form__c);
+        //need to check if it's a new or updating an existing connection
+        List<Clarity_Form_Response_Connection__c> responseConnections = new List<Clarity_Form_Response_Connection__c>();
 
         Map<Id, Clarity_Form_Answer__c> answersByQuestions = ResponseAnswers.get(response.Id);
 
