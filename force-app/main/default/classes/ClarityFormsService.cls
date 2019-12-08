@@ -173,6 +173,82 @@ public with sharing class ClarityFormsService {
 
     // }
 
+
+    public static List<sObject> connectionRecords(List<Clarity_Form_Response_Connection__c> responseConnections, List<Clarity_Form_Connection__c> formConnections) {
+
+        List<sObject> records = new List<sObject>(); 
+
+        Map<Id, Clarity_Form_Response_Connection__c> responseConnectionById = new Map<Id, Clarity_Form_Response_Connection__c>(); 
+
+        for(Clarity_Form_Response_Connection__c responseConnection : responseConnections) {
+            responseConnectionById.put(responseConnection.Clarity_Form_Connection__c, responseConnection);
+        }
+
+        for(Clarity_Form_Connection__c formConnection : formConnections) {
+
+            List<String> sFields = new List<String>(); 
+
+            Clarity_Form_Response_Connection__c responseConnection = responseConnectionById.get(formConnection.Id); 
+
+            for(Clarity_Form_Connection_Field__c field : formConnection.Clarity_Form_Connection_Fields__r) {
+                sFields.add(field.Salesforce_Field__c); 
+            }
+
+            String joinedFields = '';
+
+            if(sFields.size() > 0) {
+                joinedFields = String.join(sFields, ', ');
+                joinedFields = joinedFields.removeEnd(',');
+                joinedFields = ', ' + joinedFields;
+            } 
+
+            String record = responseConnection.Record__c;
+
+            sObject result = Database.query('SELECT Id' + joinedFields + ' FROM ' + formConnection.Salesforce_Object__c + ' WHERE Id = :record LIMIT 1');
+
+            records.add(result);
+        }
+
+        return records; 
+
+    }
+
+
+    public static List<Clarity_Form_Response_Connection__c> submitConnections(String responseId, String sConnections) {
+
+        List<Clarity_Form_Response_Connection__c> connections = new List<Clarity_Form_Response_Connection__c>(); 
+
+        List<Map<String, String>> parsedConnections = (List<Map<String, String>>)JSON.deserialize(sConnections, List<Map<String, String>>.class);
+
+        if(parsedConnections.size() == 0) {
+            return connections;
+        }
+
+        for(Map<String, String> parsedConnection : parsedConnections) {
+
+            Clarity_Form_Response_Connection__c connection = new Clarity_Form_Response_Connection__c(
+                Record__c = parsedConnection.get('key'),
+                Clarity_Form_Connection__c = parsedConnection.get('connectionId'),
+                Clarity_Form_Response__c = responseId
+            );
+
+            connections.add(connection); 
+
+        }
+
+        List<Database.SaveResult> connectionResults = Database.insert(connections, true); 
+
+        for(Database.SaveResult connectionResult : connectionResults) {
+
+            if(!connectionResult.isSuccess()) {
+                System.debug('error');
+            }
+
+        }
+        
+        return connections;   
+    }
+ 
     public static Map<String, List<sObject>> edit(Id responseId) {
 
         Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
@@ -250,11 +326,11 @@ public with sharing class ClarityFormsService {
             System.debug('error creating new repsonse');
         }
 
-        return create(form, response); 
+        return create(form, response, null); 
 
     } 
 
-    public static  Map<String, List<sObject>> create(String formName) {
+    public static  Map<String, List<sObject>> create(String formName, String sConnections) {
 
         Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Button_Color__c, 
             Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
@@ -272,23 +348,23 @@ public with sharing class ClarityFormsService {
             System.debug('error creating new repsonse');
         }
 
-        return create(form, response); 
+        return create(form, response, sConnections); 
 
     }  
 
-    public static Map<String, List<sObject>> create(Clarity_Form__c form, Clarity_Form_Response__c response) {
+    public static Map<String, List<sObject>> create(Clarity_Form__c form, Clarity_Form_Response__c response, String sConnections) {
 
         Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
 
-        List<Clarity_Form_Connection__c> connections = [SELECT Id, Salesforce_Object__c, New__c, 
+        List<Clarity_Form_Connection__c> formConnections = [SELECT Id, Salesforce_Object__c, New__c, 
             (SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
             FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: form.Id];
 
         List<Clarity_Form_Connection_Field__c> mappingFields = new List<Clarity_Form_Connection_Field__c>(); 
         List<Clarity_Form_Connection_Field__c> prefillFields = new List<Clarity_Form_Connection_Field__c>(); 
 
-        for(Clarity_Form_Connection__c connection : connections) {
-            for(Clarity_Form_Connection_Field__c connectionField : connection.Clarity_Form_Connection_Fields__r) {
+        for(Clarity_Form_Connection__c formConnection : formConnections) {
+            for(Clarity_Form_Connection_Field__c connectionField : formConnection.Clarity_Form_Connection_Fields__r) {
                 if(connectionField.PreFill__c) {
                     prefillFields.add(connectionField);
                 } else {
@@ -308,12 +384,25 @@ public with sharing class ClarityFormsService {
 
         formDetails.put('Form', new List<sObject>{ form });
         formDetails.put('FormResponse', new List<sObject>{ response });
-        formDetails.put('Connections', connections);
-        formDetails.put('ResponseConnections', new List<sObject>());
+
         formDetails.put('Mapping', mappingFields);
         formDetails.put('Prefills', prefillFields);
         formDetails.put('Questions', questions);
         formDetails.put('Answers', answers);
+
+        if(sConnections != null) {
+
+            List<Clarity_Form_Response_Connection__c> responseConnections = submitConnections(response.Id, sConnections);
+            List<sObject> records = new  List<sObject>(); 
+
+            if(responseConnections.size() > 0) {
+                records = connectionRecords(responseConnections, formConnections);            
+            }
+
+            formDetails.put('Connections', responseConnections);
+            formDetails.put('ConnectedRecords', records);
+
+        }
 
         return formDetails; 
         

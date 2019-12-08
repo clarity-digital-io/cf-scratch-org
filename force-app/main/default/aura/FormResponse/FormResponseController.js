@@ -1,6 +1,28 @@
 ({
     doInit: function(cmp) {
 
+        let id = cmp.get('v.sObjectId');
+
+        let type = cmp.get('v.sObjectType');
+
+        console.log('type id', id, type); 
+
+        if(id != null && type != null) {
+
+            let parameters = cmp.get('v.parameters'); 
+
+            if(parameters != "") {
+
+                cmp.set('v.parameters', parameters + '&' + type + '=' + id);
+
+            } else {
+
+                cmp.set('v.parameters', type + '=' + id);
+
+            }
+
+        }
+
         let pageRef = cmp.get("v.pageReference");
 
         if(pageRef) {

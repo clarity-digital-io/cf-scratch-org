@@ -1,7 +1,7 @@
 global with sharing class ClarityFormResponse {
 
     private final static Integer MAX_RESULTS = 5;
-
+    
     @RemoteAction
     global static Map<String, List<sObject>> preview(String formId) {
 
@@ -12,9 +12,20 @@ global with sharing class ClarityFormResponse {
     }
 
     @RemoteAction
-    global static Map<String, List<sObject>> create(String formName) {
+    global static List<Clarity_Form_Connection__c> getConnections(String formName) {
 
-        Map<String, List<sObject>> formDetails = ClarityFormsService.create(formName);
+        Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c WHERE Name =: formName LIMIT 1];
+
+        List<Clarity_Form_Connection__c> connections = [SELECT Id, Salesforce_Object__c, New__c FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: form.Id];
+
+        return connections; 
+
+    }
+
+    @RemoteAction
+    global static Map<String, List<sObject>> create(String formName, String sConnections) {
+
+        Map<String, List<sObject>> formDetails = ClarityFormsService.create(formName, sConnections);
 
         return formDetails; 
 
@@ -83,6 +94,33 @@ global with sharing class ClarityFormResponse {
         String searchTerm = searchItems[0];
         String lookupObject = searchItems[1];
         String questionId = searchItems[2]; 
+
+        searchTerm += '*';
+
+        String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + lookupObject + ' (Id, Name)';
+
+        List<List<sObject>> searchResults = search.query(searchString);
+
+        List<LookupResult> results = new List<LookupResult>();
+
+        String recordIcon = 'standard:' + lookupObject.toLowerCase();
+
+        List<sObject> records = ((List<sObject>) searchResults[0]);
+
+        for (sObject record : records) {
+            System.debug('record: ' + record);
+            results.add(new LookupResult(record.Id, lookupObject, (String)record.get('Name'), lookupObject));
+        }
+
+        return results;
+    }
+
+    @RemoteAction 
+    global static List<LookupResult> connectionSearch(List<String> searchItems) {
+
+        String searchTerm = searchItems[0];
+        String lookupObject = searchItems[1];
+        String fields = searchItems[2]; 
 
         searchTerm += '*';
 

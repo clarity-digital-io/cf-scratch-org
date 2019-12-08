@@ -1,6 +1,6 @@
 ({
 	doInit: function(cmp) {
-		console.log('recordId', cmp.get('v.recordId'));
+
 		if(cmp.get('v.recordId') == '') {
             cmp.set('v.recordId', cmp.get("v.pageReference").state.c__recordId);
 		}

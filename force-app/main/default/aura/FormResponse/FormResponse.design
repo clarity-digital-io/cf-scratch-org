@@ -2,6 +2,6 @@
 
     <design:attribute name="formName" label="Form Name" description="Name of the Clarity Form you want to use" />
 
-    <design:attribute name="recordId" label="Record Id" description="Id of the Record it's oppened from" />
+    <design:attribute name="recordId" label="RecordId" description="Clarity Form Response Id" />
 
 </design:component>

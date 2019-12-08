@@ -1,8 +1,16 @@
 ({  
     handleNewFormResponse: function(cmp, event, helper) {
 
+        var useRecordId = cmp.get("v.useRecordId");
+
+        var recordId = cmp.get("v.recordId");
+
+        var sObjectType = cmp.get("v.sobjecttype");
+
+        console.log('useRecordId', sObjectType, useRecordId, recordId)
+
         $A.createComponents([
-            ["c:FormResponse", { "formName": cmp.get("v.formName") }]
+            ["c:FormResponse", { "formName": cmp.get("v.formName"), "useRecordId": useRecordId, "sObjectType": sObjectType, "sObjectId": recordId }]
         ],
         function(components, status) {
             if (status === "SUCCESS") {
@@ -19,22 +27,5 @@
             }
         });
 
-    }, 
-    handleNewFormResponseTab: function(cmp, event, helper) {
-
-        let navLink = cmp.find("navService");
-        console.log('CF', cmp.get("v.formName"));
-        let pageRef = {
-            type: "standard__component",
-            attributes: {
-                componentName: "c__FormResponse"    
-            },    
-            state: {
-                c__formName: cmp.get("v.formName")
-            }
-        }
-
-        navLink.navigate(pageRef, true);
-
-    }
+    },
 })

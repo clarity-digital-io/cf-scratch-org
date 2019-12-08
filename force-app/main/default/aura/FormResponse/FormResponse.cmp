@@ -21,11 +21,16 @@
 
     <aura:attribute name="formId" type="String" default="default" />
     <aura:attribute name="preview" type="String" default="false" />
+    <aura:attribute name="loading" type="Boolean" default="true" />
 
     <aura:attribute name="recordId" type="String" default="default" />
+    <aura:attribute name="sObjectType" type="String" default="default" />
+    <aura:attribute name="sObjectId" type="String" default="default" />
+    <aura:attribute name="parameters" type="String" default="" />
+
     <aura:attribute name="formName" type="String" required="true" default="default" access="global" />
 
-    <lightning:container src="{!$Resource.ClarityFormsResponse + '/index.html?recordId=' + v.recordId + '&amp;formName=' + v.formName + '&amp;formId=' + v.formId + '&amp;preview=' + v.preview }" onmessage="{!c.handleMessage}" />
+    <lightning:container src="{!$Resource.ClarityFormsResponse + '/index.html?recordId=' + v.recordId + '&amp;formName=' + v.formName + '&amp;formId=' + v.formId + '&amp;preview=' + v.preview + '&amp;' + v.parameters }" onmessage="{!c.handleMessage}" />
 
     <lightning:navigation aura:id="navService"/>
     <lightning:workspaceAPI aura:id="workspace" />

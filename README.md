@@ -7,7 +7,7 @@ sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-forms-org
 
-sfdx force:alias:set forms=test-e7cmxwaxbtza@example.com
+sfdx force:alias:set forms=test-tkg6ixvrkmnr@example.com
 
 sfdx force:config:set defaultusername=forms
 
