@@ -27,19 +27,26 @@
     },
     edit: function(cmp, event, helper) {
 
-        let navLink = cmp.find("navService");
+        var workspaceAPI = cmp.find("workspace");
 
-        let pageRef = {
-            type: "standard__component",
-            attributes: {
-                componentName: "c__FormBuilder"    
-            },    
-            state: {
-                c__recordId: cmp.get("v.recordId")    
-            }
-        }
-
-        navLink.navigate(pageRef, true);
+        workspaceAPI.openTab({
+            pageReference: {
+                type: "standard__component",
+                attributes: {
+                    recordId: cmp.get("v.recordId"),
+                    componentName: "c__FormBuilder"
+                }
+            },
+            focus: true
+        }).then(function(response) {
+            workspaceAPI.getTabInfo({
+                tabId: response
+        }).then(function(tabInfo) {
+            console.log("The recordId for this tab is: " + tabInfo.recordId);
+        })
+        }).catch(function(error) {
+            console.log(error);
+        });
 
     },
     clone: function(cmp, event, helper) {
