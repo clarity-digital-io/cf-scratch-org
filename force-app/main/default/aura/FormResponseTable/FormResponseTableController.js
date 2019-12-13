@@ -17,18 +17,18 @@
     },
     viewRecord: function(cmp, event, helper) {
 
-        var recordId = event.getParam('row').id;
+        var record = event.getParam('row');
         var actionName = event.getParam('action').name;
 
         switch (actionName) {
             case 'View':
-                helper.handleViewResponse(cmp, event, recordId);
+                helper.handleViewResponse(cmp, event, record);
                 break;
             case 'Edit':
-                helper.handleEditResponse(cmp, event, recordId);
+                helper.handleEditResponse(cmp, event, record);
                 break;
             case 'Delete':
-                helper.handleDeleteResponse(cmp, event, recordId);
+                helper.handleDeleteResponse(cmp, event, record);
                 break;    
             default:
                 break;

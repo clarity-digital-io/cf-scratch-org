@@ -16,7 +16,7 @@
             if (state === "SUCCESS") {
             
                 var form = response.getReturnValue();
-                console.log('form', form);
+
                 cmp.set('v.form', form); 
 
             }
@@ -33,8 +33,10 @@
             pageReference: {
                 type: "standard__component",
                 attributes: {
-                    recordId: cmp.get("v.recordId"),
                     componentName: "c__FormBuilder"
+                },
+                state: {
+                    c__recordId: cmp.get("v.recordId"),
                 }
             },
             focus: true
@@ -42,10 +44,10 @@
             workspaceAPI.getTabInfo({
                 tabId: response
         }).then(function(tabInfo) {
-            console.log("The recordId for this tab is: " + tabInfo.recordId);
+
         })
         }).catch(function(error) {
-            console.log(error);
+
         });
 
     },
@@ -99,7 +101,27 @@
         
             if (state === "SUCCESS") {
             
-            } 
+                var navService = cmp.find("navService");
+
+                var pageReference = {
+                    type: 'standard__objectPage',
+                    attributes: {
+                        objectApiName: 'Clarity_Form__c',
+                        actionName: 'home'
+                    }
+                };
+
+                navService.navigate(pageReference);
+
+            } else {
+
+                cmp.find('notifLib').showNotice({
+                    "variant": "error",
+                    "header": "Error",
+                    "title": "Failed to delete",
+                    "message": response.getError()[0].message
+                });
+            }
             
         }); 
 

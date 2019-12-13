@@ -92,7 +92,7 @@ public with sharing class FormController {
     @AuraEnabled
     public static  Map<String, List<Map<String, String>>> getAnswerColumns(String recordId){
         
-        Clarity_Form__c form = [SELECT Id, (SELECT Id, Name, Title__c, Type__c FROM Clarity_Form_Questions__r) 
+        Clarity_Form__c form = [SELECT Id, (SELECT Id, Name, Record_Group__c, Title__c, Type__c FROM Clarity_Form_Questions__r) 
             FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
 
         List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c, 
@@ -116,9 +116,13 @@ public with sharing class FormController {
 
         for(Clarity_Form_Question__c question : form.Clarity_Form_Questions__r) {
 
-            Map<String, String> column = buildColumn(question);
-            if(column.size() > 0 ) {
-                columns.add(column); 
+            if(question.Record_Group__c == null && question.Type__c != 'RecordGroup') {
+
+                Map<String, String> column = buildColumn(question);
+                if(column.size() > 0 ) {
+                    columns.add(column); 
+                }
+
             }
 
         }

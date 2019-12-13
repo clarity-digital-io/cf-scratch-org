@@ -15,31 +15,8 @@
             
                 let table = response.getReturnValue();
 
-                // let columns = table.Columns.map(column => {
-
-                //     if(column.type == 'recordgroup') {
-
-                //         let newColumn = {
-                //             label : column.label, 
-                //             fieldName : column.fieldName,
-                //             type: 'button',
-                //             typeAttributes: {
-                //                 iconName: 'utility:view',
-                //                 label: 'View Record',
-                //                 name: 'viewRecord',
-                //                 disabled: false,
-                //                 value: 'viewBtn'
-                //             }
-                //         }
-
-                //         return newColumn;
-                //     }
-                //     return column;
-                // })
-
                 cmp.set('v.columns', table.Columns);
 
-                console.log('data', table.Columns, table.Data);
                 cmp.set('v.data', table.Data);
 
             }

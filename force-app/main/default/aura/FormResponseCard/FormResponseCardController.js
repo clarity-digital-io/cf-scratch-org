@@ -7,8 +7,6 @@
 
         var sObjectType = cmp.get("v.sobjecttype");
 
-        console.log('useRecordId', sObjectType, useRecordId, recordId)
-
         $A.createComponents([
             ["c:FormResponse", { "formName": cmp.get("v.formName"), "useRecordId": useRecordId, "sObjectType": sObjectType, "sObjectId": recordId }]
         ],

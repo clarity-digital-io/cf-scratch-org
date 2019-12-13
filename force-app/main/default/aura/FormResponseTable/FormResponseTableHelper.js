@@ -18,8 +18,6 @@
 
                 cmp.set('v.loading', false);
 
-                console.log(response.getReturnValue());
-
                 let data = response.getReturnValue(); 
 
                 let responses = data.map(response => {
@@ -100,7 +98,7 @@
         doneCallback(actions);
 
     },
-    handleViewResponse: function(cmp, event, recordId) {
+    handleViewResponse: function(cmp, event, record) {
 
         var workspaceAPI = cmp.find("workspace");
 
@@ -108,7 +106,7 @@
             pageReference: {
                 type: "standard__recordPage",
                 attributes: {
-                    recordId: recordId,
+                    recordId: record.id,
                     objectApiName: "Clarity_Form_Response__c",
                     actionName: "view"
                 }
@@ -118,18 +116,18 @@
             workspaceAPI.getTabInfo({
                 tabId: response
         }).then(function(tabInfo) {
-            console.log("The recordId for this tab is: " + tabInfo.recordId);
+
         })
         }).catch(function(error) {
-            console.log(error);
+
         });
 
 
     },
-    handleEditResponse: function(cmp, event, recordId) {
+    handleEditResponse: function(cmp, event, record) {
 
         $A.createComponents([
-            ["c:FormResponse", { "formName": cmp.get("v.formName"), "recordId": recordId }]
+            ["c:FormResponse", { "formName": record.name, "recordId": record.id }]
         ],
         function(components, status) {
             if (status === "SUCCESS") {
@@ -147,14 +145,14 @@
         });
 
     },
-    handleDeleteResponse: function(cmp, event, recordId) {
+    handleDeleteResponse: function(cmp, event, record) {
 
         cmp.set('v.loading', true);
 
         let action = cmp.get("c.deleteFormResponse");
 
         action.setParams({
-            responseId: recordId
+            responseId: record.id
         });
 
 		action.setCallback(this, function (response) {

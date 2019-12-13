@@ -65,7 +65,7 @@
         <lightning:tabset selectedTabId="responses">
             <lightning:tab label="Responses" id="responses">
 
-                <c:FormResponseTable formId="{!v.recordId}" />
+                <c:FormResponseTable formName="{!v.form.Name}" formId="{!v.recordId}" />
 
             </lightning:tab>
             <lightning:tab label="Results" id="results">
@@ -80,5 +80,6 @@
 
     <lightning:navigation aura:id="navService"/>
     <lightning:overlayLibrary aura:id="overlayLib"/>
+    <lightning:notificationsLibrary aura:id="notifLib"/>
 
 </aura:component>

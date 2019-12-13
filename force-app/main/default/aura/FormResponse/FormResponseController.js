@@ -5,8 +5,6 @@
 
         let type = cmp.get('v.sObjectType');
 
-        console.log('type id', id, type); 
-
         if(id != null && type != null) {
 
             let parameters = cmp.get('v.parameters'); 
@@ -51,7 +49,7 @@
                 });
             })
             .catch(function(error) {
-                console.log(error);
+
             });
             
         } 

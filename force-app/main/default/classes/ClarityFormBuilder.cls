@@ -660,7 +660,29 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<Clarity_Form_Connection__c> saveConnections(String sConnections, String formId) {
+    global static List<Clarity_Form_Connection__c> saveConnections(List<String> connect) {
+
+        String sConnections = connect[0];
+        String formId = connect[1]; 
+        String sRemoved = connect[2];
+
+        List<Clarity_Form_Connection__c> removedParsedConnections = (List<Clarity_Form_Connection__c>)JSON.deserialize(sRemoved, List<Clarity_Form_Connection__c>.class);
+
+        if(removedParsedConnections.size() > 0) {
+
+            List<Database.DeleteResult> deleteResults = Database.delete(removedParsedConnections, true); 
+
+            for(Database.DeleteResult deleteResult : deleteResults) {
+
+                if(!deleteResult.isSuccess()) {
+
+                    System.debug('error: ' + deleteResult.getErrors());
+
+                }
+
+            }
+
+        }
 
         List<Clarity_Form_Connection__c> parsedConnections = (List<Clarity_Form_Connection__c>)JSON.deserialize(sConnections, List<Clarity_Form_Connection__c>.class);
 

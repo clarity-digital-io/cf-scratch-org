@@ -65,12 +65,6 @@ public class FormResponseLimits {
         if(ResponsesSubmitted.get(response.Clarity_Form__c) >= form.Limit__c) {
             response.addError('Form has reached it\'s limit in responses allowed.');
         }
-
-        if(form.End_Date__c == null) return;
-
-        if(System.today() >= form.End_Date__c) {
-            response.addError('Response allowed submit date has ended.');
-        }
     }
 
 }

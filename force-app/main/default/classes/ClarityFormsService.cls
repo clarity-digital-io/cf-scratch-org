@@ -49,131 +49,6 @@ public with sharing class ClarityFormsService {
         
     }
 
-    // public static Id clone(Id recordId) {
-
-    //     Clarity_Form__c form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__c, Clarity_Form_Assignment__c     
-    //         FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
-
-    //     List<Clarity_Form_Connection__c> connections = [SELECT Id, Salesforce_Object__c, New__c, 
-    //         (SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
-    //         FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: form.Id];
-
-    //     List<Clarity_Form_Question__c> questions = [SELECT Id, 
-    //         (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
-    //         (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
-    //         (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__r),
-    //         Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, 
-    //         Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
-
-    //     Clarity_Form__c newForm = form.clone(false); 
-
-    //     Database.SaveResult result = Database.insert(newForm, true); 
-
-    //     if(!result.isSuccess()) {
-    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
-    //     }
-
-    //     List<Clarity_Form_Connection__c> newConnections = new List<Clarity_Form_Connection__c>(); 
-
-    //     List<Clarity_Form_Connection_Field__c> newConnectionFields = new List<Clarity_Form_Connection_Field__c>(); 
-
-    //     for(Clarity_Form_Connection__c connection : connections) {
-
-    //         Clarity_Form_Connection__c newConnection = connection.clone(false); 
-    //         newConnection.Clarity_Form__c = newForm.Id;
-
-    //         newConnections.add(newConnection); 
-
-    //         for(Clarity_Form_Connection_Field__c field : connection.Clarity_Form_Connection_Fields__r) {
-
-    //             Clarity_Form_Connection_Field__c newField = field.clone(false); 
-    //             newField.Clarity_Form_Connection__c = newConnection;
-    //             newConnectionFields.add(newField); 
-
-    //         }
-
-    //     }
-
-    //     List<Clarity_Form_Question__c> newQuestions = new List<Clarity_Form_Question__c>(); 
-
-    //     List<Clarity_Form_Question_Option__c> newOptions = new List<Clarity_Form_Question_Option__c>(); 
-
-    //     List<Clarity_Form_Question_Flow_Design__c> newDesigns = new List<Clarity_Form_Question_Flow_Design__c>(); 
-
-    //     List<Clarity_Form_Question_Criteria__c> newCriterias = new List<Clarity_Form_Question_Criteria__c>(); 
-
-    //     for(Clarity_Form_Question__c question : questions) {
-
-    //         Clarity_Form_Question__c newQuestion = question.clone(false); 
-    //         newQuestion.Clarity_Form__c = newForm.Id; 
-
-    //         newQuestions.add(newQuestion); 
-
-    //         for(Clarity_Form_Question_Option__c option : question.Clarity_Form_Question_Options__r) {
-
-    //             Clarity_Form_Question_Option__c newOption = option.clone(false);
-    //             newOption.Clarity_Form_Question__c = newQuestion;
-    //             newOptions.add(newOption);
-
-    //         }
-
-    //         for(Clarity_Form_Question_Flow_Design__c design : question.Clarity_Form_Question_Flow_Designs__r) {
-
-    //             Clarity_Form_Question_Flow_Design__c newDesign = design.clone(false); 
-    //             newDesign.Clarity_Form_Question__c = newQuestion;
-    //             newDesigns.add(newOption);
-
-    //         }
-
-    //         for(Clarity_Form_Question_Criteria__c criteria : question.Clarity_Form_Question_Criteria__r) {
-
-    //             Clarity_Form_Question_Criteria__c newCriteria = criteria.clone(false); 
-    //             newCriteria.Clarity_Form_Question__c = newQuestion;
-    //             newCriteria.add(newOption);
-
-    //         }
-
-    //     }
-
-    //     Database.SaveResult resultConnections = Database.insert(newConnections, true);
-
-    //     if(!resultConnections.isSuccess()) {
-    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
-    //     }
-
-    //     Database.SaveResult resultConnectionFields = Database.insert(newConnectionFields, true); 
-
-    //     if(!resultConnectionFields.isSuccess()) {
-    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
-    //     }
-
-    //     Database.SaveResult resultQuestions = Database.insert(newQuestions, true); 
-
-    //     if(!resultQuestions.isSuccess()) {
-    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
-    //     }
-
-    //     Database.SaveResult resultOptions = Database.insert(newOptions, true); 
-
-    //     if(!resultOptions.isSuccess()) {
-    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
-    //     }
-
-    //     Database.SaveResult resultDesigns = Database.insert(newDesigns, true); 
-
-    //     if(!resultDesigns.isSuccess()) {
-    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
-    //     }
-
-    //     Database.SaveResult resultCriterias = Database.insert(newCriterias, true); 
-
-    //     if(!resultCriterias.isSuccess()) {
-    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
-    //     }
-
-    // }
-
-
     public static List<sObject> connectionRecords(List<Clarity_Form_Response_Connection__c> responseConnections, List<Clarity_Form_Connection__c> formConnections) {
 
         List<sObject> records = new List<sObject>(); 
@@ -221,7 +96,6 @@ public with sharing class ClarityFormsService {
 
     }
 
-
     public static List<Clarity_Form_Response_Connection__c> submitConnections(String responseId, String sConnections) {
 
         List<Clarity_Form_Response_Connection__c> connections = new List<Clarity_Form_Response_Connection__c>(); 
@@ -257,7 +131,7 @@ public with sharing class ClarityFormsService {
         return connections;   
     }
  
-    public static Map<String, List<sObject>> edit(Id responseId) {
+    public static Map<String, List<sObject>> edit(Id responseId, String sConnections) {
 
         Map<String, List<sObject>> formDetails = new Map<String, List<sObject>>();
 
@@ -268,14 +142,14 @@ public with sharing class ClarityFormsService {
             Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
             FROM Clarity_Form__c WHERE Id =: response.Clarity_Form__c LIMIT 1];
 
-        List<Clarity_Form_Connection__c> connections = [SELECT Id, Salesforce_Object__c, New__c, 
+        List<Clarity_Form_Connection__c> formConnections = [SELECT Id, Salesforce_Object__c, New__c, 
             (SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
-            FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: form.Id];
+            FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: form.Id AND New__c = false];
 
         List<Clarity_Form_Connection_Field__c> mappingFields = new List<Clarity_Form_Connection_Field__c>(); 
         List<Clarity_Form_Connection_Field__c> prefillFields = new List<Clarity_Form_Connection_Field__c>(); 
 
-        for(Clarity_Form_Connection__c connection : connections) {
+        for(Clarity_Form_Connection__c connection : formConnections) {
             for(Clarity_Form_Connection_Field__c connectionField : connection.Clarity_Form_Connection_Fields__r) {
                 if(connectionField.PreFill__c) {
                     prefillFields.add(connectionField);
@@ -289,22 +163,163 @@ public with sharing class ClarityFormsService {
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
             (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__r),
-            Salesforce_Object__c, FreeText_Type__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, 
+            Salesforce_Object__c, FreeText_Type__c, Title__c, Order__c, Required__c, Lookup__c, 
+            Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, 
             Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
-        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, Date_Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
+        List<Clarity_Form_Answer__c> answers = [SELECT Id, Record__c, Answer__c, Date_Answer__c, ContentDocument__c, 
+            Clarity_Form_Question__r.Salesforce_Object__c, Clarity_Form_Response__c, Clarity_Form_Question__c, 
+            Clarity_Form_Question__r.Record_Group__c, Clarity_Form_Question__r.Type__c  
             FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
 
         formDetails.put('Form', new List<sObject>{ form });
         formDetails.put('FormResponse', new List<sObject>{ response });
-        formDetails.put('Connections', connections);
-        formDetails.put('ResponseConnections', new List<sObject>());
+
+        if(sConnections != null) {
+
+            List<Clarity_Form_Response_Connection__c> responseConnections = submitConnections(response.Id, sConnections);
+            List<sObject> records = new  List<sObject>(); 
+
+            if(responseConnections.size() > 0) {
+                records = connectionRecords(responseConnections, formConnections);            
+            }
+
+            formDetails.put('Connections', responseConnections);
+            formDetails.put('ConnectedRecords', records);
+
+        } else {
+
+            List<sObject> records = new  List<sObject>(); 
+            
+            List<Clarity_Form_Response_Connection__c> responseConnections = [SELECT Id, Record__c, Clarity_Form_Response__c, 
+                Clarity_Form_Connection__c FROM Clarity_Form_Response_Connection__c];
+            
+            if(responseConnections.size() > 0) {
+                records = connectionRecords(responseConnections, formConnections);            
+            }
+ 
+            formDetails.put('Connections', responseConnections);
+            formDetails.put('ConnectedRecords', records);
+
+        }
+        
         formDetails.put('Mapping', mappingFields);
         formDetails.put('Prefills', prefillFields);
         formDetails.put('Questions', questions);
         formDetails.put('Answers', answers);
 
         return formDetails; 
+    }
+
+    public static Map<Id, List<sObject>> getRecordGroupSubmissions(List<Clarity_Form_Answer__c> answers, List<Clarity_Form_Question__c> questions) {
+
+        Map<Id, List<sObject>> recordGroupSubmissions = new Map<Id, List<sObject>>();
+
+        Map<String, Set<String>> recordGroupFields = new Map<String, Set<String>>(); 
+
+        //get the field names by sboject
+        for(Clarity_Form_Question__c question : questions) {
+
+            if(question.Record_Group__c != null) {
+
+                String sObjectName = question.Record_Group__r.Salesforce_Object__c;
+
+                Id recordGroupId = question.Record_Group__c; 
+
+                String field = question.Salesforce_Field__c;
+
+                if(recordGroupFields.get(sObjectName) != null) {
+
+                    recordGroupFields.get(sObjectName).add(field);
+
+                } else {
+
+                    recordGroupFields.put(sObjectName, new Set<String>{ field });
+
+                }
+
+            }
+        }
+
+        Map<String, Set<String>> recordIdsBySObjectName = new Map<String, Set<String>>(); 
+
+        Map<String, Set<String>> recordIdsByRecordGroupId = new Map<String, Set<String>>(); 
+
+        Map<Id, Id> recordGroupIdByRecordId = new Map<Id, Id>();
+
+        //get the recordIds created by sobject name that way we can query for them
+        //we will also need to be able to know which recordIds belong to which record group/question ids
+        //ability to get sbojectname by recordgroupid
+        for(Clarity_Form_Answer__c answer : answers) {
+
+            if(answer.Clarity_Form_Question__r.Type__c == 'RecordGroup') {
+
+                Id recordId = answer.Record__c; 
+                Id recordGroupId = answer.Clarity_Form_Question__c; 
+                String sObjectName = answer.Clarity_Form_Question__r.Salesforce_Object__c;
+
+                if(recordIdsBySObjectName.get(sObjectName) != null) {
+
+                    recordIdsBySObjectName.get(sObjectName).add(recordId);
+
+                } else {
+
+                    recordIdsBySObjectName.put(sObjectName, new Set<String>{ recordId });
+
+                }
+
+                if(recordIdsByRecordGroupId.get(recordGroupId) != null) {
+
+                    recordIdsByRecordGroupId.get(recordGroupId).add(recordId);
+
+                } else {
+
+                    recordIdsByRecordGroupId.put(recordGroupId, new Set<String>{ recordId });
+
+                }
+
+                recordGroupIdByRecordId.put(recordId, recordGroupId); 
+
+            }
+        }
+
+        //need to be able to query for sobject recordIds only once and assign results to map by questionId/recordGroupId
+        for(String sObjectName : recordGroupFields.keySet()) {
+
+            List<String> sFields = new List<String>(recordGroupFields.get(sObjectName));
+
+            Set<String> recordIds = recordIdsBySObjectName.get(sObjectName);
+
+            String joinedFields = '';
+
+            if(sFields.size() > 0) {
+                joinedFields = String.join(sFields, ', ');
+                joinedFields = joinedFields.removeEnd(',');
+                joinedFields = ', ' + joinedFields;
+            } 
+
+            List<sObject> results = Database.query('SELECT Id ' + joinedFields + ' FROM ' + sObjectName + ' WHERE Id IN :recordIds');
+
+            for(sObject result : results) {
+
+                Id recordGroupId = recordGroupIdByRecordId.get(result.Id); 
+
+                if(recordGroupSubmissions.get(recordGroupId) != null) {
+                    
+                    recordGroupSubmissions.get(recordGroupId).add(result); 
+
+                } else {
+
+                    recordGroupSubmissions.put(recordGroupId, new List<sObject> { result }); 
+
+                }
+
+            }
+
+        }
+
+        return recordGroupSubmissions;
+
     }
 
     public static  Map<String, List<sObject>> create(Id formId) {
@@ -384,7 +399,8 @@ public with sharing class ClarityFormsService {
         List<Clarity_Form_Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
-            Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, 
+            Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, 
+            Record_Group__c, Record_Group__r.Salesforce_Object__c, 
             Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, Date_Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
@@ -759,4 +775,127 @@ public with sharing class ClarityFormsService {
         public List<Clarity_Form_Connection_Field__c> Fields;
     }
 
+    // public static Id clone(Id recordId) {
+
+        //     Clarity_Form__c form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__c, Clarity_Form_Assignment__c     
+        //         FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
+
+        //     List<Clarity_Form_Connection__c> connections = [SELECT Id, Salesforce_Object__c, New__c, 
+        //         (SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
+        //         FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: form.Id];
+
+        //     List<Clarity_Form_Question__c> questions = [SELECT Id, 
+        //         (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
+        //         (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
+        //         (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__r),
+        //         Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, 
+        //         Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
+
+        //     Clarity_Form__c newForm = form.clone(false); 
+
+        //     Database.SaveResult result = Database.insert(newForm, true); 
+
+        //     if(!result.isSuccess()) {
+        //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+        //     }
+
+        //     List<Clarity_Form_Connection__c> newConnections = new List<Clarity_Form_Connection__c>(); 
+
+        //     List<Clarity_Form_Connection_Field__c> newConnectionFields = new List<Clarity_Form_Connection_Field__c>(); 
+
+        //     for(Clarity_Form_Connection__c connection : connections) {
+
+        //         Clarity_Form_Connection__c newConnection = connection.clone(false); 
+        //         newConnection.Clarity_Form__c = newForm.Id;
+
+        //         newConnections.add(newConnection); 
+
+        //         for(Clarity_Form_Connection_Field__c field : connection.Clarity_Form_Connection_Fields__r) {
+
+        //             Clarity_Form_Connection_Field__c newField = field.clone(false); 
+        //             newField.Clarity_Form_Connection__c = newConnection;
+        //             newConnectionFields.add(newField); 
+
+        //         }
+
+        //     }
+
+        //     List<Clarity_Form_Question__c> newQuestions = new List<Clarity_Form_Question__c>(); 
+
+        //     List<Clarity_Form_Question_Option__c> newOptions = new List<Clarity_Form_Question_Option__c>(); 
+
+        //     List<Clarity_Form_Question_Flow_Design__c> newDesigns = new List<Clarity_Form_Question_Flow_Design__c>(); 
+
+        //     List<Clarity_Form_Question_Criteria__c> newCriterias = new List<Clarity_Form_Question_Criteria__c>(); 
+
+        //     for(Clarity_Form_Question__c question : questions) {
+
+        //         Clarity_Form_Question__c newQuestion = question.clone(false); 
+        //         newQuestion.Clarity_Form__c = newForm.Id; 
+
+        //         newQuestions.add(newQuestion); 
+
+        //         for(Clarity_Form_Question_Option__c option : question.Clarity_Form_Question_Options__r) {
+
+        //             Clarity_Form_Question_Option__c newOption = option.clone(false);
+        //             newOption.Clarity_Form_Question__c = newQuestion;
+        //             newOptions.add(newOption);
+
+        //         }
+
+        //         for(Clarity_Form_Question_Flow_Design__c design : question.Clarity_Form_Question_Flow_Designs__r) {
+
+        //             Clarity_Form_Question_Flow_Design__c newDesign = design.clone(false); 
+        //             newDesign.Clarity_Form_Question__c = newQuestion;
+        //             newDesigns.add(newOption);
+
+        //         }
+
+        //         for(Clarity_Form_Question_Criteria__c criteria : question.Clarity_Form_Question_Criteria__r) {
+
+        //             Clarity_Form_Question_Criteria__c newCriteria = criteria.clone(false); 
+        //             newCriteria.Clarity_Form_Question__c = newQuestion;
+        //             newCriteria.add(newOption);
+
+        //         }
+
+        //     }
+
+        //     Database.SaveResult resultConnections = Database.insert(newConnections, true);
+
+        //     if(!resultConnections.isSuccess()) {
+        //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+        //     }
+
+        //     Database.SaveResult resultConnectionFields = Database.insert(newConnectionFields, true); 
+
+        //     if(!resultConnectionFields.isSuccess()) {
+        //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+        //     }
+
+        //     Database.SaveResult resultQuestions = Database.insert(newQuestions, true); 
+
+        //     if(!resultQuestions.isSuccess()) {
+        //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+        //     }
+
+        //     Database.SaveResult resultOptions = Database.insert(newOptions, true); 
+
+        //     if(!resultOptions.isSuccess()) {
+        //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+        //     }
+
+        //     Database.SaveResult resultDesigns = Database.insert(newDesigns, true); 
+
+        //     if(!resultDesigns.isSuccess()) {
+        //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+        //     }
+
+        //     Database.SaveResult resultCriterias = Database.insert(newCriterias, true); 
+
+        //     if(!resultCriterias.isSuccess()) {
+        //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+        //     }
+
+        // }
 }
