@@ -9,7 +9,7 @@
     <aura:attribute name="loading" type="Boolean"/>
     <aura:attribute name="recordId" type="String"/>
 
-    <div class="slds-page-header slds-page-header_record-home">
+    <div class="clarity-header slds-page-header slds-page-header_record-home">
         <div class="slds-page-header__row">
             <div class="slds-page-header__col-title">
                 <div class="slds-media">

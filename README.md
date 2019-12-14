@@ -25,6 +25,8 @@ sfdx force:apex:trigger:create -n ClarityFormResponseTrigger -d force-app/main/d
 
 sfdx force:lightning:component:create --type aura -n FormResponseView -d force-app/main/default/aura
 
+sfdx force:lightning:component:create --type aura -n FormHeader -d force-app/main/default/aura
+
 sfdx force:lightning:component:create --type aura -n FormAnswersTable -d force-app/main/default/aura
 
 sfdx force:lightning:component:create --type aura -n FormResponseCard -d force-app/main/default/aura
