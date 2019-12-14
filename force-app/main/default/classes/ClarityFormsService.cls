@@ -164,10 +164,10 @@ public with sharing class ClarityFormsService {
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
             (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__r),
             Salesforce_Object__c, FreeText_Type__c, Title__c, Order__c, Required__c, Lookup__c, 
-            Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, 
+            Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, Max_Length__c, 
             Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
-        List<Clarity_Form_Answer__c> answers = [SELECT Id, Record__c, Answer__c, Date_Answer__c, ContentDocument__c, 
+        List<Clarity_Form_Answer__c> answers = [SELECT Id, Name, Record__c, Answer__c, Date_Answer__c, ContentVersion__c, ContentDocument__c, 
             Clarity_Form_Question__r.Salesforce_Object__c, Clarity_Form_Response__c, Clarity_Form_Question__c, 
             Clarity_Form_Question__r.Record_Group__c, Clarity_Form_Question__r.Type__c  
             FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
@@ -400,10 +400,11 @@ public with sharing class ClarityFormsService {
             (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
             Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, 
-            Record_Group__c, Record_Group__r.Salesforce_Object__c, 
+            Record_Group__c, Record_Group__r.Salesforce_Object__c, Max_Length__c, 
             Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
-        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, Date_Answer__c, ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
+        List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, Date_Answer__c, ContentVersion__c, 
+            ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  
             FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: response.Id];
 
         formDetails.put('Form', new List<sObject>{ form });
@@ -626,6 +627,7 @@ public with sharing class ClarityFormsService {
 
             Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
                 ContentDocument__c = cv.ContentDocumentId,
+                ContentVersion__c = cv.Id,
                 Clarity_Form_Question__c = questionId,
                 Clarity_Form_Response__c = responseId
             );

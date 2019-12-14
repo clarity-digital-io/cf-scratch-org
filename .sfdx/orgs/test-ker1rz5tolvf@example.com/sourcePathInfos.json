@@ -1128,14 +1128,13 @@
         {
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormsService.cls",
             "isDirectory": false,
-            "size": 35855,
-            "modifiedTime": 1576182774955,
-            "changeTime": 1576182774955,
-            "contentHash": "5fc3fd8c670fff8881d05c08315b90a5adf8258e",
+            "size": 35985,
+            "modifiedTime": 1576356753521,
+            "changeTime": 1576356753521,
+            "contentHash": "3b7eb45f7b9c4b1a7127cfbd0c2c1c924d2452a3",
             "isMetadataFile": false,
             "state": "u",
-            "isWorkspace": false,
-            "isArtifactRoot": false
+            "isWorkspace": false
         }
     ],
     [
@@ -5401,15 +5400,15 @@
     [
         "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsBuilder/bundle.js",
         {
-            "state": "u",
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsBuilder/bundle.js",
             "isDirectory": false,
+            "size": 2593517,
+            "modifiedTime": 1576353235355,
+            "changeTime": 1576353017425,
+            "contentHash": "bf0d642155d1ea9653634774f326975f7ea728b5",
             "isMetadataFile": false,
-            "size": 2594110,
-            "modifiedTime": 1576351349090,
-            "changeTime": 1576351349090,
-            "isWorkspace": false,
-            "contentHash": "fad8e7d7a6e6d79d9b9190b0426403f215f3374d"
+            "state": "u",
+            "isWorkspace": false
         }
     ],
     [
@@ -5505,16 +5504,15 @@
     [
         "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsResponse/bundle.js",
         {
+            "state": "u",
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/staticresources/ClarityFormsResponse/bundle.js",
             "isDirectory": false,
-            "size": 2268030,
-            "modifiedTime": 1576201650795,
-            "changeTime": 1576201650795,
-            "contentHash": "6c13f24bac9ccd1257867cd6196a4dc6584e8dbc",
             "isMetadataFile": false,
-            "state": "u",
+            "size": 2268572,
+            "modifiedTime": 1576357207600,
+            "changeTime": 1576357207600,
             "isWorkspace": false,
-            "isArtifactRoot": false
+            "contentHash": "61eba6427be042a6be89e28f363c44ba8093383e"
         }
     ],
     [
