@@ -41,7 +41,7 @@
                         </aura:if>
 
                         <lightning:button iconName="utility:insert_template" onclick="{!c.edit}" label="Form Builder" />
-                        <lightning:button iconName="action:clone" label="Clone" onclick="{!c.clone}" />
+                        <!-- <lightning:button iconName="action:clone" label="Clone" onclick="{!c.clone}" /> -->
                         <lightning:button iconName="action:delete" label="Delete" onclick="{!c.delete}" />
                     </lightning:buttonGroup>
                 </div>

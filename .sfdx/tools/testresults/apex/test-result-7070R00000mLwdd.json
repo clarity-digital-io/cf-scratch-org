@@ -1,0 +1,46 @@
+{
+    "summary": {
+        "outcome": "Passed",
+        "testsRan": 1,
+        "passing": 1,
+        "failing": 0,
+        "skipped": 0,
+        "passRate": "100%",
+        "failRate": "0%",
+        "testStartTime": "Dec 12, 2019 9:40 PM",
+        "testExecutionTime": "120 ms",
+        "testTotalTime": "120 ms",
+        "commandTime": "5335 ms",
+        "hostname": "https://customization-business-8920-dev-ed.cs94.my.salesforce.com",
+        "orgId": "00D0R0000001hlnUAA",
+        "username": "test-tkg6ixvrkmnr@example.com",
+        "testRunId": "7070R00000mLwdd",
+        "userId": "0050R000003YmuIQAS"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M0R000007TyyqUAC"
+            },
+            "Id": "07M0R000007TyyqUAC",
+            "QueueItemId": "7090R000000sbTOQAY",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7070R00000mLwddQAC",
+            "MethodName": "shouldGetFormResponses",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p0R000005EEckQAG"
+                },
+                "Id": "01p0R000005EEckQAG",
+                "Name": "FormControllerTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 120,
+            "FullName": "FormControllerTest.shouldGetFormResponses"
+        }
+    ]
+}

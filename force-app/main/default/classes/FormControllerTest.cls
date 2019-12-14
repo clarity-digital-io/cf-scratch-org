@@ -17,7 +17,7 @@ public class FormControllerTest {
 
         Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c Limit 1];
 
-        List<Clarity_Form_Response__c> responses = FormController.getFormResponses(form.Name, null);
+        List<Clarity_Form_Response__c> responses = FormController.getFormResponses(null, form.Name);
 
         System.assertEquals(1, responses.size());
 
@@ -28,9 +28,26 @@ public class FormControllerTest {
 
         Clarity_Form_Response__c response = [SELECT Id FROM Clarity_Form_Response__c Limit 1]; 
 
-        String deleteFormResponseId = FormController.deleteForm(response.Id);
+        String deleteFormResponseId = FormController.deleteFormResponse(response.Id);
 
         System.assertEquals(response.Id, deleteFormResponseId);
+    }
+
+    @isTest
+    public static void shouldNotDeleteForm() {
+
+        Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c Limit 1];
+
+        List<Clarity_Form_Response__c> responses = [SELECT Id FROM Clarity_Form_Response__c]; 
+
+        try {
+            String status = FormController.deleteForm(form.Id);
+        } catch (AuraHandledException e) {
+            System.assertEquals('Script-thrown exception', e.getMessage());
+        }
+
+        System.assertNotEquals(0, responses.size());
+
     }
 
     @isTest
@@ -38,11 +55,13 @@ public class FormControllerTest {
 
         Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c Limit 1];
 
-        String status = FormController.deleteForm(form.Id);
-
         List<Clarity_Form_Response__c> responses = [SELECT Id FROM Clarity_Form_Response__c]; 
 
-        System.assertEquals(0, responses.size());
+        Test.startTest();
+            delete responses; 
+        Test.stopTest();
+
+        String status = FormController.deleteForm(form.Id);
 
         System.assertEquals('Success', status);
 

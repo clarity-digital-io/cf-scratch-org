@@ -1,0 +1,46 @@
+{
+    "summary": {
+        "outcome": "Failed",
+        "testsRan": 1,
+        "passing": 0,
+        "failing": 1,
+        "skipped": 0,
+        "passRate": "0%",
+        "failRate": "100%",
+        "testStartTime": "Dec 12, 2019 9:44 PM",
+        "testExecutionTime": "1529 ms",
+        "testTotalTime": "1529 ms",
+        "commandTime": "7461 ms",
+        "hostname": "https://customization-business-8920-dev-ed.cs94.my.salesforce.com",
+        "orgId": "00D0R0000001hlnUAA",
+        "username": "test-tkg6ixvrkmnr@example.com",
+        "testRunId": "7070R00000mLwiE",
+        "userId": "0050R000003YmuIQAS"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M0R000007Tyz0UAC"
+            },
+            "Id": "07M0R000007Tyz0UAC",
+            "QueueItemId": "7090R000000sbTYQAY",
+            "StackTrace": "Class.FormControllerTest.shouldDeleteForm: line 49, column 1",
+            "Message": "System.AssertException: Assertion Failed: Expected: 0, Actual: 1",
+            "AsyncApexJobId": "7070R00000mLwiEQAS",
+            "MethodName": "shouldDeleteForm",
+            "Outcome": "Fail",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p0R000005EEckQAG"
+                },
+                "Id": "01p0R000005EEckQAG",
+                "Name": "FormControllerTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 1529,
+            "FullName": "FormControllerTest.shouldDeleteForm"
+        }
+    ]
+}

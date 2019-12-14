@@ -1,0 +1,118 @@
+{
+    "summary": {
+        "outcome": "Failed",
+        "testsRan": 4,
+        "passing": 1,
+        "failing": 3,
+        "skipped": 0,
+        "passRate": "25%",
+        "failRate": "75%",
+        "testStartTime": "Dec 12, 2019 9:02 PM",
+        "testExecutionTime": "138 ms",
+        "testTotalTime": "138 ms",
+        "commandTime": "7035 ms",
+        "hostname": "https://customization-business-8920-dev-ed.cs94.my.salesforce.com",
+        "orgId": "00D0R0000001hlnUAA",
+        "username": "test-tkg6ixvrkmnr@example.com",
+        "testRunId": "7070R00000mLvpZ",
+        "userId": "0050R000003YmuIQAS"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M0R000007Tyy2UAC"
+            },
+            "Id": "07M0R000007Tyy2UAC",
+            "QueueItemId": "7090R000000sbSzQAI",
+            "StackTrace": "Class.FormController.deleteForm: line 42, column 1\nClass.FormControllerTest.shouldDeleteForm: line 41, column 1",
+            "Message": "System.AuraHandledException: Script-thrown exception",
+            "AsyncApexJobId": "7070R00000mLvpZQAS",
+            "MethodName": "shouldDeleteForm",
+            "Outcome": "Fail",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p0R000005EEckQAG"
+                },
+                "Id": "01p0R000005EEckQAG",
+                "Name": "FormControllerTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 53,
+            "FullName": "FormControllerTest.shouldDeleteForm"
+        },
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M0R000007Tyy3UAC"
+            },
+            "Id": "07M0R000007Tyy3UAC",
+            "QueueItemId": "7090R000000sbSzQAI",
+            "StackTrace": "Class.FormController.deleteForm: line 39, column 1\nClass.FormControllerTest.shouldDeleteFormResponse: line 31, column 1",
+            "Message": "System.QueryException: List has no rows for assignment to SObject",
+            "AsyncApexJobId": "7070R00000mLvpZQAS",
+            "MethodName": "shouldDeleteFormResponse",
+            "Outcome": "Fail",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p0R000005EEckQAG"
+                },
+                "Id": "01p0R000005EEckQAG",
+                "Name": "FormControllerTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 16,
+            "FullName": "FormControllerTest.shouldDeleteFormResponse"
+        },
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M0R000007Tyy4UAC"
+            },
+            "Id": "07M0R000007Tyy4UAC",
+            "QueueItemId": "7090R000000sbSzQAI",
+            "StackTrace": "Class.FormControllerTest.shouldGetFormResponses: line 22, column 1",
+            "Message": "System.AssertException: Assertion Failed: Expected: 1, Actual: 0",
+            "AsyncApexJobId": "7070R00000mLvpZQAS",
+            "MethodName": "shouldGetFormResponses",
+            "Outcome": "Fail",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p0R000005EEckQAG"
+                },
+                "Id": "01p0R000005EEckQAG",
+                "Name": "FormControllerTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 20,
+            "FullName": "FormControllerTest.shouldGetFormResponses"
+        },
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M0R000007Tyy5UAC"
+            },
+            "Id": "07M0R000007Tyy5UAC",
+            "QueueItemId": "7090R000000sbSzQAI",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7070R00000mLvpZQAS",
+            "MethodName": "shouldPublishForm",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p0R000005EEckQAG"
+                },
+                "Id": "01p0R000005EEckQAG",
+                "Name": "FormControllerTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 49,
+            "FullName": "FormControllerTest.shouldPublishForm"
+        }
+    ]
+}

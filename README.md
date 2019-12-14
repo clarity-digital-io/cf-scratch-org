@@ -7,7 +7,7 @@ sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-forms-org
 
-sfdx force:alias:set forms=test-tkg6ixvrkmnr@example.com
+sfdx force:alias:set forms=test-ker1rz5tolvf@example.com
 
 sfdx force:config:set defaultusername=forms
 
@@ -86,4 +86,9 @@ Timeline
 ResponsesTable
 FormResponse - (New, Edit, Submitted, Locked)
 
+## Creating a managed package
 
+https://sfdx-isv.github.io/sfdx-workshop/
+
+- Environment Hub
+- Create new Partner Developer Org

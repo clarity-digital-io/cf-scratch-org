@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2019-12-12T21:40:50-06:00" hostname="https://customization-business-8920-dev-ed.cs94.my.salesforce.com" tests="4" failures="2"  errors="0"  time="0.13">
+        <properties>
+            <property name="outcome" value="Failed"/>
+            <property name="testsRan" value="4"/>
+            <property name="passing" value="2"/>
+            <property name="failing" value="2"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="50%"/>
+            <property name="failRate" value="50%"/>
+            <property name="testStartTime" value="Dec 12, 2019 9:40 PM"/>
+            <property name="testExecutionTime" value="0.13 s"/>
+            <property name="testTotalTime" value="0.13 s"/>
+            <property name="commandTime" value="7.37 s"/>
+            <property name="hostname" value="https://customization-business-8920-dev-ed.cs94.my.salesforce.com"/>
+            <property name="orgId" value="00D0R0000001hlnUAA"/>
+            <property name="username" value="test-tkg6ixvrkmnr@example.com"/>
+            <property name="testRunId" value="7070R00000mLwby"/>
+            <property name="userId" value="0050R000003YmuIQAS"/>
+        </properties>
+        <testcase name="shouldDeleteForm" classname="FormControllerTest" time="0.02">
+            <failure message="System.AuraHandledException: Script-thrown exception"><![CDATA[Class.FormController.deleteForm: line 42, column 1
+Class.FormControllerTest.shouldDeleteForm: line 41, column 1]]></failure>
+        </testcase>
+        <testcase name="shouldDeleteFormResponse" classname="FormControllerTest" time="0.01">
+            <failure message="System.QueryException: List has no rows for assignment to SObject"><![CDATA[Class.FormController.deleteForm: line 39, column 1
+Class.FormControllerTest.shouldDeleteFormResponse: line 31, column 1]]></failure>
+        </testcase>
+        <testcase name="shouldGetFormResponses" classname="FormControllerTest" time="0.06">
+        </testcase>
+        <testcase name="shouldPublishForm" classname="FormControllerTest" time="0.04">
+        </testcase>
+    </testsuite>
+</testsuites>

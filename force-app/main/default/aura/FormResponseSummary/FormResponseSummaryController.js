@@ -51,42 +51,42 @@
         });
 
     },
-    clone: function(cmp, event, helper) {
+    // clone: function(cmp, event, helper) {
 
-        let action = cmp.get("c.cloneForm");
+    //     let action = cmp.get("c.cloneForm");
 
-        action.setParams({
-            recordId: cmp.get("v.recordId")
-        });
+    //     action.setParams({
+    //         recordId: cmp.get("v.recordId")
+    //     });
 
-		action.setCallback(this, function (response) {
+	// 	action.setCallback(this, function (response) {
 
-            let state = response.getState();
+    //         let state = response.getState();
         
-            if (state === "SUCCESS") {
+    //         if (state === "SUCCESS") {
             
-                var formId = response.getReturnValue();
+    //             var formId = response.getReturnValue();
 
-                let navLink = cmp.find("navService");
+    //             let navLink = cmp.find("navService");
 
-                let pageRef = {
-                    type: "standard__recordPage",
-                    attributes: {
-                        actionName: 'view', 
-                        objectApiName: 'Clarity_Form__c', 
-                        recordId: formId   
-                    }
-                }
+    //             let pageRef = {
+    //                 type: "standard__recordPage",
+    //                 attributes: {
+    //                     actionName: 'view', 
+    //                     objectApiName: 'Clarity_Form__c', 
+    //                     recordId: formId   
+    //                 }
+    //             }
         
-                navLink.navigate(pageRef, true);
+    //             navLink.navigate(pageRef, true);
 
-            } 
+    //         } 
             
-        }); 
+    //     }); 
 
-        $A.enqueueAction(action);
+    //     $A.enqueueAction(action);
 
-    }, 
+    // }, 
     delete: function(cmp, event, helper) {
 
         let action = cmp.get("c.deleteForm");

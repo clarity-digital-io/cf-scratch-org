@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2019-12-12T21:53:20-06:00" hostname="https://customization-business-8920-dev-ed.cs94.my.salesforce.com" tests="5" failures="0"  errors="0"  time="1.84">
+        <properties>
+            <property name="outcome" value="Passed"/>
+            <property name="testsRan" value="5"/>
+            <property name="passing" value="5"/>
+            <property name="failing" value="0"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="100%"/>
+            <property name="failRate" value="0%"/>
+            <property name="testStartTime" value="Dec 12, 2019 9:53 PM"/>
+            <property name="testExecutionTime" value="1.84 s"/>
+            <property name="testTotalTime" value="1.84 s"/>
+            <property name="commandTime" value="9.15 s"/>
+            <property name="hostname" value="https://customization-business-8920-dev-ed.cs94.my.salesforce.com"/>
+            <property name="orgId" value="00D0R0000001hlnUAA"/>
+            <property name="username" value="test-tkg6ixvrkmnr@example.com"/>
+            <property name="testRunId" value="7070R00000mLwtS"/>
+            <property name="userId" value="0050R000003YmuIQAS"/>
+        </properties>
+        <testcase name="shouldDeleteForm" classname="FormControllerTest" time="1.48">
+        </testcase>
+        <testcase name="shouldDeleteFormResponse" classname="FormControllerTest" time="0.22">
+        </testcase>
+        <testcase name="shouldGetFormResponses" classname="FormControllerTest" time="0.07">
+        </testcase>
+        <testcase name="shouldNotDeleteForm" classname="FormControllerTest" time="0.02">
+        </testcase>
+        <testcase name="shouldPublishForm" classname="FormControllerTest" time="0.04">
+        </testcase>
+    </testsuite>
+</testsuites>
