@@ -7,3 +7,17 @@
 .THIS .clarityModal {
     background: #000;
 }
+
+.THIS .slds-card {
+    background: #00305C !important;
+    border: #00305C !important;
+}
+
+.THIS h2 {
+    color: #fff;
+}
+
+article.slds-card.slds-card_boundary.cFormResponseCard {
+    background: #00305C !important;
+    border: #00305C !important; 
+}
