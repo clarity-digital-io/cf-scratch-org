@@ -52,26 +52,6 @@ public with sharing class FormController {
 
     }
 
-    //Cloning a form needs to include cloning questions and it's values
-    // @AuraEnabled
-    // public static Id cloneForm(String recordId){
-        
-    //     Clarity_Form__c form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__c, Clarity_Form_Assignment__c 
-            
-    //         FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
-
-    //     Clarity_Form__c newForm = form.clone(false); 
-
-    //     Database.SaveResult result = Database.insert(newForm, true); 
-
-    //     if(!result.isSuccess()) {
-    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
-    //     }
-
-    //     return newForm.Id;
-
-    // }
-
     @AuraEnabled
     public static String publishForm(String recordId){
         
@@ -89,7 +69,7 @@ public with sharing class FormController {
 
     }
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static  Map<String, List<Map<String, String>>> getAnswerColumns(String recordId){
         
         Clarity_Form__c form = [SELECT Id, (SELECT Id, Name, Record_Group__c, Title__c, Type__c FROM Clarity_Form_Questions__r) 
@@ -133,7 +113,7 @@ public with sharing class FormController {
 
         List<Clarity_Form_Response__c> responses = [SELECT Id, Name, 
             (SELECT Id, ContentDocument__c, Date_Answer__c, Answer__c, Record__c, Clarity_Form_Question__c, 
-            Clarity_Form_Question__r.Type__c, Clarity_Form_Question__r.Name 
+            Clarity_Form_Question__r.Type__c, Clarity_Form_Question__r.Name, ContentVersion__c  
             FROM Clarity_Form_Answers__r) FROM Clarity_Form_Response__c WHERE Clarity_Form__c =: recordId AND Status__c != 'Preview'];
 
         for(Clarity_Form_Response__c response : responses) {
@@ -144,7 +124,32 @@ public with sharing class FormController {
 
             for(Clarity_Form_Answer__c answer : response.Clarity_Form_Answers__r) {
 
-                row.put(answer.Clarity_Form_Question__r.Name, buildAnswer(answer, questionOptions));
+                if(answer.Clarity_Form_Question__r.Type__c == 'Attachments') {
+                    
+                    if(row.get(answer.Clarity_Form_Question__r.Name) != null) {
+
+                        String sAttachments = row.get(answer.Clarity_Form_Question__r.Name); 
+
+                        List<String> attachments = (List<String>)JSON.deserialize(sAttachments, List<String>.class);
+
+                        attachments.add('/sfc/servlet.shepherd/version/download/' + answer.ContentVersion__c);
+
+                        row.put(answer.Clarity_Form_Question__r.Name, JSON.serialize(attachments));
+
+                    } else {
+
+                        if(answer.ContentVersion__c != null) {
+                            List<String> attachments = new List<String>{ '/sfc/servlet.shepherd/version/download/' + answer.ContentVersion__c };
+                            row.put(answer.Clarity_Form_Question__r.Name, JSON.serialize(attachments));
+                        }
+
+                    }
+
+                } else {
+
+                    row.put(answer.Clarity_Form_Question__r.Name, buildAnswer(answer, questionOptions));
+
+                }
 
             }
 
@@ -163,7 +168,8 @@ public with sharing class FormController {
         Map<String, String> column = new Map<String, String>(); 
 
         if(question.Type__c != 'FreeText') {
-
+            
+            column.put('id', question.Id);
             column.put('label', question.Title__c);
             column.put('fieldName', question.Name);
             column.put('type', question.Type__c.toLowerCase());
@@ -200,11 +206,34 @@ public with sharing class FormController {
             when 'RecordGroup' {
                 return answer.Record__c;
             }
+            when 'Attachments' {
+                return answer.ContentVersion__c;
+            }
             when else {
                 return answer.Answer__c;
             }
         }
 
     }
+
+    //Cloning a form needs to include cloning questions and it's values
+    // @AuraEnabled
+    // public static Id cloneForm(String recordId){
+        
+    //     Clarity_Form__c form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__c, Clarity_Form_Assignment__c 
+            
+    //         FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
+
+    //     Clarity_Form__c newForm = form.clone(false); 
+
+    //     Database.SaveResult result = Database.insert(newForm, true); 
+
+    //     if(!result.isSuccess()) {
+    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
+    //     }
+
+    //     return newForm.Id;
+
+    // }
 
 }

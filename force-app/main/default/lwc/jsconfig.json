@@ -2,7 +2,17 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "baseUrl": ".",
-        "paths": {}
+        "paths": {
+            "c/formAnswers": [
+                "formAnswers/formAnswers.js"
+            ],
+            "c/imageAnswersTable": [
+                "imageAnswersTable/imageAnswersTable.js"
+            ],
+            "c/imageControl": [
+                "imageControl/imageControl.js"
+            ]
+        }
     },
     "include": [
         "**/*",

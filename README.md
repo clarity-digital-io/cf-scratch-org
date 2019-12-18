@@ -35,6 +35,12 @@ sfdx force:lightning:event:create -n FormResponseEvent -d force-app/main/default
 
 sfdx force:apex:class:create -n FormResponseLimits -d force-app/main/default/classes
 
+sfdx force:lightning:component:create --type lwc -n formAnswers -d force-app/main/default/lwc
+
+sfdx force:lightning:component:create --type lwc -n imageAnswersTable -d force-app/main/default/lwc
+
+sfdx force:lightning:component:create --type lwc -n imageControl -d force-app/main/default/lwc
+
 ## Tests
 
 ### Clarity_Form_QuestionTriggerHandler

@@ -10,7 +10,7 @@
         <pageOrSobjectType>Clarity_Form__c</pageOrSobjectType>
     </actionOverrides>
     <brand>
-        <headerColor>#000000</headerColor>
+        <headerColor>#00305C</headerColor>
         <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
     </brand>
     <description>Build, Manage, Automate, and Connect Forms</description>
@@ -21,8 +21,6 @@
     <navType>Console</navType>
     <tabs>Clarity_Form__c</tabs>
     <tabs>Clarity_Form_Response__c</tabs>
-    <tabs>standard-home</tabs>
-    <tabs>standard-Dashboard</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Clarity_Forms_UtilityBar</utilityBar>
     <workspaceConfig>
@@ -31,12 +29,6 @@
         </mappings>
         <mappings>
             <tab>Clarity_Form__c</tab>
-        </mappings>
-        <mappings>
-            <tab>standard-Dashboard</tab>
-        </mappings>
-        <mappings>
-            <tab>standard-home</tab>
         </mappings>
     </workspaceConfig>
 </CustomApplication>

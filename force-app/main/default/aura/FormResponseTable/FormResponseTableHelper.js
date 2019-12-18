@@ -86,6 +86,7 @@
 
         if (row.status == 'Submitted') {
             actions.push(viewAction);
+            editAction.disabled = true;
             actions.push(editAction);
         } else {
             viewAction.disabled = true;

@@ -14,7 +14,7 @@
             if (state === "SUCCESS") {
             
                 let table = response.getReturnValue();
-
+                console.log('table', table); 
                 cmp.set('v.columns', table.Columns);
 
                 cmp.set('v.data', table.Data);

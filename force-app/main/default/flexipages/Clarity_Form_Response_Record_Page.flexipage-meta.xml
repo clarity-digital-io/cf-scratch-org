@@ -2,19 +2,7 @@
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <componentInstances>
-            <componentInstanceProperties>
-                <name>collapsed</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>hideChatterActions</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>numVisibleActions</name>
-                <value>1</value>
-            </componentInstanceProperties>
-            <componentName>force:highlightsPanel</componentName>
+            <componentName>FormHeader</componentName>
         </componentInstances>
         <name>header</name>
         <type>Region</type>
@@ -55,9 +43,6 @@
             <componentName>force:relatedListSingleContainer</componentName>
         </componentInstances>
         <componentInstances>
-            <componentName>forceChatter:recordFeedContainer</componentName>
-        </componentInstances>
-        <componentInstances>
             <componentInstanceProperties>
                 <name>parentFieldApiName</name>
                 <value>Clarity_Form_Response__c.Id</value>
@@ -79,6 +64,39 @@
                 <value>true</value>
             </componentInstanceProperties>
             <componentName>force:relatedListSingleContainer</componentName>
+        </componentInstances>
+        <name>Facet-4fe4dbe7-90ae-4215-a6e6-8b3384de30c6</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>body</name>
+                <value>Facet-4fe4dbe7-90ae-4215-a6e6-8b3384de30c6</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>label</name>
+                <value>Standard.Tab.relatedLists</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>name</name>
+                <value>accordionSection1</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:accordionSection</componentName>
+        </componentInstances>
+        <name>Facet-2f92cdbc-8d98-4a12-827c-a9e819a519a7</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>accordionSections</name>
+                <value>Facet-2f92cdbc-8d98-4a12-827c-a9e819a519a7</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:accordion</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentName>forceChatter:recordFeedContainer</componentName>
         </componentInstances>
         <name>sidebar</name>
         <type>Region</type>

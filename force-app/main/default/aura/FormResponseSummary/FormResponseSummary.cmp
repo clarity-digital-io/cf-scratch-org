@@ -70,8 +70,9 @@
             </lightning:tab>
             <lightning:tab label="Results" id="results">
                 
-                <c:FormAnswersTable recordId="{!v.recordId}" />
-            
+                <!-- <c:FormAnswersTable recordId="{!v.recordId}" /> -->
+                <c:formAnswers recordId="{!v.recordId}" />    
+
             </lightning:tab>
         </lightning:tabset>
     </div>

@@ -69,6 +69,8 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Salesforce_Connection_Object__c</fields>
+        <fields>Status__c</fields>
         <relatedList>Clarity_Form_Connection_Process__c.Clarity_Form_Response__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -87,7 +89,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h54000001MHCJ</masterLabel>
+        <masterLabel>00h0x000000iKiW</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

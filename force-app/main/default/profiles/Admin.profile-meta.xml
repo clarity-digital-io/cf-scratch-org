@@ -14,7 +14,15 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>ClarityFormBuilderTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ClarityFormResponse</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ClarityFormResponseTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -127,6 +135,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form_Answer__c.ContentDocument__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Answer__c.ContentVersion__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

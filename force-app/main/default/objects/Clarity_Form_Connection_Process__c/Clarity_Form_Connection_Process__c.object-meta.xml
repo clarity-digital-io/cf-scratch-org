@@ -54,8 +54,9 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Clarity Form Connection Process</label>
     <nameField>
+        <displayFormat>CFCP-{0000}</displayFormat>
         <label>Clarity Form Connection Process Name</label>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Clarity Form Connection Process</pluralLabel>
     <searchLayouts/>
