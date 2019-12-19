@@ -6,9 +6,14 @@
     <aura:attribute name="loading" type="Boolean"/>
     <aura:attribute name="recordId" type="String"/>
 
-    <lightning:datatable
-        keyField="id"
-        data="{! v.data }"
-        columns="{! v.columns }" />
+    <aura:if isTrue="{! v.loading }">
+        <lightning:spinner alternativeText="Loading" />
+        <aura:set attribute="else">
+            <lightning:datatable
+                keyField="id"
+                data="{! v.data }"
+                columns="{! v.columns }" />
+        </aura:set>
+    </aura:if>  
 
 </aura:component>	

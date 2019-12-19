@@ -1,8 +1,6 @@
 ({
     doInit: function(cmp, event, helper) {
 
-        // cmp.set('v.columns', [{label: 'Name', fieldName: 'Name', type: 'text'}]);
-
         let action = cmp.get("c.getForm");
 
         action.setParams({
@@ -129,6 +127,32 @@
 
     },
     handlePublishForm: function(cmp, event, helper) {
+
+
+        let action = cmp.get("c.publishForm");
+
+        action.setParams({
+            recordId: cmp.get("v.recordId")
+        });
+
+        cmp.set('v.loading', true); 
+
+		action.setCallback(this, function (response) {
+
+            let state = response.getState();
+        
+            cmp.set('v.loading', false); 
+
+            if (state === "SUCCESS") {
+            
+                var form = response.getReturnValue();
+
+                cmp.set('v.form', form); 
+
+            }
+        }); 
+
+        $A.enqueueAction(action);
 
     },
     handleNewFormResponse: function(cmp, event, helper) {

@@ -14,11 +14,16 @@
 
     <aura:attribute name="columns" type="List"/>
 
-    <lightning:datatable
-        keyField="id"
-        data="{! v.data }"
-        columns="{! v.columns }"
-        onrowaction="{!c.viewRecord}" />
+    <aura:if isTrue="{! v.loading }">
+        <lightning:spinner alternativeText="Loading" />
+        <aura:set attribute="else">
+            <lightning:datatable
+                keyField="id"
+                data="{! v.data }"
+                columns="{! v.columns }"
+                onrowaction="{!c.viewRecord}" />
+        </aura:set>
+    </aura:if>  
 
     <lightning:overlayLibrary aura:id="overlayLib"/>
     <lightning:workspaceAPI aura:id="workspace" />

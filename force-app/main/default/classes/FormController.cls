@@ -53,7 +53,7 @@ public with sharing class FormController {
     }
 
     @AuraEnabled
-    public static String publishForm(String recordId){
+    public static Clarity_Form__c publishForm(String recordId){
         
         Clarity_Form__c form = [SELECT Id, Status__c, Name FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
 
@@ -65,7 +65,7 @@ public with sharing class FormController {
             throw new AuraHandledException('Unable to publish form: ' + form.Name);
         }
 
-        return 'Success';
+        return form;
 
     }
 

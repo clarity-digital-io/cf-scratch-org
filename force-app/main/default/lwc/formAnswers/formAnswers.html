@@ -1,4 +1,9 @@
 <template>
+
+    <template if:true={loading}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </template>
+
     <c-image-answers-table
                     key-field="id"
                     data={data}
