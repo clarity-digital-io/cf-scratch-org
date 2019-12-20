@@ -1,10 +1,12 @@
 @RestResource(urlMapping='/api/ClarityFormsOffline/*')
 global with sharing class ClarityFormsOfflineController {
 
-    @HttpPost
+    @HttpGet
     global static void getOfflineRecords() {
 
         RestRequest req = RestContext.request;
+
+        Id userId = System.UserInfo.getUserId();
 
         RestResponse res = RestContext.response;
 

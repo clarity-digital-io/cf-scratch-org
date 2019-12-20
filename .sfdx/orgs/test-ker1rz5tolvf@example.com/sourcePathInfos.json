@@ -862,7 +862,7 @@
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes",
             "isDirectory": true,
             "size": 1920,
-            "modifiedTime": 1576215010016,
+            "modifiedTime": 1576804744587,
             "changeTime": 1576215010016,
             "contentHash": "0fb211bd40d19f8197bf6eb0d34a5727ea2423f2",
             "isMetadataFile": false,
@@ -1026,7 +1026,7 @@
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormsExternalController.cls",
             "isDirectory": false,
             "size": 614,
-            "modifiedTime": 1569640451541,
+            "modifiedTime": 1576804744586,
             "changeTime": 1569640451541,
             "contentHash": "ea35a06b878acae807f76290b5a8340abcd63e2d",
             "isMetadataFile": false,
@@ -1041,7 +1041,7 @@
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormsExternalController.cls-meta.xml",
             "isDirectory": false,
             "size": 208,
-            "modifiedTime": 1569640451541,
+            "modifiedTime": 1576804744586,
             "changeTime": 1569640451541,
             "contentHash": "47fff89df66565ac05987bedd4dc4dd87fc8dfec",
             "isMetadataFile": true,
@@ -1056,7 +1056,7 @@
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormsMobileController.cls",
             "isDirectory": false,
             "size": 1438,
-            "modifiedTime": 1574916986012,
+            "modifiedTime": 1576804744587,
             "changeTime": 1574916986012,
             "contentHash": "600002076c872e6a99422f779f8ed9e083ea2fd7",
             "isMetadataFile": false,
@@ -1071,7 +1071,7 @@
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormsMobileController.cls-meta.xml",
             "isDirectory": false,
             "size": 206,
-            "modifiedTime": 1569640451542,
+            "modifiedTime": 1576804744587,
             "changeTime": 1569640451542,
             "contentHash": "4b32d0ac51795cf242589431a87a758e92b165bd",
             "isMetadataFile": true,
@@ -1083,16 +1083,15 @@
     [
         "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormsOfflineController.cls",
         {
+            "state": "u",
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormsOfflineController.cls",
             "isDirectory": false,
-            "size": 521,
-            "modifiedTime": 1569640451542,
-            "changeTime": 1569640451542,
-            "contentHash": "8fb68c9bfc7fc0c795f309f65987ac717c2c4221",
             "isMetadataFile": false,
-            "state": "u",
+            "size": 570,
+            "modifiedTime": 1576814422501,
+            "changeTime": 1576814422501,
             "isWorkspace": false,
-            "isArtifactRoot": false
+            "contentHash": "13a0df66f1439a45e371d5e1d16589fca974a93f"
         }
     ],
     [
@@ -1101,7 +1100,7 @@
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormsOfflineController.cls-meta.xml",
             "isDirectory": false,
             "size": 207,
-            "modifiedTime": 1569640451542,
+            "modifiedTime": 1576804744587,
             "changeTime": 1569640451542,
             "contentHash": "df2e6b48d179071095c123e310fa99076b9bad55",
             "isMetadataFile": true,
@@ -5874,14 +5873,14 @@
     [
         "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/formAnswers/formAnswers.js",
         {
-            "state": "u",
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/lwc/formAnswers/formAnswers.js",
             "isDirectory": false,
-            "isMetadataFile": false,
             "size": 1621,
             "modifiedTime": 1576707949402,
             "changeTime": 1576707949402,
-            "contentHash": "432d61977bba0cf0d3c59df91596283c25f70915"
+            "contentHash": "432d61977bba0cf0d3c59df91596283c25f70915",
+            "isMetadataFile": false,
+            "state": "u"
         }
     ],
     [
