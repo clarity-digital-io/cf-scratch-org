@@ -99,11 +99,9 @@ public class FormControllerTest {
 
         Test.startTest();
 
-            String status = FormController.publishForm(form.Id);
+            Clarity_Form__c updatedForm = FormController.publishForm(form.Id);
 
         Test.stopTest();
-
-        Clarity_Form__c updatedForm = [SELECT Id, Status__c FROM Clarity_Form__c Limit 1];
 
         System.assertEquals('Published', updatedForm.Status__c);
 
