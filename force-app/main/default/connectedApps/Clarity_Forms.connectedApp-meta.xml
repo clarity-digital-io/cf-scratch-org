@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
-    <contactEmail>efigenio.ben@clarityforms.com</contactEmail>
+    <contactEmail>ben@clarityforms.io</contactEmail>
     <label>Clarity Forms</label>
     <oauthConfig>
-        <callbackUrl>https://auth.expo.io/@befigenio/clarity-mobile-fs</callbackUrl>
+        <callbackUrl>mobile:///sfdc/auth/done</callbackUrl>
+        <consumerKey>3MVG9OI03ecbG2Vo1s9_On3rL_tAxsXrGNie5WOobDHKlt9EXSblilhqvzB2ZEySgDMXkeNCbJzMSSYbIFiQ5</consumerKey>
         <scopes>Full</scopes>
         <scopes>RefreshToken</scopes>
     </oauthConfig>

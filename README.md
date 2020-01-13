@@ -1,13 +1,17 @@
 # Clarity Forms Salesforce App
 
+## Packaging
+sfdx force:auth:web:login -a PkgOrg
+
+
 ## Dev, Build and Test
-sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-hub-org
+sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-devhub
 
 sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-forms-org
 
-sfdx force:alias:set forms=test-ker1rz5tolvf@example.com
+sfdx force:alias:set forms=test-5dyeg6r1gyv9@example.com
 
 sfdx force:config:set defaultusername=forms
 
