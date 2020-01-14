@@ -3,18 +3,18 @@
 * @company Clarity Forms
 * @date 05/16/2019
 *
-* @group Clarity_Form_Question__c
+* @group forms__Form_Question__c
 *
-* @description Clarity_Form_Question Trigger Handler for the Clarity_Form_Question SObject. This class implements the ITrigger
+* @description forms__Form_Question Trigger Handler for the forms__Form_Question SObject. This class implements the ITrigger
 *  Please check ITrigger and TriggerFactory to understand the order execution and methods used
 */
-public class Clarity_Form_QuestionTriggerHandler implements ITrigger {
+public class forms__Form_QuestionTriggerHandler implements ITrigger {
     
     /*******************************************************************************************************
 	* @description List of flow designs to be updated in the andFinally method
 	*/
-	private List<Clarity_Form_Question_Flow_Design__c> flowDesignsToBeCreated = new List<Clarity_Form_Question_Flow_Design__c>();
-	private List<Clarity_Form_Audit_Log__c> logs = new List<Clarity_Form_Audit_Log__c>();
+	private List<forms__Form_Question_Flow_Design__c> flowDesignsToBeCreated = new List<forms__Form_Question_Flow_Design__c>();
+	private List<forms__Form_Audit_Log__c> logs = new List<forms__Form_Audit_Log__c>();
 
     /*******************************************************************************************************
 	* @description This method is called prior to execution of a BEFORE trigger. Use this to cache
@@ -81,7 +81,7 @@ public class Clarity_Form_QuestionTriggerHandler implements ITrigger {
 	*/
 	public void afterInsert(SObject so) {
 
-        Clarity_Form_Question__c cf = (Clarity_Form_Question__c) so; 
+        forms__Form_Question__c cf = (forms__Form_Question__c) so; 
 
         QuestionFlowDesigns.execute(flowDesignsToBeCreated, cf);
 		AuditLogBuilderService.execute(logs, cf, null, 'Title__c');
@@ -94,8 +94,8 @@ public class Clarity_Form_QuestionTriggerHandler implements ITrigger {
 	*/
 	public void afterUpdate(SObject oldSo, SObject so) {
 
-        Clarity_Form_Question__c oldCf = (Clarity_Form_Question__c) oldSo; 
-		Clarity_Form_Question__c newCf = (Clarity_Form_Question__c) so; 
+        forms__Form_Question__c oldCf = (forms__Form_Question__c) oldSo; 
+		forms__Form_Question__c newCf = (forms__Form_Question__c) so; 
 
 		AuditLogBuilderService.execute(logs, newCf, oldCf, 'Title__c');
 
@@ -107,7 +107,7 @@ public class Clarity_Form_QuestionTriggerHandler implements ITrigger {
 	*/
 	public void afterDelete(SObject so) {
 
-		Clarity_Form_Question__c newCf = (Clarity_Form_Question__c) so; 
+		forms__Form_Question__c newCf = (forms__Form_Question__c) so; 
 
 		AuditLogBuilderService.execute(logs, newCf, null, 'Title__c');
 

@@ -32,7 +32,7 @@ sfdx force:config:set defaultusername=forms
 
 sfdx force:source:push
 
-sfdx force:org:open -u Pckg
+sfdx force:org:open -u PkgOrg
 
 sfdx force:user:password:generate --targetusername forms
 
@@ -62,17 +62,17 @@ sfdx force:lightning:component:create --type lwc -n imageControl -d force-app/ma
 
 ## Tests
 
-### Clarity_Form_QuestionTriggerHandler
+### forms__Form_QuestionTriggerHandler
 
 F - sfdx force:apex:class:create -n AuditLogBuilderServiceTest -d force-app/main/default/classes
 
-### Clarity_Form_ResponseTriggerHandler
+### forms__Form_ResponseTriggerHandler
 
 P - sfdx force:apex:class:create -n FormResponseAssignmentTest -d force-app/main/default/classes
 
 P - sfdx force:apex:class:create -n CreateResponseAnswersTest -d force-app/main/default/classes
 
-### Clarity_Form_ConnectionTriggerHandler
+### forms__Form_ConnectionTriggerHandler
 
 sfdx force:apex:class:create -n ConnectionRecordProcessTest -d force-app/main/default/classes
 

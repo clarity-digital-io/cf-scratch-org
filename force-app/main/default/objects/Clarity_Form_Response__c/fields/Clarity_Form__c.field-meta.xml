@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Clarity_Form__c</fullName>
+    <fullName>forms__Form__c</fullName>
     <externalId>false</externalId>
     <label>Clarity Form</label>
-    <referenceTo>Clarity_Form__c</referenceTo>
+    <referenceTo>forms__Form__c</referenceTo>
     <relationshipLabel>Clarity Form Responses</relationshipLabel>
-    <relationshipName>Clarity_Form_Responses</relationshipName>
+    <relationshipName>forms__Form_Responses</relationshipName>
     <relationshipOrder>0</relationshipOrder>
     <reparentableMasterDetail>false</reparentableMasterDetail>
     <trackFeedHistory>false</trackFeedHistory>

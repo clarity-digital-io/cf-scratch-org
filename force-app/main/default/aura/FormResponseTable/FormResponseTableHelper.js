@@ -108,7 +108,7 @@
                 type: "standard__recordPage",
                 attributes: {
                     recordId: record.id,
-                    objectApiName: "Clarity_Form_Response__c",
+                    objectApiName: "forms__Form_Response__c",
                     actionName: "view"
                 }
             },

@@ -1,19 +1,19 @@
 public with sharing class FormController {
 
     @AuraEnabled
-    public static Clarity_Form__c getForm(String recordId) {
+    public static forms__Form__c getForm(String recordId) {
 
-        Clarity_Form__c form = [SELECT Id, Status__c, Name FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
+        forms__Form__c form = [SELECT Id, Status__c, Name FROM forms__Form__c WHERE Id =: recordId Limit 1]; 
 
         return form; 
 
     }
 
     @AuraEnabled
-    public static List<Clarity_Form_Response__c> getFormResponses(String formId, String name){
+    public static List<forms__Form_Response__c> getFormResponses(String formId, String name){
 
-        List<Clarity_Form_Response__c> responses = [SELECT Id, Name, Status__c, Completion__c, CreatedDate, Submitted_Date__c 
-            FROM Clarity_Form_Response__c WHERE (Clarity_Form__c =: formId OR Clarity_Form__r.Name =: name) AND Status__c != 'Preview'];
+        List<forms__Form_Response__c> responses = [SELECT Id, Name, Status__c, Completion__c, CreatedDate, Submitted_Date__c 
+            FROM forms__Form_Response__c WHERE (forms__Form__c =: formId OR forms__Form__r.Name =: name) AND Status__c != 'Preview'];
 
         return responses; 
 
@@ -22,7 +22,7 @@ public with sharing class FormController {
     @AuraEnabled
     public static String deleteFormResponse(String responseId){
         
-        Clarity_Form_Response__c response = [SELECT Id, Name FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
+        forms__Form_Response__c response = [SELECT Id, Name FROM forms__Form_Response__c WHERE Id =: responseId Limit 1];
 
         Database.DeleteResult result = Database.delete(response, true); 
 
@@ -36,9 +36,9 @@ public with sharing class FormController {
     @AuraEnabled
     public static String deleteForm(String recordId){
         
-        Clarity_Form__c form = [SELECT Id, Name, (SELECT Id FROM Clarity_Form_Responses__r) FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
+        forms__Form__c form = [SELECT Id, Name, (SELECT Id FROM forms__Form_Responses__r) FROM forms__Form__c WHERE Id =: recordId Limit 1]; 
 
-        if(form.Clarity_Form_Responses__r.size() > 0) {
+        if(form.forms__Form_Responses__r.size() > 0) {
             throw new AuraHandledException('Unable to delete form while it has Responses');
         }
 
@@ -53,9 +53,9 @@ public with sharing class FormController {
     }
 
     @AuraEnabled
-    public static Clarity_Form__c publishForm(String recordId){
+    public static forms__Form__c publishForm(String recordId){
         
-        Clarity_Form__c form = [SELECT Id, Status__c, Name FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
+        forms__Form__c form = [SELECT Id, Status__c, Name FROM forms__Form__c WHERE Id =: recordId Limit 1]; 
 
         form.Status__c = 'Published'; 
 
@@ -72,18 +72,18 @@ public with sharing class FormController {
     @AuraEnabled(cacheable=true)
     public static  Map<String, List<Map<String, String>>> getAnswerColumns(String recordId){
         
-        Clarity_Form__c form = [SELECT Id, (SELECT Id, Name, Record_Group__c, Title__c, Type__c FROM Clarity_Form_Questions__r) 
-            FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
+        forms__Form__c form = [SELECT Id, (SELECT Id, Name, Record_Group__c, Title__c, Type__c FROM forms__Form_Questions__r) 
+            FROM forms__Form__c WHERE Id =: recordId Limit 1]; 
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c, 
-            (SELECT Id, Label__c FROM Clarity_Form_Question_Options__r) FROM Clarity_Form_Question__c];
+        List<forms__Form_Question__c> questions = [SELECT Id, Type__c, 
+            (SELECT Id, Label__c FROM forms__Form_Question_Options__r) FROM forms__Form_Question__c];
 
-        Map<Id, List<Clarity_Form_Question_Option__c>> questionOptions = new Map<Id, List<Clarity_Form_Question_Option__c>>();
+        Map<Id, List<forms__Form_Question_Option__c>> questionOptions = new Map<Id, List<forms__Form_Question_Option__c>>();
 
-        for(Clarity_Form_Question__c question : questions) {
+        for(forms__Form_Question__c question : questions) {
 
             if(question.Type__c == 'Dropdown') {
-                questionOptions.put(question.Id, question.Clarity_Form_Question_Options__r);
+                questionOptions.put(question.Id, question.forms__Form_Question_Options__r);
             }
 
         }
@@ -94,7 +94,7 @@ public with sharing class FormController {
 
         columns.add(new Map<String, String> { 'fieldName' => 'id' }); 
 
-        for(Clarity_Form_Question__c question : form.Clarity_Form_Questions__r) {
+        for(forms__Form_Question__c question : form.forms__Form_Questions__r) {
 
             if(question.Record_Group__c == null && question.Type__c != 'RecordGroup') {
 
@@ -111,43 +111,43 @@ public with sharing class FormController {
 
         List<Map<String, String>> rows = new List<Map<String, String>>();
 
-        List<Clarity_Form_Response__c> responses = [SELECT Id, Name, 
-            (SELECT Id, ContentDocument__c, Date_Answer__c, Answer__c, Record__c, Clarity_Form_Question__c, 
-            Clarity_Form_Question__r.Type__c, Clarity_Form_Question__r.Name, ContentVersion__c  
-            FROM Clarity_Form_Answers__r) FROM Clarity_Form_Response__c WHERE Clarity_Form__c =: recordId AND Status__c != 'Preview'];
+        List<forms__Form_Response__c> responses = [SELECT Id, Name, 
+            (SELECT Id, ContentDocument__c, Date_Answer__c, Answer__c, Record__c, forms__Form_Question__c, 
+            forms__Form_Question__r.Type__c, forms__Form_Question__r.Name, ContentVersion__c  
+            FROM forms__Form_Answers__r) FROM forms__Form_Response__c WHERE forms__Form__c =: recordId AND Status__c != 'Preview'];
 
-        for(Clarity_Form_Response__c response : responses) {
+        for(forms__Form_Response__c response : responses) {
             
             Map<String, String> row = new Map<String, String>(); 
 
             row.put('id', response.Name);
 
-            for(Clarity_Form_Answer__c answer : response.Clarity_Form_Answers__r) {
+            for(forms__Form_Answer__c answer : response.forms__Form_Answers__r) {
 
-                if(answer.Clarity_Form_Question__r.Type__c == 'Attachments') {
+                if(answer.forms__Form_Question__r.Type__c == 'Attachments') {
                     
-                    if(row.get(answer.Clarity_Form_Question__r.Name) != null) {
+                    if(row.get(answer.forms__Form_Question__r.Name) != null) {
 
-                        String sAttachments = row.get(answer.Clarity_Form_Question__r.Name); 
+                        String sAttachments = row.get(answer.forms__Form_Question__r.Name); 
 
                         List<String> attachments = (List<String>)JSON.deserialize(sAttachments, List<String>.class);
 
                         attachments.add('/sfc/servlet.shepherd/version/download/' + answer.ContentVersion__c);
 
-                        row.put(answer.Clarity_Form_Question__r.Name, JSON.serialize(attachments));
+                        row.put(answer.forms__Form_Question__r.Name, JSON.serialize(attachments));
 
                     } else {
 
                         if(answer.ContentVersion__c != null) {
                             List<String> attachments = new List<String>{ '/sfc/servlet.shepherd/version/download/' + answer.ContentVersion__c };
-                            row.put(answer.Clarity_Form_Question__r.Name, JSON.serialize(attachments));
+                            row.put(answer.forms__Form_Question__r.Name, JSON.serialize(attachments));
                         }
 
                     }
 
                 } else {
 
-                    row.put(answer.Clarity_Form_Question__r.Name, buildAnswer(answer, questionOptions));
+                    row.put(answer.forms__Form_Question__r.Name, buildAnswer(answer, questionOptions));
 
                 }
 
@@ -163,7 +163,7 @@ public with sharing class FormController {
 
     }
     
-    public static Map<String, String> buildColumn(Clarity_Form_Question__c question) {
+    public static Map<String, String> buildColumn(forms__Form_Question__c question) {
 
         Map<String, String> column = new Map<String, String>(); 
 
@@ -180,16 +180,16 @@ public with sharing class FormController {
 
     }
 
-    public static String buildAnswer(Clarity_Form_Answer__c answer, Map<Id, List<Clarity_Form_Question_Option__c>> questionOptions) {
+    public static String buildAnswer(forms__Form_Answer__c answer, Map<Id, List<forms__Form_Question_Option__c>> questionOptions) {
 
-        switch on answer.Clarity_Form_Question__r.Type__c {
+        switch on answer.forms__Form_Question__r.Type__c {
             when 'Dropdown' {
 
                 String value = '';
 
-                List<Clarity_Form_Question_Option__c> options = questionOptions.get(answer.Clarity_Form_Question__c);
+                List<forms__Form_Question_Option__c> options = questionOptions.get(answer.forms__Form_Question__c);
                                 
-                for(Clarity_Form_Question_Option__c option : options) {
+                for(forms__Form_Question_Option__c option : options) {
 
                     if(option.Id == answer.Answer__c) {
                         value = option.Label__c; 
@@ -220,11 +220,11 @@ public with sharing class FormController {
     // @AuraEnabled
     // public static Id cloneForm(String recordId){
         
-    //     Clarity_Form__c form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__c, Clarity_Form_Assignment__c 
+    //     forms__Form__c form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, forms__Form_Style__c, forms__Form_Assignment__c 
             
-    //         FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
+    //         FROM forms__Form__c WHERE Id =: recordId Limit 1]; 
 
-    //     Clarity_Form__c newForm = form.clone(false); 
+    //     forms__Form__c newForm = form.clone(false); 
 
     //     Database.SaveResult result = Database.insert(newForm, true); 
 

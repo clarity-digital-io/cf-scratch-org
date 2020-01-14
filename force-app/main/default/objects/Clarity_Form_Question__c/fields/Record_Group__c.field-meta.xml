@@ -4,9 +4,9 @@
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>Record Group</label>
-    <referenceTo>Clarity_Form_Question__c</referenceTo>
+    <referenceTo>forms__Form_Question__c</referenceTo>
     <relationshipLabel>Record Groups</relationshipLabel>
-    <relationshipName>Clarity_Form_Questions1</relationshipName>
+    <relationshipName>forms__Form_Questions1</relationshipName>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>

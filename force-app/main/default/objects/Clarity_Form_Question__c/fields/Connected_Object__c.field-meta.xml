@@ -4,9 +4,9 @@
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>Connected Object</label>
-    <referenceTo>Clarity_Form_Question__c</referenceTo>
+    <referenceTo>forms__Form_Question__c</referenceTo>
     <relationshipLabel>Connected Objects</relationshipLabel>
-    <relationshipName>Clarity_Form_Questions</relationshipName>
+    <relationshipName>forms__Form_Questions</relationshipName>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>

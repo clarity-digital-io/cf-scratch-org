@@ -5,15 +5,15 @@ public class ConnectionCreateJob implements Queueable {
 
     private Integer order;
 
-    private List<Clarity_Form_Connection__c> connections;
+    private List<forms__Form_Connection__c> connections;
 
-    private Map<Id, Clarity_Form_Answer__c> answersByQuestion;
+    private Map<Id, forms__Form_Answer__c> answersByQuestion;
 
-    private Map<Id, Clarity_Form_Connection_Process__c> processByConnections;
+    private Map<Id, forms__Form_Connection_Process__c> processByConnections;
     
     private Map<String, Id> storedResults;
 
-    public ConnectionCreateJob(Integer order, List<Clarity_Form_Connection__c> connections, Map<Id, Clarity_Form_Answer__c> answersByQuestion, Map<Id, Clarity_Form_Connection_Process__c> processByConnections, Map<String, Id> storedResults) {
+    public ConnectionCreateJob(Integer order, List<forms__Form_Connection__c> connections, Map<Id, forms__Form_Answer__c> answersByQuestion, Map<Id, forms__Form_Connection_Process__c> processByConnections, Map<String, Id> storedResults) {
         this.order = order;
         this.connections = connections;
         this.answersByQuestion = answersByQuestion;
@@ -23,7 +23,7 @@ public class ConnectionCreateJob implements Queueable {
 
     public void execute(QueueableContext context) {
 
-        List<Clarity_Form_Connection_Field__c> fields = [SELECT Id, Clarity_Form_Connection__c, Custom_Value__c, Salesforce_Field__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Field__c WHERE Clarity_Form_Connection__c =: connections[order].Id];
+        List<forms__Form_Connection_Field__c> fields = [SELECT Id, forms__Form_Connection__c, Custom_Value__c, Salesforce_Field__c, forms__Form_Question__c FROM forms__Form_Connection_Field__c WHERE forms__Form_Connection__c =: connections[order].Id];
 
         if(fields.size() > 0) {
 
@@ -33,13 +33,13 @@ public class ConnectionCreateJob implements Queueable {
 
             SObject genericObject = convertType.newSObject();
 
-            for(Clarity_Form_Connection_Field__c field : fields) {
+            for(forms__Form_Connection_Field__c field : fields) {
 
                 String dirtyAnswer;
 
-                if(field.Clarity_Form_Question__c != null) {
+                if(field.forms__Form_Question__c != null) {
 
-                    dirtyAnswer = answersByQuestion.get(field.Clarity_Form_Question__c) != null ? answersByQuestion.get(field.Clarity_Form_Question__c).Answer__c : ''; 
+                    dirtyAnswer = answersByQuestion.get(field.forms__Form_Question__c) != null ? answersByQuestion.get(field.forms__Form_Question__c).Answer__c : ''; 
 
 
                 } else if(field.Custom_Value__c != null) {
@@ -64,7 +64,7 @@ public class ConnectionCreateJob implements Queueable {
 
             Database.UpsertResult record = Database.upsert(genericObject, false); 
 
-            Clarity_Form_Connection_Process__c connectionStatus = processByConnections.get(connections[order].Id);
+            forms__Form_Connection_Process__c connectionStatus = processByConnections.get(connections[order].Id);
 
             if(record.isSuccess()) {
 

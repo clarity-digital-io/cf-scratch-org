@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Clarity_Form_Question__c</fullName>
+    <fullName>forms__Form_Question__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>Clarity Form Question</label>
-    <referenceTo>Clarity_Form_Question__c</referenceTo>
+    <referenceTo>forms__Form_Question__c</referenceTo>
     <relationshipLabel>Clarity Form Question Flows</relationshipLabel>
-    <relationshipName>Clarity_Form_Question_Flows</relationshipName>
+    <relationshipName>forms__Form_Question_Flows</relationshipName>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>

@@ -12,7 +12,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Clarity_Form_Connection__c</field>
+                <field>forms__Form_Connection__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -20,7 +20,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Clarity_Form_Question__c</field>
+                <field>forms__Form_Question__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

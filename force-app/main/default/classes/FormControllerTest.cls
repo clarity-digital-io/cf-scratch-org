@@ -4,20 +4,20 @@ public class FormControllerTest {
     @testSetup
     public static void setup(){
                 
-        Clarity_Form__c form = ClarityTestDataFactory.generateForm();
+        forms__Form__c form = ClarityTestDataFactory.generateForm();
 
-        List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(form);
+        List<forms__Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(form);
 
-        Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
+        forms__Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
 
     }
 
     @isTest
     public static void shouldGetFormResponses() {
 
-        Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c Limit 1];
+        forms__Form__c form = [SELECT Id, Name FROM forms__Form__c Limit 1];
 
-        List<Clarity_Form_Response__c> responses = FormController.getFormResponses(null, form.Name);
+        List<forms__Form_Response__c> responses = FormController.getFormResponses(null, form.Name);
 
         System.assertEquals(1, responses.size());
 
@@ -26,7 +26,7 @@ public class FormControllerTest {
     @isTest
     public static void shouldDeleteFormResponse() {
 
-        Clarity_Form_Response__c response = [SELECT Id FROM Clarity_Form_Response__c Limit 1]; 
+        forms__Form_Response__c response = [SELECT Id FROM forms__Form_Response__c Limit 1]; 
 
         String deleteFormResponseId = FormController.deleteFormResponse(response.Id);
 
@@ -36,9 +36,9 @@ public class FormControllerTest {
     @isTest
     public static void shouldNotDeleteForm() {
 
-        Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c Limit 1];
+        forms__Form__c form = [SELECT Id, Name FROM forms__Form__c Limit 1];
 
-        List<Clarity_Form_Response__c> responses = [SELECT Id FROM Clarity_Form_Response__c]; 
+        List<forms__Form_Response__c> responses = [SELECT Id FROM forms__Form_Response__c]; 
 
         try {
             String status = FormController.deleteForm(form.Id);
@@ -53,9 +53,9 @@ public class FormControllerTest {
     @isTest
     public static void shouldDeleteForm() {
 
-        Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c Limit 1];
+        forms__Form__c form = [SELECT Id, Name FROM forms__Form__c Limit 1];
 
-        List<Clarity_Form_Response__c> responses = [SELECT Id FROM Clarity_Form_Response__c]; 
+        List<forms__Form_Response__c> responses = [SELECT Id FROM forms__Form_Response__c]; 
 
         Test.startTest();
             delete responses; 
@@ -70,9 +70,9 @@ public class FormControllerTest {
     // @isTest
     // public static void shouldCloneForm() {
 
-    //     Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c Limit 1];
+    //     forms__Form__c form = [SELECT Id, Name FROM forms__Form__c Limit 1];
 
-    //     List<Clarity_Form_Question__c> questions = [SELECT Id FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id]; 
+    //     List<forms__Form_Question__c> questions = [SELECT Id FROM forms__Form_Question__c WHERE forms__Form__c =: form.Id]; 
 
     //     Test.startTest();
 
@@ -82,7 +82,7 @@ public class FormControllerTest {
 
     //     System.assertNotEquals(form.Id, newFormId);
 
-    //     List<Clarity_Form_Question__c> clonedQuestions = [SELECT Id FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: newFormId]; 
+    //     List<forms__Form_Question__c> clonedQuestions = [SELECT Id FROM forms__Form_Question__c WHERE forms__Form__c =: newFormId]; 
 
     //     System.assertEquals(questions.size(), clonedQuestions.size()); 
 
@@ -93,13 +93,13 @@ public class FormControllerTest {
     @isTest
     public static void shouldPublishForm() {
 
-        Clarity_Form__c form = [SELECT Id, Status__c FROM Clarity_Form__c Limit 1];
+        forms__Form__c form = [SELECT Id, Status__c FROM forms__Form__c Limit 1];
 
         System.assertNotEquals('Published', form.Status__c);
 
         Test.startTest();
 
-            Clarity_Form__c updatedForm = FormController.publishForm(form.Id);
+            forms__Form__c updatedForm = FormController.publishForm(form.Id);
 
         Test.stopTest();
 

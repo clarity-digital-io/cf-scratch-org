@@ -71,7 +71,7 @@
     //                 type: "standard__recordPage",
     //                 attributes: {
     //                     actionName: 'view', 
-    //                     objectApiName: 'Clarity_Form__c', 
+    //                     objectApiName: 'forms__Form__c', 
     //                     recordId: formId   
     //                 }
     //             }
@@ -104,7 +104,7 @@
                 var pageReference = {
                     type: 'standard__objectPage',
                     attributes: {
-                        objectApiName: 'Clarity_Form__c',
+                        objectApiName: 'forms__Form__c',
                         actionName: 'home'
                     }
                 };

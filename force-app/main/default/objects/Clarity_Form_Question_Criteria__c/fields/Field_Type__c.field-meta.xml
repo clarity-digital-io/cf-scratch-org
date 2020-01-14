@@ -8,6 +8,6 @@
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
-        <valueSetName>Clarity_Form_Question_Type</valueSetName>
+        <valueSetName>forms__Form_Question_Type</valueSetName>
     </valueSet>
 </CustomField>

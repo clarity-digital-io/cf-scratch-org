@@ -3,17 +3,17 @@
 * @company Clarity Forms
 * @date 07/07/2019
 *
-* @group Clarity_Form_Connection__c
+* @group forms__Form_Connection__c
 *
-* @description Clarity_Form_Connection Trigger Handler for the Clarity_Form_Connection SObject. This class implements the ITrigger
+* @description forms__Form_Connection Trigger Handler for the forms__Form_Connection SObject. This class implements the ITrigger
 *  Please check ITrigger and TriggerFactory to understand the order execution and methods used
 */
-public class Clarity_Form_ConnectionTriggerHandler implements ITrigger {
+public class forms__Form_ConnectionTriggerHandler implements ITrigger {
     
     /*******************************************************************************************************
 	* @description List of fields to be deleted in the andFinally method
 	*/
-	private List<Clarity_Form_Connection_Field__c> fieldsToBeDeleted = new List<Clarity_Form_Connection_Field__c>();
+	private List<forms__Form_Connection_Field__c> fieldsToBeDeleted = new List<forms__Form_Connection_Field__c>();
     
     /*******************************************************************************************************
 	* @description This method is called prior to execution of a BEFORE trigger. Use this to cache
@@ -88,9 +88,9 @@ public class Clarity_Form_ConnectionTriggerHandler implements ITrigger {
 	*/
 	public void afterUpdate(SObject oldSo, SObject so) {
 
-        Clarity_Form_Connection__c oldConnection = (Clarity_Form_Connection__c) so; 
+        forms__Form_Connection__c oldConnection = (forms__Form_Connection__c) so; 
 
-        Clarity_Form_Connection__c newConnection = (Clarity_Form_Connection__c) so; 
+        forms__Form_Connection__c newConnection = (forms__Form_Connection__c) so; 
 
         ConnectionFieldValidation.execute(fieldsToBeDeleted, oldConnection, newConnection);
 

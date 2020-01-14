@@ -38,7 +38,7 @@
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Clarity Form Overview</masterLabel>
-    <sobjectType>Clarity_Form__c</sobjectType>
+    <sobjectType>forms__Form__c</sobjectType>
     <template>
         <name>flexipage:recordHomeSingleColTemplateDesktop</name>
     </template>
