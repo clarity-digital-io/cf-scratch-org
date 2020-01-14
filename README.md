@@ -3,6 +3,21 @@
 ## Packaging
 sfdx force:auth:web:login -a PkgOrg
 
+```
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    }
+  ],
+  "namespace": "YOUR_NS_HERE",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "44.0"
+}
+```
+
+sfdx force:org:create -a forms-pkg -s -f config/project-scratch-def.json
 
 ## Dev, Build and Test
 sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-devhub
@@ -17,7 +32,7 @@ sfdx force:config:set defaultusername=forms
 
 sfdx force:source:push
 
-sfdx force:org:open
+sfdx force:org:open -u Pckg
 
 sfdx force:user:password:generate --targetusername forms
 
