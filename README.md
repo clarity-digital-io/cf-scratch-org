@@ -19,6 +19,29 @@ sfdx force:auth:web:login -a PkgOrg
 
 sfdx force:org:create -a forms-pkg -s -f config/project-scratch-def.json
 
+sfdx force:source:convert \
+    -d mdapi-source/updated-package \
+    -n "Clarity Forms"
+
+sfdx force:mdapi:deploy \
+    -d mdapi-source/updated-package \
+    -u PkgOrg \
+    -l NoTestRun \
+    -w 15
+
+    NoTestRun
+    RunLocalTests
+
+sfdx force:package1:version:create \
+    -i 0336g0000005mgC \
+    -n "Alpha 2020" \
+    -v "1.0" \
+    -d "Managed beta release. Uploaded via the CLI" \
+    -u PkgOrg \
+    -w 15
+
+sfdx force:data:soql:query -q 'select ApexTestClass.Name, TestMethodName, ApexClassOrTrigger.Name, NumLinesUncovered, NumLinesCovered, Coverage from ApexCodeCoverage' -u forms-pkg -t -r csv > testcoverage.csv
+
 ## Dev, Build and Test
 sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-devhub
 
@@ -60,19 +83,24 @@ sfdx force:lightning:component:create --type lwc -n imageAnswersTable -d force-a
 
 sfdx force:lightning:component:create --type lwc -n imageControl -d force-app/main/default/lwc
 
+sfdx force:apex:class:create -n ConnectionFieldValidationTest -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n ClarityFormBuilderTest -d force-app/main/default/classes
+
+
 ## Tests
 
-### forms__Form_QuestionTriggerHandler
+### Clarity_Form_QuestionTriggerHandler
 
 F - sfdx force:apex:class:create -n AuditLogBuilderServiceTest -d force-app/main/default/classes
 
-### forms__Form_ResponseTriggerHandler
+### Clarity_Form_ResponseTriggerHandler
 
 P - sfdx force:apex:class:create -n FormResponseAssignmentTest -d force-app/main/default/classes
 
 P - sfdx force:apex:class:create -n CreateResponseAnswersTest -d force-app/main/default/classes
 
-### forms__Form_ConnectionTriggerHandler
+### Clarity_Form_ConnectionTriggerHandler
 
 sfdx force:apex:class:create -n ConnectionRecordProcessTest -d force-app/main/default/classes
 

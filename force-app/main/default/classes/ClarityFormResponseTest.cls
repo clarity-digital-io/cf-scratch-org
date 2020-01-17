@@ -1,4 +1,4 @@
-public with sharing class ClarityFormResponseTest {
+public class ClarityFormResponseTest {
     public ClarityFormResponseTest() {
 
     }

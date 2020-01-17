@@ -1,12 +1,12 @@
 <aura:component controller="FormController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionwithoutheader,lightning:actionOverride">
 
-    <aura:attribute name="response" type="forms__Form_Response__c" />
+    <aura:attribute name="response" type="Clarity_Form_Response__c" />
     <aura:attribute name="data" type="Object"/>
     <aura:attribute name="recordId" type="String"/>
 
     <force:recordData aura:id="recordLoader"
         recordId="{!v.recordId}"
-        fields="Name, Status__c"
+        fields="Name, form__Status__c"
         targetFields="{!v.response}"
     />
 
@@ -35,7 +35,7 @@
             <ul class="slds-page-header__detail-row">
                 <li class="slds-page-header__detail-block">
                     <div class="slds-text-title slds-truncate" title="Status">Status</div>
-                    <div class="slds-truncate" title="Draft">{!v.response.Status__c}</div>
+                    <div class="slds-truncate" title="Draft">{!v.response.form__Status__c}</div>
                 </li>            
             </ul>
         </div>

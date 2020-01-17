@@ -108,10 +108,16 @@ public class TriggerFactory {
 	*/
 	private static ITrigger getHandler(Schema.sObjectType soType) {
 		try {
-			return (ITrigger)Type.forName(soType.getDescribe().getName().replaceAll('__c|__', '') + 'TriggerHandler').newInstance();
+			String handlerName = soType.getDescribe().getName().replaceAll('__c|__', '');
+			handlerName = handlerName.replaceAll('forms', ''); 
+			return (ITrigger)Type.forName(handlerName + 'TriggerHandler').newInstance();
 		} 
 		catch(Exception e) {
-			throw new TriggerException('No Trigger Handler registered for Object Type: ' + soType);
+
+			String handlerName = soType.getDescribe().getName().replaceAll('__c|__', '');
+			handlerName = handlerName.replaceAll('forms', ''); 
+
+			throw new TriggerException('No Trigger Handler registered for Object Type: ' + soType + ' ' + handlerName);
 		}
 	}
 

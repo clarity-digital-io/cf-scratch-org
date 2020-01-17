@@ -7,14 +7,14 @@
             recordId: cmp.get("v.recordId")
         });
 
-		action.setCallback(this, function (response) {
+		    action.setCallback(this, function (response) {
 
             let state = response.getState();
         
             if (state === "SUCCESS") {
             
                 var form = response.getReturnValue();
-
+                console.log('form', form); 
                 cmp.set('v.form', form); 
 
             }
@@ -31,7 +31,7 @@
             pageReference: {
                 type: "standard__component",
                 attributes: {
-                    componentName: "c__FormBuilder"
+                    componentName: "forms__FormBuilder"
                 },
                 state: {
                     c__recordId: cmp.get("v.recordId"),
@@ -71,7 +71,7 @@
     //                 type: "standard__recordPage",
     //                 attributes: {
     //                     actionName: 'view', 
-    //                     objectApiName: 'forms__Form__c', 
+    //                     objectApiName: 'Clarity_Form__c', 
     //                     recordId: formId   
     //                 }
     //             }
@@ -104,7 +104,7 @@
                 var pageReference = {
                     type: 'standard__objectPage',
                     attributes: {
-                        objectApiName: 'forms__Form__c',
+                        objectApiName: 'form__Clarity_Form__c',
                         actionName: 'home'
                     }
                 };
@@ -158,7 +158,7 @@
     handleNewFormResponse: function(cmp, event, helper) {
 
         $A.createComponents([
-            ["c:FormResponse", { "formName": cmp.get("v.form.Name") }]
+            ["forms:FormResponse", { "formName": cmp.get("v.form.Name") }]
         ],
         function(components, status) {
             if (status === "SUCCESS") {

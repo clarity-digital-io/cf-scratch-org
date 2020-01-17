@@ -16,7 +16,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>forms__Form_Question__c</field>
+                <field>Clarity_Form_Question__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

@@ -4,10 +4,10 @@
 
     <aura:attribute name="sobjecttype" type="String" default="{!v.sObjectName}"/>
 
-    <aura:attribute name="formName" type="String" required="true" default="default" />
+    <aura:attribute access="global" name="formName" type="String" required="true" default="default" />
     <aura:attribute name="loading" type="Boolean" default="false" />
     <aura:attribute name="data" type="List" default="[]"/>
-    <aura:attribute name="useRecordId" type="Boolean" default="false"/>
+    <aura:attribute access="global" name="useRecordId" type="Boolean" default="false"/>
     <aura:attribute name="recordId" type="String" />
 
     <lightning:card class="slds-card_boundary" title="{!v.formName}" iconName="standard:account" >

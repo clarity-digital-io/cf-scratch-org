@@ -32,7 +32,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>forms__Form_Assignment__c</field>
+                <field>Clarity_Form_Assignment__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>

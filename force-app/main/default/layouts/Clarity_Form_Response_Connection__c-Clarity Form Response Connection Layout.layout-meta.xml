@@ -16,11 +16,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>forms__Form_Connection__c</field>
+                <field>Clarity_Form_Connection__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>forms__Form_Response__c</field>
+                <field>Clarity_Form_Response__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>

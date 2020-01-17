@@ -5,7 +5,7 @@
     <externalId>false</externalId>
     <label>Default Assign</label>
     <referenceTo>User</referenceTo>
-    <relationshipName>forms__Form_Assignments1</relationshipName>
+    <relationshipName>Clarity_Form_Assignments1</relationshipName>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>

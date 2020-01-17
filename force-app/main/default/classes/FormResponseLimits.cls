@@ -3,25 +3,25 @@
 * @company Clarity Forms
 * @date 11/27/2019
 *
-* @group forms__Form_Response__c
+* @group Clarity_Form_Response__c
 *
-* @description On insert of forms__Form_Response__c check submission limits
+* @description On insert of Clarity_Form_Response__c check submission limits
 */
 public class FormResponseLimits {
 
-    private static Map<Id, forms__Form__c> Forms {
+    private static Map<Id, Clarity_Form__c> Forms {
         get {
             if(Forms == null) {
 
-                Forms = new Map<Id, forms__Form__c>();
+                Forms = new Map<Id, Clarity_Form__c>();
 
                 List<Id> formIds = new List<Id>();
 
-                for(forms__Form_Response__c response : (List<forms__Form_Response__c>)Trigger.new) {
-                    formIds.add(response.forms__Form__c);
+                for(Clarity_Form_Response__c response : (List<Clarity_Form_Response__c>)Trigger.new) {
+                    formIds.add(response.Clarity_Form__c);
                 }
 
-                Forms = new Map<Id, forms__Form__c>([SELECT Id, Limit__c, End_Date__c FROM forms__Form__c WHERE Id IN :formIds]);
+                Forms = new Map<Id, Clarity_Form__c>([SELECT Id, Limit__c, End_Date__c FROM Clarity_Form__c WHERE Id IN :formIds]);
 
             }
             return Forms;
@@ -37,15 +37,15 @@ public class FormResponseLimits {
 
                 List<Id> formIds = new List<Id>();
 
-                for(forms__Form_Response__c response : (List<forms__Form_Response__c>)Trigger.new) {
-                    formIds.add(response.forms__Form__c);
+                for(Clarity_Form_Response__c response : (List<Clarity_Form_Response__c>)Trigger.new) {
+                    formIds.add(response.Clarity_Form__c);
                 }
 
-                List<forms__Form__c> forms = [SELECT Id, 
-                    (SELECT Id FROM forms__Form_Responses__r WHERE Status__c = 'Submitted') FROM forms__Form__c WHERE Id IN :formIds];
+                List<Clarity_Form__c> forms = [SELECT Id, 
+                    (SELECT Id FROM Clarity_Form_Responses__r WHERE Status__c = 'Submitted') FROM Clarity_Form__c WHERE Id IN :formIds];
 
-                for(forms__Form__c form : forms) {
-                    ResponsesSubmitted.put(form.Id, form.forms__Form_Responses__r.size());
+                for(Clarity_Form__c form : forms) {
+                    ResponsesSubmitted.put(form.Id, form.Clarity_Form_Responses__r.size());
                 }
 
             }
@@ -54,15 +54,15 @@ public class FormResponseLimits {
         set;
     }
 
-    public static void execute(forms__Form_Response__c response) {
+    public static void execute(Clarity_Form_Response__c response) {
 
-        if(ResponsesSubmitted.get(response.forms__Form__c) == null) return;
+        if(ResponsesSubmitted.get(response.Clarity_Form__c) == null) return;
 
-        if(Forms.get(response.forms__Form__c) == null) return; 
+        if(Forms.get(response.Clarity_Form__c) == null) return; 
 
-        forms__Form__c form = Forms.get(response.forms__Form__c);
+        Clarity_Form__c form = Forms.get(response.Clarity_Form__c);
 
-        if(ResponsesSubmitted.get(response.forms__Form__c) >= form.Limit__c) {
+        if(ResponsesSubmitted.get(response.Clarity_Form__c) >= form.Limit__c) {
             response.addError('Form has reached it\'s limit in responses allowed.');
         }
     }

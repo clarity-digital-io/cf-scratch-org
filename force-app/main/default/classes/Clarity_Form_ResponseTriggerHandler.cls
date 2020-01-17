@@ -3,17 +3,17 @@
 * @company Clarity Forms
 * @date 07/07/2019
 *
-* @group forms__Form_Response__c
+* @group Clarity_Form_Response__c
 *
-* @description forms__Form_Response Trigger Handler for the forms__Form_Response SObject. This class implements the ITrigger
+* @description Clarity_Form_Response Trigger Handler for the Clarity_Form_Response SObject. This class implements the ITrigger
 *  Please check ITrigger and TriggerFactory to understand the order execution and methods used
 */
-public class forms__Form_ResponseTriggerHandler implements ITrigger {
+public class Clarity_Form_ResponseTriggerHandler implements ITrigger {
     
     /*******************************************************************************************************
 	* @description List of answers to be inserted in the andFinally method
 	*/
-	private List<forms__Form_Answer__c> answersToBeCreated = new List<forms__Form_Answer__c>();
+	private List<Clarity_Form_Answer__c> answersToBeCreated = new List<Clarity_Form_Answer__c>();
 
     /*******************************************************************************************************
 	* @description This method is called prior to execution of a BEFORE trigger. Use this to cache
@@ -55,7 +55,7 @@ public class forms__Form_ResponseTriggerHandler implements ITrigger {
 	*/
 	public void beforeInsert(SObject so) {
 
-        forms__Form_Response__c response = (forms__Form_Response__c) so; 
+        Clarity_Form_Response__c response = (Clarity_Form_Response__c) so; 
 
 		FormResponseLimits.execute(response);
 
@@ -67,9 +67,9 @@ public class forms__Form_ResponseTriggerHandler implements ITrigger {
 	*/
 	public void beforeUpdate(SObject oldSo, SObject so) {
 
-        forms__Form_Response__c oldResponse = (forms__Form_Response__c) oldSo; 
+        Clarity_Form_Response__c oldResponse = (Clarity_Form_Response__c) oldSo; 
 
-        forms__Form_Response__c newResponse = (forms__Form_Response__c) so; 
+        Clarity_Form_Response__c newResponse = (Clarity_Form_Response__c) so; 
 
 		FormResponseAssignment.execute(oldResponse, newResponse);
 
@@ -90,7 +90,7 @@ public class forms__Form_ResponseTriggerHandler implements ITrigger {
 	*/
 	public void afterInsert(SObject so) {
 
-		forms__Form_Response__c newResponse = (forms__Form_Response__c) so; 
+		Clarity_Form_Response__c newResponse = (Clarity_Form_Response__c) so; 
 
         CreateResponseAnswers.execute(answersToBeCreated, newResponse); 
 
@@ -102,9 +102,9 @@ public class forms__Form_ResponseTriggerHandler implements ITrigger {
 	*/
 	public void afterUpdate(SObject oldSo, SObject so) {
 
-        forms__Form_Response__c oldResponse = (forms__Form_Response__c) oldSo; 
+        Clarity_Form_Response__c oldResponse = (Clarity_Form_Response__c) oldSo; 
 
-        forms__Form_Response__c newResponse = (forms__Form_Response__c) so; 
+        Clarity_Form_Response__c newResponse = (Clarity_Form_Response__c) so; 
 
         ConnectionRecordProcess.execute(oldResponse, newResponse); 
 

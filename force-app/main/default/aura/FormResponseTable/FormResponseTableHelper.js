@@ -10,42 +10,42 @@
             name    : cmp.get("v.formName") ? cmp.get("v.formName") : ''
         })
 
-		action.setCallback(this, function (response) {
+        action.setCallback(this, function (response) {
 
-			let state = response.getState();
+        let state = response.getState();
 
-			if (state === "SUCCESS") {
+        if (state === "SUCCESS") {
 
-                cmp.set('v.loading', false);
+                  cmp.set('v.loading', false);
 
-                let data = response.getReturnValue(); 
+                  let data = response.getReturnValue(); 
+                  console.log('data', data); 
+                  let responses = data.map(response => {
+                      return {
+                          name          : response.Name,
+                          status        : response.forms__Status__c, 
+                          completed     : response.forms__Completion__c ? response.forms__Completion__c : '0%',
+                          start         : response.CreatedDate, 
+                          submittedDate : response.forms__Submitted_Date__c ? response.forms__Submitted_Date__c : '',
+                          id            : response.Id
+                      }
+                  })
 
-                let responses = data.map(response => {
-                    return {
-                        name          : response.Name,
-                        status        : response.Status__c, 
-                        completed     : response.Completion__c ? response.Completion__c : '0%',
-                        start         : response.CreatedDate, 
-                        submittedDate : response.Submitted_Date__c ? response.Submitted_Date__c : '',
-                        id            : response.Id
-                    }
-                })
+                  cmp.set('v.data', responses);
 
-                cmp.set('v.data', responses);
+                  cmp.set('v.loading', false);
 
-                cmp.set('v.loading', false);
+        } else if (state === "ERROR") {
 
-			} else if (state === "ERROR") {
+          let errors = response.getError();
 
-				let errors = response.getError();
+                  cmp.find('notifLib').showToast({
+                      "variant": "error",
+                      "title"  : "Error!",
+                      "message": response.getError()
+                  });
 
-                cmp.find('notifLib').showToast({
-                    "variant": "error",
-                    "title"  : "Error!",
-                    "message": response.getError()
-                });
-
-			}
+        }
 
 		});
 
@@ -108,7 +108,7 @@
                 type: "standard__recordPage",
                 attributes: {
                     recordId: record.id,
-                    objectApiName: "forms__Form_Response__c",
+                    objectApiName: "form__Clarity_Form_Response__c",
                     actionName: "view"
                 }
             },
@@ -128,7 +128,7 @@
     handleEditResponse: function(cmp, event, record) {
 
         $A.createComponents([
-            ["c:FormResponse", { "formName": record.name, "recordId": record.id }]
+            ["forms:FormResponse", { "formName": record.name, "recordId": record.id }]
         ],
         function(components, status) {
             if (status === "SUCCESS") {

@@ -5,7 +5,7 @@
     <externalId>false</externalId>
     <label>OwnerId</label>
     <referenceTo>User</referenceTo>
-    <relationshipName>forms__Form_Responses</relationshipName>
+    <relationshipName>Clarity_Form_Responses</relationshipName>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <trackTrending>false</trackTrending>

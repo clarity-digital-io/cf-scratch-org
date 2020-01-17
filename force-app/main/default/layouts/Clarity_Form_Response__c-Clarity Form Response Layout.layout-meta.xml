@@ -13,7 +13,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>forms__Form__c</field>
+                <field>Clarity_Form__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -71,14 +71,14 @@
         <fields>NAME</fields>
         <fields>Salesforce_Connection_Object__c</fields>
         <fields>Status__c</fields>
-        <relatedList>forms__Form_Connection_Process__c.forms__Form_Response__c</relatedList>
+        <relatedList>Clarity_Form_Connection_Process__c.Clarity_Form_Response__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>forms__Form_Question__c</fields>
+        <fields>Clarity_Form_Question__c</fields>
         <fields>Answer__c</fields>
         <fields>OBJECT_ID</fields>
-        <relatedList>forms__Form_Answer__c.forms__Form_Response__c</relatedList>
+        <relatedList>Clarity_Form_Answer__c.Clarity_Form_Response__c</relatedList>
     </relatedLists>
     <relatedLists>
         <relatedList>RelatedNoteList</relatedList>

@@ -7,7 +7,7 @@
 
 		if(name == 'Cancel' || name == 'Close') {
 
-            cmp.find("overlayLib").notifyClose();
+      cmp.find("overlayLib").notifyClose();
 
 		} 
 

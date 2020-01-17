@@ -20,11 +20,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>forms__Form_Style__c</field>
+                <field>Clarity_Form_Style__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>forms__Form_Assignment__c</field>
+                <field>Clarity_Form_Assignment__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -125,13 +125,13 @@
         <fields>Status__c</fields>
         <fields>OwnerId__c</fields>
         <fields>Completion__c</fields>
-        <relatedList>forms__Form_Response__c.forms__Form__c</relatedList>
+        <relatedList>Clarity_Form_Response__c.Clarity_Form__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
         <fields>Title__c</fields>
         <fields>Required__c</fields>
-        <relatedList>forms__Form_Question__c.forms__Form__c</relatedList>
+        <relatedList>Clarity_Form_Question__c.Clarity_Form__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

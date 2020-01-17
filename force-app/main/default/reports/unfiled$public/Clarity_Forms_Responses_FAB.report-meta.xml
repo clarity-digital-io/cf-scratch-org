@@ -13,19 +13,19 @@
         </columns>
         <filter>
             <criteriaItems>
-                <column>forms__Form__c.Status__c</column>
+                <column>Clarity_Form__c.Status__c</column>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Published</value>
             </criteriaItems>
             <criteriaItems>
-                <column>forms__Form__c.Responses_Started__c</column>
+                <column>Clarity_Form__c.Responses_Started__c</column>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value/>
             </criteriaItems>
             <criteriaItems>
-                <column>forms__Form__c.Responses_Completed__c</column>
+                <column>Clarity_Form__c.Responses_Completed__c</column>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value/>
@@ -37,7 +37,7 @@
             <name>co</name>
             <value>1</value>
         </params>
-        <reportType>CustomEntityCustomEntity$forms__Form__c$forms__Form_Response__c</reportType>
+        <reportType>CustomEntityCustomEntity$Clarity_Form__c$Clarity_Form_Response__c</reportType>
         <scope>user</scope>
         <showGrandTotal>true</showGrandTotal>
         <showSubTotals>true</showSubTotals>
@@ -61,7 +61,7 @@
         <chartType>Donut</chartType>
         <enableHoverLabels>false</enableHoverLabels>
         <expandOthers>false</expandOthers>
-        <groupingColumn>forms__Form_Response__c.Status__c</groupingColumn>
+        <groupingColumn>Clarity_Form_Response__c.Status__c</groupingColumn>
         <legendPosition>Right</legendPosition>
         <location>CHART_BOTTOM</location>
         <showAxisLabels>false</showAxisLabels>
@@ -78,10 +78,10 @@
     <format>MultiBlock</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>forms__Form_Response__c.Status__c</field>
+        <field>Clarity_Form_Response__c.Status__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Clarity Forms Responses</name>
-    <reportType>CustomEntityCustomEntity$forms__Form__c$forms__Form_Response__c</reportType>
+    <reportType>CustomEntityCustomEntity$Clarity_Form__c$Clarity_Form_Response__c</reportType>
     <showDetails>true</showDetails>
 </Report>

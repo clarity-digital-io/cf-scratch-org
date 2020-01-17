@@ -1,3 +1,3 @@
-trigger ClarityFormQuestionTrigger on forms__Form_Question__c (after insert, after update, after delete) {
-  TriggerFactory.createHandler(forms__Form_Question__c.SObjectType);
+trigger ClarityFormQuestionTrigger on Clarity_Form_Question__c (after insert, after update, after delete) {
+  TriggerFactory.createHandler(Clarity_Form_Question__c.SObjectType);
 }

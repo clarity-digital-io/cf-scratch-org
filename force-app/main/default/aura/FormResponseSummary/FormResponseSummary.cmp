@@ -2,7 +2,7 @@
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:attribute name="detail" type="Object" default="{}" />
-    <aura:attribute name="form" type="forms__Form__c" />
+    <aura:attribute name="form" type="Clarity_Form__c" />
     <aura:attribute name="responses" type ="list"/>
     <aura:attribute name="data" type="Object"/>
     <aura:attribute name="columns" type="List"/>
@@ -37,7 +37,7 @@
                         <div class="slds-page-header__control">
                             <lightning:buttonGroup>
 
-                                <aura:if isTrue="{!v.form.Status__c == 'Published'}">
+                                <aura:if isTrue="{!v.form.forms__Status__c == 'Published'}">
                                     <lightning:button label="New Form Response" onclick="{!c.handleNewFormResponse}" />
                                     <aura:set attribute="else">
                                         <lightning:button label="Publish Form" onclick="{!c.handlePublishForm}" />
@@ -57,7 +57,7 @@
                     <ul class="slds-page-header__detail-row">
                         <li class="slds-page-header__detail-block">
                             <div class="slds-text-title slds-truncate" title="Status">Status</div>
-                            <div class="slds-truncate" title="Draft">{!v.form.Status__c}</div>
+                            <div class="slds-truncate" title="Draft">{!v.form.forms__Status__c}</div>
                         </li>            
                     </ul>
                 </div>

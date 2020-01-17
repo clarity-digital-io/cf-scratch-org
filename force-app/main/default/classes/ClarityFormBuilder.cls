@@ -5,7 +5,7 @@ global with sharing class ClarityFormBuilder {
 
         List<String> saved = new List<String>(); 
 
-        List<forms__Form_Question__c> parsedQuestions = (List<forms__Form_Question__c>)JSON.deserialize(sQuestions, List<forms__Form_Question__c>.class);
+        List<Clarity_Form_Question__c> parsedQuestions = (List<Clarity_Form_Question__c>)JSON.deserialize(sQuestions, List<Clarity_Form_Question__c>.class);
 
         List<Database.UpsertResult> results = Database.upsert(parsedQuestions, true); 
 
@@ -23,19 +23,19 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static forms__Form__c startup(String formId) {
+    global static Clarity_Form__c startup(String formId) {
         
-        forms__Form__c form = null;
+        Clarity_Form__c form = null;
 
         if(formId == '') {
 
-            forms__Form_Style__c styling = new forms__Form_Style__c(Name = 'Clarity Form Styling', Background_Color__c = '#FFF', Color__c = '#333');
+            Clarity_Form_Style__c styling = new Clarity_Form_Style__c(Name = 'Clarity Form Styling', Background_Color__c = '#FFF', Color__c = '#333');
 
             Database.SaveResult stylingResult = Database.insert(styling); 
 
             if(!stylingResult.isSuccess()) System.debug('throw error'); // throw error
 
-            forms__Form__c newForm = new forms__Form__c(Label__c = 'Clarity Form', forms__Form_Style__c = styling.Id); 
+            Clarity_Form__c newForm = new Clarity_Form__c(Label__c = 'Clarity Form', Clarity_Form_Style__c = styling.Id); 
             
             Database.SaveResult result = Database.insert(newForm); 
 
@@ -45,18 +45,18 @@ global with sharing class ClarityFormBuilder {
 
         } 
         
-        form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, forms__Form_Style__r.Name, forms__Form_Style__r.Multi_Page__c, forms__Form_Style__r.Background_Image__c, forms__Form_Style__r.Background_Color__c, forms__Form_Style__r.Color__c, 
-            forms__Form_Assignment__c, forms__Form_Assignment__r.Assign__c, forms__Form_Assignment__r.Default_Assign__c, forms__Form_Assignment__r.Name 
-            FROM forms__Form__c WHERE Id =: formId];
+        form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__r.Name, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
+            Clarity_Form_Assignment__c, Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
+            FROM Clarity_Form__c WHERE Id =: formId];
 
         return form; 
 
     }
 
     @RemoteAction
-    global static forms__Form__c updateForm(String sForm) {
+    global static Clarity_Form__c updateForm(String sForm) {
 
-        forms__Form__c parsedForm = (forms__Form__c)JSON.deserialize(sForm, forms__Form__c.class);
+        Clarity_Form__c parsedForm = (Clarity_Form__c)JSON.deserialize(sForm, Clarity_Form__c.class);
 
         Database.SaveResult result = Database.update(parsedForm, true); 
 
@@ -69,18 +69,18 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<forms__Form_Style__c> getDesigns() {
+    global static List<Clarity_Form_Style__c> getDesigns() {
 
-        List<forms__Form_Style__c> designs = [SELECT Id, Multi_Page__c, Name, Background_Image__c, Background_Color__c, Button_Color__c, Color__c FROM forms__Form_Style__c];
+        List<Clarity_Form_Style__c> designs = [SELECT Id, Multi_Page__c, Name, Background_Image__c, Background_Color__c, Button_Color__c, Color__c FROM Clarity_Form_Style__c];
 
         return designs; 
         
     }
 
     @RemoteAction
-    global static forms__Form_Style__c updateDesign(String sDesign, String file) {
+    global static Clarity_Form_Style__c updateDesign(String sDesign, String file) {
 
-        forms__Form_Style__c parsedStyle = (forms__Form_Style__c)JSON.deserialize(sDesign, forms__Form_Style__c.class);
+        Clarity_Form_Style__c parsedStyle = (Clarity_Form_Style__c)JSON.deserialize(sDesign, Clarity_Form_Style__c.class);
 
         if(file != '') {
 
@@ -141,20 +141,20 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<forms__Form_Question__c> getQuestions(String recordId){
+    global static List<Clarity_Form_Question__c> getQuestions(String recordId){
 
-        List<forms__Form_Question__c> questions = [SELECT Id, Page__c, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, 
-            (SELECT Id, Label__c FROM forms__Form_Question_Options__r), Type__c, forms__Form__c, Max_Length__c, Lookup__c 
-            FROM forms__Form_Question__c WHERE forms__Form__c =: recordId];
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Page__c, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, 
+            (SELECT Id, Label__c FROM Clarity_Form_Question_Options__r), Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
+            FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: recordId];
 
         return questions; 
 
     }
 
     @RemoteAction
-    global static List<forms__Form_Question_Option__c> getQuestionOptions(String sQuestionId) {
+    global static List<Clarity_Form_Question_Option__c> getQuestionOptions(String sQuestionId) {
 
-        List<forms__Form_Question_Option__c> options = [SELECT Id, Active_Flow__c, Label__c FROM forms__Form_Question_Option__c WHERE forms__Form_Question__c =: sQuestionId];
+        List<Clarity_Form_Question_Option__c> options = [SELECT Id, Active_Flow__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
 
         return options; 
 
@@ -163,7 +163,7 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static String saveQuestion(String sQuestion) {
 
-        forms__Form_Question__c parsedQuestion = (forms__Form_Question__c)JSON.deserialize(sQuestion, forms__Form_Question__c.class);
+        Clarity_Form_Question__c parsedQuestion = (Clarity_Form_Question__c)JSON.deserialize(sQuestion, Clarity_Form_Question__c.class);
 
         Database.SaveResult result = Database.update(parsedQuestion, true); 
 
@@ -178,9 +178,9 @@ global with sharing class ClarityFormBuilder {
     // @RemoteAction
     // global static  Map<String, List<sObject>> saveQuestionWithPictureOptions(String sQuestion, String sQuestionOptions) {
 
-    //     List<forms__Form_Question_Option__c> parsedQuestionOptions = (List<forms__Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, List<forms__Form_Question_Option__c>.class);
+    //     List<Clarity_Form_Question_Option__c> parsedQuestionOptions = (List<Clarity_Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, List<Clarity_Form_Question_Option__c>.class);
 
-    //     for(forms__Form_Question_Option__c option : parsedQuestionOptions) {
+    //     for(Clarity_Form_Question_Option__c option : parsedQuestionOptions) {
     //         Map<String, Object> optionFields = new Map<String, Object>( option.getPopulatedFieldsAsMap() );
     //     }
         
@@ -192,7 +192,7 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static Map<String, List<sObject>> saveQuestionWithOptions(String sQuestion, String sQuestionOptions) {
 
-        forms__Form_Question__c parsedQuestion = (forms__Form_Question__c)JSON.deserialize(sQuestion, forms__Form_Question__c.class);
+        Clarity_Form_Question__c parsedQuestion = (Clarity_Form_Question__c)JSON.deserialize(sQuestion, Clarity_Form_Question__c.class);
 
         Database.SaveResult resultQuestion = Database.update(parsedQuestion, true); 
 
@@ -200,19 +200,19 @@ global with sharing class ClarityFormBuilder {
             System.debug('error result');
         }
 
-        List<forms__Form_Question_Option__c> currentOptions = [SELECT Id, Active_Flow__c, Label__c FROM forms__Form_Question_Option__c WHERE forms__Form_Question__c =: parsedQuestion.Id];
+        List<Clarity_Form_Question_Option__c> currentOptions = [SELECT Id, Active_Flow__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: parsedQuestion.Id];
 
-        List<forms__Form_Question_Option__c> parsedQuestionOptions = (List<forms__Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, List<forms__Form_Question_Option__c>.class);
+        List<Clarity_Form_Question_Option__c> parsedQuestionOptions = (List<Clarity_Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, List<Clarity_Form_Question_Option__c>.class);
 
-        Map<Id, forms__Form_Question_Option__c> updatedQuestionOptionsById = new Map<Id, forms__Form_Question_Option__c>();
+        Map<Id, Clarity_Form_Question_Option__c> updatedQuestionOptionsById = new Map<Id, Clarity_Form_Question_Option__c>();
 
-        for(forms__Form_Question_Option__c o : parsedQuestionOptions) {
+        for(Clarity_Form_Question_Option__c o : parsedQuestionOptions) {
             updatedQuestionOptionsById.put(o.Id, o); 
         }
 
-        List<forms__Form_Question_Option__c> notFoundInParsedQuestionOptions = new List<forms__Form_Question_Option__c>();
+        List<Clarity_Form_Question_Option__c> notFoundInParsedQuestionOptions = new List<Clarity_Form_Question_Option__c>();
 
-        for(forms__Form_Question_Option__c currentOption : currentOptions) {
+        for(Clarity_Form_Question_Option__c currentOption : currentOptions) {
 
             if(updatedQuestionOptionsById.get(currentOption.Id) == null) {
                 notFoundInParsedQuestionOptions.add(currentOption); 
@@ -260,15 +260,15 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction 
-    global static List<forms__Form_Question__c> pageDelete(String sQuestions, String sDetails) {
+    global static List<Clarity_Form_Question__c> pageDelete(String sQuestions, String sDetails) {
 
         List<String> details = (List<String>)JSON.deserialize(sDetails, List<String>.class);
 
         Double page = Double.valueOf(details[0]); 
         String recordId = details[1];
 
-        List<forms__Form_Question__c> questionsToDelete = [SELECT Id, Page__c, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, Type__c, forms__Form__c, Max_Length__c, Lookup__c 
-            FROM forms__Form_Question__c WHERE forms__Form__c =: recordId AND Page__c =: page];
+        List<Clarity_Form_Question__c> questionsToDelete = [SELECT Id, Page__c, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
+            FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: recordId AND Page__c =: page];
 
         List<Database.DeleteResult> deleteResults = Database.delete(questionsToDelete, true); 
 
@@ -278,7 +278,7 @@ global with sharing class ClarityFormBuilder {
             }
         }
         
-        List<forms__Form_Question__c> parsedQuestions = (List<forms__Form_Question__c>)JSON.deserialize(sQuestions, List<forms__Form_Question__c>.class);
+        List<Clarity_Form_Question__c> parsedQuestions = (List<Clarity_Form_Question__c>)JSON.deserialize(sQuestions, List<Clarity_Form_Question__c>.class);
 
         if(parsedQuestions.size() > 0) {
             List<Database.SaveResult> results = Database.update(parsedQuestions, true); 
@@ -297,9 +297,9 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction 
-    global static List<forms__Form_Question__c> deleteQuestion(String sQuestions, String sDeleteQuestionId) {
+    global static List<Clarity_Form_Question__c> deleteQuestion(String sQuestions, String sDeleteQuestionId) {
 
-        forms__Form_Question__c questionToDelete = [SELECT Id FROM forms__Form_Question__c WHERE Id =: sDeleteQuestionId];
+        Clarity_Form_Question__c questionToDelete = [SELECT Id FROM Clarity_Form_Question__c WHERE Id =: sDeleteQuestionId];
 
         Database.DeleteResult result = Database.delete(questionToDelete, true);
 
@@ -307,7 +307,7 @@ global with sharing class ClarityFormBuilder {
             System.debug('error: ' + result.getErrors());
         }
         
-        List<forms__Form_Question__c> parsedQuestions = (List<forms__Form_Question__c>)JSON.deserialize(sQuestions, List<forms__Form_Question__c>.class);
+        List<Clarity_Form_Question__c> parsedQuestions = (List<Clarity_Form_Question__c>)JSON.deserialize(sQuestions, List<Clarity_Form_Question__c>.class);
 
         List<Database.SaveResult> results = Database.update(parsedQuestions, true); 
 
@@ -325,11 +325,11 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction 
     global static Map<String, List<sObject>> getQuestionEditDetails(String sQuestionId) {
 
-        List<forms__Form_Question_Flow_Design__c> flowDesign = [SELECT Id, Active__c, Form_Submission__c, forms__Form_Question__c FROM forms__Form_Question_Flow_Design__c WHERE forms__Form_Question__c =: sQuestionId LIMIT 1];
+        List<Clarity_Form_Question_Flow_Design__c> flowDesign = [SELECT Id, Active__c, Form_Submission__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Flow_Design__c WHERE Clarity_Form_Question__c =: sQuestionId LIMIT 1];
 
-        List<forms__Form_Question_Option__c> questionOptions = [SELECT Id, Active_Flow__c, Choice_Image__c, Label__c FROM forms__Form_Question_Option__c WHERE forms__Form_Question__c =: sQuestionId];
+        List<Clarity_Form_Question_Option__c> questionOptions = [SELECT Id, Active_Flow__c, Choice_Image__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
 
-        List<forms__Form_Question_Criteria__c> criteria = [SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, forms__Form_Question__c FROM forms__Form_Question_Criteria__c WHERE forms__Form_Question__c =: sQuestionId];
+        List<Clarity_Form_Question_Criteria__c> criteria = [SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__c WHERE Clarity_Form_Question__c =: sQuestionId];
 
         Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
 
@@ -344,7 +344,7 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static Map<String, List<sObject>> saveFlowDesign(String sFlowDesign, String sQuestionOptions) {
 
-        forms__Form_Question_Flow_Design__c parsedFlowDesign = (forms__Form_Question_Flow_Design__c)JSON.deserialize(sFlowDesign, forms__Form_Question_Flow_Design__c.class);
+        Clarity_Form_Question_Flow_Design__c parsedFlowDesign = (Clarity_Form_Question_Flow_Design__c)JSON.deserialize(sFlowDesign, Clarity_Form_Question_Flow_Design__c.class);
     
         Database.UpsertResult result = Database.upsert(parsedFlowDesign, true); 
 
@@ -352,7 +352,7 @@ global with sharing class ClarityFormBuilder {
            System.debug('log error: '); 
         }
 
-        List<forms__Form_Question_Option__c> parsedQuestionOptions = (List<forms__Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, List<forms__Form_Question_Option__c>.class);
+        List<Clarity_Form_Question_Option__c> parsedQuestionOptions = (List<Clarity_Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, List<Clarity_Form_Question_Option__c>.class);
 
         List<Database.UpsertResult> resultOptions = Database.upsert(parsedQuestionOptions, true); 
         
@@ -384,7 +384,7 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static Map<String, List<sObject>> saveQuestionWithCriteria(String sQuestion, String sCriteria) {
 
-        forms__Form_Question__c parsedQuestion = (forms__Form_Question__c)JSON.deserialize(sQuestion, forms__Form_Question__c.class);
+        Clarity_Form_Question__c parsedQuestion = (Clarity_Form_Question__c)JSON.deserialize(sQuestion, Clarity_Form_Question__c.class);
 
         Database.SaveResult resultQuestion = Database.update(parsedQuestion, true); 
 
@@ -392,7 +392,7 @@ global with sharing class ClarityFormBuilder {
             System.debug('error');
         }
 
-        List<forms__Form_Question_Criteria__c> currentCriteria = [SELECT Id FROM forms__Form_Question_Criteria__c WHERE forms__Form_Question__c =: parsedQuestion.Id];
+        List<Clarity_Form_Question_Criteria__c> currentCriteria = [SELECT Id FROM Clarity_Form_Question_Criteria__c WHERE Clarity_Form_Question__c =: parsedQuestion.Id];
 
         List<Database.DeleteResult> resultCriteriaDelete = Database.delete(currentCriteria, true); 
 
@@ -406,7 +406,7 @@ global with sharing class ClarityFormBuilder {
 
         }
 
-        List<forms__Form_Question_Criteria__c> parsedCriteria = (List<forms__Form_Question_Criteria__c>)JSON.deserialize(sCriteria, List<forms__Form_Question_Criteria__c>.class);
+        List<Clarity_Form_Question_Criteria__c> parsedCriteria = (List<Clarity_Form_Question_Criteria__c>)JSON.deserialize(sCriteria, List<Clarity_Form_Question_Criteria__c>.class);
 
         List<Database.SaveResult> resultCriteria = Database.insert(parsedCriteria, true); 
 
@@ -499,9 +499,9 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static forms__Form_Assignment__c createAssignment(String name, String formId) {
+    global static Clarity_Form_Assignment__c createAssignment(String name, String formId) {
 
-        forms__Form_Assignment__c assignment = new forms__Form_Assignment__c(Name = name);
+        Clarity_Form_Assignment__c assignment = new Clarity_Form_Assignment__c(Name = name);
 
         Database.SaveResult assignmentResult = Database.insert(assignment, true); 
 
@@ -509,8 +509,8 @@ global with sharing class ClarityFormBuilder {
             System.debug('error');
         }
 
-        forms__Form__c form = [SELECT Id FROM forms__Form__c WHERE Id =: formId];
-        form.forms__Form_Assignment__c = assignment.Id; 
+        Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c WHERE Id =: formId];
+        form.Clarity_Form_Assignment__c = assignment.Id; 
         
         Database.SaveResult formResult = Database.update(form); 
 
@@ -523,18 +523,18 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<forms__Form_Assignment_Rule__c> getAssignmentRules(String formAssignmentId) {
+    global static List<Clarity_Form_Assignment_Rule__c> getAssignmentRules(String formAssignmentId) {
 
-        List<forms__Form_Assignment_Rule__c> rules = [SELECT Id FROM forms__Form_Assignment_Rule__c WHERE forms__Form_Assignment__c = :formAssignmentId];
+        List<Clarity_Form_Assignment_Rule__c> rules = [SELECT Id FROM Clarity_Form_Assignment_Rule__c WHERE Clarity_Form_Assignment__c = :formAssignmentId];
 
         return rules; 
 
     }
 
     @RemoteAction
-    global static List<forms__Form_Assignment_Rule__c> saveAssignmentRules(String sFormAssignment, String sFormAssignmentRules) {
+    global static List<Clarity_Form_Assignment_Rule__c> saveAssignmentRules(String sFormAssignment, String sFormAssignmentRules) {
 
-        forms__Form_Assignment__c assignment = (forms__Form_Assignment__c)JSON.deserialize(sFormAssignment, forms__Form_Assignment__c.class); 
+        Clarity_Form_Assignment__c assignment = (Clarity_Form_Assignment__c)JSON.deserialize(sFormAssignment, Clarity_Form_Assignment__c.class); 
 
         Database.SaveResult assignmentResult = Database.update(assignment, true); 
 
@@ -542,10 +542,10 @@ global with sharing class ClarityFormBuilder {
             System.debug('error');
         }
 
-        List<forms__Form_Assignment_Rule__c> parsedAssignmentRules = (List<forms__Form_Assignment_Rule__c>)JSON.deserialize(sFormAssignmentRules, List<forms__Form_Assignment_Rule__c>.class);
+        List<Clarity_Form_Assignment_Rule__c> parsedAssignmentRules = (List<Clarity_Form_Assignment_Rule__c>)JSON.deserialize(sFormAssignmentRules, List<Clarity_Form_Assignment_Rule__c>.class);
 
-        for(forms__Form_Assignment_Rule__c rule : parsedAssignmentRules) {
-            rule.forms__Form_Assignment__c = assignment.Id; 
+        for(Clarity_Form_Assignment_Rule__c rule : parsedAssignmentRules) {
+            rule.Clarity_Form_Assignment__c = assignment.Id; 
         }
 
         List<Database.UpsertResult> results = Database.upsert(parsedAssignmentRules, true); 
@@ -563,9 +563,9 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<forms__Form_Question__c> saveRecordGroupFields(String sRecordGroupFields, String relatedRecordGroupId) {
+    global static List<Clarity_Form_Question__c> saveRecordGroupFields(String sRecordGroupFields, String relatedRecordGroupId) {
 
-        List<forms__Form_Question__c> recordFieldsToDelete = [SELECT Id FROM forms__Form_Question__c WHERE Record_Group__c =: relatedRecordGroupId]; 
+        List<Clarity_Form_Question__c> recordFieldsToDelete = [SELECT Id FROM Clarity_Form_Question__c WHERE Record_Group__c =: relatedRecordGroupId]; 
 
         List<Database.DeleteResult> deleteResults = Database.delete(recordFieldsToDelete, true);
 
@@ -577,7 +577,7 @@ global with sharing class ClarityFormBuilder {
 
         }
 
-        List<forms__Form_Question__c> parsedRecordGroupFields = (List<forms__Form_Question__c>)JSON.deserialize(sRecordGroupFields, List<forms__Form_Question__c>.class);
+        List<Clarity_Form_Question__c> parsedRecordGroupFields = (List<Clarity_Form_Question__c>)JSON.deserialize(sRecordGroupFields, List<Clarity_Form_Question__c>.class);
 
         List<Database.UpsertResult> resultRecordFields = Database.upsert(parsedRecordGroupFields, true); 
 
@@ -594,9 +594,9 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<forms__Form_Connection__c> getConnections(String formId){
+    global static List<Clarity_Form_Connection__c> getConnections(String formId){
 
-        List<forms__Form_Connection__c> connections = [SELECT Id, New__c, Salesforce_Object__c FROM forms__Form_Connection__c WHERE forms__Form__c =: formId];
+        List<Clarity_Form_Connection__c> connections = [SELECT Id, New__c, Salesforce_Object__c FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: formId];
 
         return connections; 
         
@@ -607,14 +607,14 @@ global with sharing class ClarityFormBuilder {
 
         Map<String, List<Object>> fieldMapping = new Map<String, List<Object>>(); 
 
-        List<forms__Form_Connection_Field__c> connectionFields = [SELECT Id, forms__Form_Connection__c, Custom_Value__c, 
-            Salesforce_Field__c, forms__Form_Question__c, PreFill__c 
-            FROM forms__Form_Connection_Field__c WHERE forms__Form_Connection__c =: connectionId];
+        List<Clarity_Form_Connection_Field__c> connectionFields = [SELECT Id, Clarity_Form_Connection__c, Custom_Value__c, 
+            Salesforce_Field__c, Clarity_Form_Question__c, PreFill__c 
+            FROM Clarity_Form_Connection_Field__c WHERE Clarity_Form_Connection__c =: connectionId];
 
-        List<forms__Form_Connection_Field__c> mappingFields = new List<forms__Form_Connection_Field__c>(); 
-        List<forms__Form_Connection_Field__c> prefillFields = new List<forms__Form_Connection_Field__c>(); 
+        List<Clarity_Form_Connection_Field__c> mappingFields = new List<Clarity_Form_Connection_Field__c>(); 
+        List<Clarity_Form_Connection_Field__c> prefillFields = new List<Clarity_Form_Connection_Field__c>(); 
 
-        for(forms__Form_Connection_Field__c connectionField : connectionFields) {
+        for(Clarity_Form_Connection_Field__c connectionField : connectionFields) {
             if(connectionField.PreFill__c) {
                 prefillFields.add(connectionField);
             } else {
@@ -660,13 +660,13 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<forms__Form_Connection__c> saveConnections(List<String> connect) {
+    global static List<Clarity_Form_Connection__c> saveConnections(List<String> connect) {
 
         String sConnections = connect[0];
         String formId = connect[1]; 
         String sRemoved = connect[2];
 
-        List<forms__Form_Connection__c> removedParsedConnections = (List<forms__Form_Connection__c>)JSON.deserialize(sRemoved, List<forms__Form_Connection__c>.class);
+        List<Clarity_Form_Connection__c> removedParsedConnections = (List<Clarity_Form_Connection__c>)JSON.deserialize(sRemoved, List<Clarity_Form_Connection__c>.class);
 
         if(removedParsedConnections.size() > 0) {
 
@@ -684,7 +684,7 @@ global with sharing class ClarityFormBuilder {
 
         }
 
-        List<forms__Form_Connection__c> parsedConnections = (List<forms__Form_Connection__c>)JSON.deserialize(sConnections, List<forms__Form_Connection__c>.class);
+        List<Clarity_Form_Connection__c> parsedConnections = (List<Clarity_Form_Connection__c>)JSON.deserialize(sConnections, List<Clarity_Form_Connection__c>.class);
 
         List<Database.UpsertResult> results = Database.upsert(parsedConnections, true); 
 
@@ -707,7 +707,7 @@ global with sharing class ClarityFormBuilder {
 
         Map<String, List<Object>> fieldMapping = new Map<String, List<Object>>(); 
 
-        List<forms__Form_Connection_Field__c> connection = [SELECT Id FROM forms__Form_Connection_Field__c WHERE forms__Form_Connection__c =: connectionId];
+        List<Clarity_Form_Connection_Field__c> connection = [SELECT Id FROM Clarity_Form_Connection_Field__c WHERE Clarity_Form_Connection__c =: connectionId];
 
         List<Database.DeleteResult> resultConnectionDelete = Database.delete(connection, true); 
 
@@ -721,7 +721,7 @@ global with sharing class ClarityFormBuilder {
 
         }
 
-        List<forms__Form_Connection_Field__c> parsedConnectionFields = (List<forms__Form_Connection_Field__c>)JSON.deserialize(sActiveConnectionFields, List<forms__Form_Connection_Field__c>.class);
+        List<Clarity_Form_Connection_Field__c> parsedConnectionFields = (List<Clarity_Form_Connection_Field__c>)JSON.deserialize(sActiveConnectionFields, List<Clarity_Form_Connection_Field__c>.class);
     
         if(parsedConnectionFields.size() > 0) {
 
@@ -738,10 +738,10 @@ global with sharing class ClarityFormBuilder {
 
         }
 
-        List<forms__Form_Connection_Field__c> mappingFields = new List<forms__Form_Connection_Field__c>(); 
-        List<forms__Form_Connection_Field__c> prefillFields = new List<forms__Form_Connection_Field__c>(); 
+        List<Clarity_Form_Connection_Field__c> mappingFields = new List<Clarity_Form_Connection_Field__c>(); 
+        List<Clarity_Form_Connection_Field__c> prefillFields = new List<Clarity_Form_Connection_Field__c>(); 
 
-        for(forms__Form_Connection_Field__c connectionField : parsedConnectionFields) {
+        for(Clarity_Form_Connection_Field__c connectionField : parsedConnectionFields) {
             if(connectionField.PreFill__c) {
                 prefillFields.add(connectionField);
             } else {
@@ -778,7 +778,7 @@ global with sharing class ClarityFormBuilder {
 
         Map<String, Object> result = new Map<String, Object>(); 
 
-        forms__Form__c form = [SELECT Id, Status__c FROM forms__Form__c WHERE Id =: formId]; 
+        Clarity_Form__c form = [SELECT Id, Status__c FROM Clarity_Form__c WHERE Id =: formId]; 
 
         form.Status__c = status;
 

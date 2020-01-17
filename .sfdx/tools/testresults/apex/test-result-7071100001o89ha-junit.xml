@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2020-01-16T18:44:54-06:00" hostname="https://java-ability-1684-dev-ed.cs18.my.salesforce.com" tests="23" failures="0"  errors="0"  time="0.12">
+        <properties>
+            <property name="outcome" value="Passed"/>
+            <property name="testsRan" value="23"/>
+            <property name="passing" value="23"/>
+            <property name="failing" value="0"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="100%"/>
+            <property name="failRate" value="0%"/>
+            <property name="testStartTime" value="Jan 16, 2020 6:44 PM"/>
+            <property name="testExecutionTime" value="0.12 s"/>
+            <property name="testTotalTime" value="0.12 s"/>
+            <property name="commandTime" value="2.74 s"/>
+            <property name="hostname" value="https://java-ability-1684-dev-ed.cs18.my.salesforce.com"/>
+            <property name="orgId" value="00D1100000BwinsEAB"/>
+            <property name="username" value="test-wc0mayhd3hmi@example.com"/>
+            <property name="testRunId" value="7071100001o89ha"/>
+            <property name="userId" value="00511000006ptkJAAQ"/>
+        </properties>
+        <testcase name="shouldCreateAssignment" classname="formsClarityFormBuilderTest" time="0">
+        </testcase>
+        <testcase name="shouldDeletePage" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldDeleteQuestion" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldGetAssignmentRules" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldGetConnectionFieldMapping" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldGetConnections" classname="formsClarityFormBuilderTest" time="0">
+        </testcase>
+        <testcase name="shouldGetDesigns" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldGetQuestionDetails" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldGetQuestions" classname="formsClarityFormBuilderTest" time="0">
+        </testcase>
+        <testcase name="shouldGetSObjectsAvailable" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldGetUsers" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldSave" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldSaveActiveFieldConnections" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldSaveAssignmentRules" classname="formsClarityFormBuilderTest" time="0">
+        </testcase>
+        <testcase name="shouldSaveConnections" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldSaveFlowDesign" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldSaveQuestionWithCriteria" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldSaveQuestionWithOptions" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldSaveRecordGroupFields" classname="formsClarityFormBuilderTest" time="0">
+        </testcase>
+        <testcase name="shouldStartup" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldUpdateDesign" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="shouldUpdateForm" classname="formsClarityFormBuilderTest" time="0">
+        </testcase>
+        <testcase name="shouldUpdateStatus" classname="formsClarityFormBuilderTest" time="0.01">
+        </testcase>
+    </testsuite>
+</testsuites>

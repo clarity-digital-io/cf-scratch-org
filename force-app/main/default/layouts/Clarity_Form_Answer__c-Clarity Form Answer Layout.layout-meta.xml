@@ -12,7 +12,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>forms__Form_Question__c</field>
+                <field>Clarity_Form_Question__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -20,7 +20,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>forms__Form_Response__c</field>
+                <field>Clarity_Form_Response__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -70,7 +70,7 @@
         <fields>VERSION.TITLE</fields>
         <fields>VERSION.CREATED_DATE</fields>
         <fields>VERSION.LAST_UPDATE</fields>
-        <relatedList>ContentVersion.forms__Form_Answer__c</relatedList>
+        <relatedList>ContentVersion.Clarity_Form_Answer__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

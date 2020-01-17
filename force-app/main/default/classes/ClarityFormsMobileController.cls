@@ -15,7 +15,7 @@ global with sharing class ClarityFormsMobileController {
     }
 
     @HttpPut 
-    global static List<forms__Form_Answer__c> save() {
+    global static List<Clarity_Form_Answer__c> save() {
 
         RestRequest req = RestContext.request;
 
@@ -27,7 +27,7 @@ global with sharing class ClarityFormsMobileController {
         
         String saveAnswers = ClarityFormsService.prepareAnswers(sAnswers); 
 
-        List<forms__Form_Answer__c> savedAnswers = ClarityFormsService.save(saveAnswers); 
+        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(saveAnswers); 
 
         return savedAnswers;
 
