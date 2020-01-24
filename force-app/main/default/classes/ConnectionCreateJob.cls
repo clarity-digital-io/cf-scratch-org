@@ -13,12 +13,15 @@ public class ConnectionCreateJob implements Queueable {
     
     private Map<String, Id> storedResults;
 
-    public ConnectionCreateJob(Integer order, List<Clarity_Form_Connection__c> connections, Map<Id, Clarity_Form_Answer__c> answersByQuestion, Map<Id, Clarity_Form_Connection_Process__c> processByConnections, Map<String, Id> storedResults) {
+	private Clarity_Form_Response__c response; 
+
+    public ConnectionCreateJob(Integer order, List<Clarity_Form_Connection__c> connections, Map<Id, Clarity_Form_Answer__c> answersByQuestion, Map<Id, Clarity_Form_Connection_Process__c> processByConnections, Map<String, Id> storedResults, Clarity_Form_Response__c response) {
         this.order = order;
         this.connections = connections;
         this.answersByQuestion = answersByQuestion;
         this.processByConnections = processByConnections;
         this.storedResults = storedResults;
+		this.response = response;
     }
 
     public void execute(QueueableContext context) {
@@ -28,6 +31,8 @@ public class ConnectionCreateJob implements Queueable {
         if(fields.size() > 0) {
 
             Schema.SObjectType convertType = Schema.getGlobalDescribe().get(connections[order].Salesforce_Object__c);
+
+			String genericObjectName = convertType.getDescribe().getName();
             
             Map<String, Schema.SObjectField> sObjectFields = convertType.getDescribe().fields.getMap();
 
@@ -79,15 +84,27 @@ public class ConnectionCreateJob implements Queueable {
 
             }
             
-            update connectionStatus;
+			update connectionStatus;
+
+			Schema.SObjectType responseType = Schema.Clarity_Form_Response__c.getSObjectType(); 
+			
+			Map<String, Schema.SObjectField> responseSObjectFields = responseType.getDescribe().fields.getMap();
+
+			String connectedName = 'Connection_' + genericObjectName + '__c'; 
+
+			if(responseSObjectFields.get('forms__' + connectedName) != null && record.isSuccess()) {
+
+				connectRecords(JSON.serialize(response), connectedName, record.getId()); 
+
+			} 
 
         }
 
         if((connections.size() > (order + 1)) && chainJob) 
-            System.enqueueJob(new ConnectionCreateJob(order + 1, connections, answersByQuestion, processByConnections, storedResults));
+            System.enqueueJob(new ConnectionCreateJob(order + 1, connections, answersByQuestion, processByConnections, storedResults, response));
 
         if((connections.size() > (order + 1)) && !chainJob) {
-            ConnectionCreateJob job = new ConnectionCreateJob(order + 1, connections, answersByQuestion, processByConnections, storedResults);
+            ConnectionCreateJob job = new ConnectionCreateJob(order + 1, connections, answersByQuestion, processByConnections, storedResults, response);
             job.execute(null);
         }
 
@@ -173,5 +190,14 @@ public class ConnectionCreateJob implements Queueable {
         return cleanValue; 
 
     }
+
+	@future
+	public static void connectRecords(String sResponse, String connectedName, String recordId) {
+
+		Clarity_Form_Response__c response = (Clarity_Form_Response__c)JSON.deserialize(sResponse, Clarity_Form_Response__c.class);
+		response.put(connectedName, recordId);
+		update response; 
+
+	}
 
 }

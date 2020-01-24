@@ -80,48 +80,20 @@ public class ClarityTestDataFactory {
 
     }
 
-    public static Clarity_Form_Assignment__c generateAssignment(Clarity_Form__c form, User u, String logic){
+	public static Clarity_Form_Question__c generateRecordGroup(Clarity_Form__c form) {
 
-        Clarity_Form_Assignment__c assignment = new Clarity_Form_Assignment__c(
-            Assign__c = u.Id,
-            Default_Assign__c = u.Id,
-            Logic__c = logic
-        );
+		Clarity_Form_Question__c question = new Clarity_Form_Question__c(
+			Clarity_Form__c 	 = form.Id, 
+			Title__c        	 = 'Title: RecordGroup', 
+			Type__c         	 = 'RecordGroup',
+			Salesforce_Object__c = 'Opportunity'
+		);
 
-        insert assignment;
+		insert question; 
 
-        form.Clarity_Form_Assignment__c = assignment.Id; 
+		return question; 
 
-        return assignment; 
-
-    }
-
-    public static void generateAssignmentRules(Id assignmentId, List<Clarity_Form_Question__c> questions, String type){
-
-        List<Clarity_Form_Assignment_Rule__c> rules = new List<Clarity_Form_Assignment_Rule__c>();
-
-        for(Clarity_Form_Question__c question : questions){
-
-            if(question.Type__c == type) {
-
-                Clarity_Form_Assignment_Rule__c rule = new Clarity_Form_Assignment_Rule__c(
-                    Clarity_Form_Assignment__c = assignmentId,
-                    Field__c                   = question.Id,
-                    Field_Type__c              = type,
-                    Operator__c                = 'Is Not Null',
-                    Type__c                    = 'String',
-                    Value__c                   = 'Answer for: Title: ' + type
-                );
-
-                rules.add(rule);
-
-            }
-
-        }
-
-        insert rules; 
-
-    }
+	}
 
     public static List<Clarity_Form_Connection__c> generateConnections(Clarity_Form__c form, List<String> connectionObjects){
 

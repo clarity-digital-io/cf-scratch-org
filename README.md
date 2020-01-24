@@ -47,9 +47,9 @@ sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-de
 
 sfdx force:org:list --all
 
-sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-forms-org
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-forms-pkg
 
-sfdx force:alias:set forms=test-5dyeg6r1gyv9@example.com
+sfdx force:alias:set forms=test-kzsaqkcclnnv@example.com
 
 sfdx force:config:set defaultusername=forms
 
@@ -60,6 +60,8 @@ sfdx force:org:open -u PkgOrg
 sfdx force:user:password:generate --targetusername forms
 
 sfdx force:user:display --targetusername forms
+
+sfdx force:org:delete -u test-iwaemnwejmjb@example.com
 
 ## commonly used commands
 

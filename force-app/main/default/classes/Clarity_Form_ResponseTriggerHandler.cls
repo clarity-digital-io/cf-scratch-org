@@ -67,12 +67,6 @@ public class Clarity_Form_ResponseTriggerHandler implements ITrigger {
 	*/
 	public void beforeUpdate(SObject oldSo, SObject so) {
 
-        Clarity_Form_Response__c oldResponse = (Clarity_Form_Response__c) oldSo; 
-
-        Clarity_Form_Response__c newResponse = (Clarity_Form_Response__c) so; 
-
-		FormResponseAssignment.execute(oldResponse, newResponse);
-
 	}
 
 	/*******************************************************************************************************

@@ -25,18 +25,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ClarityFormsExternalController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ClarityFormsMobileController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ClarityFormsOfflineController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>ClarityFormsService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -86,14 +74,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FormControllerTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>FormResponseAssignment</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>FormResponseAssignmentTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -419,6 +399,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form_Response__c.Completion__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Response__c.Connection_Account__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Response__c.Connection_Case__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

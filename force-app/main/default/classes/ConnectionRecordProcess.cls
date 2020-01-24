@@ -130,7 +130,7 @@ public class ConnectionRecordProcess {
 
         Map<String, Id> storedResults = new Map<String, Id>();
 
-        System.enqueueJob(new ConnectionCreateJob(0, connections, answersByQuestions, processByConnections, storedResults));
+        System.enqueueJob(new ConnectionCreateJob(0, connections, answersByQuestions, processByConnections, storedResults, response));
 
     }
 

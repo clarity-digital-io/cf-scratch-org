@@ -139,12 +139,7 @@ global with sharing class ClarityFormResponse {
         return success; 
         
     }
-
-    @RemoteAction
-    global static void publishFlow(String questionFlow) {
-        System.debug(questionFlow);
-    }
-
+	
     @RemoteAction 
     global static List<LookupResult> search(List<String> searchItems) {
 
@@ -181,7 +176,15 @@ global with sharing class ClarityFormResponse {
 
         searchTerm += '*';
 
-        String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + lookupObject + ' (Id, Name)';
+		String returningFields = '(Id, Name)';
+		String returningField = 'Name';
+
+		if(lookupObject == 'Case') {
+			returningFields = '(Id, Subject)';
+			returningField = 'Subject';
+		}
+
+        String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + lookupObject + ' ' + returningFields;
 
         List<List<sObject>> searchResults = search.query(searchString);
 
@@ -193,7 +196,7 @@ global with sharing class ClarityFormResponse {
 
         for (sObject record : records) {
             System.debug('record: ' + record);
-            results.add(new LookupResult(record.Id, lookupObject, (String)record.get('Name'), lookupObject));
+            results.add(new LookupResult(record.Id, lookupObject, (String)record.get(returningField), lookupObject));
         }
 
         return results;

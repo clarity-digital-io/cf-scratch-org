@@ -3,26 +3,46 @@ public class ClarityFormBuilderTest {
 
     @testSetup
     public static void setup(){
-        
+
+		Clarity_Form__c form = ClarityTestDataFactory.generateForm();
+
+		List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(form);
+
     }
 
     @isTest
     public static void shouldSaveQuestions() {
 
-        Clarity_Form__c form = ClarityTestDataFactory.generateForm();
+		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c]; 
 
-        String sQuestions = ''; 
+		List<Clarity_Form_Question__c> questions = [SELECT Id FROM Clarity_Form_Question__c];
 
-        List<String> questionIds = ClarityFormBuilder.save(sQuestions);
+        String sQuestions = JSON.serialize(questions); 
+
+		Test.startTest();
+
+        	List<String> questionIds = ClarityFormBuilder.save(sQuestions);
+
+		Test.stopTest();
 
     }
 
     @isTest
     public static void shouldStartupFormBuilder() {
 
-        Clarity_Form__c form = ClarityTestDataFactory.generateForm();
+		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c]; 
+		
+		Test.startTest();
+        
+		Clarity_Form__c formStart = ClarityFormBuilder.startup(form.Id);
+		
+		Test.stopTest();
+    }
 
-        Clarity_Form__c formStart = ClarityFormBuilder.startup(form.Id);
+	@isTest
+    public static void shouldStartupNewFormBuilder() {
+
+        Clarity_Form__c formStart = ClarityFormBuilder.startup('');
 
     }
 
@@ -35,24 +55,6 @@ public class ClarityFormBuilderTest {
 
         Clarity_Form__c updatedForm = ClarityFormBuilder.updateForm(sForm);
     }
-
-    @isTest
-    public static void shouldGetDesigns() {
-
-        List<Clarity_Form_Style__c> designs = ClarityFormBuilder.getDesigns(); 
-    }
-
-    @isTest
-    public static void shouldUpdateDesign() {
-
-		String sDesign = '';
-
-		String file = '';
-
-        Clarity_Form_Style__c style = ClarityFormBuilder.updateDesign(sDesign, file);
-
-    }
-
 
     @isTest
     public static void shouldGetQuestions() {
@@ -76,7 +78,9 @@ public class ClarityFormBuilderTest {
     @isTest
     public static void shouldSaveQuestionEdit() {
         
-		String sQuestion = ''; 
+		Clarity_Form_Question__c question = [SELECT Id FROM Clarity_Form_Question__c LIMIT 1]; 
+
+		String sQuestion = JSON.serialize(question); 
 
         String updatedQuestion = ClarityFormBuilder.saveQuestion(sQuestion); 
 
@@ -160,38 +164,6 @@ public class ClarityFormBuilderTest {
 		String objectType = '';
 
         Map<String, Map<String, Map<String, String>>> sObjectFields = ClarityFormBuilder.getSObjectFields(objectType); 
-
-    }
-
-    @isTest
-    public static void shouldCreateAssignment() {
-
-		String name = ''; 
-
-		String formId = ''; 
-
-        Clarity_Form_Assignment__c assignment = ClarityFormBuilder.createAssignment(name, formId);
-
-    }
-
-    @isTest
-    public static void shouldGetAssignmentRules() {
-
-		String formAssignmentId = ''; 
-
-        List<Clarity_Form_Assignment_Rule__c> rules = ClarityFormBuilder.getAssignmentRules(formAssignmentId);
-
-    }
-
-
-    @isTest
-    public static void shouldSaveAssignmentRules() {
-
-		String sFormAssignment = ''; 
-		
-		String sFormAssignmentRules = ''; 
-
-        List<Clarity_Form_Assignment_Rule__c> rules = ClarityFormBuilder.saveAssignmentRules(sFormAssignment, sFormAssignmentRules);
 
     }
 

@@ -69,78 +69,6 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static List<Clarity_Form_Style__c> getDesigns() {
-
-        List<Clarity_Form_Style__c> designs = [SELECT Id, Multi_Page__c, Name, Background_Image__c, Background_Color__c, Button_Color__c, Color__c FROM Clarity_Form_Style__c];
-
-        return designs; 
-        
-    }
-
-    @RemoteAction
-    global static Clarity_Form_Style__c updateDesign(String sDesign, String file) {
-
-        Clarity_Form_Style__c parsedStyle = (Clarity_Form_Style__c)JSON.deserialize(sDesign, Clarity_Form_Style__c.class);
-
-        if(file != '') {
-
-            Database.UpsertResult initialResult = Database.upsert(parsedStyle, true); 
-
-            if(!initialResult.isSuccess()) {
-                System.debug('error');
-            }
-
-            ContentVersion content = new ContentVersion();
-            content.ContentLocation = 'S'; 
-            content.PathOnClient = parsedStyle.Name + 'Background.png';
-            content.Title = parsedStyle.Name + ' Background'; 
-            content.VersionData = EncodingUtil.base64Decode(file); // converting your binary string to Blob
-
-            Database.SaveResult contentResult = Database.insert(content, true); 
-
-            if(!contentResult.isSuccess()) {
-                System.debug('error');
-            }
-
-            Id documentId = [SELECT ContentDocumentId FROM ContentVersion WHERE Id =:content.Id].ContentDocumentId;
-
-            ContentDocumentLink documentLink = new ContentDocumentLink();
-            documentLink.ContentDocumentId = documentId;
-            documentLink.LinkedEntityId = parsedStyle.Id; 
-            documentLink.ShareType = 'I'; 
-            documentLink.Visibility = 'AllUsers';
-            
-            Database.SaveResult documentResult = Database.insert(documentLink, true); 
-
-            if(!documentResult.isSuccess()) {
-                System.debug('error');
-            }
-
-            //Attach to Clarity Form Style
-
-            parsedStyle.Background_Image__c = documentId;
-
-            Database.SaveResult result = Database.update(parsedStyle, true); 
-
-            if(!result.isSuccess()) {
-                System.debug('error');
-            }
-
-        } else {
-
-            Database.SaveResult result = Database.update(parsedStyle, true); 
-
-            if(!result.isSuccess()) {
-                System.debug('error');
-            }
-
-        }
-
-        return parsedStyle;
-
-    }
-
-    @RemoteAction
     global static List<Clarity_Form_Question__c> getQuestions(String recordId){
 
         List<Clarity_Form_Question__c> questions = [SELECT Id, Page__c, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, 
@@ -174,19 +102,6 @@ global with sharing class ClarityFormBuilder {
         return result.getId();
 
     }
-
-    // @RemoteAction
-    // global static  Map<String, List<sObject>> saveQuestionWithPictureOptions(String sQuestion, String sQuestionOptions) {
-
-    //     List<Clarity_Form_Question_Option__c> parsedQuestionOptions = (List<Clarity_Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, List<Clarity_Form_Question_Option__c>.class);
-
-    //     for(Clarity_Form_Question_Option__c option : parsedQuestionOptions) {
-    //         Map<String, Object> optionFields = new Map<String, Object>( option.getPopulatedFieldsAsMap() );
-    //     }
-        
-    //     Map<String, List<sObject>> = saveQuestionWithOptions(sQuestion, sQuestionOptions); 
-
-    // }
 
 
     @RemoteAction
@@ -495,70 +410,6 @@ global with sharing class ClarityFormBuilder {
         }
 
         return requiredFields; 
-
-    }
-
-    @RemoteAction
-    global static Clarity_Form_Assignment__c createAssignment(String name, String formId) {
-
-        Clarity_Form_Assignment__c assignment = new Clarity_Form_Assignment__c(Name = name);
-
-        Database.SaveResult assignmentResult = Database.insert(assignment, true); 
-
-        if(!assignmentResult.isSuccess()) {
-            System.debug('error');
-        }
-
-        Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c WHERE Id =: formId];
-        form.Clarity_Form_Assignment__c = assignment.Id; 
-        
-        Database.SaveResult formResult = Database.update(form); 
-
-        if(!formResult.isSuccess()) {
-            System.debug('error');
-        }
-
-        return assignment; 
-
-    }
-
-    @RemoteAction
-    global static List<Clarity_Form_Assignment_Rule__c> getAssignmentRules(String formAssignmentId) {
-
-        List<Clarity_Form_Assignment_Rule__c> rules = [SELECT Id FROM Clarity_Form_Assignment_Rule__c WHERE Clarity_Form_Assignment__c = :formAssignmentId];
-
-        return rules; 
-
-    }
-
-    @RemoteAction
-    global static List<Clarity_Form_Assignment_Rule__c> saveAssignmentRules(String sFormAssignment, String sFormAssignmentRules) {
-
-        Clarity_Form_Assignment__c assignment = (Clarity_Form_Assignment__c)JSON.deserialize(sFormAssignment, Clarity_Form_Assignment__c.class); 
-
-        Database.SaveResult assignmentResult = Database.update(assignment, true); 
-
-        if(!assignmentResult.isSuccess()) {
-            System.debug('error');
-        }
-
-        List<Clarity_Form_Assignment_Rule__c> parsedAssignmentRules = (List<Clarity_Form_Assignment_Rule__c>)JSON.deserialize(sFormAssignmentRules, List<Clarity_Form_Assignment_Rule__c>.class);
-
-        for(Clarity_Form_Assignment_Rule__c rule : parsedAssignmentRules) {
-            rule.Clarity_Form_Assignment__c = assignment.Id; 
-        }
-
-        List<Database.UpsertResult> results = Database.upsert(parsedAssignmentRules, true); 
-
-        for(Database.UpsertResult result : results) {
-
-            if(!result.isSuccess()) {
-                System.debug('error');
-            }
-
-        }
-
-        return parsedAssignmentRules; 
 
     }
 

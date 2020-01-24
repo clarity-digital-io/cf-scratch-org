@@ -216,24 +216,4 @@ public with sharing class FormController {
 
     }
 
-    //Cloning a form needs to include cloning questions and it's values
-    // @AuraEnabled
-    // public static Id cloneForm(String recordId){
-        
-    //     Clarity_Form__c form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__c, Clarity_Form_Assignment__c 
-            
-    //         FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
-
-    //     Clarity_Form__c newForm = form.clone(false); 
-
-    //     Database.SaveResult result = Database.insert(newForm, true); 
-
-    //     if(!result.isSuccess()) {
-    //         throw new AuraHandledException('Unable to clone form: ' + form.Name);
-    //     }
-
-    //     return newForm.Id;
-
-    // }
-
 }
