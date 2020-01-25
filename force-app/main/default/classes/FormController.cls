@@ -3,7 +3,7 @@ public with sharing class FormController {
     @AuraEnabled
     public static Clarity_Form__c getForm(String recordId) {
 
-        Clarity_Form__c form = [SELECT Id, Status__c, Name FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
+        Clarity_Form__c form = [SELECT Id, Label__c, Status__c, Name FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
 
         return form; 
 

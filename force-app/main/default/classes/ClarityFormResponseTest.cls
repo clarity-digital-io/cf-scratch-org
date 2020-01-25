@@ -6,9 +6,9 @@ public class ClarityFormResponseTest {
 
 		Clarity_Form__c form = ClarityTestDataFactory.generateForm();
 
-		List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(form);
+		List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
 
-        List<Clarity_Form_Connection__c> connections = ClarityTestDataFactory.generateConnections(form,  new List<String>{ 'Opportunity' });
+        List<Clarity_Form_Connection__c> connections = ClarityTestDataFactory.generateConnections(false, form,  new List<String>{ 'Opportunity' });
 
     }
 
@@ -32,11 +32,17 @@ public class ClarityFormResponseTest {
 
 		Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
 
+		List<Clarity_Form_Connection__c> connections = [SELECT Id FROM Clarity_Form_Connection__c];
+
+		List<Clarity_Form_Response_Connection__c> responseConnections = ClarityTestDataFactory.generateResponseConnection(response.Id, connections); 
+
 		Test.startTest();
 
-			List<Clarity_Form_Connection__c> connections = ClarityFormResponse.checkConnections(response.Id); 
+			List<Clarity_Form_Connection__c> checkConnections = ClarityFormResponse.checkConnections(response.Id); 
 
 		Test.stopTest();
+
+		System.assertEquals(0, checkConnections.size());
 
 	}
 
@@ -51,20 +57,26 @@ public class ClarityFormResponseTest {
 
 		Test.stopTest();
 
+		System.assertEquals(1, connections.size());
+
 	}
 
 	@isTest
 	public static void shouldGetRecordGroupResults() {
 		
-		// Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
+		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
 
-		// Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
+		Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
 
-		// Test.startTest();
+		List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'RecordGroup' AND Clarity_Form__c =: form.Id];
 
-		// 	Map<Id, List<sObject>> recordGroupResults = ClarityFormResponse.getRecordGroupResults(response.Id, form.Id); 
+        ClarityTestDataFactory.generateRecordGroupAnswers(response, questions);
 
-		// Test.stopTest();
+		Test.startTest();
+
+			Map<Id, List<sObject>> recordGroupResults = ClarityFormResponse.getRecordGroupResults(response.Id, form.Id); 
+
+		Test.stopTest();
 
 	}
 
@@ -75,14 +87,27 @@ public class ClarityFormResponseTest {
 
 		List<Clarity_Form_Connection__c> connections = [SELECT Id FROM Clarity_Form_Connection__c];
 
-		String sConnections = JSON.serialize(connections); 
+		Opportunity opp = new Opportunity(Name = 'Test', StageName = 'Prospecting', CloseDate = date.newInstance(2030, 11, 21)); 
+
+		insert opp; 
+
+		List<Map<String, String>> valueConnections = new List<Map<String, String>>(); 
+
+		Map<String, String> mappedConnections = new Map<String, String>();
+
+		mappedConnections.put('key', opp.Id); 
+		mappedConnections.put('label', 'Test Connection'); 
+		mappedConnections.put('connectionId', connections[0].Id); 
+		
+		valueConnections.add(mappedConnections);
 
 		Test.startTest();
 
-			Map<String, List<sObject>> create = ClarityFormResponse.create(form.Name, sConnections); 
+			Map<String, List<sObject>> create = ClarityFormResponse.create(form.Name, JSON.serialize(valueConnections)); 
 
 		Test.stopTest();
 
+		System.assertEquals(1, create.get('Connections').size());
 	}
 
 	@isTest
@@ -92,15 +117,13 @@ public class ClarityFormResponseTest {
 
 		Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
 
-		List<Clarity_Form_Connection__c> connections = [SELECT Id FROM Clarity_Form_Connection__c];
-
-		String sConnections = JSON.serialize(connections); 
-
 		Test.startTest();
 
-			Map<String, List<sObject>> edit = ClarityFormResponse.edit(response.Id, sConnections);
+			Map<String, List<sObject>> edit = ClarityFormResponse.edit(response.Id, null);
 
 		Test.stopTest();
+
+		System.assertEquals(new List<Clarity_Form_Response_Connection__c>(), edit.get('Connections'));
 
 	}
 
@@ -113,24 +136,70 @@ public class ClarityFormResponseTest {
 
 		List<Clarity_Form_Question__c> questions = [SELECT Id FROM Clarity_Form_Question__c];
 
+		List<Clarity_Form_Answer__c> answers = new List<Clarity_Form_Answer__c>(); 
+
 		Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
 			Clarity_Form_Question__c = questions[0].Id, 
 			Answer__c				 = 'Test', 
 			Clarity_Form_Response__c = response.Id
 		);
 
-		String sAnswer = JSON.serialize(answer); 
+		answers.add(answer); 
+
+		String sAnswer = JSON.serialize(answers); 
 
 		Test.startTest();
 
-			List<Clarity_Form_Answer__c> answers = ClarityFormResponse.saveAnswer(sAnswer);
+			List<Clarity_Form_Answer__c> rAnswers = ClarityFormResponse.saveAnswer(sAnswer);
 
 		Test.stopTest();
 
+		System.assertEquals('Test', rAnswers[0].Answer__c);
 	}
 
 	@isTest
 	public static void shouldSaveResponse() {
+
+		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
+
+		Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
+
+		List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c FROM Clarity_Form_Question__c];
+
+		List<Clarity_Form_Answer__c> answers = new List<Clarity_Form_Answer__c>(); 
+
+		Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
+			Clarity_Form_Question__c = questions[0].Id, 
+			Answer__c				 = 'Test',
+			Clarity_Form_Response__c = response.Id
+		);
+
+		answers.add(answer); 
+
+		String answerValues = JSON.serialize(answers); 
+
+		String aQuestionId = '';
+
+		for(Clarity_Form_Question__c question : questions) {
+			if(question.Type__c == 'Attachments') {
+				aQuestionId = question.Id; 
+			}
+		}
+
+		List<String> holdAnswers = new List<String>{ '{"' + response.Id + '":{"' + aQuestionId + '":["iVBOR"]}}', answerValues, response.Id }; 
+
+		Test.startTest();
+
+			List<String> save = ClarityFormResponse.save(holdAnswers);
+
+		Test.stopTest();
+
+		System.assertEquals(1, save.size());
+
+	}
+
+	@isTest
+	public static void shouldSubmitResponse() {
 
 		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
 
@@ -154,47 +223,33 @@ public class ClarityFormResponseTest {
 
 		Test.startTest();
 
-			List<String> save = ClarityFormResponse.save(holdAnswers);
-
-		Test.stopTest();
-
-	}
-
-	@isTest
-	public static void shouldSubmitResponse() {
-
-		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
-
-		Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
-
-		List<Clarity_Form_Question__c> questions = [SELECT Id FROM Clarity_Form_Question__c];
-
-		Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
-			Clarity_Form_Question__c = questions[0].Id, 
-			Answer__c				 = 'Test',
-			Clarity_Form_Response__c = response.Id
-		);
-
-		String answerValue = JSON.serialize(answer); 
-
-		Test.startTest();
-
-			List<Clarity_Form_Answer__c> answers = ClarityFormResponse.saveAnswer(answerValue);
+			List<String> submit = ClarityFormResponse.submit(holdAnswers);
 
 		Test.stopTest();	
+
+		System.assertEquals(1, submit.size());
 
 	}
 
 	@isTest
 	public static void shouldReturnLookSearchResults() {
 		
-		List<String> searchItems = new List<String>{ 'Test', 'Account', '' };
+		Opportunity opp = new Opportunity(Name = 'Test', StageName = 'Prospecting', CloseDate = date.newInstance(2030, 11, 21)); 
+		
+		insert opp; 
+
+		List<Id> fixedSearchResults = new List<Id>{opp.Id};
+        Test.setFixedSearchResults(fixedSearchResults);
+
+		List<String> searchItems = new List<String>{ 'Tes', 'Opportunity', '' };
 
 		Test.startTest();
 
 			List<ClarityFormResponse.LookupResult> search = ClarityFormResponse.search(searchItems);
 
 		Test.stopTest();
+
+		System.assertEquals(1, search.size());
 	}
 
 	@isTest
@@ -212,14 +267,20 @@ public class ClarityFormResponseTest {
 
 		Test.startTest();
 
-			sObject result = ClarityFormResponse.createRecord(recordValues);
+			//sObject result = ClarityFormResponse.createRecord(recordValues);
 
 		Test.stopTest();
 	}
 
 	@isTest
 	public static void shouldGetRecordGroupPicklist() {
-		
+
+		Test.startTest();
+
+			//Map<String, Map<String, Map<String, String>>> picklists = ClarityFormResponse.getRecordGroupPicklist(recordValues);
+
+		Test.stopTest();
+
 	}
 
 }

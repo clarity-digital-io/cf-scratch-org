@@ -6,9 +6,20 @@ public class FormControllerTest {
                 
         Clarity_Form__c form = ClarityTestDataFactory.generateForm();
 
-        List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(form);
+        List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
 
         Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
+
+    }
+
+    @isTest
+    public static void shouldGetForm() {
+
+        Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c Limit 1];
+
+        Clarity_Form__c formReturned = FormController.getForm(form.Id);
+
+        System.assertEquals('Clarity Form', formReturned.Label__c);
 
     }
 
@@ -67,29 +78,6 @@ public class FormControllerTest {
 
     }
 
-    // @isTest
-    // public static void shouldCloneForm() {
-
-    //     Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c Limit 1];
-
-    //     List<Clarity_Form_Question__c> questions = [SELECT Id FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id]; 
-
-    //     Test.startTest();
-
-    //         Id newFormId = FormController.cloneForm(form.Id);
-
-    //     Test.stopTest();
-
-    //     System.assertNotEquals(form.Id, newFormId);
-
-    //     List<Clarity_Form_Question__c> clonedQuestions = [SELECT Id FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: newFormId]; 
-
-    //     System.assertEquals(questions.size(), clonedQuestions.size()); 
-
-    //     System.assertEquals(2, forms.size());
-
-    // }
-
     @isTest
     public static void shouldPublishForm() {
 
@@ -106,4 +94,22 @@ public class FormControllerTest {
         System.assertEquals('Published', updatedForm.Status__c);
 
     }
+
+	@isTest
+	public static void shouldGetAnswerColumns() {
+
+		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c Limit 1];
+
+        Clarity_Form_Response__c response = [SELECT Id FROM Clarity_Form_Response__c Limit 1];
+
+		List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c, Title__c FROM Clarity_Form_Question__c];
+
+		ClarityTestDataFactory.generateAnswers(response, questions);
+
+		Test.startTest();
+
+			Map<String, List<Map<String, String>>> answers = FormController.getAnswerColumns(form.Id);
+
+		Test.stopTest();
+	}
 }

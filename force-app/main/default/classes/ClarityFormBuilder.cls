@@ -257,46 +257,6 @@ global with sharing class ClarityFormBuilder {
     }
 
     @RemoteAction
-    global static Map<String, List<sObject>> saveFlowDesign(String sFlowDesign, String sQuestionOptions) {
-
-        Clarity_Form_Question_Flow_Design__c parsedFlowDesign = (Clarity_Form_Question_Flow_Design__c)JSON.deserialize(sFlowDesign, Clarity_Form_Question_Flow_Design__c.class);
-    
-        Database.UpsertResult result = Database.upsert(parsedFlowDesign, true); 
-
-        if(!result.isSuccess()) {
-           System.debug('log error: '); 
-        }
-
-        List<Clarity_Form_Question_Option__c> parsedQuestionOptions = (List<Clarity_Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, List<Clarity_Form_Question_Option__c>.class);
-
-        List<Database.UpsertResult> resultOptions = Database.upsert(parsedQuestionOptions, true); 
-        
-        for(Database.UpsertResult resultOption : resultOptions) {
-
-            if(!resultOption.isSuccess()) {
-
-                System.debug('error: ' + resultOption.getErrors());
-
-            }
-
-        }
-
-        List<sObject> options = new List<sObject>(); 
-        options.addAll(parsedQuestionOptions);
-
-        List<sObject> flow = new List<sObject>(); 
-        flow.add(parsedFlowDesign);
-
-        Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
-
-        results.put('Options', options);
-        results.put('FlowDesign', flow);
-
-        return results;
-        
-    }
-
-    @RemoteAction
     global static Map<String, List<sObject>> saveQuestionWithCriteria(String sQuestion, String sCriteria) {
 
         Clarity_Form_Question__c parsedQuestion = (Clarity_Form_Question__c)JSON.deserialize(sQuestion, Clarity_Form_Question__c.class);
@@ -604,24 +564,6 @@ global with sharing class ClarityFormBuilder {
         fieldMapping.put('Prefills', prefillFields);
 
         return fieldMapping; 
-    }
-
-    @RemoteAction
-    global static List<sObject> getUsers(String searchTerm){
-
-        List<sObject> results = new List<sObject>(); 
-
-        String searchKey = '%' + searchTerm + '%';
-
-        List<sObject> users = (List<sObject>)[SELECT Id, Name, UserName FROM User WHERE Name LIKE :searchKey OR UserName LIKE :searchKey LIMIT 20];
-
-        List<sObject> queue = (List<sObject>)[SELECT Id, Name FROM Group WHERE Name LIKE :searchKey AND Type = 'Queue' LIMIT 20];
-
-        results.addAll(users);
-        results.addAll(queue);
-
-        return results;
-
     }
 
     @RemoteAction

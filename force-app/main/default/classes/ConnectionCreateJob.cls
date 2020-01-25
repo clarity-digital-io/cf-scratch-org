@@ -46,7 +46,6 @@ public class ConnectionCreateJob implements Queueable {
 
                     dirtyAnswer = answersByQuestion.get(field.Clarity_Form_Question__c) != null ? answersByQuestion.get(field.Clarity_Form_Question__c).Answer__c : ''; 
 
-
                 } else if(field.Custom_Value__c != null) {
 
                     dirtyAnswer = field.Custom_Value__c;

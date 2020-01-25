@@ -46,6 +46,22 @@ public class ClarityTestDataFactory {
 
     }
 
+	public static List<Clarity_Form__c> generateForms(Integer count) {
+		
+		List<Clarity_Form__c> forms = new List<Clarity_Form__c>(); 
+
+		for (Integer i = 0; i < count; i++) {
+			 
+			Clarity_Form__c form = new Clarity_Form__c(Label__c = 'Clarity Form ' + i, Status__c = 'Draft'); 
+			forms.add(form); 
+
+		}
+
+		insert forms; 
+
+		return forms; 
+	}
+
     public static void publishForm(Clarity_Form__c form) {
 
         form.Status__c = 'Published'; 
@@ -54,25 +70,29 @@ public class ClarityTestDataFactory {
 
     }
 
-    public static List<Clarity_Form_Question__c> generateQuestions(Clarity_Form__c form){
+    public static List<Clarity_Form_Question__c> generateQuestions(List<Clarity_Form__c> forms){
 
         List<Clarity_Form_Question__c> questions = new  List<Clarity_Form_Question__c>();
 
         Integer order = 0; 
 
-        for(String type : Types) {
+		for(Clarity_Form__c form : forms) {
 
-            Clarity_Form_Question__c question = new Clarity_Form_Question__c(
-                Clarity_Form__c = form.Id, 
-                Title__c        = 'Title: ' + type, 
-                Type__c         = type,
-                Order__c        = order
-            );
+			for(String type : Types) {
 
-            questions.add(question);
+				Clarity_Form_Question__c question = new Clarity_Form_Question__c(
+					Clarity_Form__c = form.Id, 
+					Title__c        = 'Title: ' + type, 
+					Type__c         = type,
+					Order__c        = order
+				);
 
-            order++; 
-        }
+				questions.add(question);
+
+				order++; 
+			}
+
+		}
 
         insert questions;
 
@@ -80,13 +100,31 @@ public class ClarityTestDataFactory {
 
     }
 
+	public static List<Clarity_Form_Question_Option__c> generateQuestionOptions(List<Clarity_Form_Question__c> multiChoiceQuestions) {
+
+		List<Clarity_Form_Question_Option__c> options = new List<Clarity_Form_Question_Option__c>(); 
+
+		for(Clarity_Form_Question__c question : multiChoiceQuestions) {
+
+			Clarity_Form_Question_Option__c option = new Clarity_Form_Question_Option__c(
+				Label__c = 'Test',
+				Clarity_Form_Question__c = question.Id
+			);
+
+			options.add(option); 
+		}
+
+		return options;
+	}
+
 	public static Clarity_Form_Question__c generateRecordGroup(Clarity_Form__c form) {
 
 		Clarity_Form_Question__c question = new Clarity_Form_Question__c(
 			Clarity_Form__c 	 = form.Id, 
 			Title__c        	 = 'Title: RecordGroup', 
 			Type__c         	 = 'RecordGroup',
-			Salesforce_Object__c = 'Opportunity'
+			Salesforce_Object__c = 'Opportunity',
+			Order__c		     = 0
 		);
 
 		insert question; 
@@ -95,7 +133,7 @@ public class ClarityTestDataFactory {
 
 	}
 
-    public static List<Clarity_Form_Connection__c> generateConnections(Clarity_Form__c form, List<String> connectionObjects){
+    public static List<Clarity_Form_Connection__c> generateConnections(Boolean newConnection, Clarity_Form__c form, List<String> connectionObjects){
 
         List<Clarity_Form_Connection__c> connections = new List<Clarity_Form_Connection__c>();
 
@@ -105,7 +143,7 @@ public class ClarityTestDataFactory {
                 Clarity_Form__c      = form.Id, 
                 Salesforce_Object__c = salesForceObject, 
                 Type__c              = 'Create', 
-                New__c               = true, 
+                New__c               = newConnection, 
                 Result_Holder__c     = '{Connection_' + salesForceObject + '}'
             );
 
@@ -166,9 +204,29 @@ public class ClarityTestDataFactory {
 
     }
 
+	public static List<Clarity_Form_Response_Connection__c> generateResponseConnection(String responseId, List<Clarity_Form_Connection__c> connections) {
+
+        List<Clarity_Form_Response_Connection__c> newConnections = new List<Clarity_Form_Response_Connection__c>(); 
+		
+		for(Clarity_Form_Connection__c con : connections) {
+			
+			Clarity_Form_Response_Connection__c connection = new Clarity_Form_Response_Connection__c(
+                Clarity_Form_Connection__c = con.Id,
+                Clarity_Form_Response__c = responseId
+            );
+
+            newConnections.add(connection); 
+
+		}
+
+		insert newConnections; 
+
+		return newConnections;
+	}
+
     public static Clarity_Form_Response__c generateResponse(Clarity_Form__c form){
 
-        Clarity_Form_Response__c response = new Clarity_Form_Response__c(Status__c = 'New', Clarity_Form__c = form.Id);
+        Clarity_Form_Response__c response = new Clarity_Form_Response__c(Status__c = 'New', Clarity_Form__c = form.Id, OwnerId__c = UserInfo.getUserId());
 
         insert response;
 
@@ -188,6 +246,21 @@ public class ClarityTestDataFactory {
                 Answer__c                = 'Answer for: ' + question.Title__c
             );
 
+			if(question.Type__c == 'Attachments') {
+				answer.ContentVersion__c = '123456789';
+
+				//Add second attachment
+				Clarity_Form_Answer__c answer2 = new Clarity_Form_Answer__c(
+					Clarity_Form_Response__c = response.Id,
+					Clarity_Form_Question__c = question.Id,
+					Answer__c                = 'Answer for: ' + question.Title__c,
+					ContentVersion__c 	     = '123456789'
+				);
+				
+				answers.add(answer2);
+
+			}
+
             answers.add(answer);
 
         }
@@ -195,6 +268,26 @@ public class ClarityTestDataFactory {
         insert answers; 
 
     }
+
+	public static void generateRecordGroupAnswers(Clarity_Form_Response__c response, List<Clarity_Form_Question__c> questions){
+
+		List<Clarity_Form_Answer__c> answers = new List<Clarity_Form_Answer__c>();
+
+        for(Clarity_Form_Question__c question : questions) {
+
+            Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
+                Clarity_Form_Response__c = response.Id,
+                Clarity_Form_Question__c = question.Id,
+                Answer__c                = 'Answer for: ' + question.Title__c
+            );
+
+            answers.add(answer);
+
+        }
+
+        insert answers; 
+
+	}
     
     public static void updateAnswer(Clarity_Form_Response__c response, Clarity_Form_Question__c question){
 

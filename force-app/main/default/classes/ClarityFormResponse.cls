@@ -34,7 +34,7 @@ global with sharing class ClarityFormResponse {
             for(Clarity_Form_Response_Connection__c rc : responseConnections){
                 responseConnectedIds.add(rc.Clarity_Form_Connection__c); 
             }
-
+			System.debug('responseConnectedIds: ' + responseConnectedIds); 
             for(Clarity_Form_Connection__c connection : connections.values()) {
                 if(!responseConnectedIds.contains(connection.Id)) {
                     requiredConnections.add(connection); 
@@ -98,9 +98,9 @@ global with sharing class ClarityFormResponse {
     }
 
     @RemoteAction
-    global static List<Clarity_Form_Answer__c> saveAnswer(String answer){
+    global static List<Clarity_Form_Answer__c> saveAnswer(String answers){
 
-        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(answer); 
+        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(answers); 
 
         return savedAnswers;
         
@@ -149,53 +149,21 @@ global with sharing class ClarityFormResponse {
 
         searchTerm += '*';
 
-        String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + lookupObject + ' (Id, Name)';
-
-        List<List<sObject>> searchResults = search.query(searchString);
-
-        List<LookupResult> results = new List<LookupResult>();
-
-        String recordIcon = 'standard:' + lookupObject.toLowerCase();
-
-        List<sObject> records = ((List<sObject>) searchResults[0]);
-
-        for (sObject record : records) {
-            System.debug('record: ' + record);
-            results.add(new LookupResult(record.Id, lookupObject, (String)record.get('Name'), lookupObject));
-        }
-
-        return results;
-    }
-
-    @RemoteAction 
-    global static List<LookupResult> connectionSearch(List<String> searchItems) {
-
-        String searchTerm = searchItems[0];
-        String lookupObject = searchItems[1];
-        String fields = searchItems[2]; 
-
-        searchTerm += '*';
-
-		String returningFields = '(Id, Name)';
 		String returningField = 'Name';
 
 		if(lookupObject == 'Case') {
-			returningFields = '(Id, Subject)';
 			returningField = 'Subject';
 		}
 
-        String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + lookupObject + ' ' + returningFields;
+        String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + lookupObject + ' (Id, ' + returningField + ')';
 
         List<List<sObject>> searchResults = search.query(searchString);
 
         List<LookupResult> results = new List<LookupResult>();
 
-        String recordIcon = 'standard:' + lookupObject.toLowerCase();
-
         List<sObject> records = ((List<sObject>) searchResults[0]);
 
         for (sObject record : records) {
-            System.debug('record: ' + record);
             results.add(new LookupResult(record.Id, lookupObject, (String)record.get(returningField), lookupObject));
         }
 

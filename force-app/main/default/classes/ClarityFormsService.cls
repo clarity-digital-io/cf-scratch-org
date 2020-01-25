@@ -1,54 +1,5 @@
 public with sharing class ClarityFormsService {
 
-    public static Map<String, Map<String, List<sObject>>> getForms() {
-
-        Map<String, Map<String, List<sObject>>> formDetails = new Map<String, Map<String, List<sObject>>>(); 
-
-        List<Clarity_Form__c> forms = [SELECT Id, Name, Limit__c, End_Date__c, Clarity_Form_Style__r.Multi_Page__c, 
-            Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c FROM Clarity_Form__c];
-
-        List<Id> formIds = new List<Id>(); 
-
-        for(Clarity_Form__c form : forms) {
-            formIds.add(form.Id); 
-        }
-
-        Map<Id, List<Clarity_Form_Question__c>> questionsByForms = new Map<Id, List<Clarity_Form_Question__c>>();
-
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Clarity_Form__c, 
-            (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
-            (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
-            Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c IN :formIds];
-
-        for(Clarity_Form_Question__c question : questions) {
-            
-            if(questionsByForms.get(question.Clarity_Form__c) != null) {
-
-                questionsByForms.get(question.Clarity_Form__c).add(question); 
-
-            } else {
-
-                questionsByForms.put(question.Clarity_Form__c, new List<Clarity_Form_Question__c>{ question }); 
-
-            }
-
-        }
-
-        for(Clarity_Form__c form : forms) {
-
-            Map<String, List<sObject>> formDetail = new Map<String, List<sObject>>();
-        
-            formDetail.put('Form', new List<sObject>{ form });
-            formDetail.put('Questions', questionsByForms.get(form.Id));
-
-            formDetails.put(form.Id, formDetail); 
-
-        }
-
-        return formDetails; 
-        
-    }
-
     public static List<sObject> connectionRecords(List<Clarity_Form_Response_Connection__c> responseConnections, List<Clarity_Form_Connection__c> formConnections) {
 
         List<sObject> records = new List<sObject>(); 
@@ -489,23 +440,11 @@ public with sharing class ClarityFormsService {
 
     }
 
-    public static String prepareAnswers(Map<String, List<String>> sAnswers) {
-
-        List<String> allAnswers = new List<String>(); 
-
-        for(String responseId : sAnswers.keySet()) {
-
-            List<String> answers = sAnswers.get(responseId); 
-
-            allAnswers.addAll(answers);
-
-        }
-
-        return JSON.serialize(allAnswers);
-
-    }
-
     public static List<Clarity_Form_Answer__c> upload(String sFileAnswers) {
+
+		if(sFileAnswers == '' || sFileAnswers == null) {
+			return new List<Clarity_Form_Answer__c>(); 
+		}
 
         Map<String, Map<String, List<String>>> parsedFileAnswers = (Map<String, Map<String, List<String>>>)JSON.deserialize(sFileAnswers, Map<String, Map<String, List<String>>>.class);
 

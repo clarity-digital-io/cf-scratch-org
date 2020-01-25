@@ -3,53 +3,31 @@ FORMAT  FILE
 ──────  ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 txt     /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result.txt
 txt     /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-run-id.txt
-junit   /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7071100001o89ha-junit.xml
-json    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7071100001o89ha.json
+junit   /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7076300001LrEbx-junit.xml
+json    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7076300001LrEbx.json
 
 === Test Results
-TEST NAME                                                OUTCOME  MESSAGE  RUNTIME (MS)
-───────────────────────────────────────────────────────  ───────  ───────  ────────────
-ClarityFormBuilderTest.shouldCreateAssignment            Pass              4
-ClarityFormBuilderTest.shouldDeletePage                  Pass              5
-ClarityFormBuilderTest.shouldDeleteQuestion              Pass              7
-ClarityFormBuilderTest.shouldGetAssignmentRules          Pass              6
-ClarityFormBuilderTest.shouldGetConnectionFieldMapping   Pass              7
-ClarityFormBuilderTest.shouldGetConnections              Pass              4
-ClarityFormBuilderTest.shouldGetDesigns                  Pass              5
-ClarityFormBuilderTest.shouldGetQuestionDetails          Pass              5
-ClarityFormBuilderTest.shouldGetQuestions                Pass              4
-ClarityFormBuilderTest.shouldGetSObjectsAvailable        Pass              5
-ClarityFormBuilderTest.shouldGetUsers                    Pass              5
-ClarityFormBuilderTest.shouldSave                        Pass              5
-ClarityFormBuilderTest.shouldSaveActiveFieldConnections  Pass              6
-ClarityFormBuilderTest.shouldSaveAssignmentRules         Pass              4
-ClarityFormBuilderTest.shouldSaveConnections             Pass              5
-ClarityFormBuilderTest.shouldSaveFlowDesign              Pass              5
-ClarityFormBuilderTest.shouldSaveQuestionWithCriteria    Pass              6
-ClarityFormBuilderTest.shouldSaveQuestionWithOptions     Pass              5
-ClarityFormBuilderTest.shouldSaveRecordGroupFields       Pass              4
-ClarityFormBuilderTest.shouldStartup                     Pass              5
-ClarityFormBuilderTest.shouldUpdateDesign                Pass              5
-ClarityFormBuilderTest.shouldUpdateForm                  Pass              4
-ClarityFormBuilderTest.shouldUpdateStatus                Pass              9
+TEST NAME                                       OUTCOME  MESSAGE  RUNTIME (MS)
+──────────────────────────────────────────────  ───────  ───────  ────────────
+ClarityFormResponseTest.shouldCheckConnections  Pass              513
 
 === Test Summary
 NAME                 VALUE
-───────────────────  ────────────────────────────────────────────────────────
+───────────────────  ──────────────────────────────────────────────────────
 Outcome              Passed
-Tests Ran            23
-Passing              23
+Tests Ran            1
+Passing              1
 Failing              0
 Skipped              0
 Pass Rate            100%
 Fail Rate            0%
-Test Start Time      Jan 16, 2020 6:44 PM
-Test Execution Time  120 ms
-Test Total Time      120 ms
-Command Time         2738 ms
-Hostname             https://java-ability-1684-dev-ed.cs18.my.salesforce.com
-Org Id               00D1100000BwinsEAB
-Username             test-wc0mayhd3hmi@example.com
-Test Run Id          7071100001o89ha
-User Id              00511000006ptkJAAQ
+Test Start Time      Jan 24, 2020 6:02 PM
+Test Execution Time  513 ms
+Test Total Time      513 ms
+Command Time         193254 ms
+Hostname             https://saas-force-6592-dev-ed.cs43.my.salesforce.com
+Org Id               00D63000000Dsa5EAC
+Username             test-kzsaqkcclnnv@example.com
+Test Run Id          7076300001LrEbx
+User Id              00563000003U8IMAA0
 

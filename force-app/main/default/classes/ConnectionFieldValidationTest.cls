@@ -15,7 +15,7 @@ public class ConnectionFieldValidationTest {
         
         Clarity_Form__c form = ClarityTestDataFactory.generateForm();
 
-        List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(form);
+        List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
 
         Clarity_Form_Connection__c connection = new Clarity_Form_Connection__c(
             Clarity_Form__c = form.Id, 

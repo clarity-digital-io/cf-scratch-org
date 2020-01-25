@@ -6,7 +6,7 @@ public class CreateResponseAnswersTest {
                 
         Clarity_Form__c form = ClarityTestDataFactory.generateForm();
 
-        List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(form);
+        List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
 
     }
 
