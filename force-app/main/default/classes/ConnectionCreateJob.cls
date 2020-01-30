@@ -7,6 +7,8 @@ public class ConnectionCreateJob implements Queueable {
 
     private List<Clarity_Form_Connection__c> connections;
 
+    private Map<Id, Clarity_Form_Response_Connection__c> responseConnections;
+
     private Map<Id, Clarity_Form_Answer__c> answersByQuestion;
 
     private Map<Id, Clarity_Form_Connection_Process__c> processByConnections;
@@ -15,9 +17,10 @@ public class ConnectionCreateJob implements Queueable {
 
 	private Clarity_Form_Response__c response; 
 
-    public ConnectionCreateJob(Integer order, List<Clarity_Form_Connection__c> connections, Map<Id, Clarity_Form_Answer__c> answersByQuestion, Map<Id, Clarity_Form_Connection_Process__c> processByConnections, Map<String, Id> storedResults, Clarity_Form_Response__c response) {
+    public ConnectionCreateJob(Integer order, List<Clarity_Form_Connection__c> connections, Map<Id, Clarity_Form_Response_Connection__c> responseConnections, Map<Id, Clarity_Form_Answer__c> answersByQuestion, Map<Id, Clarity_Form_Connection_Process__c> processByConnections, Map<String, Id> storedResults, Clarity_Form_Response__c response) {
         this.order = order;
         this.connections = connections;
+        this.responseConnections = responseConnections;
         this.answersByQuestion = answersByQuestion;
         this.processByConnections = processByConnections;
         this.storedResults = storedResults;
@@ -30,13 +33,25 @@ public class ConnectionCreateJob implements Queueable {
 
         if(fields.size() > 0) {
 
+			Clarity_Form_Response_Connection__c rConnection = null; 
+
+			if(responseConnections.get(connections[order].Id) != null) {
+				rConnection = responseConnections.get(connections[order].Id); 
+			}
+
             Schema.SObjectType convertType = Schema.getGlobalDescribe().get(connections[order].Salesforce_Object__c);
 
 			String genericObjectName = convertType.getDescribe().getName();
             
             Map<String, Schema.SObjectField> sObjectFields = convertType.getDescribe().fields.getMap();
 
-            SObject genericObject = convertType.newSObject();
+            SObject genericObject = null;
+
+			if(rConnection != null) {
+				genericObject = convertType.newSObject(rConnection.Record__c);
+			} else {
+				genericObject = convertType.newSObject();
+			}
 
             for(Clarity_Form_Connection_Field__c field : fields) {
 
@@ -63,49 +78,59 @@ public class ConnectionCreateJob implements Queueable {
                 Object cleanType = cleanType(fieldResult, dirtyAnswer);
 
 				//first check if field is updateable createable
+				Boolean accessField = rConnection != null ? sObjectFields.get(field.Salesforce_Field__c).getDescribe().isUpdateable() : sObjectFields.get(field.Salesforce_Field__c).getDescribe().isCreateable();
+				
+				if(accessField) {
+                	
+					genericObject.put(field.Salesforce_Field__c, cleanType);
 
-                genericObject.put(field.Salesforce_Field__c, cleanType);
+				}
 
             }
 
-            Database.UpsertResult record = Database.upsert(genericObject, false); 
+			Boolean access = rConnection != null ? convertType.getDescribe().isUpdateable() : convertType.getDescribe().isCreateable(); 
 
             Clarity_Form_Connection_Process__c connectionStatus = processByConnections.get(connections[order].Id);
 
-            if(record.isSuccess() && access) {
+			if(access) {
+            	
+				Database.UpsertResult record = Database.upsert(genericObject, false); 
 
-                storedResults.put(connections[order].Result_Holder__c, record.getId());
-                
-                connectionStatus.Salesforce_Connection_Object__c = record.getId();
-                connectionStatus.Status__c = 'Success';
+				if(record.isSuccess()) {
 
-            } else {
+					storedResults.put(connections[order].Result_Holder__c, record.getId());
+					
+					connectionStatus.Salesforce_Connection_Object__c = record.getId();
+					connectionStatus.Status__c = 'Success';
 
-                connectionStatus.Status__c = 'Failed';
+					Schema.SObjectType responseType = Schema.Clarity_Form_Response__c.getSObjectType(); 
+					
+					Map<String, Schema.SObjectField> responseSObjectFields = responseType.getDescribe().fields.getMap();
 
-            }
+					String connectedName = 'Connection_' + genericObjectName + '__c'; 
+
+					if(responseSObjectFields.get('forms__' + connectedName) != null) {
+
+						connectRecords(JSON.serialize(response), connectedName, record.getId()); 
+
+					} 
+				}
+
+			} else {
+
+				connectionStatus.Status__c = 'Failed';
+
+			}
             
 			update connectionStatus;
-
-			Schema.SObjectType responseType = Schema.Clarity_Form_Response__c.getSObjectType(); 
-			
-			Map<String, Schema.SObjectField> responseSObjectFields = responseType.getDescribe().fields.getMap();
-
-			String connectedName = 'Connection_' + genericObjectName + '__c'; 
-
-			if(responseSObjectFields.get('forms__' + connectedName) != null && record.isSuccess()) {
-
-				connectRecords(JSON.serialize(response), connectedName, record.getId()); 
-
-			} 
 
         }
 
         if((connections.size() > (order + 1)) && chainJob) 
-            System.enqueueJob(new ConnectionCreateJob(order + 1, connections, answersByQuestion, processByConnections, storedResults, response));
+            System.enqueueJob(new ConnectionCreateJob(order + 1, connections, responseConnections, answersByQuestion, processByConnections, storedResults, response));
 
         if((connections.size() > (order + 1)) && !chainJob) {
-            ConnectionCreateJob job = new ConnectionCreateJob(order + 1, connections, answersByQuestion, processByConnections, storedResults, response);
+            ConnectionCreateJob job = new ConnectionCreateJob(order + 1, connections, responseConnections, answersByQuestion, processByConnections, storedResults, response);
             job.execute(null);
         }
 

@@ -23,7 +23,7 @@ public class ClarityFormResponseTest {
 
 		Test.stopTest();
 
-		System.assertEquals(1, preview.size());
+		System.assertEquals(6, preview.size());
 
 	}
 
@@ -80,7 +80,7 @@ public class ClarityFormResponseTest {
 
 		Test.stopTest();
 
-		System.assertNotEquals(0, recordGroupResults.size());
+		System.assertNotEquals(1, recordGroupResults.size());
 
 	}
 

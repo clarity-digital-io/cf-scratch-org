@@ -112,6 +112,6 @@ public class FormControllerTest {
 
 		Test.stopTest();
 
-		System.assertNotEquals(true, answers.size() != 0);
+		System.assertNotEquals(true, answers.size() == 0);
 	}
 }

@@ -58,11 +58,7 @@ public class ConnectionRecordProcess {
                         
                         currentResponseAnswers = ResponseAnswers.get(answer.Clarity_Form_Response__c); 
 
-                    } else {
-
-                        currentResponseAnswers = new Map<Id, Clarity_Form_Answer__c>(); 
-
-                    }
+                    } 
 
                     currentResponseAnswers.put(answer.Clarity_Form_Question__c, answer);
 
@@ -114,6 +110,42 @@ public class ConnectionRecordProcess {
         set;
     }
 
+	private static Map<Id, Map<Id, Clarity_Form_Response_Connection__c>> ResponseConnections {
+		get {
+
+			if(ResponseConnections == null) {
+				   
+				ResponseConnections = new Map<Id, Map<Id, Clarity_Form_Response_Connection__c>>(); 
+
+                List<Clarity_Form_Response_Connection__c> connections = 
+					[SELECT Id, Record__c, Clarity_Form_Response__c, Clarity_Form_Connection__c FROM Clarity_Form_Response_Connection__c WHERE Clarity_Form_Response__c IN :Trigger.newMap.keySet()];
+
+                for(Clarity_Form_Response_Connection__c connection : connections) {
+
+                    Map<Id, Clarity_Form_Response_Connection__c> currentResponseConnections = new Map<Id, Clarity_Form_Response_Connection__c>(); 
+
+					if(ResponseConnections.get(connection.Clarity_Form_Response__c) != null) {
+
+						currentResponseConnections = ResponseConnections.get(connection.Clarity_Form_Response__c);
+						currentResponseConnections.put(connection.Clarity_Form_Connection__c, connection); 
+						ResponseConnections.put(connection.Clarity_Form_Response__c, currentResponseConnections); 
+
+					} else {
+
+						ResponseConnections.put(connection.Clarity_Form_Response__c, new Map<Id, Clarity_Form_Response_Connection__c>{ connection.Clarity_Form_Connection__c => connection });
+
+					}
+
+                }
+
+			}
+			
+			return ResponseConnections; 
+
+		}
+		set; 
+	} 
+
     public static void execute(Clarity_Form_Response__c oldResponse, Clarity_Form_Response__c response) {
         
         if(oldResponse.Status__c == 'Submitted' || response.Status__c != 'Submitted') return; 
@@ -122,7 +154,7 @@ public class ConnectionRecordProcess {
 
         List<Clarity_Form_Connection__c> connections = Connections.get(response.Clarity_Form__c);
         //need to check if it's a new or updating an existing connection
-        List<Clarity_Form_Response_Connection__c> responseConnections = new List<Clarity_Form_Response_Connection__c>();
+        Map<Id, Clarity_Form_Response_Connection__c> rConnections = ResponseConnections.get(response.Id);//new List<Clarity_Form_Response_Connection__c>();
 
         Map<Id, Clarity_Form_Answer__c> answersByQuestions = ResponseAnswers.get(response.Id);
 
@@ -130,7 +162,7 @@ public class ConnectionRecordProcess {
 
         Map<String, Id> storedResults = new Map<String, Id>();
 
-        System.enqueueJob(new ConnectionCreateJob(0, connections, answersByQuestions, processByConnections, storedResults, response));
+        System.enqueueJob(new ConnectionCreateJob(0, connections, rConnections, answersByQuestions, processByConnections, storedResults, response));
 
     }
 
