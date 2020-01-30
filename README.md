@@ -19,6 +19,10 @@ sfdx force:auth:web:login -a PkgOrg
 
 sfdx force:org:create -a forms-pkg -s -f config/project-scratch-def.json
 
+sfdx force:org:create -a formsPkgTest -n -f config/project-scratch-def.json
+
+sfdx force:org:open -u formsPkgTest
+
 sfdx force:source:convert \
     -d mdapi-source/updated-package \
     -n "Clarity Forms"
@@ -27,20 +31,30 @@ sfdx force:mdapi:deploy \
     -d mdapi-source/updated-package \
     -u PkgOrg \
     -l NoTestRun \
-    -w 15
+    -w 1q5
 
     NoTestRun
     RunLocalTests
 
+>>>>>> here is where we are
 sfdx force:package1:version:create \
-    -i 0336g0000005mgC \
+    -i 0336g00000061bb \
     -n "Alpha 2020" \
     -v "1.0" \
     -d "Managed beta release. Uploaded via the CLI" \
     -u PkgOrg \
     -w 15
 
-sfdx force:data:soql:query -q 'select ApexTestClass.Name, TestMethodName, ApexClassOrTrigger.Name, NumLinesUncovered, NumLinesCovered, Coverage from ApexCodeCoverage' -u forms-pkg -t -r csv > testcoverage.csv
+sfdx force:package1:version:list -u PkgOrg
+
+sfdx force:package:install \
+    -p 04t6g000005pmKsAAI \
+    -u formsPkgTest \
+    -w 15
+
+sfdx force:user:permset:assign -u formsPkgTest -n "Clarity_Forms_Builder"
+
+sfdx force:package:version:promote --package "ClarityForms@1.0"
 
 ## Dev, Build and Test
 sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-devhub
@@ -53,7 +67,7 @@ sfdx force:alias:set forms=test-kzsaqkcclnnv@example.com
 
 sfdx force:config:set defaultusername=forms
 
-sfdx force:source:push
+sfdx force:source:push -f
 
 sfdx force:org:open -u PkgOrg
 
@@ -149,3 +163,13 @@ https://sfdx-isv.github.io/sfdx-workshop/
 
 - Environment Hub
 - Create new Partner Developer Org
+
+## CRUD and FLS Security
+
+DMLManager.insert
+DMLManager.update
+DMLManager.upsert
+DMLManager.delete
+DMLManager.query
+
+sfdx force:apex:class:create -n DMLManager -d force-app/main/default/classes

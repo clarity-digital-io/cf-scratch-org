@@ -23,7 +23,7 @@
     <aura:attribute name="preview" type="String" default="false" />
     <aura:attribute name="loading" type="Boolean" default="true" />
 
-    <aura:attribute name="recordId" type="String" default="default" />
+    <aura:attribute access="global" name="recordId" type="String" default="default" />
     <aura:attribute name="sObjectType" type="String" default="default" />
     <aura:attribute name="sObjectId" type="String" default="default" />
     <aura:attribute name="parameters" type="String" default="" />

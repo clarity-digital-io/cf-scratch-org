@@ -154,17 +154,6 @@ public class ClarityFormBuilderTest {
     }
 
     @isTest
-    public static void shouldDeletePage() {
-
-		String sQuestions = ''; 
-
-		String sDetails = ''; 
-
-        //List<Clarity_Form_Question__c> updatedQuestions = ClarityFormBuilder.pageDelete(sQuestions, sDetails); 
-    
-    }
-
-    @isTest
     public static void shouldDeleteQuestion() {
 
 		String sDeleteQuestionId = ''; 
@@ -213,17 +202,6 @@ public class ClarityFormBuilderTest {
     }
 
     @isTest
-    public static void shouldSaveQuestionWithCriteria() {
-
-		String sQuestion = ''; 
-
-		String sCriteria = ''; 
-
-        //Map<String, List<sObject>> questions = ClarityFormBuilder.saveQuestionWithCriteria(sQuestion, sCriteria);
-
-    }
-
-    @isTest
     public static void shouldGetSObjectsAvailable() {
 
         List<String> sObjects = ClarityFormBuilder.getSObjectsAvailable();
@@ -237,16 +215,7 @@ public class ClarityFormBuilderTest {
 
         Map<String, Map<String, Map<String, String>>> sObjectFields = ClarityFormBuilder.getSObjectFields('Account'); 
 
-    }
-
-    @isTest
-    public static void shouldSaveRecordGroupFields() {
-
-		String sRecordGroupFields = ''; 
-		
-		String relatedRecordGroupId = ''; 
-
-        //List<Clarity_Form_Question__c> fields = ClarityFormBuilder.saveRecordGroupFields(sRecordGroupFields, relatedRecordGroupId);
+		System.assertEquals(true, sObjectFields.size() > 1);
 
     }
 
@@ -262,37 +231,6 @@ public class ClarityFormBuilderTest {
 		Test.stopTest();
 
 		System.assertEquals(1, connections.size());
-
-    }
-
-    @isTest
-    public static void shouldGetConnectionFieldMapping() {
-
-		String connectionId = ''; 
-
-		String objectType = ''; 
-
-        //Map<String, List<Object>> mapping = ClarityFormBuilder.getConnectionFieldMapping(connectionId, objectType);
-
-    }
-
-    @isTest
-    public static void shouldSaveConnections() {
-
-		List<String> connect = new List<String>(); 
-
-       // List<Clarity_Form_Connection__c> connections = ClarityFormBuilder.saveConnections(connect);
-
-    }
-
-    @isTest
-    public static void shouldSaveActiveFieldConnections() {
-
-		String sActiveConnectionFields = ''; 
-		
-		String connectionId = ''; 
-
-        //Map<String, List<Object>> activeFieldConnections = ClarityFormBuilder.saveActiveFieldConnections(sActiveConnectionFields, connectionId);
 
     }
 

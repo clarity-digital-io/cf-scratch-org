@@ -62,6 +62,8 @@ public class ConnectionCreateJob implements Queueable {
 
                 Object cleanType = cleanType(fieldResult, dirtyAnswer);
 
+				//first check if field is updateable createable
+
                 genericObject.put(field.Salesforce_Field__c, cleanType);
 
             }
@@ -70,7 +72,7 @@ public class ConnectionCreateJob implements Queueable {
 
             Clarity_Form_Connection_Process__c connectionStatus = processByConnections.get(connections[order].Id);
 
-            if(record.isSuccess()) {
+            if(record.isSuccess() && access) {
 
                 storedResults.put(connections[order].Result_Holder__c, record.getId());
                 

@@ -1,41 +1,5 @@
 public class ClarityTestDataFactory {
 
-    public static User generateUser() {
-
-        User u;
-
-        User usr = [Select id from User where Id = :UserInfo.getUserId()];
-
-        System.RunAs(usr) {
-
-            UserRole r = new UserRole(DeveloperName = 'MyCustomRole', Name = 'My Role');
-
-            insert r;
-
-            u = new User(
-                ProfileId         = [SELECT Id FROM Profile WHERE Name = 'System Administrator'].Id,
-                FirstName         ='Food',
-                LastName          = 'Admin',
-                Email             = 'admin@foodcompany.com',
-                Username          = 'admin@foodcompany.com' + System.currentTimeMillis(),
-                CompanyName       = 'Food Company',
-                Title             = 'Clarity Response Admin',
-                Alias             = 'admin',
-                TimeZoneSidKey    = 'America/Los_Angeles',
-                EmailEncodingKey  = 'UTF-8',
-                LanguageLocaleKey = 'en_US',
-                LocaleSidKey      = 'en_US',
-                UserRoleId        = r.Id
-            );
-
-            insert u; 
-
-        }
-
-        return u;
-
-    }
-
     public static Clarity_Form__c generateForm(){
 
         Clarity_Form__c form = new Clarity_Form__c(Label__c = 'Clarity Form', Status__c = 'Draft'); 

@@ -15,7 +15,7 @@
         }
      </aura:html>
 
-    <aura:attribute name="recordId" type="String" default="default" />
+    <aura:attribute access="global" name="recordId" type="String" default="default" />
 
     <lightning:container src="{!$Resource.ClarityFormsResponse + '/index.html?recordId=' + v.recordId}" onmessage="{!c.handleMessage}" />
 

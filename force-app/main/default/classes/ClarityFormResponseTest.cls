@@ -23,6 +23,8 @@ public class ClarityFormResponseTest {
 
 		Test.stopTest();
 
+		System.assertEquals(1, preview.size());
+
 	}
 
 	@isTest
@@ -77,6 +79,8 @@ public class ClarityFormResponseTest {
 			Map<Id, List<sObject>> recordGroupResults = ClarityFormResponse.getRecordGroupResults(response.Id, form.Id); 
 
 		Test.stopTest();
+
+		System.assertNotEquals(0, recordGroupResults.size());
 
 	}
 
@@ -250,37 +254,6 @@ public class ClarityFormResponseTest {
 		Test.stopTest();
 
 		System.assertEquals(1, search.size());
-	}
-
-	@isTest
-	public static void shouldCreateRecord() {
-
-		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
-
-		Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
-
-		Clarity_Form_Question__c recordGroup = ClarityTestDataFactory.generateRecordGroup(form);
-
-		String records = '[{"field":"OpportunityId","value":"2","type":"REFERENCE"},{"field":"Quantity","value":1,"type":"INTEGER"},{"field":"Product2Id","value":"2","type":"REFERENCE"}]';
-
-		List<String> recordValues = new List<String>{ response.Id, recordGroup.Id, 'Opportunity', records };
-
-		Test.startTest();
-
-			//sObject result = ClarityFormResponse.createRecord(recordValues);
-
-		Test.stopTest();
-	}
-
-	@isTest
-	public static void shouldGetRecordGroupPicklist() {
-
-		Test.startTest();
-
-			//Map<String, Map<String, Map<String, String>>> picklists = ClarityFormResponse.getRecordGroupPicklist(recordValues);
-
-		Test.stopTest();
-
 	}
 
 }

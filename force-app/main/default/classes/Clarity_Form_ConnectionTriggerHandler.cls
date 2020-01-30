@@ -110,7 +110,7 @@ public class Clarity_Form_ConnectionTriggerHandler implements ITrigger {
     */
 	public void andFinally() {
 
-		if (!fieldsToBeDeleted.isEmpty()) {
+		if (!fieldsToBeDeleted.isEmpty() && Schema.sObjectType.Clarity_Form_Connection_Field__c.isDeletable()) {
             delete fieldsToBeDeleted; 
 		}
 

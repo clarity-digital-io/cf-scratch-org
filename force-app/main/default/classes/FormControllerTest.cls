@@ -111,5 +111,7 @@ public class FormControllerTest {
 			Map<String, List<Map<String, String>>> answers = FormController.getAnswerColumns(form.Id);
 
 		Test.stopTest();
+
+		System.assertNotEquals(true, answers.size() != 0);
 	}
 }
