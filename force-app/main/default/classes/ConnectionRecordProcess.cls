@@ -154,7 +154,7 @@ public class ConnectionRecordProcess {
 
         List<Clarity_Form_Connection__c> connections = Connections.get(response.Clarity_Form__c);
         //need to check if it's a new or updating an existing connection
-        Map<Id, Clarity_Form_Response_Connection__c> rConnections = ResponseConnections.get(response.Id);//new List<Clarity_Form_Response_Connection__c>();
+        Map<Id, Clarity_Form_Response_Connection__c> rConnections = ResponseConnections.get(response.Id) != null ? ResponseConnections.get(response.Id) : new Map<Id, Clarity_Form_Response_Connection__c>();//new List<Clarity_Form_Response_Connection__c>();
 
         Map<Id, Clarity_Form_Answer__c> answersByQuestions = ResponseAnswers.get(response.Id);
 

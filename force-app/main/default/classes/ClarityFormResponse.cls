@@ -155,17 +155,26 @@ global with sharing class ClarityFormResponse {
 			returningField = 'Subject';
 		}
 
-        String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + lookupObject + ' (Id, ' + returningField + ')';
+		Schema.SObjectType convertType = Schema.getGlobalDescribe().get(lookupObject);
 
-        List<List<sObject>> searchResults = search.query(searchString);
+		List<LookupResult> results = new List<LookupResult>();
 
-        List<LookupResult> results = new List<LookupResult>();
+		Boolean access = convertType.getDescribe().isAccessible();
 
-        List<sObject> records = ((List<sObject>) searchResults[0]);
+		if(access) {
 
-        for (sObject record : records) {
-            results.add(new LookupResult(record.Id, lookupObject, (String)record.get(returningField), lookupObject));
-        }
+			String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + lookupObject + ' (Id, ' + returningField + ')';
+
+			List<List<sObject>> searchResults = search.query(searchString);
+
+
+			List<sObject> records = ((List<sObject>) searchResults[0]);
+
+			for (sObject record : records) {
+				results.add(new LookupResult(record.Id, lookupObject, (String)record.get(returningField), lookupObject));
+			}
+
+		}
 
         return results;
     }
@@ -184,44 +193,62 @@ global with sharing class ClarityFormResponse {
 
         sObject genericObject = convertType.newSObject();
 
+        Map<String, Schema.SObjectField> sObjectFields = convertType.getDescribe().fields.getMap();
+
         for(Record record : recordFields) {
 
-            if(record.type == 'Date') {
+			Boolean accessField = sObjectFields.get(record.field).getDescribe().isCreateable();
 
-                Date value = Date.parse(record.value); 
-                genericObject.put(record.field, value);
+			if(accessField) {
 
-            } else {
-                
-                genericObject.put(record.field, record.value);
+				if(record.type == 'Date') {
 
-            }
+					Date value = Date.parse(record.value); 
+					genericObject.put(record.field, value);
 
-        }
+				} else {
+					
+					genericObject.put(record.field, record.value);
 
-        Database.UpsertResult result = Database.upsert(genericObject, true); 
+				}
 
-        if(!result.isSuccess()) {
-
-            System.debug('error: ' + result.getErrors());
+			}
 
         }
 
-        Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
-            Clarity_Form_Response__c = responseId, 
-            Clarity_Form_Question__c = recordGroupId,
-            Record__c                = result.getId()
-        );
+		Boolean access = convertType.getDescribe().isCreateable(); 
 
-        Database.UpsertResult resultAnswer = Database.upsert(answer, true); 
+		if(access) {
+        
+			Database.UpsertResult result = Database.upsert(genericObject, true); 
 
-        if(!resultAnswer.isSuccess()) {
+			if(!result.isSuccess()) {
 
-            System.debug('error: ' + resultAnswer.getErrors());
+				System.debug('error: ' + result.getErrors());
 
-        }
+			}
 
-        return genericObject;
+			Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
+				Clarity_Form_Response__c = responseId, 
+				Clarity_Form_Question__c = recordGroupId,
+				Record__c                = result.getId()
+			);
+
+			Database.UpsertResult resultAnswer = Database.upsert(answer, true); 
+
+			if(!resultAnswer.isSuccess()) {
+
+				System.debug('error: ' + resultAnswer.getErrors());
+
+			}
+
+		} else {
+
+			System.debug('User lacks create access to this object.');
+
+		}
+		
+		return genericObject;
 
     }
 

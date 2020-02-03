@@ -31,7 +31,7 @@ sfdx force:mdapi:deploy \
     -d mdapi-source/updated-package \
     -u PkgOrg \
     -l NoTestRun \
-    -w 1q5
+    -w 15
 
     NoTestRun
     RunLocalTests
@@ -40,7 +40,7 @@ sfdx force:mdapi:deploy \
 sfdx force:package1:version:create \
     -i 0336g00000061bb \
     -n "Alpha 2020" \
-    -v "1.0" \
+    -v "1.1" \
     -d "Managed beta release. Uploaded via the CLI" \
     -u PkgOrg \
     -w 15
@@ -48,7 +48,7 @@ sfdx force:package1:version:create \
 sfdx force:package1:version:list -u PkgOrg
 
 sfdx force:package:install \
-    -p 04t6g000005pmKsAAI \
+    -p 04t6g000005qGoVAAU \
     -u formsPkgTest \
     -w 15
 
@@ -61,7 +61,7 @@ sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-de
 
 sfdx force:org:list --all
 
-sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias clarity-forms-pkg
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias forms //clarity-forms-pkg
 
 sfdx force:alias:set forms=test-kzsaqkcclnnv@example.com
 
@@ -173,3 +173,22 @@ DMLManager.delete
 DMLManager.query
 
 sfdx force:apex:class:create -n DMLManager -d force-app/main/default/classes
+
+## sObjects
+Clarity_Form__c
+Clarity_Form_Answer__c
+Clarity_Form_Assignment__c
+Clarity_Form_Assignment_Rule__c
+Clarity_Form_Audit_Log__c
+Clarity_Form_Connection__c
+Clarity_Form_Connection_Field__c
+Clarity_Form_Connection_Process__c
+Clarity_Form_Question__c
+Clarity_Form_Question_Criteria__c
+Clarity_Form_Question_Filter__c
+Clarity_Form_Question_Flow__c
+Clarity_Form_Question_Flow_Design__c
+Clarity_Form_Question_Option__c
+Clarity_Form_Response__c
+Clarity_Form_Response_Connection__c
+Clarity_Form_Style__c

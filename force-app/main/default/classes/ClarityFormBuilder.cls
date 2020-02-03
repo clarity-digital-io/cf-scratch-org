@@ -312,7 +312,7 @@ global with sharing class ClarityFormBuilder {
         Map<String, Schema.SObjectType> sObjectsAvailable = Schema.getGlobalDescribe();
 
         for(Schema.SObjectType so : sObjectsAvailable.values()) {
-
+			//checkfls
             lookups.add(so.getDescribe().getName());
         
         }

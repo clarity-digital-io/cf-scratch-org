@@ -114,6 +114,10 @@ public class ConnectionCreateJob implements Queueable {
 						connectRecords(JSON.serialize(response), connectedName, record.getId()); 
 
 					} 
+				} else {
+					
+					connectionStatus.Status__c = 'Failed';
+
 				}
 
 			} else {

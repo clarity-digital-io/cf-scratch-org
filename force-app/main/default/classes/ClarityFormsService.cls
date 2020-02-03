@@ -173,6 +173,7 @@ public with sharing class ClarityFormsService {
         Map<Id, List<sObject>> recordGroupSubmissions = new Map<Id, List<sObject>>();
 
         Map<String, Set<String>> recordGroupFields = new Map<String, Set<String>>(); 
+		
 
         //get the field names by sboject
         for(Clarity_Form_Question__c question : questions) {
@@ -185,11 +186,17 @@ public with sharing class ClarityFormsService {
 
                 String field = question.Salesforce_Field__c;
 
-                if(recordGroupFields.get(sObjectName) != null) {
+				Schema.SObjectType convertType = Schema.getGlobalDescribe().get(sObjectName);
+
+				Map<String, Schema.SObjectField> sObjectFields = convertType.getDescribe().fields.getMap();
+
+				Boolean access = sObjectFields.get(field).getDescribe().isCreateable();
+
+                if(recordGroupFields.get(sObjectName) != null && access) {
 
                     recordGroupFields.get(sObjectName).add(field);
 
-                } else {
+                } else if(access) {
 
                     recordGroupFields.put(sObjectName, new Set<String>{ field });
 
@@ -255,7 +262,7 @@ public with sharing class ClarityFormsService {
                 joinedFields = ', ' + joinedFields;
             } 
 
-            List<sObject> results = Database.query('SELECT Id ' + joinedFields + ' FROM ' + sObjectName + ' WHERE Id IN :recordIds');
+            List<sObject> results = Database.query('SELECT Id ' + joinedFields + ' FROM ' + sObjectName + ' WHERE Id IN :recordIds WITH SECURITY_ENFORCED');
 
             for(sObject result : results) {
 
@@ -625,38 +632,6 @@ public with sharing class ClarityFormsService {
 
         return answersByContentVersion.values(); 
 
-    }
-
-    public static List<sObject> getSObjectConnections(List<Clarity_Form_Connection__c> connections) {
-
-        return new List<sObject>(); 
-
-    }
-
-    public static Map<String, sObject> applyExistingConnections(String records) {
-
-        List<Connection> connectionsRequired = (List<Connection>)JSON.deserialize(records, List<Connection>.class);
-
-        Map<String, sObject> connectionResults = new Map<String, sObject>(); 
-
-        for(Connection c : connectionsRequired) {
-
-            List<String> sFields = new List<String>(); 
-
-            for(Clarity_Form_Connection_Field__c field : c.Fields) {
-                sFields.add(field.Salesforce_Field__c); 
-            }
-
-            String joinedFields = String.join(sFields, ', ');
-
-            joinedFields = joinedFields.removeEnd(',');
-
-            sObject result = Database.query('SELECT ' + joinedFields + 'FROM ' + c.SalesforceObject + ' WHERE Id =: ' + c.RecordId + ' LIMIT 1');
-            //set salesforce as key
-            connectionResults.put(c.SalesforceObject, result); 
-        }
-
-        return connectionResults; 
     }
 
     public static Map<String, List<String>> filterRecordGroupPicklist(List<Clarity_Form_Question__c> questions) {
