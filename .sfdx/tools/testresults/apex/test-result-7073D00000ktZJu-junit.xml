@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2020-02-18T19:55:47-06:00" hostname="https://customer-page-2773-dev-ed.cs70.my.salesforce.com" tests="1" failures="0"  errors="0"  time="0.96">
+        <properties>
+            <property name="outcome" value="Passed"/>
+            <property name="testsRan" value="1"/>
+            <property name="passing" value="1"/>
+            <property name="failing" value="0"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="100%"/>
+            <property name="failRate" value="0%"/>
+            <property name="testStartTime" value="Feb 18, 2020 7:55 PM"/>
+            <property name="testExecutionTime" value="0.96 s"/>
+            <property name="testTotalTime" value="0.96 s"/>
+            <property name="commandTime" value="5.88 s"/>
+            <property name="hostname" value="https://customer-page-2773-dev-ed.cs70.my.salesforce.com"/>
+            <property name="orgId" value="00D3D000000Aw0MUAS"/>
+            <property name="username" value="test-zvk734n6fchq@example.com"/>
+            <property name="testRunId" value="7073D00000ktZJu"/>
+            <property name="userId" value="0053D0000030KCGQA2"/>
+        </properties>
+        <testcase name="shouldSaveQuestionWithPictureOptions" classname="formsClarityFormBuilderTest" time="0.96">
+        </testcase>
+    </testsuite>
+</testsuites>

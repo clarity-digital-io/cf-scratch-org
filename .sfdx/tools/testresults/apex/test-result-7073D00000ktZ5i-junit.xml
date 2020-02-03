@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2020-02-18T19:46:03-06:00" hostname="https://customer-page-2773-dev-ed.cs70.my.salesforce.com" tests="1" failures="1"  errors="0"  time="6.44">
+        <properties>
+            <property name="outcome" value="Failed"/>
+            <property name="testsRan" value="1"/>
+            <property name="passing" value="0"/>
+            <property name="failing" value="1"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="0%"/>
+            <property name="failRate" value="100%"/>
+            <property name="testStartTime" value="Feb 18, 2020 7:46 PM"/>
+            <property name="testExecutionTime" value="6.44 s"/>
+            <property name="testTotalTime" value="6.44 s"/>
+            <property name="commandTime" value="36.33 s"/>
+            <property name="hostname" value="https://customer-page-2773-dev-ed.cs70.my.salesforce.com"/>
+            <property name="orgId" value="00D3D000000Aw0MUAS"/>
+            <property name="username" value="test-zvk734n6fchq@example.com"/>
+            <property name="testRunId" value="7073D00000ktZ5i"/>
+            <property name="userId" value="0053D0000030KCGQA2"/>
+        </properties>
+        <testcase name="shouldSaveQuestionWithPictureOptions" classname="formsClarityFormBuilderTest" time="6.44">
+            <failure message="System.DmlException: Insert failed. First exception on row 0; first error: REQUIRED_FIELD_MISSING, Required fields are missing: [LinkedEntityId]: [LinkedEntityId]"><![CDATA[Class.forms.ClarityFormBuilder.saveQuestionWithPictureOptions: line 239, column 1
+Class.forms.ClarityFormBuilderTest.shouldSaveQuestionWithPictureOptions: line 181, column 1]]></failure>
+        </testcase>
+    </testsuite>
+</testsuites>

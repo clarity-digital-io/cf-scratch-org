@@ -1,0 +1,46 @@
+{
+    "summary": {
+        "outcome": "Passed",
+        "testsRan": 1,
+        "passing": 1,
+        "failing": 0,
+        "skipped": 0,
+        "passRate": "100%",
+        "failRate": "0%",
+        "testStartTime": "Feb 18, 2020 7:55 PM",
+        "testExecutionTime": "960 ms",
+        "testTotalTime": "960 ms",
+        "commandTime": "5875 ms",
+        "hostname": "https://customer-page-2773-dev-ed.cs70.my.salesforce.com",
+        "orgId": "00D3D000000Aw0MUAS",
+        "username": "test-zvk734n6fchq@example.com",
+        "testRunId": "7073D00000ktZJu",
+        "userId": "0053D0000030KCGQA2"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M3D000008AZUXUA4"
+            },
+            "Id": "07M3D000008AZUXUA4",
+            "QueueItemId": "7093D0000012vQlQAI",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7073D00000ktZJuQAM",
+            "MethodName": "shouldSaveQuestionWithPictureOptions",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p3D000004G9GsQAK"
+                },
+                "Id": "01p3D000004G9GsQAK",
+                "Name": "ClarityFormBuilderTest",
+                "NamespacePrefix": "forms"
+            },
+            "RunTime": 960,
+            "FullName": "ClarityFormBuilderTest.shouldSaveQuestionWithPictureOptions"
+        }
+    ]
+}
