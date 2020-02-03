@@ -1,5 +1,7 @@
 # Clarity Forms Salesforce App
 
+## External/Mobile API Testing
+
 ## Packaging
 sfdx force:auth:web:login -a PkgOrg
 
@@ -61,9 +63,9 @@ sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-de
 
 sfdx force:org:list --all
 
-sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias forms //clarity-forms-pkg
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias forms-external //clarity-forms-pkg
 
-sfdx force:alias:set forms=test-kzsaqkcclnnv@example.com
+sfdx force:alias:set forms=test-s5vwans743ty@example.com
 
 sfdx force:config:set defaultusername=forms
 
@@ -75,7 +77,7 @@ sfdx force:user:password:generate --targetusername forms
 
 sfdx force:user:display --targetusername forms
 
-sfdx force:org:delete -u test-iwaemnwejmjb@example.com
+sfdx force:org:delete -u test-kzsaqkcclnnv@example.com
 
 ## commonly used commands
 
