@@ -1,0 +1,46 @@
+{
+    "summary": {
+        "outcome": "Passed",
+        "testsRan": 1,
+        "passing": 1,
+        "failing": 0,
+        "skipped": 0,
+        "passRate": "100%",
+        "failRate": "0%",
+        "testStartTime": "Feb 3, 2020 1:51 PM",
+        "testExecutionTime": "830 ms",
+        "testTotalTime": "830 ms",
+        "commandTime": "6561 ms",
+        "hostname": "https://business-business-4316-dev-ed.cs18.my.salesforce.com/",
+        "orgId": "00D1100000Bx7l6EAB",
+        "username": "test-s5vwans743ty@example.com",
+        "testRunId": "7071100001onUq9",
+        "userId": "005110000078rK1AAI"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v47.0/tooling/sobjects/ApexTestResult/07M1100000AybeNEAR"
+            },
+            "Id": "07M1100000AybeNEAR",
+            "QueueItemId": "70911000001g8SdAAI",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7071100001onUq9AAE",
+            "MethodName": "shouldDeleteFieldOnConnectionUpdate",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v47.0/tooling/sobjects/ApexClass/01p11000003vIWFAA2"
+                },
+                "Id": "01p11000003vIWFAA2",
+                "Name": "ConnectionFieldValidationTest",
+                "NamespacePrefix": "forms"
+            },
+            "RunTime": 830,
+            "FullName": "ConnectionFieldValidationTest.shouldDeleteFieldOnConnectionUpdate"
+        }
+    ]
+}
