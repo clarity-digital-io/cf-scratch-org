@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2020-02-03T13:51:06-06:00" hostname="https://business-business-4316-dev-ed.cs18.my.salesforce.com/" tests="1" failures="0"  errors="0"  time="0.83">
+        <properties>
+            <property name="outcome" value="Passed"/>
+            <property name="testsRan" value="1"/>
+            <property name="passing" value="1"/>
+            <property name="failing" value="0"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="100%"/>
+            <property name="failRate" value="0%"/>
+            <property name="testStartTime" value="Feb 3, 2020 1:51 PM"/>
+            <property name="testExecutionTime" value="0.83 s"/>
+            <property name="testTotalTime" value="0.83 s"/>
+            <property name="commandTime" value="6.56 s"/>
+            <property name="hostname" value="https://business-business-4316-dev-ed.cs18.my.salesforce.com/"/>
+            <property name="orgId" value="00D1100000Bx7l6EAB"/>
+            <property name="username" value="test-s5vwans743ty@example.com"/>
+            <property name="testRunId" value="7071100001onUq9"/>
+            <property name="userId" value="005110000078rK1AAI"/>
+        </properties>
+        <testcase name="shouldDeleteFieldOnConnectionUpdate" classname="formsConnectionFieldValidationTest" time="0.83">
+        </testcase>
+    </testsuite>
+</testsuites>

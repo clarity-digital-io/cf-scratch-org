@@ -34,8 +34,8 @@ global with sharing class ClarityFormResponse {
             for(Clarity_Form_Response_Connection__c rc : responseConnections){
                 responseConnectedIds.add(rc.Clarity_Form_Connection__c); 
             }
-			System.debug('responseConnectedIds: ' + responseConnectedIds); 
-            for(Clarity_Form_Connection__c connection : connections.values()) {
+
+			for(Clarity_Form_Connection__c connection : connections.values()) {
                 if(!responseConnectedIds.contains(connection.Id)) {
                     requiredConnections.add(connection); 
                 }

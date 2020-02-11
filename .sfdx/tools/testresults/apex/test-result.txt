@@ -3,17 +3,17 @@ FORMAT  FILE
 ──────  ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 txt     /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result.txt
 txt     /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-run-id.txt
-junit   /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7076300001LrEbx-junit.xml
-json    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7076300001LrEbx.json
+junit   /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7071100001onUq9-junit.xml
+json    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7071100001onUq9.json
 
 === Test Results
-TEST NAME                                       OUTCOME  MESSAGE  RUNTIME (MS)
-──────────────────────────────────────────────  ───────  ───────  ────────────
-ClarityFormResponseTest.shouldCheckConnections  Pass              513
+TEST NAME                                                          OUTCOME  MESSAGE  RUNTIME (MS)
+─────────────────────────────────────────────────────────────────  ───────  ───────  ────────────
+ConnectionFieldValidationTest.shouldDeleteFieldOnConnectionUpdate  Pass              830
 
 === Test Summary
 NAME                 VALUE
-───────────────────  ──────────────────────────────────────────────────────
+───────────────────  ──────────────────────────────────────────────────────────────
 Outcome              Passed
 Tests Ran            1
 Passing              1
@@ -21,13 +21,13 @@ Failing              0
 Skipped              0
 Pass Rate            100%
 Fail Rate            0%
-Test Start Time      Jan 24, 2020 6:02 PM
-Test Execution Time  513 ms
-Test Total Time      513 ms
-Command Time         193254 ms
-Hostname             https://saas-force-6592-dev-ed.cs43.my.salesforce.com
-Org Id               00D63000000Dsa5EAC
-Username             test-kzsaqkcclnnv@example.com
-Test Run Id          7076300001LrEbx
-User Id              00563000003U8IMAA0
+Test Start Time      Feb 3, 2020 1:51 PM
+Test Execution Time  830 ms
+Test Total Time      830 ms
+Command Time         6561 ms
+Hostname             https://business-business-4316-dev-ed.cs18.my.salesforce.com/
+Org Id               00D1100000Bx7l6EAB
+Username             test-s5vwans743ty@example.com
+Test Run Id          7071100001onUq9
+User Id              005110000078rK1AAI
 
