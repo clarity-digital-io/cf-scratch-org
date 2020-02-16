@@ -72,7 +72,7 @@ global with sharing class ClarityFormBuilder {
     global static List<Clarity_Form_Question__c> getQuestions(String recordId){
 
         List<Clarity_Form_Question__c> questions = [SELECT Id, Page__c, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, 
-            (SELECT Id, Label__c, Choice_Image__c FROM Clarity_Form_Question_Options__r), Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
+            (SELECT Id, Order__c, Label__c, Choice_Image__c FROM Clarity_Form_Question_Options__r), Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
             FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: recordId];
 
         return questions; 
@@ -82,7 +82,7 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static List<Clarity_Form_Question_Option__c> getQuestionOptions(String sQuestionId) {
 
-        List<Clarity_Form_Question_Option__c> options = [SELECT Id, Active_Flow__c, Label__c, Choice_Image__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
+        List<Clarity_Form_Question_Option__c> options = [SELECT Id, Order__c, Active_Flow__c, Label__c, Choice_Image__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
 
         return options; 
 
@@ -110,19 +110,37 @@ global with sharing class ClarityFormBuilder {
 		String sQuestionOptions = optionValues[1];
 		String sQuestionOptionImages = optionValues[2];
 
-		if(sQuestionOptionImages != '' || sQuestionOptionImages != null) {
+		Map<String, Clarity_Form_Question_Option__c> parsedOptions = (Map<String, Clarity_Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, Map<String, Clarity_Form_Question_Option__c>.class);
 
-			Map<String, String> parsedOptionImages = (Map<String, String>)JSON.deserialize(sQuestionOptionImages, Map<String, String>.class);
+		List<Clarity_Form_Question_Option__c> options = new List<Clarity_Form_Question_Option__c>();
 
-			Map<String, Clarity_Form_Question_Option__c> parsedOptions = (Map<String, Clarity_Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, Map<String, Clarity_Form_Question_Option__c>.class); 
+		for(Clarity_Form_Question_Option__c option : parsedOptions.values()) {
+			options.add(option);
+		}
+
+		String sQuestionOptionsList = JSON.serialize(options);
+		Map<String, List<sObject>> savedOptions = saveQuestionWithOptions(sQuestion, sQuestionOptionsList);
+
+		Map<String, Clarity_Form_Question_Option__c> savedParsedOptions = new Map<String, Clarity_Form_Question_Option__c>();
+		for(String result : savedOptions.keySet()) {
+			if(result == 'Options') {
+				List<sObject> recentlySavedOptions = savedOptions.get(result);
+				for(Clarity_Form_Question_Option__c so : (List<Clarity_Form_Question_Option__c>)recentlySavedOptions) {
+					Integer order = so.Order__c.intValue(); 
+					savedParsedOptions.put(order.format(), so); 
+				}
+			}
+		}
+
+		Map<String, String> parsedOptionImages = (Map<String, String>)JSON.deserialize(sQuestionOptionImages, Map<String, String>.class);
+
+		if(parsedOptionImages.size() > 0) {
 
 			Clarity_Form_Question__c parsedQuestion = (Clarity_Form_Question__c)JSON.deserialize(sQuestion, Clarity_Form_Question__c.class);
-
+	
 			Map<String, ContentVersion> contents = new Map<String, ContentVersion>();
 
-			List<Clarity_Form_Question_Option__c> options = new List<Clarity_Form_Question_Option__c>();
-
-			for(String optionId : parsedOptions.keySet()) {
+			for(String optionId : parsedOptionImages.keySet()) {
 				
 				String img = parsedOptionImages.get(optionId); 
 				
@@ -134,12 +152,6 @@ global with sharing class ClarityFormBuilder {
 					Clarity_Form__c = parsedQuestion.forms__Clarity_Form__c,
 					VersionData     = EncodingUtil.base64Decode(img) // converting your binary string to Blob
 				);
-
-				Clarity_Form_Question_Option__c option = parsedOptions.get(optionId); 
-
-				option.forms__Choice_Image__c = content.Id; 
-
-				options.add(option); 
 
 				contents.put(optionId, content);
 			}
@@ -160,9 +172,24 @@ global with sharing class ClarityFormBuilder {
 	
 			}
 
-			List<Database.UpsertResult> optionsResults = Database.upsert(options, true); 
+			List<Clarity_Form_Question_Option__c> updateOptions = new List<Clarity_Form_Question_Option__c>();
 
-			for(Database.UpsertResult optionsResult : optionsResults) {
+			for(String optionId : contents.keySet()) {
+				ContentVersion cv = contents.get(optionId); 
+				System.debug('savedParsedOptions: ' + savedParsedOptions); 
+				if(savedParsedOptions.get(optionId) != null) {
+					Clarity_Form_Question_Option__c option = savedParsedOptions.get(optionId);
+
+					option.Choice_Image__c = cv.Id; 
+	
+					updateOptions.add(option); 
+				}
+				
+			}
+
+			List<Database.SaveResult> optionsResults = Database.update(updateOptions, true); 
+
+			for(Database.SaveResult optionsResult : optionsResults) {
 	
 				if(!optionsResult.isSuccess()) {
 					System.debug('error');
@@ -175,7 +202,7 @@ global with sharing class ClarityFormBuilder {
 			Set<Id> cvIds = new Set<Id>();
 
 			for(ContentVersion cv : cvSaves) {
-                cv.OwnerId = UserInfo.getUserId();
+				cv.OwnerId = UserInfo.getUserId();
 				cvUpdates.add(cv); 
 				cvIds.add(cv.Id); 
 			}
@@ -216,16 +243,11 @@ global with sharing class ClarityFormBuilder {
 					System.debug('error');
 				}
 			}
-
-
-		}
-
-		//UserInfo.getUserId()
-
-		Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
-
-		return results;
 		
+		} 
+
+		return savedOptions; 
+
 	}
 
     @RemoteAction
@@ -239,7 +261,7 @@ global with sharing class ClarityFormBuilder {
             System.debug('error result');
         }
 
-        List<Clarity_Form_Question_Option__c> currentOptions = [SELECT Id, Active_Flow__c, Label__c, Choice_Image__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: parsedQuestion.Id];
+        List<Clarity_Form_Question_Option__c> currentOptions = [SELECT Id, Order__c, Active_Flow__c, Label__c, Choice_Image__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: parsedQuestion.Id];
 
         List<Clarity_Form_Question_Option__c> parsedQuestionOptions = (List<Clarity_Form_Question_Option__c>)JSON.deserialize(sQuestionOptions, List<Clarity_Form_Question_Option__c>.class);
 
@@ -366,7 +388,7 @@ global with sharing class ClarityFormBuilder {
 
         List<Clarity_Form_Question_Flow_Design__c> flowDesign = [SELECT Id, Active__c, Form_Submission__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Flow_Design__c WHERE Clarity_Form_Question__c =: sQuestionId LIMIT 1];
 
-        List<Clarity_Form_Question_Option__c> questionOptions = [SELECT Id, Active_Flow__c, Choice_Image__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
+        List<Clarity_Form_Question_Option__c> questionOptions = [SELECT Id, Order__c, Active_Flow__c, Choice_Image__c, Label__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: sQuestionId];
 
         List<Clarity_Form_Question_Criteria__c> criteria = [SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__c WHERE Clarity_Form_Question__c =: sQuestionId];
 
