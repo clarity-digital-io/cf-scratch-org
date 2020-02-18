@@ -14,7 +14,7 @@ export default class formAnswers extends LightningElement {
                 this.columns = result.Columns;
 
                 let attachmentColumns = result.Columns.filter(column => {
-                    return column.type === 'attachments';
+                    return column.type === 'attachments' || column.type === 'picturechoice';
                 }).map(column => {
                     return column.fieldName;
                 });
@@ -51,7 +51,7 @@ export default class formAnswers extends LightningElement {
 
                 }
 
-                this.loading = false; 
+								this.loading = false; 
 
             })
             .catch(error => {
