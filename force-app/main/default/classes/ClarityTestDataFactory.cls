@@ -68,12 +68,17 @@ public class ClarityTestDataFactory {
 
 		List<Clarity_Form_Question_Option__c> options = new List<Clarity_Form_Question_Option__c>(); 
 
+		Integer count = 0; 
+
 		for(Clarity_Form_Question__c question : multiChoiceQuestions) {
 
 			Clarity_Form_Question_Option__c option = new Clarity_Form_Question_Option__c(
 				Label__c = 'Test',
-				Clarity_Form_Question__c = question.Id
+				Clarity_Form_Question__c = question.Id,
+				Order__c = count
 			);
+
+			count = count + 1; 
 
 			options.add(option); 
 		}

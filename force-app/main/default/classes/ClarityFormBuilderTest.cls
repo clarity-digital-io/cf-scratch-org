@@ -151,7 +151,40 @@ public class ClarityFormBuilderTest {
 		Test.stopTest();
 
 		System.assertEquals(1, options.get('Options').size());
-    }
+	}
+	
+	@isTest
+    public static void shouldSaveQuestionWithPictureOptions() {
+
+        Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
+
+		List<Clarity_Form_Question__c> expectedQuestions = [SELECT Id, Clarity_Form__c FROM Clarity_Form_Question__c WHERE Type__c = 'Dropdown']; 
+
+		List<Clarity_Form_Question_Option__c> optionsCreate = ClarityTestDataFactory.generateQuestionOptions(expectedQuestions);
+
+		String sQuestion = JSON.serialize(expectedQuestions[0]); 
+
+		Map<Decimal, Clarity_Form_Question_Option__c> optionsCreateMap = new Map<Decimal, Clarity_Form_Question_Option__c>();
+
+		for(Clarity_Form_Question_Option__c option : optionsCreate) {
+			optionsCreateMap.put(option.Order__c, option); 
+		}
+
+		String sQuestionOptions = JSON.serialize(optionsCreateMap); 
+
+		String images = JSON.serialize(new Map<String, String>{ '0' => 'testimage' }); 
+
+		Test.startTest();
+
+		List<String> optionValues = new List<String>{sQuestion, sQuestionOptions, images};
+
+        Map<String, List<sObject>> options = ClarityFormBuilder.saveQuestionWithPictureOptions(optionValues);
+
+		Test.stopTest();
+
+		System.assertEquals(1, options.get('Options').size());
+	}
+
 
     @isTest
     public static void shouldDeleteQuestion() {
