@@ -218,14 +218,17 @@ public with sharing class FormController {
                 for(Clarity_Form_Question_Option__c option : options) {
 
                     if(option.Id == answer.Answer__c) {
-                        value = option.Choice_Image__c; 
-                    }
+                        //value = option.Choice_Image__c; 
+                        value = option.Label__c; 
+					}
 
-                }
+				}
 				
-				List<String> pictures = new List<String>{ '/sfc/servlet.shepherd/version/download/' + value };
+				return value;
+				
+				// List<String> pictures = new List<String>{ '/sfc/servlet.shepherd/version/download/' + value };
 
-				return JSON.serialize(pictures);
+				// return JSON.serialize(pictures);
 				
 			}
             when else {

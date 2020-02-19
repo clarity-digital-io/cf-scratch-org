@@ -14,7 +14,7 @@ export default class formAnswers extends LightningElement {
                 this.columns = result.Columns;
 
                 let attachmentColumns = result.Columns.filter(column => {
-                    return column.type === 'attachments' || column.type === 'picturechoice';
+                    return column.type === 'attachments';
                 }).map(column => {
                     return column.fieldName;
                 });
