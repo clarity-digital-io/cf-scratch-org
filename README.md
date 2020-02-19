@@ -56,6 +56,13 @@ sfdx force:user:permset:assign -u formsPkgTest -n "Clarity_Forms_Builder"
 
 sfdx force:package:version:promote --package "ClarityForms@1.0"
 
+## Feature Development 
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias CF-8 //feature-name
+
+sfdx force:alias:set CF-8=test-zvk734n6fchq@example.com
+
+sfdx force:config:set defaultusername=CF-8 //feature name
+
 ## Dev, Build and Test
 sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-devhub
 
@@ -63,7 +70,7 @@ sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias forms //clarity-forms-pkg
 
-sfdx force:alias:set forms=test-kzsaqkcclnnv@example.com
+sfdx force:alias:set forms=test-zvk734n6fchq@example.com
 
 sfdx force:config:set defaultusername=forms
 

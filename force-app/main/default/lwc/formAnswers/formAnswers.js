@@ -51,7 +51,7 @@ export default class formAnswers extends LightningElement {
 
                 }
 
-                this.loading = false; 
+								this.loading = false; 
 
             })
             .catch(error => {

@@ -196,11 +196,6 @@
                 <label>FreeText</label>
             </value>
             <value>
-                <fullName>Picture Choice</fullName>
-                <default>false</default>
-                <label>Picture Choice</label>
-            </value>
-            <value>
                 <fullName>PictureChoice</fullName>
                 <default>false</default>
                 <label>PictureChoice</label>
