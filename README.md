@@ -65,11 +65,7 @@ sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias forms-external //clarity-forms-pkg
 
-<<<<<<< HEAD
-sfdx force:alias:set forms=test-bpehufks4x01@example.com
-=======
 sfdx force:alias:set forms-external=test-s5vwans743ty@example.com
->>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958
 
 sfdx force:config:set defaultusername=forms-external
 
