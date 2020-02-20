@@ -4,6 +4,7 @@ FORMAT  FILE
 txt     /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result.txt
 txt     /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-run-id.txt
 <<<<<<< HEAD
+<<<<<<< HEAD
 junit   /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7073D00000ktZJu-junit.xml
 json    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7073D00000ktZJu.json
 
@@ -28,6 +29,19 @@ ConnectionFieldValidationTest.shouldDeleteFieldOnConnectionUpdate  Pass         
 NAME                 VALUE
 ───────────────────  ──────────────────────────────────────────────────────────────
 >>>>>>> adding form and response controllers for mobile
+=======
+junit   /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7071100001onUq9-junit.xml
+json    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7071100001onUq9.json
+
+=== Test Results
+TEST NAME                                                          OUTCOME  MESSAGE  RUNTIME (MS)
+─────────────────────────────────────────────────────────────────  ───────  ───────  ────────────
+ConnectionFieldValidationTest.shouldDeleteFieldOnConnectionUpdate  Pass              830
+
+=== Test Summary
+NAME                 VALUE
+───────────────────  ──────────────────────────────────────────────────────────────
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958
 Outcome              Passed
 Tests Ran            1
 Passing              1
@@ -35,6 +49,7 @@ Failing              0
 Skipped              0
 Pass Rate            100%
 Fail Rate            0%
+<<<<<<< HEAD
 <<<<<<< HEAD
 Test Start Time      Feb 18, 2020 7:55 PM
 Test Execution Time  960 ms
@@ -46,6 +61,8 @@ Username             test-zvk734n6fchq@example.com
 Test Run Id          7073D00000ktZJu
 User Id              0053D0000030KCGQA2
 =======
+=======
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958
 Test Start Time      Feb 3, 2020 1:51 PM
 Test Execution Time  830 ms
 Test Total Time      830 ms
@@ -55,5 +72,8 @@ Org Id               00D1100000Bx7l6EAB
 Username             test-s5vwans743ty@example.com
 Test Run Id          7071100001onUq9
 User Id              005110000078rK1AAI
+<<<<<<< HEAD
 >>>>>>> adding form and response controllers for mobile
+=======
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958
 

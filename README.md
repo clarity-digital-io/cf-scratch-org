@@ -65,17 +65,21 @@ sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias forms-external //clarity-forms-pkg
 
+<<<<<<< HEAD
 sfdx force:alias:set forms=test-bpehufks4x01@example.com
+=======
+sfdx force:alias:set forms-external=test-s5vwans743ty@example.com
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958
 
-sfdx force:config:set defaultusername=forms
+sfdx force:config:set defaultusername=forms-external
 
 sfdx force:source:push -f
 
 sfdx force:org:open -u PkgOrg
 
-sfdx force:user:password:generate --targetusername forms
+sfdx force:user:password:generate --targetusername forms-external
 
-sfdx force:user:display --targetusername forms
+sfdx force:user:display --targetusername forms-external
 
 sfdx force:org:delete -u test-kzsaqkcclnnv@example.com
 
@@ -103,8 +107,9 @@ sfdx force:lightning:component:create --type lwc -n imageControl -d force-app/ma
 
 sfdx force:apex:class:create -n ConnectionFieldValidationTest -d force-app/main/default/classes
 
-sfdx force:apex:class:create -n ClarityFormBuilderTest -d force-app/main/default/classes
+sfdx force:apex:class:create -n MobileFormController -d force-app/main/default/classes
 
+sfdx force:apex:class:create -n MobileResponseController -d force-app/main/default/classes
 
 ## Tests
 

@@ -265,6 +265,11 @@
             "modifiedTime": 1580753757570,
             "changeTime": 1580753757570,
             "contentHash": "615187b9b06cbd43f0947b07f21d49d27dab1a76",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -430,6 +435,11 @@
             "modifiedTime": 1580753757570,
             "changeTime": 1580753757570,
             "contentHash": "6693e3c46d80bc7835f7c0b035343ac0bd8906c1",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -655,6 +665,11 @@
             "modifiedTime": 1580753757571,
             "changeTime": 1580753757571,
             "contentHash": "894d0ad29df43b724f2c885b07aa82cadb83b499",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -850,6 +865,11 @@
             "modifiedTime": 1580753757572,
             "changeTime": 1580753757572,
             "contentHash": "2c6067dd77d1fc9d79ae76098d67426fa0e1eb5a",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -935,6 +955,7 @@
             "state": "u",
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes",
             "isDirectory": true,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "isMetadataFile": false,
             "size": 1600,
             "modifiedTime": 1582078102692,
@@ -942,6 +963,15 @@
             "contentHash": "92559f2cdeee164bf10431dd3d2fd80a2393635b",
             "isWorkspace": false,
             "isArtifactRoot": false
+=======
+            "size": 1728,
+            "modifiedTime": 1581085112849,
+            "changeTime": 1581085112849,
+            "contentHash": "b21b233d23b84f893fd423e8bf6edd8d5a5426df",
+            "isMetadataFile": false,
+            "state": "u",
+            "isWorkspace": false
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
         }
     ],
     [
@@ -980,11 +1010,20 @@
             "state": "u",
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormBuilder.cls",
             "isDirectory": false,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "isMetadataFile": false,
             "size": 20797,
             "modifiedTime": 1582078102688,
             "changeTime": 1582078102688,
             "contentHash": "8f79ed36838dedf9e99a9a2cd0b1cbd8382198ae",
+=======
+            "size": 20797,
+            "modifiedTime": 1580753757573,
+            "changeTime": 1580753757573,
+            "contentHash": "8f79ed36838dedf9e99a9a2cd0b1cbd8382198ae",
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -1012,9 +1051,17 @@
             "isDirectory": false,
             "isMetadataFile": false,
             "size": 6464,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "modifiedTime": 1582078102689,
             "changeTime": 1582078102689,
             "contentHash": "0670f4f735236c78b965a773c533cdb9f6823338",
+=======
+            "modifiedTime": 1580753757573,
+            "changeTime": 1580753757573,
+            "contentHash": "0670f4f735236c78b965a773c533cdb9f6823338",
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -1040,6 +1087,13 @@
             "state": "u",
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormResponse.cls",
             "isDirectory": false,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "size": 9434,
+            "modifiedTime": 1581127100460,
+            "changeTime": 1581127100460,
+            "contentHash": "6503c4cf70e192efd362572078e1e11b974270da",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isMetadataFile": false,
             "size": 9509,
             "modifiedTime": 1582078102690,
@@ -1075,6 +1129,11 @@
             "modifiedTime": 1580753757574,
             "changeTime": 1580753757574,
             "contentHash": "374cc3e05c1e1cc883f6c29b70ef0c309a31c506",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -1100,6 +1159,13 @@
             "state": "u",
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ClarityFormsService.cls",
             "isDirectory": false,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "size": 33743,
+            "modifiedTime": 1581126728755,
+            "changeTime": 1581126728755,
+            "contentHash": "bf99b84529b147c605aaabf23a73ddf582302954",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isMetadataFile": false,
             "size": 27423,
             "modifiedTime": 1582078102691,
@@ -1132,9 +1198,17 @@
             "isDirectory": false,
             "isMetadataFile": false,
             "size": 8245,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "modifiedTime": 1582078102691,
             "changeTime": 1582078102691,
             "contentHash": "bd8fb53d3bc6fcadb29f69f334b5bea6f5a1ac00",
+=======
+            "modifiedTime": 1580753757574,
+            "changeTime": 1580753757574,
+            "contentHash": "bd8fb53d3bc6fcadb29f69f334b5bea6f5a1ac00",
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -1165,6 +1239,11 @@
             "modifiedTime": 1580753757574,
             "changeTime": 1580753757574,
             "contentHash": "b1fc5820b432a2e2831ed931bb393808f59d5ef2",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -1225,6 +1304,11 @@
             "modifiedTime": 1580753757575,
             "changeTime": 1580753757575,
             "contentHash": "f98f5782e00c6fb8e4c5778c1633ab20d8d8fd8f",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -1247,14 +1331,21 @@
     [
         "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ConnectionCreateJob.cls",
         {
-            "state": "u",
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ConnectionCreateJob.cls",
             "isDirectory": false,
-            "isMetadataFile": false,
             "size": 8574,
             "modifiedTime": 1580753757575,
             "changeTime": 1580753757575,
             "contentHash": "497dff1b5dfac601e286f7875de4869265bd2b64",
+            "isMetadataFile": false,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+            "size": 8574,
+            "modifiedTime": 1580753757575,
+            "changeTime": 1580753757575,
+            "contentHash": "497dff1b5dfac601e286f7875de4869265bd2b64",
+=======
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -1315,6 +1406,11 @@
             "modifiedTime": 1580753757575,
             "changeTime": 1580753757575,
             "contentHash": "2289ce894935a7d38d09052b6c9f86c0d81df5e1",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -1340,11 +1436,20 @@
             "state": "u",
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/ConnectionRecordProcess.cls",
             "isDirectory": false,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "isMetadataFile": false,
             "size": 6734,
             "modifiedTime": 1580753757576,
             "changeTime": 1580753757576,
             "contentHash": "2d3286993f767106956e309c9b6d9f5f1e84e583",
+=======
+            "size": 6734,
+            "modifiedTime": 1580753757576,
+            "changeTime": 1580753757576,
+            "contentHash": "2d3286993f767106956e309c9b6d9f5f1e84e583",
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -1375,6 +1480,11 @@
             "modifiedTime": 1580753757576,
             "changeTime": 1580753757576,
             "contentHash": "ebfc14d71e6e0d271bde9ffd7fa407a0f2719c89",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -1435,6 +1545,11 @@
             "modifiedTime": 1580753757576,
             "changeTime": 1580753757576,
             "contentHash": "828e629c518538088890a339ee0c309caa524274",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -1462,9 +1577,17 @@
             "isDirectory": false,
             "isMetadataFile": false,
             "size": 7352,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "modifiedTime": 1582078102692,
             "changeTime": 1582078102692,
             "contentHash": "4a34581002686b4e44f5fb5af65624556934b679",
+=======
+            "modifiedTime": 1580753757577,
+            "changeTime": 1580753757577,
+            "contentHash": "4a34581002686b4e44f5fb5af65624556934b679",
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -1495,6 +1618,11 @@
             "modifiedTime": 1580753757577,
             "changeTime": 1580753757577,
             "contentHash": "0c4de65fb8038db7deb34c89a75dfd50110dabd2",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -4045,6 +4173,11 @@
             "modifiedTime": 1580753757578,
             "changeTime": 1580753757578,
             "contentHash": "02977cea26690393aabe92a77740975ba5cdee86",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -4105,6 +4238,36 @@
             "modifiedTime": 1580753757578,
             "changeTime": 1580753757578,
             "contentHash": "b02b7da32a7d2127da8fa538f1560daad435c0e3",
+            "isWorkspace": false,
+            "isArtifactRoot": false
+        }
+    ],
+    [
+        "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/objects/Clarity_Form_Response__c/fields/Connection_Account__c.field-meta.xml",
+        {
+            "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/objects/Clarity_Form_Response__c/fields/Connection_Account__c.field-meta.xml",
+            "isDirectory": false,
+            "size": 586,
+            "modifiedTime": 1580753757578,
+            "changeTime": 1580753757578,
+            "contentHash": "c6e2527211b35a9f5baa0dc82120831fdc195cc6",
+            "isMetadataFile": true,
+            "state": "u",
+            "isWorkspace": false,
+            "isArtifactRoot": false
+        }
+    ],
+    [
+        "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/objects/Clarity_Form_Response__c/fields/Connection_Case__c.field-meta.xml",
+        {
+            "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/objects/Clarity_Form_Response__c/fields/Connection_Case__c.field-meta.xml",
+            "isDirectory": false,
+            "size": 577,
+            "modifiedTime": 1580753757578,
+            "changeTime": 1580753757578,
+            "contentHash": "b02b7da32a7d2127da8fa538f1560daad435c0e3",
+            "isMetadataFile": true,
+            "state": "u",
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -4642,9 +4805,17 @@
             "isDirectory": true,
             "isMetadataFile": false,
             "size": 128,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "modifiedTime": 1582078102697,
             "changeTime": 1582078102697,
             "contentHash": "ea4e5364e900fcac9961152caf08779554221fd7",
+=======
+            "modifiedTime": 1580753757578,
+            "changeTime": 1580753757578,
+            "contentHash": "ea4e5364e900fcac9961152caf08779554221fd7",
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -4657,8 +4828,13 @@
             "isDirectory": false,
             "isMetadataFile": true,
             "size": 23526,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "modifiedTime": 1582078102697,
             "changeTime": 1582078102697,
+=======
+            "modifiedTime": 1580753757578,
+            "changeTime": 1580753757578,
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "contentHash": "75d6f4cb75616d0610ae77ca3c5f6bc45af794eb",
             "isWorkspace": false,
             "isArtifactRoot": false
@@ -4671,10 +4847,29 @@
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/permissionsets/Clarity_Forms_Response.permissionset-meta.xml",
             "isDirectory": false,
             "isMetadataFile": true,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "size": 14169,
             "modifiedTime": 1582078102698,
             "changeTime": 1582078102698,
             "contentHash": "9f5d3763552354f981c6188d47cd19d94884fa77",
+=======
+            "state": "u",
+            "isWorkspace": false,
+            "isArtifactRoot": false
+        }
+    ],
+    [
+        "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/permissionsets/Clarity_Forms_Response.permissionset-meta.xml",
+        {
+            "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/permissionsets/Clarity_Forms_Response.permissionset-meta.xml",
+            "isDirectory": false,
+            "size": 14169,
+            "modifiedTime": 1580753757578,
+            "changeTime": 1580753757578,
+            "contentHash": "9f5d3763552354f981c6188d47cd19d94884fa77",
+            "isMetadataFile": true,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -4687,8 +4882,13 @@
             "isDirectory": true,
             "isMetadataFile": false,
             "size": 96,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "modifiedTime": 1582078102698,
             "changeTime": 1582078102698,
+=======
+            "modifiedTime": 1580753757579,
+            "changeTime": 1580753757579,
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "contentHash": "dd4bc5d00d5b87ac9dcfa94ec543d354d095c25c",
             "isWorkspace": false,
             "isArtifactRoot": false
@@ -4702,9 +4902,17 @@
             "isDirectory": false,
             "isMetadataFile": true,
             "size": 46092,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "modifiedTime": 1582078102699,
             "changeTime": 1582078102699,
             "contentHash": "e5381b1f295eb02bf8556b292fe640bebfb873c6",
+=======
+            "modifiedTime": 1580753757579,
+            "changeTime": 1580753757579,
+            "contentHash": "e5381b1f295eb02bf8556b292fe640bebfb873c6",
+            "isMetadataFile": true,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -4807,8 +5015,13 @@
             "isDirectory": true,
             "isMetadataFile": false,
             "size": 256,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "modifiedTime": 1582078102699,
             "changeTime": 1582078102699,
+=======
+            "modifiedTime": 1580753757591,
+            "changeTime": 1580753757591,
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "contentHash": "a29ce3f1ac93ad1a6af95717eb5bbafa2b913ec6",
             "isWorkspace": false,
             "isArtifactRoot": false
@@ -4825,6 +5038,11 @@
             "modifiedTime": 1580753757541,
             "changeTime": 1580753757541,
             "contentHash": "04d3b602cdc8d51e1a3bb4d03f7dab96a9ec37e5",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -4912,9 +5130,17 @@
             "isDirectory": false,
             "isMetadataFile": false,
             "size": 2455907,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "modifiedTime": 1582078102711,
             "changeTime": 1582078102711,
             "contentHash": "998cdec0e420fd6df92b06736e15738bb4925ef1",
+=======
+            "modifiedTime": 1580753757590,
+            "changeTime": 1580753757590,
+            "contentHash": "998cdec0e420fd6df92b06736e15738bb4925ef1",
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -4945,6 +5171,11 @@
             "modifiedTime": 1580753757591,
             "changeTime": 1580753757591,
             "contentHash": "da38cc252e72cee94f0a8f69ed7771ca4350db99",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -4960,6 +5191,11 @@
             "modifiedTime": 1579824414864,
             "changeTime": 1579824414864,
             "contentHash": "6a89e67808ab2d0b2458b5f4d5ee8e0287a801f2",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -4975,6 +5211,11 @@
             "modifiedTime": 1580753757591,
             "changeTime": 1580753757591,
             "contentHash": "3a557827a4b5056069144048721ef7d80536b801",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -5002,8 +5243,13 @@
             "isDirectory": true,
             "isMetadataFile": false,
             "size": 224,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "modifiedTime": 1582078102711,
             "changeTime": 1582078102711,
+=======
+            "modifiedTime": 1580753757602,
+            "changeTime": 1580753757602,
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "contentHash": "6c138d30faa134d44fbc914712fcaafbdf83327f",
             "isWorkspace": false,
             "isArtifactRoot": false
@@ -5017,9 +5263,17 @@
             "isDirectory": false,
             "isMetadataFile": false,
             "size": 2270302,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "modifiedTime": 1582078102724,
             "changeTime": 1582078102724,
             "contentHash": "45e395c12dbcd5b5ca470ff5ac212e9d2098ef8c",
+=======
+            "modifiedTime": 1580753757602,
+            "changeTime": 1580753757602,
+            "contentHash": "45e395c12dbcd5b5ca470ff5ac212e9d2098ef8c",
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -5080,6 +5334,11 @@
             "modifiedTime": 1580753757602,
             "changeTime": 1580753757602,
             "contentHash": "eb2d3cb2d227770b9be27349f287db51c53d0ae1",
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
+=======
+            "isMetadataFile": false,
+            "state": "u",
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
             "isWorkspace": false,
             "isArtifactRoot": false
         }
@@ -5270,6 +5529,7 @@
             "state": "u",
             "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org",
             "isDirectory": true,
+<<<<<<< HEAD:.sfdx/orgs/test-b3neo8cvhbki@example.com/sourcePathInfos.json
             "isMetadataFile": false,
             "size": 384,
             "modifiedTime": 1582078102687,
@@ -5277,6 +5537,68 @@
             "contentHash": "64c9c32625e323cda9011d983c7f2de6bd22b0a9",
             "isWorkspace": true,
             "isArtifactRoot": false
+=======
+            "size": 384,
+            "modifiedTime": 1580756631713,
+            "changeTime": 1580756631713,
+            "contentHash": "64c9c32625e323cda9011d983c7f2de6bd22b0a9",
+            "isMetadataFile": false,
+            "state": "u",
+            "isWorkspace": true,
+            "isArtifactRoot": false
+        }
+    ],
+    [
+        "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/MobileFormController.cls",
+        {
+            "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/MobileFormController.cls",
+            "isDirectory": false,
+            "size": 409,
+            "modifiedTime": 1580760358207,
+            "changeTime": 1580760358207,
+            "contentHash": "0b5f8222330894897db7b7dd8d61f7c834735886",
+            "isMetadataFile": false,
+            "state": "u"
+        }
+    ],
+    [
+        "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/MobileFormController.cls-meta.xml",
+        {
+            "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/MobileFormController.cls-meta.xml",
+            "isDirectory": false,
+            "size": 174,
+            "modifiedTime": 1580758820850,
+            "changeTime": 1580758820850,
+            "contentHash": "50701282159e2679109ad6da2dfbb354eca50ce0",
+            "isMetadataFile": true,
+            "state": "u"
+        }
+    ],
+    [
+        "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/MobileResponseController.cls",
+        {
+            "state": "u",
+            "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/MobileResponseController.cls",
+            "isDirectory": false,
+            "isMetadataFile": false,
+            "size": 1139,
+            "modifiedTime": 1581127931765,
+            "changeTime": 1581127931765,
+            "contentHash": "8f1e104bdded81e6a63ea644d9585d195d659733"
+        }
+    ],
+    [
+        "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/MobileResponseController.cls-meta.xml",
+        {
+            "sourcePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/classes/MobileResponseController.cls-meta.xml",
+            "isDirectory": false,
+            "size": 174,
+            "modifiedTime": 1581085112849,
+            "changeTime": 1581085112849,
+            "contentHash": "50701282159e2679109ad6da2dfbb354eca50ce0",
+            "isMetadataFile": true,
+            "state": "u"
+>>>>>>> de69cdcfdb9c19372cd65778115c8bdced2d4958:.sfdx/orgs/test-s5vwans743ty@example.com/sourcePathInfos.json
         }
     ]
 ]
