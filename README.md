@@ -65,7 +65,7 @@ sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias forms-external //clarity-forms-pkg
 
-sfdx force:alias:set forms-external=test-yk4t8kcrrb0c@example.com
+sfdx force:alias:set forms-external=test-xlcflt32qcav@example.com
 
 sfdx force:config:set defaultusername=forms-external
 
@@ -106,6 +106,10 @@ sfdx force:apex:class:create -n ConnectionFieldValidationTest -d force-app/main/
 sfdx force:apex:class:create -n MobileFormController -d force-app/main/default/classes
 
 sfdx force:apex:class:create -n MobileResponseController -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n MobileRecordController -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n MobileSyncController -d force-app/main/default/classes
 
 ## Tests
 
@@ -195,3 +199,22 @@ Clarity_Form_Question_Option__c
 Clarity_Form_Response__c
 Clarity_Form_Response_Connection__c
 Clarity_Form_Style__c
+
+
+MobileSyncController
+{
+    "responseWithAnswers": {
+      "New": [
+       "", 
+       "",
+       "",
+       "a0G3D000001GBdZUAW"
+      ],
+	  "New1": [
+       "", 
+       "",
+       "",
+       "a0G3D000001GBdZUAW"
+      ]
+    }
+}

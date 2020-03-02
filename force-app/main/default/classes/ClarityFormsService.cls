@@ -1,5 +1,96 @@
 public with sharing class ClarityFormsService {
 
+	public static Map<String, Map<String, sObject>> getMobileRecords() {
+
+		Map<String, Map<String, sObject>> records = new Map<String, Map<String, sObject>>(); 
+
+		List<Clarity_Form__c> forms = [SELECT Id FROM Clarity_Form__c WHERE Status__c = 'Published'];
+
+		List<Id> formIds = new List<Id>(); 
+
+		for (Clarity_Form__c form : forms) {
+			formIds.add(form.Id); 
+		}
+
+		List<Clarity_Form_Connection__c> formConnections = [SELECT Id, Clarity_Form__c, Salesforce_Object__c, New__c, 
+		(SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
+		FROM Clarity_Form_Connection__c WHERE Clarity_Form__c IN :formIds];
+
+
+		Map<String, Set<String>> objectFields = new Map<String, Set<String>>(); 
+
+		for(Clarity_Form_Connection__c formConnection : formConnections) {
+
+			for(Clarity_Form_Connection_Field__c field : formConnection.Clarity_Form_Connection_Fields__r) {
+							
+				if(objectFields.get(formConnection.Salesforce_Object__c) != null) {
+
+					Set<String> fields = objectFields.get(formConnection.Salesforce_Object__c); 
+					fields.add(field.Salesforce_Field__c);
+					objectFields.put(formConnection.Salesforce_Object__c, fields); 
+
+				} else {
+
+					Set<String> fields = new Set<String>();
+
+					if(formConnection.Salesforce_Object__c == 'Case') {
+						fields.add('Subject');
+					} else {
+						fields.add('Name');
+					}
+
+					fields.add('Id');
+					fields.add(field.Salesforce_Field__c);
+					
+					objectFields.put(formConnection.Salesforce_Object__c, fields); 
+
+				}
+            }
+			
+		}
+
+		Integer limitCount = 0;
+
+		for(String objectName : objectFields.keySet()) {
+
+			if(limitCount > 10) {
+				continue; 
+			}
+
+			List<String> sFields = new List<String>(); 
+
+			Set<String> fields = objectFields.get(objectName); 
+
+			String joinedFields = '';
+
+			for(String field : fields) {
+				sFields.add(field);
+			}
+
+			if(sFields.size() > 0) {
+				joinedFields = String.join(sFields, ', ');
+				joinedFields = joinedFields.removeEnd(',');
+			} 
+			System.debug('joinedFields: ' + joinedFields); 
+			String sQuery = 'SELECT ' + joinedFields + ' FROM ' + objectName + ' LIMIT 50';
+
+			List<sObject> results = Database.query(sQuery);
+
+			Map<String, sObject> sObjectRecords = new Map<String, sObject>(); 
+
+			for(SObject result : results) {
+				sObjectRecords.put(result.Id, result);
+			} 
+
+			records.put(objectName, sObjectRecords);
+
+			limitCount = limitCount + 1; 
+
+		}
+
+		return records;
+	}
+
 	public static Map<String, Map<String, List<sObject>>> getMobileForms() {
 
         Map<String, Map<String, List<sObject>>> formDetails = new Map<String, Map<String, List<sObject>>>(); 
@@ -9,6 +100,10 @@ public with sharing class ClarityFormsService {
         **/
         List<Clarity_Form__c> forms = [SELECT Id, Name, Limit__c, End_Date__c, Clarity_Form_Style__r.Multi_Page__c, 
             Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c FROM Clarity_Form__c WHERE Status__c = 'Published'];
+		
+		if(forms.size() == 0) {
+			return formDetails; 
+		}
 
         List<Id> formIds = new List<Id>(); 
 
@@ -47,7 +142,7 @@ public with sharing class ClarityFormsService {
         Map<Id, List<Clarity_Form_Connection_Field__c>> prefillFieldsByForms = new Map<Id, List<Clarity_Form_Connection_Field__c>>();
         Map<Id, List<Clarity_Form_Connection_Field__c>> mappingFieldsByForms = new Map<Id, List<Clarity_Form_Connection_Field__c>>();
 
-        List<Clarity_Form_Connection__c> formConnections = [SELECT Id, Salesforce_Object__c, New__c, 
+        List<Clarity_Form_Connection__c> formConnections = [SELECT Id, Clarity_Form__c, Salesforce_Object__c, New__c, 
             (SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
             FROM Clarity_Form_Connection__c WHERE Clarity_Form__c IN :formIds AND New__c = false];
 
@@ -146,6 +241,10 @@ public with sharing class ClarityFormsService {
 
 		Map<String, Map<String, List<sObject>>> forms = getMobileForms();
 
+		if(forms.size() == 0) {
+			return responseDetails;
+		}
+
 		for(Clarity_Form_Response__c response : responses) {
 			
 			Map<String, List<sObject>> formDetail = forms.get(response.Clarity_Form__c);
@@ -158,7 +257,7 @@ public with sharing class ClarityFormsService {
 			responseDetails.put(response.Id, formDetail);
 
 		}
-		System.debug('responseDetails: ' + responseDetails); 
+
 		return responseDetails; 
 		
 	}
@@ -478,7 +577,25 @@ public with sharing class ClarityFormsService {
 
         return create(form, response, null); 
 
-    } 
+	} 
+	
+	public static String createMobile(String formId) {
+
+		Clarity_Form_Response__c response = new Clarity_Form_Response__c(
+			Status__c       = 'New', 
+			Clarity_Form__c = formId,
+			OwnerId__c      = UserInfo.getUserId()
+		);
+
+        Database.SaveResult result = Database.insert(response);
+
+        if(!result.isSuccess()) {
+            System.debug('error creating new repsonse');
+		}
+		
+		return response.Id;
+		
+	}
 
     public static  Map<String, List<sObject>> create(String formName, String sConnections) {
 
@@ -581,7 +698,7 @@ public with sharing class ClarityFormsService {
 
             if(result.isSuccess()) {
                 Clarity_Form_Response__c response = responses.get(result.getId());
-                success.add(response.Name);
+                success.add(response.Status__c);
             }
 
         }

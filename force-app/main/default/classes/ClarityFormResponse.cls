@@ -16,32 +16,36 @@ global with sharing class ClarityFormResponse {
         
         List<Clarity_Form_Connection__c> requiredConnections = new List<Clarity_Form_Connection__c>(); 
 
-        Clarity_Form_Response__c response = [SELECT Id, Clarity_Form__c FROM Clarity_Form_Response__c WHERE Id =: responseId LIMIT 1];
+		List<Clarity_Form_Response__c> responses = [SELECT Id, Clarity_Form__c FROM Clarity_Form_Response__c WHERE Id =: responseId LIMIT 1];
+		
+		if(responses.size() > 0) {
 
-        Map<Id, Clarity_Form_Connection__c> connections = new Map<Id, Clarity_Form_Connection__c>([SELECT Id, Salesforce_Object__c, New__c FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: response.Clarity_Form__c AND New__c = false]);
+			Map<Id, Clarity_Form_Connection__c> connections = new Map<Id, Clarity_Form_Connection__c>([SELECT Id, Salesforce_Object__c, New__c FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: responses[0].Clarity_Form__c AND New__c = false]);
 
-        if(connections.size() > 0) {
+			if(connections.size() > 0) {
 
-            List<Clarity_Form_Response_Connection__c> responseConnections = [SELECT Id, Clarity_Form_Connection__c 
-                FROM Clarity_Form_Response_Connection__c WHERE Clarity_Form_Response__c =: responseId AND Clarity_Form_Connection__c IN :connections.keySet()];
+				List<Clarity_Form_Response_Connection__c> responseConnections = [SELECT Id, Clarity_Form_Connection__c 
+					FROM Clarity_Form_Response_Connection__c WHERE Clarity_Form_Response__c =: responseId AND Clarity_Form_Connection__c IN :connections.keySet()];
 
-            if(responseConnections.size() == 0) {
-                return connections.values();
-            } 
+				if(responseConnections.size() == 0) {
+					return connections.values();
+				} 
 
-            Set<Id> responseConnectedIds = new Set<Id>(); 
+				Set<Id> responseConnectedIds = new Set<Id>(); 
 
-            for(Clarity_Form_Response_Connection__c rc : responseConnections){
-                responseConnectedIds.add(rc.Clarity_Form_Connection__c); 
-            }
+				for(Clarity_Form_Response_Connection__c rc : responseConnections){
+					responseConnectedIds.add(rc.Clarity_Form_Connection__c); 
+				}
 
-			for(Clarity_Form_Connection__c connection : connections.values()) {
-                if(!responseConnectedIds.contains(connection.Id)) {
-                    requiredConnections.add(connection); 
-                }
-            }
+				for(Clarity_Form_Connection__c connection : connections.values()) {
+					if(!responseConnectedIds.contains(connection.Id)) {
+						requiredConnections.add(connection); 
+					}
+				}
 
-        }
+			}
+
+		}
 
         return requiredConnections;
     }

@@ -1,7 +1,3 @@
-// getResponses(Filter || Status || Null / Page) => Map (Responses with Questions+)
-
-// submit(Response) => Response object with updated status
-
 @RestResource(urlMapping='/MobileResponseController/*')
 global with sharing class MobileResponseController {
 	
@@ -25,9 +21,13 @@ global with sharing class MobileResponseController {
         String answers = answerValues[1];
 		String formResponseId = answerValues[2]; 
 
-		List<Clarity_Form_Answer__c> savedAnswerImages = ClarityFormsService.upload(answerImages); 
+		if(answerImages != '') {
+			List<Clarity_Form_Answer__c> savedAnswerImages = ClarityFormsService.upload(answerImages); 
+		}
 
-		List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(answers); 
+		if(answers != '') {
+			List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(answers); 
+		}
 		
         List<String> success = ClarityFormsService.updateStatus(new List<String>{ formResponseId }, 'Submitted');
 
