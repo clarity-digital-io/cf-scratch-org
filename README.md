@@ -63,7 +63,7 @@ sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias CF-38 -d 30 //clarity-forms-pkg
 
-sfdx force:alias:set CF-38=test-j5uvn1hxcigk@example.com
+sfdx force:alias:set CF-38=test-rkoxzz1zrsvb@example.com
 
 sfdx force:config:set defaultusername=CF-38
 
@@ -75,7 +75,7 @@ sfdx force:user:password:generate --targetusername CF-38
 
 sfdx force:user:display --targetusername CF-38
 
-sfdx force:org:delete -u test-iwaemnwejmjb@example.com
+sfdx force:org:delete -u test-kcokhvynzqxr@example.com
 
 ## commonly used commands
 
