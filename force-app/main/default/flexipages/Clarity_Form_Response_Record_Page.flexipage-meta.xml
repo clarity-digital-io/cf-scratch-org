@@ -95,6 +95,9 @@
             </componentInstanceProperties>
             <componentName>flexipage:accordion</componentName>
         </componentInstances>
+        <componentInstances>
+            <componentName>force:detailPanel</componentName>
+        </componentInstances>
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>

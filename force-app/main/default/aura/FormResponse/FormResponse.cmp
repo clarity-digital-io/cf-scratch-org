@@ -1,4 +1,4 @@
-<aura:component access="global" implements="lightning:actionOverride,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
+<aura:component controller="FormController" access="global" implements="lightning:actionOverride,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
 
     <aura:registerEvent name="formResponseEvent" type="c:FormResponseEvent"/>
 
@@ -19,6 +19,8 @@
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
 
+	<aura:attribute name="startTime" type="String" />
+
     <aura:attribute name="formId" type="String" default="default" />
     <aura:attribute name="preview" type="String" default="false" />
     <aura:attribute name="loading" type="Boolean" default="true" />
@@ -35,5 +37,6 @@
     <lightning:navigation aura:id="navService"/>
     <lightning:workspaceAPI aura:id="workspace" />
     <lightning:overlayLibrary aura:id="overlayLib"/>
+	<lightning:empApi aura:id="empApi"/>
 
 </aura:component>	

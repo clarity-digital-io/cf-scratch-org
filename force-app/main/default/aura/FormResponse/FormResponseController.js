@@ -1,6 +1,10 @@
 ({
     doInit: function(cmp) {
 
+				let startTime = new Date().getTime();
+
+				cmp.set('v.startTime', startTime);
+
         let id = cmp.get('v.sObjectId');
 
         let type = cmp.get('v.sObjectType');
@@ -62,15 +66,17 @@
 
 		if(name == 'Cancel' || name == 'Close') {
 
-            cmp.find("overlayLib").notifyClose();
+			helper.update(cmp);
+			
+			cmp.find("overlayLib").notifyClose();
 
-            var formEvent = $A.get("e.c:formResponseEvent");
+			var formEvent = $A.get("e.c:formResponseEvent");
 
-            formEvent.setParams({
-                formId: cmp.get('v.formId')
-            })
+			formEvent.setParams({
+					formId: cmp.get('v.formId')
+			})
 
-            formEvent.fire();
+			formEvent.fire();
 
 		} 
 

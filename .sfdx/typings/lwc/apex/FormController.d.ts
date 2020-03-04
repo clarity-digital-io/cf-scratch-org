@@ -1,3 +1,6 @@
+declare module "@salesforce/apex/forms.FormController.updateResponse" {
+  export default function updateResponse(param: {responseId: any, totalTime: any}): Promise<any>;
+}
 declare module "@salesforce/apex/forms.FormController.getForm" {
   export default function getForm(param: {recordId: any}): Promise<any>;
 }
