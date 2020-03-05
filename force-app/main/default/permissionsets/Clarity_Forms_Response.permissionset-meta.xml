@@ -284,6 +284,11 @@
         <field>Clarity_Form_Response__c.Submitted_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form_Response__c.Time__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Clarity Forms Response</label>
     <objectPermissions>

@@ -7,3 +7,5 @@ AppSwitcher.appMenu
 
 **/jsconfig.json
 **/.eslintrc.json
+Account.CustomApplication
+CustomApplication/Account

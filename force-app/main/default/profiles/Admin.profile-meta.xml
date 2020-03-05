@@ -419,6 +419,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Clarity_Form_Response__c.Display_Time__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Clarity_Form_Response__c.OwnerId__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -430,6 +435,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Clarity_Form_Response__c.Submitted_Date__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form_Response__c.Time__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -568,13 +578,6 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Response_Connection__c-Clarity Form Response Connection Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Clarity_Form_Response__c-Clarity Form Response Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Clarity_Form_Response__c-Clarity Form Response Layout</layout>
-        <recordType>Clarity_Form_Response__c.Preview</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Style__c-Clarity Form Style Layout</layout>
@@ -842,6 +845,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ConnectOrgToEnvironmentHub</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ConsentApiUpdate</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>

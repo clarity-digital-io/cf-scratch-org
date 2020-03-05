@@ -10,6 +10,23 @@ public class FormControllerTest {
 
         Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
 
+	}
+
+    @isTest
+    public static void shouldUpdateResponse() {
+
+        Clarity_Form_Response__c response = [SELECT Id FROM Clarity_Form_Response__c Limit 1];
+
+		Test.startTest();
+
+			FormController.updateResponse(response.Id, 12345);
+
+		Test.stopTest();
+
+		Clarity_Form_Response__c updatedResponse = [SELECT Id, Time__c FROM Clarity_Form_Response__c Limit 1];
+
+		System.assertEquals(12345, updatedResponse.Time__c);
+		
     }
 
     @isTest
