@@ -61,19 +61,19 @@ sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-de
 
 sfdx force:org:list --all
 
-sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias forms //clarity-forms-pkg
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias CF-61 //clarity-forms-pkg
 
-sfdx force:alias:set forms=test-j5uvn1hxcigk@example.com
+sfdx force:alias:set CF-61=test-9l7w7wibcjet@example.com
 
-sfdx force:config:set defaultusername=forms
+sfdx force:config:set defaultusername=CF-61
 
 sfdx force:source:push -f
 
 sfdx force:org:open -u PkgOrg
 
-sfdx force:user:password:generate --targetusername forms
+sfdx force:user:password:generate --targetusername CF-61
 
-sfdx force:user:display --targetusername forms
+sfdx force:user:display --targetusername CF-61
 
 sfdx force:org:delete -u test-iwaemnwejmjb@example.com
 
