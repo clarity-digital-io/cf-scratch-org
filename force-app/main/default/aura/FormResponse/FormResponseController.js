@@ -59,14 +59,16 @@
         } 
 
     }, 
-    handleMessage : function(cmp, event, helper) {
+  handleMessage : function(cmp, event, helper) {
 		let message = event.getParams();
 
 		let name = message.payload.name; 
 
+		let recordId = message.payload.recordId; 
+
 		if(name == 'Cancel' || name == 'Close') {
 
-			helper.update(cmp);
+			helper.update(cmp, recordId);
 			
 			cmp.find("overlayLib").notifyClose();
 

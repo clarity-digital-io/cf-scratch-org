@@ -1,5 +1,5 @@
 ({
-    update: function(cmp) {
+    update: function(cmp, recordId) {
 
 			let endTime = new Date().getTime();
 
@@ -10,7 +10,7 @@
 			let action = cmp.get("c.updateResponse");
 
 			action.setParams({
-					responseId : cmp.get("v.recordId"),
+					responseId : cmp.get("v.recordId") || recordId,
 					totalTime : actualTime
 			})
 

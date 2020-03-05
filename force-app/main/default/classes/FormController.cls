@@ -14,15 +14,6 @@ public with sharing class FormController {
 				response.Time__c = totalTime; 
 			}
 
-			if(response.Time__c != null && response.Time__c != 0) {
-				Decimal secs = response.Time__c / 60;
-				Decimal mins = secs / 60;
-				Decimal remainingSecs = secs - (mins * 60);
-				String sTotalTime = String.valueOf(mins) + ':' +  String.valueOf(remainingSecs) + '';
-
-				response.Display_Time__c = sTotalTime;
-			}
-
 			Database.SaveResult result = Database.update(response, true); 
 
 			if(!result.isSuccess()) {
