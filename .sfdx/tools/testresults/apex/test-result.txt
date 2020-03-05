@@ -3,13 +3,13 @@ FORMAT  FILE
 ──────  ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 txt     /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result.txt
 txt     /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-run-id.txt
-junit   /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7073D00000ktZJu-junit.xml
-json    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7073D00000ktZJu.json
+junit   /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7075600000wSv4A-junit.xml
+json    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7075600000wSv4A.json
 
 === Test Results
-TEST NAME                                                    OUTCOME  MESSAGE  RUNTIME (MS)
-───────────────────────────────────────────────────────────  ───────  ───────  ────────────
-ClarityFormBuilderTest.shouldSaveQuestionWithPictureOptions  Pass              960
+TEST NAME                                OUTCOME  MESSAGE  RUNTIME (MS)
+───────────────────────────────────────  ───────  ───────  ────────────
+FormControllerTest.shouldUpdateResponse  Pass              491
 
 === Test Summary
 NAME                 VALUE
@@ -21,13 +21,13 @@ Failing              0
 Skipped              0
 Pass Rate            100%
 Fail Rate            0%
-Test Start Time      Feb 18, 2020 7:55 PM
-Test Execution Time  960 ms
-Test Total Time      960 ms
-Command Time         5875 ms
-Hostname             https://customer-page-2773-dev-ed.cs70.my.salesforce.com
-Org Id               00D3D000000Aw0MUAS
-Username             test-zvk734n6fchq@example.com
-Test Run Id          7073D00000ktZJu
-User Id              0053D0000030KCGQA2
+Test Start Time      Mar 5, 2020 12:49 PM
+Test Execution Time  491 ms
+Test Total Time      491 ms
+Command Time         4602 ms
+Hostname             https://customer-java-6747-dev-ed.cs42.my.salesforce.com
+Org Id               00D56000000387kEAA
+Username             test-it6fccrms7lf@example.com
+Test Run Id          7075600000wSv4A
+User Id              00556000004TMt8AAG
 

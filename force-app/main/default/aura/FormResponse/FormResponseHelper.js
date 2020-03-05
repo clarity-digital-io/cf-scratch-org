@@ -10,7 +10,7 @@
 			let action = cmp.get("c.updateResponse");
 
 			action.setParams({
-					responseId : cmp.get("v.recordId") || recordId,
+					responseId : recordId != null ? recordId : cmp.get("v.recordId"),
 					totalTime : actualTime
 			})
 
@@ -22,11 +22,11 @@
 
 					let errors = response.getError();
 
-									cmp.find('notifLib').showToast({
-											"variant": "error",
-											"title"  : "Error!",
-											"message": response.getError()
-									});
+					cmp.find('notifLib').showToast({
+							"variant": "error",
+							"title"  : "Error!",
+							"message": response.getError()
+					});
 
 				}
 
