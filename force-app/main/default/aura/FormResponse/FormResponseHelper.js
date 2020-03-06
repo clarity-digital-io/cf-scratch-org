@@ -25,7 +25,7 @@
 					cmp.find('notifLib').showToast({
 							"variant": "error",
 							"title"  : "Error!",
-							"message": response.getError()
+							"message": errors
 					});
 
 				}

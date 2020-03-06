@@ -25,27 +25,7 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static Clarity_Form__c startup(String formId) {
         
-        Clarity_Form__c form = null;
-
-        if(formId == '') {
-
-            Clarity_Form_Style__c styling = new Clarity_Form_Style__c(Name = 'Clarity Form Styling', Background_Color__c = '#FFF', Color__c = '#333');
-
-            Database.SaveResult stylingResult = Database.insert(styling); 
-
-            if(!stylingResult.isSuccess()) System.debug('throw error'); // throw error
-
-            Clarity_Form__c newForm = new Clarity_Form__c(Label__c = 'Clarity Form', Clarity_Form_Style__c = styling.Id); 
-            
-            Database.SaveResult result = Database.insert(newForm); 
-
-            if(!result.isSuccess()) System.debug('throw error'); // throw error
-
-            formId = newForm.Id;
-
-        } 
-        
-        form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__r.Name, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
+        Clarity_Form__c form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__r.Name, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
             Clarity_Form_Assignment__c, Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
             FROM Clarity_Form__c WHERE Id =: formId];
 

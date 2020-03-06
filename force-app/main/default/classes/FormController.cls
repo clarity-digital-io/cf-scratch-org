@@ -1,6 +1,29 @@
 public with sharing class FormController {
 
 	@AuraEnabled
+	public static Id create(){
+
+		Clarity_Form__c form = null;
+
+		Clarity_Form_Style__c styling = new Clarity_Form_Style__c(Name = 'Clarity Form Styling', Background_Color__c = '#FFF', Color__c = '#333');
+
+		Database.SaveResult stylingResult = Database.insert(styling); 
+
+		if(!stylingResult.isSuccess()) System.debug('throw error'); // throw error
+
+		Clarity_Form__c newForm = new Clarity_Form__c(Label__c = 'Clarity Form', Clarity_Form_Style__c = styling.Id); 
+		
+		Database.SaveResult result = Database.insert(newForm); 
+
+		if(!result.isSuccess()) {
+			throw new AuraHandledException('Unable to create Form');
+		}
+
+		return newForm.Id;
+		
+	}
+
+	@AuraEnabled
 	public static void updateResponse(String responseId, Integer totalTime){
 		
 		List<Clarity_Form_Response__c> responses = [SELECT Id, Time__c, Name FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];

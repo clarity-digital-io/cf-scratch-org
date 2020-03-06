@@ -1,8 +1,14 @@
 ({
-	doInit: function(cmp) {
+	doInit: function(cmp, event, helper) {
 
 		if(cmp.get('v.recordId') == '') {
-            cmp.set('v.recordId', cmp.get("v.pageReference").state.c__recordId);
+			
+			if( cmp.get("v.pageReference").state.c__recordId != null ) {
+				cmp.set('v.recordId', cmp.get("v.pageReference").state.c__recordId);
+			} else {
+				helper.create(cmp); 
+			}
+
 		}
 
 		let workspaceAPI = cmp.find("workspace");
