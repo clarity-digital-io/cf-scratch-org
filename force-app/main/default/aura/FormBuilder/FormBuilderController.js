@@ -53,9 +53,8 @@
 				if (status === "SUCCESS") {
 	
 					let formResponse = components[0];
-	
 					cmp.find('overlayLib').showCustomModal({
-						header: cmp.get("v.formName"),
+						header: 'Form Preview',
 						cssClass: "clarityModal",
 						body: formResponse, 
 						showCloseButton: true
