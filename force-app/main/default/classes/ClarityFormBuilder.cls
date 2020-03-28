@@ -621,9 +621,17 @@ global with sharing class ClarityFormBuilder {
 
         }
 
-        List<Clarity_Form_Connection__c> parsedConnections = (List<Clarity_Form_Connection__c>)JSON.deserialize(sConnections, List<Clarity_Form_Connection__c>.class);
+		List<Clarity_Form_Connection__c> parsedConnections = (List<Clarity_Form_Connection__c>)JSON.deserialize(sConnections, List<Clarity_Form_Connection__c>.class);
+		
+		List<Clarity_Form_Connection__c> validatedConnections = new List<Clarity_Form_Connection__c>();
 
-        List<Database.UpsertResult> results = Database.upsert(parsedConnections, true); 
+		for(Clarity_Form_Connection__c parsedConnection : parsedConnections) {
+			if(parsedConnection.Salesforce_Object__c != '') {
+				validatedConnections.add(parsedConnection);
+			}
+		}
+
+        List<Database.UpsertResult> results = Database.upsert(validatedConnections, true); 
 
         for(Database.UpsertResult result : results) {
 

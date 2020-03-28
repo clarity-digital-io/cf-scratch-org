@@ -15,7 +15,4 @@
 			<lightning:container src="{!$Resource.ClarityFormsBuilder + '/index.html?recordId=' + v.recordId}" onmessage="{!c.handleMessage}" />
         </aura:set>
     </aura:if>  
-
-	<lightning:navigation aura:id="navService"/>
-
 </aura:component>

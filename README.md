@@ -61,9 +61,9 @@ sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-de
 
 sfdx force:org:list --all
 
-sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias CF-73 //clarity-forms-pkg
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias CF-73 --durationdays 30 //clarity-forms-pkg
 
-sfdx force:alias:set CF-73=test-ojqf7xq1tsj1@example.com
+sfdx force:alias:set CF-73=test-ex5axiv4kztu@example.com
 
 sfdx force:config:set defaultusername=CF-73
 
@@ -75,11 +75,13 @@ sfdx force:user:password:generate --targetusername CF-73
 
 sfdx force:user:display --targetusername CF-73
 
-sfdx force:org:delete -u test-iwaemnwejmjb@example.com
+sfdx force:org:delete -u test-xlcflt32qcav@example.com
 
 ## commonly used commands
 
 sfdx force:apex:trigger:create -n ClarityFormResponseTrigger -d force-app/main/default/triggers
+
+sfdx force:lightning:app:create -n FormBuilderApp -d force-app/main/default/aura
 
 sfdx force:lightning:component:create --type aura -n FormResponseView -d force-app/main/default/aura
 

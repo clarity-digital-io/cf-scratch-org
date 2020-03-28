@@ -493,6 +493,11 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form__c.Is_Flow__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Clarity_Form__c.Label__c</field>
         <readable>false</readable>
@@ -578,6 +583,13 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Response_Connection__c-Clarity Form Response Connection Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Clarity_Form_Response__c-Clarity Form Response Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Clarity_Form_Response__c-Clarity Form Response Layout</layout>
+        <recordType>Clarity_Form_Response__c.Preview</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Clarity_Form_Style__c-Clarity Form Style Layout</layout>

@@ -3,7 +3,7 @@
 
 		if(cmp.get('v.recordId') == '') {
 			
-			if( cmp.get("v.pageReference").state.c__recordId != null ) {
+			if( cmp.get("v.pageReference") != null && cmp.get("v.pageReference").state.c__recordId != null ) {
 				cmp.set('v.recordId', cmp.get("v.pageReference").state.c__recordId);
 			} else {
 				helper.create(cmp); 
@@ -64,6 +64,30 @@
 			});
 
 		} 
+
+		var navLink = cmp.find("navService");
+
+		if(name == 'Back') {
+			var pageRef = {
+					type: 'standard__recordPage',
+					attributes: {
+							actionName: 'view',
+							objectApiName: 'ns__Clarity_Form__c',
+							recordId : formId // change record id. 
+					},
+			};
+			navLink.navigate(pageRef, true);
+		}
+
+		if(name == 'Help') {
+			var pageRef =	{    
+					"type": "standard__webPage",
+					"attributes": {
+							"url": "https://claritydigital.io"
+					}
+			}
+			navLink.navigate(pageRef, true);
+		}
 
 	}
 })

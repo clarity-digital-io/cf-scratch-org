@@ -122,13 +122,13 @@ public with sharing class FormController {
             FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
 
         List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c, 
-            (SELECT Id, Label__c, Choice_Image__c FROM Clarity_Form_Question_Options__r) FROM Clarity_Form_Question__c];
+            (SELECT Id, Label__c, Choice_Image__c FROM Clarity_Form_Question_Options__r) FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: recordId];
 
         Map<Id, List<Clarity_Form_Question_Option__c>> questionOptions = new Map<Id, List<Clarity_Form_Question_Option__c>>();
 
         for(Clarity_Form_Question__c question : questions) {
 
-            if(question.Type__c == 'Dropdown' || question.Type__c == 'PictureChoice') {
+            if(question.Type__c == 'Checkbox' || question.Type__c == 'Dropdown' || question.Type__c == 'PictureChoice') {
                 questionOptions.put(question.Id, question.Clarity_Form_Question_Options__r);
             }
 
@@ -229,17 +229,26 @@ public with sharing class FormController {
     public static String buildAnswer(Clarity_Form_Answer__c answer, Map<Id, List<Clarity_Form_Question_Option__c>> questionOptions) {
 
         switch on answer.Clarity_Form_Question__r.Type__c {
-            when 'Dropdown' {
+            when 'PictureChoice','Checkbox','Dropdown' {
 
                 String value = '';
 
-                List<Clarity_Form_Question_Option__c> options = questionOptions.get(answer.Clarity_Form_Question__c);
-                                
-                for(Clarity_Form_Question_Option__c option : options) {
+				List<Clarity_Form_Question_Option__c> options = new List<Clarity_Form_Question_Option__c>();
+				
+				if( questionOptions.get(answer.Clarity_Form_Question__c) != null ) {
+					options = questionOptions.get(answer.Clarity_Form_Question__c);
+				}
+				
+				List<String> answers = answer.Answer__c != null ? answer.Answer__c.split(',') : new List<String>();
 
-                    if(option.Id == answer.Answer__c) {
-                        value = option.Label__c; 
-                    }
+                for(Clarity_Form_Question_Option__c option : options) {
+					System.debug('answer: ' + answer);
+
+					for(String splitAnswer : answers) {
+						if(option.Id == splitAnswer) {
+							value = value + option.Label__c + ' '; 
+						}
+					}
 
                 }
 
@@ -254,28 +263,6 @@ public with sharing class FormController {
             }
             when 'Attachments' {
                 return answer.ContentVersion__c;
-			}
-			when 'PictureChoice' {
-				
-				String value = '';
-
-                List<Clarity_Form_Question_Option__c> options = questionOptions.get(answer.Clarity_Form_Question__c);
-                                
-                for(Clarity_Form_Question_Option__c option : options) {
-
-                    if(option.Id == answer.Answer__c) {
-                        //value = option.Choice_Image__c; 
-                        value = option.Label__c; 
-					}
-
-				}
-				
-				return value;
-				
-				// List<String> pictures = new List<String>{ '/sfc/servlet.shepherd/version/download/' + value };
-
-				// return JSON.serialize(pictures);
-				
 			}
             when else {
                 return answer.Answer__c;
