@@ -116,7 +116,7 @@ public with sharing class ClarityFormsService {
             }
         }
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, 
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Logic__c,
             (SELECT Id, Label__c, Active_Flow__c, Choice_Image__c, Order__c FROM Clarity_Form_Question_Options__r), 
             (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
             (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__r),
@@ -190,7 +190,7 @@ public with sharing class ClarityFormsService {
 
 				Map<String, Schema.SObjectField> sObjectFields = convertType.getDescribe().fields.getMap();
 
-				Boolean access = sObjectFields.get(field).getDescribe().isCreateable();
+				Boolean access = sObjectFields.get(field).getDescribe().isAccessible();
 
                 if(recordGroupFields.get(sObjectName) != null && access) {
 
@@ -360,12 +360,13 @@ public with sharing class ClarityFormsService {
             }
         }
         
-        List<Clarity_Form_Question__c> questions = [SELECT Id, 
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Logic__c,
             (SELECT Id, Label__c, Active_Flow__c, Choice_Image__c, Order__c FROM Clarity_Form_Question_Options__r), 
-            (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
+			(SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
+            (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__r),
             Salesforce_Object__c, Title__c, Order__c, Required__c, Lookup__c, Salesforce_Field__c, 
             Record_Group__c, Record_Group__r.Salesforce_Object__c, Max_Length__c, 
-            Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
+			Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: form.Id];
 
         List<Clarity_Form_Answer__c> answers = [SELECT Id, Answer__c, Date_Answer__c, ContentVersion__c, 
             ContentDocument__c, Clarity_Form_Response__c, Clarity_Form_Question__c, Clarity_Form_Question__r.Type__c  

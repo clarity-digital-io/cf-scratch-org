@@ -82,6 +82,7 @@ sfdx force:org:delete -u test-xlcflt32qcav@example.com
 sfdx force:apex:trigger:create -n ClarityFormResponseTrigger -d force-app/main/default/triggers
 
 sfdx force:lightning:app:create -n FormBuilderApp -d force-app/main/default/aura
+sfdx force:lightning:app:create -n FormResponseApp -d force-app/main/default/aura
 
 sfdx force:lightning:component:create --type aura -n FormResponseView -d force-app/main/default/aura
 

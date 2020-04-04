@@ -203,7 +203,7 @@ global with sharing class ClarityFormResponse {
 
 				if(record.type == 'Date') {
 
-					Date value = Date.parse(record.value); 
+					Date value = Date.valueOf(record.value);
 					genericObject.put(record.field, value);
 
 				} else {

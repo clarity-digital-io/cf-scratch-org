@@ -24,67 +24,10 @@
 
     },
     edit: function(cmp, event, helper) {
-
-        var workspaceAPI = cmp.find("workspace");
-
-        workspaceAPI.openTab({
-            pageReference: {
-                type: "standard__component",
-                attributes: {
-                    componentName: "forms__FormBuilder"
-                },
-                state: {
-                    c__recordId: cmp.get("v.recordId"),
-                }
-            },
-            focus: true
-        }).then(function(response) {
-            workspaceAPI.getTabInfo({
-                tabId: response
-        }).then(function(tabInfo) {
-
-        })
-        }).catch(function(error) {
-
-        });
+				
+				window.open ('/forms/FormBuilderApp.app?recordId=' + cmp.get('v.recordId'),'_self',false)
 
     },
-    // clone: function(cmp, event, helper) {
-
-    //     let action = cmp.get("c.cloneForm");
-
-    //     action.setParams({
-    //         recordId: cmp.get("v.recordId")
-    //     });
-
-	// 	action.setCallback(this, function (response) {
-
-    //         let state = response.getState();
-        
-    //         if (state === "SUCCESS") {
-            
-    //             var formId = response.getReturnValue();
-
-    //             let navLink = cmp.find("navService");
-
-    //             let pageRef = {
-    //                 type: "standard__recordPage",
-    //                 attributes: {
-    //                     actionName: 'view', 
-    //                     objectApiName: 'Clarity_Form__c', 
-    //                     recordId: formId   
-    //                 }
-    //             }
-        
-    //             navLink.navigate(pageRef, true);
-
-    //         } 
-            
-    //     }); 
-
-    //     $A.enqueueAction(action);
-
-    // }, 
     delete: function(cmp, event, helper) {
 
         let action = cmp.get("c.deleteForm");
