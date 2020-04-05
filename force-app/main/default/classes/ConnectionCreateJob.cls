@@ -55,6 +55,8 @@ public class ConnectionCreateJob implements Queueable {
 
             for(Clarity_Form_Connection_Field__c field : fields) {
 
+				if(field.Salesforce_Field__c == null) continue;
+
                 String dirtyAnswer;
 
                 if(field.Clarity_Form_Question__c != null) {

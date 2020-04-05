@@ -8,7 +8,7 @@ declare module "@salesforce/apex/forms.FormController.getForm" {
   export default function getForm(param: {recordId: any}): Promise<any>;
 }
 declare module "@salesforce/apex/forms.FormController.getFormResponses" {
-  export default function getFormResponses(param: {formId: any, name: any}): Promise<any>;
+  export default function getFormResponses(param: {formId: any, name: any, recordId: any, sObjectName: any}): Promise<any>;
 }
 declare module "@salesforce/apex/forms.FormController.deleteFormResponse" {
   export default function deleteFormResponse(param: {responseId: any}): Promise<any>;

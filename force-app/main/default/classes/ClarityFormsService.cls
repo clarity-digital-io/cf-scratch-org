@@ -32,8 +32,10 @@ public with sharing class ClarityFormsService {
 
             if(sFields.size() > 0) {
                 joinedFields = String.join(sFields, ', ');
-                joinedFields = joinedFields.removeEnd(',');
-                joinedFields = ', ' + joinedFields;
+				joinedFields = joinedFields.removeEnd(',');
+				if(joinedFields != null && joinedFields != '') {
+					joinedFields = ', ' + joinedFields;
+				}
             } 
 
             String record = responseConnection.Record__c;
@@ -132,33 +134,17 @@ public with sharing class ClarityFormsService {
         formDetails.put('Form', new List<sObject>{ form });
         formDetails.put('FormResponse', new List<sObject>{ response });
 
-        if(sConnections != null) {
-
-            List<Clarity_Form_Response_Connection__c> responseConnections = submitConnections(response.Id, sConnections);
-            List<sObject> records = new  List<sObject>(); 
-
-            if(responseConnections.size() > 0) {
-                records = connectionRecords(responseConnections, formConnections);            
-            }
-
-            formDetails.put('Connections', responseConnections);
-            formDetails.put('ConnectedRecords', records);
-
-        } else {
-
-            List<sObject> records = new  List<sObject>(); 
+		List<sObject> records = new  List<sObject>(); 
             
-            List<Clarity_Form_Response_Connection__c> responseConnections = [SELECT Id, Record__c, Clarity_Form_Response__c, 
-                Clarity_Form_Connection__c FROM Clarity_Form_Response_Connection__c];
-            
-            if(responseConnections.size() > 0) {
-                records = connectionRecords(responseConnections, formConnections);            
-            }
- 
-            formDetails.put('Connections', responseConnections);
-            formDetails.put('ConnectedRecords', records);
+		List<Clarity_Form_Response_Connection__c> responseConnections = [SELECT Id, Record__c, Clarity_Form_Response__c, 
+			Clarity_Form_Connection__c FROM Clarity_Form_Response_Connection__c WHERE Clarity_Form_Response__c =: responseId];
+		
+		if(responseConnections.size() > 0) {
+			records = connectionRecords(responseConnections, formConnections);            
+		}
 
-        }
+		formDetails.put('Connections', responseConnections);
+		formDetails.put('ConnectedRecords', records);
         
         formDetails.put('Mapping', mappingFields);
         formDetails.put('Prefills', prefillFields);
@@ -329,7 +315,20 @@ public with sharing class ClarityFormsService {
             OwnerId__c      = UserInfo.getUserId()
         );
 
-        Database.SaveResult result = Database.insert(response);
+		List<Map<String, String>> parsedConnections = (List<Map<String, String>>)JSON.deserialize(sConnections, List<Map<String, String>>.class);
+
+		if(parsedConnections.size() != 0) {
+			for(Map<String, String> connection : parsedConnections) {
+				String fieldName = connection.get('sObject');
+				String recordId = connection.get('key');
+				Boolean fieldCheck = SObjectType.Clarity_Form_Response__c.fields.getMap().containsKey('forms__connection_' + fieldName.toLowerCase() + '__c');
+				if(fieldCheck) {
+					response.put('forms__Connection_' + fieldName + '__c', recordId);
+				}
+			}
+		}
+
+		Database.SaveResult result = Database.insert(response);
 
         if(!result.isSuccess()) {
             System.debug('error creating new repsonse');

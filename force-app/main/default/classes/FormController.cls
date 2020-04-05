@@ -56,10 +56,13 @@ public with sharing class FormController {
     }
 
     @AuraEnabled
-    public static List<Clarity_Form_Response__c> getFormResponses(String formId, String name){
+    public static List<Clarity_Form_Response__c> getFormResponses(String formId, String name, String recordId, String sObjectName){
 
-        List<Clarity_Form_Response__c> responses = [SELECT Id, Name, Status__c, Completion__c, CreatedDate, Submitted_Date__c 
-            FROM Clarity_Form_Response__c WHERE (Clarity_Form__c =: formId OR Clarity_Form__r.Name =: name) AND Status__c != 'Preview'];
+		List<Clarity_Form_Response__c> responses = new List<Clarity_Form_Response__c>();
+
+		if(recordId != null && sObjectName != null) {
+			responses = Database.query('SELECT Id, Name, Status__c, Completion__c, CreatedDate, Submitted_Date__c FROM Clarity_Form_Response__c WHERE (Clarity_Form__c = :formId OR Clarity_Form__r.Name = :name) AND' + ' Connection_' + sObjectName + '__c = :recordId');
+		}
 
         return responses; 
 
