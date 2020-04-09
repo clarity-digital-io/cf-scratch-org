@@ -39,8 +39,8 @@ sfdx force:mdapi:deploy \
 >>>>>> here is where we are
 sfdx force:package1:version:create \
     -i 0336g00000061bb \
-    -n "Alpha 2020" \
-    -v "1.1" \
+    -n "Beta 2020" \
+    -v "1.2" \
     -d "Managed beta release. Uploaded via the CLI" \
     -u PkgOrg \
     -w 15
@@ -48,7 +48,7 @@ sfdx force:package1:version:create \
 sfdx force:package1:version:list -u PkgOrg
 
 sfdx force:package:install \
-    -p 04t6g000005qGoVAAU \
+    -p 04t6g000008OMW4AAO \
     -u formsPkgTest \
     -w 15
 
@@ -195,3 +195,18 @@ Clarity_Form_Question_Option__c
 Clarity_Form_Response__c
 Clarity_Form_Response_Connection__c
 Clarity_Form_Style__c
+
+## Creating an External Form Generator
+New Setting in Clarity Form Settings
+- External JSON only 
+- External Simple only
+- External Designed
+- Connect with Pardot
+
+- Lead to Web Forms
+- - Users might want to only use Lead/Contact Fields
+- - Users might want to map to Lead/Contact Fields
+- - Relating to a Campaign
+
+## Required features
+-- reCAPTCHA

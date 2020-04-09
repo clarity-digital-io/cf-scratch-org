@@ -14,8 +14,10 @@
             if (state === "SUCCESS") {
             
                 var form = response.getReturnValue();
-                console.log('form', form); 
-                cmp.set('v.form', form); 
+								if(!cmp.get("v.recordId")) {
+									cmp.set("v.recordId", form.Id);
+								}
+								cmp.set('v.form', form); 
 
             }
         }); 

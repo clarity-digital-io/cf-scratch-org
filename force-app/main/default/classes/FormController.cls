@@ -1,7 +1,7 @@
 public with sharing class FormController {
 
 	@AuraEnabled
-	public static Id create(){
+	public static Clarity_Form__c create(){
 
 		Clarity_Form__c form = null;
 
@@ -19,7 +19,7 @@ public with sharing class FormController {
 			throw new AuraHandledException('Unable to create Form');
 		}
 
-		return newForm.Id;
+		return newForm;
 		
 	}
 
@@ -49,9 +49,13 @@ public with sharing class FormController {
     @AuraEnabled
     public static Clarity_Form__c getForm(String recordId) {
 
-        Clarity_Form__c form = [SELECT Id, Label__c, Status__c, Name FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
+        List<Clarity_Form__c> forms = [SELECT Id, Label__c, Status__c, Name FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
 
-        return form; 
+		if(forms.size() > 0) {
+			return forms[0]; 
+		}
+
+		return create();
 
     }
 

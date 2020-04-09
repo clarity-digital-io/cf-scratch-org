@@ -25,12 +25,14 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static Clarity_Form__c startup(String formId) {
         
-        Clarity_Form__c form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__r.Name, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
+        List<Clarity_Form__c> forms = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__r.Name, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
             Clarity_Form_Assignment__c, Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
-            FROM Clarity_Form__c WHERE Id =: formId];
+            FROM Clarity_Form__c WHERE Id =: formId Limit 1];
 
-        return form; 
-
+		if(forms.size() > 0) {
+			return forms[0];
+		}
+        return null; 
     }
 
     @RemoteAction

@@ -319,8 +319,8 @@ public with sharing class ClarityFormsService {
 
 		if(parsedConnections.size() != 0) {
 			for(Map<String, String> connection : parsedConnections) {
-				String fieldName = connection.get('sObject');
-				String recordId = connection.get('key');
+				String fieldName = connection.containsKey('sObject') ? connection.get('sObject') : '';
+				String recordId = connection.containsKey('key') ? connection.get('key') : '';
 				Boolean fieldCheck = SObjectType.Clarity_Form_Response__c.fields.getMap().containsKey('forms__connection_' + fieldName.toLowerCase() + '__c');
 				if(fieldCheck) {
 					response.put('forms__Connection_' + fieldName + '__c', recordId);
