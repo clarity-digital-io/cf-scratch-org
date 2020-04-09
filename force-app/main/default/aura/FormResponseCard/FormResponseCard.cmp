@@ -16,7 +16,7 @@
         </aura:set>
         <div class="slds-m-horizontal_none">
 
-            <c:FormResponseTable formName="{!v.formName}" />
+            <c:FormResponseTable formName="{!v.formName}" recordId="{!v.recordId}" sObjectName="{!v.sObjectName}" />
 
         </div>
     </lightning:card>

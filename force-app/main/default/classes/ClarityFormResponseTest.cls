@@ -102,6 +102,7 @@ public class ClarityFormResponseTest {
 		mappedConnections.put('key', opp.Id); 
 		mappedConnections.put('label', 'Test Connection'); 
 		mappedConnections.put('connectionId', connections[0].Id); 
+		mappedConnections.put('sObjectName', 'Opportunity'); 
 		
 		valueConnections.add(mappedConnections);
 

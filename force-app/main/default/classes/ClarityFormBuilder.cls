@@ -25,12 +25,14 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static Clarity_Form__c startup(String formId) {
         
-        Clarity_Form__c form = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__r.Name, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
+        List<Clarity_Form__c> forms = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__r.Name, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
             Clarity_Form_Assignment__c, Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
-            FROM Clarity_Form__c WHERE Id =: formId];
+            FROM Clarity_Form__c WHERE Id =: formId Limit 1];
 
-        return form; 
-
+		if(forms.size() > 0) {
+			return forms[0];
+		}
+        return null; 
     }
 
     @RemoteAction
@@ -51,7 +53,7 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static List<Clarity_Form_Question__c> getQuestions(String recordId){
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Page__c, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, 
+        List<Clarity_Form_Question__c> questions = [SELECT Id, Page__c, Logic__c, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, 
             (SELECT Id, Order__c, Label__c, Choice_Image__c FROM Clarity_Form_Question_Options__r), Type__c, Clarity_Form__c, Max_Length__c, Lookup__c 
             FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: recordId];
 
@@ -621,9 +623,17 @@ global with sharing class ClarityFormBuilder {
 
         }
 
-        List<Clarity_Form_Connection__c> parsedConnections = (List<Clarity_Form_Connection__c>)JSON.deserialize(sConnections, List<Clarity_Form_Connection__c>.class);
+		List<Clarity_Form_Connection__c> parsedConnections = (List<Clarity_Form_Connection__c>)JSON.deserialize(sConnections, List<Clarity_Form_Connection__c>.class);
+		
+		List<Clarity_Form_Connection__c> validatedConnections = new List<Clarity_Form_Connection__c>();
 
-        List<Database.UpsertResult> results = Database.upsert(parsedConnections, true); 
+		for(Clarity_Form_Connection__c parsedConnection : parsedConnections) {
+			if(parsedConnection.Salesforce_Object__c != '') {
+				validatedConnections.add(parsedConnection);
+			}
+		}
+
+        List<Database.UpsertResult> results = Database.upsert(validatedConnections, true); 
 
         for(Database.UpsertResult result : results) {
 

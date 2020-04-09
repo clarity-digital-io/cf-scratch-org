@@ -39,8 +39,8 @@ sfdx force:mdapi:deploy \
 >>>>>> here is where we are
 sfdx force:package1:version:create \
     -i 0336g00000061bb \
-    -n "Alpha 2020" \
-    -v "1.1" \
+    -n "Beta 2020" \
+    -v "1.2" \
     -d "Managed beta release. Uploaded via the CLI" \
     -u PkgOrg \
     -w 15
@@ -48,7 +48,7 @@ sfdx force:package1:version:create \
 sfdx force:package1:version:list -u PkgOrg
 
 sfdx force:package:install \
-    -p 04t6g000005qGoVAAU \
+    -p 04t6g000008OMW4AAO \
     -u formsPkgTest \
     -w 15
 
@@ -61,25 +61,28 @@ sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-de
 
 sfdx force:org:list --all
 
-sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias forms //clarity-forms-pkg
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias CF-73 --durationdays 30 //clarity-forms-pkg
 
-sfdx force:alias:set forms=test-j5uvn1hxcigk@example.com
+sfdx force:alias:set CF-73=test-ex5axiv4kztu@example.com
 
-sfdx force:config:set defaultusername=forms
+sfdx force:config:set defaultusername=CF-73
 
 sfdx force:source:push -f
 
 sfdx force:org:open -u PkgOrg
 
-sfdx force:user:password:generate --targetusername forms
+sfdx force:user:password:generate --targetusername CF-73
 
-sfdx force:user:display --targetusername forms
+sfdx force:user:display --targetusername CF-73
 
-sfdx force:org:delete -u test-iwaemnwejmjb@example.com
+sfdx force:org:delete -u test-xlcflt32qcav@example.com
 
 ## commonly used commands
 
 sfdx force:apex:trigger:create -n ClarityFormResponseTrigger -d force-app/main/default/triggers
+
+sfdx force:lightning:app:create -n FormBuilderApp -d force-app/main/default/aura
+sfdx force:lightning:app:create -n FormResponseApp -d force-app/main/default/aura
 
 sfdx force:lightning:component:create --type aura -n FormResponseView -d force-app/main/default/aura
 
@@ -192,3 +195,18 @@ Clarity_Form_Question_Option__c
 Clarity_Form_Response__c
 Clarity_Form_Response_Connection__c
 Clarity_Form_Style__c
+
+## Creating an External Form Generator
+New Setting in Clarity Form Settings
+- External JSON only 
+- External Simple only
+- External Designed
+- Connect with Pardot
+
+- Lead to Web Forms
+- - Users might want to only use Lead/Contact Fields
+- - Users might want to map to Lead/Contact Fields
+- - Relating to a Campaign
+
+## Required features
+-- reCAPTCHA

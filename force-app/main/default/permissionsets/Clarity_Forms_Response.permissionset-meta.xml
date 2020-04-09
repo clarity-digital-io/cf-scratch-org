@@ -261,16 +261,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Clarity_Form_Response__c.Connection_Account__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Clarity_Form_Response__c.Connection_Case__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Clarity_Form_Response__c.OwnerId__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -287,6 +277,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form_Response__c.Time__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Clarity_Form__c.Is_Flow__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>

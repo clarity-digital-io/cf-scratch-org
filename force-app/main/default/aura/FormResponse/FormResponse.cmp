@@ -1,4 +1,4 @@
-<aura:component controller="FormController" access="global" implements="lightning:actionOverride,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
+<aura:component controller="FormController" access="global" implements="lightning:availableForFlowScreens,lightning:actionOverride,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
 
     <aura:registerEvent name="formResponseEvent" type="c:FormResponseEvent"/>
 

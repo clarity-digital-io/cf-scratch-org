@@ -50,7 +50,7 @@ public class ClarityFormBuilderTest {
 
         Clarity_Form__c formStart = ClarityFormBuilder.startup('');
 
-		System.assertNotEquals(null, formStart);
+		System.assertEquals(null, formStart);
 
     }
 

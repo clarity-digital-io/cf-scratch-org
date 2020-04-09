@@ -7,7 +7,9 @@
 
         action.setParams({
             formId  : cmp.get("v.formId"),
-            name    : cmp.get("v.formName") ? cmp.get("v.formName") : ''
+						name    : cmp.get("v.formName") ? cmp.get("v.formName") : '',
+						recordId: cmp.get("v.recordId"),
+						sObjectName: cmp.get("v.sObjectName")
         })
 
         action.setCallback(this, function (response) {

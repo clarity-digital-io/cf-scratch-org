@@ -45,7 +45,7 @@ public class FormControllerTest {
 
         Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c Limit 1];
 
-        List<Clarity_Form_Response__c> responses = FormController.getFormResponses(null, form.Name);
+        List<Clarity_Form_Response__c> responses = FormController.getFormResponses(null, form.Name, null, null);
 
         System.assertEquals(1, responses.size());
 
