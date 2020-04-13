@@ -5,13 +5,8 @@ public with sharing class FormController {
 
 		Clarity_Form__c form = null;
 
-		Clarity_Form_Style__c styling = new Clarity_Form_Style__c(Name = 'Clarity Form Styling', Background_Color__c = '#FFF', Color__c = '#333');
 
-		Database.SaveResult stylingResult = Database.insert(styling); 
-
-		if(!stylingResult.isSuccess()) System.debug('throw error'); // throw error
-
-		Clarity_Form__c newForm = new Clarity_Form__c(Label__c = 'Clarity Form', Clarity_Form_Style__c = styling.Id); 
+		Clarity_Form__c newForm = new Clarity_Form__c(Label__c = 'Clarity Form'); 
 		
 		Database.SaveResult result = Database.insert(newForm); 
 

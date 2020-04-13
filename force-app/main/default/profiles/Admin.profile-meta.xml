@@ -134,46 +134,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Clarity_Form_Assignment_Rule__c.Field_Type__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form_Assignment_Rule__c.Field__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form_Assignment_Rule__c.Operator__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form_Assignment_Rule__c.Type__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form_Assignment_Rule__c.Value__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form_Assignment__c.Assign__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form_Assignment__c.Default_Assign__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form_Assignment__c.Logic__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Clarity_Form_Audit_Log__c.Action__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -434,41 +394,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Clarity_Form_Style__c.Background_Color__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form_Style__c.Background_Image__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form_Style__c.Button_Color__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form_Style__c.Color__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form_Style__c.Multi_Page__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form__c.Clarity_Form_Assignment__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Clarity_Form__c.Clarity_Form_Style__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Clarity_Form__c.Completion_Rate__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -546,12 +471,6 @@
         <layout>Clarity_Form_Answer__c-Clarity Form Answer Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Clarity_Form_Assignment_Rule__c-Clarity Form Assignment Rule Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Clarity_Form_Assignment__c-Clarity Form Assignment Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>Clarity_Form_Audit_Log__c-Clarity Form Audit Log Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -589,12 +508,6 @@
         <recordType>Clarity_Form_Response__c.Preview</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Clarity_Form_Style__c-Clarity Form Style Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Clarity_Form__c-Clarity Form Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>ContentVersion-Content Version Layout</layout>
     </layoutAssignments>
     <objectPermissions>
@@ -604,24 +517,6 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
         <object>Clarity_Form_Answer__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Clarity_Form_Assignment_Rule__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Clarity_Form_Assignment__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -738,24 +633,11 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>Clarity_Form_Style__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
         <object>Clarity_Form__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <tabVisibilities>
         <tab>Clarity_Form_Response__c</tab>
-        <visibility>Hidden</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
-        <tab>Clarity_Form_Style__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>

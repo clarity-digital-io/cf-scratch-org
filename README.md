@@ -61,21 +61,21 @@ sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-de
 
 sfdx force:org:list --all
 
-sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias CF-114 --durationdays 30 //clarity-forms-pkg
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias CF-110 --durationdays 30 //clarity-forms-pkg
 
-sfdx force:alias:set CF-114=test-lygkv0hclja0@example.com
+sfdx force:alias:set CF-110=test-tmbdkvglrsyw@example.com
 
-sfdx force:config:set defaultusername=CF-114
+sfdx force:config:set defaultusername=CF-110
 
 sfdx force:source:push -f
 
 sfdx force:org:open -u PkgOrg
 
-sfdx force:user:password:generate --targetusername CF-114
+sfdx force:user:password:generate --targetusername CF-110
 
-sfdx force:user:display --targetusername CF-114
+sfdx force:user:display --targetusername CF-110
 
-sfdx force:org:delete -u test-yeoebtf9oa2k@example.com
+sfdx force:org:delete -u test-tmbdkvglrsyw@example.com
 
 ## commonly used commands
 
