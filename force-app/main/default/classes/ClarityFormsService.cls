@@ -97,7 +97,7 @@ public with sharing class ClarityFormsService {
         Clarity_Form_Response__c response = [SELECT Id, Clarity_Form__c, Status__c, OwnerId__c 
             FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
 
-        Clarity_Form__c form = [SELECT Id, Name, Is_Flow__c, Clarity_Form_Style__r.Button_Color__c, 
+        Clarity_Form__c form = [SELECT Id, Name, Is_Flow__c, Has_Thank_You__c, Thank_You_Redirect__c, Clarity_Form_Style__r.Button_Color__c, 
             Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
             FROM Clarity_Form__c WHERE Id =: response.Clarity_Form__c LIMIT 1];
 
@@ -274,7 +274,7 @@ public with sharing class ClarityFormsService {
 
     public static  Map<String, List<sObject>> create(Id formId) {
 
-        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Button_Color__c, Is_Flow__c, 
+        Clarity_Form__c form = [SELECT Id, Name, Has_Thank_You__c, Thank_You_Redirect__c, Clarity_Form_Style__r.Button_Color__c, Is_Flow__c, 
             Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
             FROM Clarity_Form__c WHERE Id =: formId LIMIT 1];
 
@@ -305,7 +305,7 @@ public with sharing class ClarityFormsService {
 
     public static  Map<String, List<sObject>> create(String formName, String sConnections) {
 
-        Clarity_Form__c form = [SELECT Id, Name, Clarity_Form_Style__r.Button_Color__c, Is_Flow__c, 
+        Clarity_Form__c form = [SELECT Id, Name, Has_Thank_You__c, Thank_You_Redirect__c, Clarity_Form_Style__r.Button_Color__c, Is_Flow__c, 
             Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
             FROM Clarity_Form__c WHERE Name =: formName LIMIT 1];
 
