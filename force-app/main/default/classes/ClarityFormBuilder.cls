@@ -25,7 +25,7 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static Clarity_Form__c startup(String formId) {
         
-        List<Clarity_Form__c> forms = [SELECT Id, Name, Limit__c, Status__c, End_Date__c FROM Clarity_Form__c WHERE Id =: formId Limit 1];
+        List<Clarity_Form__c> forms = [SELECT Id, Name, Limit__c, Multi_Page__c, Multi_Page_Info__c, Multi_Page_Val__c, Status__c, End_Date__c FROM Clarity_Form__c WHERE Id =: formId Limit 1];
 
 		if(forms.size() > 0) {
 			return forms[0];
