@@ -25,7 +25,7 @@ global with sharing class ClarityFormBuilder {
     @RemoteAction
     global static Clarity_Form__c startup(String formId) {
         
-        List<Clarity_Form__c> forms = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Clarity_Form_Style__r.Name, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
+        List<Clarity_Form__c> forms = [SELECT Id, Name, Limit__c, Status__c, Has_Thank_You__c, Thank_You_Redirect__c, End_Date__c, Clarity_Form_Style__r.Name, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Color__c, 
             Clarity_Form_Assignment__c, Clarity_Form_Assignment__r.Assign__c, Clarity_Form_Assignment__r.Default_Assign__c, Clarity_Form_Assignment__r.Name 
             FROM Clarity_Form__c WHERE Id =: formId Limit 1];
 
