@@ -75,7 +75,7 @@ sfdx force:user:password:generate --targetusername CF-114
 
 sfdx force:user:display --targetusername CF-114
 
-sfdx force:org:delete -u test-xlcflt32qcav@example.com
+sfdx force:org:delete -u test-yeoebtf9oa2k@example.com
 
 ## commonly used commands
 
