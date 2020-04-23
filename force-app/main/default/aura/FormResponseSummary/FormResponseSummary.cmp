@@ -8,6 +8,7 @@
     <aura:attribute name="columns" type="List"/>
     <aura:attribute name="loading" type="Boolean"/>
     <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="tabId" type="String"/>
 
     <aura:if isTrue="{! v.loading }">
         <lightning:spinner alternativeText="Loading" />
