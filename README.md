@@ -61,19 +61,19 @@ sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-de
 
 sfdx force:org:list --all
 
-sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias CF-114 --durationdays 30 //clarity-forms-pkg
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias CF-21 --durationdays 30 //clarity-forms-pkg
 
-sfdx force:alias:set CF-114=test-lygkv0hclja0@example.com
+sfdx force:alias:set CF-21=test-tp4uo5to2zt3@example.com
 
-sfdx force:config:set defaultusername=CF-114
+sfdx force:config:set defaultusername=CF-21
 
 sfdx force:source:push -f
 
 sfdx force:org:open -u PkgOrg
 
-sfdx force:user:password:generate --targetusername CF-114
+sfdx force:user:password:generate --targetusername CF-21
 
-sfdx force:user:display --targetusername CF-114
+sfdx force:user:display --targetusername CF-21
 
 sfdx force:org:delete -u test-yeoebtf9oa2k@example.com
 
@@ -106,6 +106,11 @@ sfdx force:apex:class:create -n ConnectionFieldValidationTest -d force-app/main/
 
 sfdx force:apex:class:create -n ClarityFormBuilderTest -d force-app/main/default/classes
 
+## Digital Signature
+sfdx force:lightning:component:create --type aura -n DigitalSignature -d force-app/main/default/aura
+sfdx force:lightning:component:create --type aura -n DigitalSignatureFooter -d force-app/main/default/aura
+sfdx force:lightning:event:create -n DigitalSignatureEvent -d force-app/main/default/aura
+sfdx force:apex:class:create -n DigitalSignature -d force-app/main/default/classes
 
 ## Tests
 

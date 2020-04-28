@@ -38,7 +38,7 @@
             recordId: cmp.get("v.recordId")
         });
 
-		action.setCallback(this, function (response) {
+				action.setCallback(this, function (response) {
 
             let state = response.getState();
         

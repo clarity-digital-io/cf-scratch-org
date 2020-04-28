@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="Event template">
+    <aura:attribute name="agreed" type="Boolean"/>
+    <aura:attribute name="signature" type="String"/>
+    <aura:attribute name="body" type="String"/>
+</aura:event>

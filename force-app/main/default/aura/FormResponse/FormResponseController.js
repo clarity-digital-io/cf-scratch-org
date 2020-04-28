@@ -92,6 +92,33 @@
 
 		} 
 
+		if(name == 'Sign') {
+
+			let responseSigned = message.payload.responseSigned; 
+			console.log('responseSigned', responseSigned);
+			$A.createComponents([
+				["forms:DigitalSignature", { "responseSigned": responseSigned }],
+				["forms:DigitalSignatureFooter", {}]
+			],
+			function(components, status) {
+					if (status === "SUCCESS") {
+
+							let formSign = components[0];
+							let formSignFooter = components[1];
+
+							cmp.find('overlayLib').showCustomModal({
+									header: 'Create a Signature',
+									cssClass: "claritySignatureModal",
+									body: formSign, 
+									footer: formSignFooter,
+									showCloseButton: true
+							})
+
+					}
+			});
+
+		}
+
 	}
     
 })
