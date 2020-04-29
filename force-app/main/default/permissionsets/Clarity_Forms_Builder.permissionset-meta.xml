@@ -419,18 +419,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Clarity_Form__c.Is_Flow__c</field>
         <field>Clarity_Form__c.Multi_Page_Info__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form__c.Multi_Page_Val__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Clarity_Form__c.Limit__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

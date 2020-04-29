@@ -96,7 +96,7 @@ public with sharing class ClarityFormsService {
 
         Clarity_Form_Response__c response = [SELECT Id, Clarity_Form__c, Status__c, OwnerId__c 
             FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
-		
+
         Clarity_Form__c form = [SELECT Id, Has_Thank_You__c, Thank_You_Redirect__c, Multi_Page__c, Multi_Page_Info__c, Multi_Page_Val__c, Name, Is_Flow__c FROM Clarity_Form__c WHERE Id =: response.Clarity_Form__c LIMIT 1];
 
         List<Clarity_Form_Connection__c> formConnections = [SELECT Id, Salesforce_Object__c, New__c, 
