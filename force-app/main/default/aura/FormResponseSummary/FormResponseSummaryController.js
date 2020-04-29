@@ -19,6 +19,11 @@
 								}
 								cmp.set('v.form', form); 
 
+								var workspaceAPI = cmp.find("workspace");
+								workspaceAPI.getEnclosingTabId().then(function(response){
+									cmp.set("v.tabId", response);
+								});
+
             }
         }); 
 
@@ -38,23 +43,38 @@
             recordId: cmp.get("v.recordId")
         });
 
-		action.setCallback(this, function (response) {
+				action.setCallback(this, function (response) {
 
             let state = response.getState();
         
             if (state === "SUCCESS") {
+
+							if(cmp.get('v.tabId') != null) {
+								var workspaceAPI = cmp.find("workspace");
+
+								workspaceAPI.getFocusedTabInfo().then(function(response) {
+									var focusedTabId = response.tabId;
+									workspaceAPI.closeTab({tabId: focusedTabId});
+								})
+								.catch(function(error) {
+										console.log(error);
+								});
+							}
             
-                var navService = cmp.find("navService");
+							var navService = cmp.find("navService");
 
-                var pageReference = {
-                    type: 'standard__objectPage',
-                    attributes: {
-                        objectApiName: 'form__Clarity_Form__c',
-                        actionName: 'home'
-                    }
-                };
+							var pageReference = {
+									type: 'standard__objectPage',
+									attributes: {
+											objectApiName: 'forms__Clarity_Form__c',
+											actionName: 'list'
+									},
+									state: {
+										filterName: "Recent"
+									}
+							};
 
-                navService.navigate(pageReference);
+              navService.navigate(pageReference);
 
             } else {
 

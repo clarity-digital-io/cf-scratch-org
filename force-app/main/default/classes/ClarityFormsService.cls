@@ -97,9 +97,7 @@ public with sharing class ClarityFormsService {
         Clarity_Form_Response__c response = [SELECT Id, Clarity_Form__c, Status__c, OwnerId__c 
             FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
 
-        Clarity_Form__c form = [SELECT Id, Name, Is_Flow__c, Has_Thank_You__c, Thank_You_Redirect__c, Clarity_Form_Style__r.Button_Color__c, 
-            Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
-            FROM Clarity_Form__c WHERE Id =: response.Clarity_Form__c LIMIT 1];
+        Clarity_Form__c form = [SELECT Id, Has_Thank_You__c, Thank_You_Redirect__c, Multi_Page__c, Multi_Page_Info__c, Multi_Page_Val__c, Name, Is_Flow__c FROM Clarity_Form__c WHERE Id =: response.Clarity_Form__c LIMIT 1];
 
         List<Clarity_Form_Connection__c> formConnections = [SELECT Id, Salesforce_Object__c, New__c, 
             (SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
@@ -274,9 +272,7 @@ public with sharing class ClarityFormsService {
 
     public static  Map<String, List<sObject>> create(Id formId) {
 
-        Clarity_Form__c form = [SELECT Id, Name, Has_Thank_You__c, Thank_You_Redirect__c, Clarity_Form_Style__r.Button_Color__c, Is_Flow__c, 
-            Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
-            FROM Clarity_Form__c WHERE Id =: formId LIMIT 1];
+        Clarity_Form__c form = [SELECT Id, Has_Thank_You__c, Thank_You_Redirect__c, Multi_Page__c, Multi_Page_Info__c, Multi_Page_Val__c, Status__c, Name FROM Clarity_Form__c WHERE Id =: formId LIMIT 1];
 
         List<Clarity_Form_Response__c> oldResponses = [SELECT Id, Clarity_Form__c, Status__c, OwnerId__c 
             FROM Clarity_Form_Response__c WHERE Clarity_Form__c =: formId];
@@ -305,9 +301,7 @@ public with sharing class ClarityFormsService {
 
     public static  Map<String, List<sObject>> create(String formName, String sConnections) {
 
-        Clarity_Form__c form = [SELECT Id, Name, Has_Thank_You__c, Thank_You_Redirect__c, Clarity_Form_Style__r.Button_Color__c, Is_Flow__c, 
-            Clarity_Form_Style__r.Background_Color__c, Clarity_Form_Style__r.Multi_Page__c, Clarity_Form_Style__r.Background_Image__c, Clarity_Form_Style__r.Color__c 
-            FROM Clarity_Form__c WHERE Name =: formName LIMIT 1];
+        Clarity_Form__c form = [SELECT Id, Has_Thank_You__c, Thank_You_Redirect__c, Multi_Page__c, Multi_Page_Info__c, Multi_Page_Val__c, Name FROM Clarity_Form__c WHERE Name =: formName LIMIT 1];
 
         Clarity_Form_Response__c response = new Clarity_Form_Response__c(
             Status__c       = 'New', 

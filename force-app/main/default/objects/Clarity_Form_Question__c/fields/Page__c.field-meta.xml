@@ -4,7 +4,7 @@
     <defaultValue>0</defaultValue>
     <externalId>false</externalId>
     <label>Page</label>
-    <precision>1</precision>
+    <precision>3</precision>
     <required>false</required>
     <scale>0</scale>
     <trackTrending>false</trackTrending>
