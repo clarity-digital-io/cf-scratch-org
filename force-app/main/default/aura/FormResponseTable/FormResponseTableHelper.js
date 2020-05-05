@@ -39,13 +39,14 @@
 
         } else if (state === "ERROR") {
 
+					console.log('errors', errors);
           let errors = response.getError();
 
-                  cmp.find('notifLib').showToast({
-                      "variant": "error",
-                      "title"  : "Error!",
-                      "message": response.getError()
-                  });
+					cmp.find('notifLib').showToast({
+							"variant": "error",
+							"title"  : "Error!",
+							"message": errors
+					});
 
         }
 

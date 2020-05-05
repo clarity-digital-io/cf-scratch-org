@@ -61,7 +61,7 @@ public with sharing class FormController {
 
 		if(recordId != null && sObjectName != null && sObjectName != 'Clarity') {
 			responses = Database.query('SELECT Id, Name, Status__c, Completion__c, CreatedDate, Submitted_Date__c FROM Clarity_Form_Response__c WHERE (Clarity_Form__c = :formId OR Clarity_Form__r.Name = :name) AND' + ' Connection_' + sObjectName + '__c = :recordId');
-		} else {
+		} else if(formId != null || name != null) {
 			responses = [SELECT Id, Name, Status__c, Completion__c, CreatedDate, Submitted_Date__c FROM Clarity_Form_Response__c WHERE (Clarity_Form__c = :formId OR Clarity_Form__r.Name = :name)];
 		}
 
