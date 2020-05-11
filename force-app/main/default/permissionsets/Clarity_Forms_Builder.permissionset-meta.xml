@@ -9,11 +9,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ClarityFormBuilder</apexClass>
+        <apexClass>FormBuilder</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ClarityFormBuilderTest</apexClass>
+        <apexClass>FormBuilder</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>

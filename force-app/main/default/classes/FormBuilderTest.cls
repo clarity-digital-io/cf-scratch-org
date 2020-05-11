@@ -1,5 +1,5 @@
 @isTest
-public class ClarityFormBuilderTest {
+public class FormBuilderTest {
 
     @testSetup
     public static void setup(){
@@ -23,7 +23,7 @@ public class ClarityFormBuilderTest {
 
 		Test.startTest();
 
-        	List<String> questionIds = ClarityFormBuilder.save(sQuestions);
+        	List<String> questionIds = FormBuilder.save(sQuestions);
 
 		Test.stopTest();
 
@@ -38,7 +38,7 @@ public class ClarityFormBuilderTest {
 		
 		Test.startTest();
         
-			Clarity_Form__c formStart = ClarityFormBuilder.startup(form.Id);
+			Clarity_Form__c formStart = FormBuilder.startup(form.Id);
 		
 		Test.stopTest();
 
@@ -48,7 +48,7 @@ public class ClarityFormBuilderTest {
 	@isTest
     public static void shouldStartupNewFormBuilder() {
 
-        Clarity_Form__c formStart = ClarityFormBuilder.startup('');
+        Clarity_Form__c formStart = FormBuilder.startup('');
 
 		System.assertEquals(null, formStart);
 
@@ -65,7 +65,7 @@ public class ClarityFormBuilderTest {
 
 		Test.startTest();
 
-        	Clarity_Form__c updatedForm = ClarityFormBuilder.updateForm(sForm);
+        	Clarity_Form__c updatedForm = FormBuilder.updateForm(sForm);
 
 		Test.stopTest();
 
@@ -81,7 +81,7 @@ public class ClarityFormBuilderTest {
 
 		Test.startTest();
 
-        	List<Clarity_Form_Question__c> questions = ClarityFormBuilder.getQuestions(form.Id);
+        	List<Clarity_Form_Question__c> questions = FormBuilder.getQuestions(form.Id);
 
 		Test.stopTest();
 
@@ -101,7 +101,7 @@ public class ClarityFormBuilderTest {
 
 		Test.startTest();
 
-       		List<Clarity_Form_Question_Option__c> options = ClarityFormBuilder.getQuestionOptions(expectedQuestions[0].Id);
+       		List<Clarity_Form_Question_Option__c> options = FormBuilder.getQuestionOptions(expectedQuestions[0].Id);
 
 		Test.stopTest();
 
@@ -121,7 +121,7 @@ public class ClarityFormBuilderTest {
 
 		Test.startTest();
 
-        	String updatedQuestion = ClarityFormBuilder.saveQuestion(sQuestion); 
+        	String updatedQuestion = FormBuilder.saveQuestion(sQuestion); 
 
 		Test.stopTest();
 
@@ -146,7 +146,7 @@ public class ClarityFormBuilderTest {
 
 		Test.startTest();
 
-        Map<String, List<sObject>> options = ClarityFormBuilder.saveQuestionWithOptions(sQuestion, sQuestionOptions);
+        Map<String, List<sObject>> options = FormBuilder.saveQuestionWithOptions(sQuestion, sQuestionOptions);
 
 		Test.stopTest();
 
@@ -178,7 +178,7 @@ public class ClarityFormBuilderTest {
 
 		List<String> optionValues = new List<String>{sQuestion, sQuestionOptions, images};
 
-        Map<String, List<sObject>> options = ClarityFormBuilder.saveQuestionWithPictureOptions(optionValues);
+        Map<String, List<sObject>> options = FormBuilder.saveQuestionWithPictureOptions(optionValues);
 
 		Test.stopTest();
 
@@ -208,7 +208,7 @@ public class ClarityFormBuilderTest {
 
 		Test.startTest();
 
-	        List<Clarity_Form_Question__c> updatedQuestions = ClarityFormBuilder.deleteQuestion(JSON.serialize(keepQuestions), sDeleteQuestionId);
+	        List<Clarity_Form_Question__c> updatedQuestions = FormBuilder.deleteQuestion(JSON.serialize(keepQuestions), sDeleteQuestionId);
 
 		Test.stopTest();
 
@@ -227,7 +227,7 @@ public class ClarityFormBuilderTest {
 		
 		Test.startTest();
 
-        	Map<String, List<sObject>> details = ClarityFormBuilder.getQuestionEditDetails(expectedQuestions[0].Id);
+        	Map<String, List<sObject>> details = FormBuilder.getQuestionEditDetails(expectedQuestions[0].Id);
 
 		Test.stopTest();
 
@@ -237,7 +237,7 @@ public class ClarityFormBuilderTest {
     @isTest
     public static void shouldGetSObjectsAvailable() {
 
-        List<String> sObjects = ClarityFormBuilder.getSObjectsAvailable();
+        List<String> sObjects = FormBuilder.getSObjectsAvailable();
 
 		System.assertEquals(true, sObjects.size() > 1);
 
@@ -246,7 +246,7 @@ public class ClarityFormBuilderTest {
     @isTest
     public static void shouldGetSObjectFields() {
 
-        Map<String, Map<String, Map<String, String>>> sObjectFields = ClarityFormBuilder.getSObjectFields('Account'); 
+        Map<String, Map<String, Map<String, String>>> sObjectFields = FormBuilder.getSObjectFields('Account'); 
 
 		System.assertEquals(true, sObjectFields.size() > 1);
 
@@ -259,7 +259,7 @@ public class ClarityFormBuilderTest {
 		
 		Test.startTest();
         
-			List<Clarity_Form_Connection__c> connections = ClarityFormBuilder.getConnections(form.Id);
+			List<Clarity_Form_Connection__c> connections = FormBuilder.getConnections(form.Id);
 		
 		Test.stopTest();
 
@@ -274,7 +274,7 @@ public class ClarityFormBuilderTest {
 
 		Test.startTest();
 
-			Map<String, Object> result = ClarityFormBuilder.updateStatus(form.Id, 'Published');
+			Map<String, Object> result = FormBuilder.updateStatus(form.Id, 'Published');
 
 		Test.stopTest();
 
