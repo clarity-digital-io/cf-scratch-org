@@ -106,6 +106,16 @@ sfdx force:apex:class:create -n ConnectionFieldValidationTest -d force-app/main/
 
 sfdx force:apex:class:create -n ClarityFormBuilderTest -d force-app/main/default/classes
 
+sfdx force:apex:class:create -n MobileService -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n MobileFormController -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n MobileRecordController -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n MobileResponseController -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n MobileService -d force-app/main/default/classes
+
 
 ## Tests
 
