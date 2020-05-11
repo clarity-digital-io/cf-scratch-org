@@ -4,74 +4,74 @@ public class ConnectionRecordProcessTest {
     @testSetup
     public static void setup(){
                 
-        List<Clarity_Form__c> forms = ClarityTestDataFactory.generateForms(5);
+        List<Clarity_Form__c> forms = TestDataFactory.generateForms(5);
 
-        List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(forms);
+        List<Clarity_Form_Question__c> questions = TestDataFactory.generateQuestions(forms);
 		//response 1 prep
-        List<Clarity_Form_Connection__c> connections = ClarityTestDataFactory.generateConnections(true, forms[0], new List<String>{ 'Opportunity' });
+        List<Clarity_Form_Connection__c> connections = TestDataFactory.generateConnections(true, forms[0], new List<String>{ 'Opportunity' });
 
-        ClarityTestDataFactory.generateConnectionFields(connections[0], new Map<String, Id>{'ForecastCategoryName' =>  questions[0].Id });
+        TestDataFactory.generateConnectionFields(connections[0], new Map<String, Id>{'ForecastCategoryName' =>  questions[0].Id });
 
-        ClarityTestDataFactory.publishForm(forms[0]);
+        TestDataFactory.publishForm(forms[0]);
 
-		Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(forms[0]);
+		Clarity_Form_Response__c response = TestDataFactory.generateResponse(forms[0]);
 		//response 2 prep
-		List<Clarity_Form_Connection__c> connections2 = ClarityTestDataFactory.generateConnections(true, forms[1], new List<String>{ 'Opportunity' });
+		List<Clarity_Form_Connection__c> connections2 = TestDataFactory.generateConnections(true, forms[1], new List<String>{ 'Opportunity' });
 
-        ClarityTestDataFactory.generateCustomConnectionFields(connections2[0], new Map<String, String>{ 'Name' => 'Custom Name', 'StageName' => 'Prospecting', 'CloseDate' => '07/22/2030' });
+        TestDataFactory.generateCustomConnectionFields(connections2[0], new Map<String, String>{ 'Name' => 'Custom Name', 'StageName' => 'Prospecting', 'CloseDate' => '07/22/2030' });
 
-        ClarityTestDataFactory.publishForm(forms[1]);
+        TestDataFactory.publishForm(forms[1]);
 
-		Clarity_Form_Response__c response2 = ClarityTestDataFactory.generateResponse(forms[1]);
+		Clarity_Form_Response__c response2 = TestDataFactory.generateResponse(forms[1]);
 
-        ClarityTestDataFactory.generateAnswers(response2, questions);
+        TestDataFactory.generateAnswers(response2, questions);
 		
 		//response 3 prep
-        List<Clarity_Form_Connection__c> connections3 = ClarityTestDataFactory.generateConnections(true, forms[2], new List<String>{ 'Opportunity', 'Contact' });
+        List<Clarity_Form_Connection__c> connections3 = TestDataFactory.generateConnections(true, forms[2], new List<String>{ 'Opportunity', 'Contact' });
 
-        ClarityTestDataFactory.generateCustomConnectionFields(connections3[0], new Map<String, String>{ 'Name' => 'Custom Name', 'StageName' => 'Prospecting', 'CloseDate' => '07/22/2030' });
+        TestDataFactory.generateCustomConnectionFields(connections3[0], new Map<String, String>{ 'Name' => 'Custom Name', 'StageName' => 'Prospecting', 'CloseDate' => '07/22/2030' });
 
-        ClarityTestDataFactory.generateCustomConnectionFields(connections3[1], new Map<String, String>{ 'FirstName' => 'Clarity', 'LastName' => 'Developer' });
+        TestDataFactory.generateCustomConnectionFields(connections3[1], new Map<String, String>{ 'FirstName' => 'Clarity', 'LastName' => 'Developer' });
 
-        ClarityTestDataFactory.publishForm(forms[2]);
+        TestDataFactory.publishForm(forms[2]);
 
-        Clarity_Form_Response__c response3 = ClarityTestDataFactory.generateResponse(forms[2]);
+        Clarity_Form_Response__c response3 = TestDataFactory.generateResponse(forms[2]);
 
-        ClarityTestDataFactory.generateAnswers(response3, questions);
+        TestDataFactory.generateAnswers(response3, questions);
 
         Clarity_Form_Question__c question = [SELECT Id, Type__c, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment' AND Clarity_Form__c =: forms[2].Id LIMIT 1];
 
-		ClarityTestDataFactory.updateAnswer(response3, question);
+		TestDataFactory.updateAnswer(response3, question);
 
 		//response 4 prep
-        List<Clarity_Form_Connection__c> connections4 = ClarityTestDataFactory.generateConnections(true, forms[3], new List<String>{ 'Opportunity' });
+        List<Clarity_Form_Connection__c> connections4 = TestDataFactory.generateConnections(true, forms[3], new List<String>{ 'Opportunity' });
 
         List<Clarity_Form_Question__c> questions4 = [SELECT Id, Type__c, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment' AND Clarity_Form__c =: forms[3].Id];
 
-        ClarityTestDataFactory.generateConnectionFields(connections4[0], new Map<String, String>{ 'Name' => questions4[0].Id });
+        TestDataFactory.generateConnectionFields(connections4[0], new Map<String, String>{ 'Name' => questions4[0].Id });
 
-        ClarityTestDataFactory.generateCustomConnectionFields(connections4[0], new Map<String, String>{ 'StageName' => 'Prospecting', 'CloseDate' => '07/22/2030' });
+        TestDataFactory.generateCustomConnectionFields(connections4[0], new Map<String, String>{ 'StageName' => 'Prospecting', 'CloseDate' => '07/22/2030' });
 
-        ClarityTestDataFactory.publishForm(forms[3]);
+        TestDataFactory.publishForm(forms[3]);
 
-        Clarity_Form_Response__c response4 = ClarityTestDataFactory.generateResponse(forms[3]);
+        Clarity_Form_Response__c response4 = TestDataFactory.generateResponse(forms[3]);
 
-        ClarityTestDataFactory.generateAnswers(response4, questions4);
+        TestDataFactory.generateAnswers(response4, questions4);
 		
 		//response 5 prep
-        List<Clarity_Form_Connection__c> connections5 = ClarityTestDataFactory.generateConnections(true, forms[4],  new List<String>{ 'Account', 'Opportunity' });
+        List<Clarity_Form_Connection__c> connections5 = TestDataFactory.generateConnections(true, forms[4],  new List<String>{ 'Account', 'Opportunity' });
 
-        ClarityTestDataFactory.generateCustomConnectionFields(connections5[0], new Map<String, String>{ 'Name' => 'Custom Account Name' });
+        TestDataFactory.generateCustomConnectionFields(connections5[0], new Map<String, String>{ 'Name' => 'Custom Account Name' });
 
-        ClarityTestDataFactory.generateCustomConnectionFields(connections5[1], new Map<String, String>{ 'Name' => 'Custom Opportunity Name', 'StageName' => 'Prospecting', 'CloseDate' => '07/22/2030', 'AccountId' => '{Connection_Account}' });
+        TestDataFactory.generateCustomConnectionFields(connections5[1], new Map<String, String>{ 'Name' => 'Custom Opportunity Name', 'StageName' => 'Prospecting', 'CloseDate' => '07/22/2030', 'AccountId' => '{Connection_Account}' });
 
-        ClarityTestDataFactory.publishForm(forms[4]);
+        TestDataFactory.publishForm(forms[4]);
 
-        Clarity_Form_Response__c response5 = ClarityTestDataFactory.generateResponse(forms[4]);
+        Clarity_Form_Response__c response5 = TestDataFactory.generateResponse(forms[4]);
 
         List<Clarity_Form_Question__c> questions5 = [SELECT Id,  Type__c, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment' AND Clarity_Form__c =: forms[4].Id];
 
-        ClarityTestDataFactory.generateAnswers(response5, questions5);
+        TestDataFactory.generateAnswers(response5, questions5);
     }
 
     @isTest

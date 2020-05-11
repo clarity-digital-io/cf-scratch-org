@@ -1,4 +1,4 @@
-public with sharing class ClarityFormsService {
+public with sharing class FormService {
 
     public static List<sObject> connectionRecords(List<Clarity_Form_Response_Connection__c> responseConnections, List<Clarity_Form_Connection__c> formConnections) {
 

@@ -1,14 +1,14 @@
 @isTest
-public class ClarityFormResponseTest {
+public class FormResponseTest {
 
     @testSetup
     public static void setup(){
 
-		Clarity_Form__c form = ClarityTestDataFactory.generateForm();
+		Clarity_Form__c form = TestDataFactory.generateForm();
 
-		List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
+		List<Clarity_Form_Question__c> questions = TestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
 
-        List<Clarity_Form_Connection__c> connections = ClarityTestDataFactory.generateConnections(false, form,  new List<String>{ 'Opportunity' });
+        List<Clarity_Form_Connection__c> connections = TestDataFactory.generateConnections(false, form,  new List<String>{ 'Opportunity' });
 
     }
 
@@ -19,7 +19,7 @@ public class ClarityFormResponseTest {
 
 		Test.startTest();
 
-			Map<String, List<sObject>> preview = ClarityFormResponse.preview(form.Id); 
+			Map<String, List<sObject>> preview = FormResponse.preview(form.Id); 
 
 		Test.stopTest();
 
@@ -32,15 +32,15 @@ public class ClarityFormResponseTest {
 
 		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
 
-		Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
+		Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
 
 		List<Clarity_Form_Connection__c> connections = [SELECT Id FROM Clarity_Form_Connection__c];
 
-		List<Clarity_Form_Response_Connection__c> responseConnections = ClarityTestDataFactory.generateResponseConnection(response.Id, connections); 
+		List<Clarity_Form_Response_Connection__c> responseConnections = TestDataFactory.generateResponseConnection(response.Id, connections); 
 
 		Test.startTest();
 
-			List<Clarity_Form_Connection__c> checkConnections = ClarityFormResponse.checkConnections(response.Id); 
+			List<Clarity_Form_Connection__c> checkConnections = FormResponse.checkConnections(response.Id); 
 
 		Test.stopTest();
 
@@ -55,7 +55,7 @@ public class ClarityFormResponseTest {
 
 		Test.startTest();
 
-			List<Clarity_Form_Connection__c> connections = ClarityFormResponse.getConnections(form.Name); 
+			List<Clarity_Form_Connection__c> connections = FormResponse.getConnections(form.Name); 
 
 		Test.stopTest();
 
@@ -68,15 +68,15 @@ public class ClarityFormResponseTest {
 		
 		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
 
-		Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
+		Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
 
 		List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'RecordGroup' AND Clarity_Form__c =: form.Id];
 
-        ClarityTestDataFactory.generateRecordGroupAnswers(response, questions);
+        TestDataFactory.generateRecordGroupAnswers(response, questions);
 
 		Test.startTest();
 
-			Map<Id, List<sObject>> recordGroupResults = ClarityFormResponse.getRecordGroupResults(response.Id, form.Id); 
+			Map<Id, List<sObject>> recordGroupResults = FormResponse.getRecordGroupResults(response.Id, form.Id); 
 
 		Test.stopTest();
 
@@ -108,7 +108,7 @@ public class ClarityFormResponseTest {
 
 		Test.startTest();
 
-			Map<String, List<sObject>> create = ClarityFormResponse.create(form.Name, JSON.serialize(valueConnections)); 
+			Map<String, List<sObject>> create = FormResponse.create(form.Name, JSON.serialize(valueConnections)); 
 
 		Test.stopTest();
 
@@ -120,11 +120,11 @@ public class ClarityFormResponseTest {
 		
 		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
 
-		Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
+		Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
 
 		Test.startTest();
 
-			Map<String, List<sObject>> edit = ClarityFormResponse.edit(response.Id, null);
+			Map<String, List<sObject>> edit = FormResponse.edit(response.Id, null);
 
 		Test.stopTest();
 
@@ -137,7 +137,7 @@ public class ClarityFormResponseTest {
 
 		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
 
-		Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
+		Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
 
 		List<Clarity_Form_Question__c> questions = [SELECT Id FROM Clarity_Form_Question__c];
 
@@ -155,7 +155,7 @@ public class ClarityFormResponseTest {
 
 		Test.startTest();
 
-			List<Clarity_Form_Answer__c> rAnswers = ClarityFormResponse.saveAnswer(sAnswer);
+			List<Clarity_Form_Answer__c> rAnswers = FormResponse.saveAnswer(sAnswer);
 
 		Test.stopTest();
 
@@ -167,7 +167,7 @@ public class ClarityFormResponseTest {
 
 		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
 
-		Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
+		Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
 
 		List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c FROM Clarity_Form_Question__c];
 
@@ -195,7 +195,7 @@ public class ClarityFormResponseTest {
 
 		Test.startTest();
 
-			List<String> save = ClarityFormResponse.save(holdAnswers);
+			List<String> save = FormResponse.save(holdAnswers);
 
 		Test.stopTest();
 
@@ -208,7 +208,7 @@ public class ClarityFormResponseTest {
 
 		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
 
-		Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
+		Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
 
 		List<Clarity_Form_Question__c> questions = [SELECT Id FROM Clarity_Form_Question__c];
 
@@ -228,7 +228,7 @@ public class ClarityFormResponseTest {
 
 		Test.startTest();
 
-			List<String> submit = ClarityFormResponse.submit(holdAnswers);
+			List<String> submit = FormResponse.submit(holdAnswers);
 
 		Test.stopTest();	
 
@@ -250,7 +250,7 @@ public class ClarityFormResponseTest {
 
 		Test.startTest();
 
-			List<ClarityFormResponse.LookupResult> search = ClarityFormResponse.search(searchItems);
+			List<FormResponse.LookupResult> search = FormResponse.search(searchItems);
 
 		Test.stopTest();
 

@@ -1,4 +1,4 @@
-public class ClarityTestDataFactory {
+public class TestDataFactory {
 
     public static Clarity_Form__c generateForm(){
 

@@ -4,9 +4,9 @@ public class CreateResponseAnswersTest {
     @testSetup
     public static void setup(){
                 
-        Clarity_Form__c form = ClarityTestDataFactory.generateForm();
+        Clarity_Form__c form = TestDataFactory.generateForm();
 
-        List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
+        List<Clarity_Form_Question__c> questions = TestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
 
     }
 
@@ -19,7 +19,7 @@ public class CreateResponseAnswersTest {
 
         Test.startTest();       
             
-            Clarity_Form_Response__c response = ClarityTestDataFactory.generateResponse(form);
+            Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
 
         Test.stopTest(); 
 

@@ -5,7 +5,7 @@ global with sharing class ClarityFormResponse {
     @RemoteAction
     global static Map<String, List<sObject>> preview(String formId) {
 
-        Map<String, List<sObject>> formDetails = ClarityFormsService.create((Id)formId);
+        Map<String, List<sObject>> formDetails = FormService.create((Id)formId);
 
         return formDetails; 
 
@@ -73,7 +73,7 @@ global with sharing class ClarityFormResponse {
             Clarity_Form_Question__r.Record_Group__c, Clarity_Form_Question__r.Type__c  
             FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: responseId];
 
-        Map<Id, List<sObject>> records = ClarityFormsService.getRecordGroupSubmissions(answers, questions);
+        Map<Id, List<sObject>> records = FormService.getRecordGroupSubmissions(answers, questions);
 
         return records; 
 
@@ -82,7 +82,7 @@ global with sharing class ClarityFormResponse {
     @RemoteAction
     global static Map<String, List<sObject>> create(String formName, String sConnections) {
 
-        Map<String, List<sObject>> formDetails = ClarityFormsService.create(formName, sConnections);
+        Map<String, List<sObject>> formDetails = FormService.create(formName, sConnections);
 
         return formDetails; 
 
@@ -91,7 +91,7 @@ global with sharing class ClarityFormResponse {
     @RemoteAction
     global static Map<String, List<sObject>> edit(String responseId, String sConnections) {
 
-        Map<String, List<sObject>> formDetails = ClarityFormsService.edit(responseId, sConnections);
+        Map<String, List<sObject>> formDetails = FormService.edit(responseId, sConnections);
 
         return formDetails; 
 
@@ -100,7 +100,7 @@ global with sharing class ClarityFormResponse {
     @RemoteAction
     global static List<Clarity_Form_Answer__c> saveAnswer(String answers){
 
-        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(answers); 
+        List<Clarity_Form_Answer__c> savedAnswers = FormService.save(answers); 
 
         return savedAnswers;
         
@@ -113,11 +113,11 @@ global with sharing class ClarityFormResponse {
         String answers = answerValues[1];
         String formResponseId = answerValues[2]; 
 
-        List<Clarity_Form_Answer__c> savedAnswerImages = ClarityFormsService.upload(answerImages); 
+        List<Clarity_Form_Answer__c> savedAnswerImages = FormService.upload(answerImages); 
 
-        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(answers); 
+        List<Clarity_Form_Answer__c> savedAnswers = FormService.save(answers); 
 
-        List<String> success = ClarityFormsService.updateStatus(new List<String>{ formResponseId }, 'In Progress');
+        List<String> success = FormService.updateStatus(new List<String>{ formResponseId }, 'In Progress');
 
         return success; 
 
@@ -130,11 +130,11 @@ global with sharing class ClarityFormResponse {
         String answers = answerValues[1];
         String formResponseId = answerValues[2]; 
 
-        List<Clarity_Form_Answer__c> savedAnswerImages = ClarityFormsService.upload(answerImages); 
+        List<Clarity_Form_Answer__c> savedAnswerImages = FormService.upload(answerImages); 
 
-        List<Clarity_Form_Answer__c> savedAnswers = ClarityFormsService.save(answers); 
+        List<Clarity_Form_Answer__c> savedAnswers = FormService.save(answers); 
 
-        List<String> success = ClarityFormsService.updateStatus(new List<String>{ formResponseId }, 'Submitted');
+        List<String> success = FormService.updateStatus(new List<String>{ formResponseId }, 'Submitted');
 
         return success; 
         
@@ -258,9 +258,9 @@ global with sharing class ClarityFormResponse {
         List<Clarity_Form_Question__c> picklistQuestions = [SELECT Id, Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, 
             Record_Group__r.Salesforce_Object__c, Salesforce_Field__c, Type__c FROM Clarity_Form_Question__c WHERE ID IN :sPicklistQuestionIds];
 
-        Map<String, List<String>> rcp = ClarityFormsService.filterRecordGroupPicklist(picklistQuestions);
+        Map<String, List<String>> rcp = FormService.filterRecordGroupPicklist(picklistQuestions);
 
-        Map<String, Map<String, Map<String, String>>> values = ClarityFormsService.getSalesforcePicklistValues(rcp);
+        Map<String, Map<String, Map<String, String>>> values = FormService.getSalesforcePicklistValues(rcp);
 
         return values; 
 

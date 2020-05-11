@@ -4,11 +4,11 @@ public class FormBuilderTest {
     @testSetup
     public static void setup(){
 
-		Clarity_Form__c form = ClarityTestDataFactory.generateForm();
+		Clarity_Form__c form = TestDataFactory.generateForm();
 
-		List<Clarity_Form_Question__c> questions = ClarityTestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
+		List<Clarity_Form_Question__c> questions = TestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
 
-        List<Clarity_Form_Connection__c> connections = ClarityTestDataFactory.generateConnections(true, form, new List<String>{ 'Opportunity' });
+        List<Clarity_Form_Connection__c> connections = TestDataFactory.generateConnections(true, form, new List<String>{ 'Opportunity' });
 
     }
 
@@ -57,7 +57,7 @@ public class FormBuilderTest {
     @isTest
     public static void shouldUpdateForm() {
 
-        Clarity_Form__c form = ClarityTestDataFactory.generateForm();
+        Clarity_Form__c form = TestDataFactory.generateForm();
 
 		form.Label__c = 'Test New Form'; 
 
@@ -95,7 +95,7 @@ public class FormBuilderTest {
 
 		List<Clarity_Form_Question__c> expectedQuestions = [SELECT Id FROM Clarity_Form_Question__c WHERE Type__c = 'Dropdown']; 
 
-		List<Clarity_Form_Question_Option__c> optionsCreate = ClarityTestDataFactory.generateQuestionOptions(expectedQuestions);
+		List<Clarity_Form_Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(expectedQuestions);
 
 		insert optionsCreate;
 
@@ -138,7 +138,7 @@ public class FormBuilderTest {
 
 		List<Clarity_Form_Question__c> expectedQuestions = [SELECT Id FROM Clarity_Form_Question__c WHERE Type__c = 'Dropdown']; 
 
-		List<Clarity_Form_Question_Option__c> optionsCreate = ClarityTestDataFactory.generateQuestionOptions(expectedQuestions);
+		List<Clarity_Form_Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(expectedQuestions);
 
 		String sQuestion = JSON.serialize(expectedQuestions[0]); 
 
@@ -160,7 +160,7 @@ public class FormBuilderTest {
 
 		List<Clarity_Form_Question__c> expectedQuestions = [SELECT Id, Clarity_Form__c FROM Clarity_Form_Question__c WHERE Type__c = 'Dropdown']; 
 
-		List<Clarity_Form_Question_Option__c> optionsCreate = ClarityTestDataFactory.generateQuestionOptions(expectedQuestions);
+		List<Clarity_Form_Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(expectedQuestions);
 
 		String sQuestion = JSON.serialize(expectedQuestions[0]); 
 
