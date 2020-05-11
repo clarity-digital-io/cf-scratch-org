@@ -1,4 +1,4 @@
-global with sharing class ClarityFormBuilder {
+global with sharing class FormBuilder {
 	
     @RemoteAction
     global static List<String> save(String sQuestions){
