@@ -4,7 +4,7 @@
     <label>Clarity Forms Mobile</label>
     <oauthConfig>
         <callbackUrl>https://dev-gzcou5sg.eu.auth0.com/login/callback</callbackUrl>
-        <consumerKey>3MVG9Iu66FKeHhIPl0uFlYZBdNU.6Pent1ZGBfmItYa7PSnT6MJi1q1IkELJEieYgazbKz7fC_P5tHVrJCMV1</consumerKey>
+        <consumerKey></consumerKey>
         <scopes>Api</scopes>
         <scopes>Web</scopes>
         <scopes>Full</scopes>
