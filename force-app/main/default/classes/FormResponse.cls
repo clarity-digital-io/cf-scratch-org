@@ -1,4 +1,4 @@
-global with sharing class ClarityFormResponse {
+global with sharing class FormResponse {
 
     private final static Integer MAX_RESULTS = 5;
     

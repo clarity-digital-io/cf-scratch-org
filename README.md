@@ -75,7 +75,7 @@ sfdx force:user:password:generate --targetusername iOS
 
 sfdx force:user:display --targetusername iOS
 
-sfdx force:org:delete -u test-rogis8qkakwe@example.com
+sfdx force:org:delete -u test-rogis8qkakwe@example.com ^*Wfl%u)E2
 
 ## commonly used commands
 
@@ -114,8 +114,13 @@ sfdx force:apex:class:create -n MobileRecordController -d force-app/main/default
 
 sfdx force:apex:class:create -n MobileResponseController -d force-app/main/default/classes
 
-sfdx force:apex:class:create -n MobileService -d force-app/main/default/classes
+sfdx force:apex:class:create -n MobileSettingsController -d force-app/main/default/classes
 
+Mobile Settings Controller Should:
+
+- get company information (sandbox + company)
+- check user permission (clarity forms mobile)
+- get user info 
 
 ## Tests
 
