@@ -163,7 +163,7 @@ global with sharing class FormResponse {
 
 		if(access) {
 
-			String searchString = 'FIND ' + '\'' + searchTerm + '\'' + ' IN ALL FIELDS RETURNING ' + lookupObject + ' (Id, ' + returningField + ')';
+			String searchString = 'FIND ' + '\'%' + searchTerm + '%\'' + ' IN ALL FIELDS RETURNING ' + lookupObject + ' (Id, ' + returningField + ')';
 
 			List<List<sObject>> searchResults = search.query(searchString);
 
