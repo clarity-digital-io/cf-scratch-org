@@ -26,7 +26,7 @@
                                 <div class="slds-page-header__name-title">
                                     <h1>
                                         <span>Clarity Form</span>
-                                        <span class="slds-page-header__title slds-truncate" title="{!v.form.Name}">{!v.form.Name}</span>
+                                        <span class="slds-page-header__title slds-truncate" title="{!v.form.forms__Title__c}">{!v.form.forms__Title__c}</span>
                                     </h1>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                     <ul class="slds-page-header__detail-row">
                         <li class="slds-page-header__detail-block">
                             <div class="slds-text-title slds-truncate" title="Status">Status</div>
-                            <div class="slds-truncate" title="Draft">{!v.form.forms__Status__c}</div>
+                            <div class="slds-truncate" title="{!v.form.forms__Status__c}">{!v.form.forms__Status__c}</div>
                         </li>            
                     </ul>
                 </div>

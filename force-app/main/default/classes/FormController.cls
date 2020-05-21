@@ -1,24 +1,6 @@
 public with sharing class FormController {
 
 	@AuraEnabled
-	public static Clarity_Form__c create(){
-
-		Clarity_Form__c form = null;
-
-
-		Clarity_Form__c newForm = new Clarity_Form__c(Label__c = 'Clarity Form'); 
-		
-		Database.SaveResult result = Database.insert(newForm); 
-
-		if(!result.isSuccess()) {
-			throw new AuraHandledException('Unable to create Form');
-		}
-
-		return newForm;
-		
-	}
-
-	@AuraEnabled
 	public static void updateResponse(String responseId, Integer totalTime){
 		
 		List<Clarity_Form_Response__c> responses = [SELECT Id, Time__c, Name FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
@@ -44,13 +26,9 @@ public with sharing class FormController {
     @AuraEnabled
     public static Clarity_Form__c getForm(String recordId) {
 
-        List<Clarity_Form__c> forms = [SELECT Id, Label__c, Status__c, Name FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
+        List<Clarity_Form__c> forms = [SELECT Id, Title__c, Label__c, Status__c, Name FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
 
-		if(forms.size() > 0) {
-			return forms[0]; 
-		}
-
-		return create();
+		return forms[0]; 
 
     }
 
