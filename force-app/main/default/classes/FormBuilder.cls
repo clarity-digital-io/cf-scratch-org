@@ -247,9 +247,9 @@ global with sharing class FormBuilder {
 			}
 	
 
-			Boolean hasPermission = FLSUtility.isCreateable(links[0]);
+			Boolean hasPermission4 = FLSUtility.isCreateable(links[0]);
 
-			if(hasPermission) {
+			if(hasPermission4) {
 
 				List<Database.SaveResult> formLinkResults = Database.insert(links, true); 
 
@@ -306,9 +306,9 @@ global with sharing class FormBuilder {
 
         if(notFoundInParsedQuestionOptions.size() > 0) {
 
-			Boolean hasPermission = FLSUtility.isDeleteable(Schema.SObjectType.Clarity_Form_Question_Option__c);
+			Boolean hasPermission2 = FLSUtility.isDeleteable(Schema.SObjectType.Clarity_Form_Question_Option__c);
 
-			if(hasPermission) {
+			if(hasPermission2) {
 				
 				List<Database.DeleteResult> deleteOptions = Database.delete(notFoundInParsedQuestionOptions, true);
 
@@ -470,9 +470,9 @@ global with sharing class FormBuilder {
 
         List<Clarity_Form_Question_Criteria__c> parsedCriteria = (List<Clarity_Form_Question_Criteria__c>)JSON.deserialize(sCriteria, List<Clarity_Form_Question_Criteria__c>.class);
 
-		Boolean hasPermission = FLSUtility.isCreateable(parsedCriteria[0]);
+		Boolean hasPermission3 = FLSUtility.isCreateable(parsedCriteria[0]);
 
-		if(hasPermission) {
+		if(hasPermission3) {
 
 			List<Database.SaveResult> resultCriteria = Database.insert(parsedCriteria, true); 
 

@@ -571,9 +571,9 @@ public with sharing class FormService {
 
 		}
 		
-		Boolean hasPermission = FLSUtility.isUpdateable(cvUpdates[0]);
+		Boolean hasPermission2 = FLSUtility.isUpdateable(cvUpdates[0]);
 
-		if(hasPermission) {
+		if(hasPermission2) {
 
 			List<Database.SaveResult> updateContentResults = Database.update(cvUpdates, true); 
 
@@ -633,9 +633,9 @@ public with sharing class FormService {
 
         }
 
-		Boolean hasPermission = FLSUtility.isCreateable(answersByContentVersion.values()[0]);
+		Boolean hasPermission3 = FLSUtility.isCreateable(answersByContentVersion.values()[0]);
 
-		if(hasPermission) {
+		if(hasPermission3) {
 
 			List<Database.SaveResult> answerResults = Database.insert(answersByContentVersion.values(), true); 
 
@@ -664,9 +664,9 @@ public with sharing class FormService {
 
         }
 
-		Boolean hasPermission = FLSUtility.isCreateable(links[0]);
+		Boolean hasPermission4 = FLSUtility.isCreateable(links[0]);
 
-		if(hasPermission) {
+		if(hasPermission4) {
 
 			List<Database.SaveResult> formLinkResults = Database.insert(links, true); 
 
