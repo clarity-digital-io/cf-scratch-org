@@ -14,10 +14,16 @@ public with sharing class FormController {
 				response.Time__c = totalTime; 
 			}
 
-			Database.SaveResult result = Database.update(response, true); 
+			Boolean hasPermission = FLSUtility.isUpdateable(response);
 
-			if(!result.isSuccess()) {
-				throw new AuraHandledException('Unable to update response: ' + response.Name);
+			if(hasPermission) {
+
+				Database.SaveResult result = Database.update(response, true); 
+
+				if(!result.isSuccess()) {
+					throw new AuraHandledException('Unable to update response: ' + response.Name);
+				}
+
 			}
 		}
 
@@ -50,13 +56,19 @@ public with sharing class FormController {
     @AuraEnabled
     public static String deleteFormResponse(String responseId){
         
-        Clarity_Form_Response__c response = [SELECT Id, Name FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
+		Clarity_Form_Response__c response = [SELECT Id, Name FROM Clarity_Form_Response__c WHERE Id =: responseId Limit 1];
+		
+		Boolean hasPermission = FLSUtility.isDeleteable(Schema.SObjectType.Clarity_Form_Response__c);
 
-        Database.DeleteResult result = Database.delete(response, true); 
+		if(hasPermission) {
 
-        if(!result.isSuccess()) {
-            throw new AuraHandledException('Unable to delete response: ' + response.Name);
-        }
+			Database.DeleteResult result = Database.delete(response, true); 
+
+			if(!result.isSuccess()) {
+				throw new AuraHandledException('Unable to delete response: ' + response.Name);
+			}
+			
+		}
 
         return responseId;
     }
@@ -70,30 +82,42 @@ public with sharing class FormController {
             throw new AuraHandledException('Unable to delete form while it has Responses');
         }
 
-        Database.DeleteResult result = Database.delete(form, true); 
+		Boolean hasPermission = FLSUtility.isDeleteable(Schema.SObjectType.Clarity_Form__c);
 
-        if(!result.isSuccess()) {
-            throw new AuraHandledException('Unable to delete form: ' + form.Name);
-        }
+		if(hasPermission) {
+
+			Database.DeleteResult result = Database.delete(form, true); 
+
+			if(!result.isSuccess()) {
+				throw new AuraHandledException('Unable to delete form: ' + form.Name);
+			}
+			
+		}
 
         return 'Success';
 
-    }
+	}
 
     @AuraEnabled
     public static Clarity_Form__c publishForm(String recordId){
         
         Clarity_Form__c form = [SELECT Id, Status__c, Name FROM Clarity_Form__c WHERE Id =: recordId Limit 1]; 
 
-        form.Status__c = 'Published'; 
+		form.Status__c = 'Published'; 
+		
+		Boolean hasPermission = FLSUtility.isUpdateable(form);
 
-        Database.SaveResult result = Database.update(form, true); 
+		if(hasPermission) {
 
-        if(!result.isSuccess()) {
-            throw new AuraHandledException('Unable to publish form: ' + form.Name);
-        }
+			Database.SaveResult result = Database.update(form, true); 
 
-        return form;
+			if(!result.isSuccess()) {
+				throw new AuraHandledException('Unable to publish form: ' + form.Name);
+			}
+	
+		}
+
+	    return form;
 
     }
 

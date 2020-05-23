@@ -77,15 +77,21 @@ public with sharing class FormService {
 
         }
 
-        List<Database.SaveResult> connectionResults = Database.insert(connections, true); 
+		Boolean hasPermission = FLSUtility.isCreateable(connections[0]);
 
-        for(Database.SaveResult connectionResult : connectionResults) {
+		if(hasPermission) {
 
-            if(!connectionResult.isSuccess()) {
-                System.debug('error');
-            }
+			List<Database.SaveResult> connectionResults = Database.insert(connections, true); 
 
-        }
+			for(Database.SaveResult connectionResult : connectionResults) {
+
+				if(!connectionResult.isSuccess()) {
+					System.debug('error');
+				}
+
+			}
+			
+		}
         
         return connections;   
     }
@@ -279,7 +285,13 @@ public with sharing class FormService {
 
         if(oldResponses.size() > 0) {
 
-            List<Database.DeleteResult> deleteOldResponses = Database.delete(oldResponses, true);
+			Boolean hasPermission = FLSUtility.isDeleteable(Schema.SObjectType.Clarity_Form_Response__c);
+
+			if(hasPermission) {
+
+				List<Database.DeleteResult> deleteOldResponses = Database.delete(oldResponses, true);
+			
+			}
 
         }
 
@@ -289,11 +301,17 @@ public with sharing class FormService {
             OwnerId__c      = UserInfo.getUserId()
         );
 
-        Database.SaveResult result = Database.insert(response);
+		Boolean hasPermission = FLSUtility.isCreateable(response);
 
-        if(!result.isSuccess()) {
-            System.debug('error creating new repsonse');
-        }
+		if(hasPermission) {
+
+			Database.SaveResult result = Database.insert(response);
+
+			if(!result.isSuccess()) {
+				System.debug('error creating new repsonse');
+			}
+			
+		}
 
         return create(form, response, null); 
 
@@ -322,11 +340,17 @@ public with sharing class FormService {
 			}
 		}
 
-		Database.SaveResult result = Database.insert(response);
+		Boolean hasPermission = FLSUtility.isCreateable(response);
 
-        if(!result.isSuccess()) {
-            System.debug('error creating new repsonse');
-        }
+		if(hasPermission) {
+
+			Database.SaveResult result = Database.insert(response);
+
+			if(!result.isSuccess()) {
+				System.debug('error creating new repsonse');
+			}
+
+		}
 
         return create(form, response, sConnections); 
 
@@ -406,16 +430,22 @@ public with sharing class FormService {
 
         }
 
-        List<Database.SaveResult> results = Database.update(responsesUpdated, false);
+		Boolean hasPermission = FLSUtility.isUpdateable(responsesUpdated[0]);
 
-        for(Database.SaveResult result : results) {
+		if(hasPermission) {
 
-            if(result.isSuccess()) {
-                Clarity_Form_Response__c response = responses.get(result.getId());
-                success.add(response.Name);
-            }
+			List<Database.SaveResult> results = Database.update(responsesUpdated, false);
 
-        }
+			for(Database.SaveResult result : results) {
+
+				if(result.isSuccess()) {
+					Clarity_Form_Response__c response = responses.get(result.getId());
+					success.add(response.Name);
+				}
+
+			}
+		
+		}
 
         return success; 
 
@@ -506,15 +536,21 @@ public with sharing class FormService {
             cvSaves.addAll(cvs);
         }
 
-        List<Database.SaveResult> contentResults = Database.insert(cvSaves, true); 
+		Boolean hasPermission = FLSUtility.isCreateable(cvSaves[0]);
 
-        for(Database.SaveResult contentResult : contentResults) {
+		if(hasPermission) {
+		
+			List<Database.SaveResult> contentResults = Database.insert(cvSaves, true); 
 
-            if(!contentResult.isSuccess()) {
-                System.debug('error');
-            }
+			for(Database.SaveResult contentResult : contentResults) {
 
-        }
+				if(!contentResult.isSuccess()) {
+					System.debug('error');
+				}
+
+			}
+			
+		}
 
         List<ContentVersion> cvUpdates = new List<ContentVersion>();
 
@@ -533,17 +569,23 @@ public with sharing class FormService {
 
             contentsByQuestion.put(questionId, cvs); 
 
-        }
+		}
+		
+		Boolean hasPermission = FLSUtility.isUpdateable(cvUpdates[0]);
 
-        List<Database.SaveResult> updateContentResults = Database.update(cvUpdates, true); 
+		if(hasPermission) {
 
-        for(Database.SaveResult updateContentResult : updateContentResults) {
+			List<Database.SaveResult> updateContentResults = Database.update(cvUpdates, true); 
 
-            if(!updateContentResult.isSuccess()) {
-                System.debug('error');
-            }
+			for(Database.SaveResult updateContentResult : updateContentResults) {
 
-        }
+				if(!updateContentResult.isSuccess()) {
+					System.debug('error');
+				}
+
+			}
+			
+		}
 
         Map<Id, String> questionIdByContentVersionId = new Map<Id, String>(); 
 
@@ -591,13 +633,19 @@ public with sharing class FormService {
 
         }
 
-        List<Database.SaveResult> answerResults = Database.insert(answersByContentVersion.values(), true); 
+		Boolean hasPermission = FLSUtility.isCreateable(answersByContentVersion.values()[0]);
 
-        for(Database.SaveResult answerResult : answerResults) {
-            if(!answerResult.isSuccess()) {
-                System.debug('error');
-            }
-        }
+		if(hasPermission) {
+
+			List<Database.SaveResult> answerResults = Database.insert(answersByContentVersion.values(), true); 
+
+			for(Database.SaveResult answerResult : answerResults) {
+				if(!answerResult.isSuccess()) {
+					System.debug('error');
+				}
+			}
+			
+		}
 
         for(Id cvId : answersByContentVersion.keySet()) {
 
@@ -616,13 +664,19 @@ public with sharing class FormService {
 
         }
 
-        List<Database.SaveResult> formLinkResults = Database.insert(links, true); 
+		Boolean hasPermission = FLSUtility.isCreateable(links[0]);
 
-        for(Database.SaveResult formLinkResult : formLinkResults) {
-            if(!formLinkResult.isSuccess()) {
-                System.debug('error');
-            }
-        }
+		if(hasPermission) {
+
+			List<Database.SaveResult> formLinkResults = Database.insert(links, true); 
+
+			for(Database.SaveResult formLinkResult : formLinkResults) {
+				if(!formLinkResult.isSuccess()) {
+					System.debug('error');
+				}
+			}
+			
+		}
 
         return answersByContentVersion.values(); 
 

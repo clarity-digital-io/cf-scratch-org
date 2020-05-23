@@ -64,17 +64,23 @@ global with sharing class MobileResponseController {
 
 		}
 		
-		List<Database.SaveResult> results = Database.insert(records, true); 
+		Boolean hasPermission = FLSUtility.isCreateable(records[0]);
 
-        for(Database.SaveResult result : results) {
-            
-            if(!result.isSuccess()) {
+		if(hasPermission) {
 
-                System.debug('error: ' + result.getErrors());
+			List<Database.SaveResult> results = Database.insert(records, true); 
 
-            }
+			for(Database.SaveResult result : results) {
+				
+				if(!result.isSuccess()) {
 
-        }
+					System.debug('error: ' + result.getErrors());
+
+				}
+
+			}
+			
+		}
 
         return records;
 

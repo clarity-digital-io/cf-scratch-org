@@ -36,13 +36,19 @@ global with sharing class FormBuilder {
     @RemoteAction
     global static Clarity_Form__c updateForm(String sForm) {
 
-        Clarity_Form__c parsedForm = (Clarity_Form__c)JSON.deserialize(sForm, Clarity_Form__c.class);
+		Clarity_Form__c parsedForm = (Clarity_Form__c)JSON.deserialize(sForm, Clarity_Form__c.class);
+		
+		Boolean hasPermission = FLSUtility.isUpdateable(parsedForm);
 
-        Database.SaveResult result = Database.update(parsedForm, true); 
+		if(hasPermission) {
+			
+			Database.SaveResult result = Database.update(parsedForm, true); 
 
-        if(!result.isSuccess()) {
-            System.debug('error');
-        }
+			if(!result.isSuccess()) {
+				System.debug('error');
+			}
+	
+		}
 
         return parsedForm;
     
@@ -73,13 +79,21 @@ global with sharing class FormBuilder {
 
         Clarity_Form_Question__c parsedQuestion = (Clarity_Form_Question__c)JSON.deserialize(sQuestion, Clarity_Form_Question__c.class);
 
-        Database.SaveResult result = Database.update(parsedQuestion, true); 
+		Boolean hasPermission = FLSUtility.isUpdateable(parsedQuestion);
 
-        if(!result.isSuccess()) {
-            System.debug('error');
-        }
-        
-        return result.getId();
+		if(hasPermission) {
+
+			Database.SaveResult result = Database.update(parsedQuestion, true); 
+
+			if(!result.isSuccess()) {
+				System.debug('error');
+			}
+			
+			return result.getId();
+
+		} 
+
+		return '';
 
     }
 
@@ -142,21 +156,27 @@ global with sharing class FormBuilder {
 				cvSaves.add(cv);
 			}
 
-			List<Database.SaveResult> contentResults = Database.insert(cvSaves, true); 
+			Boolean hasPermission = FLSUtility.isCreateable(cvSaves[0]);
 
-			for(Database.SaveResult contentResult : contentResults) {
-	
-				if(!contentResult.isSuccess()) {
-					System.debug('error');
+			if(hasPermission) {
+
+				List<Database.SaveResult> contentResults = Database.insert(cvSaves, true); 
+
+				for(Database.SaveResult contentResult : contentResults) {
+		
+					if(!contentResult.isSuccess()) {
+						System.debug('error');
+					}
+		
 				}
-	
+
 			}
 
 			List<Clarity_Form_Question_Option__c> updateOptions = new List<Clarity_Form_Question_Option__c>();
 
 			for(String optionId : contents.keySet()) {
 				ContentVersion cv = contents.get(optionId); 
-				System.debug('savedParsedOptions: ' + savedParsedOptions); 
+
 				if(savedParsedOptions.get(optionId) != null) {
 					Clarity_Form_Question_Option__c option = savedParsedOptions.get(optionId);
 
@@ -167,14 +187,19 @@ global with sharing class FormBuilder {
 				
 			}
 
-			List<Database.SaveResult> optionsResults = Database.update(updateOptions, true); 
 
-			for(Database.SaveResult optionsResult : optionsResults) {
-	
-				if(!optionsResult.isSuccess()) {
-					System.debug('error');
+			Boolean hasPermission2 = FLSUtility.isUpdateable(updateOptions[0]);
+
+			if(hasPermission2) {
+				List<Database.SaveResult> optionsResults = Database.update(updateOptions, true); 
+
+				for(Database.SaveResult optionsResult : optionsResults) {
+		
+					if(!optionsResult.isSuccess()) {
+						System.debug('error');
+					}
+		
 				}
-	
 			}
 
 			List<ContentVersion> cvUpdates = new List<ContentVersion>();
@@ -187,14 +212,19 @@ global with sharing class FormBuilder {
 				cvIds.add(cv.Id); 
 			}
 
-			List<Database.SaveResult> updateContentResults = Database.update(cvUpdates, true); 
+			Boolean hasPermission3 = FLSUtility.isUpdateable(cvUpdates[0]);
 
-			for(Database.SaveResult updateContentResult : updateContentResults) {
-	
-				if(!updateContentResult.isSuccess()) {
-					System.debug('error');
+			if(hasPermission3) {
+
+				List<Database.SaveResult> updateContentResults = Database.update(cvUpdates, true); 
+
+				for(Database.SaveResult updateContentResult : updateContentResults) {
+		
+					if(!updateContentResult.isSuccess()) {
+						System.debug('error');
+					}
+		
 				}
-	
 			}
 
 			Map<Id, ContentVersion> createdContentVersions = new Map<Id, ContentVersion>([SELECT Id, Title, ContentSize, ContentDocumentId FROM ContentVersion WHERE Id IN :cvIds]);
@@ -216,14 +246,21 @@ global with sharing class FormBuilder {
 
 			}
 	
-			List<Database.SaveResult> formLinkResults = Database.insert(links, true); 
 
-			for(Database.SaveResult formLinkResult : formLinkResults) {
-				if(!formLinkResult.isSuccess()) {
-					System.debug('error');
+			Boolean hasPermission = FLSUtility.isCreateable(links[0]);
+
+			if(hasPermission) {
+
+				List<Database.SaveResult> formLinkResults = Database.insert(links, true); 
+
+				for(Database.SaveResult formLinkResult : formLinkResults) {
+					if(!formLinkResult.isSuccess()) {
+						System.debug('error');
+					}
 				}
+
 			}
-		
+			
 		} 
 
 		return savedOptions; 
@@ -235,11 +272,17 @@ global with sharing class FormBuilder {
 
         Clarity_Form_Question__c parsedQuestion = (Clarity_Form_Question__c)JSON.deserialize(sQuestion, Clarity_Form_Question__c.class);
 
-        Database.SaveResult resultQuestion = Database.update(parsedQuestion, true); 
+		Boolean hasPermission = FLSUtility.isUpdateable(parsedQuestion);
 
-        if(!resultQuestion.isSuccess()) {
-            System.debug('error result');
-        }
+		if(hasPermission) {
+
+			Database.SaveResult resultQuestion = Database.update(parsedQuestion, true); 
+
+			if(!resultQuestion.isSuccess()) {
+				System.debug('error result');
+			}
+		
+		}
 
         List<Clarity_Form_Question_Option__c> currentOptions = [SELECT Id, Order__c, Active_Flow__c, Label__c, Choice_Image__c FROM Clarity_Form_Question_Option__c WHERE Clarity_Form_Question__c =: parsedQuestion.Id];
 
@@ -262,18 +305,24 @@ global with sharing class FormBuilder {
         }
 
         if(notFoundInParsedQuestionOptions.size() > 0) {
-            
-            List<Database.DeleteResult> deleteOptions = Database.delete(notFoundInParsedQuestionOptions, true);
 
-            for(Database.DeleteResult deleteOption : deleteOptions) {
+			Boolean hasPermission = FLSUtility.isDeleteable(Schema.SObjectType.Clarity_Form_Question_Option__c);
 
-                if(!deleteOption.isSuccess()) {
+			if(hasPermission) {
+				
+				List<Database.DeleteResult> deleteOptions = Database.delete(notFoundInParsedQuestionOptions, true);
 
-                    System.debug('error: ' + deleteOption.getErrors());
+				for(Database.DeleteResult deleteOption : deleteOptions) {
 
-                }
+					if(!deleteOption.isSuccess()) {
 
-            }
+						System.debug('error: ' + deleteOption.getErrors());
+
+					}
+
+				}
+				
+			}
         }
 
         List<Database.UpsertResult> resultOptions = Database.upsert(parsedQuestionOptions, true); 
@@ -305,16 +354,22 @@ global with sharing class FormBuilder {
 
         List<Id> deleteQuestions = (List<Id>)JSON.deserialize(sQuestions, List<String>.class);
 
-        List<Clarity_Form_Question__c> questionsToDelete = [SELECT Id FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: formId AND Id IN :deleteQuestions];
-
-        List<Database.DeleteResult> deleteResults = Database.delete(questionsToDelete, true); 
-
-        for(Database.DeleteResult result : deleteResults) {
-            if(!result.isSuccess()) {
-                System.debug('delete fail');
-            }
-		}
+		List<Clarity_Form_Question__c> questionsToDelete = [SELECT Id FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: formId AND Id IN :deleteQuestions];
 		
+		Boolean hasPermission = FLSUtility.isDeleteable(Schema.SObjectType.Clarity_Form_Question_Option__c);
+
+		if(hasPermission) {
+
+			List<Database.DeleteResult> deleteResults = Database.delete(questionsToDelete, true); 
+
+			for(Database.DeleteResult result : deleteResults) {
+				if(!result.isSuccess()) {
+					System.debug('delete fail');
+				}
+			}
+
+		}
+			
 		return getQuestions(formId);
     
     }
@@ -324,23 +379,35 @@ global with sharing class FormBuilder {
 
         Clarity_Form_Question__c questionToDelete = [SELECT Id FROM Clarity_Form_Question__c WHERE Id =: sDeleteQuestionId];
 
-        Database.DeleteResult result = Database.delete(questionToDelete, true);
+		Boolean hasPermission = FLSUtility.isDeleteable(Schema.SObjectType.Clarity_Form_Question__c);
 
-        if(!result.isSuccess()) {
-            System.debug('error: ' + result.getErrors());
-        }
+		if(hasPermission) {
+
+			Database.DeleteResult result = Database.delete(questionToDelete, true);
+
+			if(!result.isSuccess()) {
+				System.debug('error: ' + result.getErrors());
+			}
+			
+		}
         
         List<Clarity_Form_Question__c> parsedQuestions = (List<Clarity_Form_Question__c>)JSON.deserialize(sQuestions, List<Clarity_Form_Question__c>.class);
 
-        List<Database.SaveResult> results = Database.update(parsedQuestions, true); 
+		Boolean hasPermission3 = FLSUtility.isUpdateable(parsedQuestions[0]);
 
-        for(Database.SaveResult sResult : results) {
+		if(hasPermission3) {
 
-            if(!sResult.isSuccess()) {
-                System.debug('error');
-            }
+			List<Database.SaveResult> results = Database.update(parsedQuestions, true); 
 
-        }
+			for(Database.SaveResult sResult : results) {
+
+				if(!sResult.isSuccess()) {
+					System.debug('error');
+				}
+
+			}
+			
+		}
 
         return parsedQuestions;
     }
@@ -369,39 +436,57 @@ global with sharing class FormBuilder {
 
         Clarity_Form_Question__c parsedQuestion = (Clarity_Form_Question__c)JSON.deserialize(sQuestion, Clarity_Form_Question__c.class);
 
-        Database.SaveResult resultQuestion = Database.update(parsedQuestion, true); 
+		Boolean hasPermission = FLSUtility.isUpdateable(parsedQuestion);
 
-        if(!resultQuestion.isSuccess()) {
-            System.debug('error');
-        }
+		if(hasPermission) {
 
-        List<Clarity_Form_Question_Criteria__c> currentCriteria = [SELECT Id FROM Clarity_Form_Question_Criteria__c WHERE Clarity_Form_Question__c =: parsedQuestion.Id];
+			Database.SaveResult resultQuestion = Database.update(parsedQuestion, true); 
 
-        List<Database.DeleteResult> resultCriteriaDelete = Database.delete(currentCriteria, true); 
+			if(!resultQuestion.isSuccess()) {
+				System.debug('error');
+			}
+			
+		}
 
-        for(Database.DeleteResult criteriaDelete : resultCriteriaDelete) {
+		List<Clarity_Form_Question_Criteria__c> currentCriteria = [SELECT Id FROM Clarity_Form_Question_Criteria__c WHERE Clarity_Form_Question__c =: parsedQuestion.Id];
+		
+		Boolean hasPermission2 = FLSUtility.isDeleteable(Schema.SObjectType.Clarity_Form_Question_Criteria__c);
 
-            if(!criteriaDelete.isSuccess()) {
+		if(hasPermission2) {
 
-                System.debug('error: ' + criteriaDelete.getErrors());
+			List<Database.DeleteResult> resultCriteriaDelete = Database.delete(currentCriteria, true); 
 
-            }
+			for(Database.DeleteResult criteriaDelete : resultCriteriaDelete) {
 
-        }
+				if(!criteriaDelete.isSuccess()) {
+
+					System.debug('error: ' + criteriaDelete.getErrors());
+
+				}
+
+			}
+
+		}
 
         List<Clarity_Form_Question_Criteria__c> parsedCriteria = (List<Clarity_Form_Question_Criteria__c>)JSON.deserialize(sCriteria, List<Clarity_Form_Question_Criteria__c>.class);
 
-        List<Database.SaveResult> resultCriteria = Database.insert(parsedCriteria, true); 
+		Boolean hasPermission = FLSUtility.isCreateable(parsedCriteria[0]);
 
-        for(Database.SaveResult newCriteria : resultCriteria) {
+		if(hasPermission) {
 
-            if(!newCriteria.isSuccess()) {
+			List<Database.SaveResult> resultCriteria = Database.insert(parsedCriteria, true); 
 
-                System.debug('error: ' + newCriteria.getErrors());
+			for(Database.SaveResult newCriteria : resultCriteria) {
 
-            }
+				if(!newCriteria.isSuccess()) {
 
-        }
+					System.debug('error: ' + newCriteria.getErrors());
+
+				}
+
+			}
+			
+		}
 
         Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
 
@@ -484,17 +569,23 @@ global with sharing class FormBuilder {
     @RemoteAction
     global static List<Clarity_Form_Question__c> saveRecordGroupFields(String sRecordGroupFields, String relatedRecordGroupId) {
 
-        List<Clarity_Form_Question__c> recordFieldsToDelete = [SELECT Id FROM Clarity_Form_Question__c WHERE Record_Group__c =: relatedRecordGroupId]; 
+		List<Clarity_Form_Question__c> recordFieldsToDelete = [SELECT Id FROM Clarity_Form_Question__c WHERE Record_Group__c =: relatedRecordGroupId]; 
+		
+		Boolean hasPermission = FLSUtility.isDeleteable(Schema.SObjectType.Clarity_Form_Question__c);
 
-        List<Database.DeleteResult> deleteResults = Database.delete(recordFieldsToDelete, true);
+		if(hasPermission) {
 
-        for(Database.DeleteResult deleteResult : deleteResults) {
-            
-            if(!deleteResult.isSuccess()) {
-                System.debug('error: ' + deleteResult.getErrors());
-            }
+			List<Database.DeleteResult> deleteResults = Database.delete(recordFieldsToDelete, true);
 
-        }
+			for(Database.DeleteResult deleteResult : deleteResults) {
+				
+				if(!deleteResult.isSuccess()) {
+					System.debug('error: ' + deleteResult.getErrors());
+				}
+
+			}
+			
+		}
 
         List<Clarity_Form_Question__c> parsedRecordGroupFields = (List<Clarity_Form_Question__c>)JSON.deserialize(sRecordGroupFields, List<Clarity_Form_Question__c>.class);
 
@@ -589,17 +680,23 @@ global with sharing class FormBuilder {
 
         if(removedParsedConnections.size() > 0) {
 
-            List<Database.DeleteResult> deleteResults = Database.delete(removedParsedConnections, true); 
+			Boolean hasPermission = FLSUtility.isDeleteable(Schema.SObjectType.Clarity_Form_Connection__c);
 
-            for(Database.DeleteResult deleteResult : deleteResults) {
+			if(hasPermission) {
 
-                if(!deleteResult.isSuccess()) {
+				List<Database.DeleteResult> deleteResults = Database.delete(removedParsedConnections, true); 
 
-                    System.debug('error: ' + deleteResult.getErrors());
+				for(Database.DeleteResult deleteResult : deleteResults) {
 
-                }
+					if(!deleteResult.isSuccess()) {
 
-            }
+						System.debug('error: ' + deleteResult.getErrors());
+
+					}
+
+				}
+				
+			}
 
         }
 
@@ -636,17 +733,23 @@ global with sharing class FormBuilder {
 
         List<Clarity_Form_Connection_Field__c> connection = [SELECT Id FROM Clarity_Form_Connection_Field__c WHERE Clarity_Form_Connection__c =: connectionId];
 
-        List<Database.DeleteResult> resultConnectionDelete = Database.delete(connection, true); 
+		Boolean hasPermission = FLSUtility.isDeleteable(Schema.SObjectType.Clarity_Form_Connection_Field__c);
 
-        for(Database.DeleteResult connectionDelete : resultConnectionDelete) {
+		if(hasPermission) {
 
-            if(!connectionDelete.isSuccess()) {
+			List<Database.DeleteResult> resultConnectionDelete = Database.delete(connection, true); 
 
-                System.debug('error: ' + connectionDelete.getErrors());
+			for(Database.DeleteResult connectionDelete : resultConnectionDelete) {
 
-            }
+				if(!connectionDelete.isSuccess()) {
 
-        }
+					System.debug('error: ' + connectionDelete.getErrors());
+
+				}
+
+			}
+			
+		}
 
         List<Clarity_Form_Connection_Field__c> parsedConnectionFields = (List<Clarity_Form_Connection_Field__c>)JSON.deserialize(sActiveConnectionFields, List<Clarity_Form_Connection_Field__c>.class);
     
@@ -691,15 +794,21 @@ global with sharing class FormBuilder {
 
         form.Status__c = status;
 
-        Database.SaveResult formResult = Database.update(form, true);
+		Boolean hasPermission = FLSUtility.isUpdateable(form);
 
-        if(formResult.isSuccess()) {
-            result.put('Status', 'Success'); 
-        } else {
-            result.put('Status', 'Error'); 
-        }
+		if(hasPermission) {
+			
+			Database.SaveResult formResult = Database.update(form, true);
 
-        result.put('Form', form); 
+			if(formResult.isSuccess()) {
+				result.put('Status', 'Success'); 
+			} else {
+				result.put('Status', 'Error'); 
+			}
+
+			result.put('Form', form); 
+			
+		}
 
         return result;
     }

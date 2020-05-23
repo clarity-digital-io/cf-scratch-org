@@ -77,46 +77,7 @@ sfdx force:user:display --targetusername securityreview
 
 sfdx force:org:delete -u test-7leetbcrqylb@example.com
 
-## commonly used commands
-
-sfdx force:apex:trigger:create -n ClarityFormResponseTrigger -d force-app/main/default/triggers
-
-sfdx force:lightning:app:create -n FormBuilderApp -d force-app/main/default/aura
-sfdx force:lightning:app:create -n FormResponseApp -d force-app/main/default/aura
-
-sfdx force:lightning:component:create --type aura -n FormResponseView -d force-app/main/default/aura
-
-sfdx force:lightning:component:create --type aura -n FormHeader -d force-app/main/default/aura
-
-sfdx force:lightning:component:create --type aura -n FormAnswersTable -d force-app/main/default/aura
-
-sfdx force:lightning:component:create --type aura -n FormResponseCard -d force-app/main/default/aura
-
-sfdx force:lightning:event:create -n FormResponseEvent -d force-app/main/default/aura
-
-sfdx force:apex:class:create -n FormResponseLimits -d force-app/main/default/classes
-
-sfdx force:lightning:component:create --type lwc -n formAnswers -d force-app/main/default/lwc
-
-sfdx force:lightning:component:create --type lwc -n imageAnswersTable -d force-app/main/default/lwc
-
-sfdx force:lightning:component:create --type lwc -n imageControl -d force-app/main/default/lwc
-
-sfdx force:apex:class:create -n ConnectionFieldValidationTest -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n ClarityFormBuilderTest -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n MobileService -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n MobileFormController -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n MobileRecordController -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n MobileResponseController -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n MobileSettingsController -d force-app/main/default/classes
-
-Mobile Settings Controller Should:
+## Mobile Settings Controller Should:
 
 - get company information (sandbox + company)
 - check user permission (clarity forms mobile)
@@ -124,37 +85,12 @@ Mobile Settings Controller Should:
 
 ## Tests
 
-### Clarity_Form_QuestionTriggerHandler
+## Security Checks 
 
-F - sfdx force:apex:class:create -n AuditLogBuilderServiceTest -d force-app/main/default/classes
+sfdx force:apex:class:create -n FLSUtility -d force-app/main/default/classes
 
-### Clarity_Form_ResponseTriggerHandler
+sfdx force:apex:class:create -n DatabaseUtility -d force-app/main/default/classes
 
-P - sfdx force:apex:class:create -n FormResponseAssignmentTest -d force-app/main/default/classes
-
-P - sfdx force:apex:class:create -n CreateResponseAnswersTest -d force-app/main/default/classes
-
-### Clarity_Form_ConnectionTriggerHandler
-
-sfdx force:apex:class:create -n ConnectionRecordProcessTest -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n ConnectionCreateJobTest -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n ConnectionFieldValidationTest -d force-app/main/default/classes
-
-### Service Tests
-
-sfdx force:apex:class:create -n ClarityFormBuilderTest -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n ClarityFormResponseTest -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n ClarityFormsExternalControllerTest -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n ClarityFormsOfflineControllerTest -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n ClarityFormsServiceTest -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n FormControllerTest -d force-app/main/default/classes
 
 ## Resources
 
@@ -182,46 +118,55 @@ https://sfdx-isv.github.io/sfdx-workshop/
 - Environment Hub
 - Create new Partner Developer Org
 
-## CRUD and FLS Security
 
-DMLManager.insert
-DMLManager.update
-DMLManager.upsert
-DMLManager.delete
-DMLManager.query
+## Rearchitect 
 
-sfdx force:apex:class:create -n DMLManager -d force-app/main/default/classes
+# UI/Front End Layer
 
-## sObjects
-Clarity_Form__c
-Clarity_Form_Answer__c
-Clarity_Form_Assignment__c
-Clarity_Form_Assignment_Rule__c
-Clarity_Form_Audit_Log__c
-Clarity_Form_Connection__c
-Clarity_Form_Connection_Field__c
-Clarity_Form_Connection_Process__c
-Clarity_Form_Question__c
-Clarity_Form_Question_Criteria__c
-Clarity_Form_Question_Filter__c
-Clarity_Form_Question_Flow__c
-Clarity_Form_Question_Flow_Design__c
-Clarity_Form_Question_Option__c
-Clarity_Form_Response__c
-Clarity_Form_Response_Connection__c
-Clarity_Form_Style__c
+- Used to build forms and create form responses
+Form Builder
+Form Response 
+Form Mobile Application 
 
-## Creating an External Form Generator
-New Setting in Clarity Form Settings
-- External JSON only 
-- External Simple only
-- External Designed
-- Connect with Pardot
+- Used for reviewing and setup
+Form Summary 
+Form Response View
+Form Response Results
 
-- Lead to Web Forms
-- - Users might want to only use Lead/Contact Fields
-- - Users might want to map to Lead/Contact Fields
-- - Relating to a Campaign
 
-## Required features
--- reCAPTCHA
+# Service Layer
+FormService.cls
+FormBuilder.cls
+FormController.cls
+FormResponse.cls
+
+MobileFormController
+MobileRecordController
+MobileResponseController
+MobileService
+
+# Domain Layer
+Clarity_Form_ConnectionTriggerHandler.cls
+Clarity_Form_QuestionTriggerHandler.cls
+Clarity_Form_ResponseTriggerHandler.cls
+ConnectionCreateJob.cls
+ConnectionFieldValidation.cls
+ConnectionRecordProcess.cls
+CreateResponseAnswers.cls
+QuestionFlowDesigns
+
+# Selector Layer
+
+Clarity_Form__c => Form__c
+Clarity_Form_Response__c => Response__c
+Clarity_Form_Answer__c => Answer__c
+Clarity_Form_Connection__c => Form_Connection__c
+Clarity_Form_Connection_Field__c => Connection_Field__c
+Clarity_Form_Connection_Process__c => Connection_Process__c
+Clarity_Form_Question__c => Question__c
+Clarity_Form_Question_Criteria__c => Question_Criteria__c
+Clarity_Form_Question_Filter__c => Question_Filter__c
+Clarity_Form_Question_Flow__c => Flow__c
+Clarity_Form_Question_Flow_Design__c => Flow_Design__c
+Clarity_Form_Question_Option__c => Question_Option__c
+Clarity_Form_Response_Connection__c => Response_Connection__c
