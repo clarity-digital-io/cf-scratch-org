@@ -50,6 +50,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FLSUtility</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>FormBuilder</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -485,6 +489,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Clarity_Form__c.Thank_You_Redirect__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Clarity_Form__c.Title__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
