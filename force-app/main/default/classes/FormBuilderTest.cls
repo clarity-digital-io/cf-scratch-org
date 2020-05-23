@@ -4,20 +4,20 @@ public class FormBuilderTest {
     @testSetup
     public static void setup(){
 
-		Clarity_Form__c form = TestDataFactory.generateForm();
+		Form__c form = TestDataFactory.generateForm();
 
-		List<Clarity_Form_Question__c> questions = TestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
+		List<Question__c> questions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
 
-        List<Clarity_Form_Connection__c> connections = TestDataFactory.generateConnections(true, form, new List<String>{ 'Opportunity' });
+        List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, form, new List<String>{ 'Opportunity' });
 
     }
 
     @isTest
     public static void shouldSaveQuestions() {
 
-		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c]; 
+		Form__c form = [SELECT Id FROM Form__c]; 
 
-		List<Clarity_Form_Question__c> questions = [SELECT Id FROM Clarity_Form_Question__c];
+		List<Question__c> questions = [SELECT Id FROM Question__c];
 
         String sQuestions = JSON.serialize(questions); 
 
@@ -34,11 +34,11 @@ public class FormBuilderTest {
     @isTest
     public static void shouldStartupFormBuilder() {
 
-		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c]; 
+		Form__c form = [SELECT Id FROM Form__c]; 
 		
 		Test.startTest();
         
-			Clarity_Form__c formStart = FormBuilder.startup(form.Id);
+			Form__c formStart = FormBuilder.startup(form.Id);
 		
 		Test.stopTest();
 
@@ -48,7 +48,7 @@ public class FormBuilderTest {
 	@isTest
     public static void shouldStartupNewFormBuilder() {
 
-        Clarity_Form__c formStart = FormBuilder.startup('');
+        Form__c formStart = FormBuilder.startup('');
 
 		System.assertEquals(null, formStart);
 
@@ -57,7 +57,7 @@ public class FormBuilderTest {
     @isTest
     public static void shouldUpdateForm() {
 
-        Clarity_Form__c form = TestDataFactory.generateForm();
+        Form__c form = TestDataFactory.generateForm();
 
 		form.Label__c = 'Test New Form'; 
 
@@ -65,7 +65,7 @@ public class FormBuilderTest {
 
 		Test.startTest();
 
-        	Clarity_Form__c updatedForm = FormBuilder.updateForm(sForm);
+        	Form__c updatedForm = FormBuilder.updateForm(sForm);
 
 		Test.stopTest();
 
@@ -75,13 +75,13 @@ public class FormBuilderTest {
     @isTest
     public static void shouldGetQuestions() {
 
-        Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
+        Form__c form = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<Clarity_Form_Question__c> expectedQuestions = [SELECT Id FROM Clarity_Form_Question__c]; 
+		List<Question__c> expectedQuestions = [SELECT Id FROM Question__c]; 
 
 		Test.startTest();
 
-        	List<Clarity_Form_Question__c> questions = FormBuilder.getQuestions(form.Id);
+        	List<Question__c> questions = FormBuilder.getQuestions(form.Id);
 
 		Test.stopTest();
 
@@ -91,17 +91,17 @@ public class FormBuilderTest {
     @isTest
     public static void shouldGetQuestionOptions() {
 
-        Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
+        Form__c form = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<Clarity_Form_Question__c> expectedQuestions = [SELECT Id FROM Clarity_Form_Question__c WHERE Type__c = 'Dropdown']; 
+		List<Question__c> expectedQuestions = [SELECT Id FROM Question__c WHERE Type__c = 'Dropdown']; 
 
-		List<Clarity_Form_Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(expectedQuestions);
+		List<Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(expectedQuestions);
 
 		insert optionsCreate;
 
 		Test.startTest();
 
-       		List<Clarity_Form_Question_Option__c> options = FormBuilder.getQuestionOptions(expectedQuestions[0].Id);
+       		List<Question_Option__c> options = FormBuilder.getQuestionOptions(expectedQuestions[0].Id);
 
 		Test.stopTest();
 
@@ -113,7 +113,7 @@ public class FormBuilderTest {
     @isTest
     public static void shouldSaveQuestionEdit() {
         
-		Clarity_Form_Question__c question = [SELECT Id, Title__c FROM Clarity_Form_Question__c LIMIT 1]; 
+		Question__c question = [SELECT Id, Title__c FROM Question__c LIMIT 1]; 
 		
 		question.Title__c = 'Something Else'; 
 
@@ -125,7 +125,7 @@ public class FormBuilderTest {
 
 		Test.stopTest();
 
-		Clarity_Form_Question__c newQuestion = [SELECT Id, Title__c FROM Clarity_Form_Question__c LIMIT 1]; 
+		Question__c newQuestion = [SELECT Id, Title__c FROM Question__c LIMIT 1]; 
 
 		System.assertEquals('Something Else', newQuestion.Title__c);
 
@@ -134,11 +134,11 @@ public class FormBuilderTest {
     @isTest
     public static void shouldSaveQuestionWithOptions() {
 
-        Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
+        Form__c form = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<Clarity_Form_Question__c> expectedQuestions = [SELECT Id FROM Clarity_Form_Question__c WHERE Type__c = 'Dropdown']; 
+		List<Question__c> expectedQuestions = [SELECT Id FROM Question__c WHERE Type__c = 'Dropdown']; 
 
-		List<Clarity_Form_Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(expectedQuestions);
+		List<Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(expectedQuestions);
 
 		String sQuestion = JSON.serialize(expectedQuestions[0]); 
 
@@ -156,17 +156,17 @@ public class FormBuilderTest {
 	@isTest
     public static void shouldSaveQuestionWithPictureOptions() {
 
-        Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
+        Form__c form = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<Clarity_Form_Question__c> expectedQuestions = [SELECT Id, Clarity_Form__c FROM Clarity_Form_Question__c WHERE Type__c = 'Dropdown']; 
+		List<Question__c> expectedQuestions = [SELECT Id, Form__c FROM Question__c WHERE Type__c = 'Dropdown']; 
 
-		List<Clarity_Form_Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(expectedQuestions);
+		List<Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(expectedQuestions);
 
 		String sQuestion = JSON.serialize(expectedQuestions[0]); 
 
-		Map<Decimal, Clarity_Form_Question_Option__c> optionsCreateMap = new Map<Decimal, Clarity_Form_Question_Option__c>();
+		Map<Decimal, Question_Option__c> optionsCreateMap = new Map<Decimal, Question_Option__c>();
 
-		for(Clarity_Form_Question_Option__c option : optionsCreate) {
+		for(Question_Option__c option : optionsCreate) {
 			optionsCreateMap.put(option.Order__c, option); 
 		}
 
@@ -191,10 +191,10 @@ public class FormBuilderTest {
 
 		String sDeleteQuestionId = ''; 
 
-		List<Clarity_Form_Question__c> keepQuestions = new List<Clarity_Form_Question__c>(); 
-		List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c FROM Clarity_Form_Question__c]; 
+		List<Question__c> keepQuestions = new List<Question__c>(); 
+		List<Question__c> questions = [SELECT Id, Type__c FROM Question__c]; 
 
-		for(Clarity_Form_Question__c question : questions) {
+		for(Question__c question : questions) {
 			if(question.Type__c == 'Dropdown') {
 				
 				sDeleteQuestionId = question.Id;
@@ -208,7 +208,7 @@ public class FormBuilderTest {
 
 		Test.startTest();
 
-	        List<Clarity_Form_Question__c> updatedQuestions = FormBuilder.deleteQuestion(JSON.serialize(keepQuestions), sDeleteQuestionId);
+	        List<Question__c> updatedQuestions = FormBuilder.deleteQuestion(JSON.serialize(keepQuestions), sDeleteQuestionId);
 
 		Test.stopTest();
 
@@ -221,9 +221,9 @@ public class FormBuilderTest {
 
 		String sQuestionId = ''; 
 
-		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
+		Form__c form = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<Clarity_Form_Question__c> expectedQuestions = [SELECT Id FROM Clarity_Form_Question__c WHERE Type__c = 'Dropdown']; 
+		List<Question__c> expectedQuestions = [SELECT Id FROM Question__c WHERE Type__c = 'Dropdown']; 
 		
 		Test.startTest();
 
@@ -255,11 +255,11 @@ public class FormBuilderTest {
     @isTest
     public static void shouldGetConnections() {
 
-		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c]; 
+		Form__c form = [SELECT Id FROM Form__c]; 
 		
 		Test.startTest();
         
-			List<Clarity_Form_Connection__c> connections = FormBuilder.getConnections(form.Id);
+			List<Form_Connection__c> connections = FormBuilder.getConnections(form.Id);
 		
 		Test.stopTest();
 
@@ -270,7 +270,7 @@ public class FormBuilderTest {
     @isTest
     public static void shouldUpdateStatus() {
 
-		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
+		Form__c form = [SELECT Id FROM Form__c LIMIT 1];
 
 		Test.startTest();
 

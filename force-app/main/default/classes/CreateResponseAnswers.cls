@@ -3,36 +3,36 @@
 * @company Clarity Forms
 * @date 07/22/2019
 *
-* @group Clarity_Form_Response__c
+* @group Response__c
 *
-* @description On insert of Clarity_Form_Response__c create an answer for each question.
+* @description On insert of Response__c create an answer for each question.
 */
 public class CreateResponseAnswers {
 
-    private static Map<Id, List<Clarity_Form_Question__c>> FormQuestions {
+    private static Map<Id, List<Question__c>> FormQuestions {
         get {
 
             if(FormQuestions == null) {
 
-                FormQuestions = new Map<Id,  List<Clarity_Form_Question__c>>();
+                FormQuestions = new Map<Id,  List<Question__c>>();
 
                 List<Id> formIds = new List<Id>();
 
-                for(Clarity_Form_Response__c response : (List<Clarity_Form_Response__c>)Trigger.new) {
-                    formIds.add(response.Clarity_Form__c);
+                for(Response__c response : (List<Response__c>)Trigger.new) {
+                    formIds.add(response.Form__c);
                 }
 
-                List<Clarity_Form_Question__c> questions = [SELECT Id, Record_Group__c, Type__c, Clarity_Form__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c IN :formIds];
+                List<Question__c> questions = [SELECT Id, Record_Group__c, Type__c, Form__c FROM Question__c WHERE Form__c IN :formIds];
 
-                for(Clarity_Form_Question__c question : questions) { 
+                for(Question__c question : questions) { 
 
-                    if(FormQuestions.get(question.Clarity_Form__c) != null) {
+                    if(FormQuestions.get(question.Form__c) != null) {
                         
-                        FormQuestions.get(question.Clarity_Form__c).add(question);
+                        FormQuestions.get(question.Form__c).add(question);
 
                     } else {
 
-                        FormQuestions.put(question.Clarity_Form__c, new List<Clarity_Form_Question__c>{ question });
+                        FormQuestions.put(question.Form__c, new List<Question__c>{ question });
 
                     }
 
@@ -45,20 +45,20 @@ public class CreateResponseAnswers {
         set; 
     }
 
-    public static void execute(List<Clarity_Form_Answer__c> answersToBeCreated, Clarity_Form_Response__c response) {
+    public static void execute(List<Answer__c> answersToBeCreated, Response__c response) {
         
         if(response.Status__c != 'New') return; 
                 
-        if(FormQuestions.get(response.Clarity_Form__c) == null) return; 
+        if(FormQuestions.get(response.Form__c) == null) return; 
 
-        List<Clarity_Form_Question__c> questions = FormQuestions.get(response.Clarity_Form__c); 
+        List<Question__c> questions = FormQuestions.get(response.Form__c); 
 
-        for(Clarity_Form_Question__c question : questions) {
+        for(Question__c question : questions) {
 
             if(question.Record_Group__c == null && question.Type__c != 'RecordGroup' && question.Type__c != 'FreeText') {
-                Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
-                    Clarity_Form_Response__c = response.Id, 
-                    Clarity_Form_Question__c = question.Id
+                Answer__c answer = new Answer__c(
+                    Response__c = response.Id, 
+                    Question__c = question.Id
                 );
                 answersToBeCreated.add(answer);
             }

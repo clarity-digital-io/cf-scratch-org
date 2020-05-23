@@ -5,19 +5,19 @@ public class ConnectionCreateJob implements Queueable {
 
     private Integer order;
 
-    private List<Clarity_Form_Connection__c> connections;
+    private List<Form_Connection__c> connections;
 
-    private Map<Id, Clarity_Form_Response_Connection__c> responseConnections;
+    private Map<Id, Response_Connection__c> responseConnections;
 
-    private Map<Id, Clarity_Form_Answer__c> answersByQuestion;
+    private Map<Id, Answer__c> answersByQuestion;
 
-    private Map<Id, Clarity_Form_Connection_Process__c> processByConnections;
+    private Map<Id, Form_Connection_Process__c> processByConnections;
     
     private Map<String, Id> storedResults;
 
-	private Clarity_Form_Response__c response; 
+	private Response__c response; 
 
-    public ConnectionCreateJob(Integer order, List<Clarity_Form_Connection__c> connections, Map<Id, Clarity_Form_Response_Connection__c> responseConnections, Map<Id, Clarity_Form_Answer__c> answersByQuestion, Map<Id, Clarity_Form_Connection_Process__c> processByConnections, Map<String, Id> storedResults, Clarity_Form_Response__c response) {
+    public ConnectionCreateJob(Integer order, List<Form_Connection__c> connections, Map<Id, Response_Connection__c> responseConnections, Map<Id, Answer__c> answersByQuestion, Map<Id, Form_Connection_Process__c> processByConnections, Map<String, Id> storedResults, Response__c response) {
         this.order = order;
         this.connections = connections;
         this.responseConnections = responseConnections;
@@ -29,11 +29,11 @@ public class ConnectionCreateJob implements Queueable {
 
     public void execute(QueueableContext context) {
 
-        List<Clarity_Form_Connection_Field__c> fields = [SELECT Id, Clarity_Form_Connection__c, Custom_Value__c, Salesforce_Field__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Field__c WHERE Clarity_Form_Connection__c =: connections[order].Id];
+        List<Form_Connection_Field__c> fields = [SELECT Id, Form_Connection__c, Custom_Value__c, Salesforce_Field__c, Question__c FROM Form_Connection_Field__c WHERE Form_Connection__c =: connections[order].Id];
 
         if(fields.size() > 0) {
 
-			Clarity_Form_Response_Connection__c rConnection = null; 
+			Response_Connection__c rConnection = null; 
 
 			if(responseConnections.get(connections[order].Id) != null) {
 				rConnection = responseConnections.get(connections[order].Id); 
@@ -53,15 +53,15 @@ public class ConnectionCreateJob implements Queueable {
 				genericObject = convertType.newSObject();
 			}
 
-            for(Clarity_Form_Connection_Field__c field : fields) {
+            for(Form_Connection_Field__c field : fields) {
 
 				if(field.Salesforce_Field__c == null) continue;
 
                 String dirtyAnswer;
 
-                if(field.Clarity_Form_Question__c != null) {
+                if(field.Question__c != null) {
 
-                    dirtyAnswer = answersByQuestion.get(field.Clarity_Form_Question__c) != null ? answersByQuestion.get(field.Clarity_Form_Question__c).Answer__c : ''; 
+                    dirtyAnswer = answersByQuestion.get(field.Question__c) != null ? answersByQuestion.get(field.Question__c).Answer__c : ''; 
 
                 } else if(field.Custom_Value__c != null) {
 
@@ -92,7 +92,7 @@ public class ConnectionCreateJob implements Queueable {
 
 			Boolean access = rConnection != null ? convertType.getDescribe().isUpdateable() : convertType.getDescribe().isCreateable(); 
 
-            Clarity_Form_Connection_Process__c connectionStatus = processByConnections.get(connections[order].Id);
+            Form_Connection_Process__c connectionStatus = processByConnections.get(connections[order].Id);
 
 			if(access) {
             	
@@ -105,7 +105,7 @@ public class ConnectionCreateJob implements Queueable {
 					connectionStatus.Salesforce_Connection_Object__c = record.getId();
 					connectionStatus.Status__c = 'Success';
 
-					Schema.SObjectType responseType = Schema.Clarity_Form_Response__c.getSObjectType(); 
+					Schema.SObjectType responseType = Schema.Response__c.getSObjectType(); 
 					
 					Map<String, Schema.SObjectField> responseSObjectFields = responseType.getDescribe().fields.getMap();
 
@@ -226,7 +226,7 @@ public class ConnectionCreateJob implements Queueable {
 	@future
 	public static void connectRecords(String sResponse, String connectedName, String recordId) {
 
-		Clarity_Form_Response__c response = (Clarity_Form_Response__c)JSON.deserialize(sResponse, Clarity_Form_Response__c.class);
+		Response__c response = (Response__c)JSON.deserialize(sResponse, Response__c.class);
 		response.put(connectedName, recordId);
 		update response; 
 

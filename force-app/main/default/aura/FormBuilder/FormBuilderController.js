@@ -7,7 +7,7 @@
 		let formId = message.payload.value; 
 
 		if(name == 'Back') {
-			window.open ('/lightning/r/forms_Clarity_Form__c/' + formId + '/view','_self',false)
+			window.open ('/lightning/r/forms_Form__c/' + formId + '/view','_self',false)
 		}
 
 		if(name == 'Help') {

@@ -4,30 +4,30 @@ public class ConnectionRecordProcessTest {
     @testSetup
     public static void setup(){
                 
-        List<Clarity_Form__c> forms = TestDataFactory.generateForms(5);
+        List<Form__c> forms = TestDataFactory.generateForms(5);
 
-        List<Clarity_Form_Question__c> questions = TestDataFactory.generateQuestions(forms);
+        List<Question__c> questions = TestDataFactory.generateQuestions(forms);
 		//response 1 prep
-        List<Clarity_Form_Connection__c> connections = TestDataFactory.generateConnections(true, forms[0], new List<String>{ 'Opportunity' });
+        List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, forms[0], new List<String>{ 'Opportunity' });
 
         TestDataFactory.generateConnectionFields(connections[0], new Map<String, Id>{'ForecastCategoryName' =>  questions[0].Id });
 
         TestDataFactory.publishForm(forms[0]);
 
-		Clarity_Form_Response__c response = TestDataFactory.generateResponse(forms[0]);
+		Response__c response = TestDataFactory.generateResponse(forms[0]);
 		//response 2 prep
-		List<Clarity_Form_Connection__c> connections2 = TestDataFactory.generateConnections(true, forms[1], new List<String>{ 'Opportunity' });
+		List<Form_Connection__c> connections2 = TestDataFactory.generateConnections(true, forms[1], new List<String>{ 'Opportunity' });
 
         TestDataFactory.generateCustomConnectionFields(connections2[0], new Map<String, String>{ 'Name' => 'Custom Name', 'StageName' => 'Prospecting', 'CloseDate' => '07/22/2030' });
 
         TestDataFactory.publishForm(forms[1]);
 
-		Clarity_Form_Response__c response2 = TestDataFactory.generateResponse(forms[1]);
+		Response__c response2 = TestDataFactory.generateResponse(forms[1]);
 
         TestDataFactory.generateAnswers(response2, questions);
 		
 		//response 3 prep
-        List<Clarity_Form_Connection__c> connections3 = TestDataFactory.generateConnections(true, forms[2], new List<String>{ 'Opportunity', 'Contact' });
+        List<Form_Connection__c> connections3 = TestDataFactory.generateConnections(true, forms[2], new List<String>{ 'Opportunity', 'Contact' });
 
         TestDataFactory.generateCustomConnectionFields(connections3[0], new Map<String, String>{ 'Name' => 'Custom Name', 'StageName' => 'Prospecting', 'CloseDate' => '07/22/2030' });
 
@@ -35,18 +35,18 @@ public class ConnectionRecordProcessTest {
 
         TestDataFactory.publishForm(forms[2]);
 
-        Clarity_Form_Response__c response3 = TestDataFactory.generateResponse(forms[2]);
+        Response__c response3 = TestDataFactory.generateResponse(forms[2]);
 
         TestDataFactory.generateAnswers(response3, questions);
 
-        Clarity_Form_Question__c question = [SELECT Id, Type__c, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment' AND Clarity_Form__c =: forms[2].Id LIMIT 1];
+        Question__c question = [SELECT Id, Type__c, Title__c FROM Question__c WHERE Type__c = 'Comment' AND Form__c =: forms[2].Id LIMIT 1];
 
 		TestDataFactory.updateAnswer(response3, question);
 
 		//response 4 prep
-        List<Clarity_Form_Connection__c> connections4 = TestDataFactory.generateConnections(true, forms[3], new List<String>{ 'Opportunity' });
+        List<Form_Connection__c> connections4 = TestDataFactory.generateConnections(true, forms[3], new List<String>{ 'Opportunity' });
 
-        List<Clarity_Form_Question__c> questions4 = [SELECT Id, Type__c, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment' AND Clarity_Form__c =: forms[3].Id];
+        List<Question__c> questions4 = [SELECT Id, Type__c, Title__c FROM Question__c WHERE Type__c = 'Comment' AND Form__c =: forms[3].Id];
 
         TestDataFactory.generateConnectionFields(connections4[0], new Map<String, String>{ 'Name' => questions4[0].Id });
 
@@ -54,12 +54,12 @@ public class ConnectionRecordProcessTest {
 
         TestDataFactory.publishForm(forms[3]);
 
-        Clarity_Form_Response__c response4 = TestDataFactory.generateResponse(forms[3]);
+        Response__c response4 = TestDataFactory.generateResponse(forms[3]);
 
         TestDataFactory.generateAnswers(response4, questions4);
 		
 		//response 5 prep
-        List<Clarity_Form_Connection__c> connections5 = TestDataFactory.generateConnections(true, forms[4],  new List<String>{ 'Account', 'Opportunity' });
+        List<Form_Connection__c> connections5 = TestDataFactory.generateConnections(true, forms[4],  new List<String>{ 'Account', 'Opportunity' });
 
         TestDataFactory.generateCustomConnectionFields(connections5[0], new Map<String, String>{ 'Name' => 'Custom Account Name' });
 
@@ -67,9 +67,9 @@ public class ConnectionRecordProcessTest {
 
         TestDataFactory.publishForm(forms[4]);
 
-        Clarity_Form_Response__c response5 = TestDataFactory.generateResponse(forms[4]);
+        Response__c response5 = TestDataFactory.generateResponse(forms[4]);
 
-        List<Clarity_Form_Question__c> questions5 = [SELECT Id,  Type__c, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'Comment' AND Clarity_Form__c =: forms[4].Id];
+        List<Question__c> questions5 = [SELECT Id,  Type__c, Title__c FROM Question__c WHERE Type__c = 'Comment' AND Form__c =: forms[4].Id];
 
         TestDataFactory.generateAnswers(response5, questions5);
     }
@@ -79,9 +79,9 @@ public class ConnectionRecordProcessTest {
         
         ConnectionCreateJob.chainJob = false;
 
-        List<Clarity_Form_Response__c> responses = [SELECT Id, Name, Status__c, Clarity_Form__c FROM Clarity_Form_Response__c];
+        List<Response__c> responses = [SELECT Id, Name, Status__c, Form__c FROM Response__c];
 
-		Clarity_Form_Response__c response = responses[0];
+		Response__c response = responses[0];
 
         Test.startTest();       
             
@@ -97,9 +97,9 @@ public class ConnectionRecordProcessTest {
 
 		List<Opportunity> opportunities = [SELECT Id, ForecastCategoryName FROM Opportunity];
 
-        List<Clarity_Form_Connection_Process__c> connectionProcess = [SELECT Id, Salesforce_Connection_Object__c, Status__c FROM Clarity_Form_Connection_Process__c WHERE Clarity_Form_Response__c =: response.Id]; 
+        List<Form_Connection_Process__c> connectionProcess = [SELECT Id, Salesforce_Connection_Object__c, Status__c FROM Form_Connection_Process__c WHERE Response__c =: response.Id]; 
 
-        for(Clarity_Form_Connection_Process__c process : connectionProcess) {
+        for(Form_Connection_Process__c process : connectionProcess) {
             System.assertEquals('Failed', process.Status__c); 
         }
 
@@ -112,9 +112,9 @@ public class ConnectionRecordProcessTest {
 
         ConnectionCreateJob.chainJob = false;
 
-        List<Clarity_Form_Response__c> responses = [SELECT Id, Status__c FROM Clarity_Form_Response__c];
+        List<Response__c> responses = [SELECT Id, Status__c FROM Response__c];
 
-		Clarity_Form_Response__c response = responses[1];
+		Response__c response = responses[1];
 
         Test.startTest();       
             
@@ -128,9 +128,9 @@ public class ConnectionRecordProcessTest {
         
         Test.stopTest(); 
 
-        List<Clarity_Form_Connection_Process__c> connectionProcess = [SELECT Id, Salesforce_Connection_Object__c, Status__c FROM Clarity_Form_Connection_Process__c]; 
+        List<Form_Connection_Process__c> connectionProcess = [SELECT Id, Salesforce_Connection_Object__c, Status__c FROM Form_Connection_Process__c]; 
 
-        for(Clarity_Form_Connection_Process__c process : connectionProcess) {
+        for(Form_Connection_Process__c process : connectionProcess) {
             System.assertEquals('Success', process.Status__c); 
         }
 
@@ -144,9 +144,9 @@ public class ConnectionRecordProcessTest {
 
         ConnectionCreateJob.chainJob = false;
 
-        List<Clarity_Form_Response__c> responses = [SELECT Id, Status__c FROM Clarity_Form_Response__c];
+        List<Response__c> responses = [SELECT Id, Status__c FROM Response__c];
 
-		Clarity_Form_Response__c response = responses[2];
+		Response__c response = responses[2];
 
         Test.startTest();       
             
@@ -156,9 +156,9 @@ public class ConnectionRecordProcessTest {
         
         Test.stopTest(); 
 
-        List<Clarity_Form_Connection_Process__c> connectionProcess = [SELECT Id, Status__c FROM Clarity_Form_Connection_Process__c]; 
+        List<Form_Connection_Process__c> connectionProcess = [SELECT Id, Status__c FROM Form_Connection_Process__c]; 
 
-        for(Clarity_Form_Connection_Process__c process : connectionProcess) {
+        for(Form_Connection_Process__c process : connectionProcess) {
             System.assertEquals('Success', process.Status__c); 
         }
 
@@ -177,9 +177,9 @@ public class ConnectionRecordProcessTest {
 
         ConnectionCreateJob.chainJob = false;
 
-        List<Clarity_Form_Response__c> responses = [SELECT Id, Status__c, Clarity_Form__c FROM Clarity_Form_Response__c];
+        List<Response__c> responses = [SELECT Id, Status__c, Form__c FROM Response__c];
 
-		Clarity_Form_Response__c response = responses[3];
+		Response__c response = responses[3];
 
         Test.startTest();       
             
@@ -189,9 +189,9 @@ public class ConnectionRecordProcessTest {
         
         Test.stopTest(); 
 
-        List<Clarity_Form_Connection_Process__c> connectionProcess = [SELECT Id, Salesforce_Connection_Object__c, Status__c FROM Clarity_Form_Connection_Process__c WHERE Clarity_Form_Response__c =: response.Id]; 
+        List<Form_Connection_Process__c> connectionProcess = [SELECT Id, Salesforce_Connection_Object__c, Status__c FROM Form_Connection_Process__c WHERE Response__c =: response.Id]; 
 
-        for(Clarity_Form_Connection_Process__c process : connectionProcess) {
+        for(Form_Connection_Process__c process : connectionProcess) {
             System.assertEquals('Success', process.Status__c); 
         }
 
@@ -206,9 +206,9 @@ public class ConnectionRecordProcessTest {
 
         ConnectionCreateJob.chainJob = false;
 
-        List<Clarity_Form_Response__c> responses = [SELECT Id, Status__c, Clarity_Form__c FROM Clarity_Form_Response__c];
+        List<Response__c> responses = [SELECT Id, Status__c, Form__c FROM Response__c];
 
-		Clarity_Form_Response__c response = responses[4];
+		Response__c response = responses[4];
 
         Test.startTest();       
             
@@ -218,9 +218,9 @@ public class ConnectionRecordProcessTest {
         
         Test.stopTest(); 
 
-        List<Clarity_Form_Connection_Process__c> connectionProcess = [SELECT Id, Salesforce_Connection_Object__c, Status__c FROM Clarity_Form_Connection_Process__c WHERE Clarity_Form_Response__c =: response.Id]; 
+        List<Form_Connection_Process__c> connectionProcess = [SELECT Id, Salesforce_Connection_Object__c, Status__c FROM Form_Connection_Process__c WHERE Response__c =: response.Id]; 
 
-        for(Clarity_Form_Connection_Process__c process : connectionProcess) {
+        for(Form_Connection_Process__c process : connectionProcess) {
             System.assertEquals('Success', process.Status__c); 
         }
 

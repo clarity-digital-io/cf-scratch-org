@@ -3,9 +3,9 @@
 * @company Clarity Forms
 * @date 05/16/2019
 *
-* @group Clarity_Form_Connection_Field__c
+* @group Form_Connection_Field__c
 *
-* @description On update of Clarity_Form_Connection__c, if salesforce object was changed delete Clarity_Form_Connection_Field__c records
+* @description On update of Form_Connection__c, if salesforce object was changed delete Form_Connection_Field__c records
 */
 @isTest
 public class ConnectionFieldValidationTest {
@@ -13,22 +13,22 @@ public class ConnectionFieldValidationTest {
     @testSetup
     public static void setup() {
         
-        Clarity_Form__c form = TestDataFactory.generateForm();
+        Form__c form = TestDataFactory.generateForm();
 
-        List<Clarity_Form_Question__c> questions = TestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
+        List<Question__c> questions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
 
-        Clarity_Form_Connection__c connection = new Clarity_Form_Connection__c(
-            Clarity_Form__c = form.Id, 
+        Form_Connection__c connection = new Form_Connection__c(
+            Form__c = form.Id, 
             Salesforce_Object__c = 'Account',
             Type__c = 'Create'
         );
 
         insert connection; 
 
-        Clarity_Form_Connection_Field__c field = new Clarity_Form_Connection_Field__c(
+        Form_Connection_Field__c field = new Form_Connection_Field__c(
             Custom_Value__c = 'Testing',
             PreFill__c = true,
-            Clarity_Form_Connection__c = connection.Id
+            Form_Connection__c = connection.Id
         );
 
         insert field; 
@@ -38,9 +38,9 @@ public class ConnectionFieldValidationTest {
     @isTest
     public static void shouldDeleteFieldOnConnectionUpdate() {
 
-        Clarity_Form_Connection__c connection = [SELECT Id FROM Clarity_Form_Connection__c];
+        Form_Connection__c connection = [SELECT Id FROM Form_Connection__c];
 
-        List<Clarity_Form_Connection_Field__c> beforeFields = [SELECT Id FROM Clarity_Form_Connection_Field__c];
+        List<Form_Connection_Field__c> beforeFields = [SELECT Id FROM Form_Connection_Field__c];
 
         System.assertEquals(1, beforeFields.size());
 
@@ -52,7 +52,7 @@ public class ConnectionFieldValidationTest {
         
         Test.stopTest(); 
 
-        List<Clarity_Form_Connection_Field__c> afterFields = [SELECT Id FROM Clarity_Form_Connection_Field__c];
+        List<Form_Connection_Field__c> afterFields = [SELECT Id FROM Form_Connection_Field__c];
 
         System.assertEquals(0, afterFields.size());
 

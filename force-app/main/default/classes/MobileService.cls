@@ -5,24 +5,24 @@ public with sharing class MobileService {
 
 		Map<String, Map<String, sObject>> records = new Map<String, Map<String, sObject>>(); 
 
-		List<Clarity_Form__c> forms = [SELECT Id FROM Clarity_Form__c WHERE Status__c = 'Published'];
+		List<Form__c> forms = [SELECT Id FROM Form__c WHERE Status__c = 'Published'];
 
 		List<Id> formIds = new List<Id>(); 
 
-		for (Clarity_Form__c form : forms) {
+		for (Form__c form : forms) {
 			formIds.add(form.Id); 
 		}
 
-		List<Clarity_Form_Connection__c> formConnections = [SELECT Id, Clarity_Form__c, Salesforce_Object__c, New__c, 
-		(SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
-		FROM Clarity_Form_Connection__c WHERE Clarity_Form__c IN :formIds];
+		List<Form_Connection__c> formConnections = [SELECT Id, Form__c, Salesforce_Object__c, New__c, 
+		(SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Question__c FROM Form_Connection_Fields__r) 
+		FROM Form_Connection__c WHERE Form__c IN :formIds];
 
 
 		Map<String, Set<String>> objectFields = new Map<String, Set<String>>(); 
 
-		for(Clarity_Form_Connection__c formConnection : formConnections) {
+		for(Form_Connection__c formConnection : formConnections) {
 
-			for(Clarity_Form_Connection_Field__c field : formConnection.Clarity_Form_Connection_Fields__r) {
+			for(Form_Connection_Field__c field : formConnection.Form_Connection_Fields__r) {
 							
 				if(objectFields.get(formConnection.Salesforce_Object__c) != null) {
 
@@ -99,7 +99,7 @@ public with sharing class MobileService {
         /**
         * Grab Forms
         **/
-        List<Clarity_Form__c> forms = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Multi_Page__c, Multi_Page_Info__c, Multi_Page_Val__c FROM Clarity_Form__c WHERE Status__c = 'Published'];
+        List<Form__c> forms = [SELECT Id, Name, Limit__c, Status__c, End_Date__c, Multi_Page__c, Multi_Page_Info__c, Multi_Page_Val__c FROM Form__c WHERE Status__c = 'Published'];
 		
 		if(forms.size() == 0) {
 			return formDetails; 
@@ -107,29 +107,29 @@ public with sharing class MobileService {
 
         List<Id> formIds = new List<Id>(); 
 
-        for(Clarity_Form__c form : forms) {
+        for(Form__c form : forms) {
             formIds.add(form.Id); 
         }
 
         /**
         * Grab Form Questions 
         **/
-        Map<Id, List<Clarity_Form_Question__c>> questionsByForms = new Map<Id, List<Clarity_Form_Question__c>>();
+        Map<Id, List<Question__c>> questionsByForms = new Map<Id, List<Question__c>>();
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, Clarity_Form__c, 
-            (SELECT Id, Label__c, Active_Flow__c FROM Clarity_Form_Question_Options__r), 
-            (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
-            Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c IN :formIds];
+        List<Question__c> questions = [SELECT Id, Form__c, 
+            (SELECT Id, Label__c, Active_Flow__c FROM Question_Options__r), 
+            (SELECT Id, Active__c, Form_Submission__c FROM Flow_Designs__r LIMIT 1),
+            Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, Type__c FROM Question__c WHERE Form__c IN :formIds];
 
-        for(Clarity_Form_Question__c question : questions) {
+        for(Question__c question : questions) {
             
-            if(questionsByForms.get(question.Clarity_Form__c) != null) {
+            if(questionsByForms.get(question.Form__c) != null) {
 
-                questionsByForms.get(question.Clarity_Form__c).add(question); 
+                questionsByForms.get(question.Form__c).add(question); 
 
             } else {
 
-                questionsByForms.put(question.Clarity_Form__c, new List<Clarity_Form_Question__c>{ question }); 
+                questionsByForms.put(question.Form__c, new List<Question__c>{ question }); 
 
             }
 
@@ -139,19 +139,19 @@ public with sharing class MobileService {
         * Grab Form Connections Mapping Fields & Prefilled Fields
         **/
 
-        Map<Id, List<Clarity_Form_Connection_Field__c>> prefillFieldsByForms = new Map<Id, List<Clarity_Form_Connection_Field__c>>();
-        Map<Id, List<Clarity_Form_Connection_Field__c>> mappingFieldsByForms = new Map<Id, List<Clarity_Form_Connection_Field__c>>();
+        Map<Id, List<Form_Connection_Field__c>> prefillFieldsByForms = new Map<Id, List<Form_Connection_Field__c>>();
+        Map<Id, List<Form_Connection_Field__c>> mappingFieldsByForms = new Map<Id, List<Form_Connection_Field__c>>();
 
-        List<Clarity_Form_Connection__c> formConnections = [SELECT Id, Clarity_Form__c, Salesforce_Object__c, New__c, 
-            (SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Clarity_Form_Question__c FROM Clarity_Form_Connection_Fields__r) 
-            FROM Clarity_Form_Connection__c WHERE Clarity_Form__c IN :formIds AND New__c = false];
+        List<Form_Connection__c> formConnections = [SELECT Id, Form__c, Salesforce_Object__c, New__c, 
+            (SELECT Id, Salesforce_Field__c, PreFill__c, Custom_Value__c, Question__c FROM Form_Connection_Fields__r) 
+            FROM Form_Connection__c WHERE Form__c IN :formIds AND New__c = false];
 
-        for(Clarity_Form_Connection__c formConnection : formConnections) {
+        for(Form_Connection__c formConnection : formConnections) {
 
-            List<Clarity_Form_Connection_Field__c> prefillFields = new List<Clarity_Form_Connection_Field__c>(); 
-            List<Clarity_Form_Connection_Field__c> mappingFields = new List<Clarity_Form_Connection_Field__c>(); 
+            List<Form_Connection_Field__c> prefillFields = new List<Form_Connection_Field__c>(); 
+            List<Form_Connection_Field__c> mappingFields = new List<Form_Connection_Field__c>(); 
 
-            for(Clarity_Form_Connection_Field__c connectionField : formConnection.Clarity_Form_Connection_Fields__r) {
+            for(Form_Connection_Field__c connectionField : formConnection.Form_Connection_Fields__r) {
 
                 if(connectionField.PreFill__c) {
 
@@ -164,28 +164,28 @@ public with sharing class MobileService {
                 }
             }
 
-            if(prefillFieldsByForms.get(formConnection.Clarity_Form__c) != null) {
+            if(prefillFieldsByForms.get(formConnection.Form__c) != null) {
 
-                prefillFieldsByForms.get(formConnection.Clarity_Form__c).addAll(prefillFields); 
+                prefillFieldsByForms.get(formConnection.Form__c).addAll(prefillFields); 
 
             } else {
 
-                prefillFieldsByForms.put(formConnection.Clarity_Form__c, prefillFields); 
+                prefillFieldsByForms.put(formConnection.Form__c, prefillFields); 
 
             }
 
-            if(mappingFieldsByForms.get(formConnection.Clarity_Form__c) != null) {
+            if(mappingFieldsByForms.get(formConnection.Form__c) != null) {
 
-                mappingFieldsByForms.get(formConnection.Clarity_Form__c).addAll(mappingFields); 
+                mappingFieldsByForms.get(formConnection.Form__c).addAll(mappingFields); 
 
             } else {
 
-                mappingFieldsByForms.put(formConnection.Clarity_Form__c, mappingFields); 
+                mappingFieldsByForms.put(formConnection.Form__c, mappingFields); 
 
             }
         }
 
-        for(Clarity_Form__c form : forms) {
+        for(Form__c form : forms) {
 
             Map<String, List<sObject>> formDetail = new Map<String, List<sObject>>();
         
@@ -211,30 +211,30 @@ public with sharing class MobileService {
 
 		List<sObject> records = new  List<sObject>(); 
 
-		List<Clarity_Form_Response__c> responses = [SELECT Id, Clarity_Form__c, Status__c, OwnerId__c FROM Clarity_Form_Response__c];
+		List<Response__c> responses = [SELECT Id, Form__c, Status__c, OwnerId__c FROM Response__c];
 
 		Set<Id> responseIds = new Set<Id>();
 
-		for(Clarity_Form_Response__c response : responses) {
+		for(Response__c response : responses) {
 			responseIds.add(response.Id); 
 		}
 
 		//Answers by responseId
-		Map<Id, List<Clarity_Form_Answer__c>> answersByResponseId = new Map<Id, List<Clarity_Form_Answer__c>>();
+		Map<Id, List<Answer__c>> answersByResponseId = new Map<Id, List<Answer__c>>();
 
-		List<Clarity_Form_Answer__c> answers = [SELECT Id, Name, Record__c, Answer__c, Date_Answer__c, ContentVersion__c, ContentDocument__c, 
-			Clarity_Form_Question__r.Salesforce_Object__c, Clarity_Form_Response__c, Clarity_Form_Question__c, 
-			Clarity_Form_Question__r.Record_Group__c, Clarity_Form_Question__r.Type__c  
-			FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c IN :responseIds];
+		List<Answer__c> answers = [SELECT Id, Name, Record__c, Answer__c, Date_Answer__c, ContentVersion__c, ContentDocument__c, 
+			Question__r.Salesforce_Object__c, Response__c, Question__c, 
+			Question__r.Record_Group__c, Question__r.Type__c  
+			FROM Answer__c WHERE Response__c IN :responseIds];
 
-		for(Clarity_Form_Answer__c answer : answers) {
+		for(Answer__c answer : answers) {
 
-			if(answersByResponseId.get(answer.Clarity_Form_Response__c) != null) {
-				List<Clarity_Form_Answer__c> responseAnswers = answersByResponseId.get(answer.Clarity_Form_Response__c);
+			if(answersByResponseId.get(answer.Response__c) != null) {
+				List<Answer__c> responseAnswers = answersByResponseId.get(answer.Response__c);
 				responseAnswers.add(answer); 
-				answersByResponseId.put(answer.Clarity_Form_Response__c, responseAnswers);
+				answersByResponseId.put(answer.Response__c, responseAnswers);
 			} else {
-				answersByResponseId.put(answer.Clarity_Form_Response__c, new List<Clarity_Form_Answer__c>{ answer });
+				answersByResponseId.put(answer.Response__c, new List<Answer__c>{ answer });
 			}
 
 		}
@@ -245,14 +245,14 @@ public with sharing class MobileService {
 			return responseDetails;
 		}
 
-		for(Clarity_Form_Response__c response : responses) {
+		for(Response__c response : responses) {
 			
-			Map<String, List<sObject>> formDetail = forms.get(response.Clarity_Form__c);
+			Map<String, List<sObject>> formDetail = forms.get(response.Form__c);
 
-			List<Clarity_Form_Answer__c> responseAnswers = answersByResponseId.get(response.Id); 
+			List<Answer__c> responseAnswers = answersByResponseId.get(response.Id); 
 
 			formDetail.put('Answers', responseAnswers); 
-			formDetail.put('Response', new List<Clarity_Form_Response__c>{ response });
+			formDetail.put('Response', new List<Response__c>{ response });
 			
 			responseDetails.put(response.Id, formDetail);
 

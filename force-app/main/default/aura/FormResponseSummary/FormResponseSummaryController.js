@@ -66,7 +66,7 @@
 						var pageReference = {
 								type: 'standard__objectPage',
 								attributes: {
-										objectApiName: 'forms__Clarity_Form__c',
+										objectApiName: 'forms__Form__c',
 										actionName: 'list'
 								},
 								state: {

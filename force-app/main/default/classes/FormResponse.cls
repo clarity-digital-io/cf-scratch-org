@@ -12,18 +12,18 @@ global with sharing class FormResponse {
     }
 
     @RemoteAction 
-    global static List<Clarity_Form_Connection__c> checkConnections(String responseId) {
+    global static List<Form_Connection__c> checkConnections(String responseId) {
         
-        List<Clarity_Form_Connection__c> requiredConnections = new List<Clarity_Form_Connection__c>(); 
+        List<Form_Connection__c> requiredConnections = new List<Form_Connection__c>(); 
 
-        Clarity_Form_Response__c response = [SELECT Id, Clarity_Form__c FROM Clarity_Form_Response__c WHERE Id =: responseId LIMIT 1];
+        Response__c response = [SELECT Id, Form__c FROM Response__c WHERE Id =: responseId LIMIT 1];
 
-        Map<Id, Clarity_Form_Connection__c> connections = new Map<Id, Clarity_Form_Connection__c>([SELECT Id, Salesforce_Object__c, New__c FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: response.Clarity_Form__c AND New__c = false]);
+        Map<Id, Form_Connection__c> connections = new Map<Id, Form_Connection__c>([SELECT Id, Salesforce_Object__c, New__c FROM Form_Connection__c WHERE Form__c =: response.Form__c AND New__c = false]);
 
         if(connections.size() > 0) {
 
-            List<Clarity_Form_Response_Connection__c> responseConnections = [SELECT Id, Clarity_Form_Connection__c 
-                FROM Clarity_Form_Response_Connection__c WHERE Clarity_Form_Response__c =: responseId AND Clarity_Form_Connection__c IN :connections.keySet()];
+            List<Response_Connection__c> responseConnections = [SELECT Id, Form_Connection__c 
+                FROM Response_Connection__c WHERE Response__c =: responseId AND Form_Connection__c IN :connections.keySet()];
 
             if(responseConnections.size() == 0) {
                 return connections.values();
@@ -31,11 +31,11 @@ global with sharing class FormResponse {
 
             Set<Id> responseConnectedIds = new Set<Id>(); 
 
-            for(Clarity_Form_Response_Connection__c rc : responseConnections){
-                responseConnectedIds.add(rc.Clarity_Form_Connection__c); 
+            for(Response_Connection__c rc : responseConnections){
+                responseConnectedIds.add(rc.Form_Connection__c); 
             }
 			System.debug('responseConnectedIds: ' + responseConnectedIds); 
-            for(Clarity_Form_Connection__c connection : connections.values()) {
+            for(Form_Connection__c connection : connections.values()) {
                 if(!responseConnectedIds.contains(connection.Id)) {
                     requiredConnections.add(connection); 
                 }
@@ -47,11 +47,11 @@ global with sharing class FormResponse {
     }
 
     @RemoteAction
-    global static List<Clarity_Form_Connection__c> getConnections(String formName) {
+    global static List<Form_Connection__c> getConnections(String formName) {
 
-        Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c WHERE Name =: formName LIMIT 1];
+        Form__c form = [SELECT Id FROM Form__c WHERE Name =: formName LIMIT 1];
 
-        List<Clarity_Form_Connection__c> connections = [SELECT Id, Salesforce_Object__c, New__c FROM Clarity_Form_Connection__c WHERE Clarity_Form__c =: form.Id];
+        List<Form_Connection__c> connections = [SELECT Id, Salesforce_Object__c, New__c FROM Form_Connection__c WHERE Form__c =: form.Id];
 
         return connections; 
 
@@ -60,18 +60,18 @@ global with sharing class FormResponse {
     @RemoteAction
     global static Map<Id, List<sObject>> getRecordGroupResults(String responseId, String formId) {
 
-        List<Clarity_Form_Question__c> questions = [SELECT Id, 
-            (SELECT Id, Label__c, Active_Flow__c, Choice_Image__c, Order__c FROM Clarity_Form_Question_Options__r), 
-            (SELECT Id, Active__c, Form_Submission__c FROM Clarity_Form_Question_Flow_Designs__r LIMIT 1),
-            (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Clarity_Form_Question__c FROM Clarity_Form_Question_Criteria__r),
+        List<Question__c> questions = [SELECT Id, 
+            (SELECT Id, Label__c, Active_Flow__c, Choice_Image__c, Order__c FROM Question_Options__r), 
+            (SELECT Id, Active__c, Form_Submission__c FROM Flow_Designs__r LIMIT 1),
+            (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Question__c FROM Question_Criteria__r),
             Salesforce_Object__c, FreeText_Type__c, Title__c, Order__c, Required__c, Lookup__c, 
             Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, 
-            Page__c, Type__c FROM Clarity_Form_Question__c WHERE Clarity_Form__c =: formId];
+            Page__c, Type__c FROM Question__c WHERE Form__c =: formId];
 
-        List<Clarity_Form_Answer__c> answers = [SELECT Id, Record__c, Answer__c, Date_Answer__c, ContentDocument__c, 
-            Clarity_Form_Question__r.Salesforce_Object__c, Clarity_Form_Response__c, Clarity_Form_Question__c, 
-            Clarity_Form_Question__r.Record_Group__c, Clarity_Form_Question__r.Type__c  
-            FROM Clarity_Form_Answer__c WHERE Clarity_Form_Response__c =: responseId];
+        List<Answer__c> answers = [SELECT Id, Record__c, Answer__c, Date_Answer__c, ContentDocument__c, 
+            Question__r.Salesforce_Object__c, Response__c, Question__c, 
+            Question__r.Record_Group__c, Question__r.Type__c  
+            FROM Answer__c WHERE Response__c =: responseId];
 
         Map<Id, List<sObject>> records = FormService.getRecordGroupSubmissions(answers, questions);
 
@@ -98,9 +98,9 @@ global with sharing class FormResponse {
     }
 
     @RemoteAction
-    global static List<Clarity_Form_Answer__c> saveAnswer(String answers){
+    global static List<Answer__c> saveAnswer(String answers){
 
-        List<Clarity_Form_Answer__c> savedAnswers = FormService.save(answers); 
+        List<Answer__c> savedAnswers = FormService.save(answers); 
 
         return savedAnswers;
         
@@ -113,9 +113,9 @@ global with sharing class FormResponse {
         String answers = answerValues[1];
         String formResponseId = answerValues[2]; 
 
-        List<Clarity_Form_Answer__c> savedAnswerImages = FormService.upload(answerImages); 
+        List<Answer__c> savedAnswerImages = FormService.upload(answerImages); 
 
-        List<Clarity_Form_Answer__c> savedAnswers = FormService.save(answers); 
+        List<Answer__c> savedAnswers = FormService.save(answers); 
 
         List<String> success = FormService.updateStatus(new List<String>{ formResponseId }, 'In Progress');
 
@@ -130,9 +130,9 @@ global with sharing class FormResponse {
         String answers = answerValues[1];
         String formResponseId = answerValues[2]; 
 
-        List<Clarity_Form_Answer__c> savedAnswerImages = FormService.upload(answerImages); 
+        List<Answer__c> savedAnswerImages = FormService.upload(answerImages); 
 
-        List<Clarity_Form_Answer__c> savedAnswers = FormService.save(answers); 
+        List<Answer__c> savedAnswers = FormService.save(answers); 
 
         List<String> success = FormService.updateStatus(new List<String>{ formResponseId }, 'Submitted');
 
@@ -228,9 +228,9 @@ global with sharing class FormResponse {
 
 			}
 
-			Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
-				Clarity_Form_Response__c = responseId, 
-				Clarity_Form_Question__c = recordGroupId,
+			Answer__c answer = new Answer__c(
+				Response__c = responseId, 
+				Question__c = recordGroupId,
 				Record__c                = result.getId()
 			);
 
@@ -255,8 +255,8 @@ global with sharing class FormResponse {
     @RemoteAction
     global static Map<String, Map<String, Map<String, String>>> getRecordGroupPicklist(List<String> sPicklistQuestionIds) {
 
-        List<Clarity_Form_Question__c> picklistQuestions = [SELECT Id, Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, 
-            Record_Group__r.Salesforce_Object__c, Salesforce_Field__c, Type__c FROM Clarity_Form_Question__c WHERE ID IN :sPicklistQuestionIds];
+        List<Question__c> picklistQuestions = [SELECT Id, Title__c, Order__c, Required__c, Lookup__c, Record_Group__c, 
+            Record_Group__r.Salesforce_Object__c, Salesforce_Field__c, Type__c FROM Question__c WHERE ID IN :sPicklistQuestionIds];
 
         Map<String, List<String>> rcp = FormService.filterRecordGroupPicklist(picklistQuestions);
 

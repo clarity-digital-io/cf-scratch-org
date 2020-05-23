@@ -4,18 +4,18 @@ public class FormControllerTest {
     @testSetup
     public static void setup(){
                 
-        Clarity_Form__c form = TestDataFactory.generateForm();
+        Form__c form = TestDataFactory.generateForm();
 
-        List<Clarity_Form_Question__c> questions = TestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
+        List<Question__c> questions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
 
-        Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
+        Response__c response = TestDataFactory.generateResponse(form);
 
 	}
 
     @isTest
     public static void shouldUpdateResponse() {
 
-        Clarity_Form_Response__c response = [SELECT Id FROM Clarity_Form_Response__c Limit 1];
+        Response__c response = [SELECT Id FROM Response__c Limit 1];
 
 		Test.startTest();
 
@@ -23,7 +23,7 @@ public class FormControllerTest {
 
 		Test.stopTest();
 
-		Clarity_Form_Response__c updatedResponse = [SELECT Id, Time__c FROM Clarity_Form_Response__c Limit 1];
+		Response__c updatedResponse = [SELECT Id, Time__c FROM Response__c Limit 1];
 
 		System.assertEquals(12345, updatedResponse.Time__c);
 		
@@ -32,9 +32,9 @@ public class FormControllerTest {
     @isTest
     public static void shouldGetForm() {
 
-        Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c Limit 1];
+        Form__c form = [SELECT Id FROM Form__c Limit 1];
 
-        Clarity_Form__c formReturned = FormController.getForm(form.Id);
+        Form__c formReturned = FormController.getForm(form.Id);
 
         System.assertEquals('Clarity Form', formReturned.Label__c);
 
@@ -43,9 +43,9 @@ public class FormControllerTest {
     @isTest
     public static void shouldGetFormResponses() {
 
-        Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c Limit 1];
+        Form__c form = [SELECT Id, Name FROM Form__c Limit 1];
 
-        List<Clarity_Form_Response__c> responses = FormController.getFormResponses(null, form.Name, null, null);
+        List<Response__c> responses = FormController.getFormResponses(null, form.Name, null, null);
 
         System.assertEquals(1, responses.size());
 
@@ -54,7 +54,7 @@ public class FormControllerTest {
     @isTest
     public static void shouldDeleteFormResponse() {
 
-        Clarity_Form_Response__c response = [SELECT Id FROM Clarity_Form_Response__c Limit 1]; 
+        Response__c response = [SELECT Id FROM Response__c Limit 1]; 
 
         String deleteFormResponseId = FormController.deleteFormResponse(response.Id);
 
@@ -64,9 +64,9 @@ public class FormControllerTest {
     @isTest
     public static void shouldNotDeleteForm() {
 
-        Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c Limit 1];
+        Form__c form = [SELECT Id, Name FROM Form__c Limit 1];
 
-        List<Clarity_Form_Response__c> responses = [SELECT Id FROM Clarity_Form_Response__c]; 
+        List<Response__c> responses = [SELECT Id FROM Response__c]; 
 
         try {
             String status = FormController.deleteForm(form.Id);
@@ -81,9 +81,9 @@ public class FormControllerTest {
     @isTest
     public static void shouldDeleteForm() {
 
-        Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c Limit 1];
+        Form__c form = [SELECT Id, Name FROM Form__c Limit 1];
 
-        List<Clarity_Form_Response__c> responses = [SELECT Id FROM Clarity_Form_Response__c]; 
+        List<Response__c> responses = [SELECT Id FROM Response__c]; 
 
         Test.startTest();
             delete responses; 
@@ -98,13 +98,13 @@ public class FormControllerTest {
     @isTest
     public static void shouldPublishForm() {
 
-        Clarity_Form__c form = [SELECT Id, Status__c FROM Clarity_Form__c Limit 1];
+        Form__c form = [SELECT Id, Status__c FROM Form__c Limit 1];
 
         System.assertNotEquals('Published', form.Status__c);
 
         Test.startTest();
 
-            Clarity_Form__c updatedForm = FormController.publishForm(form.Id);
+            Form__c updatedForm = FormController.publishForm(form.Id);
 
         Test.stopTest();
 
@@ -115,11 +115,11 @@ public class FormControllerTest {
 	@isTest
 	public static void shouldGetAnswerColumns() {
 
-		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c Limit 1];
+		Form__c form = [SELECT Id FROM Form__c Limit 1];
 
-        Clarity_Form_Response__c response = [SELECT Id FROM Clarity_Form_Response__c Limit 1];
+        Response__c response = [SELECT Id FROM Response__c Limit 1];
 
-		List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c, Title__c FROM Clarity_Form_Question__c];
+		List<Question__c> questions = [SELECT Id, Type__c, Title__c FROM Question__c];
 
 		TestDataFactory.generateAnswers(response, questions);
 

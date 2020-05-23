@@ -61,19 +61,19 @@ sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-de
 
 sfdx force:org:list --all
 
-sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias refactor --durationdays 30 //clarity-forms-pkg
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias refactor-rename --durationdays 30 //clarity-forms-pkg
 
-sfdx force:alias:set refactor=test-5rv8cgdafulc@example.com
+sfdx force:alias:set refactor-rename=test-sskno9gl8p6m@example.com
 
-sfdx force:config:set defaultusername=refactor
+sfdx force:config:set defaultusername=refactor-rename
 
 sfdx force:source:push -f
 
 sfdx force:org:open -u PkgOrg
 
-sfdx force:user:password:generate --targetusername refactor
+sfdx force:user:password:generate --targetusername refactor-rename
 
-sfdx force:user:display --targetusername refactor
+sfdx force:user:display --targetusername refactor-rename
 
 sfdx force:org:delete -u test-5rv8cgdafulc@example.com
 
@@ -146,9 +146,9 @@ MobileResponseController
 MobileService
 
 # Domain Layer
-Clarity_Form_ConnectionTriggerHandler.cls
-Clarity_Form_QuestionTriggerHandler.cls
-Clarity_Form_ResponseTriggerHandler.cls
+Form_ConnectionTriggerHandler.cls
+QuestionTriggerHandler.cls
+ResponseTriggerHandler.cls
 ConnectionCreateJob.cls
 ConnectionFieldValidation.cls
 ConnectionRecordProcess.cls
@@ -156,17 +156,16 @@ CreateResponseAnswers.cls
 QuestionFlowDesigns
 
 # Selector Layer
-
-Clarity_Form__c => Form__c
-Clarity_Form_Response__c => Response__c
-Clarity_Form_Answer__c => Answer__c
-Clarity_Form_Connection__c => Form_Connection__c
-Clarity_Form_Connection_Field__c => Connection_Field__c
-Clarity_Form_Connection_Process__c => Connection_Process__c
-Clarity_Form_Question__c => Question__c
-Clarity_Form_Question_Criteria__c => Question_Criteria__c
-Clarity_Form_Question_Filter__c => Question_Filter__c
-Clarity_Form_Question_Flow__c => Flow__c
-Clarity_Form_Question_Flow_Design__c => Flow_Design__c
-Clarity_Form_Question_Option__c => Question_Option__c
-Clarity_Form_Response_Connection__c => Response_Connection__c
+Form__c
+Response__c
+Answer__c
+Form_Connection__c
+Form_Connection_Field__c
+Form_Connection_Process__c
+Question__c
+Question_Criteria__c
+Question_Filter__c
+Flow__c
+Flow_Design__c
+Question_Option__c
+Response_Connection__c

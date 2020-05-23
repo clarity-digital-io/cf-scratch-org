@@ -15,15 +15,15 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Clarity_Form_Response__c</field>
+                <field>Response__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Clarity_Form_Answer__c</field>
+                <field>Answer__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Clarity_Form__c</field>
+                <field>Form__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>

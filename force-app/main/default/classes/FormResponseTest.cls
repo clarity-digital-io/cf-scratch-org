@@ -4,18 +4,18 @@ public class FormResponseTest {
     @testSetup
     public static void setup(){
 
-		Clarity_Form__c form = TestDataFactory.generateForm();
+		Form__c form = TestDataFactory.generateForm();
 
-		List<Clarity_Form_Question__c> questions = TestDataFactory.generateQuestions(new List<Clarity_Form__c>{ form });
+		List<Question__c> questions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
 
-        List<Clarity_Form_Connection__c> connections = TestDataFactory.generateConnections(false, form,  new List<String>{ 'Opportunity' });
+        List<Form_Connection__c> connections = TestDataFactory.generateConnections(false, form,  new List<String>{ 'Opportunity' });
 
     }
 
 	@isTest
 	public static void shouldGetPreview() {
 
-		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
+		Form__c form = [SELECT Id FROM Form__c LIMIT 1];
 
 		Test.startTest();
 
@@ -30,17 +30,17 @@ public class FormResponseTest {
 	@isTest
 	public static void shouldCheckConnections() {
 
-		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
+		Form__c form = [SELECT Id FROM Form__c LIMIT 1];
 
-		Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
+		Response__c response = TestDataFactory.generateResponse(form);
 
-		List<Clarity_Form_Connection__c> connections = [SELECT Id FROM Clarity_Form_Connection__c];
+		List<Form_Connection__c> connections = [SELECT Id FROM Form_Connection__c];
 
-		List<Clarity_Form_Response_Connection__c> responseConnections = TestDataFactory.generateResponseConnection(response.Id, connections); 
+		List<Response_Connection__c> responseConnections = TestDataFactory.generateResponseConnection(response.Id, connections); 
 
 		Test.startTest();
 
-			List<Clarity_Form_Connection__c> checkConnections = FormResponse.checkConnections(response.Id); 
+			List<Form_Connection__c> checkConnections = FormResponse.checkConnections(response.Id); 
 
 		Test.stopTest();
 
@@ -51,11 +51,11 @@ public class FormResponseTest {
 	@isTest
 	public static void shouldGetConnections() {
 		
-		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
+		Form__c form = [SELECT Id, Name FROM Form__c LIMIT 1];
 
 		Test.startTest();
 
-			List<Clarity_Form_Connection__c> connections = FormResponse.getConnections(form.Name); 
+			List<Form_Connection__c> connections = FormResponse.getConnections(form.Name); 
 
 		Test.stopTest();
 
@@ -66,11 +66,11 @@ public class FormResponseTest {
 	@isTest
 	public static void shouldGetRecordGroupResults() {
 		
-		Clarity_Form__c form = [SELECT Id FROM Clarity_Form__c LIMIT 1];
+		Form__c form = [SELECT Id FROM Form__c LIMIT 1];
 
-		Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
+		Response__c response = TestDataFactory.generateResponse(form);
 
-		List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c, Title__c FROM Clarity_Form_Question__c WHERE Type__c = 'RecordGroup' AND Clarity_Form__c =: form.Id];
+		List<Question__c> questions = [SELECT Id, Type__c, Title__c FROM Question__c WHERE Type__c = 'RecordGroup' AND Form__c =: form.Id];
 
         TestDataFactory.generateRecordGroupAnswers(response, questions);
 
@@ -87,9 +87,9 @@ public class FormResponseTest {
 	@isTest
 	public static void shouldCreateResponse() {
 		
-		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
+		Form__c form = [SELECT Id, Name FROM Form__c LIMIT 1];
 
-		List<Clarity_Form_Connection__c> connections = [SELECT Id FROM Clarity_Form_Connection__c];
+		List<Form_Connection__c> connections = [SELECT Id FROM Form_Connection__c];
 
 		Opportunity opp = new Opportunity(Name = 'Test', StageName = 'Prospecting', CloseDate = date.newInstance(2030, 11, 21)); 
 
@@ -118,9 +118,9 @@ public class FormResponseTest {
 	@isTest
 	public static void shouldEditResponse() {
 		
-		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
+		Form__c form = [SELECT Id, Name FROM Form__c LIMIT 1];
 
-		Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
+		Response__c response = TestDataFactory.generateResponse(form);
 
 		Test.startTest();
 
@@ -128,25 +128,25 @@ public class FormResponseTest {
 
 		Test.stopTest();
 
-		System.assertEquals(new List<Clarity_Form_Response_Connection__c>(), edit.get('Connections'));
+		System.assertEquals(new List<Response_Connection__c>(), edit.get('Connections'));
 
 	}
 
 	@isTest
 	public static void shouldSaveAnswer() {
 
-		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
+		Form__c form = [SELECT Id, Name FROM Form__c LIMIT 1];
 
-		Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
+		Response__c response = TestDataFactory.generateResponse(form);
 
-		List<Clarity_Form_Question__c> questions = [SELECT Id FROM Clarity_Form_Question__c];
+		List<Question__c> questions = [SELECT Id FROM Question__c];
 
-		List<Clarity_Form_Answer__c> answers = new List<Clarity_Form_Answer__c>(); 
+		List<Answer__c> answers = new List<Answer__c>(); 
 
-		Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
-			Clarity_Form_Question__c = questions[0].Id, 
+		Answer__c answer = new Answer__c(
+			Question__c = questions[0].Id, 
 			Answer__c				 = 'Test', 
-			Clarity_Form_Response__c = response.Id
+			Response__c = response.Id
 		);
 
 		answers.add(answer); 
@@ -155,7 +155,7 @@ public class FormResponseTest {
 
 		Test.startTest();
 
-			List<Clarity_Form_Answer__c> rAnswers = FormResponse.saveAnswer(sAnswer);
+			List<Answer__c> rAnswers = FormResponse.saveAnswer(sAnswer);
 
 		Test.stopTest();
 
@@ -165,18 +165,18 @@ public class FormResponseTest {
 	@isTest
 	public static void shouldSaveResponse() {
 
-		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
+		Form__c form = [SELECT Id, Name FROM Form__c LIMIT 1];
 
-		Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
+		Response__c response = TestDataFactory.generateResponse(form);
 
-		List<Clarity_Form_Question__c> questions = [SELECT Id, Type__c FROM Clarity_Form_Question__c];
+		List<Question__c> questions = [SELECT Id, Type__c FROM Question__c];
 
-		List<Clarity_Form_Answer__c> answers = new List<Clarity_Form_Answer__c>(); 
+		List<Answer__c> answers = new List<Answer__c>(); 
 
-		Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
-			Clarity_Form_Question__c = questions[0].Id, 
+		Answer__c answer = new Answer__c(
+			Question__c = questions[0].Id, 
 			Answer__c				 = 'Test',
-			Clarity_Form_Response__c = response.Id
+			Response__c = response.Id
 		);
 
 		answers.add(answer); 
@@ -185,7 +185,7 @@ public class FormResponseTest {
 
 		String aQuestionId = '';
 
-		for(Clarity_Form_Question__c question : questions) {
+		for(Question__c question : questions) {
 			if(question.Type__c == 'Attachments') {
 				aQuestionId = question.Id; 
 			}
@@ -206,18 +206,18 @@ public class FormResponseTest {
 	@isTest
 	public static void shouldSubmitResponse() {
 
-		Clarity_Form__c form = [SELECT Id, Name FROM Clarity_Form__c LIMIT 1];
+		Form__c form = [SELECT Id, Name FROM Form__c LIMIT 1];
 
-		Clarity_Form_Response__c response = TestDataFactory.generateResponse(form);
+		Response__c response = TestDataFactory.generateResponse(form);
 
-		List<Clarity_Form_Question__c> questions = [SELECT Id FROM Clarity_Form_Question__c];
+		List<Question__c> questions = [SELECT Id FROM Question__c];
 
-		List<Clarity_Form_Answer__c> answers = new List<Clarity_Form_Answer__c>(); 
+		List<Answer__c> answers = new List<Answer__c>(); 
 
-		Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
-			Clarity_Form_Question__c = questions[0].Id, 
+		Answer__c answer = new Answer__c(
+			Question__c = questions[0].Id, 
 			Answer__c				 = 'Test',
-			Clarity_Form_Response__c = response.Id
+			Response__c = response.Id
 		);
 
 		answers.add(answer); 

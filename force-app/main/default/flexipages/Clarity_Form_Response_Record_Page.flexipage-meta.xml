@@ -22,7 +22,7 @@
         <componentInstances>
             <componentInstanceProperties>
                 <name>parentFieldApiName</name>
-                <value>Clarity_Form_Response__c.Id</value>
+                <value>Response__c.Id</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>relatedListApiName</name>
@@ -45,11 +45,11 @@
         <componentInstances>
             <componentInstanceProperties>
                 <name>parentFieldApiName</name>
-                <value>Clarity_Form_Response__c.Id</value>
+                <value>Response__c.Id</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>relatedListApiName</name>
-                <value>Clarity_Form_Connection_Process__r</value>
+                <value>Form_Connection_Process__r</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>relatedListComponentOverride</name>
@@ -102,7 +102,7 @@
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Clarity Form Response Record Page</masterLabel>
-    <sobjectType>Clarity_Form_Response__c</sobjectType>
+    <sobjectType>Response__c</sobjectType>
     <template>
         <name>flexipage:recordHomeLeftSidebarTemplateDesktop</name>
     </template>

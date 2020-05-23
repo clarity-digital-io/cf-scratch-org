@@ -1,6 +1,6 @@
 public class AuditLogBuilderService {
     
-    public static void execute(List<Clarity_Form_Audit_Log__c> logs, sObject newRecord, sObject oldRecord, String fieldId) {
+    public static void execute(List<Audit_Log__c> logs, sObject newRecord, sObject oldRecord, String fieldId) {
 
             String sObjectType = newRecord.getSObjectType().getDescribe().getName();
 
@@ -32,7 +32,7 @@ public class AuditLogBuilderService {
 
             String logMessage = buildMessage(userName, action, sObjectType, actionTransform, oldIdentifier, newIdentifier); 
 
-            Clarity_Form_Audit_Log__c log = new Clarity_Form_Audit_Log__c(
+            Audit_Log__c log = new Audit_Log__c(
                 Log__c      = logMessage, 
                 sObject__c  = sObjectType, 
                 Action__c   = action,

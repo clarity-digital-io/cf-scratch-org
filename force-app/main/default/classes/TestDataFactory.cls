@@ -1,8 +1,8 @@
 public class TestDataFactory {
 
-    public static Clarity_Form__c generateForm(){
+    public static Form__c generateForm(){
 
-        Clarity_Form__c form = new Clarity_Form__c(Label__c = 'Clarity Form', Status__c = 'Draft'); 
+        Form__c form = new Form__c(Label__c = 'Clarity Form', Status__c = 'Draft'); 
 
         insert form; 
 
@@ -10,13 +10,13 @@ public class TestDataFactory {
 
     }
 
-	public static List<Clarity_Form__c> generateForms(Integer count) {
+	public static List<Form__c> generateForms(Integer count) {
 		
-		List<Clarity_Form__c> forms = new List<Clarity_Form__c>(); 
+		List<Form__c> forms = new List<Form__c>(); 
 
 		for (Integer i = 0; i < count; i++) {
 			 
-			Clarity_Form__c form = new Clarity_Form__c(Label__c = 'Clarity Form ' + i, Status__c = 'Draft'); 
+			Form__c form = new Form__c(Label__c = 'Clarity Form ' + i, Status__c = 'Draft'); 
 			forms.add(form); 
 
 		}
@@ -26,7 +26,7 @@ public class TestDataFactory {
 		return forms; 
 	}
 
-    public static void publishForm(Clarity_Form__c form) {
+    public static void publishForm(Form__c form) {
 
         form.Status__c = 'Published'; 
 
@@ -34,18 +34,18 @@ public class TestDataFactory {
 
     }
 
-    public static List<Clarity_Form_Question__c> generateQuestions(List<Clarity_Form__c> forms){
+    public static List<Question__c> generateQuestions(List<Form__c> forms){
 
-        List<Clarity_Form_Question__c> questions = new  List<Clarity_Form_Question__c>();
+        List<Question__c> questions = new  List<Question__c>();
 
         Integer order = 0; 
 
-		for(Clarity_Form__c form : forms) {
+		for(Form__c form : forms) {
 
 			for(String type : Types) {
 
-				Clarity_Form_Question__c question = new Clarity_Form_Question__c(
-					Clarity_Form__c = form.Id, 
+				Question__c question = new Question__c(
+					Form__c = form.Id, 
 					Title__c        = 'Title: ' + type, 
 					Type__c         = type,
 					Order__c        = order
@@ -64,17 +64,17 @@ public class TestDataFactory {
 
     }
 
-	public static List<Clarity_Form_Question_Option__c> generateQuestionOptions(List<Clarity_Form_Question__c> multiChoiceQuestions) {
+	public static List<Question_Option__c> generateQuestionOptions(List<Question__c> multiChoiceQuestions) {
 
-		List<Clarity_Form_Question_Option__c> options = new List<Clarity_Form_Question_Option__c>(); 
+		List<Question_Option__c> options = new List<Question_Option__c>(); 
 
 		Integer count = 0; 
 
-		for(Clarity_Form_Question__c question : multiChoiceQuestions) {
+		for(Question__c question : multiChoiceQuestions) {
 
-			Clarity_Form_Question_Option__c option = new Clarity_Form_Question_Option__c(
+			Question_Option__c option = new Question_Option__c(
 				Label__c = 'Test',
-				Clarity_Form_Question__c = question.Id,
+				Question__c = question.Id,
 				Order__c = count
 			);
 
@@ -86,10 +86,10 @@ public class TestDataFactory {
 		return options;
 	}
 
-	public static Clarity_Form_Question__c generateRecordGroup(Clarity_Form__c form) {
+	public static Question__c generateRecordGroup(Form__c form) {
 
-		Clarity_Form_Question__c question = new Clarity_Form_Question__c(
-			Clarity_Form__c 	 = form.Id, 
+		Question__c question = new Question__c(
+			Form__c 	 = form.Id, 
 			Title__c        	 = 'Title: RecordGroup', 
 			Type__c         	 = 'RecordGroup',
 			Salesforce_Object__c = 'Opportunity',
@@ -102,14 +102,14 @@ public class TestDataFactory {
 
 	}
 
-    public static List<Clarity_Form_Connection__c> generateConnections(Boolean newConnection, Clarity_Form__c form, List<String> connectionObjects){
+    public static List<Form_Connection__c> generateConnections(Boolean newConnection, Form__c form, List<String> connectionObjects){
 
-        List<Clarity_Form_Connection__c> connections = new List<Clarity_Form_Connection__c>();
+        List<Form_Connection__c> connections = new List<Form_Connection__c>();
 
         for (String salesForceObject : connectionObjects) {
             
-            Clarity_Form_Connection__c connection = new Clarity_Form_Connection__c(
-                Clarity_Form__c      = form.Id, 
+            Form_Connection__c connection = new Form_Connection__c(
+                Form__c      = form.Id, 
                 Salesforce_Object__c = salesForceObject, 
                 Type__c              = 'Create', 
                 New__c               = newConnection, 
@@ -125,18 +125,18 @@ public class TestDataFactory {
         return connections;
     }
 
-    public static List<Clarity_Form_Connection_Field__c> generateConnectionFields(Clarity_Form_Connection__c connection, Map<String, Id> mappingFieldNames){
+    public static List<Form_Connection_Field__c> generateConnectionFields(Form_Connection__c connection, Map<String, Id> mappingFieldNames){
 
-        List<Clarity_Form_Connection_Field__c> connectionFields = new List<Clarity_Form_Connection_Field__c>();
+        List<Form_Connection_Field__c> connectionFields = new List<Form_Connection_Field__c>();
 
         for(String field : mappingFieldNames.keySet()) {
             
             Id questionId = mappingFieldNames.get(field);
 
-            Clarity_Form_Connection_Field__c connectionField = new Clarity_Form_Connection_Field__c(
-                Clarity_Form_Connection__c = connection.Id, 
+            Form_Connection_Field__c connectionField = new Form_Connection_Field__c(
+                Form_Connection__c = connection.Id, 
                 Salesforce_Field__c        = '' + field, 
-                Clarity_Form_Question__c   =  questionId
+                Question__c   =  questionId
             );
 
             connectionFields.add(connectionField);
@@ -149,16 +149,16 @@ public class TestDataFactory {
 
     }
 
-    public static List<Clarity_Form_Connection_Field__c> generateCustomConnectionFields(Clarity_Form_Connection__c connection, Map<String, String> mappingFieldNames){
+    public static List<Form_Connection_Field__c> generateCustomConnectionFields(Form_Connection__c connection, Map<String, String> mappingFieldNames){
 
-        List<Clarity_Form_Connection_Field__c> connectionFields = new List<Clarity_Form_Connection_Field__c>();
+        List<Form_Connection_Field__c> connectionFields = new List<Form_Connection_Field__c>();
 
         for(String field : mappingFieldNames.keySet()) {
             
             String customValue = mappingFieldNames.get(field);
 
-            Clarity_Form_Connection_Field__c connectionField = new Clarity_Form_Connection_Field__c(
-                Clarity_Form_Connection__c = connection.Id, 
+            Form_Connection_Field__c connectionField = new Form_Connection_Field__c(
+                Form_Connection__c = connection.Id, 
                 Salesforce_Field__c        = '' + field, 
                 Custom_Value__c            =  customValue
             );
@@ -173,15 +173,15 @@ public class TestDataFactory {
 
     }
 
-	public static List<Clarity_Form_Response_Connection__c> generateResponseConnection(String responseId, List<Clarity_Form_Connection__c> connections) {
+	public static List<Response_Connection__c> generateResponseConnection(String responseId, List<Form_Connection__c> connections) {
 
-        List<Clarity_Form_Response_Connection__c> newConnections = new List<Clarity_Form_Response_Connection__c>(); 
+        List<Response_Connection__c> newConnections = new List<Response_Connection__c>(); 
 		
-		for(Clarity_Form_Connection__c con : connections) {
+		for(Form_Connection__c con : connections) {
 			
-			Clarity_Form_Response_Connection__c connection = new Clarity_Form_Response_Connection__c(
-                Clarity_Form_Connection__c = con.Id,
-                Clarity_Form_Response__c = responseId
+			Response_Connection__c connection = new Response_Connection__c(
+                Form_Connection__c = con.Id,
+                Response__c = responseId
             );
 
             newConnections.add(connection); 
@@ -193,9 +193,9 @@ public class TestDataFactory {
 		return newConnections;
 	}
 
-    public static Clarity_Form_Response__c generateResponse(Clarity_Form__c form){
+    public static Response__c generateResponse(Form__c form){
 
-        Clarity_Form_Response__c response = new Clarity_Form_Response__c(Status__c = 'New', Clarity_Form__c = form.Id, OwnerId__c = UserInfo.getUserId());
+        Response__c response = new Response__c(Status__c = 'New', Form__c = form.Id, OwnerId__c = UserInfo.getUserId());
 
         insert response;
 
@@ -203,15 +203,15 @@ public class TestDataFactory {
 
     }
 
-    public static void generateAnswers(Clarity_Form_Response__c response, List<Clarity_Form_Question__c> questions){
+    public static void generateAnswers(Response__c response, List<Question__c> questions){
 
-        List<Clarity_Form_Answer__c> answers = new List<Clarity_Form_Answer__c>();
+        List<Answer__c> answers = new List<Answer__c>();
 
-        for(Clarity_Form_Question__c question : questions) {
+        for(Question__c question : questions) {
 
-            Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
-                Clarity_Form_Response__c = response.Id,
-                Clarity_Form_Question__c = question.Id,
+            Answer__c answer = new Answer__c(
+                Response__c = response.Id,
+                Question__c = question.Id,
                 Answer__c                = 'Answer for: ' + question.Title__c
             );
 
@@ -219,9 +219,9 @@ public class TestDataFactory {
 				answer.ContentVersion__c = '123456789';
 
 				//Add second attachment
-				Clarity_Form_Answer__c answer2 = new Clarity_Form_Answer__c(
-					Clarity_Form_Response__c = response.Id,
-					Clarity_Form_Question__c = question.Id,
+				Answer__c answer2 = new Answer__c(
+					Response__c = response.Id,
+					Question__c = question.Id,
 					Answer__c                = 'Answer for: ' + question.Title__c,
 					ContentVersion__c 	     = '123456789'
 				);
@@ -238,15 +238,15 @@ public class TestDataFactory {
 
     }
 
-	public static void generateRecordGroupAnswers(Clarity_Form_Response__c response, List<Clarity_Form_Question__c> questions){
+	public static void generateRecordGroupAnswers(Response__c response, List<Question__c> questions){
 
-		List<Clarity_Form_Answer__c> answers = new List<Clarity_Form_Answer__c>();
+		List<Answer__c> answers = new List<Answer__c>();
 
-        for(Clarity_Form_Question__c question : questions) {
+        for(Question__c question : questions) {
 
-            Clarity_Form_Answer__c answer = new Clarity_Form_Answer__c(
-                Clarity_Form_Response__c = response.Id,
-                Clarity_Form_Question__c = question.Id,
+            Answer__c answer = new Answer__c(
+                Response__c = response.Id,
+                Question__c = question.Id,
                 Answer__c                = 'Answer for: ' + question.Title__c
             );
 
@@ -258,9 +258,9 @@ public class TestDataFactory {
 
 	}
     
-    public static void updateAnswer(Clarity_Form_Response__c response, Clarity_Form_Question__c question){
+    public static void updateAnswer(Response__c response, Question__c question){
 
-        Clarity_Form_Answer__c answer = [SELECT Id FROM Clarity_Form_Answer__c WHERE Clarity_Form_Question__c =: question.Id LIMIT 1];
+        Answer__c answer = [SELECT Id FROM Answer__c WHERE Question__c =: question.Id LIMIT 1];
 
         answer.Answer__c = 'Answer for: ' + question.Title__c;
 
@@ -275,7 +275,7 @@ public class TestDataFactory {
 
                 Types = new List<String>();
 
-               	Schema.DescribeFieldResult fieldResult = Clarity_Form_Question__c.Type__c.getDescribe();
+               	Schema.DescribeFieldResult fieldResult = Question__c.Type__c.getDescribe();
 
                 List<Schema.PicklistEntry> ple = fieldResult.getPicklistValues();
                 

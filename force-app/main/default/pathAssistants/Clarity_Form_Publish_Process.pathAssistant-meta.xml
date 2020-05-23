@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
     <active>true</active>
-    <entityName>Clarity_Form__c</entityName>
+    <entityName>Form__c</entityName>
     <fieldName>Status__c</fieldName>
     <masterLabel>Clarity Form Publish Process</masterLabel>
     <pathAssistantSteps>

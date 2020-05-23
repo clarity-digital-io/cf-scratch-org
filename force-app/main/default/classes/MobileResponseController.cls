@@ -28,7 +28,7 @@ global with sharing class MobileResponseController {
 		// String formResponseId = answerValues[2]; 
 
 		// if(answerImages != '') {
-		// 	List<Clarity_Form_Answer__c> savedAnswerImages = FormService.upload(answerImages); 
+		// 	List<Answer__c> savedAnswerImages = FormService.upload(answerImages); 
 		// }
 
 		List<sObject> savedAnswers = save(answers); 
@@ -47,17 +47,17 @@ global with sharing class MobileResponseController {
 
 		for(Answer answer: answers) {
 
-			Clarity_Form_Response__c response = new Clarity_Form_Response__c(
+			Response__c response = new Response__c(
 				UUID__c = answer.responseId,
-				Clarity_Form__c = answer.formId
+				Form__c = answer.formId
 			);
 
 			records.add(response);
 
-			Clarity_Form_Answer__c newAnswer = new Clarity_Form_Answer__c(
-				Clarity_Form_Response__r = new Clarity_Form_Response__c(UUID__c = response.UUID__c),
+			Answer__c newAnswer = new Answer__c(
+				Response__r = new Response__c(UUID__c = response.UUID__c),
 				Answer__c = answer.answer,
-				Clarity_Form_Question__c = answer.questionId
+				Question__c = answer.questionId
 			);
 
 			records.add(newAnswer);
