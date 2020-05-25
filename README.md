@@ -61,21 +61,21 @@ sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-de
 
 sfdx force:org:list --all
 
-sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias master --durationdays 30 //clarity-forms-pkg
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias mobile --durationdays 30 //clarity-forms-pkg
 
-sfdx force:alias:set master=test-sskno9gl8p6m@example.com
+sfdx force:alias:set mobile=test-vsjzhlogmd0n@example.com
 
-sfdx force:config:set defaultusername=master
+sfdx force:config:set defaultusername=mobile
 
 sfdx force:source:push -f
 
 sfdx force:org:open -u PkgOrg
 
-sfdx force:user:password:generate --targetusername master
+sfdx force:user:password:generate --targetusername mobile
 
-sfdx force:user:display --targetusername master
+sfdx force:user:display --targetusername mobile
 
-sfdx force:org:delete -u test-5rv8cgdafulc@example.com
+sfdx force:org:delete -u test-vsjzhlogmd0n@example.com
 
 ## Mobile Settings Controller Should:
 
