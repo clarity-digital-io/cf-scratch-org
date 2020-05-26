@@ -84,10 +84,6 @@ public class ResponseTriggerHandler implements ITrigger {
 	*/
 	public void afterInsert(SObject so) {
 
-		Response__c newResponse = (Response__c) so; 
-
-        CreateResponseAnswers.execute(answersToBeCreated, newResponse); 
-
 	}
 
 	/*******************************************************************************************************

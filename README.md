@@ -133,6 +133,10 @@ sfdx force:apex:class:create -n AnswersSelector -d force-app/main/default/classe
 
 sfdx force:apex:class:create -n IAnswersSelector -d force-app/main/default/classes
 
+sfdx force:apex:class:create -n Response -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n Answer -d force-app/main/default/classes
+
 ## Resources
 
 
@@ -193,7 +197,6 @@ ResponseTriggerHandler.cls
 ConnectionCreateJob.cls
 ConnectionFieldValidation.cls
 ConnectionRecordProcess.cls
-CreateResponseAnswers.cls
 QuestionFlowDesigns
 
 # Selector Layer

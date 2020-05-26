@@ -25,14 +25,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>CreateResponseAnswers</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>CreateResponseAnswersTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>FormBuilder</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -66,10 +58,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>ITrigger</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>QuestionFlowDesigns</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>

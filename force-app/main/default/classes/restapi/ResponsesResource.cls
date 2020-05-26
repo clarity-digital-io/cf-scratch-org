@@ -8,13 +8,28 @@ global with sharing class ResponsesResource {
 
         RestResponse res = RestContext.response;
 
-        //Map<String, Map<String, List<sObject>>> forms = MobileService.getMobileForms();
-
-		// Map<String, Map<String, List<sObject>>> forms = FormsService.
-
 		List<Response__c> responses = ResponsesService.getResponses();
 
         return responses;
 
-    }
+	}
+	
+	@HttpPost
+    global static List<Response__c> saveResponse() {
+
+        RestRequest req = RestContext.request;
+
+		RestResponse res = RestContext.response;
+		
+		String requestBody = RestContext.request.requestBody.toString();
+		
+		List<Response> responses = (List<Response>) JSON.deserialize(requestBody, List<Response>.class);
+
+		// Call Service Method - Is mobile Yes
+		List<Response__c> insertedResponses = ResponsesService.saveResponse(responses, true);
+
+        return insertedResponses;
+
+	}
+	
 }

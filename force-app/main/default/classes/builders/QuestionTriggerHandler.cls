@@ -82,8 +82,6 @@ public class QuestionTriggerHandler implements ITrigger {
 	public void afterInsert(SObject so) {
 
         Question__c cf = (Question__c) so; 
-
-        QuestionFlowDesigns.execute(flowDesignsToBeCreated, cf);
 		AuditLogBuilderService.execute(logs, cf, null, 'Title__c');
 
 	}
