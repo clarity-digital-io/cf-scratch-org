@@ -137,6 +137,9 @@ sfdx force:apex:class:create -n Response -d force-app/main/default/classes
 
 sfdx force:apex:class:create -n Answer -d force-app/main/default/classes
 
+sfdx force:apex:class:create -n SObjectsResource -d force-app/main/default/classes/restapi
+
+
 ## Resources
 
 
