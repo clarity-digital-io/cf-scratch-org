@@ -1,0 +1,1 @@
+public interface IResponses extends fflib_ISObjectDomain {}

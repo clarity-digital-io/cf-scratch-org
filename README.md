@@ -87,10 +87,51 @@ sfdx force:org:delete -u test-vsjzhlogmd0n@example.com
 
 ## Security Checks 
 
-sfdx force:apex:class:create -n FLSUtility -d force-app/main/default/classes
+sfdx force:apex:class:create -n Forms -d force-app/main/default/classes
 
-sfdx force:apex:class:create -n DatabaseUtility -d force-app/main/default/classes
+sfdx force:apex:class:create -n IForms -d force-app/main/default/classes
 
+sfdx force:apex:class:create -n Questions -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n IQuestions -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n Responses -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n IResponses -d force-app/main/default/classes
+
+
+sfdx force:apex:class:create -n FormsSelector -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n IFormsSelector -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n QuestionsSelector -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n ResponsesSelector -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n IResponsesSelector -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n Application -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n IFormsService -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n FormsServiceImpl -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n QuestionsSelector -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n IQuestionsSelector -d force-app/main/default/classes
+
+
+sfdx force:apex:class:create -n ResponsesResource -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n ResponsesService -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n ResponsesServiceImpl -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n IResponsesService -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n AnswersSelector -d force-app/main/default/classes
+
+sfdx force:apex:class:create -n IAnswersSelector -d force-app/main/default/classes
 
 ## Resources
 

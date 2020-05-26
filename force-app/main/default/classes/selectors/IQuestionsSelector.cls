@@ -1,0 +1,1 @@
+public interface IQuestionsSelector extends fflib_ISObjectSelector {}

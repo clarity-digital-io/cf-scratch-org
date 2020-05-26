@@ -1,4 +1,4 @@
-public with sharing class MobileService {
+public with sharing class FormsService {
 
 	
 	public static Map<String, Map<String, sObject>> getMobileRecords() {
@@ -262,5 +262,12 @@ public with sharing class MobileService {
 		
 	}
 
+	public static List<Form__c> getForms() {
+		return service().getForms();
+	}
+
+	public static IFormsService service(){
+		return (IFormsService) Application.service.newInstance(IFormsService.class);
+	}
 }
 
