@@ -1,7 +1,7 @@
-public class QuestionsSelector extends fflib_SObjectSelector {
+public class QuestionsSelector extends fflib_SObjectSelector implements IQuestionsSelector {
  
 	public Schema.SObjectType getSObjectType(){
-	   return Answer__c.sObjectType;
+	   return Question__c.sObjectType;
 	}
   
 	public List<Schema.SObjectField> getSObjectFieldList(){
@@ -30,6 +30,15 @@ public class QuestionsSelector extends fflib_SObjectSelector {
 	public List<Question__c> selectById(Set<Id> recordIds){
 		return (List<Question__c>) selectSObjectsById(recordIds);
 	}
+
+	public List<Question__c> selectWithAllDetails(){
+		fflib_QueryFactory query = newQueryFactory();
+
+		new QuestionOptionsSelector().
+			addQueryFactorySubselect(query,'forms__Question_Options__r');
+   
+		return (List<Question__c>) Database.query( query.toSOQL() );
+	}  
 
 	public static IQuestionsSelector newInstance(){
 		return (IQuestionsSelector) Application.selector.newInstance(Question__c.SObjectType);

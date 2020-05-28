@@ -14,7 +14,8 @@ public class Application {
 		new fflib_Application.ServiceFactory(
 			new Map<Type, Type> {
 				IFormsService.class => FormsServiceImpl.class,
-				IResponsesService.class => ResponsesServiceImpl.class
+				IResponsesService.class => ResponsesServiceImpl.class,
+				IQuestionsService.class => QuestionsServiceImpl.class
 			}
 		);
 
@@ -22,7 +23,8 @@ public class Application {
 		new fflib_Application.SelectorFactory(
 			new Map<SObjectType, Type> {
 				Form__c.sObjectType => FormsSelector.class,
-				Response__c.sObjectType => ResponsesSelector.class
+				Response__c.sObjectType => ResponsesSelector.class,
+				Question__c.sObjectType => QuestionsSelector.class
 			}
 		);
 

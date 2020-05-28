@@ -11,7 +11,8 @@ public class FormsSelector extends fflib_SObjectSelector implements IFormsSelect
 			Form__c.Title__c,
 			Form__c.Status__c,
 			Form__c.CreatedDate,
-			Form__c.Multi_Page__c
+			Form__c.Multi_Page__c,
+			Form__c.CreatedById.Name
 	   };
 	}
 
@@ -20,7 +21,7 @@ public class FormsSelector extends fflib_SObjectSelector implements IFormsSelect
 	}
 
 	public List<Form__c> selectWithResponseItems(){
-		fflib_QueryFactory query = newQueryFactory();
+		fflib_QueryFactory query = newQueryFactory().selectField('CreatedById.Name');
 
 		new QuestionsSelector().
 			addQueryFactorySubselect(query,'forms__Questions__r');
@@ -35,3 +36,6 @@ public class FormsSelector extends fflib_SObjectSelector implements IFormsSelect
 		return (IFormsSelector) Application.selector.newInstance(Form__c.SObjectType);
 	}
 }
+
+// (SELECT Id, Label__c, Active_Flow__c, Choice_Image__c, Order__c FROM Question_Options__r), 
+// (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Question__c FROM Question_Criteria__r),

@@ -12,7 +12,8 @@ public class ResponsesSelector extends fflib_SObjectSelector implements IRespons
 			Response__c.Status__c,
 			Response__c.Submitted_Date__c,
 			Response__c.UUID__c,
-			Response__c.Form__c
+			Response__c.Form__c,
+			Response__c.CreatedById.Name
 	   };
 	}
 
@@ -21,7 +22,7 @@ public class ResponsesSelector extends fflib_SObjectSelector implements IRespons
 	}
 
 	public List<Response__c> selectRecent(){
-		fflib_QueryFactory query = newQueryFactory();
+		fflib_QueryFactory query = newQueryFactory().selectField('CreatedById.Name').selectField('Form__r.Title__c');
 
 		query.addOrdering('CreatedDate', fflib_QueryFactory.SortOrder.DESCENDING);
 		query.setLimit( 100 );

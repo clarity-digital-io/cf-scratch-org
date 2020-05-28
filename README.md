@@ -139,6 +139,24 @@ sfdx force:apex:class:create -n Answer -d force-app/main/default/classes
 
 sfdx force:apex:class:create -n SObjectsResource -d force-app/main/default/classes/restapi
 
+## Question_Option__c
+
+sfdx force:apex:class:create -n QuestionsService -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n QuestionsServiceImpl -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n IQuestionsService -d force-app/main/default/classes/services
+
+
+sfdx force:apex:class:create -n QuestionOptionsSelector -d force-app/main/default/classes/selectors
+
+sfdx force:apex:class:create -n IQuestionOptionsSelector -d force-app/main/default/classes/selectors
+
+## Question_Criteria__c
+
+sfdx force:apex:class:create -n QuestionCriteriaSelector -d force-app/main/default/classes/selectors
+
+sfdx force:apex:class:create -n IQuestionCriteriaSelector -d force-app/main/default/classes/selectors
 
 ## Resources
 
