@@ -158,6 +158,38 @@ sfdx force:apex:class:create -n QuestionCriteriaSelector -d force-app/main/defau
 
 sfdx force:apex:class:create -n IQuestionCriteriaSelector -d force-app/main/default/classes/selectors
 
+## Records 
+
+## Question_Option__c
+
+sfdx force:apex:class:create -n RecordsService -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n RecordsServiceImpl -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n IRecordsService -d force-app/main/default/classes/services
+
+## Controllers Builder
+
+sfdx force:apex:class:create -n BuilderController -d force-app/main/default/classes/controllers
+
+sfdx force:apex:class:create -n Questions -d force-app/main/default/classes/domains
+
+sfdx force:apex:class:create -n IQuestions -d force-app/main/default/classes/domains
+
+sfdx force:apex:class:create -n QuestionOptions -d force-app/main/default/classes/domains
+
+sfdx force:apex:class:create -n IQuestionOptions -d force-app/main/default/classes/domains
+
+sfdx force:apex:class:create -n FormConnections -d force-app/main/default/classes/domains
+
+sfdx force:apex:class:create -n IFormConnections -d force-app/main/default/classes/domains
+
+
+sfdx force:apex:class:create -n FormResponseController -d force-app/main/default/classes/controllers
+
+
+sfdx force:apex:class:create -n FormController -d force-app/main/default/classes/controllers
+
 ## Resources
 
 

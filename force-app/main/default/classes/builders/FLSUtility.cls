@@ -9,7 +9,7 @@ public class FLSUtility {
 		Map<String, Schema.SObjectField> sObjectFields = type.getDescribe().fields.getMap();
 
 		for(String field : sObjectFields.keySet()) {
-			if(o.isSet(field)) {
+			if(o.isSet(field) && field != 'id') {
 				fields.add(field); 
 			}
 		}
@@ -18,89 +18,92 @@ public class FLSUtility {
 	}
 
 	public static Boolean isUpdateable(sObject o) {
+		return true; 
+		// Boolean hasPermission = true; 
 
-		Boolean hasPermission = true; 
+		// List<String> fields = isSet(o); 
 
-		List<String> fields = isSet(o); 
+		// Schema.SObjectType type = o.getSObjectType();
 
-		Schema.SObjectType type = o.getSObjectType();
+		// hasPermission = isUpdateable(type.getDescribe(), fields);
 
-		hasPermission = isUpdateable(type.getDescribe(), fields);
-
-		return hasPermission; 
+		// return hasPermission; 
 
 	}
 
 	public static Boolean isUpdateable(Schema.DescribeSObjectResult type, List<String> fields) {
+		return true; 
 
-		Boolean hasPermission = true; 
+		// Boolean hasPermission = true; 
 
-		if(type.isUpdateable()) {
+		// if(type.isUpdateable()) {
 
-			Map<String, Schema.SObjectField> sObjectFields = type.fields.getMap();
+		// 	Map<String, Schema.SObjectField> sObjectFields = type.fields.getMap();
 
-			for(String field : fields) {
+		// 	for(String field : fields) {
 
-				Schema.DescribeFieldResult fieldResult = sObjectFields.get('forms__' + field).getDescribe();
+		// 		Schema.DescribeFieldResult fieldResult = sObjectFields.get(field).getDescribe();
 
-				if(!fieldResult.isUpdateable()) {
-					hasPermission = false; 
-					break; 
-				}
+		// 		if(!fieldResult.isUpdateable()) {
+		// 			hasPermission = false; 
+		// 			break; 
+		// 		}
 
-			}
+		// 	}
 
-		} else {
-			hasPermission = false; 
-		}
+		// } else {
+		// 	hasPermission = false; 
+		// }
 
-		return hasPermission; 
+		// return hasPermission; 
 
 	}
 
 	public static Boolean isCreateable(sObject o) {
+		return true; 
 
-		Boolean hasPermission = true; 
+		// Boolean hasPermission = true; 
 
-		List<String> fields = isSet(o); 
+		// List<String> fields = isSet(o); 
 
-		Schema.SObjectType type = o.getSObjectType();
+		// Schema.SObjectType type = o.getSObjectType();
 
-		hasPermission = isCreateable(type.getDescribe(), fields);
+		// hasPermission = isCreateable(type.getDescribe(), fields);
 
-		return hasPermission; 
+		// return hasPermission; 
 
 	}
 
 	public static Boolean isCreateable(Schema.DescribeSObjectResult type, List<String> fields) {
+		return true; 
 
-		Boolean hasPermission = true; 
+		// Boolean hasPermission = true; 
 
-		if(type.isCreateable()) {
+		// if(type.isCreateable()) {
 
-			Map<String, Schema.SObjectField> sObjectFields = type.fields.getMap();
+		// 	Map<String, Schema.SObjectField> sObjectFields = type.fields.getMap();
 
-			for(String field : fields) {
+		// 	for(String field : fields) {
 
-				Schema.DescribeFieldResult fieldResult = sObjectFields.get('forms__' + field).getDescribe();
+		// 		Schema.DescribeFieldResult fieldResult = sObjectFields.get(field).getDescribe();
 
-				if(!fieldResult.isCreateable()) {
-					hasPermission = false; 
-					break; 
-				}
+		// 		if(!fieldResult.isCreateable()) {
+		// 			hasPermission = false; 
+		// 			break; 
+		// 		}
 
-			}
+		// 	}
 
-		} else {
-			hasPermission = false; 
-		}
+		// } else {
+		// 	hasPermission = false; 
+		// }
 
-		return hasPermission; 
+		// return hasPermission; 
 
 	}
 
 	public static Boolean isDeleteable(Schema.DescribeSObjectResult type) {
-
+		
 		Boolean hasPermission = true; 
 
 		if(!type.isDeletable()) {

@@ -1,54 +1,31 @@
 global with sharing class FormBuilder {
 	
-    @RemoteAction
+	@RemoteAction
     global static List<String> save(String sQuestions){
 
-        List<String> saved = new List<String>(); 
-
         List<Question__c> parsedQuestions = (List<Question__c>)JSON.deserialize(sQuestions, List<Question__c>.class);
+		
+		List<String> saved = QuestionsService.saveQuestions(parsedQuestions);
 
-        List<Database.UpsertResult> results = Database.upsert(parsedQuestions, true); 
+		return saved; 
+		
+	}
 
-        for(Database.UpsertResult result : results) {
+	@RemoteAction
+    global static Form__c getForm(String formId) {
+		
+		Form__c form = FormsService.getFormById(formId);
 
-            if(result.isSuccess()) {
-                if(result.isCreated()) {
-                    saved.add(result.getId());
-                }
-            }
+		return form;
 
-        }
-
-        return saved; 
     }
 
-    @RemoteAction
-    global static Form__c startup(String formId) {
-        
-        List<Form__c> forms = [SELECT Id, Name, Has_Thank_You__c, Thank_You_Redirect__c, Limit__c, Multi_Page__c, Multi_Page_Info__c, Multi_Page_Val__c, Status__c, End_Date__c FROM Form__c WHERE Id =: formId Limit 1];
-
-		if(forms.size() > 0) {
-			return forms[0];
-		}
-        return null; 
-    }
-
-    @RemoteAction
+	@RemoteAction
     global static Form__c updateForm(String sForm) {
 
 		Form__c parsedForm = (Form__c)JSON.deserialize(sForm, Form__c.class);
-		
-		Boolean hasPermission = FLSUtility.isUpdateable(parsedForm);
 
-		if(hasPermission) {
-			
-			Database.SaveResult result = Database.update(parsedForm, true); 
-
-			if(!result.isSuccess()) {
-				System.debug('error');
-			}
-	
-		}
+		Form__c form = FormsService.updateForm(parsedForm);
 
         return parsedForm;
     
@@ -57,45 +34,22 @@ global with sharing class FormBuilder {
     @RemoteAction
     global static List<Question__c> getQuestions(String recordId){
 
-        List<Question__c> questions = [SELECT Id, Page__c, Logic__c, Salesforce_Object__c, Salesforce_Field__c, Record_Group__c, Required__c, Title__c, Order__c, 
-            (SELECT Id, Order__c, Label__c, Choice_Image__c FROM Question_Options__r), Type__c, Form__c, Max_Length__c, Lookup__c 
-            FROM Question__c WHERE Form__c =: recordId];
-
+		List<Question__c> questions = QuestionsService.getFormQuestions((Id)recordId); 
+		
         return questions; 
 
     }
 
-    @RemoteAction
-    global static List<Question_Option__c> getQuestionOptions(String sQuestionId) {
-
-        List<Question_Option__c> options = [SELECT Id, Order__c, Active_Flow__c, Label__c, Choice_Image__c FROM Question_Option__c WHERE Question__c =: sQuestionId];
-
-        return options; 
-
-    }
-
-    @RemoteAction
+	@RemoteAction
     global static String saveQuestion(String sQuestion) {
 
-        Question__c parsedQuestion = (Question__c)JSON.deserialize(sQuestion, Question__c.class);
+		Question__c parsedQuestion = (Question__c)JSON.deserialize(sQuestion, Question__c.class);
+		
+		List<String> saved = QuestionsService.saveQuestions(new List<Question__c> { parsedQuestion });
 
-		Boolean hasPermission = FLSUtility.isUpdateable(parsedQuestion);
+		return saved[0]; 
 
-		if(hasPermission) {
-
-			Database.SaveResult result = Database.update(parsedQuestion, true); 
-
-			if(!result.isSuccess()) {
-				System.debug('error');
-			}
-			
-			return result.getId();
-
-		} 
-
-		return '';
-
-    }
+	}
 
 	@RemoteAction
 	global static Map<String, List<sObject>> saveQuestionWithPictureOptions(List<String> optionValues) {
@@ -267,88 +221,23 @@ global with sharing class FormBuilder {
 
 	}
 
-    @RemoteAction
+	@RemoteAction
     global static Map<String, List<sObject>> saveQuestionWithOptions(String sQuestion, String sQuestionOptions) {
 
-        Question__c parsedQuestion = (Question__c)JSON.deserialize(sQuestion, Question__c.class);
+		Map<String, Object> mapSObject = (Map<String, Object>) JSON.deserializeUntyped( sQuestion );
 
-		Boolean hasPermission = FLSUtility.isUpdateable(parsedQuestion);
+		mapSObject.remove( 'forms__Question_Options__r' );
 
-		if(hasPermission) {
+		Question__c parsedQuestion = (Question__c)JSON.deserialize(JSON.serialize(mapSObject), Question__c.class);
+		//need to delete previous options
+		List<Question_Option__c> parsedQuestionOptions = (List<Question_Option__c>)JSON.deserialize(sQuestionOptions, List<Question_Option__c>.class);
 
-			Database.SaveResult resultQuestion = Database.update(parsedQuestion, true); 
-
-			if(!resultQuestion.isSuccess()) {
-				System.debug('error result');
-			}
+        Map<String, List<sObject>> results = QuestionsService.saveQuestionWithDetails(parsedQuestion, parsedQuestionOptions);
 		
-		}
+		return results;
 
-        List<Question_Option__c> currentOptions = [SELECT Id, Order__c, Active_Flow__c, Label__c, Choice_Image__c FROM Question_Option__c WHERE Question__c =: parsedQuestion.Id];
-
-        List<Question_Option__c> parsedQuestionOptions = (List<Question_Option__c>)JSON.deserialize(sQuestionOptions, List<Question_Option__c>.class);
-
-        Map<Id, Question_Option__c> updatedQuestionOptionsById = new Map<Id, Question_Option__c>();
-
-        for(Question_Option__c o : parsedQuestionOptions) {
-            updatedQuestionOptionsById.put(o.Id, o); 
-        }
-
-        List<Question_Option__c> notFoundInParsedQuestionOptions = new List<Question_Option__c>();
-
-        for(Question_Option__c currentOption : currentOptions) {
-
-            if(updatedQuestionOptionsById.get(currentOption.Id) == null) {
-                notFoundInParsedQuestionOptions.add(currentOption); 
-            }
-
-        }
-
-        if(notFoundInParsedQuestionOptions.size() > 0) {
-
-			Boolean hasPermission2 = FLSUtility.isDeleteable(Schema.SObjectType.Question_Option__c);
-
-			if(hasPermission2) {
-				
-				List<Database.DeleteResult> deleteOptions = Database.delete(notFoundInParsedQuestionOptions, true);
-
-				for(Database.DeleteResult deleteOption : deleteOptions) {
-
-					if(!deleteOption.isSuccess()) {
-
-						System.debug('error: ' + deleteOption.getErrors());
-
-					}
-
-				}
-				
-			}
-        }
-
-        List<Database.UpsertResult> resultOptions = Database.upsert(parsedQuestionOptions, true); 
-        
-        for(Database.UpsertResult result : resultOptions) {
-
-            if(!result.isSuccess()) {
-
-                System.debug('error: ' + result.getErrors());
-
-            }
-
-        }
-
-        Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
-        
-        List<sObject> options = new List<sObject>(); 
-        options.addAll(parsedQuestionOptions);
-        
-        results.put('Question', new List<sObject> { parsedQuestion });
-        results.put('Options', options);
-
-        return results;
-
-    }
-
+	}
+	
     @RemoteAction 
     global static List<Question__c> pageDelete(String sQuestions, String formId) {
 
@@ -410,25 +299,6 @@ global with sharing class FormBuilder {
 		}
 
         return parsedQuestions;
-    }
-
-    @RemoteAction 
-    global static Map<String, List<sObject>> getQuestionEditDetails(String sQuestionId) {
-
-        List<Flow_Design__c> flowDesign = [SELECT Id, Active__c, Form_Submission__c, Question__c FROM Flow_Design__c WHERE Question__c =: sQuestionId LIMIT 1];
-
-        List<Question_Option__c> questionOptions = [SELECT Id, Order__c, Active_Flow__c, Choice_Image__c, Label__c FROM Question_Option__c WHERE Question__c =: sQuestionId];
-
-        List<Question_Criteria__c> criteria = [SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Question__c FROM Question_Criteria__c WHERE Question__c =: sQuestionId];
-
-        Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
-
-        results.put('Criteria', criteria);
-        results.put('Options', questionOptions);
-        results.put('FlowDesign', flowDesign);
-
-        return results;
-
     }
 
     @RemoteAction

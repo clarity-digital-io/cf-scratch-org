@@ -12,7 +12,13 @@ public class FormsSelector extends fflib_SObjectSelector implements IFormsSelect
 			Form__c.Status__c,
 			Form__c.CreatedDate,
 			Form__c.Multi_Page__c,
-			Form__c.CreatedById.Name
+			Form__c.CreatedById.Name,
+			Form__c.Has_Thank_You__c,
+			Form__c.Thank_You_Redirect__c,
+			Form__c.Limit__c,
+			Form__c.Multi_Page_Val__c,
+			Form__c.Multi_Page_Info__c,
+			Form__c.End_Date__c
 	   };
 	}
 
@@ -27,7 +33,7 @@ public class FormsSelector extends fflib_SObjectSelector implements IFormsSelect
 			addQueryFactorySubselect(query,'forms__Questions__r');
 
 		new ResponsesSelector().
-			  addQueryFactorySubselect(query,'forms__Responses__r');
+			  addQueryFactorySubselect(query,'forms__Responses__r').selectField('CreatedById.Name').selectField('Form__c.Title__c');
    
 		return (List<Form__c>) Database.query( query.toSOQL() );
 	}  

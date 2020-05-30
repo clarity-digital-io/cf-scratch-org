@@ -205,6 +205,11 @@
                 <default>false</default>
                 <label>InputField</label>
             </value>
+            <value>
+                <fullName>GeoLocation</fullName>
+                <default>false</default>
+                <label>GeoLocation</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

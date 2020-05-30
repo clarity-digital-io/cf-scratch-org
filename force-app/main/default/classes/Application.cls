@@ -5,6 +5,7 @@ public class Application {
 			new List<SObjectType> {
 				Form__c.sObjectType,
 				Question__c.sObjectType,
+				Question_Option__c.sObjectType,
 				Response__c.sObjectType,
 				Answer__c.sObjectType
 			}
@@ -15,7 +16,8 @@ public class Application {
 			new Map<Type, Type> {
 				IFormsService.class => FormsServiceImpl.class,
 				IResponsesService.class => ResponsesServiceImpl.class,
-				IQuestionsService.class => QuestionsServiceImpl.class
+				IQuestionsService.class => QuestionsServiceImpl.class,
+				IRecordsService.class => RecordsServiceImpl.class
 			}
 		);
 
@@ -24,7 +26,8 @@ public class Application {
 			new Map<SObjectType, Type> {
 				Form__c.sObjectType => FormsSelector.class,
 				Response__c.sObjectType => ResponsesSelector.class,
-				Question__c.sObjectType => QuestionsSelector.class
+				Question__c.sObjectType => QuestionsSelector.class,
+				Question_Option__c.sObjectType => QuestionOptionsSelector.class
 			}
 		);
 

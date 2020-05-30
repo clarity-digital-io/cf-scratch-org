@@ -36,6 +36,22 @@ public class QuestionsSelector extends fflib_SObjectSelector implements IQuestio
 
 		new QuestionOptionsSelector().
 			addQueryFactorySubselect(query,'forms__Question_Options__r');
+	
+		new QuestionCriteriaSelector().
+			addQueryFactorySubselect(query,'forms__Question_Criteria__r');
+   
+		return (List<Question__c>) Database.query( query.toSOQL() );
+	}  
+
+	public List<Question__c> selectWithAllDetailsByIds(Set<Id> formIds){
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition('Form__c IN :formIds');
+
+		new QuestionOptionsSelector().
+			addQueryFactorySubselect(query,'forms__Question_Options__r');
+	
+		new QuestionCriteriaSelector().
+			addQueryFactorySubselect(query,'forms__Question_Criteria__r');
    
 		return (List<Question__c>) Database.query( query.toSOQL() );
 	}  

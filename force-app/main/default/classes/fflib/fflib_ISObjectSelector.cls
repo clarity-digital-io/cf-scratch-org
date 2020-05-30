@@ -35,4 +35,6 @@ public interface fflib_ISObjectSelector
 	 * Selects by Id records using the fields defined by the Selector configuration
 	 **/
 	List<SObject> selectSObjectsById(Set<Id> idSet);	
+
+	fflib_QueryFactory newQueryFactory(Boolean enforce);
 }
