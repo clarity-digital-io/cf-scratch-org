@@ -16,9 +16,16 @@ public class QuestionCriteriaSelector extends fflib_SObjectSelector implements I
 		};
 	}
 
-	public List<Question__c> selectById(Set<Id> recordIds){
-		return (List<Question__c>) selectSObjectsById(recordIds);
+	public List<Question_Criteria__c> selectById(Set<Id> recordIds){
+		return (List<Question_Criteria__c>) selectSObjectsById(recordIds);
 	} 
+
+	public List<Question_Criteria__c> selectByQuestionId(Id questionId){
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition('Question__c = :questionId');
+   
+		return (List<Question_Criteria__c>) Database.query( query.toSOQL() );
+	}  
 
 	public static IQuestionCriteriaSelector newInstance(){
 		return (IQuestionCriteriaSelector) Application.selector.newInstance(Question_Criteria__c.SObjectType);

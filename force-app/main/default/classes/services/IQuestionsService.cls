@@ -3,4 +3,6 @@ public interface IQuestionsService {
 	List<Question__c> getFormQuestions(Id formId);
 	List<String> saveQuestions(List<Question__c> questions);
 	Map<String, List<sObject>> saveQuestionWithDetails(Question__c question, List<Question_Option__c> options);
+	Map<String, List<sObject>> saveQuestionWithCriteriaDetails(Question__c question, List<Question_Criteria__c> criteria);
+	List<Question__c> deleteQuestion(List<Question__c> questions, Question__c questionDelete);
 }

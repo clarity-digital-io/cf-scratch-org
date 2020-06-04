@@ -237,7 +237,7 @@ global with sharing class FormBuilder {
 		return results;
 
 	}
-	
+
     @RemoteAction 
     global static List<Question__c> pageDelete(String sQuestions, String formId) {
 
@@ -261,112 +261,39 @@ global with sharing class FormBuilder {
 			
 		return getQuestions(formId);
     
-    }
-
-    @RemoteAction 
+	}
+	
+	@RemoteAction 
     global static List<Question__c> deleteQuestion(String sQuestions, String sDeleteQuestionId) {
+		
+		Id questionId = (Id)sDeleteQuestionId;
 
-        Question__c questionToDelete = [SELECT Id FROM Question__c WHERE Id =: sDeleteQuestionId];
+		Question__c questionToDelete = (Question__c)questionId.getSobjectType().newSObject((Id)sDeleteQuestionId);
 
-		Boolean hasPermission = FLSUtility.isDeleteable(Schema.SObjectType.Question__c);
+		List<Question__c> parsedQuestions = (List<Question__c>)JSON.deserialize(sQuestions, List<Question__c>.class);
+		
+		List<Question__c> updatedQuestions = QuestionsService.deleteQuestion(parsedQuestions, questionToDelete);
 
-		if(hasPermission) {
-
-			Database.DeleteResult result = Database.delete(questionToDelete, true);
-
-			if(!result.isSuccess()) {
-				System.debug('error: ' + result.getErrors());
-			}
-			
-		}
-        
-        List<Question__c> parsedQuestions = (List<Question__c>)JSON.deserialize(sQuestions, List<Question__c>.class);
-
-		Boolean hasPermission3 = FLSUtility.isUpdateable(parsedQuestions[0]);
-
-		if(hasPermission3) {
-
-			List<Database.SaveResult> results = Database.update(parsedQuestions, true); 
-
-			for(Database.SaveResult sResult : results) {
-
-				if(!sResult.isSuccess()) {
-					System.debug('error');
-				}
-
-			}
-			
-		}
-
-        return parsedQuestions;
+		return updatedQuestions;
     }
 
-    @RemoteAction
+	@RemoteAction
     global static Map<String, List<sObject>> saveQuestionWithCriteria(String sQuestion, String sCriteria) {
 
-        Question__c parsedQuestion = (Question__c)JSON.deserialize(sQuestion, Question__c.class);
+		Map<String, Object> mapSObject = (Map<String, Object>) JSON.deserializeUntyped( sQuestion );
 
-		Boolean hasPermission = FLSUtility.isUpdateable(parsedQuestion);
+		mapSObject.remove( 'forms__Question_Criteria__r' );
 
-		if(hasPermission) {
-
-			Database.SaveResult resultQuestion = Database.update(parsedQuestion, true); 
-
-			if(!resultQuestion.isSuccess()) {
-				System.debug('error');
-			}
-			
-		}
-
-		List<Question_Criteria__c> currentCriteria = [SELECT Id FROM Question_Criteria__c WHERE Question__c =: parsedQuestion.Id];
-		
-		Boolean hasPermission2 = FLSUtility.isDeleteable(Schema.SObjectType.Question_Criteria__c);
-
-		if(hasPermission2) {
-
-			List<Database.DeleteResult> resultCriteriaDelete = Database.delete(currentCriteria, true); 
-
-			for(Database.DeleteResult criteriaDelete : resultCriteriaDelete) {
-
-				if(!criteriaDelete.isSuccess()) {
-
-					System.debug('error: ' + criteriaDelete.getErrors());
-
-				}
-
-			}
-
-		}
+		Question__c parsedQuestion = (Question__c)JSON.deserialize(JSON.serialize(mapSObject), Question__c.class);
 
         List<Question_Criteria__c> parsedCriteria = (List<Question_Criteria__c>)JSON.deserialize(sCriteria, List<Question_Criteria__c>.class);
 
-		Boolean hasPermission3 = FLSUtility.isCreateable(parsedCriteria[0]);
-
-		if(hasPermission3) {
-
-			List<Database.SaveResult> resultCriteria = Database.insert(parsedCriteria, true); 
-
-			for(Database.SaveResult newCriteria : resultCriteria) {
-
-				if(!newCriteria.isSuccess()) {
-
-					System.debug('error: ' + newCriteria.getErrors());
-
-				}
-
-			}
-			
-		}
-
-        Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
-
-        results.put('Criteria', parsedCriteria);
-        results.put('Question', new List<sObject> { parsedQuestion });
-
+        Map<String, List<sObject>> results = QuestionsService.saveQuestionWithCriteriaDetails(parsedQuestion, parsedCriteria);
+		
         return results;
         
-    }
-
+	}
+	
     @RemoteAction
     global static List<String> getSObjectsAvailable() {
 

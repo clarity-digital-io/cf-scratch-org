@@ -7,7 +7,8 @@ public class Application {
 				Question__c.sObjectType,
 				Question_Option__c.sObjectType,
 				Response__c.sObjectType,
-				Answer__c.sObjectType
+				Answer__c.sObjectType,
+				Question_Criteria__c.sObjectType
 			}
 		); 
 
@@ -27,7 +28,8 @@ public class Application {
 				Form__c.sObjectType => FormsSelector.class,
 				Response__c.sObjectType => ResponsesSelector.class,
 				Question__c.sObjectType => QuestionsSelector.class,
-				Question_Option__c.sObjectType => QuestionOptionsSelector.class
+				Question_Option__c.sObjectType => QuestionOptionsSelector.class,
+				Question_Criteria__c.sObjectType => QuestionCriteriaSelector.class
 			}
 		);
 

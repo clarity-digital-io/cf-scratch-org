@@ -59,7 +59,7 @@ global with sharing class BuilderController {
 		mapSObject.remove( 'forms__Question_Options__r' );
 
 		Question__c parsedQuestion = (Question__c)JSON.deserialize(JSON.serialize(mapSObject), Question__c.class);
-		//need to delete previous options
+
 		List<Question_Option__c> parsedQuestionOptions = (List<Question_Option__c>)JSON.deserialize(sQuestionOptions, List<Question_Option__c>.class);
 
         Map<String, List<sObject>> results = QuestionsService.saveQuestionWithDetails(parsedQuestion, parsedQuestionOptions);
@@ -67,5 +67,36 @@ global with sharing class BuilderController {
 		return results;
 
 	}
+
+	@RemoteAction
+    global static Map<String, List<sObject>> saveQuestionWithCriteria(String sQuestion, String sCriteria) {
+
+		Map<String, Object> mapSObject = (Map<String, Object>) JSON.deserializeUntyped( sQuestion );
+
+		mapSObject.remove( 'forms__Question_Criteria__r' );
+
+		Question__c parsedQuestion = (Question__c)JSON.deserialize(JSON.serialize(mapSObject), Question__c.class);
+
+        List<Question_Criteria__c> parsedCriteria = (List<Question_Criteria__c>)JSON.deserialize(sCriteria, List<Question_Criteria__c>.class);
+
+        Map<String, List<sObject>> results = QuestionsService.saveQuestionWithCriteriaDetails(parsedQuestion, parsedCriteria);
+		
+        return results;
+        
+	}
+	
+	@RemoteAction 
+    global static List<Question__c> deleteQuestion(String sQuestions, String sDeleteQuestionId) {
+		
+		Id questionId = (Id)sDeleteQuestionId;
+
+		Question__c questionToDelete = (Question__c)questionId.getSobjectType().newSObject((Id)sDeleteQuestionId);
+
+		List<Question__c> parsedQuestions = (List<Question__c>)JSON.deserialize(sQuestions, List<Question__c>.class);
+		
+		List<Question__c> updatedQuestions = QuestionsService.deleteQuestion(parsedQuestions, questionToDelete);
+
+		return updatedQuestions;
+    }
 
 }

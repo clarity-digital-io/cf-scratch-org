@@ -16,6 +16,14 @@ public with sharing class QuestionsService {
 		return service().saveQuestionWithDetails(question, options);
 	}
 
+	public static Map<String, List<sObject>> saveQuestionWithCriteriaDetails(Question__c question, List<Question_Criteria__c> criteria) {
+		return service().saveQuestionWithCriteriaDetails(question, criteria);
+	}
+
+	public static List<Question__c> deleteQuestion(List<Question__c> questions, Question__c questionDelete) {
+		return service().deleteQuestion(questions, questionDelete);
+	}
+
 	public static IQuestionsService service(){
 		return (IQuestionsService) Application.service.newInstance(IQuestionsService.class);
 	}

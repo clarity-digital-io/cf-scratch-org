@@ -49,7 +49,6 @@ public class QuestionsServiceImpl implements IQuestionsService {
 
         }
 
-
 		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());    	  	    										
 
 		uow.registerUpsert(question);
@@ -70,4 +69,44 @@ public class QuestionsServiceImpl implements IQuestionsService {
 
         return results;
 	}
+
+	public Map<String, List<sObject>> saveQuestionWithCriteriaDetails(Question__c question, List<Question_Criteria__c> criteria) {
+
+        List<Question_Criteria__c> existingCriteria = QuestionCriteriaSelector.newInstance().selectByQuestionId(question.Id); 
+		
+		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());    	  	    										
+
+		uow.registerUpsert(question);
+
+		uow.registerDeleted(existingCriteria);
+		
+		uow.registerUpsert(criteria);
+
+		uow.commitWork();	
+
+		Map<String, List<sObject>> results = new Map<String, List<sObject>>(); 
+
+        List<sObject> newCriteria = new List<sObject>(); 
+        newCriteria.addAll(criteria);
+        
+        results.put('Question', new List<sObject> { question });
+        results.put('Criteria', newCriteria);
+
+        return results;
+	}
+
+	public List<Question__c> deleteQuestion(List<Question__c> questions, Question__c questionDelete) {
+
+		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());    	  	    										
+
+		uow.registerDeleted(questionDelete);
+
+		uow.registerUpsert(questions);
+
+		uow.commitWork();	
+
+		return questions; 
+
+	}
+
 }
