@@ -1,15 +1,8 @@
 public class SyncServiceImpl implements ISyncService {
 	
+	@future(callout=true) 
 	public static void process(String userId) {
 
-		System.debug('requests: ' + userId); 
-		sync(userId); 
-		
-	}
-
-	@future(callout=true) 
-	public static void sync(String userId) {
-		//query sobjects + fields that need to be included
 		List<Account> accounts = [SELECT Id, Name, OwnerId, Type, LastModifiedDate, CreatedDate FROM Account];
 		
 		Http http = new Http();
@@ -23,3 +16,4 @@ public class SyncServiceImpl implements ISyncService {
 	}
 
 }
+

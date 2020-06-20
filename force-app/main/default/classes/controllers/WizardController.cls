@@ -3,6 +3,8 @@ public with sharing class WizardController {
 	@AuraEnabled
 	public static String getSetup(){
 
+		//String response = SetupService.getOrganizationInformation(); 
+
 		Organization organization = [Select Id, Name FROM Organization Limit 1]; 
 
 		Http http = new Http();
@@ -18,6 +20,8 @@ public with sharing class WizardController {
 
 	@AuraEnabled
 	public static void createConnect(){
+
+		//String response = SyncService.connectOrganization(); 
 
 		Organization organization = [Select Id, Name FROM Organization Limit 1]; 
 
@@ -67,6 +71,8 @@ public with sharing class WizardController {
 	}
 
 	public static void usersSync() {
+
+		//String response = SyncService.registerUsers(); 
 
 		Organization organization = [Select Id, IsSandbox, Name FROM Organization Limit 1]; 
 

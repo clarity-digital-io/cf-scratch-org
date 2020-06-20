@@ -14,14 +14,16 @@ public with sharing class FormSummaryController {
     @AuraEnabled
     public static Form__c getForm(String recordId) {
 
-        List<Form__c> forms = [SELECT Id, Title__c, Label__c, Status__c, Name FROM Form__c WHERE Id =: recordId Limit 1]; 
+		Form__c form = FormsService.getFormById(recordId); 
 
-		return forms[0]; 
+		return form; 
 
     }
 
     @AuraEnabled
     public static List<Response__c> getFormResponses(String formId, String name, String recordId, String sObjectName){
+
+		//List<Response__c> responses = ResponsesService.getFormByIdAndConnection();
 
 		List<Response__c> responses = new List<Response__c>();
 
@@ -37,6 +39,8 @@ public with sharing class FormSummaryController {
 
     @AuraEnabled
     public static String deleteFormResponse(String responseId){
+
+		
         
 		Response__c response = [SELECT Id, Name FROM Response__c WHERE Id =: responseId Limit 1];
 		

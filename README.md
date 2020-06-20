@@ -97,26 +97,7 @@ sfdx force:apex:class:create -n ResponseConnectionsServiceImpl -d force-app/main
 sfdx force:apex:class:create -n ResponseConnectionsSelector -d force-app/main/default/classes/selectors
 sfdx force:apex:class:create -n IResponseConnectionsSelector -d force-app/main/default/classes/selectors
 
-sfdx force:apex:class:create -n AnswersService -d force-app/main/default/classes/services
-sfdx force:apex:class:create -n IAnswersService -d force-app/main/default/classes/services
-sfdx force:apex:class:create -n AnswersServiceImpl -d force-app/main/default/classes/services
-
-ContentVersion
-
-sfdx force:apex:class:create -n ContentVersions -d force-app/main/default/classes/domains
-sfdx force:apex:class:create -n IContentVersions -d force-app/main/default/classes/domains
-
-sfdx force:apex:class:create -n Answers -d force-app/main/default/classes/domains
-sfdx force:apex:class:create -n IAnswers -d force-app/main/default/classes/domains
-
-
-sfdx force:apex:class:create -n ImagesHelper -d force-app/main/default/classes/controllers/helpers
-
-sfdx force:apex:class:create -n PicklistHelper -d force-app/main/default/classes/controllers/helpers
-
-
-sfdx force:apex:class:create -n MobileSyncTrigger -d force-app/main/default/classes/controllers
-
+sfdx force:apex:class:create -n RecordSyncRe -d force-app/main/default/classes/restapi
 
 ## Resources
 

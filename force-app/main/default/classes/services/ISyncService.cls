@@ -1,3 +1,3 @@
 public interface ISyncService {
-    void process(String userId);
+	void process(String userId);
 }
