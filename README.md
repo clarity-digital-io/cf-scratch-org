@@ -61,21 +61,21 @@ sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-de
 
 sfdx force:org:list --all
 
-sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias mobile --durationdays 30 //clarity-forms-pkg
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias mobile-test-prod-one --durationdays 30 //clarity-forms-pkg
 
-sfdx force:alias:set mobile=test-vsjzhlogmd0n@example.com
+sfdx force:alias:set mobile-test-prod-one=test-fbyfuujmm9zd@example.com
 
-sfdx force:config:set defaultusername=mobile
+sfdx force:config:set defaultusername=mobile-test-prod-one
 
 sfdx force:source:push -f
 
 sfdx force:org:open -u PkgOrg
 
-sfdx force:user:password:generate --targetusername mobile
+sfdx force:user:password:generate --targetusername mobile-test-prod-one
 
-sfdx force:user:display --targetusername mobile
+sfdx force:user:display --targetusername mobile-test-prod-one
 
-sfdx force:org:delete -u test-vsjzhlogmd0n@example.com
+sfdx force:org:delete -u test-fbyfuujmm9zd@example.com
 
 ## Mobile Settings Controller Should:
 
@@ -113,6 +113,9 @@ sfdx force:apex:class:create -n IAnswers -d force-app/main/default/classes/domai
 sfdx force:apex:class:create -n ImagesHelper -d force-app/main/default/classes/controllers/helpers
 
 sfdx force:apex:class:create -n PicklistHelper -d force-app/main/default/classes/controllers/helpers
+
+
+sfdx force:apex:class:create -n MobileSyncTrigger -d force-app/main/default/classes/controllers
 
 
 ## Resources

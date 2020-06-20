@@ -4,12 +4,16 @@
         <componentInstances>
             <componentName>ClarityWizardSetup</componentName>
         </componentInstances>
-        <name>main</name>
+        <name>column1</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <name>column2</name>
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Clarity Forms Wizard</masterLabel>
     <template>
-        <name>flexipage:defaultAppHomeTemplate</name>
+        <name>flexipage:appHomeTemplateTwoColumns</name>
     </template>
     <type>AppPage</type>
 </FlexiPage>

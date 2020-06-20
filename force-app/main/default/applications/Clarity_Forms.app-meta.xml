@@ -9,15 +9,6 @@
         <type>Flexipage</type>
         <pageOrSobjectType>Form__c</pageOrSobjectType>
     </actionOverrides>
-    <actionOverrides>
-        <actionName>View</actionName>
-        <comment>Action override created by Lightning App Builder during activation.</comment>
-        <content>Setup</content>
-        <formFactor>Large</formFactor>
-        <skipRecordTypeSelect>false</skipRecordTypeSelect>
-        <type>Flexipage</type>
-        <pageOrSobjectType>Clarity_Setup__c</pageOrSobjectType>
-    </actionOverrides>
     <brand>
         <headerColor>#00305C</headerColor>
         <logo>RGB_Icon_Color</logo>
@@ -30,18 +21,13 @@
     <isNavPersonalizationDisabled>true</isNavPersonalizationDisabled>
     <label>Clarity Forms</label>
     <navType>Console</navType>
-    <tabs>Clarity_Forms_Wizard</tabs>
+    <tabs>Clarity_Forms_Setup_Wizard</tabs>
     <tabs>Form__c</tabs>
     <tabs>Response__c</tabs>
-    <tabs>Clarity_Setup__c</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>Clarity_Forms_UtilityBar</utilityBar>
     <workspaceConfig>
         <mappings>
-            <tab>Clarity_Forms_Wizard</tab>
-        </mappings>
-        <mappings>
-            <tab>Clarity_Setup__c</tab>
+            <tab>Clarity_Forms_Setup_Wizard</tab>
         </mappings>
         <mappings>
             <tab>Form__c</tab>

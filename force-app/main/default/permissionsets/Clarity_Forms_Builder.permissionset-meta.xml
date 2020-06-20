@@ -17,10 +17,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>FormResponseTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>FormSummaryController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -153,11 +149,6 @@
         <editable>true</editable>
         <field>Form__c.Connected_Object__c</field>
         <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Form__c.Description__c</field>
-        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>

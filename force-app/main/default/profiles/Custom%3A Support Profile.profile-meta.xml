@@ -86,10 +86,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>FormResponseTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>FormSummaryController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
