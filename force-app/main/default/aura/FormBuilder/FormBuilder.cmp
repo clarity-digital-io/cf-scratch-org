@@ -1,4 +1,4 @@
-<aura:component controller="FormController" implements="lightning:actionOverride,force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable">
+<aura:component controller="FormSummaryController" implements="lightning:actionOverride,force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable">
     
     <lightning:overlayLibrary aura:id="overlayLib"/>
 

@@ -16,21 +16,6 @@ public with sharing class Questions extends fflib_SObjectDomain implements IQues
 		super(sObjectList);
 	}
 
-	public override void onBeforeInsert()
-	{
-		System.debug('onBeforeInsert: ' + Trigger.new);
-	}
-
-	public override void onBeforeUpdate(Map<Id,SObject> existingRecords)
-	{
-		System.debug('onBeforeUpdate: ' + existingRecords);
-	}
-
-	public override void onBeforeDelete() 
-	{
-		System.debug('onBeforeDelete: ' + Trigger.old);
-	}
-
 	public class Constructor implements fflib_SObjectDomain.IConstructable
 	{
 		public fflib_SObjectDomain construct(List<SObject> sObjectList)
@@ -38,4 +23,5 @@ public with sharing class Questions extends fflib_SObjectDomain implements IQues
 			return new Questions(sObjectList);
 		}
 	}
+	
 }

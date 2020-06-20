@@ -1,4 +1,4 @@
-<aura:component controller="FormController" access="global" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId,lightning:isUrlAddressable">
+<aura:component controller="FormSummaryController" access="global" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId,lightning:isUrlAddressable">
     
     <aura:handler event="c:formResponseEvent" action="{!c.handleFormResponseEvent}"/>
 

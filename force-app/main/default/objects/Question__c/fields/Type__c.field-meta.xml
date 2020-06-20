@@ -36,11 +36,6 @@
                 <label>Ranking</label>
             </value>
             <value>
-                <fullName>NetPromoterScore</fullName>
-                <default>false</default>
-                <label>NetPromoterScore</label>
-            </value>
-            <value>
                 <fullName>Slider</fullName>
                 <default>false</default>
                 <label>Slider</label>

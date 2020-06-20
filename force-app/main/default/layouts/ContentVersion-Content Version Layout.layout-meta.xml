@@ -23,7 +23,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Form__c</field>
+                <field>Question__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>

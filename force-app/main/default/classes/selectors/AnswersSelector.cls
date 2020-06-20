@@ -1,4 +1,4 @@
-public class AnswersSelector extends fflib_SObjectSelector {
+public class AnswersSelector extends fflib_SObjectSelector implements IAnswersSelector {
  
 	public Schema.SObjectType getSObjectType(){
 	   return Answer__c.sObjectType;
@@ -19,6 +19,12 @@ public class AnswersSelector extends fflib_SObjectSelector {
 
 	public List<Answer__c> selectById(Set<Id> recordIds){
 		return (List<Answer__c>) selectSObjectsById(recordIds);
+	}
+
+	public List<Answer__c> selectByCustomQuery(String customQuery, String questionId, String responseId) {
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition(customQuery);
+		return (List<Answer__c>) Database.query( query.toSOQL());
 	}
 
 	public static IAnswersSelector newInstance(){

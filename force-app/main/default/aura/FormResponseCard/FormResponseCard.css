@@ -17,7 +17,11 @@
     color: #fff;
 }
 
-.THIS article.slds-card.slds-card_boundary.cFormResponseCard {
+.THIS article.slds-card.slds-card_boundary.formsFormResponseCard {
     background: #00305C !important;
     border: #00305C !important; 
+}
+
+.THIS .slds-m-horizontal_none {
+	background: #fff; 
 }

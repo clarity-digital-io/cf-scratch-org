@@ -13,12 +13,32 @@ public class ResponsesSelector extends fflib_SObjectSelector implements IRespons
 			Response__c.Submitted_Date__c,
 			Response__c.UUID__c,
 			Response__c.Form__c,
-			Response__c.CreatedById.Name
+			Response__c.CreatedById.Name,
+			Response__c.OwnerId
 	   };
 	}
 
 	public List<Response__c> selectById(Set<Id> recordIds){
 		return (List<Response__c>) selectSObjectsById(recordIds);
+	}
+
+	public List<Response__c> getResponsesByOwner(List<String> userIds){
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition('OwnerId = :userIds');
+		return (List<Response__c>) Database.query( query.toSOQL() );
+	}
+
+	public List<Response__c> selectWithAllDetailsByIds(Set<Id> recordIds){
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition('Id IN :recordIds');
+
+		new ResponseConnectionsSelector().
+			addQueryFactorySubselect(query,'forms__Response_Connections__r');
+	
+		new AnswersSelector().
+			addQueryFactorySubselect(query,'forms__Answers__r');
+   
+		return (List<Response__c>) Database.query( query.toSOQL() );
 	}
 
 	public List<Response__c> selectRecent(){

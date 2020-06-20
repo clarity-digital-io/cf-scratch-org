@@ -4,8 +4,16 @@ public with sharing class QuestionsService {
 		return service().getQuestions();
 	}
 
+	public static List<Question__c> getFormsQuestions(Set<Id> formIds) {
+		return service().getFormsQuestions(formIds);
+	}
+
 	public static List<Question__c> getFormQuestions(Id formId) {
 		return service().getFormQuestions(formId);
+	}
+
+	public static List<Question__c> saveRecordGroup(List<Question__c> recordGroupFields, String relatedRecordGroupId) {
+		return service().saveRecordGroup(recordGroupFields, relatedRecordGroupId);
 	}
 
 	public static List<String> saveQuestions(List<Question__c> questions) {
@@ -22,6 +30,10 @@ public with sharing class QuestionsService {
 
 	public static List<Question__c> deleteQuestion(List<Question__c> questions, Question__c questionDelete) {
 		return service().deleteQuestion(questions, questionDelete);
+	}
+
+	public static List<Question__c> deleteQuestions(List<Question__c> questions, String formId) {
+		return service().deleteQuestions(questions, formId);
 	}
 
 	public static IQuestionsService service(){

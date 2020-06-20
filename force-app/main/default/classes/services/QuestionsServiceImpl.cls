@@ -5,9 +5,31 @@ public class QuestionsServiceImpl implements IQuestionsService {
 		return questions; 
 	}
 
+	public List<Question__c> getFormsQuestions(Set<Id> formIds) {
+		List<Question__c> questions = QuestionsSelector.newInstance().selectWithAllDetailsByIds(formIds);
+		return questions; 
+	}
+
 	public List<Question__c> getFormQuestions(Id formId) {
 		List<Question__c> questions = QuestionsSelector.newInstance().selectWithAllDetailsByIds(new Set<Id>{ formId });
 		return questions; 
+	}
+
+	public List<Question__c> saveRecordGroup(List<Question__c> recordGroupFields, String relatedRecordGroupId) {
+
+		//Good candidate to move to domain layer of Question Options
+		List<Question__c> deleteExistingRecordGroupFields = QuestionsSelector.newInstance().selectByRelatedRecordGroupId(relatedRecordGroupId);
+
+		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());    	  	    										
+
+		uow.registerDeleted(deleteExistingRecordGroupFields);
+		
+		uow.registerUpsert(recordGroupFields);
+
+		uow.commitWork();	
+
+		return recordGroupFields; 
+		
 	}
 
 	public List<String> saveQuestions(List<Question__c> questions) {
@@ -16,7 +38,6 @@ public class QuestionsServiceImpl implements IQuestionsService {
 
 		uow.registerUpsert(questions);
 		
-		// Commit updates to questions		
 		uow.commitWork();	
 
 		List<String> quesitonIds = new List<String>();
@@ -105,6 +126,20 @@ public class QuestionsServiceImpl implements IQuestionsService {
 
 		uow.commitWork();	
 
+		return questions; 
+
+	}
+
+	public List<Question__c> deleteQuestions(List<Question__c> deleted, String formId) {
+
+		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());    	  	    										
+
+		uow.registerDeleted(deleted);
+
+		uow.commitWork();	
+
+		List<Question__c> questions = QuestionsSelector.newInstance().selectWithAllDetailsByIds(new Set<Id>{ formId });
+		
 		return questions; 
 
 	}

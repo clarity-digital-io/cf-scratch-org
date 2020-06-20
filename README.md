@@ -85,110 +85,35 @@ sfdx force:org:delete -u test-vsjzhlogmd0n@example.com
 
 ## Tests
 
+sfdx force:lightning:component:create -n WizardMobileSetup -d force-app/main/default/aura --type aura
+
+sfdx force:apex:class:create -n WizardController -d force-app/main/default/classes/controllers
+
 ## Security Checks 
 
-sfdx force:apex:class:create -n Forms -d force-app/main/default/classes
+sfdx force:apex:class:create -n ResponseConnectionsService -d force-app/main/default/classes/services
+sfdx force:apex:class:create -n IResponseConnectionsService -d force-app/main/default/classes/services
+sfdx force:apex:class:create -n ResponseConnectionsServiceImpl -d force-app/main/default/classes/services
+sfdx force:apex:class:create -n ResponseConnectionsSelector -d force-app/main/default/classes/selectors
+sfdx force:apex:class:create -n IResponseConnectionsSelector -d force-app/main/default/classes/selectors
 
-sfdx force:apex:class:create -n IForms -d force-app/main/default/classes
+sfdx force:apex:class:create -n AnswersService -d force-app/main/default/classes/services
+sfdx force:apex:class:create -n IAnswersService -d force-app/main/default/classes/services
+sfdx force:apex:class:create -n AnswersServiceImpl -d force-app/main/default/classes/services
 
-sfdx force:apex:class:create -n Questions -d force-app/main/default/classes
+ContentVersion
 
-sfdx force:apex:class:create -n IQuestions -d force-app/main/default/classes
+sfdx force:apex:class:create -n ContentVersions -d force-app/main/default/classes/domains
+sfdx force:apex:class:create -n IContentVersions -d force-app/main/default/classes/domains
 
-sfdx force:apex:class:create -n Responses -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n IResponses -d force-app/main/default/classes
-
-
-sfdx force:apex:class:create -n FormsSelector -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n IFormsSelector -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n QuestionsSelector -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n ResponsesSelector -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n IResponsesSelector -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n Application -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n IFormsService -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n FormsServiceImpl -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n QuestionsSelector -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n IQuestionsSelector -d force-app/main/default/classes
+sfdx force:apex:class:create -n Answers -d force-app/main/default/classes/domains
+sfdx force:apex:class:create -n IAnswers -d force-app/main/default/classes/domains
 
 
-sfdx force:apex:class:create -n ResponsesResource -d force-app/main/default/classes
+sfdx force:apex:class:create -n ImagesHelper -d force-app/main/default/classes/controllers/helpers
 
-sfdx force:apex:class:create -n ResponsesService -d force-app/main/default/classes
+sfdx force:apex:class:create -n PicklistHelper -d force-app/main/default/classes/controllers/helpers
 
-sfdx force:apex:class:create -n ResponsesServiceImpl -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n IResponsesService -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n AnswersSelector -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n IAnswersSelector -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n Response -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n Answer -d force-app/main/default/classes
-
-sfdx force:apex:class:create -n SObjectsResource -d force-app/main/default/classes/restapi
-
-## Question_Option__c
-
-sfdx force:apex:class:create -n QuestionsService -d force-app/main/default/classes/services
-
-sfdx force:apex:class:create -n QuestionsServiceImpl -d force-app/main/default/classes/services
-
-sfdx force:apex:class:create -n IQuestionsService -d force-app/main/default/classes/services
-
-
-sfdx force:apex:class:create -n QuestionOptionsSelector -d force-app/main/default/classes/selectors
-
-sfdx force:apex:class:create -n IQuestionOptionsSelector -d force-app/main/default/classes/selectors
-
-## Question_Criteria__c
-
-sfdx force:apex:class:create -n QuestionCriteriaSelector -d force-app/main/default/classes/selectors
-
-sfdx force:apex:class:create -n IQuestionCriteriaSelector -d force-app/main/default/classes/selectors
-
-## Records 
-
-## Question_Option__c
-
-sfdx force:apex:class:create -n RecordsService -d force-app/main/default/classes/services
-
-sfdx force:apex:class:create -n RecordsServiceImpl -d force-app/main/default/classes/services
-
-sfdx force:apex:class:create -n IRecordsService -d force-app/main/default/classes/services
-
-## Controllers Builder
-
-sfdx force:apex:class:create -n BuilderController -d force-app/main/default/classes/controllers
-
-sfdx force:apex:class:create -n Questions -d force-app/main/default/classes/domains
-
-sfdx force:apex:class:create -n IQuestions -d force-app/main/default/classes/domains
-
-sfdx force:apex:class:create -n QuestionOptions -d force-app/main/default/classes/domains
-
-sfdx force:apex:class:create -n IQuestionOptions -d force-app/main/default/classes/domains
-
-sfdx force:apex:class:create -n FormConnections -d force-app/main/default/classes/domains
-
-sfdx force:apex:class:create -n IFormConnections -d force-app/main/default/classes/domains
-
-
-sfdx force:apex:class:create -n FormResponseController -d force-app/main/default/classes/controllers
-
-
-sfdx force:apex:class:create -n FormController -d force-app/main/default/classes/controllers
 
 ## Resources
 
@@ -230,39 +155,3 @@ Form Mobile Application
 Form Summary 
 Form Response View
 Form Response Results
-
-
-# Service Layer
-FormService.cls
-FormBuilder.cls
-FormController.cls
-FormResponse.cls
-
-MobileFormController
-MobileRecordController
-MobileResponseController
-MobileService
-
-# Domain Layer
-Form_ConnectionTriggerHandler.cls
-QuestionTriggerHandler.cls
-ResponseTriggerHandler.cls
-ConnectionCreateJob.cls
-ConnectionFieldValidation.cls
-ConnectionRecordProcess.cls
-QuestionFlowDesigns
-
-# Selector Layer
-Form__c
-Response__c
-Answer__c
-Form_Connection__c
-Form_Connection_Field__c
-Form_Connection_Process__c
-Question__c
-Question_Criteria__c
-Question_Filter__c
-Flow__c
-Flow_Design__c
-Question_Option__c
-Response_Connection__c

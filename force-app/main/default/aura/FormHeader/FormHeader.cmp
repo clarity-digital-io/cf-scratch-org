@@ -1,4 +1,4 @@
-<aura:component access="global" controller="FormController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionwithoutheader,lightning:actionOverride">
+<aura:component access="global" controller="FormSummaryController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionwithoutheader,lightning:actionOverride">
 
     <aura:attribute name="response" type="Response__c" />
     <aura:attribute name="data" type="Object"/>

@@ -56,6 +56,12 @@ public class QuestionsSelector extends fflib_SObjectSelector implements IQuestio
 		return (List<Question__c>) Database.query( query.toSOQL() );
 	}  
 
+	public List<Question__c> selectByRelatedRecordGroupId(String relatedRecordGroupId) {
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition('Record_Group__c = :relatedRecordGroupId');
+		return (List<Question__c>) Database.query( query.toSOQL() );
+	}
+
 	public static IQuestionsSelector newInstance(){
 		return (IQuestionsSelector) Application.selector.newInstance(Question__c.SObjectType);
 	}

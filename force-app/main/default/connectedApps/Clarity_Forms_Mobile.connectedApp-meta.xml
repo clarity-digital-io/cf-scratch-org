@@ -6,9 +6,6 @@
         <callbackUrl>https://dev-gzcou5sg.eu.auth0.com/login/callback</callbackUrl>
         <consumerKey>3MVG9eQyYZ1h89HcmSUUx5uNiMC7PmkVz1k1I3R0Y_0gN3kirNwNzYFK1XtTBt22sopJHmj8GWK4V40KbVh9K</consumerKey>
         <scopes>Api</scopes>
-        <scopes>Web</scopes>
-        <scopes>Full</scopes>
-        <scopes>CustomApplications</scopes>
         <scopes>RefreshToken</scopes>
     </oauthConfig>
 </ConnectedApp>

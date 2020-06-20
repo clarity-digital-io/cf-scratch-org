@@ -1,0 +1,26 @@
+
+.THIS .clarityModal {
+    background: #000;
+}
+
+.THIS .slds-card {
+    background: #00305C !important;
+    border: #00305C !important;
+}
+
+.THIS h2 {
+    color: #fff;
+}
+
+.THIS article.slds-card.slds-card_boundary.formsClarityWizardSetup {
+    background: #00305C !important;
+    border: #00305C !important; 
+}
+
+.THIS .slds-p-around_medium {
+	background: #fff; 
+}
+
+.THIS .x-large {
+    height: 300px;
+}

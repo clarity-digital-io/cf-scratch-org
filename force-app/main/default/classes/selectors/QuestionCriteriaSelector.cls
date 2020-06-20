@@ -7,6 +7,7 @@ public class QuestionCriteriaSelector extends fflib_SObjectSelector implements I
 	public List<Schema.SObjectField> getSObjectFieldList(){
 	   return new List<Schema.SObjectField> {
 			Question_Criteria__c.Id,
+			Question_Criteria__c.Name,
 			Question_Criteria__c.Question__c,
 			Question_Criteria__c.Field__c,
 			Question_Criteria__c.Field_Type__c,

@@ -1,4 +1,4 @@
-<aura:component controller="FormController" access="global" implements="force:hasSObjectName,force:lightningQuickActionWithoutHeader,forceCommunity:availableForAllPageTypes,force:hasRecordId,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
+<aura:component controller="FormSummaryController" access="global" implements="force:hasSObjectName,force:lightningQuickActionWithoutHeader,forceCommunity:availableForAllPageTypes,force:hasRecordId,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes">
     
     <lightning:navigation aura:id="navService"/>
 
