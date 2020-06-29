@@ -14,9 +14,9 @@ public class ConnectionFieldValidation {
 
             if(ConnectionFields == null) {
 
-                ConnectionFields = new Map<Id, List<Form_Connection_Field__c>>(); 
-
-                List<Form_Connection_Field__c> fields = [SELECT Id, Form_Connection__c FROM Form_Connection_Field__c WHERE Form_Connection__c IN :Trigger.newMap.keySet()];
+				ConnectionFields = new Map<Id, List<Form_Connection_Field__c>>(); 
+				
+				List<Form_Connection_Field__c> fields = FormConnectionFieldsSelector.newInstance().selectFieldsByConnectionId(Trigger.newMap.keySet());
 
                 for(Form_Connection_Field__c field : fields) {
 

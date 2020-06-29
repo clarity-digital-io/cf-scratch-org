@@ -73,6 +73,30 @@ public inherited sharing class fflib_SecureDML implements fflib_SObjectUnitOfWor
         update records;
     }
 
+	/**
+    * @description Update given sobject records in database if user has appropriate permissions
+    * @param List of sobject records
+    * @example
+    * fflib_SecureDML.dmlUpsert(new List<SObject>{*});
+    */
+    public void dmlUpsert(List<SObject> records, Schema.SObjectField externalId) {
+        if (records == null || records.size() == 0) return; // avoid wasting any cycles
+        
+        // Check CRUD and FLS before inserting records need to add an upsert security check
+        if (enforcingSecurity(getSobjectType(records)))
+            checkInsertSecurity(records);
+
+        // Update records if above security check passed
+		if (!records.isEmpty()) {
+
+			Type objListType = Type.ForName('List<' + records[0].getSObjectType() + '>');
+			List<SObject> typedList = (List<SObject>)objListType.newInstance();
+			typedList.addAll(records);
+
+			Database.upsert(typedList, externalId);
+		}
+    }
+
     /**
     * @description Delete given sobject records from database if user has appropriate permissions
     * @param List of sobject records
@@ -253,7 +277,7 @@ public inherited sharing class fflib_SecureDML implements fflib_SObjectUnitOfWor
     * Set<String> updatedFields = fflib_SecureDML.resolveUpdatedFields(new SObject(*), new SObject(*));
     */
     public static Set<String> resolveUpdatedFields(SObject record, SObject previousRecord) {
-    	Set<String> updatedFields = new Set<String>();
+		Set<String> updatedFields = new Set<String>();
         
         // Scan through each populated field for given record
         for(String populatedField : resolvePopulatedFields(record)) {

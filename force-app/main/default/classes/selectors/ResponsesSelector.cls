@@ -22,6 +22,18 @@ public class ResponsesSelector extends fflib_SObjectSelector implements IRespons
 		return (List<Response__c>) selectSObjectsById(recordIds);
 	}
 
+	public List<Response__c> selectByUUIDs(Set<String> UUIDs){
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition('UUID__c IN :UUIDs');
+		return (List<Response__c>) Database.query( query.toSOQL() );
+	}
+
+	public List<Response__c> selectByFormId(Set<Id> recordIds){
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition('Form__c IN :recordIds');
+		return (List<Response__c>) Database.query( query.toSOQL() );
+	}
+
 	public List<Response__c> getResponsesByOwner(List<String> userIds){
 		fflib_QueryFactory query = newQueryFactory();
 		query.setCondition('OwnerId = :userIds');

@@ -6,11 +6,8 @@
         let action = cmp.get("c.getFormResponses");
 
         action.setParams({
-            formId  : cmp.get("v.formId"),
-						name    : cmp.get("v.formName") ? cmp.get("v.formName") : '',
-						recordId: cmp.get("v.recordId"),
-						sObjectName: cmp.get("v.sObjectName")
-        })
+						recordId: cmp.get("v.recordId")
+				})
 
         action.setCallback(this, function (response) {
 
@@ -21,12 +18,11 @@
                   cmp.set('v.loading', false);
 
                   let data = response.getReturnValue(); 
-                  console.log('data', data); 
-                  let responses = data.map(response => {
+
+									let responses = data.map(response => {
                       return {
                           name          : response.Name,
                           status        : response.forms__Status__c, 
-                          completed     : response.forms__Completion__c ? response.forms__Completion__c : '0%',
                           start         : response.CreatedDate, 
                           submittedDate : response.forms__Submitted_Date__c ? response.forms__Submitted_Date__c : '',
                           id            : response.Id

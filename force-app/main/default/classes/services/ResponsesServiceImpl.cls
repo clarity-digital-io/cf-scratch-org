@@ -10,6 +10,11 @@ public class ResponsesServiceImpl implements IResponsesService {
 		return responses[0]; 
 	}
 
+	public List<Response__c> getResponsesByFormId(String formId) {
+		List<Response__c> responses = ResponsesSelector.newInstance().selectByFormId(new Set<Id>{ formId });
+		return responses; 
+	}
+
 	public Response__c getResponseById(String responseId) {
 		List<Response__c> responses = ResponsesSelector.newInstance().selectById(new Set<Id>{ responseId });
 		return responses[0]; 
@@ -55,36 +60,15 @@ public class ResponsesServiceImpl implements IResponsesService {
 		
 	}
 
-	public List<Response__c> saveResponse(List<Response> responses, Boolean mobile) {
+	public List<Response__c> save(List<Response__c> responses, Schema.sObjectField uniqueExternalField) {
+
 		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
-		
-		List<Response__c> newResponses = new List<Response__c>();
-		for(Response response : responses) {
 
-			Response__c newResponse = new Response__c(
-				Form__c = response.formId,
-				UUID__c = response.responseId,
-				Status__c = 'Submitted'
-			);
+		uow.registerUpsert(responses, uniqueExternalField);
 
-			uow.registerNew(newResponse);
-
-			for(Answer answer : response.answers) {
-	
-				Answer__c newAnswer = new Answer__c(
-					Question__c = answer.questionId, 
-					Response__c = newResponse.Id,
-					Answer__c 	= answer.answer
-				);
-	
-				uow.registerNew(newAnswer, Answer__c.Response__c, newResponse);
-	
-			}
-			newResponses.add(newResponse);			
-		}
 		uow.commitWork();	
 		
-		return newResponses; 
+		return responses; 
 		
 	}
 
@@ -123,6 +107,124 @@ public class ResponsesServiceImpl implements IResponsesService {
 		uow.commitWork();	
 
 		return connections;
+
+	}
+
+	public List<String> deleteResponsesByUUIDs(List<String> UUIDs) {
+
+		Set<String> setUUIDS = new Set<String>(UUIDs);
+		List<Response__c> responses = ResponsesSelector.newInstance().selectByUUIDs(setUUIDS);
+		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
+
+		uow.registerDeleted(responses);
+		uow.commitWork();	
+
+		List<String> responseIds = new List<String>(); 
+
+		for(Response__c response : responses) {
+			responseIds.add(response.UUID__c);
+		}
+
+		return responseIds;
+
+	}
+
+	public Id deleteById(String responseId) {
+
+		List<Response__c> responses = ResponsesSelector.newInstance().selectById(new Set<Id> {responseId});
+		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
+
+		uow.registerDeleted(responses[0]);
+
+		uow.commitWork();	
+		
+		return responses[0].Id; 
+
+	}
+
+	public Map<String, List<Map<String, String>>> getResultAnswersByFormId(String recordId, Integer offset) {
+
+		List<Question__c> questions = QuestionsSelector.newInstance().selectWithAllDetailsByIds(new Set<Id> {recordId});
+
+		Map<Id, List<Question_Option__c>> questionOptions = new Map<Id, List<Question_Option__c>>();
+
+        for(Question__c question : questions) {
+
+            if(question.Type__c == 'Checkbox' || question.Type__c == 'Dropdown' || question.Type__c == 'PictureChoice') {
+                questionOptions.put(question.Id, question.Question_Options__r);
+            }
+
+        }
+
+		Map<String, List<Map<String, String>>> table = new Map<String, List<Map<String, String>>>();
+
+        List<Map<String, String>> columns = new List<Map<String, String>>();
+
+        columns.add(new Map<String, String> { 'fieldName' => 'id' }); 
+
+        for(Question__c question : questions) {
+
+            if(question.Record_Group__c == null && question.Type__c != 'RecordGroup') {
+
+                Map<String, String> column = ResultsHelper.buildColumn(question);
+                if(column.size() > 0 ) {
+                    columns.add(column); 
+                }
+
+            }
+
+        }
+
+		table.put('Columns', columns); 
+
+		List<Map<String, String>> rows = new List<Map<String, String>>();
+		
+		List<Response__c> responses = ResponsesSelector.newInstance().selectWithAllDetailsByIds(new Set<Id> {recordId});
+
+        for(Response__c response : responses) {
+            
+            Map<String, String> row = new Map<String, String>(); 
+
+            row.put('id', response.Name);
+
+            for(Answer__c answer : response.Answers__r) {
+
+                if(answer.Question__r.Type__c == 'Attachments') {
+                    
+                    if(row.get(answer.Question__r.Name) != null) {
+
+                        String sAttachments = row.get(answer.Question__r.Name); 
+
+                        List<String> attachments = (List<String>)JSON.deserialize(sAttachments, List<String>.class);
+
+                        attachments.add('/sfc/servlet.shepherd/version/download/' + answer.ContentVersion__c);
+
+                        row.put(answer.Question__r.Name, JSON.serialize(attachments));
+
+                    } else {
+
+                        if(answer.ContentVersion__c != null) {
+                            List<String> attachments = new List<String>{ '/sfc/servlet.shepherd/version/download/' + answer.ContentVersion__c };
+                            row.put(answer.Question__r.Name, JSON.serialize(attachments));
+                        }
+
+                    }
+
+                } else {
+
+                    row.put(answer.Question__r.Name, ResultsHelper.buildAnswer(answer, questionOptions));
+
+                }
+
+            }
+
+            rows.add(row); 
+
+        }
+
+        table.put('Data', rows); 
+
+        return table;
 
 	}
 

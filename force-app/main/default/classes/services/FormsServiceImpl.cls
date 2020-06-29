@@ -20,6 +20,22 @@ public class FormsServiceImpl implements IFormsService {
 		return forms[0]; 
 	}
 
+	public Id deleteById(String recordId) {
+		
+		List<Form__c> forms = FormsSelector.newInstance().selectByIdWithResponses(recordId); 
+		
+		if(forms[0].forms__Responses__r.size() > 0) {
+            throw new AuraHandledException('Unable to delete form while it has Responses');
+		}
+
+		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
+
+		uow.registerDeleted(forms[0]);
+		
+		return forms[0].Id; 
+
+	}
+
 	public Form__c updateForm(Form__c form) {
 		
 		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());    	  	    										
@@ -27,6 +43,18 @@ public class FormsServiceImpl implements IFormsService {
 		uow.registerUpsert(form);
 		// Commit updates to questions		
 		uow.commitWork();	
+
+		return form; 
+
+	}
+
+	public Form__c publishForm(Id formId) {
+
+		List<Form__c> forms = FormsSelector.newInstance().selectById(new Set<Id> {formId});
+
+		forms[0].Status__c = 'Published'; 
+
+		Form__c form = updateForm(forms[0]);
 
 		return form; 
 

@@ -159,10 +159,10 @@ global with sharing class BuilderController {
         String formId = connect[1]; 
         String sRemoved = connect[2];
 
-		List<Form_Connection__c> removedParsedConnections = (List<Form_Connection__c>)JSON.deserialize(sRemoved, List<Form_Connection__c>.class);
-		
 		List<Form_Connection__c> parsedConnections = (List<Form_Connection__c>)JSON.deserialize(sConnections, List<Form_Connection__c>.class);
 
+		List<Form_Connection__c> removedParsedConnections = (List<Form_Connection__c>)JSON.deserialize(sRemoved, List<Form_Connection__c>.class);
+		
 		List<Form_Connection__c> validatedConnections = new List<Form_Connection__c>();
 
 		for(Form_Connection__c parsedConnection : parsedConnections) {
@@ -227,6 +227,7 @@ global with sharing class BuilderController {
 		List<Question__c> updatedQuestions = QuestionsService.deleteQuestion(parsedQuestions, questionToDelete);
 
 		return updatedQuestions;
+		
 	}
 
 	@RemoteAction
@@ -238,7 +239,10 @@ global with sharing class BuilderController {
 
         for(Schema.SObjectType so : sObjectsAvailable.values()) {
 			//checkfls
-            lookups.add(so.getDescribe().getName());
+			
+			if(so.getDescribe().isCreateable() && so.getDescribe().isUpdateable() && so.getDescribe().isAccessible()) {
+				lookups.add(so.getDescribe().getName());
+			}
         
         }
 
@@ -280,13 +284,15 @@ global with sharing class BuilderController {
 
             Boolean isFieldReq  = fieldResult.isNillable();
             Boolean isFieldCreateable = fieldResult.isCreateable(); 
-            Boolean isDefaultedOnCreate = fieldResult.isDefaultedOnCreate();
+			Boolean isDefaultedOnCreate = fieldResult.isDefaultedOnCreate();
+			Boolean isAccessible = fieldResult.isAccessible();
+			Boolean isUpdateable = fieldResult.isUpdateable();
 
-            if(!isFieldReq && isFieldCreateable && !isDefaultedOnCreate) {
+            if(!isFieldReq && isFieldCreateable && !isDefaultedOnCreate && isAccessible) {
 
                 requiredFields.get('Required').put('' + field, new Map<String, String>{ '' + type => '' + referenceName });
 
-            } else if(isFieldCreateable && !isDefaultedOnCreate) {
+            } else if(isFieldCreateable && !isDefaultedOnCreate && isAccessible && isUpdateable) {
 
                 requiredFields.get('NotRequired').put('' + field, new Map<String, String>{ '' + type => '' + referenceName });
 

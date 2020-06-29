@@ -6,7 +6,6 @@
         cmp.set('v.columns', [
             {label: 'Name', fieldName: 'name', type: 'text'},
             {label: 'Status', fieldName: 'status', type: 'text'}, 
-            {label: 'Percentage Complete', fieldName: 'completed', type: 'text'},
             {label: 'Start Date', fieldName: 'start', type: 'date'}, 
             {label: 'Submitted Date', fieldName: 'submittedDate', type: 'date'}, 
             { type: 'action', typeAttributes: { rowActions: rowActions } }

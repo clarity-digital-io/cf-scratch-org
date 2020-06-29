@@ -13,7 +13,8 @@ public class Application {
 				Form_Connection__c.sObjectType,
 				Form_Connection_Field__c.sObjectType,
 				ContentVersion.sObjectType,
-				ContentDocumentLink.sObjectType
+				ContentDocumentLink.sObjectType,
+				Log__c.sObjectType
 			}
 		); 
 
@@ -25,7 +26,6 @@ public class Application {
 				IFormConnectionFieldsService.class => FormConnectionFieldsServiceImpl.class,
 				IResponsesService.class => ResponsesServiceImpl.class,
 				IQuestionsService.class => QuestionsServiceImpl.class,
-				IRecordsService.class => RecordsServiceImpl.class,
 				ISyncService.class => SyncServiceImpl.class,
 				IResponseConnectionsService.class => ResponseConnectionsServiceImpl.class,
 				IAnswersService.class => AnswersServiceImpl.class
@@ -43,7 +43,8 @@ public class Application {
 				Question_Option__c.sObjectType => QuestionOptionsSelector.class,
 				Question_Criteria__c.sObjectType => QuestionCriteriaSelector.class,
 				Response_Connection__c.sObjectType => ResponseConnectionsSelector.class,
-				Answer__c.sObjecttype => AnswersSelector.class
+				Answer__c.sObjectType => AnswersSelector.class,
+				ContentVersion.sObjectType => ContentVersionsSelector.class
 			}
 		);
 

@@ -12,6 +12,10 @@ public with sharing class ResponsesService {
 		return service().getResponseWithDetailsById(responseId);
 	}
 
+	public static List<Response__c> getResponsesByFormId(String responseId) {
+		return service().getResponsesByFormId(responseId);
+	}
+
 	public static Response__c getResponseById(String responseId) {
 		return service().getResponseById(responseId);
 	}
@@ -24,12 +28,24 @@ public with sharing class ResponsesService {
 		return service().save(answers, responseId, status);
 	}
 
-	public static List<Response__c> saveResponse(List<Response> responses, Boolean mobile) {
-		return service().saveResponse(responses, mobile);
+	public static List<Response__c> save(List<Response__c> responses, Schema.sObjectField uniqueExternalField) {
+		return service().save(responses, uniqueExternalField);
 	}
 
 	public static List<Response_Connection__c> saveConnections(String responseId, List<Map<String, String>> connections) {
 		return service().saveConnections(responseId, connections);
+	}
+
+	public static Id deleteById(String responseId) {
+		return service().deleteById(responseId);
+	}
+
+	public static List<String> deleteResponsesByUUIDs(List<String> UUIDs) {
+		return service().deleteResponsesByUUIDs(UUIDs);
+	}
+
+	public static Map<String, List<Map<String, String>>> getResultAnswersByFormId(String recordId, Integer offset) {
+		return service().getResultAnswersByFormId(recordId, offset);
 	}
 
 	public static IResponsesService service(){

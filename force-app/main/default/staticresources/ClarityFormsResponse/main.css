@@ -1,5 +1,5 @@
 html {
-    background: none !important; 
+    background: #fff !important; 
     font-family: 'Salesforce Sans', BlinkMacSystemFont !important;
 }
 
@@ -8,7 +8,8 @@ span, button {
 }
 
 body {
-    margin: 0; 
+	margin: 0; 
+	padding: 1em;
     font-family: 'Salesforce Sans', BlinkMacSystemFont !important;
 }
 

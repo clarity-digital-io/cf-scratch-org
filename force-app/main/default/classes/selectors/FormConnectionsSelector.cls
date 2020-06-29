@@ -23,6 +23,13 @@ public with sharing class FormConnectionsSelector extends fflib_SObjectSelector 
 		return (List<Form_Connection__c>) Database.query( query.toSOQL() );
 	}
 
+	public List<Form_Connection__c> selectConnectionsByFormIds(Set<Id> formIds){
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition('Form__c IN :formIds');
+
+		return (List<Form_Connection__c>) Database.query( query.toSOQL() );
+	}
+
 	public List<Form_Connection__c> selectConnectionsByFormId(String formId){
 		fflib_QueryFactory query = newQueryFactory();
 		query.setCondition('Form__c = :formId');

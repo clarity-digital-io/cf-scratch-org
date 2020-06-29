@@ -195,7 +195,7 @@ public class TestDataFactory {
 
     public static Response__c generateResponse(Form__c form){
 
-        Response__c response = new Response__c(Status__c = 'New', Form__c = form.Id, OwnerId__c = UserInfo.getUserId());
+        Response__c response = new Response__c(Status__c = 'New', Form__c = form.Id);
 
         insert response;
 

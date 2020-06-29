@@ -1,4 +1,4 @@
-<aura:component access="global" controller="WizardController" implements="flexipage:availableForRecordHome,force:appHostable,flexipage:availableForAllPageTypes">
+<aura:component access="global" controller="WizardController" implements="flexipage:availableForAllPageTypes">
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
 
@@ -70,7 +70,7 @@
 
 						<div class="slds-text-body_regular">Connect with your API User to allow Clarity Forms to keep online and offline forms synced.</div>
 
-						<aura:if isTrue="{! v.mobileLicense.IsAPIConnected }">
+						<aura:if isTrue="{!v.mobileLicense.IsAPIConnected}">
 							<lightning:badge label="Access Granted" iconName="utility:success" class="slds-theme_success"/>
 							<aura:set attribute="else">
 								<lightning:button onclick="{!c.handleAccess}" label="Grant Access" />

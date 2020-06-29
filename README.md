@@ -97,7 +97,45 @@ sfdx force:apex:class:create -n ResponseConnectionsServiceImpl -d force-app/main
 sfdx force:apex:class:create -n ResponseConnectionsSelector -d force-app/main/default/classes/selectors
 sfdx force:apex:class:create -n IResponseConnectionsSelector -d force-app/main/default/classes/selectors
 
-sfdx force:apex:class:create -n RecordSyncRe -d force-app/main/default/classes/restapi
+sfdx force:apex:class:create -n ContentVersionUnitofWorkHelper -d force-app/main/default/classes/domains
+
+
+sfdx force:apex:class:create -n ContentVersionsSelector -d force-app/main/default/classes/selectors
+sfdx force:apex:class:create -n IContentVersionsSelector -d force-app/main/default/classes/selectors
+
+
+sfdx force:apex:class:create -n SetupService -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n SyncService -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n ResultsHelper -d force-app/main/default/classes/services/helpers
+
+
+sfdx force:apex:class:create -n Sync -d force-app/main/default/classes/services/callouts
+
+sfdx force:apex:class:create -n Connect -d force-app/main/default/classes/services/callouts
+sfdx force:apex:class:create -n Form -d force-app/main/default/classes/services/callouts
+
+sfdx force:apex:class:create -n Logs -d force-app/main/default/classes/domains/
+sfdx force:apex:class:create -n ILogs -d force-app/main/default/classes/domains/
+
+
+
+sfdx force:lightning:component:create -n WizardMobileSetup -d force-app/main/default/aura --type aura
+sfdx force:lightning:component:create -n WizardMobileSetup -d force-app/main/default/aura --type aura
+sfdx force:lightning:component:create -n WizardMobileSetup -d force-app/main/default/aura --type aura
+
+
+sfdx force:apex:class:create -n JobsResource -d force-app/main/default/classes/restapi/
+
+sfdx force:apex:class:create -n AnswersResource -d force-app/main/default/classes/restapi/
+sfdx force:apex:class:create -n ResponsesResource -d force-app/main/default/classes/restapi/
+sfdx force:apex:class:create -n AttachmentsResource -d force-app/main/default/classes/restapi/
+
+sfdx force:apex:class:create -n Response -d force-app/main/default/classes/restapi/models
+sfdx force:apex:class:create -n Answer -d force-app/main/default/classes/restapi/models
+sfdx force:apex:class:create -n Attachment -d force-app/main/default/classes/restapi/models
+
 
 ## Resources
 

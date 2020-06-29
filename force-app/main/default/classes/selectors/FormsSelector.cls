@@ -26,6 +26,16 @@ public class FormsSelector extends fflib_SObjectSelector implements IFormsSelect
 		return (List<Form__c>) selectSObjectsById(recordIds);
 	}
 
+	public List<Form__c> selectByIdWithResponses(Id recordId){
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition('Id = :recordId');
+
+		new ResponsesSelector().
+			addQueryFactorySubselect(query,'forms__Responses__r');
+
+		return (List<Form__c>) Database.query( query.toSOQL() );
+	}
+
 	public List<Form__c> selectByName(String name){
 		fflib_QueryFactory query = newQueryFactory();
 		query.setCondition('Name = :name');

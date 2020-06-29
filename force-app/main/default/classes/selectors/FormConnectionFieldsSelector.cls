@@ -22,6 +22,12 @@ public with sharing class FormConnectionFieldsSelector extends fflib_SObjectSele
 		return (List<Form_Connection_Field__c>) Database.query( query.toSOQL() );
 	}
 
+	public List<Form_Connection_Field__c> selectFieldsByConnectionId(Set<Id> connectionIds){
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition('Form_Connection__c IN :connectionIds');
+		return (List<Form_Connection_Field__c>) Database.query( query.toSOQL() );
+	}
+
 	public static IFormConnectionFieldsSelector newInstance(){
 		return (IFormConnectionFieldsSelector) Application.selector.newInstance(Form_Connection_Field__c.SObjectType);
 	}

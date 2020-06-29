@@ -16,14 +16,14 @@ public class ConnectionRecordProcess {
 
                 Connections = new Map<Id, List<Form_Connection__c>>(); 
 
-                List<Id> formIds = new List<Id>(); 
+                Set<Id> formIds = new Set<Id>(); 
 
                 for(Response__c response : (List<Response__c>)Trigger.new) {
                     formIds.add(response.Form__c);
-                }
+				}
+				
+				List<Form_Connection__c> formConnections = FormConnectionsSelector.newInstance().selectConnectionsByFormIds(formIds);
                 
-                List<Form_Connection__c> formConnections = [SELECT Id, Result_Holder__c, Salesforce_Object__c, Form__c FROM Form_Connection__c WHERE Form__c IN :formIds];
-
                 for(Form_Connection__c connection : formConnections) {
 
                     if(Connections.get(connection.Form__c) == null) {
@@ -46,9 +46,9 @@ public class ConnectionRecordProcess {
         get {
             if(ResponseAnswers == null) {
 
-                ResponseAnswers = new Map<Id, Map<Id, Answer__c>>(); 
-
-                List<Answer__c> answers = [SELECT Id, Question__c, Response__c, Answer__c FROM Answer__c WHERE Response__c IN :Trigger.newMap.keySet()];
+				ResponseAnswers = new Map<Id, Map<Id, Answer__c>>(); 
+				
+				List<Answer__c> answers = AnswersSelector.newInstance().getAnswersByResponseId(Trigger.newMap.keySet());
 
                 for(Answer__c answer : answers) {
 
@@ -88,9 +88,9 @@ public class ConnectionRecordProcess {
                     for(Form_Connection__c connection : allConnections) {
 
                         Form_Connection_Process__c process = new Form_Connection_Process__c(
-                            Form_Connection__c      = connection.Id, 
-                            Response__c        = response.Id, 
-                            Status__c                       = 'In Progress'
+                            Form_Connection__c = connection.Id, 
+                            Response__c = response.Id, 
+                            Status__c = 'In Progress'
                         );
                         
                         connectionProcess.add(process);
@@ -117,8 +117,7 @@ public class ConnectionRecordProcess {
 				   
 				ResponseConnections = new Map<Id, Map<Id, Response_Connection__c>>(); 
 
-                List<Response_Connection__c> connections = 
-					[SELECT Id, Record__c, Response__c, Form_Connection__c FROM Response_Connection__c WHERE Response__c IN :Trigger.newMap.keySet()];
+				List<Response_Connection__c> connections = ResponseConnectionsSelector.newInstance().getByResponseId(Trigger.newMap.keySet());
 
                 for(Response_Connection__c connection : connections) {
 

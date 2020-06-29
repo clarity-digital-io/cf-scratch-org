@@ -20,6 +20,12 @@ public with sharing class ResponseConnectionsSelector extends fflib_SObjectSelec
 		return (List<Response_Connection__c>) Database.query( query.toSOQL() );
 	}
 
+	public List<Response_Connection__c> getByResponseId(Set<Id> responseIds){
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition('Response__c IN :responseIds');
+		return (List<Response_Connection__c>) Database.query( query.toSOQL() );
+	}
+
 	public static IResponseConnectionsSelector newInstance(){
 		return (IResponseConnectionsSelector) Application.selector.newInstance(Response_Connection__c.SObjectType);
 	}

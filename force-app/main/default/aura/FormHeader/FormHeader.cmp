@@ -3,11 +3,13 @@
     <aura:attribute name="response" type="Response__c" />
     <aura:attribute name="data" type="Object"/>
     <aura:attribute name="recordId" type="String"/>
-
+	<aura:attribute name="recordLoadError" type="String"/>
+	
     <force:recordData aura:id="recordLoader"
         recordId="{!v.recordId}"
-        fields="Name, form__Status__c"
-        targetFields="{!v.response}"
+        fields="Name,forms__Form__r.forms__Title__c,forms__Status__c"
+		targetFields="{!v.response}"
+		targetError="{!v.recordLoadError}"
     />
 
     <div class="clarity-header slds-page-header slds-page-header_record-home">
@@ -21,6 +23,7 @@
                     <div class="slds-page-header__name">
                         <div class="slds-page-header__name-title">
                             <h1>
+								<span>{!v.recordLoadError}</span>
                                 <span>Clarity Form Response</span>
                                 <span class="slds-page-header__title slds-truncate" title="{!v.response.Name}">{!v.response.Name}</span>
                             </h1>
@@ -34,8 +37,12 @@
         <div class="slds-page-header__col-details">
             <ul class="slds-page-header__detail-row">
                 <li class="slds-page-header__detail-block">
+                    <div class="slds-text-title slds-truncate" title="Status">Form</div>
+                    <div class="slds-truncate" title="{!v.response.form__Status__c}">{!v.response.forms__Form__r.forms__Title__c}</div>
+				</li>  
+				<li class="slds-page-header__detail-block">
                     <div class="slds-text-title slds-truncate" title="Status">Status</div>
-                    <div class="slds-truncate" title="Draft">{!v.response.form__Status__c}</div>
+                    <div class="slds-truncate" title="{!v.response.form__Status__c}">{!v.response.forms__Status__c}</div>
                 </li>            
             </ul>
         </div>

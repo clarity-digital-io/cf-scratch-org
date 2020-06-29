@@ -136,7 +136,13 @@ public interface fflib_ISObjectUnitOfWork
      *
      * @param records A list of mix of existing and new records
      **/
-    void registerUpsert(List<SObject> records);
+	void registerUpsert(List<SObject> records);
+	/**
+     * Register a list of mix of new and existing records to be upserted during the commitWork method
+     *
+     * @param records A list of mix of existing and new records
+     **/
+    void registerUpsert(List<SObject> records, Schema.SObjectField externalField);
     /**
      * Register an existing record to be deleted during the commitWork method
      *

@@ -33,9 +33,6 @@ public with sharing class RecordsHelper {
 			if(sFields.size() > 0) {
 				joinedFields = String.join(sFields, ', ');
 				joinedFields = joinedFields.removeEnd(',');
-				if(joinedFields != null && joinedFields != '') {
-					joinedFields = ', ' + joinedFields;
-				}
 			} 
 
 			String record = responseConnection.Record__c;
@@ -46,7 +43,7 @@ public with sharing class RecordsHelper {
 				returningField = 'Subject';
 			}
 
-			sObject result = Database.query('SELECT Id, ' + returningField + ' ' + joinedFields + ' FROM ' + formConnection.Salesforce_Object__c + ' WHERE Id = :record LIMIT 1');
+			sObject result = Database.query('SELECT Id, ' + returningField + ' ' + joinedFields + ' FROM ' + formConnection.Salesforce_Object__c + ' WHERE Id = :record LIMIT 1 WITH SECURITY_ENFORCED');
 
 			records.add(result);
 		}

@@ -62,26 +62,16 @@ global with sharing class ResponseController {
 		return formDetails; 
 
 	}
-	
-	@RemoteAction
-    global static List<Answer__c> saveAnswer(String answers){
-
-        List<Answer__c> parsedAnswers = (List<Answer__c>)JSON.deserialize(answers, List<Answer__c>.class);
-
-		List<Answer__c> savedAnswers = AnswersService.save(parsedAnswers); 
-		
-		return savedAnswers; 
-
-	}
 
 	@RemoteAction
 	global static List<Answer__c> uploadAttachment(List<String> answerValues) {
 
-		String answerImages = answerValues[0];
-		String questionId = answerValues[1]; 
-		String responseId = answerValues[2]; 
+		String answerImageName = answerValues[0];
+		String answerImages = answerValues[1];
+		String questionId = answerValues[2]; 
+		String responseId = answerValues[3]; 
 
-		List<ContentVersion> attachments = ImagesHelper.getContentVersions(answerImages, questionId, responseId);
+		List<ContentVersion> attachments = AttachmentsHelper.getContentVersions(answerImageName, answerImages, questionId, responseId);
 
 		List<Answer__c> answers = AnswersService.save(attachments, questionId, responseId); 
 
@@ -94,7 +84,7 @@ global with sharing class ResponseController {
 
         String answers = answerValues[0];
 		String responseId = answerValues[1]; 
-		String status = 'In Progress';
+		String status = answerValues[2];
 
 		List<Answer__c> parsedAnswers = (List<Answer__c>)JSON.deserialize(answers, List<Answer__c>.class);
 		
@@ -216,10 +206,9 @@ global with sharing class ResponseController {
 				
     @RemoteAction
     global static Map<Id, List<sObject>> getRecordGroupResults(String responseId, String formId) {
-
+		
         List<Question__c> questions = [SELECT Id, 
             (SELECT Id, Label__c, Active_Flow__c, Choice_Image__c, Order__c FROM Question_Options__r), 
-            (SELECT Id, Active__c, Form_Submission__c FROM Flow_Designs__r LIMIT 1),
             (SELECT Id, Field_Type__c, Field__c, Operator__c, Type__c, Value__c, Question__c FROM Question_Criteria__r),
             Salesforce_Object__c, FreeText_Type__c, Title__c, Order__c, Required__c, Lookup__c, 
             Salesforce_Field__c, Record_Group__c, Record_Group__r.Salesforce_Object__c, 

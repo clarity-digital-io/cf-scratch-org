@@ -1,7 +1,5 @@
 <design:component label="Clarity Form Responses Table">
 
-    <design:attribute name="formName" label="Form Name" description="Name of the Clarity Form you want to use." />
-
     <design:attribute name="useRecordId" label="Use Record Id" description="Pass in the Record Id as a parameter to the form and Display only Responses related to this Record Id." />
 
 </design:component>

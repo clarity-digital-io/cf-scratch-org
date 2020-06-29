@@ -70,12 +70,11 @@
                 <lightning:tabset selectedTabId="responses">
                     <lightning:tab label="Responses" id="responses">
 
-                        <c:FormResponseTable formName="{!v.form.Name}" formId="{!v.recordId}" />
+                        <c:FormResponseTable formName="{!v.form.Name}" recordId="{!v.recordId}" />
 
                     </lightning:tab>
                     <lightning:tab label="Results" id="results">
                         
-                        <!-- <c:FormAnswersTable recordId="{!v.recordId}" /> -->
                         <c:formAnswers recordId="{!v.recordId}" />    
 
                     </lightning:tab>

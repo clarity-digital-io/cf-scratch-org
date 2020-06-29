@@ -34,7 +34,7 @@
 	},
 	handleAccess: function(cmp, event, helper) {
 
-		window.open('https://secure-brook-38658.herokuapp.com/', "CNN_WindowName", "resizable,scrollbars,status"); 
+		window.open('https://clarity-api-auth.herokuapp.com/', "CNN_WindowName", "resizable,scrollbars,status"); 
 
 	},
 	handleConnect: function(cmp, event, helper) {
@@ -56,7 +56,7 @@
 	},
 	handleSyncUsers: function(cmp, event, helper) {
 
-		let action = cmp.get("c.syncUsers");
+		let action = cmp.get("c.registerUsers");
 
 		action.setCallback(this, function (response) {
 
