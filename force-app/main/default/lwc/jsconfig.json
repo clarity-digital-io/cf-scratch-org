@@ -11,6 +11,12 @@
             ],
             "c/imageControl": [
                 "imageControl/imageControl.js"
+            ],
+            "c/responseReview": [
+                "responseReview/responseReview.js"
+            ],
+            "c/responseReviewAnswer": [
+                "responseReviewAnswer/responseReviewAnswer.js"
             ]
         }
     },

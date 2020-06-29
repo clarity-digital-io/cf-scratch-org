@@ -1,0 +1,14 @@
+<template>
+
+    <template if:true={loading}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </template>
+
+
+	<lightning-card title="Response Review">
+		<template for:each={answers} for:item='answer'>
+			<c-response-review-answer key={answer.Id} answer={answer}></c-response-review-answer>
+		</template>
+	</lightning-card>
+
+</template>

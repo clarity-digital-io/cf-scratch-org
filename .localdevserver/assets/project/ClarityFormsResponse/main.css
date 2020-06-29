@@ -1,0 +1,19 @@
+html {
+    background: #fff !important; 
+    font-family: 'Salesforce Sans', BlinkMacSystemFont !important;
+}
+
+span, button {
+    font-family: 'Salesforce Sans', BlinkMacSystemFont !important;
+}
+
+body {
+	margin: 0; 
+	padding: 1em;
+    font-family: 'Salesforce Sans', BlinkMacSystemFont !important;
+}
+
+ul {
+    padding: 0; 
+    margin: 0; 
+}

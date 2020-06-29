@@ -1,5 +1,14 @@
 global with sharing class ResponseController {
 
+	@AuraEnabled
+    public static Response__c getResponse(String recordId) {
+
+		Response__c response = ResponsesService.getResponseWithDetailsById(recordId); 
+
+		return response; 
+
+    }
+
 	@RemoteAction 
     global static List<Form_Connection__c> getRequiredConnections(String responseId) {
 

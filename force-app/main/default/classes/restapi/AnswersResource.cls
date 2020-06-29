@@ -23,9 +23,7 @@ global with sharing class AnswersResource {
 				UUID__c = parsedAnswer.UUID,
 				Answer__c = parsedAnswer.Answer,
 				Question__c = parsedAnswer.Question,
-				Response__r = new Response__c(UUID__c = parsedAnswer.Response),
-				ContentDocument__c = parsedAnswer.ContentDocument,
-				ContentVersion__c = parsedAnswer.ContentVersion
+				Response__r = new Response__c(UUID__c = parsedAnswer.Response)
 			);
 			readyAnswers.add(answer); 
 		}

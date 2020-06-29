@@ -48,7 +48,7 @@ public class ResponsesSelector extends fflib_SObjectSelector implements IRespons
 			addQueryFactorySubselect(query,'forms__Response_Connections__r');
 	
 		new AnswersSelector().
-			addQueryFactorySubselect(query,'forms__Answers__r');
+			addQueryFactorySubselect(query,'forms__Answers__r').selectField('Question__c.Type__c').selectField('Question__c.Title__c');
    
 		return (List<Response__c>) Database.query( query.toSOQL() );
 	}
