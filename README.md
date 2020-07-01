@@ -87,12 +87,29 @@ sfdx force:org:delete -u test-fbyfuujmm9zd@example.com
 
 sfdx force:lightning:component:create -n WizardMobileSetup -d force-app/main/default/aura --type aura
 
-sfdx force:apex:class:create -n WizardController -d force-app/main/default/classes/controllers
+sfdx force:apex:class:create -n SetupController -d force-app/main/default/classes/controllers
 
 ## Security Checks 
 
 sfdx force:lightning:component:create --type lwc -d force-app/main/default/lwc/ -n responseReview
 sfdx force:lightning:component:create --type lwc -d force-app/main/default/lwc/ -n responseReviewAnswer
+
+
+sfdx force:apex:class:create -n FormSummaryControllerUnitTest -d force-app/main/default/classes/tests/controllers
+sfdx force:apex:class:create -n ConnectionFieldValidationUnitTest -d force-app/main/default/classes/tests/controllers
+sfdx force:apex:class:create -n ConnectionRecordProcessUnitTest -d force-app/main/default/classes/tests/controllers
+
+sfdx force:apex:class:create -n	BuilderControllerUnitTest -d force-app/main/default/classes/tests/controllers
+sfdx force:apex:class:create -n	ResponseControllerUnitTest -d force-app/main/default/classes/tests/controllers
+sfdx force:apex:class:create -n	SetupControllerUnitTest -d force-app/main/default/classes/tests/controllers
+sfdx force:apex:class:create -n	FormSummaryControllerUnitTest -d force-app/main/default/classes/tests/controllers
+
+sfdx force:apex:class:create -n	AnswersResourceUnitTest -d force-app/main/default/classes/tests/restapi
+sfdx force:apex:class:create -n	AttachmentsResourceUnitTest -d force-app/main/default/classes/tests/restapi
+sfdx force:apex:class:create -n	JobsResourceUnitTest -d force-app/main/default/classes/tests/restapi
+sfdx force:apex:class:create -n	RecordsSyncResourceUnitTest -d force-app/main/default/classes/tests/restapi
+sfdx force:apex:class:create -n	ResponsesResourceUnitTest -d force-app/main/default/classes/tests/restapi
+
 
 ## Resources
 

@@ -46,6 +46,11 @@ public class FormConnectionsServiceImpl implements IFormConnectionsService {
 		return connections; 
 	}
 
+	public List<Form_Connection__c> getConnectionsByFormStatus(String status) {
+		List<Form_Connection__c> connections = FormConnectionsSelector.newInstance().selectConnectionsByFormStatus(status);
+		return connections;
+	}
+
 	public List<Form_Connection__c> save(List<Form_Connection__c> removedConnections, List<Form_Connection__c> newConnections) {
 
 		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());    	  	    										

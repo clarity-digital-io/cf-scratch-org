@@ -98,10 +98,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>FormsResource</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>FormsSelector</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -182,10 +178,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>IRecordsService</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>IResponseConnectionsSelector</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -207,10 +199,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>ISyncService</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ImagesHelper</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -243,18 +231,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>RecordsHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>RecordsResource</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>RecordsService</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>RecordsServiceImpl</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -310,7 +286,7 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>WizardController</apexClass>
+        <apexClass>SetupController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -390,31 +366,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Answer__c.Record__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Audit_Log__c.Action__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Audit_Log__c.Log__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Audit_Log__c.Type__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Audit_Log__c.sObject__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>ContentVersion.Answer__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -729,11 +680,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Response__c.OwnerId__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Response__c.Status__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -754,9 +700,6 @@
     </fieldPermissions>
     <layoutAssignments>
         <layout>Answer__c-Answer Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Audit_Log__c-Audit Log Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>ContentVersion-Content Version Layout</layout>

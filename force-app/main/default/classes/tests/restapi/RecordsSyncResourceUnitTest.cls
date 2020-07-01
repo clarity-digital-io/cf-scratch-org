@@ -1,0 +1,9 @@
+@isTest
+public class RecordsSyncResourceUnitTest {
+
+	@TestSetup
+	public static void setup(){
+		
+	}
+
+}

@@ -23,9 +23,6 @@
             case 'View':
                 helper.handleViewResponse(cmp, event, record);
                 break;
-            case 'Edit':
-                helper.handleEditResponse(cmp, event, record);
-                break;
             case 'Delete':
                 helper.handleDeleteResponse(cmp, event, record);
                 break;    

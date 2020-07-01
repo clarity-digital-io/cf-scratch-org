@@ -39,7 +39,7 @@
                             <lightning:buttonGroup>
 
                                 <aura:if isTrue="{!v.form.forms__Status__c == 'Published'}">
-                                    <lightning:button label="New Form Response" onclick="{!c.handleNewFormResponse}" />
+                                    <lightning:button label="Set to Draft" onclick="{!c.handleSetDraft}" />
                                     <aura:set attribute="else">
                                         <lightning:button label="Publish Form" onclick="{!c.handlePublishForm}" />
                                     </aura:set>

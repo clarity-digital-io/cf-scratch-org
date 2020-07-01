@@ -44,6 +44,8 @@ public class Sync {
 	@future(callout=true) 
 	public static void process(String userId) {
 
+		//need a way to query for lookups / connections / record groups we will need
+
 		List<Account> accounts = [SELECT Id, Name, OwnerId, Type, LastModifiedDate, CreatedDate FROM Account];
 		
 		Http http = new Http();

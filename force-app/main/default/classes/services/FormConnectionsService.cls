@@ -12,6 +12,10 @@ public with sharing class FormConnectionsService {
 		return service().getConnectionsByFormName(formName);
 	}
 
+	public static List<Form_Connection__c> getConnectionsByFormStatus(String status) {
+		return service().getConnectionsByFormStatus(status);
+	}
+
 	public static List<Form_Connection__c> save(List<Form_Connection__c> removedConnections, List<Form_Connection__c> newConnections) {
 		return service().save(removedConnections, newConnections);
 	}

@@ -8,7 +8,7 @@ global with sharing class RecordsSyncResource {
 
 		RestResponse res = RestContext.response;
 		
-		SyncService.process('');
+		SyncService.process(UserInfo.getUserId());
 
         return 'In Progress';
 

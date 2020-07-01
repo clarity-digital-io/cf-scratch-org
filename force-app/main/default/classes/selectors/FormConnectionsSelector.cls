@@ -39,6 +39,15 @@ public with sharing class FormConnectionsSelector extends fflib_SObjectSelector 
 		return (List<Form_Connection__c>) Database.query( query.toSOQL() );
 	}
 
+	public List<Form_Connection__c> selectConnectionsByFormStatus(String status){
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition('Form__r.Status__c = :status');
+
+		new FormConnectionFieldsSelector().addQueryFactorySubselect(query,'forms__Form_Connection_Fields__r');
+
+		return (List<Form_Connection__c>) Database.query( query.toSOQL() );
+	}
+
 	public static IFormConnectionsSelector newInstance(){
 		return (IFormConnectionsSelector) Application.selector.newInstance(Form_Connection__c.SObjectType);
 	}

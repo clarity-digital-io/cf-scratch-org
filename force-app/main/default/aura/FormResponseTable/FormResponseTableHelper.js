@@ -124,27 +124,6 @@
 
 
     },
-    handleEditResponse: function(cmp, event, record) {
-
-        $A.createComponents([
-            ["forms:FormResponse", { "formName": record.name, "recordId": record.id }]
-        ],
-        function(components, status) {
-            if (status === "SUCCESS") {
-
-                let formResponse = components[0];
-
-                cmp.find('overlayLib').showCustomModal({
-                    header: cmp.get("v.formName"),
-                    cssClass: "clarityModal",
-                    body: formResponse, 
-                    showCloseButton: true
-                })
-
-            }
-        });
-
-    },
     handleDeleteResponse: function(cmp, event, record) {
 
         cmp.set('v.loading', true);
@@ -155,35 +134,35 @@
             responseId: record.id
         });
 
-		action.setCallback(this, function (response) {
+				action.setCallback(this, function (response) {
 
-			let state = response.getState();
+					let state = response.getState();
 
-			if (state === "SUCCESS") {
+					if (state === "SUCCESS") {
 
-                let deletedId = response.getReturnValue(); 
+										let deletedId = response.getReturnValue(); 
 
-                let data = cmp.get('v.data');
+										let data = cmp.get('v.data');
 
-                let responses = data.filter(r => r.id != deletedId);
+										let responses = data.filter(r => r.id != deletedId);
 
-                cmp.set('v.data', responses);
+										cmp.set('v.data', responses);
 
-                cmp.set('v.loading', false);
+										cmp.set('v.loading', false);
 
-			} else if (state === "ERROR") {
+					} else if (state === "ERROR") {
 
-                cmp.set('v.loading', false);
+										cmp.set('v.loading', false);
 
-				let errors = response.getError();
+						let errors = response.getError();
 
-                cmp.find('notifLib').showToast({
-                    "variant": "error",
-                    "title"  : "Error!",
-                    "message": response.getError()
-                });
+										cmp.find('notifLib').showToast({
+												"variant": "error",
+												"title"  : "Error!",
+												"message": response.getError()
+										});
 
-			}
+					}
 
         });
         

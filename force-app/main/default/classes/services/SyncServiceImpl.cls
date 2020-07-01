@@ -30,7 +30,11 @@ public class SyncServiceImpl implements ISyncService {
 
 		List<Question__c> questions = QuestionsService.getQuestions();
 
+		List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormStatus('Published');
+
 		Map<Id, List<Question__c>> formQuestions = new Map<Id, List<Question__c>>();
+
+		Map<Id, List<Form_Connection__c>> formConnections = new Map<Id, List<Form_Connection__c>>();
 
 		for(Question__c question : questions) {
 			if(formQuestions.get(question.Form__c) != null) {
@@ -39,11 +43,20 @@ public class SyncServiceImpl implements ISyncService {
 				formQuestions.put(question.Form__c, new List<Question__c>{ question });
 			}
 		}
+
+		for(Form_Connection__c connection : connections) {
+			if(formConnections.get(connection.Form__c) != null) {
+				formConnections.get(connection.Form__c).add(connection);
+			} else {
+				formConnections.put(connection.Form__c, new List<Form_Connection__c>{ connection });
+			}
+		}
 		
 		for(Form__c form : forms) {
 			Form preparedForm = new Form();
 			preparedForm.form = form; 
 			preparedForm.questions = formQuestions.get(form.Id) != null ? formQuestions.get(form.Id) : new List<Question__c>();
+			preparedForm.connections = formConnections.get(form.Id) != null ? formConnections.get(form.Id) : new List<Form_Connection__c>();
 			preparedForms.add(preparedForm);
 		}
 
@@ -57,7 +70,7 @@ public class SyncServiceImpl implements ISyncService {
 		HttpResponse response = Sync.connectOrganization(connect, organization.Id);
 
 		String body = response.getBody(); 
-		System.debug('connectOrganization: ' + body); 
+
 		Map<String, String> parsedBody = (Map<String, String>)JSON.deserialize(body, Map<String, String>.class);
 
 		Log__c log = new Log__c(

@@ -119,51 +119,6 @@
 
 			$A.enqueueAction(action);
 
-	},
-	handleNewFormResponse: function(cmp, event, helper) {
+	}
 
-			//create form pass in responseId here
-			let action = cmp.get("c.newResponse");
-
-			action.setParams({
-					formName: cmp.get("v.form.Name")
-			});
-
-			cmp.set('v.loading', true); 
-
-			action.setCallback(this, function (response) {
-
-					let state = response.getState();
-			
-					cmp.set('v.loading', false); 
-
-					if (state === "SUCCESS") {
-					
-							var responseId = response.getReturnValue();
-
-							$A.createComponents([
-								["forms:FormResponse", { "recordId": responseId }]
-							],
-							function(components, status) {
-									if (status === "SUCCESS") {
-				
-											let formResponse = components[0];
-				
-											cmp.find('overlayLib').showCustomModal({
-													header: cmp.get("v.form.Name"),
-													cssClass: "clarityModal",
-													body: formResponse, 
-													showCloseButton: true
-											})
-				
-									}
-							});
-			
-
-					}
-			}); 
-
-			$A.enqueueAction(action);
-
-	},
 })

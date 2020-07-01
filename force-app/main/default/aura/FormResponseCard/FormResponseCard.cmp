@@ -11,9 +11,6 @@
     <aura:attribute name="recordId" type="String" />
 
     <lightning:card class="slds-card_boundary" title="{!v.formName}" iconName="standard:account" >
-        <aura:set attribute="actions">
-            <lightning:button label="New Form Response" onclick="{!c.handleNewFormResponse}" />
-        </aura:set>
         <div class="slds-m-horizontal_none">
 
             <c:FormResponseTable formName="{!v.formName}" recordId="{!v.recordId}" sObjectName="{!v.sObjectName}" />
