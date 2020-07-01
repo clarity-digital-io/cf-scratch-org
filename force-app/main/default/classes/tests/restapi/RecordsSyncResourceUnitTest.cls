@@ -6,4 +6,9 @@ public class RecordsSyncResourceUnitTest {
 		
 	}
 
+	@isTest
+	public static void shouldGetRecords() {
+		
+	}
+
 }

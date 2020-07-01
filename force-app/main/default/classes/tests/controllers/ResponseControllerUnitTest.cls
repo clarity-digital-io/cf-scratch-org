@@ -2,7 +2,7 @@
 public class ResponseControllerUnitTest {
 
 	@TestSetup
-	static void setup(){
+	public static void setup(){
 		
 	}
 

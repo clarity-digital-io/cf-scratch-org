@@ -6,4 +6,9 @@ public class JobsResourceUnitTest {
 		
 	}
 
+	@isTest
+	public static void shouldUpdateJob() {
+		
+	}
+
 }

@@ -2,7 +2,7 @@
 global with sharing class AttachmentsResource {
 	
 	@HttpPost
-    global static List<Answer__c> insertAnswers() {
+    global static List<Answer__c> updateAttachments() {
 
         RestRequest req = RestContext.request;
 

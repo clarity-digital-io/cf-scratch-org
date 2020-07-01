@@ -1,36 +1,9 @@
 ({
 	doInit: function(cmp, event, helper) {
-
-		let action = cmp.get("c.getSetup");
-
-		action.setCallback(this, function (response) {
-
-				let state = response.getState();
-		
-				if (state === "SUCCESS") {
-				 
-					let licenses = JSON.parse(response.getReturnValue());
-
-					licenses.forEach(license => {
-						if(license.Type == 'Mobile') {
-							let mobileLicense = license;
-							let withinLicensePeriod = new Date(license.ExpirationDate) < Date.now();
-							cmp.set('v.mobileLicense', mobileLicense); 
-							cmp.set('v.mobileAccess', withinLicensePeriod); 
-						} else {
-							let builderLicense = license; 
-							cmp.set('v.builderLicense', builderLicense); 
-						}
-					})
-
-					cmp.set('v.licenses', licenses); 
-
-				}
-
-		}); 
-
-		$A.enqueueAction(action);
-
+		helper.getSetupInformation(cmp, event);
+	},
+	handleRefresh: function(cmp, event, helper) {
+		helper.getSetupInformation(cmp, event);
 	},
 	handleAccess: function(cmp, event, helper) {
 
@@ -70,5 +43,5 @@
 
 		$A.enqueueAction(action);
 
-}
+	}
 })

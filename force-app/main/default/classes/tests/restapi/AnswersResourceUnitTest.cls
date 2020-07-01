@@ -5,5 +5,10 @@ public class AnswersResourceUnitTest {
 	public static void setup(){
 		
 	}
-	
+
+	@isTest
+	public static void shouldUpdateAnswers() {
+		
+	}
+
 }

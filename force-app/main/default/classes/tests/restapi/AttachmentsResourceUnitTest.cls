@@ -5,5 +5,10 @@ public class AttachmentsResourceUnitTest {
 	public static void setup(){
 		
 	}
+	
+	@isTest
+	public static void shouldUpdateAttachments() {
+		
+	}
 
 }

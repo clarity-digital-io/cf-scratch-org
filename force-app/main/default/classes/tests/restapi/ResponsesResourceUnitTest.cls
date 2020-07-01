@@ -6,4 +6,14 @@ public class ResponsesResourceUnitTest {
 		
 	}
 
+	@isTest
+	public static void shouldDeleteResponses() {
+		
+	}
+
+	@isTest
+	public static void shouldUpdateResponses() {
+		
+	}
+
 }
