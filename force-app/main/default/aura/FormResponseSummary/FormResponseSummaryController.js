@@ -93,7 +93,6 @@
 	},
 	handlePublishForm: function(cmp, event, helper) {
 
-
 			let action = cmp.get("c.publishForm");
 
 			action.setParams({
@@ -119,6 +118,32 @@
 
 			$A.enqueueAction(action);
 
+	},
+	handleSetDraft: function(cmp, event) {
+		let action = cmp.get("c.setToDraft");
+
+		action.setParams({
+				recordId: cmp.get("v.recordId")
+		});
+
+		cmp.set('v.loading', true); 
+
+		action.setCallback(this, function (response) {
+
+				let state = response.getState();
+		
+				cmp.set('v.loading', false); 
+
+				if (state === "SUCCESS") {
+				
+						var form = response.getReturnValue();
+
+						cmp.set('v.form', form); 
+
+				}
+		}); 
+
+		$A.enqueueAction(action);
 	}
 
 })

@@ -24,6 +24,10 @@ public with sharing class FormsService {
 		return service().publishForm(formId);
 	}
 
+	public static Form__c setToDraft(Id formId) {
+		return service().setToDraft(formId);
+	}
+
 	public static Id deleteById(String recordId) {
 		return service().deleteById(recordId);
 	}

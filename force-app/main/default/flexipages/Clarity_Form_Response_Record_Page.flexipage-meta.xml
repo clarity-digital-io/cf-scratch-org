@@ -9,11 +9,7 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentInstanceProperties>
-                <name>recordId</name>
-                <value>default</value>
-            </componentInstanceProperties>
-            <componentName>FormResponseView</componentName>
+            <componentName>responseReview</componentName>
         </componentInstances>
         <name>main</name>
         <type>Region</type>

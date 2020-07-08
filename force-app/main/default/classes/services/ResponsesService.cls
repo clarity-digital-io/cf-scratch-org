@@ -16,12 +16,20 @@ public with sharing class ResponsesService {
 		return service().getResponsesByFormId(responseId);
 	}
 
+	public static List<Response__c> getResponsesByConnectedId(String recordId) {
+		return service().getResponsesByConnectedId(recordId);
+	}
+
 	public static Response__c getResponseById(String responseId) {
 		return service().getResponseById(responseId);
 	}
 
 	public static Response__c create(String formId) {
 		return service().create(formId);
+	}
+
+	public static Response__c create(String formId, String recordId) {
+		return service().create(formId, recordId);
 	}
 
 	public static Response__c save(List<Answer__c> answers, String responseId, String status) {

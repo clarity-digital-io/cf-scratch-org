@@ -1,0 +1,48 @@
+<template>
+    <lightning-card>
+		<h3 slot="title">
+            <lightning-icon icon-name="standard:record" size="small"></lightning-icon>
+            <span>Clarity Forms</span>
+        </h3>
+		<lightning-button label="New Response" onclick={handleNewResponse}  slot="actions"></lightning-button>
+        <template if:true={responses}>
+            <lightning-datatable
+                key-field="Id"
+                data={responses}
+				columns={columns}
+				onrowaction={handleRowAction}
+				hide-checkbox-column
+            >
+           </lightning-datatable>
+        </template>
+	</lightning-card>
+	
+	<c-modal show-modal={showModal} onclosedialog={modalCloseHandler}>
+
+		<span slot="header">Clarity Form</span>
+
+		<template if:true={showFormSelection}>
+			<c-lookup onsearch={handleFormSearch} onselectionchange={handleFormSelectionChange} label="Form Search" placeholder="Form Search">
+			</c-lookup>
+		</template>
+
+		<template if:true={showForm}>
+			<c-response-form onconnectionsready={handleConnectionsReady} record-id={recordId} form-id={formId}></c-response-form>
+		</template>
+
+		<span slot="footer">
+			<template if:true={showFormSelection}>
+				<lightning-button variant="brand" label="Start" title="Start" onclick={handleStartForm} class="slds-m-left_x-small"></lightning-button>
+			</template>
+			<template if:true={showConnectionSelection}>
+				<lightning-button variant="neutral" label="Next" title="Next" onclick={handleStartResponse} class="slds-m-left_x-small"></lightning-button>
+			</template>
+			<template if:true={showResponseControls}>
+				<lightning-button variant="neutral" label="Save" title="Save" onclick={handleSave} class="slds-m-left_x-small"></lightning-button>
+				<lightning-button variant="brand" label="Submit" title="Submit" onclick={handleSubmit} class="slds-m-left_x-small"></lightning-button>
+			</template>
+		</span>
+		
+	</c-modal>
+
+</template>

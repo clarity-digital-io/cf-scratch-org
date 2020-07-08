@@ -9,3 +9,4 @@ AppSwitcher.appMenu
 **/.eslintrc.json
 Account.app
 CustomApplication/Account
+ConnectedApp

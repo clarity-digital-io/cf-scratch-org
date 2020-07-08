@@ -46,6 +46,7 @@ public class QuestionsSelector extends fflib_SObjectSelector implements IQuestio
 	public List<Question__c> selectWithAllDetailsByIds(Set<Id> formIds){
 		fflib_QueryFactory query = newQueryFactory();
 		query.setCondition('Form__c IN :formIds');
+		query.addOrdering('Order__c', fflib_QueryFactory.SortOrder.ASCENDING);
 
 		new QuestionOptionsSelector().
 			addQueryFactorySubselect(query,'forms__Question_Options__r');

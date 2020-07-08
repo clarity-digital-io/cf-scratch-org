@@ -60,5 +60,17 @@ public class FormsServiceImpl implements IFormsService {
 
 	}
 
+	public Form__c setToDraft(Id formId) {
+
+		List<Form__c> forms = FormsSelector.newInstance().selectById(new Set<Id> {formId});
+
+		forms[0].Status__c = 'Draft'; 
+
+		Form__c form = updateForm(forms[0]);
+
+		return form; 
+
+	}
+
 
 }

@@ -53,6 +53,15 @@ public with sharing class FormSummaryController {
 
 	    return form;
 
+	}
+	
+	@AuraEnabled
+    public static Form__c setToDraft(String recordId){
+
+		Form__c form = FormsService.setToDraft(recordId); 
+
+	    return form;
+
     }
 
     @AuraEnabled(cacheable=true)

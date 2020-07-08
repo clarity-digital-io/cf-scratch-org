@@ -21,7 +21,27 @@ public class ResponsesServiceImpl implements IResponsesService {
 	}
 
 	public List<Response__c> getResponsesByOwner(List<String> userIds) {
-		List<Response__c> responses = ResponsesSelector.newInstance().getResponsesByOwner(userIds);
+		List<Response__c> responses = ResponsesSelector.newInstance().selectResponsesByOwner(userIds);
+		return responses; 
+	}
+
+	public static List<Response__c> getResponsesByConnectedId(String recordId) {
+
+		Schema.SObjectType type = Id.valueOf(recordId).getSobjectType();
+
+		Schema.DescribeSObjectResult result = type.getDescribe();
+
+		String objectName = result.getName();
+
+		String customQuery = objectName; 
+
+		if(!result.isCustom()) {
+			customQuery += '__c';
+		}
+
+		customQuery += ' = :recordId';
+
+		List<Response__c> responses = ResponsesSelector.newInstance().selectResponsesByConnectedId(customQuery, recordId);
 		return responses; 
 	}
 
@@ -32,6 +52,36 @@ public class ResponsesServiceImpl implements IResponsesService {
 			Form__c = formId,
 			Status__c = 'New'
 		);
+
+		uow.registerNew(newResponse);
+
+		uow.commitWork();	
+
+		return newResponse;
+	}
+
+	public Response__c create(String formId, String recordId) {
+
+		Schema.SObjectType type = Id.valueOf(recordId).getSobjectType();
+
+		Schema.DescribeSObjectResult result = type.getDescribe();
+
+		String objectName = result.getName();
+
+		String fieldName = objectName; 
+
+		if(!result.isCustom()) {
+			fieldName += '__c';
+		}
+
+		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
+
+		Response__c newResponse = new Response__c(
+			Form__c = formId,
+			Status__c = 'New'
+		);
+
+		newResponse.put(fieldName, recordId); 
 
 		uow.registerNew(newResponse);
 

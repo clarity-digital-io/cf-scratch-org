@@ -111,8 +111,17 @@ sfdx force:apex:class:create -n	RecordsSyncResourceUnitTest -d force-app/main/de
 sfdx force:apex:class:create -n	ResponsesResourceUnitTest -d force-app/main/default/classes/tests/restapi
 
 
+sfdx force:apex:class:create -n	Question -d force-app/main/default/classes/controllers/helpers
+
+
+responseForm
+--responseFormConnections
+--responseFormQuestions
+
 ## Resources
 
+sfdx force:data:soql:query -q "Select Id, MemberName From SourceMember Where MemberType = 'ConnectedApp'" -t
+sfdx force:data:record:delete -s SourceMember -i0MZ5400000E2q3SGAR -t
 
 ## Description of Files and Directories
 
