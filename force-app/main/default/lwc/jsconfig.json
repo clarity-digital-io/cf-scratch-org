@@ -44,6 +44,12 @@
             ],
             "c/responseFormConnection": [
                 "responseFormConnection/responseFormConnection.js"
+            ],
+            "c/responseFormEdit": [
+                "responseFormEdit/responseFormEdit.js"
+            ],
+            "c/responseFormNew": [
+                "responseFormNew/responseFormNew.js"
             ]
         }
     },

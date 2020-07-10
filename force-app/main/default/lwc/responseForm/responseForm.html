@@ -1,16 +1,11 @@
 <template>
-
-	<template if:true={hasConnection}>
-		<c-response-form-connections onconnectionsrequired={handleConnectionsRequired} connections={connections} form-id={formId}></c-response-form-connections>
+	
+	<template if:true={isEdit}>
+		<c-response-form-edit is-community={isCommunity} form-id={formId} response-id={responseId}></c-response-form-edit>
 	</template>
 
-	<template if:true={hasConnectionReady}>
-		<c-response-form-questions onanswer={handleAnswers} form-id={formId}></c-response-form-questions>
-	</template>
-
-	<template if:true={isCommunity}>
-		<lightning-button variant="neutral" label="Save" title="Save" onclick={handleSave} class="slds-m-left_x-small"></lightning-button>
-		<lightning-button variant="brand" label="Submit" title="Submit" onclick={handleSubmit} class="slds-m-left_x-small"></lightning-button>	
+	<template if:true={isNew}>
+		<c-response-form-new is-community={isCommunity} record-id={recordId} form-id={formId}></c-response-form-new>
 	</template>
 
 </template>

@@ -4,8 +4,11 @@ export default class ResponseFormQuestion extends LightningElement {
 	@api question;
 	value = '';
 
+	connectedCallback() {
+		this.value = this.question.answer ? this.question.answer : '';
+	}
+
 	get isInput() {
-		console.log(this.question.forms__Type__c);
 		return this.question.forms__Type__c == 'InputField';
 	}
 
@@ -81,18 +84,16 @@ export default class ResponseFormQuestion extends LightningElement {
 	}
 
 	handleInputChange(event) {
-		const inputEvent = new CustomEvent('change', {
-			detail: {
-				value: event.target.value,
-				questionId: this.question.Id
-			}
+		const inputEvent = new CustomEvent('answerchange', {
+			detail: { value: event.target.value, questionId: this.question.Id },
+			bubbles: true,
+			composed: true
 		});
 		this.dispatchEvent(inputEvent);
 	}
 
 	handleAttachmentChange(event) {
-		window.console.log('event', event.detail.files); 
-		const inputEvent = new CustomEvent('change', {
+		const inputEvent = new CustomEvent('answerchange', {
 			detail: {
 				value: event.detail.files,
 				questionId: this.question.Id
@@ -113,7 +114,6 @@ export default class ResponseFormQuestion extends LightningElement {
 	}
 
 	handleLookupSelectionChange(event) {
-		window.console.log('event.target.getSelection()', event.target.getSelection()); 
 		this.formId = event.detail[0];
 	}
 }

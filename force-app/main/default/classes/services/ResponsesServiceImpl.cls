@@ -60,28 +60,34 @@ public class ResponsesServiceImpl implements IResponsesService {
 		return newResponse;
 	}
 
-	public Response__c create(String formId, String recordId) {
-
-		Schema.SObjectType type = Id.valueOf(recordId).getSobjectType();
-
-		Schema.DescribeSObjectResult result = type.getDescribe();
-
-		String objectName = result.getName();
-
-		String fieldName = objectName; 
-
-		if(!result.isCustom()) {
-			fieldName += '__c';
-		}
-
-		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
+	public Response__c create(String formId, Map<String, String> connectionRecordIds) {
 
 		Response__c newResponse = new Response__c(
 			Form__c = formId,
 			Status__c = 'New'
 		);
 
-		newResponse.put(fieldName, recordId); 
+		for(String connectionId : connectionRecordIds.keySet()) {
+
+			String recordId = connectionRecordIds.get(connectionId);
+
+			Schema.SObjectType type = Id.valueOf(recordId).getSobjectType();
+
+			Schema.DescribeSObjectResult result = type.getDescribe();
+	
+			String objectName = result.getName();
+	
+			String fieldName = objectName; 
+	
+			if(!result.isCustom()) {
+				fieldName += '__c';
+			}
+
+			newResponse.put(fieldName, recordId); 
+
+		}
+
+		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
 
 		uow.registerNew(newResponse);
 

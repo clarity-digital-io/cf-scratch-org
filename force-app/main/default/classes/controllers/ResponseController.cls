@@ -1,6 +1,6 @@
 public with sharing class ResponseController {
 
-	@AuraEnabled
+	@AuraEnabled(cacheable=true)
     public static Response__c getResponse(String recordId) {
 
 		Response__c response = ResponsesService.getResponseWithDetailsById(recordId); 
@@ -19,9 +19,9 @@ public with sharing class ResponseController {
 	}
 	
 	@AuraEnabled(cacheable=true)
-	public static List<Form_Connection__c> getConnections(String recordId){
+	public static List<Form_Connection__c> getConnections(String formId){
 
-		List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormId(recordId); 
+		List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormId(formId); 
 
 		return connections;
 
@@ -51,18 +51,20 @@ public with sharing class ResponseController {
 	}
 
 	@AuraEnabled
-	public static Id saveResponse(String formId, String sResponse, String status, String recordId){
+	public static Id saveResponse(String formId, String sAnswers, String status, String sRecordIds){
 
-		Map<String, String> parsedResponse = (Map<String, String>)JSON.deserialize(sResponse, Map<String, String>.class);
+		Map<String, String> parsedAnswers = (Map<String, String>)JSON.deserialize(sAnswers, Map<String, String>.class);
 
-		Response__c newResponse = ResponsesService.create(formId, recordId);
+		Map<String, String> parsedConnectedRecordIds = (Map<String, String>)JSON.deserialize(sRecordIds, Map<String, String>.class);
+
+		Response__c newResponse = ResponsesService.create(formId, parsedConnectedRecordIds);
 
 		List<Answer__c> answers = new List<Answer__c>(); 
 
-		for(String questionId : parsedResponse.keySet()) {
+		for(String questionId : parsedAnswers.keySet()) {
 			Answer__c answer = new Answer__c(
 				Question__c = questionId,
-				Answer__c = parsedResponse.get(questionId),
+				Answer__c = parsedAnswers.get(questionId),
 				Response__c = newResponse.Id
 			);
 			answers.add(answer);
@@ -71,6 +73,26 @@ public with sharing class ResponseController {
 		Response__c response = ResponsesService.save(answers, newResponse.Id, status); 
 
 		return response.Id;
+
+	}
+
+	@AuraEnabled
+	public static Id editResponse(String responseId, String sAnswers, String status){
+
+		Map<String, String> parsedAnswers = (Map<String, String>)JSON.deserialize(sAnswers, Map<String, String>.class);
+
+		List<Answer__c> answers = new List<Answer__c>(); 
+
+		for(String questionId : parsedAnswers.keySet()) {
+			Answer__c answer = new Answer__c(
+				Question__c = questionId,
+				Answer__c = parsedAnswers.get(questionId),
+				Response__c = responseId
+			);
+			answers.add(answer);
+		}
+
+		return responseId;
 
 	}
 	
@@ -111,7 +133,13 @@ public with sharing class ResponseController {
 
 		searchTerm += '%';
 
-		List<sObject> records = Database.query('SELECT Id, Name FROM ' + connection + ' WHERE Name Like :searchTerm AND Id NOT IN :selectedIds LIMIT :MAX_RESULTS');
+		String nameField = 'Name';
+
+		if(connection == 'Case') {
+			nameField = 'Subject';
+		}
+
+		List<sObject> records = Database.query('SELECT Id, ' + nameField + ' FROM ' + connection + ' WHERE ' + nameField + ' Like :searchTerm AND Id NOT IN :selectedIds LIMIT :MAX_RESULTS');
 
 		List<LookupSearchResult> results = new List<LookupSearchResult>();
 
@@ -123,7 +151,7 @@ public with sharing class ResponseController {
 					record.Id,
 					'Form',
 					recordIcon,
-					(String)record.get('Name'),
+					(String)record.get(nameField),
 					connection
 				)
 			);

@@ -28,8 +28,8 @@ public with sharing class ResponsesService {
 		return service().create(formId);
 	}
 
-	public static Response__c create(String formId, String recordId) {
-		return service().create(formId, recordId);
+	public static Response__c create(String formId, Map<String, String> connectionRecordIds) {
+		return service().create(formId, connectionRecordIds);
 	}
 
 	public static Response__c save(List<Answer__c> answers, String responseId, String status) {

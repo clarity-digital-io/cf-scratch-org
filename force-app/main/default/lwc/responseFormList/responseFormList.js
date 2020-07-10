@@ -6,6 +6,8 @@ import getResponses from '@salesforce/apex/ResponseController.getResponses';
 import formSearch from '@salesforce/apex/ResponseController.formSearch';
 
 export default class ResponseFormList extends NavigationMixin(LightningElement) {
+		@api isNew = false; 
+		@api isEdit = false;
 		columns = [];
 
 		constructor() {
@@ -15,23 +17,28 @@ export default class ResponseFormList extends NavigationMixin(LightningElement) 
 				{ label: 'Response Name', fieldName: 'Name', type: 'text' },
 				{ label: 'Status', fieldName: 'Status', type: 'text' },
 				{ type: 'action', typeAttributes: { rowActions: this.getRowActions } },
-			]
+			];
+			this.addEventListener('connectionsready', this.handleConnectionsReady.bind(this));
 		}
 
+		readyForResponse = true;
 		showFormSelection = true;
 		showConnectionSelection = false;
 		showForm = false;
 		showResponseControls = false; 
 		formId;
+		
 		@api showModal = false;
 		@api recordId;
-
+		
 		responses;
 		@wire(getResponses, { recordId: '$recordId' })
 		wiredResponses({error, data}) {
 			if(data) {
 				this.responses = data.map(record => {
 					return {
+						ResponseId: record.Id,
+						FormId: record.forms__Form__c,
 						FormTitle: record.forms__Form__r.forms__Title__c,
 						Name: record.Name,
 						Status: record.forms__Status__c
@@ -52,13 +59,13 @@ export default class ResponseFormList extends NavigationMixin(LightningElement) 
 				this.showForm = false; 
 				this.showResponseControls = false; 
 				this.formId = null; 
+				this.isNew = true;
 				this.showModal = true; 
 			}
 
 			if(FORM_FACTOR == 'Small') {
 				window.location.href = 'clarityforms://response';
 			}
-
 		}
 
 		modalCloseHandler() {
@@ -106,17 +113,17 @@ export default class ResponseFormList extends NavigationMixin(LightningElement) 
 		}
 
 		getRowActions(row, doneCallback) {
-			window.console.log('getRowActions', row); 
+
 			let actions = [];
 			if(row.Status == 'In Progress') {
 				actions.push({
 					'label': 'Edit',
-					'iconName': 'utility:adduser',
+					'iconName': 'utility:edit',
 					'name': 'edit'
 				});
 				actions.push({
 					'label': 'Delete',
-					'iconName': 'utility:block_visitor',
+					'iconName': 'utility:delete',
 					'name': 'delete'
 				});
 			}
@@ -124,7 +131,7 @@ export default class ResponseFormList extends NavigationMixin(LightningElement) 
 			if(row.Status == 'Submitted') {
 				actions.push({
 					'label': 'View',
-					'iconName': 'utility:adduser',
+					'iconName': 'utility:preview',
 					'name': 'view'
 				});
 			}
@@ -135,6 +142,8 @@ export default class ResponseFormList extends NavigationMixin(LightningElement) 
 
 		handleRowAction(event) {
 			const action = event.detail.action.name;
+			const row = event.detail.row;
+			window.console.log('event.detail.row', event.detail.row, JSON.stringify(event.detail.row));
 			switch (action) {
 				case 'delete':
 					this.deleteResponse(row);
@@ -158,6 +167,15 @@ export default class ResponseFormList extends NavigationMixin(LightningElement) 
 		}
 
 		editResponse(row) {
-			window.console.log('row', row);
+			if(FORM_FACTOR == 'Large') {
+				this.showFormSelection = false; 
+				this.showConnectionSelection = false; 
+				this.showForm = true; 
+				this.showResponseControls = true; 
+				this.formId = row.FormId; 
+				this.responseId = row.ResponseId;
+				this.isEdit = true;
+				this.showModal = true; 
+			}
 		}
 }

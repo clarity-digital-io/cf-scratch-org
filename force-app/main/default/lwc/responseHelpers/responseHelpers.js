@@ -39,7 +39,7 @@ export const calculateLogic = ( questionId, logicType, answers, controlledQuesti
 		return true; 
 	}
 
-	if(answers.size == 0){
+	if(Object.keys(answers).length.size == 0){
 		return false; 
 	}
 
@@ -49,7 +49,7 @@ export const calculateLogic = ( questionId, logicType, answers, controlledQuesti
 		
 		return criteria.reduce((accum, crit) => {
 
-				let check = answers.has(crit.forms__Field__c) ? answerCheck(answers.get(crit.forms__Field__c), crit) : false;
+				let check = answers.hasOwnerProperty(crit.forms__Field__c) ? answerCheck(answers[crit.forms__Field__c], crit) : false;
 
 				return accum || check;
 
@@ -61,7 +61,7 @@ export const calculateLogic = ( questionId, logicType, answers, controlledQuesti
 
 		let t = criteria.reduce((accum, crit) => {
 
-				let check = answerCheck(answers.get(crit.forms__Field__c), crit);
+				let check = answerCheck(answers[crit.forms__Field__c], crit);
 
 				return accum && check;
 

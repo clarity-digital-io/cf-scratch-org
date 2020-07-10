@@ -27,7 +27,7 @@
 		</template>
 
 		<template if:true={showForm}>
-			<c-response-form onconnectionsready={handleConnectionsReady} record-id={recordId} form-id={formId}></c-response-form>
+			<c-response-form is-new={isNew} is-edit={isEdit} onconnectionsready={handleConnectionsReady} record-id={recordId} form-id={formId} response-id={responseId}></c-response-form>
 		</template>
 
 		<span slot="footer">
@@ -35,7 +35,7 @@
 				<lightning-button variant="brand" label="Start" title="Start" onclick={handleStartForm} class="slds-m-left_x-small"></lightning-button>
 			</template>
 			<template if:true={showConnectionSelection}>
-				<lightning-button variant="neutral" label="Next" title="Next" onclick={handleStartResponse} class="slds-m-left_x-small"></lightning-button>
+				<lightning-button disabled={readyForResponse} variant="neutral" label="Next" title="Next" onclick={handleStartResponse} class="slds-m-left_x-small"></lightning-button>
 			</template>
 			<template if:true={showResponseControls}>
 				<lightning-button variant="neutral" label="Save" title="Save" onclick={handleSave} class="slds-m-left_x-small"></lightning-button>

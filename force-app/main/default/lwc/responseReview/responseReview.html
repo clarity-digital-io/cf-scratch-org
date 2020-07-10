@@ -4,11 +4,17 @@
         <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
     </template>
 
+	<template if:false={loading}>
+		<lightning-card title="Response Review">
+			<div class='slds-p-around_xx-small'>
 
-	<lightning-card title="Response Review">
-		<template for:each={answers} for:item='answer'>
-			<c-response-review-answer key={answer.Id} answer={answer}></c-response-review-answer>
-		</template>
-	</lightning-card>
+				<template for:each={answers} for:item='answer'>
+					<c-response-review-answer key={answer.Id} answer={answer}></c-response-review-answer>
+				</template>
+
+			</div>	
+		</lightning-card>
+	</template>
+
 
 </template>

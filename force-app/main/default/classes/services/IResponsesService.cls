@@ -4,7 +4,7 @@ public interface IResponsesService {
 	Response__c save(List<Answer__c> answers, String responseId, String status);
 	List<Response__c> save(List<Response__c> responses, Schema.sObjectField uniqueExternalField);
 	Response__c create(String formId);
-	Response__c create(String formId, String recordId);
+	Response__c create(String formId, Map<String, String> connectionRecordIds);
 	Response__c getResponseWithDetailsById(String responseId);
 	Response__c getResponseById(String responseId);
 	List<Response__c> getResponsesByFormId(String formId);

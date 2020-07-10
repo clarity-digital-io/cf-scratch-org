@@ -9,7 +9,11 @@ export default class ResponseFormConnections extends LightningElement {
 		const detail = JSON.parse(event.detail);
 		this.responseConnections.set(detail.connectionId, detail.recordId); 
 		if(this.responseConnections.size == this.connections.length) {
-			const e = new CustomEvent('connectionsrequired');		
+			let connections = {};
+			this.responseConnections.forEach((value, key) => {
+				connections[key] = value; 
+			})
+			const e = new CustomEvent('connectionsrequired', { detail: connections });		
 			this.dispatchEvent(e);
 		}
 	}
