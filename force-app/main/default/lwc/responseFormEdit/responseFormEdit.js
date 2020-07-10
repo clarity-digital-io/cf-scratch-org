@@ -72,7 +72,7 @@ export default class ResponseFormNew extends LightningElement {
 
 	handleAnswers(event) {
 		window.console.log('response event', event.detail.questionId, event.detail.value); 
-		this.answers[event.detail.questionId] = event.detail.value;
+		this.newAnswers[event.detail.questionId] = event.detail.value;
 	}
 
 }
