@@ -5,6 +5,7 @@ export default class ResponseForm extends LightningElement {
 	@api isNew; 
 	@api formId;
 	@api responseId;
+	@api recordId;
 	@api isCommunity = false; 
 
 	@api

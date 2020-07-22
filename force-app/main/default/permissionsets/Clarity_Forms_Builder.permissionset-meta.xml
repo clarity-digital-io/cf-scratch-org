@@ -479,7 +479,7 @@
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <tabSettings>
-        <tab>Clarity_Forms_Setup_Wizard</tab>
+        <tab>Clarity_Forms_Setup</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>

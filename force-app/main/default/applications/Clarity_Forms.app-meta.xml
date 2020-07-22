@@ -21,13 +21,13 @@
     <isNavPersonalizationDisabled>true</isNavPersonalizationDisabled>
     <label>Clarity Forms</label>
     <navType>Console</navType>
-    <tabs>Clarity_Forms_Setup_Wizard</tabs>
+    <tabs>Clarity_Forms_Setup</tabs>
     <tabs>Form__c</tabs>
     <tabs>Response__c</tabs>
     <uiType>Lightning</uiType>
     <workspaceConfig>
         <mappings>
-            <tab>Clarity_Forms_Setup_Wizard</tab>
+            <tab>Clarity_Forms_Setup</tab>
         </mappings>
         <mappings>
             <tab>Form__c</tab>

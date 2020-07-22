@@ -14,7 +14,8 @@ public class ResponsesSelector extends fflib_SObjectSelector implements IRespons
 			Response__c.UUID__c,
 			Response__c.Form__c,
 			Response__c.CreatedById.Name,
-			Response__c.OwnerId
+			Response__c.OwnerId,
+			Response__c.Checklist__c
 	   };
 	}
 
@@ -43,7 +44,7 @@ public class ResponsesSelector extends fflib_SObjectSelector implements IRespons
 	public List<Response__c> selectResponsesByConnectedId(String customQuery, String recordId) {
 		fflib_QueryFactory query = newQueryFactory().selectField('Form__c.Title__c');
 		query.setCondition(customQuery);
-		return (List<Response__c>) Database.query( query.toSOQL() );
+		return (List<Response__c>) Database.query( query.toSOQL());
 	}
 
 	public List<Response__c> selectWithAllDetailsByIds(Set<Id> recordIds){

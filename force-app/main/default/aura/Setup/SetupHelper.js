@@ -1,7 +1,7 @@
 ({
 	getSetupInformation: function(cmp, event) {
 
-		cmp.set('v.loading', true);
+		//cmp.set('v.loading', true);
 
 		let action = cmp.get("c.getSetup");
 
@@ -32,7 +32,9 @@
 
 		}); 
 
-		$A.enqueueAction(action);
+		cmp.set('v.mobileLicense', { IsAPIConnected: true })
+
+		//$A.enqueueAction(action);
 
 	}
 })

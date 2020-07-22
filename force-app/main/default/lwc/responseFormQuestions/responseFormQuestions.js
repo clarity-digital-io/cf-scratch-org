@@ -3,14 +3,13 @@ import getQuestions from '@salesforce/apex/ResponseController.getQuestions';
 import { calculateLogic, getCriteriaControllers, getCriteriaControlledQuestions } from 'c/responseHelpers';
 
 export default class ResponseFormQuestions extends LightningElement {
-	@api answers;
+	@api answers = {};
 	@api formId;
 	@track questions;
 	
 	//pass in answers when edit and add it to quesetion object in getActiveQuestions
 	@wire(getQuestions, { recordId: '$formId' })
 	wiredQuestions({ error, data }) {
-		window.console.log('answers 1', JSON.stringify(this.answers));
 		if (data) {
 			this.criteriaControllers = getCriteriaControllers(data); 
 			this.criteriaControlledQuestions = getCriteriaControlledQuestions(data); 
@@ -28,7 +27,7 @@ export default class ResponseFormQuestions extends LightningElement {
 
 		return data.map(question => {
 
-			let answer = this.answers[question.Id];
+			let answer = this.answers[question.Id] || '';
 
 			if(calculateLogic(question.Id, question.forms__Logic__c, this.answers, this.criteriaControlledQuestions)) {
 				bgStyle = !bgStyle; 

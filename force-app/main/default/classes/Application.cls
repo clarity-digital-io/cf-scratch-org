@@ -14,7 +14,8 @@ public class Application {
 				Form_Connection_Field__c.sObjectType,
 				ContentVersion.sObjectType,
 				ContentDocumentLink.sObjectType,
-				Log__c.sObjectType
+				Log__c.sObjectType,
+				Account.sObjectType
 			}
 		); 
 
@@ -28,7 +29,9 @@ public class Application {
 				IQuestionsService.class => QuestionsServiceImpl.class,
 				ISyncService.class => SyncServiceImpl.class,
 				IResponseConnectionsService.class => ResponseConnectionsServiceImpl.class,
-				IAnswersService.class => AnswersServiceImpl.class
+				IAnswersService.class => AnswersServiceImpl.class,
+				IAccountsService.class => AccountsServiceImpl.class,
+				IChecklistGroupsService.class => ChecklistGroupsServiceImpl.class
 			}
 		);
 
@@ -44,7 +47,9 @@ public class Application {
 				Question_Criteria__c.sObjectType => QuestionCriteriaSelector.class,
 				Response_Connection__c.sObjectType => ResponseConnectionsSelector.class,
 				Answer__c.sObjectType => AnswersSelector.class,
-				ContentVersion.sObjectType => ContentVersionsSelector.class
+				ContentVersion.sObjectType => ContentVersionsSelector.class,
+				Checklist_Group__c.sObjectType => ChecklistGroupsSelector.class,
+				Account.sObjectType => AccountsSelector.class
 			}
 		);
 

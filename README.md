@@ -61,21 +61,21 @@ sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-de
 
 sfdx force:org:list --all
 
-sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias mobile-test-prod-one --durationdays 30 //clarity-forms-pkg
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias mobile-test-prod-two --durationdays 60 //clarity-forms-pkg
 
-sfdx force:alias:set mobile-test-prod-one=test-fbyfuujmm9zd@example.com
+sfdx force:alias:set mobile-test-prod-two=test-lanivcw2dtmk@example.com
 
-sfdx force:config:set defaultusername=mobile-test-prod-one
+sfdx force:config:set defaultusername=mobile-test-prod-two
 
 sfdx force:source:push -f
 
 sfdx force:org:open -u PkgOrg
 
-sfdx force:user:password:generate --targetusername mobile-test-prod-one
+sfdx force:user:password:generate --targetusername mobile-test-prod-two
 
-sfdx force:user:display --targetusername mobile-test-prod-one
+sfdx force:user:display --targetusername mobile-test-prod-two
 
-sfdx force:org:delete -u test-fbyfuujmm9zd@example.com
+sfdx force:org:delete -u test-lanivcw2dtmk@example.com
 
 ## Mobile Settings Controller Should:
 
@@ -94,24 +94,41 @@ sfdx force:apex:class:create -n SetupController -d force-app/main/default/classe
 sfdx force:lightning:component:create --type lwc -d force-app/main/default/lwc/ -n responseReview
 sfdx force:lightning:component:create --type lwc -d force-app/main/default/lwc/ -n responseReviewAnswer
 
-
 sfdx force:apex:class:create -n FormSummaryControllerUnitTest -d force-app/main/default/classes/tests/controllers
-sfdx force:apex:class:create -n ConnectionFieldValidationUnitTest -d force-app/main/default/classes/tests/controllers
-sfdx force:apex:class:create -n ConnectionRecordProcessUnitTest -d force-app/main/default/classes/tests/controllers
-
-sfdx force:apex:class:create -n	BuilderControllerUnitTest -d force-app/main/default/classes/tests/controllers
-sfdx force:apex:class:create -n	ResponseControllerUnitTest -d force-app/main/default/classes/tests/controllers
-sfdx force:apex:class:create -n	SetupControllerUnitTest -d force-app/main/default/classes/tests/controllers
-sfdx force:apex:class:create -n	FormSummaryControllerUnitTest -d force-app/main/default/classes/tests/controllers
-
-sfdx force:apex:class:create -n	AnswersResourceUnitTest -d force-app/main/default/classes/tests/restapi
-sfdx force:apex:class:create -n	AttachmentsResourceUnitTest -d force-app/main/default/classes/tests/restapi
-sfdx force:apex:class:create -n	JobsResourceUnitTest -d force-app/main/default/classes/tests/restapi
-sfdx force:apex:class:create -n	RecordsSyncResourceUnitTest -d force-app/main/default/classes/tests/restapi
-sfdx force:apex:class:create -n	ResponsesResourceUnitTest -d force-app/main/default/classes/tests/restapi
-
 
 sfdx force:apex:class:create -n	Question -d force-app/main/default/classes/controllers/helpers
+
+sfdx force:apex:class:create -n AccountsResource -d force-app/main/default/classes/restapi
+
+sfdx force:apex:class:create -n AccountServiceImpl -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n IAccountService -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n AccountService -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n AccountsSelector -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n IAccountsSelector -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n App -d force-app/main/default/classes/restapi/models
+
+
+sfdx force:apex:class:create -n IChecklistGroupsService -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n ChecklistGroupsService -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n ChecklistGroupsServiceImpl -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n ChecklistGroupsSelector -d force-app/main/default/classes/selectors
+
+sfdx force:apex:class:create -n IChecklistGroupsSelector -d force-app/main/default/classes/selectors
+
+sfdx force:apex:class:create -n Group -d force-app/main/default/classes/restapi/services/callouts
+
+
+sfdx force:apex:class:create -n ChecklistGroupsService -d force-app/main/default/classes/services
+sfdx force:apex:class:create -n IChecklistGroupsService -d force-app/main/default/classes/services
+sfdx force:apex:class:create -n ChecklistGroupsServiceImpl -d force-app/main/default/classes/services
 
 
 responseForm

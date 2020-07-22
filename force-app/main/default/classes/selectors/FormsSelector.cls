@@ -18,7 +18,8 @@ public class FormsSelector extends fflib_SObjectSelector implements IFormsSelect
 			Form__c.Thank_You_Redirect__c,
 			Form__c.Multi_Page_Val__c,
 			Form__c.Multi_Page_Info__c,
-			Form__c.End_Date__c
+			Form__c.End_Date__c,
+			Form__c.Checklist_Group__c
 	   };
 	}
 

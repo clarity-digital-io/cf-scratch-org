@@ -1,9 +1,7 @@
 <template>
-
-	<div>{hasConnectionReady}</div>
 	
 	<template if:true={hasConnection}>
-		<c-response-form-connections onconnectionsrequired={handleConnectionsRequired} connections={connections} form-id={formId}></c-response-form-connections>
+		<c-response-form-connections record-id={recordId} onconnectionsrequired={handleConnectionsRequired} connections={connections} form-id={formId}></c-response-form-connections>
 	</template>
 
 	<template if:true={hasConnectionReady}>

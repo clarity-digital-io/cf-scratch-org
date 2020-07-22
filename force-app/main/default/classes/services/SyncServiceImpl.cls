@@ -24,6 +24,8 @@ public class SyncServiceImpl implements ISyncService {
 
 		Organization organization = [Select Id, Name FROM Organization Limit 1]; 
 
+		List<Checklist_Group__c> groups = ChecklistGroupsService.getGroups();
+
 		List<Form> preparedForms = new List<Form>(); 
 
 		List<Form__c> forms = FormsService.getFormsByStatus('Published');
@@ -63,7 +65,8 @@ public class SyncServiceImpl implements ISyncService {
 		Connect connect = new Connect(); 
 
 		connect.org = organization;
-		connect.forms =  preparedForms;
+		connect.forms = preparedForms;
+		connect.groups = groups;
 
 		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
 
