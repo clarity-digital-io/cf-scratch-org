@@ -16,7 +16,7 @@ public with sharing class QuestionsService {
 		return service().saveRecordGroup(recordGroupFields, relatedRecordGroupId);
 	}
 
-	public static List<String> saveQuestions(List<Question__c> questions) {
+	public static List<Question__c> saveQuestions(List<Question__c> questions) {
 		return service().saveQuestions(questions);
 	}
 

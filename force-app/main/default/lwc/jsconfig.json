@@ -50,6 +50,9 @@
             ],
             "c/responseFormNew": [
                 "responseFormNew/responseFormNew.js"
+            ],
+            "c/recordGroup": [
+                "recordGroup/recordGroup.js"
             ]
         }
     },

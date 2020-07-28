@@ -1,12 +1,11 @@
+@isTest
 public class TestDataFactory {
 
     public static Form__c generateForm(){
+		
+		Form__c form = FormsService.updateForm(new Form__c(Label__c = 'Clarity Form', Status__c = 'Draft'));
 
-        Form__c form = new Form__c(Label__c = 'Clarity Form', Status__c = 'Draft'); 
-
-        insert form; 
-
-        return form; 
+		return form; 
 
     }
 
@@ -16,27 +15,26 @@ public class TestDataFactory {
 
 		for (Integer i = 0; i < count; i++) {
 			 
-			Form__c form = new Form__c(Label__c = 'Clarity Form ' + i, Status__c = 'Draft'); 
+			Form__c form = generateForm();
 			forms.add(form); 
 
 		}
 
-		insert forms; 
-
 		return forms; 
+
 	}
 
     public static void publishForm(Form__c form) {
 
         form.Status__c = 'Published'; 
 
-        update form; 
+		FormsService.updateForm(form);
 
     }
 
     public static List<Question__c> generateQuestions(List<Form__c> forms){
 
-        List<Question__c> questions = new  List<Question__c>();
+        List<Question__c> newQuestions = new  List<Question__c>();
 
         Integer order = 0; 
 
@@ -46,45 +44,23 @@ public class TestDataFactory {
 
 				Question__c question = new Question__c(
 					Form__c = form.Id, 
-					Title__c        = 'Title: ' + type, 
-					Type__c         = type,
-					Order__c        = order
+					Title__c = 'Title: ' + type, 
+					Type__c = type,
+					Order__c = order
 				);
 
-				questions.add(question);
+				newQuestions.add(question);
 
 				order++; 
 			}
 
 		}
 
-        insert questions;
+		List<Question__c> questions = QuestionsService.saveQuestions(newQuestions);
 
         return questions;
 
     }
-
-	public static List<Question_Option__c> generateQuestionOptions(List<Question__c> multiChoiceQuestions) {
-
-		List<Question_Option__c> options = new List<Question_Option__c>(); 
-
-		Integer count = 0; 
-
-		for(Question__c question : multiChoiceQuestions) {
-
-			Question_Option__c option = new Question_Option__c(
-				Label__c = 'Test',
-				Question__c = question.Id,
-				Order__c = count
-			);
-
-			count = count + 1; 
-
-			options.add(option); 
-		}
-
-		return options;
-	}
 
 	public static Question__c generateRecordGroup(Form__c form) {
 

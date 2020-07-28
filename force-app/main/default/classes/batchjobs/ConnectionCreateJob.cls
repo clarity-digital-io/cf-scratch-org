@@ -29,7 +29,7 @@ public class ConnectionCreateJob implements Queueable {
 
     public void execute(QueueableContext context) {
 
-        List<Form_Connection_Field__c> fields = [SELECT Id, Form_Connection__c, Custom_Value__c, Salesforce_Field__c, Question__c FROM Form_Connection_Field__c WHERE Form_Connection__c =: connections[order].Id];
+		List<Form_Connection_Field__c> fields = FormConnectionFieldsSelector.newInstance().selectFieldsByConnectionId( connections[order].Id );
 
         if(fields.size() > 0) {
 
@@ -61,7 +61,7 @@ public class ConnectionCreateJob implements Queueable {
 
                 if(field.Question__c != null) {
 
-                    dirtyAnswer = answersByQuestion.get(field.Question__c) != null ? answersByQuestion.get(field.Question__c).Answer__c : ''; 
+                    dirtyAnswer = answersByQuestion.containsKey(field.Question__c) ? answersByQuestion.get(field.Question__c).Answer__c : ''; 
 
                 } else if(field.Custom_Value__c != null) {
 

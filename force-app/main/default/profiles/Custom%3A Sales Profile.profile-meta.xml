@@ -1229,6 +1229,16 @@
         <field>Response__c.UUID__c</field>
         <readable>false</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>User__c.Has_Mobile_Access__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>User__c.User__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
     <layoutAssignments>
         <layout>Account-Account %28Sales%29 Layout</layout>
     </layoutAssignments>
@@ -1266,6 +1276,9 @@
         <layout>Log__c-Log Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Mobile_API__mdt-Mobile API Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Mobile_User__c-Clarity Forms Mobile User Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -1286,6 +1299,9 @@
     <layoutAssignments>
         <layout>Response__c-Response Layout</layout>
         <recordType>Response__c.Preview</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>User__c-User Layout</layout>
     </layoutAssignments>
     <objectPermissions>
         <allowCreate>true</allowCreate>

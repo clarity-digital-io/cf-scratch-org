@@ -5,7 +5,13 @@ global with sharing class BuilderController {
 
         List<Question__c> parsedQuestions = (List<Question__c>)JSON.deserialize(sQuestions, List<Question__c>.class);
 		
-		List<String> saved = QuestionsService.saveQuestions(parsedQuestions);
+		List<Question__c> questions = QuestionsService.saveQuestions(parsedQuestions);
+
+		List<String> saved = new List<String>();
+
+		for(SObject question : questions) {
+			saved.add((ID)question.get('Id'));
+		}
 
 		return saved; 
 		
@@ -45,7 +51,13 @@ global with sharing class BuilderController {
 
 		Question__c parsedQuestion = (Question__c)JSON.deserialize(sQuestion, Question__c.class);
 		
-		List<String> saved = QuestionsService.saveQuestions(new List<Question__c> { parsedQuestion });
+		List<Question__c> questions = QuestionsService.saveQuestions(new List<Question__c> { parsedQuestion });
+
+		List<String> saved = new List<String>();
+		
+		for(SObject question : questions) {
+			saved.add((ID)question.get('Id'));
+		}
 
 		return saved[0]; 
 

@@ -3,9 +3,11 @@ import { LightningElement, track, api } from 'lwc';
 export default class ResponseFormQuestion extends LightningElement {
 	@api question;
 	value = '';
+	recordGroupFields = [];
 
 	connectedCallback() {
 		this.value = this.question.answer ? this.question.answer : '';
+		this.recordGroupFields = this.question.recordGroupFields;
 	}
 
 	get isInput() {

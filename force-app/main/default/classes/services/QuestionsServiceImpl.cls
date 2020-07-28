@@ -32,7 +32,7 @@ public class QuestionsServiceImpl implements IQuestionsService {
 		
 	}
 
-	public List<String> saveQuestions(List<Question__c> questions) {
+	public List<Question__c> saveQuestions(List<Question__c> questions) {
 		
 		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());    	  	    										
 
@@ -40,10 +40,7 @@ public class QuestionsServiceImpl implements IQuestionsService {
 		
 		uow.commitWork();	
 
-		List<String> quesitonIds = new List<String>();
-		for(SObject question : questions)
-		quesitonIds.add((ID)question.get('Id'));
-		return quesitonIds;
+		return questions;
 
 	}
 

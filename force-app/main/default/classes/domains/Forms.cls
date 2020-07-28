@@ -29,20 +29,21 @@ public with sharing class Forms extends fflib_SObjectDomain implements IForms {
 	@future(callout=true)
 	public static void syncForm(Id newFormId) {
 
-		Form__c form = [SELECT Id, Title__c, Sync_Status__c FROM Form__c Limit 1]; 
+		// Form__c form = [SELECT Id, Title__c, Sync_Status__c FROM Form__c Limit 1]; 
 
-		Http http = new Http();
-		HttpRequest request = new HttpRequest();
-		request.setEndpoint('https://thawing-falls-33419.herokuapp.com/forms');
-		request.setBody(JSON.serialize(form));
-		request.setHeader('Content-Type', 'application/json');
-		request.setMethod('POST');
-		HttpResponse response = http.send(request);
+		// Http http = new Http();
+		// HttpRequest request = new HttpRequest();
+		// request.setEndpoint('https://thawing-falls-33419.herokuapp.com/forms');
+		// request.setBody(JSON.serialize(form));
+		// request.setHeader('Content-Type', 'application/json');
+		// request.setMethod('POST');
+		// HttpResponse response = http.send(request);
 
-		if (response.getStatusCode() == 200) {
-			form.Sync_Status__c = 'Complete'; 
-			update form; 
-		}
+		// if (response.getStatusCode() == 200) {
+		// 	form.Sync_Status__c = 'Complete'; 
+		// 	update form; 
+		// }
+
 	}
 
 	

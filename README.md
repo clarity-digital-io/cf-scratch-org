@@ -96,44 +96,7 @@ sfdx force:lightning:component:create --type lwc -d force-app/main/default/lwc/ 
 
 sfdx force:apex:class:create -n FormSummaryControllerUnitTest -d force-app/main/default/classes/tests/controllers
 
-sfdx force:apex:class:create -n	Question -d force-app/main/default/classes/controllers/helpers
-
-sfdx force:apex:class:create -n AccountsResource -d force-app/main/default/classes/restapi
-
-sfdx force:apex:class:create -n AccountServiceImpl -d force-app/main/default/classes/services
-
-sfdx force:apex:class:create -n IAccountService -d force-app/main/default/classes/services
-
-sfdx force:apex:class:create -n AccountService -d force-app/main/default/classes/services
-
-sfdx force:apex:class:create -n AccountsSelector -d force-app/main/default/classes/services
-
-sfdx force:apex:class:create -n IAccountsSelector -d force-app/main/default/classes/services
-
-sfdx force:apex:class:create -n App -d force-app/main/default/classes/restapi/models
-
-
-sfdx force:apex:class:create -n IChecklistGroupsService -d force-app/main/default/classes/services
-
-sfdx force:apex:class:create -n ChecklistGroupsService -d force-app/main/default/classes/services
-
-sfdx force:apex:class:create -n ChecklistGroupsServiceImpl -d force-app/main/default/classes/services
-
-sfdx force:apex:class:create -n ChecklistGroupsSelector -d force-app/main/default/classes/selectors
-
-sfdx force:apex:class:create -n IChecklistGroupsSelector -d force-app/main/default/classes/selectors
-
-sfdx force:apex:class:create -n Group -d force-app/main/default/classes/restapi/services/callouts
-
-
-sfdx force:apex:class:create -n ChecklistGroupsService -d force-app/main/default/classes/services
-sfdx force:apex:class:create -n IChecklistGroupsService -d force-app/main/default/classes/services
-sfdx force:apex:class:create -n ChecklistGroupsServiceImpl -d force-app/main/default/classes/services
-
-
-responseForm
---responseFormConnections
---responseFormQuestions
+sfdx force:apex:class:create -n BuilderControllerUnitTest -d force-app/main/default/classes/tests/controllers
 
 ## Resources
 
@@ -177,3 +140,10 @@ Form Mobile Application
 Form Summary 
 Form Response View
 Form Response Results
+
+## UI for Mobile Users setUsers mobileUserSync
+
+# Columns
+- User Name
+- Has Permission Set 
+- Switch 

@@ -115,6 +115,8 @@
 					<aura:if isTrue="{! v.loading }">
 						<lightning:spinner alternativeText="Loading" />
 						<aura:set attribute="else">
+							<div class="slds-text-body_regular">This process will sync all Users with Clarity Forms Mobile Permission Set</div>
+
 							<div class="slds-text-body_regular">Clarity Forms Mobile Seats Available: {!v.mobileLicense.Seats}/{!v.mobileLicense.Seats}</div>
 						</aura:set>
 					</aura:if>

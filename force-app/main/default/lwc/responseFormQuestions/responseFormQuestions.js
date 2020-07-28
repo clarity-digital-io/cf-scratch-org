@@ -5,14 +5,17 @@ import { calculateLogic, getCriteriaControllers, getCriteriaControlledQuestions 
 export default class ResponseFormQuestions extends LightningElement {
 	@api answers = {};
 	@api formId;
-	@track questions;
+	questions;
+	recordGroupFields;
 	
 	//pass in answers when edit and add it to quesetion object in getActiveQuestions
 	@wire(getQuestions, { recordId: '$formId' })
 	wiredQuestions({ error, data }) {
+		console.log('data', data);
 		if (data) {
 			this.criteriaControllers = getCriteriaControllers(data); 
 			this.criteriaControlledQuestions = getCriteriaControlledQuestions(data); 
+			this.recordGroupFields = this.getRecordGroupFields(data); 
 			this.questions = this.getActiveQuestions(data);
 			this.error = undefined;
 		} else if (error) {
@@ -21,20 +24,41 @@ export default class ResponseFormQuestions extends LightningElement {
 		}
 	}
 
+	getRecordGroupFields(data) {
+		return data.reduce((accum, field) => {
+
+			if(field.forms__Record_Group__c) {
+
+				if(accum.has(field.forms__Record_Group__c)) {
+
+					let fields = accum.get(field.forms__Record_Group__c);
+					accum.set(field.forms__Record_Group__c, fields.concat(field));
+
+				} else {
+					accum.set(field.forms__Record_Group__c, [field]);
+				}
+
+			}
+
+			return accum; 
+
+		}, new Map())
+	}
+
 	getActiveQuestions(data) {
 
-		let bgStyle = true; 
-
-		return data.map(question => {
+		return data.filter(question => !question.forms__Record_Group__c).map(question => {
 
 			let answer = this.answers[question.Id] || '';
 
+			let recordGroupFields = this.recordGroupFields.has(question.Id) ? this.recordGroupFields.get(question.Id) : [];
+			console.log('recordGroupFields', recordGroupFields);
+
 			if(calculateLogic(question.Id, question.forms__Logic__c, this.answers, this.criteriaControlledQuestions)) {
-				bgStyle = !bgStyle; 
-				return { ...question, active: true, answer: answer };
+				return { ...question, active: true, answer: answer, recordGroupFields: recordGroupFields };
 			} 
 
-			return { ...question, active: false, answer: answer }
+			return { ...question, active: false, answer: answer, recordGroupFields: recordGroupFields }
 	
 		});
 		

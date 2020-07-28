@@ -36,7 +36,11 @@
 		</c-lookup>
 	</template>
 	<template if:true={isRecordGroup}>
-		<lightning-input onchange={handleInputChange} type="text" label={question.forms__Title__c}></lightning-input>
+
+		<div class="slds-m-vertical_medium">
+			<c-record-group question={question} record-group-fields={recordGroupFields}></c-record-group>
+		</div>
+
 	</template>
 	<template if:true={isImage}>
 		<lightning-input onchange={handleInputChange} type="text" label={question.forms__Title__c}></lightning-input>
