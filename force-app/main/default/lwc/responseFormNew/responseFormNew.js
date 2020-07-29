@@ -2,6 +2,8 @@ import { wire, api, track, LightningElement } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 import saveResponse from '@salesforce/apex/ResponseController.saveResponse';
+import createResponse from '@salesforce/apex/ResponseController.createResponse';
+
 import getConnections from '@salesforce/apex/ResponseController.getConnections';
 
 export default class ResponseFormNew extends LightningElement {
@@ -13,8 +15,11 @@ export default class ResponseFormNew extends LightningElement {
 	@api hasConnectionReady = false;
 	@api connections;
 
+	response;
+	responseId;
 	answers = {};
 	responseConnections = {};
+
 	constructor() {
 		super();
 		this.addEventListener('answerchange', this.handleAnswers.bind(this));
@@ -35,14 +40,24 @@ export default class ResponseFormNew extends LightningElement {
 		}
 	}
 
+	connectedCallback(){
+			createResponse({ formId: this.formId, sRecordIds: JSON.stringify(this.responseConnections) })
+				.then(result => {
+						this.response = result;
+						this.responseId = this.response.Id;
+						this.error = undefined;
+				})
+				.catch(error => {
+						this.showNotification('Error', `Response Create Error: ${error.body.message}`, 'error');				
+				});
+	}
 
 	@api
 	handleSave() {
 		saveResponse({
-				formId: this.formId, 
+				responseId: this.responseId, 
 				sAnswers: JSON.stringify(this.answers), 
-				status: 'In Progress',
-				sRecordIds: JSON.stringify(this.responseConnections)
+				status: 'In Progress'
 			})
 			.then(result => {
 				this.showNotification('Success', `Response Saved: ${result}`, 'success');				
@@ -55,10 +70,9 @@ export default class ResponseFormNew extends LightningElement {
 	@api
 	handleSubmit() {
 		saveResponse({
-			formId: this.formId, 
-			sAnswers: JSON.stringify(this.answers), 
-			status: 'Submitted',
-			sRecordIds: JSON.stringify(this.responseConnections)
+				responseId: this.responseId, 
+				sAnswers: JSON.stringify(this.answers), 
+				status: 'Submitted'
 		})
 			.then(result => {
 				this.showNotification('Success', `Response Submitted: ${result}`, 'success');				
@@ -88,6 +102,10 @@ export default class ResponseFormNew extends LightningElement {
 		this.hasConnectionReady = true; 
 		const e = new CustomEvent('connectionsready', { bubbles: true, composed: true });		
 		this.dispatchEvent(e);
+	}
+
+	get isReady() {
+		return this.hasConnectionReady && this.responseId;
 	}
 
 }

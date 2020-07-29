@@ -38,9 +38,9 @@ global with sharing class BuilderController {
 	}
 	
 	@RemoteAction
-    global static List<Question__c> getQuestions(String recordId){
+    global static List<Question__c> getQuestions(String formId){
 
-		List<Question__c> questions = QuestionsService.getFormQuestions((Id)recordId); 
+		List<Question__c> questions = QuestionsService.getFormQuestions((Id)formId); 
 		
         return questions; 
 

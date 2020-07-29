@@ -4,8 +4,8 @@
 		<c-response-form-connections record-id={recordId} onconnectionsrequired={handleConnectionsRequired} connections={connections} form-id={formId}></c-response-form-connections>
 	</template>
 
-	<template if:true={hasConnectionReady}>
-		<c-response-form-questions onanswerchange={handleAnswers} form-id={formId}></c-response-form-questions>
+	<template if:true={isReady}>
+		<c-response-form-questions onanswerchange={handleAnswers} form-id={formId} response-id={responseId}></c-response-form-questions>
 	</template>
 
 	<template if:true={isCommunity}>

@@ -1,6 +1,7 @@
 import { LightningElement, track, api } from 'lwc';
 
 export default class ResponseFormQuestion extends LightningElement {
+	@api responseId; 
 	@api question;
 	value = '';
 	recordGroupFields = [];
@@ -95,6 +96,9 @@ export default class ResponseFormQuestion extends LightningElement {
 	}
 
 	handleAttachmentChange(event) {
+
+		console.log('event.detail.files', JSON.stringify(event.detail.files)); 
+
 		const inputEvent = new CustomEvent('answerchange', {
 			detail: {
 				value: event.detail.files,

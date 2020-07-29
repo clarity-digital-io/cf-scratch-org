@@ -5,6 +5,7 @@ import { calculateLogic, getCriteriaControllers, getCriteriaControlledQuestions 
 export default class ResponseFormQuestions extends LightningElement {
 	@api answers = {};
 	@api formId;
+	@api responseId;
 	questions;
 	recordGroupFields;
 	

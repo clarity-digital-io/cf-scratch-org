@@ -51,13 +51,20 @@ public with sharing class ResponseController {
 	}
 
 	@AuraEnabled
-	public static Id saveResponse(String formId, String sAnswers, String status, String sRecordIds){
-
-		Map<String, String> parsedAnswers = (Map<String, String>)JSON.deserialize(sAnswers, Map<String, String>.class);
-
+	public static Response__c createResponse(String formId, String sRecordIds){
+		
 		Map<String, String> parsedConnectedRecordIds = (Map<String, String>)JSON.deserialize(sRecordIds, Map<String, String>.class);
 
 		Response__c newResponse = ResponsesService.create(formId, parsedConnectedRecordIds);
+
+		return newResponse;
+
+	}
+
+	@AuraEnabled
+	public static Id saveResponse(String responseId, String sAnswers, String status){
+
+		Map<String, String> parsedAnswers = (Map<String, String>)JSON.deserialize(sAnswers, Map<String, String>.class);
 
 		List<Answer__c> answers = new List<Answer__c>(); 
 
@@ -65,14 +72,14 @@ public with sharing class ResponseController {
 			Answer__c answer = new Answer__c(
 				Question__c = questionId,
 				Answer__c = parsedAnswers.get(questionId),
-				Response__c = newResponse.Id
+				Response__c = responseId
 			);
 			answers.add(answer);
 		}
 
-		Response__c response = ResponsesService.save(answers, newResponse.Id, status); 
+		Response__c response = ResponsesService.save(answers, responseId, status); 
 
-		return response.Id;
+		return responseId;
 
 	}
 

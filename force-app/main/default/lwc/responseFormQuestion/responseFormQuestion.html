@@ -4,7 +4,7 @@
 		<lightning-input onchange={handleInputChange} type="text" label={question.forms__Title__c} value={value}></lightning-input>
 	</template>
 	<template if:true={isAttachment}>
-		<lightning-file-upload label={question.forms__Title__c} name="fileUploader" accept=".png" record-id={question.Id} onuploadfinished={handleAttachmentChange} multiple></lightning-file-upload>
+		<lightning-file-upload file-field-name="forms__Response__c" file-field-value={responseId} label={question.forms__Title__c} name="fileUploader" accept=".png" record-id={responseId} onuploadfinished={handleAttachmentChange} multiple></lightning-file-upload>
 	</template>
 	<template if:true={isMultipleChoice}>
 		<lightning-radio-group 

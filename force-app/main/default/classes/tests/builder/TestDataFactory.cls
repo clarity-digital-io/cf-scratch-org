@@ -56,11 +56,59 @@ public class TestDataFactory {
 
 		}
 
-		List<Question__c> questions = QuestionsService.saveQuestions(newQuestions);
+        return newQuestions;
 
-        return questions;
+	}
+	
+	public static List<Question_Option__c> generateQuestionOptions(List<Question__c> multiChoiceQuestions) {
 
-    }
+		List<Question_Option__c> options = new List<Question_Option__c>(); 
+
+		Integer count = 0; 
+
+		for(Question__c question : multiChoiceQuestions) {
+
+			Question_Option__c option = new Question_Option__c(
+				Label__c = 'Test',
+				Question__c = question.Id,
+				Order__c = count
+			);
+
+			count = count + 1; 
+
+			options.add(option); 
+		}
+
+		return options;
+	}
+
+	public static List<Question_Option__c> generateQuestionCriteria(List<Question__c> questions) {
+
+		List<Question_Criteria__c> criteria = new List<Question_Criteria__c>(); 
+
+		Question_Criteria__c criterion = new Question_Criteria__c(
+			forms__Question__c = questions[0].Id,
+			forms__Field__c = questions[1].Id, //controller
+			forms__Field_Type__c = question.forms__Type__c, 
+			forms__Operator__c = 'Equals', 
+			forms__Type__c = 'Number', 
+			forms__Value__c = '1' 
+		);
+
+		Question_Criteria__c criterion = new Question_Criteria__c(
+			forms__Question__c = questions[0].Id,
+			forms__Field__c = questions[2].Id, //controller
+			forms__Field_Type__c = question.forms__Type__c, 
+			forms__Operator__c = 'Equals', 
+			forms__Type__c = 'Number', 
+			forms__Value__c = '10' 
+		);
+
+		criteria.add(criterion); 
+
+		return criteria;
+
+	}
 
 	public static Question__c generateRecordGroup(Form__c form) {
 
@@ -72,20 +120,47 @@ public class TestDataFactory {
 			Order__c		     = 0
 		);
 
-		insert question; 
-
 		return question; 
 
 	}
 
-    public static List<Form_Connection__c> generateConnections(Boolean newConnection, Form__c form, List<String> connectionObjects){
+	public static List<Question__c> generateRecordGroupFields(Question__c question){
+
+        List<Question__c> newFields = new  List<Question__c>();
+
+		List<String> fields = new List<String>{ 'Name', 'UnitPrice' };
+
+		List<String> types = new List<String>{ 'STRING', 'DOUBLE' };
+
+        Integer order = 0; 
+
+		for(String field : fields) {
+
+			Question__c newField = new Question__c(
+				Form__c = form.Id, 
+				Salesforce_Field__c = field,
+				Title__c = 'Title: ' + type, 
+				Type__c = types[order],
+				Order__c = order
+			);
+
+			newFields.add(newField);
+
+			order++; 
+		}
+
+        return newFields;
+
+	}
+	
+    public static List<Form_Connection__c> generateConnections(Boolean newConnection, Id formId, List<String> connectionObjects){
 
         List<Form_Connection__c> connections = new List<Form_Connection__c>();
 
         for (String salesForceObject : connectionObjects) {
             
             Form_Connection__c connection = new Form_Connection__c(
-                Form__c      = form.Id, 
+                Form__c      = formId, 
                 Salesforce_Object__c = salesForceObject, 
                 Type__c              = 'Create', 
                 New__c               = newConnection, 
@@ -95,8 +170,6 @@ public class TestDataFactory {
             connections.add(connection);
 
         }
-
-        insert connections;
 
         return connections;
     }
@@ -111,15 +184,13 @@ public class TestDataFactory {
 
             Form_Connection_Field__c connectionField = new Form_Connection_Field__c(
                 Form_Connection__c = connection.Id, 
-                Salesforce_Field__c        = '' + field, 
-                Question__c   =  questionId
+                Salesforce_Field__c = '' + field, 
+                Question__c =  questionId
             );
 
             connectionFields.add(connectionField);
 
         }
-
-        insert connectionFields; 
 
         return connectionFields;
 
