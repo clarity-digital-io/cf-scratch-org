@@ -8,6 +8,8 @@ public class BuilderControllerUnitTest {
 		
 		List<Question__c> newQuestions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
 
+		BuilderController.save(JSON.serialize(newQuestions));
+
 	}
 
 
@@ -31,8 +33,10 @@ public class BuilderControllerUnitTest {
     @isTest
     public static void shouldGetForm() {
 
-		Id existingFormId = [SELECT Id FROM Form__c LIMIT 1];
-		
+		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+
+		Id existingFormId = existingForm.Id; 
+
 		Test.startTest();
 
 			Form__c form = BuilderController.getForm(existingFormId);
@@ -63,7 +67,9 @@ public class BuilderControllerUnitTest {
 	@isTest
     public static void shouldGetQuestions() {
 
-		Id existingFormId = [SELECT Id FROM Form__c LIMIT 1];
+		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+
+		Id existingFormId = existingForm.Id; 
 
 		Test.startTest();
 
@@ -106,7 +112,7 @@ public class BuilderControllerUnitTest {
 
 		List<Question__c> expectedQuestions = [SELECT Id FROM Question__c WHERE Type__c = 'Dropdown']; 
 
-		List<Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(expectedQuestions);
+		List<Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(new List<Question__c>());
 
 		String sQuestion = JSON.serialize(expectedQuestions[0]); 
 
@@ -131,7 +137,7 @@ public class BuilderControllerUnitTest {
 
 		List<Question_Criteria__c> criteria = TestDataFactory.generateQuestionCriteria(questions);
 
-		String sQuestion = JSON.serialize(expectedQuestions[0]); 
+		String sQuestion = JSON.serialize(questions[0]); 
 
 		String sCriteria = JSON.serialize(criteria); 
 
@@ -172,9 +178,13 @@ public class BuilderControllerUnitTest {
 	@isTest
     public static void shouldGetConnections() {
 
-		Id formId = [SELECT Id FROM Form__c LIMIT 1];
+		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, formId, new List<String>{ 'Opportunity', 'Case' });
+		Id formId = existingForm.Id; 
+
+		List<String> connectionObjects = new List<String>{ 'Opportunity', 'Case' };
+
+		List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, formId, connectionObjects);
 
 		List<Form_Connection__c> removedConnections = new List<Form_Connection__c>();
 
@@ -184,11 +194,11 @@ public class BuilderControllerUnitTest {
 
 		Test.startTest();
 
-			List<Form_Connection__c> connections = BuilderController.getConnections(formId);
+			List<Form_Connection__c> newConnections = BuilderController.getConnections(formId);
 
 		Test.stopTest();
 
-		System.assertEquals(savedConnections.size(), connections.size());
+		System.assertEquals(savedConnections.size(), newConnections.size());
 		
     }
 		
@@ -218,7 +228,11 @@ public class BuilderControllerUnitTest {
 	@isTest
     public static void shoulSaveConnections() {
 
-		Id formId = [SELECT Id FROM Form__c LIMIT 1];
+		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+
+		Id formId = existingForm.Id; 
+
+		List<String> connectionObjects = new List<String>{ 'Opportunity', 'Case' };
 
 		List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, formId, new List<String>{ 'Opportunity', 'Case' });
 
@@ -239,7 +253,9 @@ public class BuilderControllerUnitTest {
 	@isTest
     public static void shoulSaveActiveFieldConnections() {
 
-		Id formId = [SELECT Id FROM Form__c LIMIT 1];
+		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+
+		Id formId = existingForm.Id; 
 
 		List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, formId, new List<String>{ 'Opportunity' });
 
@@ -274,10 +290,28 @@ public class BuilderControllerUnitTest {
 	@isTest
     public static void shoulDeleteQuestion() {
 
+		List<Question__c> questions = [SELECT Id FROM Question__c]; 
+
+		String sQuestions = JSON.serialize(questions); 
+
+		Test.startTest();
+
+			List<Question__c> questionsLeft = BuilderController.deleteQuestion(sQuestions, questions[0].Id);
+
+		Test.stopTest();
+
+		System.assertEquals(questions.size() - 1, questionsLeft.size());
+
 	}
 	
 	@isTest
     public static void shoulGetSObjectsAvailable() {
+
+		Map<String, Map<String, Map<String, String>>> fields = BuilderController.getSObjectFields('Account');
+
+		System.assertNotEquals(fields.get('Required'), null);
+
+		System.assertNotEquals(fields.get('NotRequired'), null);
 
     }
 		

@@ -46,11 +46,17 @@ public class ResponsesServiceImpl implements IResponsesService {
 	}
 
 	public Response__c create(String formId) {
+		//Doesn't meet UUID V4 Standards 
+		Blob b = Crypto.GenerateAESKey(128);
+		String h = EncodingUtil.ConvertTohex(b);
+		String guid = h.SubString(0,8)+ '-' + h.SubString(8,12) + '-' + h.SubString(12,16) + '-' + h.SubString(16,20) + '-' + h.substring(20);
+
 		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
 
 		Response__c newResponse = new Response__c(
 			Form__c = formId,
-			Status__c = 'New'
+			Status__c = 'New',
+			UUID__c = guid
 		);
 
 		uow.registerNew(newResponse);

@@ -1,16 +1,5 @@
 public with sharing class FormSummaryController {
 
-	//create response from lightning
-	@AuraEnabled
-	public static Id newResponse(String formName){
-		
-		Form__c form = FormsService.getFormByName(formName); 
-		Response__c response = ResponsesService.create(form.Id); 
-
-		return response.Id; 
-
-	}
-	
     @AuraEnabled
     public static Form__c getForm(String recordId) {
 
@@ -21,35 +10,35 @@ public with sharing class FormSummaryController {
     }
 
     @AuraEnabled
-    public static List<Response__c> getFormResponses(String recordId){
+    public static List<Response__c> getFormResponses(String formId){
 
-		List<Response__c> responses = ResponsesService.getResponsesByFormId(recordId);
+		List<Response__c> responses = ResponsesService.getResponsesByFormId(formId);
 
         return responses; 
 
     }
 
     @AuraEnabled
-    public static String deleteFormResponse(String recordId){
+    public static String deleteFormResponse(String responseId){
 
-		Id responseId = ResponsesService.deleteById(recordId);
+		Id deletedResponseId = ResponsesService.deleteById(responseId);
         
-        return responseId;
+        return deletedResponseId;
     }
 
     @AuraEnabled
-    public static String deleteForm(String recordId){
+    public static String deleteForm(String formId){
 
-		Id formId = FormsService.deleteById(recordId);
+		Id deletedFormId = FormsService.deleteById(formId);
 
-        return formId;
+        return deletedFormId;
 
 	}
 
     @AuraEnabled
-    public static Form__c publishForm(String recordId){
+    public static Form__c publishForm(String formId){
 
-		Form__c form = FormsService.publishForm(recordId); 
+		Form__c form = FormsService.publishForm(formId); 
 
 	    return form;
 

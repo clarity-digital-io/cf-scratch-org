@@ -1,8 +1,8 @@
 import { wire, api, LightningElement } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
-import editResponse from '@salesforce/apex/ResponseController.editResponse';
 import getResponse from '@salesforce/apex/ResponseController.getResponse';
+import saveResponse from '@salesforce/apex/ResponseController.saveResponse';
 
 export default class ResponseFormNew extends LightningElement {
 	@api isCommunity = false; 
@@ -33,7 +33,7 @@ export default class ResponseFormNew extends LightningElement {
 
 	@api
 	handleSave() {
-		editResponse({
+		saveResponse({
 				responseId: this.responseId, 
 				sAnswers: JSON.stringify(this.answers), 
 				status: 'In Progress'
@@ -48,7 +48,7 @@ export default class ResponseFormNew extends LightningElement {
 
 	@api
 	handleSubmit() {
-		editResponse({
+		saveResponse({
 			responseId: this.responseId, 
 			sAnswers: JSON.stringify(this.answers), 
 			status: 'Submitted'

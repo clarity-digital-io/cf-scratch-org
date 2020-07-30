@@ -9,5 +9,4 @@ global class Response {
 	global String Status;
 	global String UUID; 
 	global String Form;
-	//global List<Answer> answers;
 }

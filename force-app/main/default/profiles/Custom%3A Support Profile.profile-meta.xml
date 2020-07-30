@@ -318,10 +318,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>PicklistHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>Question</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -347,10 +343,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>QuestionsServiceImpl</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>RecordsHelper</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>

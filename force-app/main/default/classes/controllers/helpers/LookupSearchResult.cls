@@ -1,9 +1,9 @@
 public class LookupSearchResult implements Comparable {
-	private Id id;
-	private String sObjectType;
-	private String icon;
-	private String title;
-	private String subtitle;
+	public Id id;
+	public String sObjectType;
+	public String icon;
+	public String title;
+	public String subtitle;
 
 	public LookupSearchResult(Id id, String sObjectType, String icon, String title, String subtitle) {
 		this.id = id;

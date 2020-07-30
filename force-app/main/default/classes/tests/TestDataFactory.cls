@@ -1,9 +1,8 @@
-@isTest
 public class TestDataFactory {
 
     public static Form__c generateForm(){
 		
-		Form__c form = FormsService.updateForm(new Form__c(Label__c = 'Clarity Form', Status__c = 'Draft'));
+		Form__c form = FormsService.updateForm(new Form__c(Title__c = 'Clarity Form', Status__c = 'Draft'));
 
 		return form; 
 
@@ -23,14 +22,6 @@ public class TestDataFactory {
 		return forms; 
 
 	}
-
-    public static void publishForm(Form__c form) {
-
-        form.Status__c = 'Published'; 
-
-		FormsService.updateForm(form);
-
-    }
 
     public static List<Question__c> generateQuestions(List<Form__c> forms){
 
@@ -59,7 +50,7 @@ public class TestDataFactory {
         return newQuestions;
 
 	}
-	
+
 	public static List<Question_Option__c> generateQuestionOptions(List<Question__c> multiChoiceQuestions) {
 
 		List<Question_Option__c> options = new List<Question_Option__c>(); 
@@ -82,29 +73,31 @@ public class TestDataFactory {
 		return options;
 	}
 
-	public static List<Question_Option__c> generateQuestionCriteria(List<Question__c> questions) {
+	public static List<Question_Criteria__c> generateQuestionCriteria(List<Question__c> questions) {
 
 		List<Question_Criteria__c> criteria = new List<Question_Criteria__c>(); 
 
 		Question_Criteria__c criterion = new Question_Criteria__c(
-			forms__Question__c = questions[0].Id,
-			forms__Field__c = questions[1].Id, //controller
-			forms__Field_Type__c = question.forms__Type__c, 
-			forms__Operator__c = 'Equals', 
-			forms__Type__c = 'Number', 
-			forms__Value__c = '1' 
-		);
-
-		Question_Criteria__c criterion = new Question_Criteria__c(
-			forms__Question__c = questions[0].Id,
-			forms__Field__c = questions[2].Id, //controller
-			forms__Field_Type__c = question.forms__Type__c, 
-			forms__Operator__c = 'Equals', 
-			forms__Type__c = 'Number', 
-			forms__Value__c = '10' 
+			Question__c = questions[0].Id,
+			Field__c = questions[1].Id, //controller
+			Field_Type__c = questions[0].Type__c, 
+			Operator__c = 'Equals', 
+			Type__c = 'Number', 
+			Value__c = '1' 
 		);
 
 		criteria.add(criterion); 
+
+		Question_Criteria__c criterion2 = new Question_Criteria__c(
+			Question__c = questions[0].Id,
+			Field__c = questions[2].Id, //controller
+			Field_Type__c = questions[0].Type__c, 
+			Operator__c = 'Equals', 
+			Type__c = 'Number', 
+			Value__c = '10' 
+		);
+
+		criteria.add(criterion2); 
 
 		return criteria;
 
@@ -113,11 +106,11 @@ public class TestDataFactory {
 	public static Question__c generateRecordGroup(Form__c form) {
 
 		Question__c question = new Question__c(
-			Form__c 	 = form.Id, 
-			Title__c        	 = 'Title: RecordGroup', 
-			Type__c         	 = 'RecordGroup',
+			Form__c = form.Id, 
+			Title__c = 'Title: RecordGroup', 
+			Type__c = 'RecordGroup',
 			Salesforce_Object__c = 'Opportunity',
-			Order__c		     = 0
+			Order__c = 0
 		);
 
 		return question; 
@@ -137,9 +130,9 @@ public class TestDataFactory {
 		for(String field : fields) {
 
 			Question__c newField = new Question__c(
-				Form__c = form.Id, 
+				Form__c = question.Form__c, 
 				Salesforce_Field__c = field,
-				Title__c = 'Title: ' + type, 
+				Title__c = 'Title: ' + types[order], 
 				Type__c = types[order],
 				Order__c = order
 			);
@@ -214,8 +207,6 @@ public class TestDataFactory {
 
         }
 
-        insert connectionFields; 
-
         return connectionFields;
 
     }
@@ -235,8 +226,6 @@ public class TestDataFactory {
 
 		}
 
-		insert newConnections; 
-
 		return newConnections;
 	}
 
@@ -244,13 +233,11 @@ public class TestDataFactory {
 
         Response__c response = new Response__c(Status__c = 'New', Form__c = form.Id);
 
-        insert response;
-
         return response; 
 
     }
 
-    public static void generateAnswers(Response__c response, List<Question__c> questions){
+    public static List<Answer__c> generateAnswers(Response__c response, List<Question__c> questions){
 
         List<Answer__c> answers = new List<Answer__c>();
 
@@ -259,62 +246,17 @@ public class TestDataFactory {
             Answer__c answer = new Answer__c(
                 Response__c = response.Id,
                 Question__c = question.Id,
-                Answer__c                = 'Answer for: ' + question.Title__c
-            );
-
-			if(question.Type__c == 'Attachments') {
-				answer.ContentVersion__c = '123456789';
-
-				//Add second attachment
-				Answer__c answer2 = new Answer__c(
-					Response__c = response.Id,
-					Question__c = question.Id,
-					Answer__c                = 'Answer for: ' + question.Title__c,
-					ContentVersion__c 	     = '123456789'
-				);
-				
-				answers.add(answer2);
-
-			}
-
-            answers.add(answer);
-
-        }
-
-        insert answers; 
-
-    }
-
-	public static void generateRecordGroupAnswers(Response__c response, List<Question__c> questions){
-
-		List<Answer__c> answers = new List<Answer__c>();
-
-        for(Question__c question : questions) {
-
-            Answer__c answer = new Answer__c(
-                Response__c = response.Id,
-                Question__c = question.Id,
-                Answer__c                = 'Answer for: ' + question.Title__c
+                Answer__c = 'Answer for: ' + question.Title__c
             );
 
             answers.add(answer);
 
         }
-
-        insert answers; 
-
-	}
-    
-    public static void updateAnswer(Response__c response, Question__c question){
-
-        Answer__c answer = [SELECT Id FROM Answer__c WHERE Question__c =: question.Id LIMIT 1];
-
-        answer.Answer__c = 'Answer for: ' + question.Title__c;
-
-        update answer; 
+		
+		return answers;
 
     }
-    
+      
     private static List<String> Types {
         get {
 

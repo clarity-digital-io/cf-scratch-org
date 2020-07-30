@@ -1,9 +1,21 @@
 public with sharing class ResponseController {
 
-	@AuraEnabled(cacheable=true)
-    public static Response__c getResponse(String recordId) {
+	@AuraEnabled
+	public static Response__c createResponse(String formId, String sRecordIds){
+		
+		Map<String, String> parsedConnectedRecordIds = (Map<String, String>)JSON.deserialize(sRecordIds, Map<String, String>.class);
 
-		Response__c response = ResponsesService.getResponseWithDetailsById(recordId); 
+		Response__c newResponse = ResponsesService.create(formId, parsedConnectedRecordIds);
+
+		return newResponse;
+
+	}
+
+
+	@AuraEnabled(cacheable=true)
+    public static Response__c getResponse(String responseId) {
+
+		Response__c response = ResponsesService.getResponseWithDetailsById(responseId); 
 
 		return response; 
 
@@ -51,17 +63,6 @@ public with sharing class ResponseController {
 	}
 
 	@AuraEnabled
-	public static Response__c createResponse(String formId, String sRecordIds){
-		
-		Map<String, String> parsedConnectedRecordIds = (Map<String, String>)JSON.deserialize(sRecordIds, Map<String, String>.class);
-
-		Response__c newResponse = ResponsesService.create(formId, parsedConnectedRecordIds);
-
-		return newResponse;
-
-	}
-
-	@AuraEnabled
 	public static Id saveResponse(String responseId, String sAnswers, String status){
 
 		Map<String, String> parsedAnswers = (Map<String, String>)JSON.deserialize(sAnswers, Map<String, String>.class);
@@ -83,26 +84,6 @@ public with sharing class ResponseController {
 
 	}
 
-	@AuraEnabled
-	public static Id editResponse(String responseId, String sAnswers, String status){
-
-		Map<String, String> parsedAnswers = (Map<String, String>)JSON.deserialize(sAnswers, Map<String, String>.class);
-
-		List<Answer__c> answers = new List<Answer__c>(); 
-
-		for(String questionId : parsedAnswers.keySet()) {
-			Answer__c answer = new Answer__c(
-				Question__c = questionId,
-				Answer__c = parsedAnswers.get(questionId),
-				Response__c = responseId
-			);
-			answers.add(answer);
-		}
-
-		return responseId;
-
-	}
-	
 	@AuraEnabled(cacheable=true)
 	public static List<LookupSearchResult> formSearch(String searchTerm, List<String> selectedIds) {
 		
@@ -110,7 +91,7 @@ public with sharing class ResponseController {
 
 		searchTerm += '%';
 
-		List<Form__c> forms = [SELECT Id, Name, Title__c, Description__c FROM Form__c WHERE Title__c LIKE :searchTerm AND Id NOT IN :selectedIds LIMIT :MAX_RESULTS];
+		List<Form__c> forms = [SELECT Id, Name, Title__c, Description__c FROM Form__c WHERE Title__c LIKE :searchTerm AND Id NOT IN :selectedIds WITH SECURITY_ENFORCED LIMIT :MAX_RESULTS];
 
 		List<LookupSearchResult> results = new List<LookupSearchResult>();
 
@@ -146,7 +127,7 @@ public with sharing class ResponseController {
 			nameField = 'Subject';
 		}
 
-		List<sObject> records = Database.query('SELECT Id, ' + nameField + ' FROM ' + connection + ' WHERE ' + nameField + ' Like :searchTerm AND Id NOT IN :selectedIds LIMIT :MAX_RESULTS');
+		List<sObject> records = Database.query('SELECT Id, ' + nameField + ' FROM ' + connection + ' WHERE ' + nameField + ' Like :searchTerm AND Id NOT IN :selectedIds WITH SECURITY_ENFORCED LIMIT :MAX_RESULTS');
 
 		List<LookupSearchResult> results = new List<LookupSearchResult>();
 

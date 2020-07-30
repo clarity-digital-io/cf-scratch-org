@@ -261,7 +261,8 @@ global with sharing class BuilderController {
         return lookups; 
 
 	}
-	
+
+	//maybe update this to pojo for easier deserialization and to make cleaner	
 	@RemoteAction
     global static Map<String, Map<String, Map<String, String>>> getSObjectFields(String objectType) {
 
