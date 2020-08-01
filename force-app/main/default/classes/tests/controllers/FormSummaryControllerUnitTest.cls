@@ -53,17 +53,34 @@ public class FormSummaryControllerUnitTest {
 	@isTest
 	public static void shouldDeleteFormResponse() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
-
-		Id existingResponseId = existingForm.Id; 
+		Response__c existingResponse = [SELECT Id FROM Response__c LIMIT 1];
 
 		Test.startTest();
 
-			String deletedResponseId = FormSummaryController.deleteFormResponse(existingResponseId);
+			String deletedResponseId = FormSummaryController.deleteFormResponse(existingResponse.Id);
 
 		Test.stopTest();
 
-		System.assertEquals(existingResponseId, Id.valueOf(deletedResponseId));
+		System.assertEquals(existingResponse.Id, Id.valueOf(deletedResponseId));
+
+	}
+
+	@isTest
+	public static void shouldNotDeleteForm() {
+
+		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+
+		Id formId = existingForm.Id; 
+
+		Test.startTest();
+
+			try {
+				String deletedFormId = FormSummaryController.deleteForm(formId);
+			} catch (AuraHandledException e) {
+				System.assertEquals('Script-thrown exception', e.getMessage());
+			}
+			
+		Test.stopTest();
 
 	}
 
@@ -73,6 +90,10 @@ public class FormSummaryControllerUnitTest {
 		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
 		Id formId = existingForm.Id; 
+
+		Response__c existingResponse = [SELECT Id FROM Response__c LIMIT 1];
+
+		String deletedResponseId = FormSummaryController.deleteFormResponse(existingResponse.Id);
 
 		Test.startTest();
 

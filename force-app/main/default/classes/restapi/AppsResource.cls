@@ -16,8 +16,6 @@ global with sharing class AppsResource {
 
 		RestResponse res = RestContext.response;
 
-		String[] uriParts = req.requestURI.split('/');
-
 		List<Account> accounts = AccountsService.getAccountsWithChecklistGroups();
 
 		Set<Id> checkListGroupIds = new Set<Id>();

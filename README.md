@@ -98,6 +98,9 @@ sfdx force:apex:class:create -n FormSummaryControllerUnitTest -d force-app/main/
 
 sfdx force:apex:class:create -n BuilderControllerUnitTest -d force-app/main/default/classes/tests/controllers
 
+sfdx force:apex:class:create -n ConnectionJob -d force-app/main/default/classes/batchjobs
+
+
 ## Resources
 
 sfdx force:data:soql:query -q "Select Id, MemberName From SourceMember Where MemberType = 'ConnectedApp'" -t

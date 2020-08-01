@@ -119,11 +119,19 @@ public class QuestionsServiceImpl implements IQuestionsService {
 
 		uow.registerDeleted(questionDelete);
 
-		uow.registerUpsert(questions);
+		List<Question__c> newQuestionsCheck = new List<Question__c>();
+
+		for (Question__c question : questions) {
+			if(question.Id != questionDelete.Id) {
+				newQuestionsCheck.add(question);
+			}
+		}
+
+		uow.registerUpsert(newQuestionsCheck);
 
 		uow.commitWork();	
 
-		return questions; 
+		return newQuestionsCheck; 
 
 	}
 

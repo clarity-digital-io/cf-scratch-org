@@ -3,17 +3,17 @@ FORMAT  FILE
 ──────  ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 txt     /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result.txt
 txt     /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-run-id.txt
-junit   /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7075600000wSv4A-junit.xml
-json    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7075600000wSv4A.json
+junit   /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7072F00001VmtMa-junit.xml
+json    /Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/.sfdx/tools/testresults/apex/test-result-7072F00001VmtMa.json
 
 === Test Results
-TEST NAME                                OUTCOME  MESSAGE  RUNTIME (MS)
-───────────────────────────────────────  ───────  ───────  ────────────
-FormControllerTest.shouldUpdateResponse  Pass              491
+TEST NAME                                            OUTCOME  MESSAGE  RUNTIME (MS)
+───────────────────────────────────────────────────  ───────  ───────  ────────────
+ConnectionCreateJobTest.shouldUpdateProcessToFailed  Pass              226
 
 === Test Summary
 NAME                 VALUE
-───────────────────  ─────────────────────────────────────────────────────────
+───────────────────  ─────────────────────────────────────────────────────────────────
 Outcome              Passed
 Tests Ran            1
 Passing              1
@@ -21,13 +21,13 @@ Failing              0
 Skipped              0
 Pass Rate            100%
 Fail Rate            0%
-Test Start Time      Mar 5, 2020 12:49 PM
-Test Execution Time  491 ms
-Test Total Time      491 ms
-Command Time         4602 ms
-Hostname             https://customer-java-6747-dev-ed.cs42.my.salesforce.com
-Org Id               00D56000000387kEAA
-Username             test-it6fccrms7lf@example.com
-Test Run Id          7075600000wSv4A
-User Id              00556000004TMt8AAG
+Test Start Time      Jul 31, 2020 6:49 PM
+Test Execution Time  226 ms
+Test Total Time      226 ms
+Command Time         8273 ms
+Hostname             https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com
+Org Id               00D2F000000AiZOUA0
+Username             test-lanivcw2dtmk@example.com
+Test Run Id          7072F00001VmtMa
+User Id              0052F000006JcZ3QAK
 

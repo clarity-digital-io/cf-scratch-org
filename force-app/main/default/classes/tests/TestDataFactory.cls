@@ -23,6 +23,52 @@ public class TestDataFactory {
 
 	}
 
+	public static List<Form__c> generateFormsWithGroup(List<Checklist_Group__c> groups) {
+		
+		List<Form__c> forms = new List<Form__c>(); 
+
+
+		for (Checklist_Group__c checklistGroup : groups) {
+			Form__c form = generateForm();
+			form.Checklist_Group__c = checklistGroup.Id;
+			forms.add(form); 
+		}
+
+		return forms; 
+
+	}
+
+	public static List<Checklist_Group__c> generateChecklistGroups(Integer count) {
+
+		List<Checklist_Group__c> groups = new List<Checklist_Group__c>();
+
+		for (Integer i = 0; i < count; i++) {
+			Checklist_Group__c checklistGroup = new Checklist_Group__c();
+			checklistGroup.Name = 'Small Assets: ' + i;
+			checklistGroup.Standard__c = true;
+			groups.add(checklistGroup);
+		}
+		
+		return groups; 
+
+	}
+
+	public static List<Account> generateApps(List<Checklist_Group__c> groups) {
+
+		List<Account> accounts = new List<Account>(); 
+
+		for(Checklist_Group__c checklistGroup : groups)  {
+			Account account = new Account(
+				Name = 'Test',
+				Checklist_Group__c = checklistGroup.Id
+			);
+			accounts.add(account);
+		}
+
+		return accounts; 
+
+	}
+
     public static List<Question__c> generateQuestions(List<Form__c> forms){
 
         List<Question__c> newQuestions = new  List<Question__c>();
@@ -199,8 +245,8 @@ public class TestDataFactory {
 
             Form_Connection_Field__c connectionField = new Form_Connection_Field__c(
                 Form_Connection__c = connection.Id, 
-                Salesforce_Field__c        = '' + field, 
-                Custom_Value__c            =  customValue
+                Salesforce_Field__c = '' + field, 
+                Custom_Value__c =  customValue
             );
 
             connectionFields.add(connectionField);
@@ -237,7 +283,7 @@ public class TestDataFactory {
 
     }
 
-    public static List<Answer__c> generateAnswers(Response__c response, List<Question__c> questions){
+    public static Map<String,String> generateAnswers(Response__c response, List<Question__c> questions){
 
         List<Answer__c> answers = new List<Answer__c>();
 
@@ -251,9 +297,15 @@ public class TestDataFactory {
 
             answers.add(answer);
 
-        }
+		}
 		
-		return answers;
+		Map<String,String> mapAnswers = new Map<String,String>();
+
+		for(Answer__c answer : answers) {
+			mapAnswers.put(answer.Question__c, answer.Answer__c); 
+		}
+		
+		return mapAnswers;
 
     }
       

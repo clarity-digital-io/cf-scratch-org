@@ -13,4 +13,6 @@ public interface IResponsesService {
 	List<Response__c> getResponsesByConnectedId(String recordId);
 	List<Response_Connection__c> saveConnections(String responseId, List<Map<String, String>> connections);
 	Map<String, List<Map<String, String>>> getResultAnswersByFormId(String recordId, Integer offset);
+	sObject upsertConnectionSObject(sObject record, Form_Connection_Process__c connectionStatus, Response__c response);
+	void updateFormConnectionStatus(Form_Connection_Process__c connectionStatus);
 }

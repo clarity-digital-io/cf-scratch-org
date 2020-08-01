@@ -23,7 +23,7 @@ public class AnswersResourceUnitTest {
 	@isTest
 	public static void shouldUpdateAnswers() {
 		
-		Response__c response = [SELECT Id FROM Response__c LIMIT 1];
+		Response__c response = [SELECT Id, UUID__c FROM Response__c LIMIT 1];
 
 		List<Question__c> questions = [SELECT Id FROM Question__c LIMIT 5];
 
@@ -39,7 +39,7 @@ public class AnswersResourceUnitTest {
 			answer.Name = 'Test';
 			answer.Answer = 'Answer';
 			answer.Question = question.Id;
-			answer.Response = response.Id;
+			answer.Response = response.UUID__c;
 
 			answers.add(answer); 
 

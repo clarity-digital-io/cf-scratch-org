@@ -36,7 +36,7 @@ public with sharing class Responses extends fflib_SObjectDomain implements IResp
 
 			if(connections == null || connections.size() == 0) return;
 
-			Map<Id, Response_Connection__c> rConnections = ConnectionRecordProcess.ResponseConnections.get(newResponse.Id) != null ? ConnectionRecordProcess.ResponseConnections.get(newResponse.Id) : new Map<Id, Response_Connection__c>();
+			Map<Id, Response_Connection__c> responseConnections = ConnectionRecordProcess.ResponseConnections.get(newResponse.Id) != null ? ConnectionRecordProcess.ResponseConnections.get(newResponse.Id) : new Map<Id, Response_Connection__c>();
 
 			Map<Id, Answer__c> answersByQuestions = ConnectionRecordProcess.ResponseAnswers.get(newResponse.Id);
 
@@ -44,7 +44,8 @@ public with sharing class Responses extends fflib_SObjectDomain implements IResp
 
 			Map<String, Id> storedResults = new Map<String, Id>();
 
-			System.enqueueJob(new ConnectionCreateJob(0, connections, rConnections, answersByQuestions, processByConnections, storedResults, newResponse));
+			System.enqueueJob(new ConnectionCreateJob(0, connections, responseConnections, answersByQuestions, processByConnections, storedResults, newResponse));
+
 		}
 
 	}

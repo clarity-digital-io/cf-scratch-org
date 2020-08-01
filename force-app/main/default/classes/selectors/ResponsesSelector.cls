@@ -15,7 +15,8 @@ public class ResponsesSelector extends fflib_SObjectSelector implements IRespons
 			Response__c.Form__c,
 			Response__c.CreatedById.Name,
 			Response__c.OwnerId,
-			Response__c.Checklist__c
+			Response__c.Checklist__c,
+			Response__c.Account__c
 	   };
 	}
 

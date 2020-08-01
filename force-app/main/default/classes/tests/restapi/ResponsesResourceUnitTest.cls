@@ -94,7 +94,7 @@ public class ResponsesResourceUnitTest {
 
 		Test.stopTest();
 
-		System.assertEquals(5, updatedResponses.size());
+		System.assertEquals(7, updatedResponses.size());
 
 	}
 

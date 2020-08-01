@@ -29,118 +29,98 @@ public class ConnectionCreateJob implements Queueable {
 
     public void execute(QueueableContext context) {
 
-		List<Form_Connection_Field__c> fields = FormConnectionFieldsSelector.newInstance().selectFieldsByConnectionId( connections[order].Id );
+		Form_Connection__c connection = connections[order];
+
+		List<Form_Connection_Field__c> fields = FormConnectionFieldsSelector.newInstance().selectFieldsByConnectionId( connection.Id );
 
         if(fields.size() > 0) {
 
 			Response_Connection__c rConnection = null; 
 
-			if(responseConnections.get(connections[order].Id) != null) {
-				rConnection = responseConnections.get(connections[order].Id); 
+			if(responseConnections.get(connection.Id) != null) {
+				rConnection = responseConnections.get(connection.Id); 
 			}
 
-            Schema.SObjectType convertType = Schema.getGlobalDescribe().get(connections[order].Salesforce_Object__c);
+            Schema.SObjectType convertType = Schema.getGlobalDescribe().get(connection.Salesforce_Object__c);
 
 			String genericObjectName = convertType.getDescribe().getName();
             
-            Map<String, Schema.SObjectField> sObjectFields = convertType.getDescribe().fields.getMap();
+			Map<String, Schema.SObjectField> sObjectFields = convertType.getDescribe().fields.getMap();
 
-            SObject genericObject = null;
+			SObject genericObject = null;
 
 			if(rConnection != null) {
 				genericObject = convertType.newSObject(rConnection.Record__c);
 			} else {
 				genericObject = convertType.newSObject();
 			}
+		
+            genericObject = generateSObject(genericObject, fields, sObjectFields, answersByQuestion, storedResults);
 
-            for(Form_Connection_Field__c field : fields) {
+			Form_Connection_Process__c connectionStatus = processByConnections.get(connection.Id);
 
-				if(field.Salesforce_Field__c == null) continue;
+			sObject createdObject = ResponsesService.upsertConnectionSObject(genericObject, connectionStatus, response); 
 
-                String dirtyAnswer;
-
-                if(field.Question__c != null) {
-
-                    dirtyAnswer = answersByQuestion.containsKey(field.Question__c) ? answersByQuestion.get(field.Question__c).Answer__c : ''; 
-
-                } else if(field.Custom_Value__c != null) {
-
-                    dirtyAnswer = field.Custom_Value__c;
-
-                    if(storedResults.get((String)dirtyAnswer) != null) {
-
-                        dirtyAnswer = Id.valueOf(storedResults.get((String)dirtyAnswer)); 
-
-                    }
-
-                }
-                                    
-                Schema.DescribeFieldResult fieldResult = sObjectFields.get(field.Salesforce_Field__c).getDescribe();
-
-                Object cleanType = cleanType(fieldResult, dirtyAnswer);
-
-				//first check if field is updateable createable
-				Boolean accessField = rConnection != null ? sObjectFields.get(field.Salesforce_Field__c).getDescribe().isUpdateable() : sObjectFields.get(field.Salesforce_Field__c).getDescribe().isCreateable();
-				
-				if(accessField) {
-                	
-					genericObject.put(field.Salesforce_Field__c, cleanType);
-
-				}
-
-            }
-
-			Boolean access = rConnection != null ? convertType.getDescribe().isUpdateable() : convertType.getDescribe().isCreateable(); 
-
-            Form_Connection_Process__c connectionStatus = processByConnections.get(connections[order].Id);
-
-			if(access) {
-            	
-				Database.UpsertResult record = Database.upsert(genericObject, false); 
-
-				if(record.isSuccess()) {
-
-					storedResults.put(connections[order].Result_Holder__c, record.getId());
-					
-					connectionStatus.Salesforce_Connection_Object__c = record.getId();
-					connectionStatus.Status__c = 'Success';
-
-					Schema.SObjectType responseType = Schema.Response__c.getSObjectType(); 
-					
-					Map<String, Schema.SObjectField> responseSObjectFields = responseType.getDescribe().fields.getMap();
-
-					String connectedName = 'Connection_' + genericObjectName + '__c'; 
-
-					if(responseSObjectFields.get('forms__' + connectedName) != null) {
-
-						connectRecords(JSON.serialize(response), connectedName, record.getId()); 
-
-					} 
-				} else {
-					
-					connectionStatus.Status__c = 'Failed';
-
-				}
-
+			if(createdObject != null) {
+				storedResults.put(connection.Result_Holder__c, createdObject.Id);
 			} else {
-
 				connectionStatus.Status__c = 'Failed';
+				ResponsesService.updateFormConnectionStatus(connectionStatus);
+			}
+
+        }
+
+        if((connections.size() > (order + 1)) && chainJob) {
+
+			System.enqueueJob(new ConnectionCreateJob(order + 1, connections, responseConnections, answersByQuestion, processByConnections, storedResults, response));
+
+		}
+
+		//Test classes		
+        if((connections.size() > (order + 1)) && !chainJob) {
+			
+			ConnectionCreateJob job = new ConnectionCreateJob(order + 1, connections, responseConnections, answersByQuestion, processByConnections, storedResults, response);
+			job.execute(null);
+			
+        }
+
+	}
+	
+	public SObject generateSObject(SObject genericObject, List<Form_Connection_Field__c> fields, Map<String, Schema.SObjectField> sObjectFields, Map<Id, Answer__c> answersByQuestion, Map<String, Id> storedResults) {
+
+		for(Form_Connection_Field__c field : fields) {
+
+			if(field.Salesforce_Field__c == null) continue;
+
+			String dirtyAnswer;
+
+			if(field.Question__c != null) {
+
+				dirtyAnswer = answersByQuestion.containsKey(field.Question__c) ? answersByQuestion.get(field.Question__c).Answer__c : ''; 
+
+			} else if(field.Custom_Value__c != null) {
+
+				dirtyAnswer = field.Custom_Value__c;
+
+				if(storedResults.get((String)dirtyAnswer) != null) {
+
+					dirtyAnswer = Id.valueOf(storedResults.get((String)dirtyAnswer)); 
+
+				}
 
 			}
-            
-			update connectionStatus;
+								
+			Schema.DescribeFieldResult fieldResult = sObjectFields.get(field.Salesforce_Field__c).getDescribe();
 
-        }
+			Object cleanAnswer = cleanType(fieldResult, dirtyAnswer);
 
-        if((connections.size() > (order + 1)) && chainJob) 
-            System.enqueueJob(new ConnectionCreateJob(order + 1, connections, responseConnections, answersByQuestion, processByConnections, storedResults, response));
+			genericObject.put(field.Salesforce_Field__c, cleanAnswer);
 
-        if((connections.size() > (order + 1)) && !chainJob) {
-            ConnectionCreateJob job = new ConnectionCreateJob(order + 1, connections, responseConnections, answersByQuestion, processByConnections, storedResults, response);
-            job.execute(null);
-        }
+		}
 
-    }
+		return genericObject;
+
+	}
 
     public Object cleanType(Schema.DescribeFieldResult fieldResult, String dirtyAnswer) {
         
@@ -222,14 +202,5 @@ public class ConnectionCreateJob implements Queueable {
         return cleanValue; 
 
     }
-
-	@future
-	public static void connectRecords(String sResponse, String connectedName, String recordId) {
-
-		Response__c response = (Response__c)JSON.deserialize(sResponse, Response__c.class);
-		response.put(connectedName, recordId);
-		update response; 
-
-	}
 
 }

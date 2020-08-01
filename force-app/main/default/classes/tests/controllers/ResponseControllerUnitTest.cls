@@ -111,17 +111,44 @@ public class ResponseControllerUnitTest {
 
 		Id existingFormId = existingForm.Id; 
 
-		Response__c response = ResponseController.createResponse( existingFormId, JSON.serialize(new Map<String, String>()) );
+		Response__c response = ResponseController.createResponse( existingFormId, null );
 
-		List<Question__c> questions = [SELECT Id FROM Question__c LIMIT 3];
+		List<Question__c> questions = [SELECT Id, Title__c FROM Question__c LIMIT 3];
 		
-		List<Answer__c> answers = TestDataFactory.generateAnswers(response, questions);
+		Map<String,String> answers = TestDataFactory.generateAnswers(response, questions);
 
 		String sAnswers = JSON.serialize(answers);
 
 		Test.startTest();
 
 			Id savedResponseId = ResponseController.saveResponse( response.Id, sAnswers, 'In Progress' );
+
+		Test.stopTest();
+
+		List<Answer__c> updatedAnswers = [SELECT Id FROM Answer__c WHERE Response__c =: savedResponseId];
+
+		System.assertEquals(answers.size(), updatedAnswers.size());
+
+	}
+	
+	@isTest
+    public static void shouldSubmitResponse() {
+
+		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+
+		Id existingFormId = existingForm.Id; 
+
+		Response__c response = ResponseController.createResponse( existingFormId, null );
+
+		List<Question__c> questions = [SELECT Id, Title__c FROM Question__c LIMIT 3];
+		
+		Map<String,String> answers = TestDataFactory.generateAnswers(response, questions);
+
+		String sAnswers = JSON.serialize(answers);
+
+		Test.startTest();
+
+			Id savedResponseId = ResponseController.saveResponse( response.Id, sAnswers, 'Submitted' );
 
 		Test.stopTest();
 

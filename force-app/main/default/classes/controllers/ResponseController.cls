@@ -2,8 +2,12 @@ public with sharing class ResponseController {
 
 	@AuraEnabled
 	public static Response__c createResponse(String formId, String sRecordIds){
+
+		Map<String, String> parsedConnectedRecordIds = new Map<String,String>();
 		
-		Map<String, String> parsedConnectedRecordIds = (Map<String, String>)JSON.deserialize(sRecordIds, Map<String, String>.class);
+		if(sRecordIds != null) {
+			parsedConnectedRecordIds = (Map<String, String>)JSON.deserialize(sRecordIds, Map<String, String>.class);
+		}
 
 		Response__c newResponse = ResponsesService.create(formId, parsedConnectedRecordIds);
 

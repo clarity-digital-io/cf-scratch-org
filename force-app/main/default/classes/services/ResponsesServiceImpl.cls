@@ -67,10 +67,15 @@ public class ResponsesServiceImpl implements IResponsesService {
 	}
 
 	public Response__c create(String formId, Map<String, String> connectionRecordIds) {
+		//Doesn't meet UUID V4 Standards 
+		Blob b = Crypto.GenerateAESKey(128);
+		String h = EncodingUtil.ConvertTohex(b);
+		String guid = h.SubString(0,8)+ '-' + h.SubString(8,12) + '-' + h.SubString(12,16) + '-' + h.SubString(16,20) + '-' + h.substring(20);
 
 		Response__c newResponse = new Response__c(
 			Form__c = formId,
-			Status__c = 'New'
+			Status__c = 'New',
+			UUID__c = guid
 		);
 
 		for(String connectionId : connectionRecordIds.keySet()) {
@@ -154,10 +159,10 @@ public class ResponsesServiceImpl implements IResponsesService {
 			
 			String fieldName = parsedConnection.containsKey('sObject') ? parsedConnection.get('sObject') : '';
 			String recordId = parsedConnection.containsKey('key') ? parsedConnection.get('key') : '';
-			Boolean fieldCheck = SObjectType.Response__c.fields.getMap().containsKey('forms__connection_' + fieldName.toLowerCase() + '__c');
+			Boolean fieldCheck = SObjectType.Response__c.fields.getMap().containsKey('forms__' + fieldName.toLowerCase() + '__c');
 			
 			if(fieldCheck) {
-				response.put('forms__Connection_' + fieldName + '__c', recordId);
+				response.put('forms__' + fieldName + '__c', recordId);
 			}
 
         }
@@ -287,6 +292,49 @@ public class ResponsesServiceImpl implements IResponsesService {
         table.put('Data', rows); 
 
         return table;
+
+	}
+
+	public sObject upsertConnectionSObject(sObject record, Form_Connection_Process__c connectionStatus, Response__c response) {
+
+		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
+
+		uow.registerUpsert(record);
+
+		connectionStatus.Salesforce_Connection_Object__c = record.Id;
+		connectionStatus.Status__c = 'Success';
+
+		uow.registerUpsert(connectionStatus);
+
+		String genericObjectName = record.getSObjectType().getDescribe().getName();
+		
+		Schema.SObjectType responseType = Schema.Response__c.getSObjectType();
+
+		Map<String, Schema.SObjectField> responseSObjectFields = responseType.getDescribe().fields.getMap();
+
+		String connectedName = genericObjectName + '__c'; 
+
+		if(responseSObjectFields.containsKey('forms__' + connectedName)) {
+
+			response.put(connectedName, record.Id);
+
+			uow.registerUpsert(response);
+
+		} 
+
+		uow.commitWork();	
+		
+		return record; 
+		
+	}
+
+	public void updateFormConnectionStatus(Form_Connection_Process__c connectionStatus) {
+
+		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
+
+		uow.registerUpsert(connectionStatus);
+
+		uow.commitWork();	
 
 	}
 

@@ -56,6 +56,14 @@ public with sharing class ResponsesService {
 		return service().getResultAnswersByFormId(recordId, offset);
 	}
 
+	public static sObject upsertConnectionSObject(sObject record, Form_Connection_Process__c connectionStatus, Response__c response) {
+		return service().upsertConnectionSObject(record, connectionStatus, response);
+	}
+
+	public static void updateFormConnectionStatus(Form_Connection_Process__c connectionStatus) {
+		service().updateFormConnectionStatus(connectionStatus);
+	}
+
 	public static IResponsesService service(){
 		return (IResponsesService) Application.service.newInstance(IResponsesService.class);
 	}

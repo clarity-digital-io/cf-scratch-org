@@ -96,8 +96,6 @@ public class BuilderControllerUnitTest {
 		
 		String questionId = BuilderController.saveQuestion(JSON.serialize(question));
 
-		System.assertEquals(question.Id, questionId);
-
 		Question__c updatedQuestion = [SELECT Id, Title__c FROM Question__c WHERE Id = :questionId LIMIT 1];
 
 		System.assertEquals('Save Test', updatedQuestion.Title__c);
@@ -112,7 +110,7 @@ public class BuilderControllerUnitTest {
 
 		List<Question__c> expectedQuestions = [SELECT Id FROM Question__c WHERE Type__c = 'Dropdown']; 
 
-		List<Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(new List<Question__c>());
+		List<Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(expectedQuestions);
 
 		String sQuestion = JSON.serialize(expectedQuestions[0]); 
 
@@ -133,7 +131,7 @@ public class BuilderControllerUnitTest {
 
 		Form__c form = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<Question__c> questions = [SELECT Id FROM Question__c Limit 3]; 
+		List<Question__c> questions = [SELECT Id, Type__c FROM Question__c Limit 3]; 
 
 		List<Question_Criteria__c> criteria = TestDataFactory.generateQuestionCriteria(questions);
 
@@ -203,7 +201,7 @@ public class BuilderControllerUnitTest {
     }
 		
 	@isTest
-    public static void shoulGetConnectionFieldMapping() {
+    public static void shouldGetConnectionFieldMapping() {
 
 		// Id formId = [SELECT Id FROM Form__c LIMIT 1];
 
@@ -226,7 +224,7 @@ public class BuilderControllerUnitTest {
 	}
 	
 	@isTest
-    public static void shoulSaveConnections() {
+    public static void shouldSaveConnections() {
 
 		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
@@ -251,7 +249,7 @@ public class BuilderControllerUnitTest {
 	}
 	
 	@isTest
-    public static void shoulSaveActiveFieldConnections() {
+    public static void shouldSaveActiveFieldConnections() {
 
 		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
@@ -277,20 +275,22 @@ public class BuilderControllerUnitTest {
 
 		Test.stopTest();
 
-		System.assertEquals(1, activeFieldConnections.get('Prefills').size());
+		System.assertEquals(1, activeFieldConnections.get('Mapping').size());
 
 
 	}
 	
 	@isTest
-    public static void shoulDeletePageQuestions() {
+    public static void shouldDeletePageQuestions() {
 
 	}
 	
 	@isTest
-    public static void shoulDeleteQuestion() {
+    public static void shouldDeleteQuestion() {
 
 		List<Question__c> questions = [SELECT Id FROM Question__c]; 
+
+		System.assertEquals(36, questions.size());
 
 		String sQuestions = JSON.serialize(questions); 
 
