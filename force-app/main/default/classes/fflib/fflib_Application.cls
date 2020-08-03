@@ -109,6 +109,13 @@ public virtual class fflib_Application
 			return new fflib_SObjectUnitOfWork(objectTypes, dml);
 		}
 
+		public fflib_ISObjectUnitOfWork newInstance(fflib_SObjectUnitOfWork.IDML dml, List<SObjectType> runTimeObjectTypes)
+		{
+			// Mock?
+			if(m_mockUow!=null)
+				return m_mockUow;
+			return new fflib_SObjectUnitOfWork(m_objectTypes, runTimeObjectTypes, dml);
+		}
 
 		@TestVisible
 		private void setMock(fflib_ISObjectUnitOfWork mockUow)

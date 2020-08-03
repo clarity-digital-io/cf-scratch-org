@@ -55,6 +55,7 @@ public virtual class fflib_SObjectUnitOfWork
     implements fflib_ISObjectUnitOfWork
 {
     protected List<Schema.SObjectType> m_sObjectTypes = new List<Schema.SObjectType>();
+    protected List<Schema.SObjectType> m_runTimesObjectTypes = new List<Schema.SObjectType>();
 
     protected Map<String, List<SObject>> m_newListByType = new Map<String, List<SObject>>();
 
@@ -142,7 +143,7 @@ public virtual class fflib_SObjectUnitOfWork
      */
     public fflib_SObjectUnitOfWork(List<Schema.SObjectType> sObjectTypes)
     {
-        this(sObjectTypes,new SimpleDML());
+        this(sObjectTypes, new SimpleDML());
     }
 
     public fflib_SObjectUnitOfWork(List<Schema.SObjectType> sObjectTypes, IDML dml)
@@ -160,6 +161,25 @@ public virtual class fflib_SObjectUnitOfWork
         m_dml = dml;
     }
 
+	public fflib_SObjectUnitOfWork(List<Schema.SObjectType> sObjectTypes, List<Schema.SObjectType> runTimeSObjectTypes, IDML dml)
+    {
+        m_sObjectTypes = sObjectTypes.clone();
+
+		m_runTimesObjectTypes = runTimeSObjectTypes.clone();
+
+		m_sObjectTypes.addAll(m_runTimesObjectTypes);
+
+        for (Schema.SObjectType sObjectType : m_sObjectTypes)
+        {
+            // register the type
+            handleRegisterType(sObjectType);
+        }
+
+		m_relationships.put(Messaging.SingleEmailMessage.class.getName(), new Relationships());
+
+        m_dml = dml;
+	}
+	
     // default implementations for commitWork events
     public virtual void onRegisterType(Schema.SObjectType sObjectType) {}
     public virtual void onCommitWorkStarting() {}

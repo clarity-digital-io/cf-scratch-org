@@ -60,7 +60,7 @@ public with sharing class ResponsesService {
 		return service().upsertConnectionSObject(record, connectionStatus, response);
 	}
 
-	public static void updateFormConnectionStatus(Form_Connection_Process__c connectionStatus) {
+	public static void updateFormConnectionStatus(List<Form_Connection_Process__c> connectionStatus) {
 		service().updateFormConnectionStatus(connectionStatus);
 	}
 

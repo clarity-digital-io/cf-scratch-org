@@ -11,11 +11,11 @@ public class Application {
 				Answer__c.sObjectType,
 				Question_Criteria__c.sObjectType,
 				Form_Connection__c.sObjectType,
+				Form_Connection_Process__c.sObjectType,
 				Form_Connection_Field__c.sObjectType,
 				ContentVersion.sObjectType,
 				ContentDocumentLink.sObjectType,
-				Log__c.sObjectType,
-				Account.sObjectType
+				Log__c.sObjectType
 			}
 		); 
 
@@ -40,6 +40,7 @@ public class Application {
 			new Map<SObjectType, Type> {
 				Form__c.sObjectType => FormsSelector.class,
 				Form_Connection__c.sObjectType => FormConnectionsSelector.class,
+				Form_Connection_Process__c.sObjectType => FormConnectionProcessSelector.class,
 				Form_Connection_Field__c.sObjectType => FormConnectionFieldsSelector.class,
 				Response__c.sObjectType => ResponsesSelector.class,
 				Question__c.sObjectType => QuestionsSelector.class,
@@ -58,7 +59,6 @@ public class Application {
 			Application.Selector,
 			new Map<SObjectType, Type> {
 				Form__c.sObjectType => Forms.Constructor.class,
-				Question__c.sObjectType => Questions.Constructor.class,
 				Response__c.sObjectType => Responses.Constructor.class,
 				Form_Connection__c.sObjectType => FormConnections.Constructor.class,
 				ContentVersion.sObjectType => ContentVersions.Constructor.class,

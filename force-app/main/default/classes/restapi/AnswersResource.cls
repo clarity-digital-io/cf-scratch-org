@@ -2,7 +2,7 @@
 global with sharing class AnswersResource {
 	
 	@HttpPost
-    global static String updateAnswers() {
+    global static List<Answer__c> updateAnswers() {
 
         RestRequest req = RestContext.request;
 
@@ -33,7 +33,7 @@ global with sharing class AnswersResource {
 
 		List<Answer__c> savedAnswers = AnswersService.save(readyAnswers, uniqueExternalField);
 
-        return 'Success';
+        return savedAnswers;
 
 	}
 

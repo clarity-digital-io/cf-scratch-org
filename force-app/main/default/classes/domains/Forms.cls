@@ -21,7 +21,7 @@ public with sharing class Forms extends fflib_SObjectDomain implements IForms {
 			Form__c oldForm = (Form__c) oldSo; 
 			Form__c newForm = (Form__c) Trigger.newMap.get(oldForm.Id); 
 			if(oldForm.Status__c != 'Published' && newForm.Status__c == 'Published') {
-				syncForm(newForm.Id); 
+				//syncForm(newForm.Id); 
 			}
 		}
 	}

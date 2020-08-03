@@ -19,7 +19,7 @@ public class ConnectionRecordProcess {
                 Set<Id> formIds = new Set<Id>(); 
 
                 for(Response__c response : (List<Response__c>)Trigger.new) {
-                    formIds.add(response.Form__c);
+                    formIds.add(response.forms__Form__c);
 				}
 				
 				List<Form_Connection__c> formConnections = FormConnectionsSelector.newInstance().selectConnectionsByFormIds(formIds);
@@ -101,8 +101,7 @@ public class ConnectionRecordProcess {
 
                 }
 
-                insert connectionProcess;
-
+				ResponsesService.updateFormConnectionStatus(connectionProcess);
             }
 
             return ResponseConnectionProcess;

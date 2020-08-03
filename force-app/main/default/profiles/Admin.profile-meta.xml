@@ -102,6 +102,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>ConnectionCreateJobTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ConnectionFieldValidation</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -111,10 +115,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>ConnectionRecordProcess</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ConnectionRecordProcessTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -143,6 +143,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FormConnectionFieldsServiceImpl</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FormConnectionProcessSelector</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -230,6 +234,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>IFormConnectionProcessSelector</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>IFormConnections</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -259,10 +267,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>IQuestionOptionsSelector</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>IQuestions</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -319,10 +323,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>QuestionOptionsSelector</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Questions</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -391,6 +391,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>ResponsesServiceImpl</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ResponsesUnitofWorkHelper</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -907,6 +911,11 @@
         <editable>false</editable>
         <field>Form_Connection_Field__c.Salesforce_Field__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Form_Connection_Process__c.Description__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>

@@ -31,6 +31,8 @@ public class ConnectionCreateJob implements Queueable {
 
 		Form_Connection__c connection = connections[order];
 
+		Form_Connection_Process__c connectionStatus = processByConnections.get(connection.Id);
+
 		List<Form_Connection_Field__c> fields = FormConnectionFieldsSelector.newInstance().selectFieldsByConnectionId( connection.Id );
 
         if(fields.size() > 0) {
@@ -48,27 +50,36 @@ public class ConnectionCreateJob implements Queueable {
 			Map<String, Schema.SObjectField> sObjectFields = convertType.getDescribe().fields.getMap();
 
 			SObject genericObject = null;
+			SObject createdObject = null; 
 
 			if(rConnection != null) {
 				genericObject = convertType.newSObject(rConnection.Record__c);
 			} else {
 				genericObject = convertType.newSObject();
 			}
-		
-            genericObject = generateSObject(genericObject, fields, sObjectFields, answersByQuestion, storedResults);
+			
+			try {
+				
+				genericObject = generateSObject(genericObject, fields, sObjectFields, answersByQuestion, storedResults);
 
-			Form_Connection_Process__c connectionStatus = processByConnections.get(connection.Id);
+				createdObject = ResponsesService.upsertConnectionSObject(genericObject, connectionStatus, response); 
 
-			sObject createdObject = ResponsesService.upsertConnectionSObject(genericObject, connectionStatus, response); 
+			} catch (Exception e) {
+				System.debug('exception: ' + e.getMessage());
+				connectionStatus.Description__c = e.getMessage();
+				connectionStatus.Status__c = 'Failed';
+				ResponsesService.updateFormConnectionStatus(new List<Form_Connection_Process__c>{ connectionStatus });
+			}
 
 			if(createdObject != null) {
 				storedResults.put(connection.Result_Holder__c, createdObject.Id);
-			} else {
-				connectionStatus.Status__c = 'Failed';
-				ResponsesService.updateFormConnectionStatus(connectionStatus);
 			}
 
-        }
+        } else {
+			connectionStatus.Description__c = 'No Fields on Connection';
+			connectionStatus.Status__c = 'Failed';
+			ResponsesService.updateFormConnectionStatus(new List<Form_Connection_Process__c>{ connectionStatus });
+		}
 
         if((connections.size() > (order + 1)) && chainJob) {
 
@@ -93,10 +104,11 @@ public class ConnectionCreateJob implements Queueable {
 			if(field.Salesforce_Field__c == null) continue;
 
 			String dirtyAnswer;
+			System.debug('field: ' + field); 
 
-			if(field.Question__c != null) {
+			if(field.Question__c != null &&  answersByQuestion.containsKey(field.Question__c)) {
 
-				dirtyAnswer = answersByQuestion.containsKey(field.Question__c) ? answersByQuestion.get(field.Question__c).Answer__c : ''; 
+				dirtyAnswer = answersByQuestion.get(field.Question__c).Answer__c != null ? answersByQuestion.get(field.Question__c).Answer__c : ''; 
 
 			} else if(field.Custom_Value__c != null) {
 

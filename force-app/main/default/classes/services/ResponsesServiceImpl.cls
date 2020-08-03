@@ -115,9 +115,13 @@ public class ResponsesServiceImpl implements IResponsesService {
 
 		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
 
-		IAnswers ans = Answers.newInstance(newAnswers);				
+		if(newAnswers.size() > 0) {
 
-		ans.save(uow); 
+			IAnswers ans = Answers.newInstance(newAnswers);				
+
+			ans.save(uow); 
+
+		}
 
 		uow.registerUpsert(response);
 
@@ -297,30 +301,17 @@ public class ResponsesServiceImpl implements IResponsesService {
 
 	public sObject upsertConnectionSObject(sObject record, Form_Connection_Process__c connectionStatus, Response__c response) {
 
-		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
+		List<SObjectType> runTimeSObjects = new List<SObjectType>();
 
-		uow.registerUpsert(record);
+		SObjectType recordSObjectType = record.getSObjectType();
 
-		connectionStatus.Salesforce_Connection_Object__c = record.Id;
-		connectionStatus.Status__c = 'Success';
+		runTimeSObjects.add(recordSObjectType);
 
-		uow.registerUpsert(connectionStatus);
+		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML(), runTimeSObjects);
 
-		String genericObjectName = record.getSObjectType().getDescribe().getName();
-		
-		Schema.SObjectType responseType = Schema.Response__c.getSObjectType();
+		IResponses responses = Responses.newInstance(new List<Response__c>{ response });				
 
-		Map<String, Schema.SObjectField> responseSObjectFields = responseType.getDescribe().fields.getMap();
-
-		String connectedName = genericObjectName + '__c'; 
-
-		if(responseSObjectFields.containsKey('forms__' + connectedName)) {
-
-			response.put(connectedName, record.Id);
-
-			uow.registerUpsert(response);
-
-		} 
+		responses.saveConnection(uow, record, connectionStatus);
 
 		uow.commitWork();	
 		
@@ -328,7 +319,7 @@ public class ResponsesServiceImpl implements IResponsesService {
 		
 	}
 
-	public void updateFormConnectionStatus(Form_Connection_Process__c connectionStatus) {
+	public void updateFormConnectionStatus(List<Form_Connection_Process__c> connectionStatus) {
 
 		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
 

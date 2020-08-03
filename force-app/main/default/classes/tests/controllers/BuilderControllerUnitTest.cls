@@ -265,7 +265,7 @@ public class BuilderControllerUnitTest {
 
 		List<Question__c> questions = [SELECT Id FROM Question__c WHERE Type__c = 'Dropdown' LIMIT 1]; 
 
-		List<Form_Connection_Field__c> fields = TestDataFactory.generateConnectionFields(savedConnections[0], new Map<String, Id>{'ForecastCategoryName' =>  questions[0].Id });
+		List<Form_Connection_Field__c> fields = TestDataFactory.generateConnectionFields(savedConnections[0].Id, new Map<String, String>{'ForecastCategoryName' =>  questions[0].Id });
 
 		String sFields = JSON.serialize(fields); 
 

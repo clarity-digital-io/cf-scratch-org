@@ -1,1 +1,0 @@
-public interface IQuestions extends fflib_ISObjectDomain {}

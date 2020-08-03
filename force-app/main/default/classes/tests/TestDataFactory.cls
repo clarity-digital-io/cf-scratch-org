@@ -97,6 +97,27 @@ public class TestDataFactory {
 
 	}
 
+	public static List<Question__c> generateAttachmentQuestions(Form__c form, Integer count){
+
+        List<Question__c> newQuestions = new  List<Question__c>();
+
+		for (Integer i = 0; i < count; i++) {
+			
+			Question__c question = new Question__c(
+				Form__c = form.Id, 
+				Title__c = 'Attachment: ' + i, 
+				Type__c = 'Attachments',
+				Order__c = i
+			);
+
+			newQuestions.add(question);
+
+		}
+
+        return newQuestions;
+
+	}
+
 	public static List<Question_Option__c> generateQuestionOptions(List<Question__c> multiChoiceQuestions) {
 
 		List<Question_Option__c> options = new List<Question_Option__c>(); 
@@ -213,16 +234,16 @@ public class TestDataFactory {
         return connections;
     }
 
-    public static List<Form_Connection_Field__c> generateConnectionFields(Form_Connection__c connection, Map<String, Id> mappingFieldNames){
+    public static List<Form_Connection_Field__c> generateConnectionFields(Id connectionId, Map<String, String> mappingFieldNames){
 
         List<Form_Connection_Field__c> connectionFields = new List<Form_Connection_Field__c>();
 
         for(String field : mappingFieldNames.keySet()) {
             
-            Id questionId = mappingFieldNames.get(field);
+            String questionId = mappingFieldNames.get(field);
 
             Form_Connection_Field__c connectionField = new Form_Connection_Field__c(
-                Form_Connection__c = connection.Id, 
+                Form_Connection__c = connectionId, 
                 Salesforce_Field__c = '' + field, 
                 Question__c =  questionId
             );
@@ -235,7 +256,7 @@ public class TestDataFactory {
 
     }
 
-    public static List<Form_Connection_Field__c> generateCustomConnectionFields(Form_Connection__c connection, Map<String, String> mappingFieldNames){
+    public static List<Form_Connection_Field__c> generateCustomConnectionFields(Id connectionId, Map<String, String> mappingFieldNames){
 
         List<Form_Connection_Field__c> connectionFields = new List<Form_Connection_Field__c>();
 
@@ -244,7 +265,7 @@ public class TestDataFactory {
             String customValue = mappingFieldNames.get(field);
 
             Form_Connection_Field__c connectionField = new Form_Connection_Field__c(
-                Form_Connection__c = connection.Id, 
+                Form_Connection__c = connectionId, 
                 Salesforce_Field__c = '' + field, 
                 Custom_Value__c =  customValue
             );

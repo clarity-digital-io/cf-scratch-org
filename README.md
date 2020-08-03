@@ -100,6 +100,13 @@ sfdx force:apex:class:create -n BuilderControllerUnitTest -d force-app/main/defa
 
 sfdx force:apex:class:create -n ConnectionJob -d force-app/main/default/classes/batchjobs
 
+sfdx force:apex:class:create -n FormConnectionProcessSelector -d force-app/main/default/classes/selectors
+
+sfdx force:apex:class:create -n IFormConnectionProcessSelector -d force-app/main/default/classes/selectors
+
+sfdx force:apex:class:create -n SetupControllerUnitTest -d force-app/main/default/classes/selectors
+
+sfdx force:apex:class:create -n ResponsesUnitofWorkHelper -d force-app/main/default/classes/domains/helpers
 
 ## Resources
 

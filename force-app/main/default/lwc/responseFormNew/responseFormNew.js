@@ -31,6 +31,8 @@ export default class ResponseFormNew extends LightningElement {
 			this.connections = data;
 			if(data.length == 0) {
 				this.hasConnectionReady = true;
+				const e = new CustomEvent('connectionsready', { bubbles: true, composed: true });		
+				this.dispatchEvent(e);
 			} else {
 				this.hasConnection = true; 
 			}

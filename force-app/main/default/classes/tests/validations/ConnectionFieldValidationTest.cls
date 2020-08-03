@@ -15,23 +15,17 @@ public class ConnectionFieldValidationTest {
         
         Form__c form = TestDataFactory.generateForm();
 
-        List<Question__c> questions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
+		List<Question__c> questions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
+		
+		List<Question__c> savedQuestions = QuestionsService.saveQuestions(questions);
 
-        Form_Connection__c connection = new Form_Connection__c(
-            Form__c = form.Id, 
-            Salesforce_Object__c = 'Account',
-            Type__c = 'Create'
-        );
+		List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, form.Id,  new List<String>{ 'Account' });
 
-        insert connection; 
+		List<Form_Connection__c> connectionsSaved = FormConnectionsService.save(new List<Form_Connection__c>(), connections);
 
-        Form_Connection_Field__c field = new Form_Connection_Field__c(
-            Custom_Value__c = 'Testing',
-            PreFill__c = true,
-            Form_Connection__c = connection.Id
-        );
+		List<Form_Connection_Field__c> customFields = TestDataFactory.generateCustomConnectionFields(connections[0].Id, new Map<String, String>{ 'Name' => 'Testing' });
 
-        insert field; 
+		List<Form_Connection_Field__c> customFieldsSaved = FormConnectionFieldsService.updateFields(customFields, connections[0].Id);
 
     }
 
@@ -47,8 +41,8 @@ public class ConnectionFieldValidationTest {
         Test.startTest();   
 
             connection.Salesforce_Object__c = 'Case';     
-            
-            update connection; 
+            			
+			List<Form_Connection__c> connectionsSaved = FormConnectionsService.save(new List<Form_Connection__c>(), new List<Form_Connection__c>{ connection });
         
         Test.stopTest(); 
 

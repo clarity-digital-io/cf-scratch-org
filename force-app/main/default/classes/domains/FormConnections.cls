@@ -15,7 +15,7 @@ public with sharing class FormConnections extends fflib_SObjectDomain implements
 	{
 		public fflib_SObjectDomain construct(List<SObject> sObjectList)
 		{
-			return new Questions(sObjectList);
+			return new FormConnections(sObjectList);
 		}
 	}
 

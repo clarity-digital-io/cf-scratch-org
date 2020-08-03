@@ -48,6 +48,7 @@ export default class ResponseFormList extends NavigationMixin(LightningElement) 
 		}
 
 		handleConnectionsReady() {
+			this.showFormSelection = false; 
 			this.showConnectionSelection = false; 
 			this.showResponseControls = true;
 		}
@@ -94,7 +95,7 @@ export default class ResponseFormList extends NavigationMixin(LightningElement) 
 		}
 
 		handleStartForm() {
-			window.console.log(this.formId);
+
 			if(this.formId != null) {
 
 				this.showFormSelection = false;
