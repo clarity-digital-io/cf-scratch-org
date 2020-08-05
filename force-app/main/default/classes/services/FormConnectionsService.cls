@@ -8,6 +8,10 @@ public with sharing class FormConnectionsService {
 		return service().getConnectionsByFormId(formId);
 	}
 
+	public static List<Form_Connection__c> getConnectionsByFormIds(Set<Id> formIds) {
+		return service().getConnectionsByFormIds(formIds);
+	}
+
 	public static List<Form_Connection__c> getConnectionsByFormName(String formName) {
 		return service().getConnectionsByFormName(formName);
 	}

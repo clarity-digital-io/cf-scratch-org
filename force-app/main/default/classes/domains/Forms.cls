@@ -17,32 +17,27 @@ public with sharing class Forms extends fflib_SObjectDomain implements IForms {
 	}
 	
 	public override void onAfterUpdate(Map<Id, sObject> existingRecords) {
+
+		Set<Id> publishedFormIds = new Set<Id>();
+
 		for (sObject oldSo : existingRecords.values()) {
 			Form__c oldForm = (Form__c) oldSo; 
 			Form__c newForm = (Form__c) Trigger.newMap.get(oldForm.Id); 
 			if(oldForm.Status__c != 'Published' && newForm.Status__c == 'Published') {
-				//syncForm(newForm.Id); 
+				publishedFormIds.add(newForm.Id);
 			}
 		}
+
+		if(publishedFormIds.size() > 0) {
+			syncPublishedForm(publishedFormIds);
+		}
+
 	}
 
 	@future(callout=true)
-	public static void syncForm(Id newFormId) {
+	public static void syncPublishedForm(Set<Id> formIds) {
 
-		// Form__c form = [SELECT Id, Title__c, Sync_Status__c FROM Form__c Limit 1]; 
-
-		// Http http = new Http();
-		// HttpRequest request = new HttpRequest();
-		// request.setEndpoint('https://thawing-falls-33419.herokuapp.com/forms');
-		// request.setBody(JSON.serialize(form));
-		// request.setHeader('Content-Type', 'application/json');
-		// request.setMethod('POST');
-		// HttpResponse response = http.send(request);
-
-		// if (response.getStatusCode() == 200) {
-		// 	form.Sync_Status__c = 'Complete'; 
-		// 	update form; 
-		// }
+		SyncService.connectOrganizationForms(formIds);
 
 	}
 

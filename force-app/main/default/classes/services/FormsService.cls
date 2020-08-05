@@ -12,6 +12,10 @@ public with sharing class FormsService {
 		return service().getFormById(formId);
 	}
 
+	public static List<Form__c> getFormByIds(Set<Id> formIds) {
+		return service().getFormByIds(formIds);
+	}
+
 	public static Form__c getFormByName(String formName) {
 		return service().getFormByName(formName);
 	}

@@ -15,6 +15,11 @@ public class FormsServiceImpl implements IFormsService {
 		return forms[0]; 
 	}
 
+	public List<Form__c> getFormByIds(Set<Id> formIds) {
+		List<Form__c> forms = FormsSelector.newInstance().selectById(formIds);
+		return forms; 
+	}
+
 	public static Form__c getFormByName(String formName) {
 		List<Form__c> forms = FormsSelector.newInstance().selectByName(formName);
 		return forms[0]; 

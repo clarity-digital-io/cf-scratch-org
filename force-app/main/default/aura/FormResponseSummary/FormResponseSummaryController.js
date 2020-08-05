@@ -40,7 +40,7 @@
 			let action = cmp.get("c.deleteForm");
 
 			action.setParams({
-					recordId: cmp.get("v.recordId")
+					formId: cmp.get("v.recordId")
 			});
 
 			action.setCallback(this, function (response) {
@@ -96,7 +96,7 @@
 			let action = cmp.get("c.publishForm");
 
 			action.setParams({
-					recordId: cmp.get("v.recordId")
+					formId: cmp.get("v.recordId")
 			});
 
 			cmp.set('v.loading', true); 

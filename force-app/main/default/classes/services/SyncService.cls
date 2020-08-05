@@ -12,6 +12,10 @@ public with sharing class SyncService {
 		return service().registerUsers();
 	}
 
+	public static void connectOrganizationForms(Set<Id> formIds) {
+		service().connectOrganizationForms(formIds);
+	}
+
 	public static void process(String userId) {
 		service().process(userId);
 	}

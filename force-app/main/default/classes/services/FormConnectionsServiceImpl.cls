@@ -40,6 +40,11 @@ public class FormConnectionsServiceImpl implements IFormConnectionsService {
 		return connections; 
 	}
 
+	public List<Form_Connection__c> getConnectionsByFormIds(Set<Id> formIds) {
+		List<Form_Connection__c> connections = FormConnectionsSelector.newInstance().selectConnectionsByFormIds(formIds);
+		return connections; 
+	}
+
 	public List<Form_Connection__c> getConnectionsByFormName(String formName) {
 		List<Form__c> forms = FormsSelector.newInstance().selectByName(formName);
 		List<Form_Connection__c> connections = FormConnectionsSelector.newInstance().selectConnectionsByFormId(forms[0].Id);

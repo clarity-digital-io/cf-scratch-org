@@ -51,11 +51,29 @@ public class Sync {
 
 	}
 
+	public static HttpResponse connectPublishedForms(List<Form__c> forms, String organizationId) {
+
+		Mobile_API__mdt api = getAPI();
+
+		Http http = new Http();
+		HttpRequest request = new HttpRequest();
+		request.setEndpoint(api.URL__c + '/forms/' + organizationId);
+		request.setBody(JSON.serialize(forms));
+		request.setHeader('Content-Type', 'application/json');
+		request.setMethod('POST');
+		HttpResponse response = http.send(request);
+
+		// if (response.getStatusCode() == 200) {
+		// 	form.Sync_Status__c = 'Complete'; 
+		// }
+		return response; 
+	}
+
 	@future(callout=true) 
 	public static void process(String userId) {
 
 		Mobile_API__mdt api = getAPI();
-		//need a way to query for lookups / connections / record groups we will need
+		//need a way to query for lookups / connections / record groups / apps we will need
 		List<Account> accounts = [SELECT Id, Name, OwnerId, Type, LastModifiedDate, CreatedDate FROM Account];
 		
 		Http http = new Http();
