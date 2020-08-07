@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2020-08-03T14:51:30-05:00" hostname="https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com" tests="1" failures="1"  errors="0"  time="1.68">
+        <properties>
+            <property name="outcome" value="Failed"/>
+            <property name="testsRan" value="1"/>
+            <property name="passing" value="0"/>
+            <property name="failing" value="1"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="0%"/>
+            <property name="failRate" value="100%"/>
+            <property name="testStartTime" value="Aug 3, 2020 2:51 PM"/>
+            <property name="testExecutionTime" value="1.68 s"/>
+            <property name="testTotalTime" value="1.68 s"/>
+            <property name="commandTime" value="9.79 s"/>
+            <property name="hostname" value="https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com"/>
+            <property name="orgId" value="00D2F000000AiZOUA0"/>
+            <property name="username" value="test-lanivcw2dtmk@example.com"/>
+            <property name="testRunId" value="7072F00001W1CgG"/>
+            <property name="userId" value="0052F000006JcZ3QAK"/>
+        </properties>
+        <testcase name="shouldFailToCreateOpportunityConnectionFromCustomValue" classname="formsConnectionCreateJobTest" time="1.68">
+            <failure message="System.AssertException: Assertion Failed: Expected: Failed, Actual: Success"><![CDATA[Class.forms.ConnectionCreateJobTest.shouldFailToCreateOpportunityConnectionFromCustomValue: line 138, column 1]]></failure>
+        </testcase>
+    </testsuite>
+</testsuites>

@@ -1,0 +1,46 @@
+{
+    "summary": {
+        "outcome": "Failed",
+        "testsRan": 1,
+        "passing": 0,
+        "failing": 1,
+        "skipped": 0,
+        "passRate": "0%",
+        "failRate": "100%",
+        "testStartTime": "Aug 3, 2020 4:15 PM",
+        "testExecutionTime": "2438 ms",
+        "testTotalTime": "2438 ms",
+        "commandTime": "12776 ms",
+        "hostname": "https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com",
+        "orgId": "00D2F000000AiZOUA0",
+        "username": "test-lanivcw2dtmk@example.com",
+        "testRunId": "7072F00001W1EtY",
+        "userId": "0052F000006JcZ3QAK"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v49.0/tooling/sobjects/ApexTestResult/07M2F00000Bt7mQUAR"
+            },
+            "Id": "07M2F00000Bt7mQUAR",
+            "QueueItemId": "7092F000001MlvlQAC",
+            "StackTrace": "Class.forms.ConnectionCreateJobTest.shouldCreateMultipleConnectionsFromCustomValues: line 182, column 1",
+            "Message": "System.AssertException: Assertion Failed: Same value: null",
+            "AsyncApexJobId": "7072F00001W1EtYQAV",
+            "MethodName": "shouldCreateMultipleConnectionsFromCustomValues",
+            "Outcome": "Fail",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v49.0/tooling/sobjects/ApexClass/01p2F000005itlYQAQ"
+                },
+                "Id": "01p2F000005itlYQAQ",
+                "Name": "ConnectionCreateJobTest",
+                "NamespacePrefix": "forms"
+            },
+            "RunTime": 2438,
+            "FullName": "ConnectionCreateJobTest.shouldCreateMultipleConnectionsFromCustomValues"
+        }
+    ]
+}

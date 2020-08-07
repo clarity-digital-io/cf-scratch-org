@@ -1,0 +1,46 @@
+{
+    "summary": {
+        "outcome": "Failed",
+        "testsRan": 1,
+        "passing": 0,
+        "failing": 1,
+        "skipped": 0,
+        "passRate": "0%",
+        "failRate": "100%",
+        "testStartTime": "Aug 2, 2020 11:47 AM",
+        "testExecutionTime": "1152 ms",
+        "testTotalTime": "1152 ms",
+        "commandTime": "13350 ms",
+        "hostname": "https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com",
+        "orgId": "00D2F000000AiZOUA0",
+        "username": "test-lanivcw2dtmk@example.com",
+        "testRunId": "7072F00001W0TA2",
+        "userId": "0052F000006JcZ3QAK"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v49.0/tooling/sobjects/ApexTestResult/07M2F00000BskTGUAZ"
+            },
+            "Id": "07M2F00000BskTGUAZ",
+            "QueueItemId": "7092F000001MjarQAC",
+            "StackTrace": "Class.forms.fflib_SObjectUnitOfWork: line 863, column 1\nClass.forms.fflib_SObjectUnitOfWork: line 392, column 1\nClass.forms.fflib_SObjectUnitOfWork.registerUpsert: line 461, column 1\nClass.forms.ResponsesServiceImpl.upsertConnectionSObject: line 315, column 1\nClass.forms.ResponsesService.upsertConnectionSObject: line 60, column 1\nClass.forms.ConnectionCreateJob.execute: line 62, column 1",
+            "Message": "forms.fflib_SObjectUnitOfWork.UnitOfWorkException: SObject type forms__Form_Connection_Process__c is not supported by this unit of work",
+            "AsyncApexJobId": "7072F00001W0TA2QAN",
+            "MethodName": "shouldCreateOpportunityConnectionFromCustomValue",
+            "Outcome": "Fail",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v49.0/tooling/sobjects/ApexClass/01p2F000005itlYQAQ"
+                },
+                "Id": "01p2F000005itlYQAQ",
+                "Name": "ConnectionCreateJobTest",
+                "NamespacePrefix": "forms"
+            },
+            "RunTime": 1152,
+            "FullName": "ConnectionCreateJobTest.shouldCreateOpportunityConnectionFromCustomValue"
+        }
+    ]
+}

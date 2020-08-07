@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2020-03-05T12:49:43-06:00" hostname="https://customer-java-6747-dev-ed.cs42.my.salesforce.com" tests="1" failures="0"  errors="0"  time="0.49">
+        <properties>
+            <property name="outcome" value="Passed"/>
+            <property name="testsRan" value="1"/>
+            <property name="passing" value="1"/>
+            <property name="failing" value="0"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="100%"/>
+            <property name="failRate" value="0%"/>
+            <property name="testStartTime" value="Mar 5, 2020 12:49 PM"/>
+            <property name="testExecutionTime" value="0.49 s"/>
+            <property name="testTotalTime" value="0.49 s"/>
+            <property name="commandTime" value="4.6 s"/>
+            <property name="hostname" value="https://customer-java-6747-dev-ed.cs42.my.salesforce.com"/>
+            <property name="orgId" value="00D56000000387kEAA"/>
+            <property name="username" value="test-it6fccrms7lf@example.com"/>
+            <property name="testRunId" value="7075600000wSv4A"/>
+            <property name="userId" value="00556000004TMt8AAG"/>
+        </properties>
+        <testcase name="shouldUpdateResponse" classname="formsFormControllerTest" time="0.49">
+        </testcase>
+    </testsuite>
+</testsuites>

@@ -1,0 +1,57 @@
+{
+    "CustomLabels__fflib_QueryFactory_crossobject_fieldsets_not_allowed_error": {
+        "fullName": "fflib_QueryFactory_crossobject_fieldsets_not_allowed_error",
+        "type": "CustomLabels",
+        "metadataFilePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/labels/fflib-Apex-Common-CustomLabels.labels-meta.xml"
+    },
+    "CustomLabels__fflib_QueryFactory_fieldset_wrong_sobject_error": {
+        "fullName": "fflib_QueryFactory_fieldset_wrong_sobject_error",
+        "type": "CustomLabels",
+        "metadataFilePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/labels/fflib-Apex-Common-CustomLabels.labels-meta.xml"
+    },
+    "CustomLabels__fflib_QueryFactory_recursive_subquery_error": {
+        "fullName": "fflib_QueryFactory_recursive_subquery_error",
+        "type": "CustomLabels",
+        "metadataFilePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/labels/fflib-Apex-Common-CustomLabels.labels-meta.xml"
+    },
+    "CustomLabels__fflib_QueryFactory_subquery_invalid_relationship": {
+        "fullName": "fflib_QueryFactory_subquery_invalid_relationship",
+        "type": "CustomLabels",
+        "metadataFilePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/labels/fflib-Apex-Common-CustomLabels.labels-meta.xml"
+    },
+    "CustomLabels__fflib_security_error_field_not_insertable": {
+        "fullName": "fflib_security_error_field_not_insertable",
+        "type": "CustomLabels",
+        "metadataFilePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/labels/fflib-Apex-Common-CustomLabels.labels-meta.xml"
+    },
+    "CustomLabels__fflib_security_error_field_not_readable": {
+        "fullName": "fflib_security_error_field_not_readable",
+        "type": "CustomLabels",
+        "metadataFilePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/labels/fflib-Apex-Common-CustomLabels.labels-meta.xml"
+    },
+    "CustomLabels__fflib_security_error_field_not_updateable": {
+        "fullName": "fflib_security_error_field_not_updateable",
+        "type": "CustomLabels",
+        "metadataFilePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/labels/fflib-Apex-Common-CustomLabels.labels-meta.xml"
+    },
+    "CustomLabels__fflib_security_error_object_not_deletable": {
+        "fullName": "fflib_security_error_object_not_deletable",
+        "type": "CustomLabels",
+        "metadataFilePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/labels/fflib-Apex-Common-CustomLabels.labels-meta.xml"
+    },
+    "CustomLabels__fflib_security_error_object_not_insertable": {
+        "fullName": "fflib_security_error_object_not_insertable",
+        "type": "CustomLabels",
+        "metadataFilePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/labels/fflib-Apex-Common-CustomLabels.labels-meta.xml"
+    },
+    "CustomLabels__fflib_security_error_object_not_readable": {
+        "fullName": "fflib_security_error_object_not_readable",
+        "type": "CustomLabels",
+        "metadataFilePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/labels/fflib-Apex-Common-CustomLabels.labels-meta.xml"
+    },
+    "CustomLabels__fflib_security_error_object_not_updateable": {
+        "fullName": "fflib_security_error_object_not_updateable",
+        "type": "CustomLabels",
+        "metadataFilePath": "/Users/befigenio/Sandbox/clarity/forms/clarity-scratch-org/force-app/main/default/labels/fflib-Apex-Common-CustomLabels.labels-meta.xml"
+    }
+}

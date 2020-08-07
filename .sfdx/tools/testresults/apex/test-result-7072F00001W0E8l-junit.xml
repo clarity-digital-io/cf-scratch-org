@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2020-08-02T01:23:06-05:00" hostname="https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com" tests="1" failures="1"  errors="0"  time="1.25">
+        <properties>
+            <property name="outcome" value="Failed"/>
+            <property name="testsRan" value="1"/>
+            <property name="passing" value="0"/>
+            <property name="failing" value="1"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="0%"/>
+            <property name="failRate" value="100%"/>
+            <property name="testStartTime" value="Aug 2, 2020 1:23 AM"/>
+            <property name="testExecutionTime" value="1.25 s"/>
+            <property name="testTotalTime" value="1.25 s"/>
+            <property name="commandTime" value="12.47 s"/>
+            <property name="hostname" value="https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com"/>
+            <property name="orgId" value="00D2F000000AiZOUA0"/>
+            <property name="username" value="test-lanivcw2dtmk@example.com"/>
+            <property name="testRunId" value="7072F00001W0E8l"/>
+            <property name="userId" value="0052F000006JcZ3QAK"/>
+        </properties>
+        <testcase name="shouldUpdateProcessToFailed" classname="formsConnectionCreateJobTest" time="1.25">
+            <failure message="forms.fflib_QueryFactory.InvalidFieldException: Invalid field &#39;forms__Form_Connection__c&#39; for object &#39;forms__Form_Connection__c&#39;"><![CDATA[Class.forms.fflib_QueryFactory.getFieldPath: line 91, column 1
+Class.forms.fflib_QueryFactory: line 240, column 1
+Class.forms.fflib_SecureDML: line 352, column 1
+Class.forms.fflib_SecureDML: line 311, column 1
+Class.forms.fflib_SecureDML: line 193, column 1
+Class.forms.fflib_SecureDML: line 70, column 1
+Class.forms.fflib_SObjectUnitOfWork.updateDmlByType: line 746, column 1
+Class.forms.fflib_SObjectUnitOfWork.doCommitWork: line 686, column 1
+Class.forms.fflib_SObjectUnitOfWork.commitWork: line 662, column 1
+Class.forms.ResponsesServiceImpl.updateFormConnectionStatus: line 341, column 1
+Class.forms.ResponsesService.updateFormConnectionStatus: line 64, column 1
+Class.forms.ConnectionCreateJob.execute: line 73, column 1]]></failure>
+        </testcase>
+    </testsuite>
+</testsuites>

@@ -1,0 +1,46 @@
+{
+    "summary": {
+        "outcome": "Failed",
+        "testsRan": 1,
+        "passing": 0,
+        "failing": 1,
+        "skipped": 0,
+        "passRate": "0%",
+        "failRate": "100%",
+        "testStartTime": "Aug 2, 2020 2:30 PM",
+        "testExecutionTime": "1001 ms",
+        "testTotalTime": "1001 ms",
+        "commandTime": "23643 ms",
+        "hostname": "https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com",
+        "orgId": "00D2F000000AiZOUA0",
+        "username": "test-lanivcw2dtmk@example.com",
+        "testRunId": "7072F00001W0Wx6",
+        "userId": "0052F000006JcZ3QAK"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v49.0/tooling/sobjects/ApexTestResult/07M2F00000Bsl2aUAB"
+            },
+            "Id": "07M2F00000Bsl2aUAB",
+            "QueueItemId": "7092F000001MjdgQAC",
+            "StackTrace": "Class.forms.fflib_SecureDML.dmlUpdate: line 73, column 1\nClass.forms.fflib_SObjectUnitOfWork.updateDmlByType: line 770, column 1\nClass.forms.fflib_SObjectUnitOfWork.doCommitWork: line 710, column 1\nClass.forms.fflib_SObjectUnitOfWork.commitWork: line 686, column 1\nClass.forms.ResponsesServiceImpl.save: line 128, column 1\nClass.forms.ResponsesService.save: line 36, column 1\nClass.forms.ConnectionCreateJobTest.shouldCreateOpportunityConnectionFromCustomValue: line 127, column 1",
+            "Message": "System.DmlException: Update failed. First exception on row 0 with id a0G2F000004LxZGUA0; first error: INSUFFICIENT_ACCESS_ON_CROSS_REFERENCE_ENTITY, Access to entity 'ActivityRecurrence2' denied: []",
+            "AsyncApexJobId": "7072F00001W0Wx6QAF",
+            "MethodName": "shouldCreateOpportunityConnectionFromCustomValue",
+            "Outcome": "Fail",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v49.0/tooling/sobjects/ApexClass/01p2F000005itlYQAQ"
+                },
+                "Id": "01p2F000005itlYQAQ",
+                "Name": "ConnectionCreateJobTest",
+                "NamespacePrefix": "forms"
+            },
+            "RunTime": 1001,
+            "FullName": "ConnectionCreateJobTest.shouldCreateOpportunityConnectionFromCustomValue"
+        }
+    ]
+}

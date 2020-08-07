@@ -1,0 +1,46 @@
+{
+    "summary": {
+        "outcome": "Passed",
+        "testsRan": 1,
+        "passing": 1,
+        "failing": 0,
+        "skipped": 0,
+        "passRate": "100%",
+        "failRate": "0%",
+        "testStartTime": "Mar 5, 2020 12:49 PM",
+        "testExecutionTime": "491 ms",
+        "testTotalTime": "491 ms",
+        "commandTime": "4602 ms",
+        "hostname": "https://customer-java-6747-dev-ed.cs42.my.salesforce.com",
+        "orgId": "00D56000000387kEAA",
+        "username": "test-it6fccrms7lf@example.com",
+        "testRunId": "7075600000wSv4A",
+        "userId": "00556000004TMt8AAG"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v48.0/tooling/sobjects/ApexTestResult/07M560000076zxYEAQ"
+            },
+            "Id": "07M560000076zxYEAQ",
+            "QueueItemId": "70956000001ZMzeAAG",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7075600000wSv4AAAS",
+            "MethodName": "shouldUpdateResponse",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v48.0/tooling/sobjects/ApexClass/01p56000003dd5eAAA"
+                },
+                "Id": "01p56000003dd5eAAA",
+                "Name": "FormControllerTest",
+                "NamespacePrefix": "forms"
+            },
+            "RunTime": 491,
+            "FullName": "FormControllerTest.shouldUpdateResponse"
+        }
+    ]
+}

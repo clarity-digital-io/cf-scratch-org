@@ -1,0 +1,46 @@
+{
+    "summary": {
+        "outcome": "Failed",
+        "testsRan": 1,
+        "passing": 0,
+        "failing": 1,
+        "skipped": 0,
+        "passRate": "0%",
+        "failRate": "100%",
+        "testStartTime": "Aug 3, 2020 12:50 PM",
+        "testExecutionTime": "473 ms",
+        "testTotalTime": "473 ms",
+        "commandTime": "7409 ms",
+        "hostname": "https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com",
+        "orgId": "00D2F000000AiZOUA0",
+        "username": "test-lanivcw2dtmk@example.com",
+        "testRunId": "7072F00001W19Hb",
+        "userId": "0052F000006JcZ3QAK"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v49.0/tooling/sobjects/ApexTestResult/07M2F00000Bt5tyUAB"
+            },
+            "Id": "07M2F00000Bt5tyUAB",
+            "QueueItemId": "7092F000001MlmoQAC",
+            "StackTrace": "Class.forms.ResponsesServiceImpl.upsertConnectionSObject: line 327, column 1\nClass.forms.ResponsesService.upsertConnectionSObject: line 60, column 1\nClass.forms.ConnectionCreateJob.execute: line 65, column 1",
+            "Message": "System.FinalException: Record is read-only",
+            "AsyncApexJobId": "7072F00001W19HbQAJ",
+            "MethodName": "shouldCreateMultipleConnectionsFromCustomValues",
+            "Outcome": "Fail",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v49.0/tooling/sobjects/ApexClass/01p2F000005itlYQAQ"
+                },
+                "Id": "01p2F000005itlYQAQ",
+                "Name": "ConnectionCreateJobTest",
+                "NamespacePrefix": "forms"
+            },
+            "RunTime": 473,
+            "FullName": "ConnectionCreateJobTest.shouldCreateMultipleConnectionsFromCustomValues"
+        }
+    ]
+}

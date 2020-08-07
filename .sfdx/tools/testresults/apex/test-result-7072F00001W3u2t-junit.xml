@@ -1,0 +1,1175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2020-08-05T21:27:39-05:00" hostname="https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com" tests="576" failures="0"  errors="0"  time="64.18">
+        <properties>
+            <property name="outcome" value="Passed"/>
+            <property name="testsRan" value="576"/>
+            <property name="passing" value="576"/>
+            <property name="failing" value="0"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="100%"/>
+            <property name="failRate" value="0%"/>
+            <property name="testStartTime" value="Aug 5, 2020 9:27 PM"/>
+            <property name="testExecutionTime" value="64.18 s"/>
+            <property name="testTotalTime" value="60.53 s"/>
+            <property name="commandTime" value="19.42 s"/>
+            <property name="hostname" value="https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com"/>
+            <property name="orgId" value="00D2F000000AiZOUA0"/>
+            <property name="username" value="test-lanivcw2dtmk@example.com"/>
+            <property name="testRunId" value="7072F00001W3u2t"/>
+            <property name="userId" value="0052F000006JcZ3QAK"/>
+        </properties>
+        <testcase name="shouldUpdateAnswers" classname="formsAnswersResourceUnitTest" time="0.17">
+        </testcase>
+        <testcase name="shouldGetApps" classname="formsAppsResourceUnitTest" time="0.26">
+        </testcase>
+        <testcase name="shouldUpdateAttachments" classname="formsAttachmentsResourceUnitTest" time="1.21">
+        </testcase>
+        <testcase name="shouldDeletePageQuestions" classname="formsBuilderControllerUnitTest" time="0.01">
+        </testcase>
+        <testcase name="shouldDeleteQuestion" classname="formsBuilderControllerUnitTest" time="0.89">
+        </testcase>
+        <testcase name="shouldGetConnectionFieldMapping" classname="formsBuilderControllerUnitTest" time="0.01">
+        </testcase>
+        <testcase name="shouldGetConnections" classname="formsBuilderControllerUnitTest" time="0.3">
+        </testcase>
+        <testcase name="shouldGetForm" classname="formsBuilderControllerUnitTest" time="0.14">
+        </testcase>
+        <testcase name="shouldGetQuestions" classname="formsBuilderControllerUnitTest" time="0.19">
+        </testcase>
+        <testcase name="shouldSave" classname="formsBuilderControllerUnitTest" time="0.41">
+        </testcase>
+        <testcase name="shouldSaveActiveFieldConnections" classname="formsBuilderControllerUnitTest" time="0.32">
+        </testcase>
+        <testcase name="shouldSaveConnections" classname="formsBuilderControllerUnitTest" time="0.15">
+        </testcase>
+        <testcase name="shouldSaveQuestion" classname="formsBuilderControllerUnitTest" time="0.64">
+        </testcase>
+        <testcase name="shouldSaveQuestionWithCriteria" classname="formsBuilderControllerUnitTest" time="0.28">
+        </testcase>
+        <testcase name="shouldSaveQuestionWithOptions" classname="formsBuilderControllerUnitTest" time="0.23">
+        </testcase>
+        <testcase name="shouldSaveRecordGroupFields" classname="formsBuilderControllerUnitTest" time="0.29">
+        </testcase>
+        <testcase name="shouldUpdateForm" classname="formsBuilderControllerUnitTest" time="0.41">
+        </testcase>
+        <testcase name="shoulGetSObjectsAvailable" classname="formsBuilderControllerUnitTest" time="0.15">
+        </testcase>
+        <testcase name="shouldCreateAccountConnectionFromQuestionValue" classname="formsConnectionCreateJobTest" time="1.47">
+        </testcase>
+        <testcase name="shouldCreateMultipleConnectionsFromCustomValues" classname="formsConnectionCreateJobTest" time="0.77">
+        </testcase>
+        <testcase name="shouldCreateMultipleConnectionsWithAppropriateStoreIds" classname="formsConnectionCreateJobTest" time="0.66">
+        </testcase>
+        <testcase name="shouldFailToCreateOpportunityConnectionFromCustomValue" classname="formsConnectionCreateJobTest" time="0.64">
+        </testcase>
+        <testcase name="shouldUpdateProcessToFailed" classname="formsConnectionCreateJobTest" time="0.52">
+        </testcase>
+        <testcase name="shouldDeleteFieldOnConnectionUpdate" classname="formsConnectionFieldValidationTest" time="0.88">
+        </testcase>
+        <testcase name="thatAnswerOnlyForTheMethodStubbedWithAnswer" classname="formsfflib_AnswerTest" time="0.12">
+        </testcase>
+        <testcase name="thatAnswerOnlyForTheStubbedParameter" classname="formsfflib_AnswerTest" time="0.04">
+        </testcase>
+        <testcase name="thatAnswersWithException" classname="formsfflib_AnswerTest" time="0.02">
+        </testcase>
+        <testcase name="thatAnswerToDifferentVoidMethods" classname="formsfflib_AnswerTest" time="0.04">
+        </testcase>
+        <testcase name="thatAnswerToVoidAndNotVoidMethods" classname="formsfflib_AnswerTest" time="0.06">
+        </testcase>
+        <testcase name="thatAnswerToVoidMethod" classname="formsfflib_AnswerTest" time="0.02">
+        </testcase>
+        <testcase name="thatArgumentListEmptyForMethodWithNoArgument" classname="formsfflib_AnswerTest" time="0.02">
+        </testcase>
+        <testcase name="thatExceptionIsThrownWhenAccessNegativeIndexArgument" classname="formsfflib_AnswerTest" time="0.02">
+        </testcase>
+        <testcase name="thatExceptionIsThrownWhenAccessOutOfIndexArgument" classname="formsfflib_AnswerTest" time="0.02">
+        </testcase>
+        <testcase name="thatMethodsParametersAreAccessible" classname="formsfflib_AnswerTest" time="0.02">
+        </testcase>
+        <testcase name="thatMethodsParametersAreAccessibleWhenCalledWithMatchers" classname="formsfflib_AnswerTest" time="0.02">
+        </testcase>
+        <testcase name="thatMultipleAnswersAreHandled" classname="formsfflib_AnswerTest" time="0.04">
+        </testcase>
+        <testcase name="thatStoresMethodIntoInvocationOnMock" classname="formsfflib_AnswerTest" time="0.03">
+        </testcase>
+        <testcase name="thatStoresMockInstanceIntoInvocationOnMock" classname="formsfflib_AnswerTest" time="0.03">
+        </testcase>
+        <testcase name="thatBetweenThrownExceptionIfCalledLessThanAtLeastNumberOfTimes" classname="formsfflib_AnyOrderTest" time="0.18">
+        </testcase>
+        <testcase name="thatBetweenThrownExceptionIfCalledLessThanAtLeastNumberOfTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatBetweenThrownExceptionIfCalledMoreThanAtMostNumberOfTimes" classname="formsfflib_AnyOrderTest" time="0.16">
+        </testcase>
+        <testcase name="thatBetweenThrownExceptionIfCalledMoreThanAtMostNumberOfTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.11">
+        </testcase>
+        <testcase name="thatCustomMessageIsAdded" classname="formsfflib_AnyOrderTest" time="0.12">
+        </testcase>
+        <testcase name="thatThrownExceptionIfCalledLessThanAtLeastNumberOfTimes" classname="formsfflib_AnyOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatThrownExceptionIfCalledLessThanAtLeastNumberOfTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatThrownExceptionIfCalledLessThanAtLeastOnce" classname="formsfflib_AnyOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatThrownExceptionIfCalledLessThanAtLeastOnceNumberOfTimes" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatThrownExceptionIfCalledLessThanAtLeastOnceNumberOfTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatThrownExceptionIfCalledLessThanAtLeastOnceWithMatchers" classname="formsfflib_AnyOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatThrownExceptionIfCalledMoreThanAtMostNumberOfTimes" classname="formsfflib_AnyOrderTest" time="0.11">
+        </testcase>
+        <testcase name="thatThrownExceptionIfCalledMoreThanAtMostNumberOfTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifiesAtLeastNumberOfTimes" classname="formsfflib_AnyOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatVerifiesAtLeastNumberOfTimesWhenIsCalledMoreTimes" classname="formsfflib_AnyOrderTest" time="0.07">
+        </testcase>
+        <testcase name="thatVerifiesAtLeastNumberOfTimesWhenIsCalledMoreTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifiesAtLeastNumberOfTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatVerifiesAtLeastOnce" classname="formsfflib_AnyOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifiesAtLeastOnceNumberOfTimes" classname="formsfflib_AnyOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatVerifiesAtLeastOnceNumberOfTimesWhenIsCalledMoreTimes" classname="formsfflib_AnyOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatVerifiesAtLeastOnceNumberOfTimesWhenIsCalledMoreTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.09">
+        </testcase>
+        <testcase name="thatVerifiesAtLeastOnceNumberOfTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatVerifiesAtLeastOnceWhenIsCalledMoreTimes" classname="formsfflib_AnyOrderTest" time="0.07">
+        </testcase>
+        <testcase name="thatVerifiesAtLeastOnceWhenIsCalledMoreTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifiesAtLeastOnceWithMatchers" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatVerifiesAtMostNumberOfTimes" classname="formsfflib_AnyOrderTest" time="0.13">
+        </testcase>
+        <testcase name="thatVerifiesAtMostNumberOfTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatVerifiesAtMostSameNumberOfTimes" classname="formsfflib_AnyOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifiesAtMostSameNumberOfTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatVerifiesBetweenNumberOfTimes" classname="formsfflib_AnyOrderTest" time="0.08">
+        </testcase>
+        <testcase name="thatVerifiesBetweenNumberOfTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatVerifyNeverFailsWhenCalledMoreTimes" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatVerifyNeverFailsWhenCalledMoreTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatVerifyTimesMethodFailsWhenCalledLessTimes" classname="formsfflib_AnyOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatVerifyTimesMethodFailsWhenCalledLessTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatVerifyTimesMethodFailsWhenCalledMoreTimes" classname="formsfflib_AnyOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatVerifyTimesMethodFailsWhenCalledMoreTimesWithMatchers" classname="formsfflib_AnyOrderTest" time="0.06">
+        </testcase>
+        <testcase name="verifyMethodCallWhenNoCallsBeenMadeForType" classname="formsfflib_AnyOrderTest" time="0.02">
+        </testcase>
+        <testcase name="verifyMethodNotCalled" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="verifyMultipleMethodCallsWithSameSingleArgument" classname="formsfflib_AnyOrderTest" time="0.03">
+        </testcase>
+        <testcase name="verifyNeverMethodHasBeenNotCalledWithMatchers" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="verifyNeverMethodHasNotBeenCalled" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="verifySingleMethodCallWithMultipleArguments" classname="formsfflib_AnyOrderTest" time="0.03">
+        </testcase>
+        <testcase name="verifyTimesMethodHasBeenCalled" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="verifyTimesMethodHasBeenCalledWithMatchers" classname="formsfflib_AnyOrderTest" time="0.04">
+        </testcase>
+        <testcase name="whenVerifyCustomMatchersCanBeUsed" classname="formsfflib_AnyOrderTest" time="0.07">
+        </testcase>
+        <testcase name="whenVerifyMethodNeverCalledMatchersAreReset" classname="formsfflib_AnyOrderTest" time="0.03">
+        </testcase>
+        <testcase name="whenVerifyMultipleCallsWithMatchersShouldReturnCorrectMethodCallCounts" classname="formsfflib_AnyOrderTest" time="0.05">
+        </testcase>
+        <testcase name="whenVerifyWithCombinedMatchersShouldReturnCorrectMethodCallCounts" classname="formsfflib_AnyOrderTest" time="0.14">
+        </testcase>
+        <testcase name="stubAndVerifyMethodCallsWithNoArguments" classname="formsfflib_ApexMocksTest" time="0.08">
+        </testcase>
+        <testcase name="thatExceptionIsthrownWhenReturnMultiPassEmptyList" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="thatExceptionIsthrownWhenReturnMultiPassNullList" classname="formsfflib_ApexMocksTest" time="0.01">
+        </testcase>
+        <testcase name="thatExceptionIsthrownWhenStubbingIsNotDone" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="thatExceptionIsthrownWhenThrowMultiPassEmptyList" classname="formsfflib_ApexMocksTest" time="0.01">
+        </testcase>
+        <testcase name="thatExceptionIsthrownWhenThrowMultiPassNullList" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="thatMultipleInstancesCanBeMockedDependently" classname="formsfflib_ApexMocksTest" time="0.05">
+        </testcase>
+        <testcase name="thatMultipleInstancesCanBeMockedIndependently" classname="formsfflib_ApexMocksTest" time="0.04">
+        </testcase>
+        <testcase name="thatMultipleVoidMethodsThrowsMultipleExceptions" classname="formsfflib_ApexMocksTest" time="0.08">
+        </testcase>
+        <testcase name="thatNullCanBeUsedAsExceptionvalue" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="thatNullCanBeUsedAsReturnValue" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="thatStubbingCanBeChainedFirstValueThenException" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="thatStubbingMultipleMethodsCanBeChainedFirstExceptionThenValue" classname="formsfflib_ApexMocksTest" time="0.04">
+        </testcase>
+        <testcase name="thatStubbingMultipleMethodsCanBeChainedFirstValueThenException" classname="formsfflib_ApexMocksTest" time="0.05">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenReturnMultiWithMultiExceptions" classname="formsfflib_ApexMocksTest" time="0.05">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenReturnMultiWithMultiValue" classname="formsfflib_ApexMocksTest" time="0.04">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenReturnMultiWithSingleException" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenReturnMultiWithSingleValue" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenReturnWithMultiExceptions" classname="formsfflib_ApexMocksTest" time="0.05">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenReturnWithMultiValues" classname="formsfflib_ApexMocksTest" time="0.04">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenReturnWithSingleException" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenReturnWithSingleValue" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenThrowMultiWithMultiExceptions" classname="formsfflib_ApexMocksTest" time="0.04">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenThrowMultiWithMultiValue" classname="formsfflib_ApexMocksTest" time="0.05">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenThrowMultiWithSingleException" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenThrowMultiWithSingleValue" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenThrowWithMultiExceptions" classname="formsfflib_ApexMocksTest" time="0.05">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenThrowWithMultiValues" classname="formsfflib_ApexMocksTest" time="0.04">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenThrowWithSingleException" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="thatStubbingMultipleTimesOverridePreviousThenThrowWithSingleValue" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="thatStubbingMutipleTimesVoidMethodThrowsMultipleExceptionsOverride" classname="formsfflib_ApexMocksTest" time="0.05">
+        </testcase>
+        <testcase name="thatStubbingMutipleTimesVoidMethodThrowsMultipleExceptionsOverrideWithSingleException" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="thatStubbingReturnsAndThrowsDifferentValuesAndExceptionsForDifferentCalls" classname="formsfflib_ApexMocksTest" time="0.06">
+        </testcase>
+        <testcase name="thatStubbingReturnsDifferentValuesForDifferentCalls" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="thatStubbingReturnsDifferentValuesForDifferentCallsAndRepeatLastValuesForFurtherCalls" classname="formsfflib_ApexMocksTest" time="0.04">
+        </testcase>
+        <testcase name="thatStubbingThrowsAndReturnsDifferentExceptionsAndValuesForDifferentCalls" classname="formsfflib_ApexMocksTest" time="0.06">
+        </testcase>
+        <testcase name="thatStubbingThrowsDifferentExceptionsForDifferentCalls" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="thatStubbingThrowsDifferentExceptionsForDifferentCallsAndRepeatLastExceptionForFurtherCalls" classname="formsfflib_ApexMocksTest" time="0.04">
+        </testcase>
+        <testcase name="thatVoidMethodThrowsMultipleExceptions" classname="formsfflib_ApexMocksTest" time="0.04">
+        </testcase>
+        <testcase name="verifyMethodCallsWithSameNameButDifferentArgumentTypes" classname="formsfflib_ApexMocksTest" time="0.05">
+        </testcase>
+        <testcase name="verifyMethodCallWhenNoCallsBeenMadeForType" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="verifyMethodNotCalled" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="verifyMultipleMethodCallsWithDifferentSingleArgument" classname="formsfflib_ApexMocksTest" time="0.04">
+        </testcase>
+        <testcase name="verifyMultipleMethodCallsWithSameSingleArgument" classname="formsfflib_ApexMocksTest" time="0.09">
+        </testcase>
+        <testcase name="verifySingleMethodCallWithMultipleArguments" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="verifySingleMethodCallWithNoArguments" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="verifySingleMethodCallWithSingleArgument" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="whenMockIsGeneratedCanStubVerify" classname="formsfflib_ApexMocksTest" time="0.04">
+        </testcase>
+        <testcase name="whenMockIsGeneratedCanVerify" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="whenSetDoThrowWhenExceptionsValuesAreSet" classname="formsfflib_ApexMocksTest" time="0.01">
+        </testcase>
+        <testcase name="whenStubCallWithNoArgumentsShouldReturnStubbedValue" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="whenStubCustomMatchersCanBeUsed" classname="formsfflib_ApexMocksTest" time="0.05">
+        </testcase>
+        <testcase name="whenStubExceptionSameMethodWithMatchersAndNonMatchersShouldStubInOrder" classname="formsfflib_ApexMocksTest" time="0.05">
+        </testcase>
+        <testcase name="whenStubExceptionTheExceptionShouldBeThrown" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="whenStubExceptionWithMatchersShouldThrowException" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="whenStubMultipleCallsWithMatchersShouldReturnExpectedValues" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="whenStubMultipleCallsWithMultipleArgumentShouldReturnStubbedValues" classname="formsfflib_ApexMocksTest" time="0.06">
+        </testcase>
+        <testcase name="whenStubMultipleCallsWithSingleArgumentShouldReturnStubbedValues" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="whenStubMultipleVoidMethodsWithExceptionsThenExceptionsShouldBeThrown" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="whenStubNullConcreteArgValueCorrectValueIsReturned" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="whenStubSameCallWithDifferentArgumentValueShouldReturnLastStubbedValue" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="whenStubSameMethodWithMatchersAndNonMatchersShouldStubInOrder" classname="formsfflib_ApexMocksTest" time="0.04">
+        </testcase>
+        <testcase name="whenStubSingleCallWithNullReturnValueItShouldReturnNull" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="whenStubSingleCallWithSingleArgumentShouldReturnStubbedValue" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="whenStubVoidMethodWithExceptionAndCallMethodTwiceThenExceptionShouldBeThrownTwice" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="whenStubVoidMethodWithExceptionThenExceptionShouldBeThrown" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="whenStubWithMatcherAndNonMatcherArgumentsShouldThrowException" classname="formsfflib_ApexMocksTest" time="0.01">
+        </testcase>
+        <testcase name="whenVerifyCustomMatchersCanBeUsed" classname="formsfflib_ApexMocksTest" time="0.04">
+        </testcase>
+        <testcase name="whenVerifyMethodNeverCalledMatchersAreReset" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="whenVerifyMultipleCallsWithMatchersShouldReturnCorrectMethodCallCounts" classname="formsfflib_ApexMocksTest" time="0.03">
+        </testcase>
+        <testcase name="whenVerifyWithCombinedMatchersShouldReturnCorrectMethodCallCounts" classname="formsfflib_ApexMocksTest" time="0.09">
+        </testcase>
+        <testcase name="whenVerifyWithMatcherAndNonMatcherArgumentsShouldThrowException" classname="formsfflib_ApexMocksTest" time="0.02">
+        </testcase>
+        <testcase name="makeRelationship_GenericOverload_ReturnsObjectsWithRelationFieldSet" classname="formsfflib_ApexMocksUtilsTest" time="1.87">
+        </testcase>
+        <testcase name="makeRelationship_GenericOverload_ThrowsErrorOnInvalidChildType" classname="formsfflib_ApexMocksUtilsTest" time="0.1">
+        </testcase>
+        <testcase name="makeRelationship_GenericOverload_ThrowsErrorOnInvalidFieldName" classname="formsfflib_ApexMocksUtilsTest" time="0.1">
+        </testcase>
+        <testcase name="makeRelationship_GenericOverload_ThrowsErrorOnInvalidParentType" classname="formsfflib_ApexMocksUtilsTest" time="0.08">
+        </testcase>
+        <testcase name="makeRelationship_returnsObjectsWithRelationFieldSet" classname="formsfflib_ApexMocksUtilsTest" time="0.06">
+        </testcase>
+        <testcase name="setReadOnlyFields_CreatedByIdSetToCurrentUserId_IdFieldSetSuccessfully" classname="formsfflib_ApexMocksUtilsTest" time="0.02">
+        </testcase>
+        <testcase name="setReadOnlyFields_IsDeletedSetOnAccount_BooleanFieldSetSuccessfully" classname="formsfflib_ApexMocksUtilsTest" time="0.01">
+        </testcase>
+        <testcase name="setReadOnlyFields_LastReferencedDateSetOnAccount_DateTimeFieldSetSuccessfully" classname="formsfflib_ApexMocksUtilsTest" time="0.01">
+        </testcase>
+        <testcase name="callingDomainFactoryShouldGiveRegisteredImplsAndMocks" classname="formsfflib_ApplicationTest" time="0.09">
+        </testcase>
+        <testcase name="callingDomainFactoryWithContructorClassThatDoesNotSupportIConstructableShouldGiveException" classname="formsfflib_ApplicationTest" time="0.02">
+        </testcase>
+        <testcase name="callingDomainFactoryWithGenericListShouldGiveException" classname="formsfflib_ApplicationTest" time="0.01">
+        </testcase>
+        <testcase name="callingDomainFactoryWithIdsShouldGiveRegisteredImpls" classname="formsfflib_ApplicationTest" time="0.06">
+        </testcase>
+        <testcase name="callingDomainFactoryWithInAccessableConstructorShouldGiveException" classname="formsfflib_ApplicationTest" time="0.01">
+        </testcase>
+        <testcase name="callingDomainFactoryWithNoSObjectTypeShouldGiveException" classname="formsfflib_ApplicationTest" time="0.01">
+        </testcase>
+        <testcase name="callingMockedUnitOfWorkWithCustomDML" classname="formsfflib_ApplicationTest" time="0.03">
+        </testcase>
+        <testcase name="callingMockedUnitOfWorkWithCustomObjectTypesAndDML" classname="formsfflib_ApplicationTest" time="0.03">
+        </testcase>
+        <testcase name="callingSelectorFactorySelectByIdWithEmptyListShouldGiveException" classname="formsfflib_ApplicationTest" time="0.02">
+        </testcase>
+        <testcase name="callingSelectorFactorySelectByIdWithMixedIdTypeListShouldGiveException" classname="formsfflib_ApplicationTest" time="0.02">
+        </testcase>
+        <testcase name="callingSelectorFactoryShouldGiveRegisteredImpls" classname="formsfflib_ApplicationTest" time="0.02">
+        </testcase>
+        <testcase name="callingSelectoryFactorySelectByIdShouldReturnResults" classname="formsfflib_ApplicationTest" time="0.06">
+        </testcase>
+        <testcase name="callingSelectoryFactorySselectByRelationshipPassRelatedIds" classname="formsfflib_ApplicationTest" time="0.05">
+        </testcase>
+        <testcase name="callingServiceFactoryShouldGiveRegisteredImplsAndMockImpls" classname="formsfflib_ApplicationTest" time="0.02">
+        </testcase>
+        <testcase name="callingUnitOfWorkFactoryShouldGivenStandardImplsAndMockImpls" classname="formsfflib_ApplicationTest" time="0.03">
+        </testcase>
+        <testcase name="callingUnitOfWorkFactoryWithCustomTypesShouldGivenStandardImplsAndMockImpls" classname="formsfflib_ApplicationTest" time="0.02">
+        </testcase>
+        <testcase name="callingUnitOfWorkWithCustomDML" classname="formsfflib_ApplicationTest" time="0.04">
+        </testcase>
+        <testcase name="callingUnitOfWorkWithCustomObjectTypesAndDML" classname="formsfflib_ApplicationTest" time="0.03">
+        </testcase>
+        <testcase name="thatArgumentValueIsCaptured" classname="formsfflib_ArgumentCaptorTest" time="0.13">
+        </testcase>
+        <testcase name="thatArgumentValueIsCapturedWithInOrderVerification" classname="formsfflib_ArgumentCaptorTest" time="0.08">
+        </testcase>
+        <testcase name="thatCanHandleMultipleCapturesInOneMethodCall" classname="formsfflib_ArgumentCaptorTest" time="0.03">
+        </testcase>
+        <testcase name="thatCanHandleMultipleCapturesInOneMethodCallWithInOrderVerification" classname="formsfflib_ArgumentCaptorTest" time="0.03">
+        </testcase>
+        <testcase name="thatCanPerformFurtherAssertionsOnCapturedArgumentValue" classname="formsfflib_ArgumentCaptorTest" time="0.03">
+        </testcase>
+        <testcase name="thatCanPerformFurtherAssertionsOnCapturedArgumentValueWithInOrderVerification" classname="formsfflib_ArgumentCaptorTest" time="0.03">
+        </testcase>
+        <testcase name="thatCaptureAllArguments" classname="formsfflib_ArgumentCaptorTest" time="0.04">
+        </testcase>
+        <testcase name="thatCaptureAllArgumentsForTheVerifiedMethods" classname="formsfflib_ArgumentCaptorTest" time="0.05">
+        </testcase>
+        <testcase name="thatCaptureAllArgumentsForTheVerifiedMethodsWithInOrderVerification" classname="formsfflib_ArgumentCaptorTest" time="0.04">
+        </testcase>
+        <testcase name="thatCaptureAllArgumentsFromMultipleMethods" classname="formsfflib_ArgumentCaptorTest" time="0.05">
+        </testcase>
+        <testcase name="thatCaptureAllArgumentsFromMultipleMethodsWithInOrderVerification" classname="formsfflib_ArgumentCaptorTest" time="0.06">
+        </testcase>
+        <testcase name="thatCaptureAllArgumentswhenMethodIsCalledWithTheSameArgument" classname="formsfflib_ArgumentCaptorTest" time="0.05">
+        </testcase>
+        <testcase name="thatCaptureAllArgumentsWithInOrderVerification" classname="formsfflib_ArgumentCaptorTest" time="0.08">
+        </testcase>
+        <testcase name="thatCaptureArgumentFromRequestedParameter" classname="formsfflib_ArgumentCaptorTest" time="0.03">
+        </testcase>
+        <testcase name="thatCaptureArgumentFromRequestedParameterWithInOrderVerification" classname="formsfflib_ArgumentCaptorTest" time="0.03">
+        </testcase>
+        <testcase name="thatCaptureArgumentOnlyFromVerifiedMethod" classname="formsfflib_ArgumentCaptorTest" time="0.03">
+        </testcase>
+        <testcase name="thatCaptureArgumentOnlyFromVerifiedMethodWithInOrderVerification" classname="formsfflib_ArgumentCaptorTest" time="0.04">
+        </testcase>
+        <testcase name="thatCaptureLastArgument" classname="formsfflib_ArgumentCaptorTest" time="0.03">
+        </testcase>
+        <testcase name="thatCaptureLastArgumentWithInOrderVerification" classname="formsfflib_ArgumentCaptorTest" time="0.04">
+        </testcase>
+        <testcase name="thatCaptureOnlyMethodsThatMatchesWithOtherMatcherAsWell" classname="formsfflib_ArgumentCaptorTest" time="0.03">
+        </testcase>
+        <testcase name="thatCaptureOnlyMethodsThatMatchesWithOtherMatcherAsWellWithInOrderVerification" classname="formsfflib_ArgumentCaptorTest" time="0.03">
+        </testcase>
+        <testcase name="thatDoesNotCaptureAnythingWhenCaptorIsWrappedInAMatcher" classname="formsfflib_ArgumentCaptorTest" time="0.05">
+        </testcase>
+        <testcase name="thatDoesNotCaptureAnythingWhenCaptorIsWrappedInAMatcherWithInOrderVerification" classname="formsfflib_ArgumentCaptorTest" time="0.04">
+        </testcase>
+        <testcase name="thatDoesNotCaptureIfNotVerified" classname="formsfflib_ArgumentCaptorTest" time="0.02">
+        </testcase>
+        <testcase name="thatDoesNotCaptureIfNotVerifiedWithInOrderVerification" classname="formsfflib_ArgumentCaptorTest" time="0.03">
+        </testcase>
+        <testcase name="itShouldGenerateValidIDs" classname="formsfflib_IDGeneratorTest" time="0.06">
+        </testcase>
+        <testcase name="canInstantiateMultipleInterfaceInheritor" classname="formsfflib_InheritorTest" time="0.08">
+        </testcase>
+        <testcase name="canStubMultipleInterfaceInheritor" classname="formsfflib_InheritorTest" time="0.09">
+        </testcase>
+        <testcase name="thatMixedVerificationDoNotInterfierWithOtherImplementationChecking" classname="formsfflib_InOrderTest" time="0.12">
+        </testcase>
+        <testcase name="thatStrictVerificationCanBeEnforced" classname="formsfflib_InOrderTest" time="0.12">
+        </testcase>
+        <testcase name="thatStrictVerificationCanBeEnforcedWithOldNotation" classname="formsfflib_InOrderTest" time="0.11">
+        </testcase>
+        <testcase name="thatStrictVerificationCanBeEnforcedWithOldNotationUsingDefaultTimesOne" classname="formsfflib_InOrderTest" time="0.13">
+        </testcase>
+        <testcase name="thatStrictVerificationCanBePerformed" classname="formsfflib_InOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatTimesOneIsTheDefaultVerification" classname="formsfflib_InOrderTest" time="0.1">
+        </testcase>
+        <testcase name="thatVerifyAtLeastConsumeAllTheInstances" classname="formsfflib_InOrderTest" time="0.19">
+        </testcase>
+        <testcase name="thatVerifyAtLeastConsumeAllTheInstancesForOnlyTheMethodVerified" classname="formsfflib_InOrderTest" time="0.08">
+        </testcase>
+        <testcase name="thatVerifyAtLeastConsumesAllTheInstances2" classname="formsfflib_InOrderTest" time="0.07">
+        </testcase>
+        <testcase name="thatVerifyAtLeastOnce" classname="formsfflib_InOrderTest" time="0.03">
+        </testcase>
+        <testcase name="thatVerifyAtLeastOnceConsumesAllTheInstances" classname="formsfflib_InOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifyAtLeastOnceConsumesInstancesUntilLastMethodVerified" classname="formsfflib_InOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatVerifyAtLeastOnceThrowsErrorIfCalledLessTimes" classname="formsfflib_InOrderTest" time="0.03">
+        </testcase>
+        <testcase name="thatVerifyAtLeastPassWithMoreCallsThenAsserted" classname="formsfflib_InOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifyAtLeastPassWithSameCallsOfAssertion" classname="formsfflib_InOrderTest" time="0.07">
+        </testcase>
+        <testcase name="thatVerifyAtLeastThrowsErrorIfCalledLessTimes" classname="formsfflib_InOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifyAtMostThrowsExceptionBecauseNotImplemented" classname="formsfflib_InOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatVerifyBetweenThrowsExceptionBecauseNotImplemented" classname="formsfflib_InOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatVerifyInOrderAllTheMethodsCalled" classname="formsfflib_InOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifyInOrderCallMethodWithMatches" classname="formsfflib_InOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatVerifyInOrderCallMethodWithMatchesFailsIfVerifyACallAlreadyInTheMatcher" classname="formsfflib_InOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifyInOrderCallMethodWithMultipleMatches" classname="formsfflib_InOrderTest" time="0.07">
+        </testcase>
+        <testcase name="thatVerifyInOrderCallMethodWithMultipleMatchesMixed" classname="formsfflib_InOrderTest" time="0.07">
+        </testcase>
+        <testcase name="thatVerifyInOrderCallMethodWithMultipleMatchesMixedFailWhenMatcherHaveAlreadyVerifiedMethod" classname="formsfflib_InOrderTest" time="0.07">
+        </testcase>
+        <testcase name="thatVerifyInOrderCanHandleMixedInOrderInstance" classname="formsfflib_InOrderTest" time="0.14">
+        </testcase>
+        <testcase name="thatVerifyInOrderCanHandleMultipleMethodsCalls" classname="formsfflib_InOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatVerifyInOrderCanHandleMultipleMethodsCallsAndNotFailsIfVerifyCountIsGreaterThenExpected" classname="formsfflib_InOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatVerifyInOrderCanHandleMultipleMethodsCallsButFailsIfVerifyCountIsLessThenExpected" classname="formsfflib_InOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatVerifyInOrderCanHandleMultipleMocks" classname="formsfflib_InOrderTest" time="0.12">
+        </testcase>
+        <testcase name="thatVerifyInOrderCanSkipMethodsCalledUntilFindTheOneThatNeedsVerify" classname="formsfflib_InOrderTest" time="0.05">
+        </testcase>
+        <testcase name="thatVerifyInOrderDifferentMethodsCalledWithSameArguments" classname="formsfflib_InOrderTest" time="0.07">
+        </testcase>
+        <testcase name="thatVerifyInOrderDifferentMethodsCalledWithSameArgumentsDoubleCallFail" classname="formsfflib_InOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatVerifyInOrderDifferentMethodsCalledWithSameArgumentsOrderFail" classname="formsfflib_InOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatVerifyInOrderThrownExceptionIfVerifyMockInstanceNotInTheSet" classname="formsfflib_InOrderTest" time="0.03">
+        </testcase>
+        <testcase name="thatVerifyInOrderThrownExceptionWithCustomMessage" classname="formsfflib_InOrderTest" time="0.04">
+        </testcase>
+        <testcase name="thatVerifyNever" classname="formsfflib_InOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifyNeverFailsWhenCalled" classname="formsfflib_InOrderTest" time="0.07">
+        </testcase>
+        <testcase name="thatVerifyNeverFailsWhenCalledWithMatchers" classname="formsfflib_InOrderTest" time="0.07">
+        </testcase>
+        <testcase name="thatVerifyNeverWithMatchers" classname="formsfflib_InOrderTest" time="0.07">
+        </testcase>
+        <testcase name="thatVerifyNoInteractionsFails" classname="formsfflib_InOrderTest" time="0.02">
+        </testcase>
+        <testcase name="thatVerifyNoInteractionsPass" classname="formsfflib_InOrderTest" time="0.01">
+        </testcase>
+        <testcase name="thatVerifyNoMoreInteractionsFails" classname="formsfflib_InOrderTest" time="0.03">
+        </testcase>
+        <testcase name="thatVerifyNoMoreInteractionsFailsWhenNoInteracionOccurs" classname="formsfflib_InOrderTest" time="0.02">
+        </testcase>
+        <testcase name="thatVerifyNoMoreInteractionsFailsWhenOnLyOneMethodLeft" classname="formsfflib_InOrderTest" time="0.03">
+        </testcase>
+        <testcase name="thatVerifyNoMoreInteractionsPass" classname="formsfflib_InOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifyThrowsExceptionWhenCallsIsInvochedFromStandardMock" classname="formsfflib_InOrderTest" time="0.02">
+        </testcase>
+        <testcase name="thatVerifyTimes" classname="formsfflib_InOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifyTimesPassWhenAnotherMethodIsCalledBetweenMethodsCalls" classname="formsfflib_InOrderTest" time="0.08">
+        </testcase>
+        <testcase name="thatVerifyTimesPassWhenAnotherMethodIsCalledBetweenMethodsCalls2" classname="formsfflib_InOrderTest" time="0.09">
+        </testcase>
+        <testcase name="thatVerifyTimesPassWhenAnotherMethodIsCalledBetweenMethodsCalls3" classname="formsfflib_InOrderTest" time="0.13">
+        </testcase>
+        <testcase name="thatVerifyTimesPassWhenAnotherMethodIsCalledBetweenMethodsCalls4" classname="formsfflib_InOrderTest" time="0.13">
+        </testcase>
+        <testcase name="thatVerifyTimesThrowsExceptionIfCalledLessTimesThanExpected" classname="formsfflib_InOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifyTimesThrowsExceptionIfCalledMoreTimesThanExpected" classname="formsfflib_InOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatVerifyTimesThrowsExceptionWhenAnotherMethodIsCalledBetweenMethodsCalls" classname="formsfflib_InOrderTest" time="0.07">
+        </testcase>
+        <testcase name="thatWithOldNotation" classname="formsfflib_InOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatWithOldNotationPassWhenAnotherMethodIsCalledBetweenMethodsCalls" classname="formsfflib_InOrderTest" time="0.07">
+        </testcase>
+        <testcase name="thatWithOldNotationThrowsExceptionIfCalledLessTimesThanExpected" classname="formsfflib_InOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatWithOldNotationThrowsExceptionIfCalledMoreTimesThanExpected" classname="formsfflib_InOrderTest" time="0.06">
+        </testcase>
+        <testcase name="thatWithOldNotationThrowsExceptionWhenAnotherMethodIsCalledBetweenMethodsCalls" classname="formsfflib_InOrderTest" time="0.08">
+        </testcase>
+        <testcase name="verifyAtLeastAndCapture" classname="formsfflib_InOrderTest" time="0.05">
+        </testcase>
+        <testcase name="verifyCallsAndCapture" classname="formsfflib_InOrderTest" time="0.07">
+        </testcase>
+        <testcase name="verifyTimesAndCaptor" classname="formsfflib_InOrderTest" time="0.09">
+        </testcase>
+        <testcase name="constructDatetimeAfter_WithNullFromDatetime_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.46">
+        </testcase>
+        <testcase name="constructDatetimeAfter_WithNullInclusive_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="constructDatetimeBefore_WithNullInclusive_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="constructDatetimeBefore_WithNullToDatetime_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="constructDatetimeBetween_WithNullFromDatetime_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="constructDatetimeBetween_WithNullInclusiveFrom_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="constructDatetimeBetween_WithNullInclusiveTo_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="constructDatetimeBetween_WithNullToDatetime_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.19">
+        </testcase>
+        <testcase name="constructDecimalBetween_WithNullInclusiveLower_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="constructDecimalBetween_WithNullInclusiveUpper_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.17">
+        </testcase>
+        <testcase name="constructDecimalBetween_WithNullLower_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="constructDecimalBetween_WithNullUpper_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.16">
+        </testcase>
+        <testcase name="constructDecimalLessThan_WithNullInclusive_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="constructDecimalLessThan_WithNullToMatch_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="constructDecimalMoreThan_WithNullInclusive_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="constructDecimalMoreThan_WithNullToMatch_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="constructEq_WithNullArg_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="constructFieldSetEquivalentTo_WithNullFieldSet_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="constructRefEq_WithNullArg_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="constructSObjectOfType_WithNullArg_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="constructSObjectWithId_WithNullArg_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="constructSObjectWithName_WithNullArg_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="constructSObjectWith_WithEmptyArg_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="constructSObjectWith_WithNullArg_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="constructStringContains_WithNullArg_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="constructStringEndsWith_WithNullArg_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="constructStringMatches_WithNullArg_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="constructStringStartsWith_WithNullArg_ThrowsException" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenAnyBooleanMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenAnyDateMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenAnyDatetimeMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.12">
+        </testcase>
+        <testcase name="whenAnyDecimalMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="whenAnyDoubleMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="whenAnyFieldSetMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.77">
+        </testcase>
+        <testcase name="whenAnyIdMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenAnyIntegerMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="whenAnyListMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenAnyLongMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.47">
+        </testcase>
+        <testcase name="whenAnyObjectMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="whenAnySObjectFieldMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="whenAnySObjectMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenAnySObjectTypeMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="whenAnyStringMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenCombinedMatchesWithAllExpressionShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="whenCombinedMatchesWithAtLeastOneExpressionShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.17">
+        </testcase>
+        <testcase name="whenCombinedMatchesWithNoneExpressionShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="whenConstructingCombinedWithEmptyInternalMatchersShouldThrowException" classname="formsfflib_MatcherDefinitionsTest" time="0.2">
+        </testcase>
+        <testcase name="whenConstructingCombinedWithNullConnectiveExpressionShouldThrowException" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenConstructingCombinedWithNullInternalMatchersShouldThrowException" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="whenDatetimeAfterMatchesWithInclusiveShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenDatetimeAfterMatchesWithoutInclusiveShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenDatetimeBeforeMatchesWithInclusiveShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.16">
+        </testcase>
+        <testcase name="whenDatetimeBeforeMatchesWithoutInclusiveShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="whenDatetimeBetweenMatchesWithInclusiveFromWithoutInclusiveToShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="whenDatetimeBetweenMatchesWithInclusiveToWithoutInclusiveFromShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="whenDecimalBetweenMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="whenDecimalLessThanMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="whenDecimalMoreThanMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenEqMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.2">
+        </testcase>
+        <testcase name="whenFieldSetEquivalentToMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.56">
+        </testcase>
+        <testcase name="whenFieldSetEquivalentToWithoutFieldSetShouldNeverMatch" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="whenIsBlankWithMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenIsNotBlankWithMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="whenIsNotNullMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenIsNullMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.18">
+        </testcase>
+        <testcase name="whenListContainsMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.13">
+        </testcase>
+        <testcase name="whenListIsEmptyMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenRefEqMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="whenSObjectOfTypeMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.19">
+        </testcase>
+        <testcase name="whenSObjectsInAnyOrderWithMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.16">
+        </testcase>
+        <testcase name="whenSObjectsWithInOrderMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.16">
+        </testcase>
+        <testcase name="whenSObjectWithIdMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenSObjectWithMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenSObjectWithNameMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="whenStringContainsMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="whenStringEndsWithMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.19">
+        </testcase>
+        <testcase name="whenStringMatchesMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.15">
+        </testcase>
+        <testcase name="whenStringStartsWithMatchesShouldReturnCorrectResults" classname="formsfflib_MatcherDefinitionsTest" time="0.14">
+        </testcase>
+        <testcase name="allOfWith2ArgsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.09">
+        </testcase>
+        <testcase name="allOfWith3ArgsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="allOfWith4ArgsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="allOfWithEmptyArgsThrowsException" classname="formsfflib_MatchTest" time="0.02">
+        </testcase>
+        <testcase name="allOfWithListArgsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="allOfWithNoArgsThrowsException" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="allOfWithoutRegisteringInnerMatchersThrowsException" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyBooleanRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyDateRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyDatetimeRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyDecimalRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyDoubleRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyFieldSetRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyIdRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyIntegerRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyListRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyLongRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyObjectRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyOfWith2ArgsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyOfWith3ArgsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.02">
+        </testcase>
+        <testcase name="anyOfWith4ArgsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyOfWithListArgsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anySObjectFieldRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anySObjectRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anySObjectTypeRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="anyStringRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="dateAfterRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="dateBeforeRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="dateBetweenRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="datetimeAfterRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="datetimeBeforeRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="datetimeBetweenRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="decimalBetweenRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="decimalLessThanRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.07">
+        </testcase>
+        <testcase name="decimalMoreThanRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="doubleBetweenRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="doubleLessThanRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="doubleMoreThanRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="eqBooleanRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="eqDateRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="eqDatetimeRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="eqDecimalRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="eqDoubleRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="eqIdRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="eqIntegerRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="eqListRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="eqLongRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="eqRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="eqSObjectFieldRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.12">
+        </testcase>
+        <testcase name="eqSObjectTypeRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.03">
+        </testcase>
+        <testcase name="eqStringRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="fieldSetEquivalentToRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="2.54">
+        </testcase>
+        <testcase name="fieldSetEquivalentWithNullFieldSetThrowsException" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="integerBetweenRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="integerLessThanRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="integerMoreThanRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="isNotNullRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="isNotRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="isNullRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="listContainsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="listIsEmptyRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="longBetweenRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="longLessThanRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="longMoreThanRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="noneOfWith2ArgsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="noneOfWith3ArgsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="noneOfWith4ArgsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="noneOfWithListArgsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="refEqRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="sObjectOfTypeRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.03">
+        </testcase>
+        <testcase name="sObjectsWithMatchInOrderRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.03">
+        </testcase>
+        <testcase name="sObjectsWithRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.03">
+        </testcase>
+        <testcase name="sObjectWithIdRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="sObjectWithNameRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="sObjectWithRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.03">
+        </testcase>
+        <testcase name="stringContainsRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="stringEndsWithRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="stringIsBlankRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="stringIsNotBlankRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="stringMatchesRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="stringStartsWithRegistersCorrectMatcherType" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="whenMatchesAllArgsWithDifferentSizeArgValuesAndMatchersThrowsException" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="whenMatchesAllArgsWithManyMatchesReturnsTrue" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="whenMatchesAllArgsWithManyMismatchesReturnsFalse" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="whenMatchesAllArgsWithMatchesAndMismatchesReturnsFalse" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="whenMatchesAllArgsWithNullMatchersThrowsException" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="whenMatchesAllArgsWithNullMethodArgsArgValuesThrowsException" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="whenMatchesAllArgsWithNullMethodArgsThrowsException" classname="formsfflib_MatchTest" time="0.08">
+        </testcase>
+        <testcase name="whenMatchesAllArgsWithOneMatchReturnsTrue" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="whenMatchesAllArgsWithOneMismatchReturnsFalse" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="whenMatchesWithOneMatcherRegistersMatcher" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="whenMatchesWithOneMatcherReturnsNull" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="whenMatchesWithOneMatcherSetsMatchingToTrue" classname="formsfflib_MatchTest" time="0.01">
+        </testcase>
+        <testcase name="equalsReturnsExpectedResults" classname="formsfflib_MethodArgValuesTest" time="0.06">
+        </testcase>
+        <testcase name="hashCodeReturnsExpectedResults" classname="formsfflib_MethodArgValuesTest" time="0.02">
+        </testcase>
+        <testcase name="equalsReturnsExpectedResults" classname="formsfflib_QualifiedMethodTest" time="0.08">
+        </testcase>
+        <testcase name="equalsReturnsExpectedResultsForHasDependentMocks" classname="formsfflib_QualifiedMethodTest" time="0.02">
+        </testcase>
+        <testcase name="hashCodeReturnsExpectedResults" classname="formsfflib_QualifiedMethodTest" time="0.02">
+        </testcase>
+        <testcase name="hashCodeReturnsExpectedResultsForHasDependentMocks" classname="formsfflib_QualifiedMethodTest" time="0.02">
+        </testcase>
+        <testcase name="toStringReturnsExpectedResult" classname="formsfflib_QualifiedMethodTest" time="0.01">
+        </testcase>
+        <testcase name="addChildQueriesWithChildRelationshipNoAccessibleCheck_fail" classname="formsfflib_QueryFactoryTest" time="1.04">
+        </testcase>
+        <testcase name="addChildQueriesWithChildRelationshipNoAccessibleCheck_success" classname="formsfflib_QueryFactoryTest" time="0.22">
+        </testcase>
+        <testcase name="addChildQueriesWithChildRelationshipObjCheckIsAccessible_success" classname="formsfflib_QueryFactoryTest" time="0.17">
+        </testcase>
+        <testcase name="addChildQueriesWithChildRelationshipObj_success" classname="formsfflib_QueryFactoryTest" time="0.15">
+        </testcase>
+        <testcase name="addChildQueriesWithChildRelationship_success" classname="formsfflib_QueryFactoryTest" time="0.16">
+        </testcase>
+        <testcase name="addChildQueries_invalidChildRelationship" classname="formsfflib_QueryFactoryTest" time="0.18">
+        </testcase>
+        <testcase name="addChildQueries_invalidChildRelationshipTooDeep" classname="formsfflib_QueryFactoryTest" time="0.15">
+        </testcase>
+        <testcase name="addChildQueries_success" classname="formsfflib_QueryFactoryTest" time="0.88">
+        </testcase>
+        <testcase name="addChildQuerySameRelationshipAgain_success" classname="formsfflib_QueryFactoryTest" time="0.31">
+        </testcase>
+        <testcase name="checkFieldObjectReadSort_success" classname="formsfflib_QueryFactoryTest" time="0.14">
+        </testcase>
+        <testcase name="checkFieldRead_fail" classname="formsfflib_QueryFactoryTest" time="0.56">
+        </testcase>
+        <testcase name="checkObjectRead_fail" classname="formsfflib_QueryFactoryTest" time="0.32">
+        </testcase>
+        <testcase name="deepCloneBasic" classname="formsfflib_QueryFactoryTest" time="0.03">
+        </testcase>
+        <testcase name="deepCloneBasicNoChanges" classname="formsfflib_QueryFactoryTest" time="0.02">
+        </testcase>
+        <testcase name="deepCloneSubquery" classname="formsfflib_QueryFactoryTest" time="0.13">
+        </testcase>
+        <testcase name="deepCloneSubqueryNoChanges" classname="formsfflib_QueryFactoryTest" time="0.04">
+        </testcase>
+        <testcase name="deterministic_toSOQL" classname="formsfflib_QueryFactoryTest" time="0.15">
+        </testcase>
+        <testcase name="duplicateFieldSelection" classname="formsfflib_QueryFactoryTest" time="0.02">
+        </testcase>
+        <testcase name="equalityCheck" classname="formsfflib_QueryFactoryTest" time="0.02">
+        </testcase>
+        <testcase name="fieldSelections" classname="formsfflib_QueryFactoryTest" time="0.14">
+        </testcase>
+        <testcase name="invalidCrossObjectField" classname="formsfflib_QueryFactoryTest" time="0.14">
+        </testcase>
+        <testcase name="invalidFields_noQueryField" classname="formsfflib_QueryFactoryTest" time="0.01">
+        </testcase>
+        <testcase name="invalidFields_nullToken" classname="formsfflib_QueryFactoryTest" time="0.01">
+        </testcase>
+        <testcase name="invalidFields_string" classname="formsfflib_QueryFactoryTest" time="0.01">
+        </testcase>
+        <testcase name="invalidFieldTests" classname="formsfflib_QueryFactoryTest" time="0.02">
+        </testcase>
+        <testcase name="invalidField_nullToken" classname="formsfflib_QueryFactoryTest" time="0.01">
+        </testcase>
+        <testcase name="invalidField_string" classname="formsfflib_QueryFactoryTest" time="0.01">
+        </testcase>
+        <testcase name="nonReferenceField" classname="formsfflib_QueryFactoryTest" time="0.12">
+        </testcase>
+        <testcase name="ordering" classname="formsfflib_QueryFactoryTest" time="0.02">
+        </testcase>
+        <testcase name="queryFieldsNotEquals" classname="formsfflib_QueryFactoryTest" time="0.01">
+        </testcase>
+        <testcase name="queryWith_noFields" classname="formsfflib_QueryFactoryTest" time="0.02">
+        </testcase>
+        <testcase name="setOrdering_ReplacesPreviousOrderingsWithExpectedOrdering" classname="formsfflib_QueryFactoryTest" time="0.13">
+        </testcase>
+        <testcase name="simpleFieldCondition" classname="formsfflib_QueryFactoryTest" time="0.01">
+        </testcase>
+        <testcase name="simpleFieldSelection" classname="formsfflib_QueryFactoryTest" time="0.02">
+        </testcase>
+        <testcase name="testSoql_unsortedSelectFields" classname="formsfflib_QueryFactoryTest" time="0.13">
+        </testcase>
+        <testcase name="readonly_field_access" classname="formsfflib_SecurityUtilsTest" time="1.06">
+        </testcase>
+        <testcase name="readonly_objectAndField_access" classname="formsfflib_SecurityUtilsTest" time="0.3">
+        </testcase>
+        <testcase name="readonly_object_access" classname="formsfflib_SecurityUtilsTest" time="0.33">
+        </testcase>
+        <testcase name="sysadmin_objectAndField_access" classname="formsfflib_SecurityUtilsTest" time="0.24">
+        </testcase>
+        <testcase name="FieldsMap" classname="formsfflib_SObjectDescribeTest" time="0.16">
+        </testcase>
+        <testcase name="flushCache" classname="formsfflib_SObjectDescribeTest" time="0.03">
+        </testcase>
+        <testcase name="getAccountDescribes" classname="formsfflib_SObjectDescribeTest" time="0.03">
+        </testcase>
+        <testcase name="getDescribe_badInput" classname="formsfflib_SObjectDescribeTest" time="0.01">
+        </testcase>
+        <testcase name="GlobalDescribeMap" classname="formsfflib_SObjectDescribeTest" time="0.01">
+        </testcase>
+        <testcase name="NamespacedAttributeMap_implementations" classname="formsfflib_SObjectDescribeTest" time="0.34">
+        </testcase>
+        <testcase name="rawGlobalDescribeCheck" classname="formsfflib_SObjectDescribeTest" time="0.06">
+        </testcase>
+        <testcase name="simpleAccountFieldDescribe" classname="formsfflib_SObjectDescribeTest" time="0.01">
+        </testcase>
+        <testcase name="simpleAccountFieldSetDescribe" classname="formsfflib_SObjectDescribeTest" time="0.01">
+        </testcase>
+        <testcase name="simpleAccountGetNameField" classname="formsfflib_SObjectDescribeTest" time="0.02">
+        </testcase>
+        <testcase name="itShouldReturnTheChangedRecordsBySObjectFields" classname="formsfflib_SObjectDomainTest" time="0.1">
+        </testcase>
+        <testcase name="itShouldReturnTheChangedRecordsByStringFields" classname="formsfflib_SObjectDomainTest" time="0.02">
+        </testcase>
+        <testcase name="testDisableTriggerEventsBehaviour" classname="formsfflib_SObjectDomainTest" time="0.06">
+        </testcase>
+        <testcase name="testErrorLogging" classname="formsfflib_SObjectDomainTest" time="0.01">
+        </testcase>
+        <testcase name="testGetChangedFieldsAsStrings" classname="formsfflib_SObjectDomainTest" time="0.02">
+        </testcase>
+        <testcase name="testInsertValidationFailedWithoutDML" classname="formsfflib_SObjectDomainTest" time="0.02">
+        </testcase>
+        <testcase name="testObjectSecurity" classname="formsfflib_SObjectDomainTest" time="0.38">
+        </testcase>
+        <testcase name="testOnAfterUndeleteWithoutDML" classname="formsfflib_SObjectDomainTest" time="0.02">
+        </testcase>
+        <testcase name="testOnBeforeDeleteWithoutDML" classname="formsfflib_SObjectDomainTest" time="0.02">
+        </testcase>
+        <testcase name="testOnValidateBehaviorDefault" classname="formsfflib_SObjectDomainTest" time="0.02">
+        </testcase>
+        <testcase name="testOnValidateBehaviorOld" classname="formsfflib_SObjectDomainTest" time="0.02">
+        </testcase>
+        <testcase name="testRecursiveTriggerState" classname="formsfflib_SObjectDomainTest" time="0.03">
+        </testcase>
+        <testcase name="testTriggerState" classname="formsfflib_SObjectDomainTest" time="0.02">
+        </testcase>
+        <testcase name="testUpdateValidationFailedWithoutDML" classname="formsfflib_SObjectDomainTest" time="0.02">
+        </testcase>
+        <testcase name="testValidationWithoutDML" classname="formsfflib_SObjectDomainTest" time="0.02">
+        </testcase>
+        <testcase name="testAssertIsAccessible" classname="formsfflib_SObjectSelectorTest" time="0.5">
+        </testcase>
+        <testcase name="testCRUDOff" classname="formsfflib_SObjectSelectorTest" time="0.29">
+        </testcase>
+        <testcase name="testDefaultConfig" classname="formsfflib_SObjectSelectorTest" time="0.02">
+        </testcase>
+        <testcase name="testGetSObjectName" classname="formsfflib_SObjectSelectorTest" time="0.01">
+        </testcase>
+        <testcase name="testQueryLocatorById" classname="formsfflib_SObjectSelectorTest" time="0.16">
+        </testcase>
+        <testcase name="testSelectSObjectsById" classname="formsfflib_SObjectSelectorTest" time="0.11">
+        </testcase>
+        <testcase name="testSOQL" classname="formsfflib_SObjectSelectorTest" time="0.04">
+        </testcase>
+        <testcase name="testWithOrderingNullsLast" classname="formsfflib_SObjectSelectorTest" time="0.04">
+        </testcase>
+        <testcase name="testWithoutSorting" classname="formsfflib_SObjectSelectorTest" time="0.03">
+        </testcase>
+        <testcase name="testDerivedUnitOfWork_CommitDMLFail" classname="formsfflib_SObjectUnitOfWorkTest" time="0.2">
+        </testcase>
+        <testcase name="testDerivedUnitOfWork_CommitDoWorkFail" classname="formsfflib_SObjectUnitOfWorkTest" time="0.12">
+        </testcase>
+        <testcase name="testDerivedUnitOfWork_CommitSuccess" classname="formsfflib_SObjectUnitOfWorkTest" time="1.98">
+        </testcase>
+        <testcase name="testRegisterDirty_ExpectReplacement" classname="formsfflib_SObjectUnitOfWorkTest" time="0.24">
+        </testcase>
+        <testcase name="testRegisterDirty_field" classname="formsfflib_SObjectUnitOfWorkTest" time="0.2">
+        </testcase>
+        <testcase name="testRegisterUpsert" classname="formsfflib_SObjectUnitOfWorkTest" time="0.24">
+        </testcase>
+        <testcase name="testUnitOfWorkEmail" classname="formsfflib_SObjectUnitOfWorkTest" time="0.18">
+        </testcase>
+        <testcase name="testUnitOfWorkNewDirtyDelete" classname="formsfflib_SObjectUnitOfWorkTest" time="2.66">
+        </testcase>
+        <testcase name="testCommaDelimitedBuilder1" classname="formsfflib_StringBuilderTest" time="0.09">
+        </testcase>
+        <testcase name="testCommaDelimitedBuilder2" classname="formsfflib_StringBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="testCommanDelimitedBuilderWithAlternativeDelimiter" classname="formsfflib_StringBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="testCommanDelimitedBuilderWithAlternativeDelimiterAndPrefix" classname="formsfflib_StringBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="testCommanDelimitedBuilderWithItemPrefix" classname="formsfflib_StringBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="testfflib_StringBuilder1" classname="formsfflib_StringBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="testfflib_StringBuilder2" classname="formsfflib_StringBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="testFieldListBuilder" classname="formsfflib_StringBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="testMultiCurrencyFieldListBuilder" classname="formsfflib_StringBuilderTest" time="0.01">
+        </testcase>
+        <testcase name="assertEquals_WithCombinedMatcher_ShouldPass" classname="formsfflib_SystemTest" time="0.07">
+        </testcase>
+        <testcase name="assertEquals_WithCustomMessage_WithCombinedMatcher_ShouldPass" classname="formsfflib_SystemTest" time="0.01">
+        </testcase>
+        <testcase name="assertEquals_WithCustomMessage_WithMatch_ShouldPass" classname="formsfflib_SystemTest" time="0.01">
+        </testcase>
+        <testcase name="assertEquals_WithCustomMessage_WithMismatch_ShouldThrowException" classname="formsfflib_SystemTest" time="0.01">
+        </testcase>
+        <testcase name="assertEquals_WithCustomMessage_WithNoMatchers_ShouldThrowException" classname="formsfflib_SystemTest" time="0.01">
+        </testcase>
+        <testcase name="assertEquals_WithCustomMessage_WithTooManyMatchers_ShouldThrowException" classname="formsfflib_SystemTest" time="0.01">
+        </testcase>
+        <testcase name="assertEquals_WithMatch_ShouldPass" classname="formsfflib_SystemTest" time="0.01">
+        </testcase>
+        <testcase name="assertEquals_WithMismatch_ShouldThrowException" classname="formsfflib_SystemTest" time="0.01">
+        </testcase>
+        <testcase name="assertEquals_WithNoMatchers_ShouldThrowException" classname="formsfflib_SystemTest" time="0.01">
+        </testcase>
+        <testcase name="assertEquals_WithTooManyMatchers_ShouldThrowException" classname="formsfflib_SystemTest" time="0.01">
+        </testcase>
+        <testcase name="shouldDeleteForm" classname="formsFormSummaryControllerUnitTest" time="1.02">
+        </testcase>
+        <testcase name="shouldDeleteFormResponse" classname="formsFormSummaryControllerUnitTest" time="0.17">
+        </testcase>
+        <testcase name="shouldGetAnswerColumns" classname="formsFormSummaryControllerUnitTest" time="0.04">
+        </testcase>
+        <testcase name="shouldGetForm" classname="formsFormSummaryControllerUnitTest" time="0.08">
+        </testcase>
+        <testcase name="shouldGetFormResponses" classname="formsFormSummaryControllerUnitTest" time="0.05">
+        </testcase>
+        <testcase name="shouldNotDeleteForm" classname="formsFormSummaryControllerUnitTest" time="0.07">
+        </testcase>
+        <testcase name="shouldPublishForm" classname="formsFormSummaryControllerUnitTest" time="0.22">
+        </testcase>
+        <testcase name="shouldUpdateJob" classname="formsJobsResourceUnitTest" time="0">
+        </testcase>
+        <testcase name="shouldGetRecords" classname="formsRecordsSyncResourceUnitTest" time="0.01">
+        </testcase>
+        <testcase name="shouldConnectionSearch" classname="formsResponseControllerUnitTest" time="0.14">
+        </testcase>
+        <testcase name="shouldCreateResponse" classname="formsResponseControllerUnitTest" time="0.27">
+        </testcase>
+        <testcase name="shouldFormSearch" classname="formsResponseControllerUnitTest" time="0.03">
+        </testcase>
+        <testcase name="shouldGetConnections" classname="formsResponseControllerUnitTest" time="0.01">
+        </testcase>
+        <testcase name="shouldGetQuestions" classname="formsResponseControllerUnitTest" time="0.32">
+        </testcase>
+        <testcase name="shouldGetResponse" classname="formsResponseControllerUnitTest" time="0.54">
+        </testcase>
+        <testcase name="shouldGetResponses" classname="formsResponseControllerUnitTest" time="0.56">
+        </testcase>
+        <testcase name="shouldSaveResponse" classname="formsResponseControllerUnitTest" time="0.5">
+        </testcase>
+        <testcase name="shouldSubmitResponse" classname="formsResponseControllerUnitTest" time="1.06">
+        </testcase>
+        <testcase name="shouldDeleteResponses" classname="formsResponsesResourceUnitTest" time="0.46">
+        </testcase>
+        <testcase name="shouldUpdateResponses" classname="formsResponsesResourceUnitTest" time="0.31">
+        </testcase>
+        <testcase name="shouldCreateConnect" classname="formsSetupControllerUnitTest" time="0">
+        </testcase>
+        <testcase name="shouldGetSetup" classname="formsSetupControllerUnitTest" time="0">
+        </testcase>
+        <testcase name="shouldRegisterUsers" classname="formsSetupControllerUnitTest" time="0">
+        </testcase>
+    </testsuite>
+</testsuites>

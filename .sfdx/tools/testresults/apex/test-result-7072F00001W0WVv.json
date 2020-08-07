@@ -1,0 +1,46 @@
+{
+    "summary": {
+        "outcome": "Failed",
+        "testsRan": 1,
+        "passing": 0,
+        "failing": 1,
+        "skipped": 0,
+        "passRate": "0%",
+        "failRate": "100%",
+        "testStartTime": "Aug 2, 2020 2:12 PM",
+        "testExecutionTime": "1489 ms",
+        "testTotalTime": "1489 ms",
+        "commandTime": "11122 ms",
+        "hostname": "https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com",
+        "orgId": "00D2F000000AiZOUA0",
+        "username": "test-lanivcw2dtmk@example.com",
+        "testRunId": "7072F00001W0WVv",
+        "userId": "0052F000006JcZ3QAK"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v49.0/tooling/sobjects/ApexTestResult/07M2F00000Bsl21UAB"
+            },
+            "Id": "07M2F00000Bsl21UAB",
+            "QueueItemId": "7092F000001Mjd7QAC",
+            "StackTrace": "Class.forms.ConnectionCreateJobTest.shouldCreateOpportunityConnectionFromCustomValue: line 134, column 1",
+            "Message": "System.AssertException: Assertion Failed: Expected: 2, Actual: 3",
+            "AsyncApexJobId": "7072F00001W0WVvQAN",
+            "MethodName": "shouldCreateOpportunityConnectionFromCustomValue",
+            "Outcome": "Fail",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v49.0/tooling/sobjects/ApexClass/01p2F000005itlYQAQ"
+                },
+                "Id": "01p2F000005itlYQAQ",
+                "Name": "ConnectionCreateJobTest",
+                "NamespacePrefix": "forms"
+            },
+            "RunTime": 1489,
+            "FullName": "ConnectionCreateJobTest.shouldCreateOpportunityConnectionFromCustomValue"
+        }
+    ]
+}

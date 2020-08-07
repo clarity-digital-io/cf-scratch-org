@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2020-08-02T15:29:21-05:00" hostname="https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com" tests="1" failures="0"  errors="0"  time="1.26">
+        <properties>
+            <property name="outcome" value="Passed"/>
+            <property name="testsRan" value="1"/>
+            <property name="passing" value="1"/>
+            <property name="failing" value="0"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="100%"/>
+            <property name="failRate" value="0%"/>
+            <property name="testStartTime" value="Aug 2, 2020 3:29 PM"/>
+            <property name="testExecutionTime" value="1.26 s"/>
+            <property name="testTotalTime" value="1.26 s"/>
+            <property name="commandTime" value="8.27 s"/>
+            <property name="hostname" value="https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com"/>
+            <property name="orgId" value="00D2F000000AiZOUA0"/>
+            <property name="username" value="test-lanivcw2dtmk@example.com"/>
+            <property name="testRunId" value="7072F00001W0ZKb"/>
+            <property name="userId" value="0052F000006JcZ3QAK"/>
+        </properties>
+        <testcase name="shouldUpdateProcessToFailed" classname="formsConnectionCreateJobTest" time="1.26">
+        </testcase>
+    </testsuite>
+</testsuites>

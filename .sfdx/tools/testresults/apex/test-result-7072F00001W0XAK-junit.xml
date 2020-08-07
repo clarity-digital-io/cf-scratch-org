@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2020-08-02T14:39:56-05:00" hostname="https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com" tests="1" failures="1"  errors="0"  time="0.57">
+        <properties>
+            <property name="outcome" value="Failed"/>
+            <property name="testsRan" value="1"/>
+            <property name="passing" value="0"/>
+            <property name="failing" value="1"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="0%"/>
+            <property name="failRate" value="100%"/>
+            <property name="testStartTime" value="Aug 2, 2020 2:39 PM"/>
+            <property name="testExecutionTime" value="0.57 s"/>
+            <property name="testTotalTime" value="0.57 s"/>
+            <property name="commandTime" value="7.77 s"/>
+            <property name="hostname" value="https://inspiration-computing-6472-dev-ed.cs91.my.salesforce.com"/>
+            <property name="orgId" value="00D2F000000AiZOUA0"/>
+            <property name="username" value="test-lanivcw2dtmk@example.com"/>
+            <property name="testRunId" value="7072F00001W0XAK"/>
+            <property name="userId" value="0052F000006JcZ3QAK"/>
+        </properties>
+        <testcase name="shouldCreateOpportunityConnectionFromCustomValue" classname="formsConnectionCreateJobTest" time="0.57">
+            <failure message="System.DmlException: Update failed. First exception on row 0 with id a0G2F000004LxZQUA0; first error: INSUFFICIENT_ACCESS_ON_CROSS_REFERENCE_ENTITY, Access to entity &#39;ActivityRecurrence2&#39; denied: []"><![CDATA[Class.forms.fflib_SecureDML.dmlUpdate: line 73, column 1
+Class.forms.fflib_SObjectUnitOfWork.updateDmlByType: line 770, column 1
+Class.forms.fflib_SObjectUnitOfWork.doCommitWork: line 710, column 1
+Class.forms.fflib_SObjectUnitOfWork.commitWork: line 686, column 1
+Class.forms.ResponsesServiceImpl.save: line 128, column 1
+Class.forms.ResponsesService.save: line 36, column 1
+Class.forms.ConnectionCreateJobTest.shouldCreateOpportunityConnectionFromCustomValue: line 127, column 1]]></failure>
+        </testcase>
+    </testsuite>
+</testsuites>
