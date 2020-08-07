@@ -33,6 +33,16 @@ sfdx force:mdapi:deploy \
     -l NoTestRun \
     -w 15
 
+## Delete Packages
+
+sfdx force:mdapi:deploy -d destructiveChanges -u PkgOrg -l NoTestRun -w 15
+
+sfdx force:mdapi:deploy \
+    -d mdapi-source/updated-package \
+    -u PkgOrg \
+    -l NoTestRun \
+    -w 15
+
     NoTestRun
     RunLocalTests
 

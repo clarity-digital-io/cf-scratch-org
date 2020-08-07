@@ -41,19 +41,23 @@ public class ResponsesUnitofWorkHelper implements fflib_SObjectUnitOfWork.IDoWor
 
 		Map<String, Schema.SObjectField> responseSObjectFields = responseType.getDescribe().fields.getMap();
 
-		String connectedName = 'forms__' + genericObjectName + '__c'; 
+		String connectedName = genericObjectName + '__c'; 
 
-		List<Response__c> updateResponses = new List<Response__c>();
+		if(responseSObjectFields.containsKey(connectedName)) {
 
-		for(Response__c response : responses) {
+			List<Response__c> updateResponses = new List<Response__c>();
 
-			Response__c newResponse = (Response__c)Schema.Response__c.getSObjectType().newSObject(response.Id); 
-			newResponse.put(connectedName, connection_record.Id);
-			updateResponses.add(newResponse);
-
+			for(Response__c response : responses) {
+	
+				Response__c newResponse = (Response__c)Schema.Response__c.getSObjectType().newSObject(response.Id); 
+				newResponse.put(connectedName, connection_record.Id);
+				updateResponses.add(newResponse);
+	
+			}
+	
+			ResponseResults = Database.upsert(updateResponses, false);  
+			
 		}
-
-		ResponseResults = Database.upsert(updateResponses, false);  
 
 		connection_status.Status__c = 'Success';
 		connection_status.Salesforce_Connection_Object__c = connection_record.Id;

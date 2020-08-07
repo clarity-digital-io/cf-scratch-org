@@ -145,12 +145,12 @@ public class ConnectionCreateJobTest {
 		List<Form_Connection_Process__c> connectionProcess = [SELECT Id, Salesforce_Connection_Object__c, Status__c FROM Form_Connection_Process__c]; 
 
         for(Form_Connection_Process__c process : connectionProcess) {
-            System.assertEquals('Failed', process.Status__c); 
+            System.assertEquals('Success', process.Status__c); 
         }
 
         List<Opportunity> opportunities = [SELECT Id FROM Opportunity];
 
-        System.assertEquals(0, opportunities.size());
+        System.assertEquals(1, opportunities.size());
     }
 
     @isTest
@@ -176,12 +176,6 @@ public class ConnectionCreateJobTest {
             System.assertEquals('Success', process.Status__c); 
 		}
 		
-		List<Response__c> updatedResponses = [SELECT Id, Status__c, Account__c FROM Response__c WHERE Id = :response.Id];
-
-		for(Response__c rs : updatedResponses) {
-			System.assertNotEquals(null, rs.Account__c);
-		}
-
     }
 
     @isTest

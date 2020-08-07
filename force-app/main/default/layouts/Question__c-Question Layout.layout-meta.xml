@@ -120,14 +120,6 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Flow__c.Question__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Flow_Design__c.Question__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
         <relatedList>Question_Criteria__c.Question__c</relatedList>
     </relatedLists>
     <relatedLists>

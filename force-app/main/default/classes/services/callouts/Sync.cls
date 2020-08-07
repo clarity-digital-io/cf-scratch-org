@@ -51,21 +51,18 @@ public class Sync {
 
 	}
 
-	public static HttpResponse connectPublishedForms(List<Form__c> forms, String organizationId) {
+	public static HttpResponse connectPublishedForms(Connect connect, String organizationId) {
 
 		Mobile_API__mdt api = getAPI();
 
 		Http http = new Http();
 		HttpRequest request = new HttpRequest();
 		request.setEndpoint(api.URL__c + '/forms/' + organizationId);
-		request.setBody(JSON.serialize(forms));
+		request.setBody(JSON.serialize(connect));
 		request.setHeader('Content-Type', 'application/json');
 		request.setMethod('POST');
 		HttpResponse response = http.send(request);
 
-		// if (response.getStatusCode() == 200) {
-		// 	form.Sync_Status__c = 'Complete'; 
-		// }
 		return response; 
 	}
 
