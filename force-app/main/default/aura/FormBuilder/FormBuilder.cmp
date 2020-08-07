@@ -1,14 +1,3 @@
-<aura:component controller="FormController" implements="lightning:actionOverride,force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable,force:appHostable">
-    
-    <lightning:overlayLibrary aura:id="overlayLib"/>
+<aura:component>
 
-    <aura:attribute access="global" name="recordId" type="String" required="true" default=""/>
-	<aura:attribute name="loading" type="Boolean"/>
-
-	<aura:if isTrue="{! v.loading }">
-        <lightning:spinner alternativeText="Loading" />
-        <aura:set attribute="else">
-			<lightning:container src="{!$Resource.ClarityFormsBuilder + '/index.html?recordId=' + v.recordId}" onmessage="{!c.handleMessage}" />
-        </aura:set>
-    </aura:if>  
 </aura:component>

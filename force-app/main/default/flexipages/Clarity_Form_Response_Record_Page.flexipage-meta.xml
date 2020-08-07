@@ -2,24 +2,6 @@
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <componentInstances>
-            <componentName>FormHeader</componentName>
-        </componentInstances>
-        <name>header</name>
-        <type>Region</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>recordId</name>
-                <value>default</value>
-            </componentInstanceProperties>
-            <componentName>FormResponseView</componentName>
-        </componentInstances>
-        <name>main</name>
-        <type>Region</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <componentInstances>
             <componentInstanceProperties>
                 <name>parentFieldApiName</name>
                 <value>Response__c.Id</value>
