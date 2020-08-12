@@ -3,79 +3,103 @@ public class ResponseControllerUnitTest {
 
 	@TestSetup
 	public static void setup(){
+
+		User user = TestDataFactory.generateUserWithBuilderPermissions(); 
+
+		System.runAs(user) {
 		
-		Form__c form = TestDataFactory.generateForm(); 
+			Form__c form = TestDataFactory.generateForm(); 
 
-		Form__c updatedForm = FormsService.updateForm(form);
+			Form__c updatedForm = FormsService.updateForm(form);
 
-		List<Question__c> newQuestions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
+			List<Question__c> newQuestions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
 
-		List<Question__c> questions = QuestionsService.saveQuestions(newQuestions);
+			List<Question__c> questions = QuestionsService.saveQuestions(newQuestions);
 
-		updatedForm.Status__c = 'Published';
+			updatedForm.Status__c = 'Published';
 
-		Form__c publishedForm = FormsService.updateForm(updatedForm);
+			Form__c publishedForm = FormsService.updateForm(updatedForm);
+
+		}
 
 	}
 
 	@isTest
     public static void shouldCreateResponse() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
-
-		Id existingFormId = existingForm.Id; 
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
 		
-		Test.startTest();
+		System.runAs(user) {
 
-			Response__c response = ResponseController.createResponse( existingFormId, JSON.serialize(new Map<String, String>()) );
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		Test.stopTest();
-		
-		System.assertEquals(existingFormId, response.Form__c);
+			Id existingFormId = existingForm.Id; 
+			
+			Test.startTest();
+
+				Response__c response = ResponseController.createResponse( existingFormId, JSON.serialize(new Map<String, String>()) );
+
+			Test.stopTest();
+			
+			System.assertEquals(existingFormId, response.Form__c);
+
+		}
 
 	}
 
 	@isTest
     public static void shouldGetResponse() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Id existingFormId = existingForm.Id; 
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		Response__c newResponse = ResponseController.createResponse( existingFormId, JSON.serialize(new Map<String, String>()) );
+			Id existingFormId = existingForm.Id; 
 
-		Test.startTest();
+			Response__c newResponse = ResponseController.createResponse( existingFormId, JSON.serialize(new Map<String, String>()) );
 
-			Response__c response = ResponseController.getResponse( newResponse.Id );
+			Test.startTest();
 
-		Test.stopTest();
+				Response__c response = ResponseController.getResponse( newResponse.Id );
 
-		System.assertEquals(newResponse.Id, response.Id);
+			Test.stopTest();
+
+			System.assertEquals(newResponse.Id, response.Id);
+
+		}
 
 	}
 	
 	@isTest
     public static void shouldGetResponses() {
 
-		Account newAccount = new Account(Name = 'Test Class');
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		insert newAccount;
+			Account newAccount = new Account(Name = 'Test Class');
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+			insert newAccount;
 
-		Id existingFormId = existingForm.Id; 
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		Map<String, String> connectionRecordIds = new Map<String, String>{ 'Account' => newAccount.Id };
+			Id existingFormId = existingForm.Id; 
 
-		Response__c newResponse = ResponseController.createResponse( existingFormId, JSON.serialize(connectionRecordIds) );
+			Map<String, String> connectionRecordIds = new Map<String, String>{ 'Account' => newAccount.Id };
 
-		Test.startTest();
+			Response__c newResponse = ResponseController.createResponse( existingFormId, JSON.serialize(connectionRecordIds) );
 
-			List<Response__c> responses = ResponseController.getResponses( newAccount.Id );
+			Test.startTest();
 
-		Test.stopTest();
+				List<Response__c> responses = ResponseController.getResponses( newAccount.Id );
 
-		System.assertEquals(newAccount.Id, responses[0].Account__c);
+			Test.stopTest();
+
+			System.assertEquals(newAccount.Id, responses[0].Account__c);
+
+		}
 
 	}
 	
@@ -88,111 +112,141 @@ public class ResponseControllerUnitTest {
 	@isTest
     public static void shouldGetQuestions() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Id existingFormId = existingForm.Id; 
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<Question__c> existingQuestions = [SELECT Id FROM Question__c];
+			Id existingFormId = existingForm.Id; 
 
-		Test.startTest();
+			List<Question__c> existingQuestions = [SELECT Id FROM Question__c];
 
-			List<Question__c> questions = ResponseController.getQuestions( existingFormId );
+			Test.startTest();
 
-		Test.stopTest();
+				List<Question__c> questions = ResponseController.getQuestions( existingFormId );
 
-		System.assertEquals(existingQuestions.size(), questions.size());
+			Test.stopTest();
+
+			System.assertEquals(existingQuestions.size(), questions.size());
+
+		}
 
 	}
 	
 	@isTest
     public static void shouldSaveResponse() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
-
-		Id existingFormId = existingForm.Id; 
-
-		Response__c response = ResponseController.createResponse( existingFormId, null );
-
-		List<Question__c> questions = [SELECT Id, Title__c FROM Question__c LIMIT 3];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
 		
-		Map<String,String> answers = TestDataFactory.generateAnswers(response, questions);
+		System.runAs(user) {
 
-		String sAnswers = JSON.serialize(answers);
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		Test.startTest();
+			Id existingFormId = existingForm.Id; 
 
-			Id savedResponseId = ResponseController.saveResponse( response.Id, sAnswers, 'In Progress' );
+			Response__c response = ResponseController.createResponse( existingFormId, null );
 
-		Test.stopTest();
+			List<Question__c> questions = [SELECT Id, Title__c FROM Question__c LIMIT 3];
+			
+			Map<String,String> answers = TestDataFactory.generateAnswers(response, questions);
 
-		List<Answer__c> updatedAnswers = [SELECT Id FROM Answer__c WHERE Response__c =: savedResponseId];
+			String sAnswers = JSON.serialize(answers);
 
-		System.assertEquals(answers.size(), updatedAnswers.size());
+			Test.startTest();
+
+				Id savedResponseId = ResponseController.saveResponse( response.Id, sAnswers, 'In Progress' );
+
+			Test.stopTest();
+
+			List<Answer__c> updatedAnswers = [SELECT Id FROM Answer__c WHERE Response__c =: savedResponseId];
+
+			System.assertEquals(answers.size(), updatedAnswers.size());
+
+		}
 
 	}
 	
 	@isTest
     public static void shouldSubmitResponse() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
-
-		Id existingFormId = existingForm.Id; 
-
-		Response__c response = ResponseController.createResponse( existingFormId, null );
-
-		List<Question__c> questions = [SELECT Id, Title__c FROM Question__c LIMIT 3];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
 		
-		Map<String,String> answers = TestDataFactory.generateAnswers(response, questions);
+		System.runAs(user) {
 
-		String sAnswers = JSON.serialize(answers);
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		Test.startTest();
+			Id existingFormId = existingForm.Id; 
 
-			Id savedResponseId = ResponseController.saveResponse( response.Id, sAnswers, 'Submitted' );
+			Response__c response = ResponseController.createResponse( existingFormId, null );
 
-		Test.stopTest();
+			List<Question__c> questions = [SELECT Id, Title__c FROM Question__c LIMIT 3];
+			
+			Map<String,String> answers = TestDataFactory.generateAnswers(response, questions);
 
-		List<Answer__c> updatedAnswers = [SELECT Id FROM Answer__c WHERE Response__c =: savedResponseId];
+			String sAnswers = JSON.serialize(answers);
 
-		System.assertEquals(answers.size(), updatedAnswers.size());
+			Test.startTest();
+
+				Id savedResponseId = ResponseController.saveResponse( response.Id, sAnswers, 'Submitted' );
+
+			Test.stopTest();
+
+			List<Answer__c> updatedAnswers = [SELECT Id FROM Answer__c WHERE Response__c =: savedResponseId];
+
+			System.assertEquals(answers.size(), updatedAnswers.size());
+
+		}
 
 	}
 	
 	@isTest
     public static void shouldFormSearch() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Id existingFormId = existingForm.Id; 
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		Test.startTest();
+			Id existingFormId = existingForm.Id; 
 
-			List<LookupSearchResult> results = ResponseController.formSearch( 'Clarity', new List<String>() );
+			Test.startTest();
 
-		Test.stopTest();
+				List<LookupSearchResult> results = ResponseController.formSearch( 'Clarity', new List<String>() );
 
-		System.assertEquals(results[0].id, existingFormId);
+			Test.stopTest();
+
+			System.assertEquals(results[0].id, existingFormId);
+
+		}
 
 	}
 	
 	@isTest
     public static void shouldConnectionSearch() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
-
-		Id existingFormId = existingForm.Id; 
-
-		Account newAccount = new Account(Name = 'Test Class');
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
 		
-		insert newAccount;
+		System.runAs(user) {
 
-		Test.startTest();
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-			List<LookupSearchResult> results = ResponseController.connectionSearch( 'Test', new List<String>(), 'Account');
+			Id existingFormId = existingForm.Id; 
 
-		Test.stopTest();
+			Account newAccount = new Account(Name = 'Test Class');
+			
+			insert newAccount;
 
-		System.assertEquals(results[0].id, newAccount.Id);
+			Test.startTest();
+
+				List<LookupSearchResult> results = ResponseController.connectionSearch( 'Test', new List<String>(), 'Account');
+
+			Test.stopTest();
+
+			System.assertEquals(results[0].id, newAccount.Id);
+
+		}
 
     }
 }

@@ -3,43 +3,55 @@ public class AppsResourceUnitTest {
 
 	@TestSetup
 	public static void setup(){
+
+		User user = TestDataFactory.generateUserWithBuilderPermissions(); 
+
+		System.runAs(user) {
 		
-		List<Checklist_Group__c> groups = TestDataFactory.generateChecklistGroups(3);
+			List<Checklist_Group__c> groups = TestDataFactory.generateChecklistGroups(3);
 
-		insert groups; 
+			insert groups; 
 
-		List<Form__c> forms = TestDataFactory.generateFormsWithGroup(groups); 
+			List<Form__c> forms = TestDataFactory.generateFormsWithGroup(groups); 
 
-		upsert forms; 
+			upsert forms; 
 
-		List<Account> accounts = TestDataFactory.generateApps(groups);
+			List<Account> accounts = TestDataFactory.generateApps(groups);
 
-		insert accounts;
+			insert accounts;
 
-		Account account = new Account(
-			Name = 'No Group'
-		);
+			Account account = new Account(
+				Name = 'No Group'
+			);
 
-		insert account; 
+			insert account; 
+
+		}
 
 	}
 
 	@isTest
 	public static void shouldGetApps() {
 
-		List<Account> accounts = [SELECT Id FROM Account];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
 
-		System.assertEquals(accounts.size(), 4);
-		
-		RestRequest request = new RestRequest();
+		System.runAs(user) {
 
-		request.httpMethod = 'GET';
-		RestContext.request = request;
+			List<Account> accounts = [SELECT Id FROM Account];
 
-		List<App> apps = AppsResource.getApps();
+			System.assertEquals(accounts.size(), 4);
+			
+			RestRequest request = new RestRequest();
 
-		//return number of apps (accounts in this case with checklist);
-		System.assertEquals(accounts.size() - 1, apps.size());
+			request.httpMethod = 'GET';
+			RestContext.request = request;
+
+			List<App> apps = AppsResource.getApps();
+
+			//return number of apps (accounts in this case with checklist);
+			System.assertEquals(accounts.size() - 1, apps.size());
+
+		}
 
 	} 
 	

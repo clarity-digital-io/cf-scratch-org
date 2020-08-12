@@ -3,143 +3,192 @@ public class FormSummaryControllerUnitTest {
 	
 	@TestSetup
 	static void setup(){
+
+		User user = TestDataFactory.generateUserWithBuilderPermissions(); 
+
+		System.runAs(user) {
+
+			Form__c form = TestDataFactory.generateForm(); 
+
+			List<Question__c> newQuestions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
+	
+			BuilderController.save(JSON.serialize(newQuestions));
+	
+			ResponseController.createResponse(form.Id, JSON.serialize(new Map<String, String>()));
+
+		}
 		
-		Form__c form = TestDataFactory.generateForm(); 
-
-		List<Question__c> newQuestions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
-
-		BuilderController.save(JSON.serialize(newQuestions));
-
-		ResponseController.createResponse(form.Id, JSON.serialize(new Map<String, String>()));
-
 	}
 
 	@isTest
 	public static void shouldGetForm() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Id formId = existingForm.Id; 
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		Test.startTest();
+			Id formId = existingForm.Id; 
 
-			Form__c form = FormSummaryController.getForm(formId);
+			Test.startTest();
 
-		Test.stopTest();
+				Form__c form = FormSummaryController.getForm(formId);
 
-		System.assertEquals(formId, form.Id);
+			Test.stopTest();
+
+			System.assertEquals(formId, form.Id);
+
+		}
 
 	}
 
 	@isTest
 	public static void shouldGetFormResponses() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Id formId = existingForm.Id; 
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<Response__c> existingResponses = [SELECT Id FROM Response__c];
+			Id formId = existingForm.Id; 
 
-		Test.startTest();
+			List<Response__c> existingResponses = [SELECT Id FROM Response__c];
 
-			List<Response__c> responses = FormSummaryController.getFormResponses(formId);
+			Test.startTest();
 
-		Test.stopTest();
+				List<Response__c> responses = FormSummaryController.getFormResponses(formId);
 
-		System.assertEquals(existingResponses.size(), responses.size());
+			Test.stopTest();
+
+			System.assertEquals(existingResponses.size(), responses.size());
+
+		}
 
 	}
 
 	@isTest
 	public static void shouldDeleteFormResponse() {
 
-		Response__c existingResponse = [SELECT Id FROM Response__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Test.startTest();
+			Response__c existingResponse = [SELECT Id FROM Response__c LIMIT 1];
 
-			String deletedResponseId = FormSummaryController.deleteFormResponse(existingResponse.Id);
+			Test.startTest();
 
-		Test.stopTest();
+				String deletedResponseId = FormSummaryController.deleteFormResponse(existingResponse.Id);
 
-		System.assertEquals(existingResponse.Id, Id.valueOf(deletedResponseId));
+			Test.stopTest();
+
+			System.assertEquals(existingResponse.Id, Id.valueOf(deletedResponseId));
+
+		}
 
 	}
 
 	@isTest
 	public static void shouldNotDeleteForm() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Id formId = existingForm.Id; 
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		Test.startTest();
+			Id formId = existingForm.Id; 
 
-			try {
-				String deletedFormId = FormSummaryController.deleteForm(formId);
-			} catch (AuraHandledException e) {
-				System.assertEquals('Script-thrown exception', e.getMessage());
-			}
-			
-		Test.stopTest();
+			Test.startTest();
+
+				try {
+					String deletedFormId = FormSummaryController.deleteForm(formId);
+				} catch (AuraHandledException e) {
+					System.assertEquals('Script-thrown exception', e.getMessage());
+				}
+				
+			Test.stopTest();
+
+		}
 
 	}
 
 	@isTest
 	public static void shouldDeleteForm() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Id formId = existingForm.Id; 
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		Response__c existingResponse = [SELECT Id FROM Response__c LIMIT 1];
+			Id formId = existingForm.Id; 
 
-		String deletedResponseId = FormSummaryController.deleteFormResponse(existingResponse.Id);
+			Response__c existingResponse = [SELECT Id FROM Response__c LIMIT 1];
 
-		Test.startTest();
+			String deletedResponseId = FormSummaryController.deleteFormResponse(existingResponse.Id);
 
-			String deletedFormId = FormSummaryController.deleteForm(formId);
+			Test.startTest();
 
-		Test.stopTest();
+				String deletedFormId = FormSummaryController.deleteForm(formId);
 
-		System.assertEquals(formId, Id.valueOf(deletedFormId));
+			Test.stopTest();
+
+			System.assertEquals(formId, Id.valueOf(deletedFormId));
+
+		}
 
 	}
 
 	@isTest
 	public static void shouldPublishForm() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Id formId = existingForm.Id; 
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		Test.startTest();
+			Id formId = existingForm.Id; 
 
-			Form__c form = FormSummaryController.publishForm(formId);
+			Test.startTest();
 
-		Test.stopTest();
+				Form__c form = FormSummaryController.publishForm(formId);
 
-		System.assertEquals('Published', form.Status__c);
+			Test.stopTest();
+
+			System.assertEquals('Published', form.Status__c);
+
+		}
 
 	}
 
 	@isTest
 	public static void shouldGetAnswerColumns() {
 
-		Form__c form = [SELECT Id FROM Form__c Limit 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-        Response__c response = [SELECT Id FROM Response__c Limit 1];
+			Form__c form = [SELECT Id FROM Form__c Limit 1];
 
-		List<Question__c> questions = [SELECT Id, Type__c, Title__c FROM Question__c];
+			Response__c response = [SELECT Id FROM Response__c Limit 1];
 
-		TestDataFactory.generateAnswers(response, questions);
+			List<Question__c> questions = [SELECT Id, Type__c, Title__c FROM Question__c];
 
-		Test.startTest();
+			TestDataFactory.generateAnswers(response, questions);
 
-			//Map<String, List<Map<String, String>>> answers = FormSummaryController.getAnswerColumns(form.Id);
+			Test.startTest();
 
-		Test.stopTest();
+				//Map<String, List<Map<String, String>>> answers = FormSummaryController.getAnswerColumns(form.Id);
 
-		//System.assertNotEquals(true, answers.size() == 0);
+			Test.stopTest();
+
+			//System.assertNotEquals(true, answers.size() == 0);
+
+		}
+		
 	}
 
 }

@@ -4,11 +4,17 @@ public class SetupControllerUnitTest {
 	@TestSetup
 	public static void setup(){
 		
-		Form__c form = TestDataFactory.generateForm(); 
-		
-		List<Question__c> newQuestions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
+		User user = TestDataFactory.generateUserWithBuilderPermissions(); 
 
-		BuilderController.save(JSON.serialize(newQuestions));
+		System.runAs(user) {
+
+			Form__c form = TestDataFactory.generateForm(); 
+			
+			List<Question__c> newQuestions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
+
+			BuilderController.save(JSON.serialize(newQuestions));
+
+		}
 		
 	}
 

@@ -1,5 +1,53 @@
 public class TestDataFactory {
 
+	public static User generateUserWithBuilderPermissions() {
+
+		Profile p = [SELECT Id FROM Profile WHERE Name = 'Standard User']; 
+
+		User user = new User(
+			Alias = 'test_cl', 
+			Email= 'test@clarityforms.io',
+			EmailEncodingKey='UTF-8', 
+			LastName='Testing', 
+			LanguageLocaleKey='en_US', 
+			LocaleSidKey='en_US', 
+			ProfileId = p.Id, 
+			TimeZoneSidKey='America/New_York', 
+			UserName= 'test_cl@clarityforms.io'
+		); 
+
+		insert user; 
+
+		PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = 'Clarity_Forms_Builder' LIMIT 1];
+		
+		insert new PermissionSetAssignment(AssigneeId = user.id, PermissionSetId = ps.Id);
+
+		return user; 
+
+	}
+
+	public static User generateUserWithNoPermissions() {
+
+		Profile p = [SELECT Id FROM Profile WHERE Name = 'Standard User']; 
+
+		User user = new User(
+			Alias = 'test_cln', 
+			Email= 'test_cln@clarityforms.io',
+			EmailEncodingKey='UTF-8', 
+			LastName='Testing', 
+			LanguageLocaleKey='en_US', 
+			LocaleSidKey='en_US', 
+			ProfileId = p.Id, 
+			TimeZoneSidKey='America/New_York', 
+			UserName= 'test_cln@clarityforms.io'
+		); 
+
+		insert user; 
+
+		return user; 
+
+	}
+
     public static Form__c generateForm(){
 		
 		Form__c form = FormsService.updateForm(new Form__c(Title__c = 'Clarity Form', Status__c = 'Draft'));

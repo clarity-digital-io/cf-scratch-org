@@ -4,11 +4,17 @@ public class BuilderControllerUnitTest {
 	@TestSetup
 	static void setup(){
 
-		Form__c form = TestDataFactory.generateForm(); 
-		
-		List<Question__c> newQuestions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
+		User user = TestDataFactory.generateUserWithBuilderPermissions(); 
 
-		BuilderController.save(JSON.serialize(newQuestions));
+		System.runAs(user) {
+
+			Form__c form = TestDataFactory.generateForm(); 
+			
+			List<Question__c> newQuestions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
+
+			BuilderController.save(JSON.serialize(newQuestions));
+
+		}
 
 	}
 
@@ -16,89 +22,119 @@ public class BuilderControllerUnitTest {
     @isTest
     public static void shouldSave() {
 
-		List<Form__c> forms = [SELECT Id FROM Form__c];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
 		
-		List<Question__c> newQuestions = TestDataFactory.generateQuestions(forms);
-		
-		Test.startTest();
+		System.runAs(user) {
 
-			List<String> questionIds = BuilderController.save(JSON.serialize(newQuestions));
+			List<Form__c> forms = [SELECT Id FROM Form__c];
+			
+			List<Question__c> newQuestions = TestDataFactory.generateQuestions(forms);
+			
+			Test.startTest();
 
-		Test.stopTest();
+				List<String> questionIds = BuilderController.save(JSON.serialize(newQuestions));
 
-		System.assertEquals(newQuestions.size(), questionIds.size());
+			Test.stopTest();
+
+			System.assertEquals(newQuestions.size(), questionIds.size());
+			
+		}
 
 	}
 
     @isTest
     public static void shouldGetForm() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
-
-		Id existingFormId = existingForm.Id; 
-
-		Test.startTest();
-
-			Form__c form = BuilderController.getForm(existingFormId);
-
-		Test.stopTest();
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
 		
-		System.assertEquals(existingFormId, form.Id);
+		System.runAs(user) {
+
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+
+			Id existingFormId = existingForm.Id; 
+
+			Test.startTest();
+
+				Form__c form = BuilderController.getForm(existingFormId);
+
+			Test.stopTest();
+			
+			System.assertEquals(existingFormId, form.Id);
+
+		}
 		
     }
 		
 	@isTest
     public static void shouldUpdateForm() {
 
-		Form__c form = [SELECT Id, Status__c FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
 		
-		form.Status__c = 'Published';
-		
-		Test.startTest();
+		System.runAs(user) {
 
-			Form__c updatedForm = BuilderController.updateForm(JSON.serialize(form));
+			Form__c form = [SELECT Id, Status__c FROM Form__c LIMIT 1];
+			
+			form.Status__c = 'Published';
+			
+			Test.startTest();
 
-		Test.stopTest();
+				Form__c updatedForm = BuilderController.updateForm(JSON.serialize(form));
 
-		System.assertEquals('Published', updatedForm.Status__c);
+			Test.stopTest();
+
+			System.assertEquals('Published', updatedForm.Status__c);
+
+		}
 
 	}
 	
 	@isTest
     public static void shouldGetQuestions() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Id existingFormId = existingForm.Id; 
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		Test.startTest();
+			Id existingFormId = existingForm.Id; 
 
-			List<Question__c> questions = BuilderController.getQuestions(existingFormId);
+			Test.startTest();
 
-		Test.stopTest();
+				List<Question__c> questions = BuilderController.getQuestions(existingFormId);
 
-		List<Question__c> existingQuestions = [SELECT Id FROM Question__c];
+			Test.stopTest();
 
-		System.assertEquals(questions.size(), existingQuestions.size());
+			List<Question__c> existingQuestions = [SELECT Id FROM Question__c];
+
+			System.assertEquals(questions.size(), existingQuestions.size());
+
+		}
 
     }
 		
 	@isTest
     public static void shouldSaveQuestion() {
 
-		List<Form__c> forms = [SELECT Id FROM Form__c];
-
-		List<Question__c> questions = TestDataFactory.generateQuestions(forms);
-
-		Question__c question = questions[0];
-
-		question.Title__c = 'Save Test';
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
 		
-		String questionId = BuilderController.saveQuestion(JSON.serialize(question));
+		System.runAs(user) {
 
-		Question__c updatedQuestion = [SELECT Id, Title__c FROM Question__c WHERE Id = :questionId LIMIT 1];
+			List<Form__c> forms = [SELECT Id FROM Form__c];
 
-		System.assertEquals('Save Test', updatedQuestion.Title__c);
+			List<Question__c> questions = TestDataFactory.generateQuestions(forms);
+
+			Question__c question = questions[0];
+
+			question.Title__c = 'Save Test';
+			
+			String questionId = BuilderController.saveQuestion(JSON.serialize(question));
+
+			Question__c updatedQuestion = [SELECT Id, Title__c FROM Question__c WHERE Id = :questionId LIMIT 1];
+
+			System.assertEquals('Save Test', updatedQuestion.Title__c);
+
+		}
 
 
 	}
@@ -106,69 +142,87 @@ public class BuilderControllerUnitTest {
 	@isTest
     public static void shouldSaveQuestionWithOptions() {
 
-		Form__c form = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		List<Question__c> expectedQuestions = [SELECT Id FROM Question__c WHERE Type__c = 'Dropdown']; 
+			Form__c form = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(expectedQuestions);
+			List<Question__c> expectedQuestions = [SELECT Id FROM Question__c WHERE Type__c = 'Dropdown']; 
 
-		String sQuestion = JSON.serialize(expectedQuestions[0]); 
+			List<Question_Option__c> optionsCreate = TestDataFactory.generateQuestionOptions(expectedQuestions);
 
-		String sQuestionOptions = JSON.serialize(optionsCreate); 
+			String sQuestion = JSON.serialize(expectedQuestions[0]); 
 
-		Test.startTest();
+			String sQuestionOptions = JSON.serialize(optionsCreate); 
 
-        	Map<String, List<sObject>> options = BuilderController.saveQuestionWithOptions(sQuestion, sQuestionOptions);
+			Test.startTest();
 
-		Test.stopTest();
+				Map<String, List<sObject>> options = BuilderController.saveQuestionWithOptions(sQuestion, sQuestionOptions);
 
-		System.assertEquals(1, options.get('Options').size());
+			Test.stopTest();
+
+			System.assertEquals(1, options.get('Options').size());
+
+		}
 		
 	}
 	
 	@isTest
     public static void shouldSaveQuestionWithCriteria() {
 
-		Form__c form = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		List<Question__c> questions = [SELECT Id, Type__c FROM Question__c Limit 3]; 
+			Form__c form = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<Question_Criteria__c> criteria = TestDataFactory.generateQuestionCriteria(questions);
+			List<Question__c> questions = [SELECT Id, Type__c FROM Question__c Limit 3]; 
 
-		String sQuestion = JSON.serialize(questions[0]); 
+			List<Question_Criteria__c> criteria = TestDataFactory.generateQuestionCriteria(questions);
 
-		String sCriteria = JSON.serialize(criteria); 
+			String sQuestion = JSON.serialize(questions[0]); 
 
-		Test.startTest();
+			String sCriteria = JSON.serialize(criteria); 
 
-			Map<String, List<sObject>> options = BuilderController.saveQuestionWithCriteria(sQuestion, sCriteria);
+			Test.startTest();
 
-		Test.stopTest();
+				Map<String, List<sObject>> options = BuilderController.saveQuestionWithCriteria(sQuestion, sCriteria);
 
-		System.assertEquals(2, options.get('Criteria').size());
+			Test.stopTest();
+
+			System.assertEquals(2, options.get('Criteria').size());
+
+		}
 
 	}
 	
 	@isTest
     public static void shouldSaveRecordGroupFields() {
 
-		Form__c form = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Question__c recordGroup = TestDataFactory.generateRecordGroup(form);
+			Form__c form = [SELECT Id FROM Form__c LIMIT 1];
 
-		String relatedRecordGroupId = BuilderController.saveQuestion(JSON.serialize(recordGroup));
+			Question__c recordGroup = TestDataFactory.generateRecordGroup(form);
 
-		List<Question__c> recordGroupFields = TestDataFactory.generateRecordGroupFields(recordGroup);
+			String relatedRecordGroupId = BuilderController.saveQuestion(JSON.serialize(recordGroup));
 
-		String sRecordGroupFields = JSON.serialize(recordGroupFields); 
+			List<Question__c> recordGroupFields = TestDataFactory.generateRecordGroupFields(recordGroup);
 
-		Test.startTest();
+			String sRecordGroupFields = JSON.serialize(recordGroupFields); 
 
-			List<Question__c> newFields = BuilderController.saveRecordGroupFields(sRecordGroupFields, relatedRecordGroupId);
+			Test.startTest();
 
-		Test.stopTest();
+				List<Question__c> newFields = BuilderController.saveRecordGroupFields(sRecordGroupFields, relatedRecordGroupId);
 
-		System.assertEquals(recordGroupFields.size(), newFields.size());
+			Test.stopTest();
+
+			System.assertEquals(recordGroupFields.size(), newFields.size());
+
+		}
 
 
 	}
@@ -176,27 +230,33 @@ public class BuilderControllerUnitTest {
 	@isTest
     public static void shouldGetConnections() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Id formId = existingForm.Id; 
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<String> connectionObjects = new List<String>{ 'Opportunity', 'Case' };
+			Id formId = existingForm.Id; 
 
-		List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, formId, connectionObjects);
+			List<String> connectionObjects = new List<String>{ 'Opportunity', 'Case' };
 
-		List<Form_Connection__c> removedConnections = new List<Form_Connection__c>();
+			List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, formId, connectionObjects);
 
-		List<String> connect = new List<String>{ JSON.serialize(connections), formId, JSON.serialize(removedConnections) };
+			List<Form_Connection__c> removedConnections = new List<Form_Connection__c>();
 
-		List<Form_Connection__c> savedConnections = BuilderController.saveConnections(connect);
+			List<String> connect = new List<String>{ JSON.serialize(connections), formId, JSON.serialize(removedConnections) };
 
-		Test.startTest();
+			List<Form_Connection__c> savedConnections = BuilderController.saveConnections(connect);
 
-			List<Form_Connection__c> newConnections = BuilderController.getConnections(formId);
+			Test.startTest();
 
-		Test.stopTest();
+				List<Form_Connection__c> newConnections = BuilderController.getConnections(formId);
 
-		System.assertEquals(savedConnections.size(), newConnections.size());
+			Test.stopTest();
+
+			System.assertEquals(savedConnections.size(), newConnections.size());
+
+		}
 		
     }
 		
@@ -226,56 +286,68 @@ public class BuilderControllerUnitTest {
 	@isTest
     public static void shouldSaveConnections() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Id formId = existingForm.Id; 
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<String> connectionObjects = new List<String>{ 'Opportunity', 'Case' };
+			Id formId = existingForm.Id; 
 
-		List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, formId, new List<String>{ 'Opportunity', 'Case' });
+			List<String> connectionObjects = new List<String>{ 'Opportunity', 'Case' };
 
-		List<Form_Connection__c> removedConnections = new List<Form_Connection__c>();
+			List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, formId, new List<String>{ 'Opportunity', 'Case' });
 
-		List<String> connect = new List<String>{ JSON.serialize(connections), formId, JSON.serialize(removedConnections) };
+			List<Form_Connection__c> removedConnections = new List<Form_Connection__c>();
 
-		Test.startTest();
+			List<String> connect = new List<String>{ JSON.serialize(connections), formId, JSON.serialize(removedConnections) };
 
-			List<Form_Connection__c> savedConnections = BuilderController.saveConnections(connect);
+			Test.startTest();
 
-		Test.stopTest();
+				List<Form_Connection__c> savedConnections = BuilderController.saveConnections(connect);
 
-		System.assertEquals(connections.size(), savedConnections.size());
+			Test.stopTest();
+
+			System.assertEquals(connections.size(), savedConnections.size());
+
+		}
 
 	}
 	
 	@isTest
     public static void shouldSaveActiveFieldConnections() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		Id formId = existingForm.Id; 
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, formId, new List<String>{ 'Opportunity' });
+			Id formId = existingForm.Id; 
 
-		List<Form_Connection__c> removedConnections = new List<Form_Connection__c>();
+			List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, formId, new List<String>{ 'Opportunity' });
 
-		List<String> connect = new List<String>{ JSON.serialize(connections), formId, JSON.serialize(removedConnections) };
+			List<Form_Connection__c> removedConnections = new List<Form_Connection__c>();
 
-		List<Form_Connection__c> savedConnections = BuilderController.saveConnections(connect);
+			List<String> connect = new List<String>{ JSON.serialize(connections), formId, JSON.serialize(removedConnections) };
 
-		List<Question__c> questions = [SELECT Id FROM Question__c WHERE Type__c = 'Dropdown' LIMIT 1]; 
+			List<Form_Connection__c> savedConnections = BuilderController.saveConnections(connect);
 
-		List<Form_Connection_Field__c> fields = TestDataFactory.generateConnectionFields(savedConnections[0].Id, new Map<String, String>{'ForecastCategoryName' =>  questions[0].Id });
+			List<Question__c> questions = [SELECT Id FROM Question__c WHERE Type__c = 'Dropdown' LIMIT 1]; 
 
-		String sFields = JSON.serialize(fields); 
+			List<Form_Connection_Field__c> fields = TestDataFactory.generateConnectionFields(savedConnections[0].Id, new Map<String, String>{'ForecastCategoryName' =>  questions[0].Id });
 
-		Test.startTest();
+			String sFields = JSON.serialize(fields); 
 
-			Map<String, List<Object>> activeFieldConnections = BuilderController.saveActiveFieldConnections(sFields, savedConnections[0].Id);
+			Test.startTest();
 
-		Test.stopTest();
+				Map<String, List<Object>> activeFieldConnections = BuilderController.saveActiveFieldConnections(sFields, savedConnections[0].Id);
 
-		System.assertEquals(1, activeFieldConnections.get('Mapping').size());
+			Test.stopTest();
+
+			System.assertEquals(1, activeFieldConnections.get('Mapping').size());
+
+		}
 
 
 	}
@@ -288,30 +360,42 @@ public class BuilderControllerUnitTest {
 	@isTest
     public static void shouldDeleteQuestion() {
 
-		List<Question__c> questions = [SELECT Id FROM Question__c]; 
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		System.assertEquals(36, questions.size());
+			List<Question__c> questions = [SELECT Id FROM Question__c]; 
 
-		String sQuestions = JSON.serialize(questions); 
+			System.assertEquals(36, questions.size());
 
-		Test.startTest();
+			String sQuestions = JSON.serialize(questions); 
 
-			List<Question__c> questionsLeft = BuilderController.deleteQuestion(sQuestions, questions[0].Id);
+			Test.startTest();
 
-		Test.stopTest();
+				List<Question__c> questionsLeft = BuilderController.deleteQuestion(sQuestions, questions[0].Id);
 
-		System.assertEquals(questions.size() - 1, questionsLeft.size());
+			Test.stopTest();
+
+			System.assertEquals(questions.size() - 1, questionsLeft.size());
+
+		}
 
 	}
 	
 	@isTest
     public static void shoulGetSObjectsAvailable() {
 
-		Map<String, Map<String, Map<String, String>>> fields = BuilderController.getSObjectFields('Account');
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-		System.assertNotEquals(fields.get('Required'), null);
+			Map<String, Map<String, Map<String, String>>> fields = BuilderController.getSObjectFields('Account');
 
-		System.assertNotEquals(fields.get('NotRequired'), null);
+			System.assertNotEquals(fields.get('Required'), null);
+
+			System.assertNotEquals(fields.get('NotRequired'), null);
+
+		}
 
     }
 		

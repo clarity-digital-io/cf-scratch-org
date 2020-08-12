@@ -4,97 +4,116 @@ public class ResponsesResourceUnitTest {
 	@TestSetup
 	public static void setup(){
 		
-		Form__c form = TestDataFactory.generateForm(); 
+		User user = TestDataFactory.generateUserWithBuilderPermissions(); 
 
-		Form__c updatedForm = FormsService.updateForm(form);
+		System.runAs(user) {
 
-		List<Question__c> newQuestions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
+			Form__c form = TestDataFactory.generateForm(); 
 
-		List<Question__c> questions = QuestionsService.saveQuestions(newQuestions);
+			Form__c updatedForm = FormsService.updateForm(form);
 
-		updatedForm.Status__c = 'Published';
+			List<Question__c> newQuestions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
 
-		Form__c publishedForm = FormsService.updateForm(updatedForm);
+			List<Question__c> questions = QuestionsService.saveQuestions(newQuestions);
 
-		Response__c response = ResponseController.createResponse( publishedForm.Id, JSON.serialize(new Map<String, String>()) );
+			updatedForm.Status__c = 'Published';
 
-		Response__c response2 = ResponseController.createResponse( publishedForm.Id, JSON.serialize(new Map<String, String>()) );
+			Form__c publishedForm = FormsService.updateForm(updatedForm);
+
+			Response__c response = ResponseController.createResponse( publishedForm.Id, JSON.serialize(new Map<String, String>()) );
+
+			Response__c response2 = ResponseController.createResponse( publishedForm.Id, JSON.serialize(new Map<String, String>()) );
+
+		}
 	}
 
 	@isTest
 	public static void shouldDeleteResponses() {
 		
-		List<Response__c> responses = [SELECT Id, UUID__c FROM Response__c];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
 
-		System.assertEquals(2, responses.size());
+		System.runAs(user) {
 
-		List<String> uuids = new List<String>();
+			List<Response__c> responses = [SELECT Id, UUID__c FROM Response__c];
 
-		for(Response__c response : responses) {
-			uuids.add(response.UUID__c);
+			System.assertEquals(2, responses.size());
+
+			List<String> uuids = new List<String>();
+
+			for(Response__c response : responses) {
+				uuids.add(response.UUID__c);
+			}
+
+			RestRequest request = new RestRequest();
+
+			request.httpMethod = 'DELETE';
+			request.requestBody = Blob.valueOf(JSON.serialize(uuids));
+
+			RestContext.request = request;
+
+			ResponsesResource.deleteResponses();
+
+			Test.startTest();
+
+				List<Response__c> afterDelete = [SELECT Id FROM Response__c];
+
+			Test.stopTest();
+
+			System.assertEquals(0, afterDelete.size());
+
 		}
-
-		RestRequest request = new RestRequest();
-
-		request.httpMethod = 'DELETE';
-		request.requestBody = Blob.valueOf(JSON.serialize(uuids));
-
-		RestContext.request = request;
-
-		ResponsesResource.deleteResponses();
-
-		Test.startTest();
-
-			List<Response__c> afterDelete = [SELECT Id FROM Response__c];
-
-		Test.stopTest();
-
-		System.assertEquals(0, afterDelete.size());
 
 	}
 
 	@isTest
 	public static void shouldUpdateResponses() {
 
-		Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+				
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
 
-		Id existingFormId = existingForm.Id; 
-		
-		Map<String, String> data = new Map<String, String>();
+		System.runAs(user) {
 
-		List<Response> responses = new List<Response>();
+			Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
 
-		for (Integer i = 0; i < 5; i++) {
+			Id existingFormId = existingForm.Id; 
 			
-			Response response = new Response();
+			Map<String, String> data = new Map<String, String>();
 
-			response.OwnerId = UserInfo.getUserId();
-			response.Status = 'In Progress';
-			response.UUID = 'TEST-123' + i;
-			response.Form = existingFormId;
+			List<Response> responses = new List<Response>();
 
-			responses.add(response);
+			for (Integer i = 0; i < 5; i++) {
+				
+				Response response = new Response();
+
+				response.OwnerId = UserInfo.getUserId();
+				response.Status = 'In Progress';
+				response.UUID = 'TEST-123' + i;
+				response.Form = existingFormId;
+
+				responses.add(response);
+
+			}
+
+			data.put('data', JSON.serialize(responses));
+
+			RestRequest request = new RestRequest();
+
+			request.httpMethod = 'POST';
+			request.requestBody = Blob.valueOf(JSON.serialize(data));
+
+			RestContext.request = request;
+
+			ResponsesResource.updateResponses();
+
+			Test.startTest();
+
+				List<Response__c> updatedResponses = [SELECT Id FROM Response__c];
+
+			Test.stopTest();
+
+			System.assertEquals(7, updatedResponses.size());
 
 		}
-
-		data.put('data', JSON.serialize(responses));
-
-		RestRequest request = new RestRequest();
-
-		request.httpMethod = 'POST';
-		request.requestBody = Blob.valueOf(JSON.serialize(data));
-
-		RestContext.request = request;
-
-		ResponsesResource.updateResponses();
-
-		Test.startTest();
-
-			List<Response__c> updatedResponses = [SELECT Id FROM Response__c];
-
-		Test.stopTest();
-
-		System.assertEquals(7, updatedResponses.size());
 
 	}
 

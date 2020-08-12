@@ -51,7 +51,7 @@ sfdx force:package1:version:create \
     -i 0336g00000061bb \
     -n "Beta 2020" \
     -v "1.2" \
-    -d "Managed beta release. Uploaded via the CLI" \
+    -d "Managed beta release." \
     -u PkgOrg \
     -w 15
 
