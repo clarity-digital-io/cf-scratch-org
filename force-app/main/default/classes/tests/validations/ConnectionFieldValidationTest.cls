@@ -12,43 +12,55 @@ public class ConnectionFieldValidationTest {
 
     @testSetup
     public static void setup() {
-        
-        Form__c form = TestDataFactory.generateForm();
-
-		List<Question__c> questions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
 		
-		List<Question__c> savedQuestions = QuestionsService.saveQuestions(questions);
+		User user = TestDataFactory.generateUserWithBuilderPermissions(); 
 
-		List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, form.Id,  new List<String>{ 'Account' });
+		System.runAs(user) {
 
-		List<Form_Connection__c> connectionsSaved = FormConnectionsService.save(new List<Form_Connection__c>(), connections);
+			Form__c form = TestDataFactory.generateForm();
 
-		List<Form_Connection_Field__c> customFields = TestDataFactory.generateCustomConnectionFields(connections[0].Id, new Map<String, String>{ 'Name' => 'Testing' });
+			List<Question__c> questions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
+			
+			List<Question__c> savedQuestions = QuestionsService.saveQuestions(questions);
 
-		List<Form_Connection_Field__c> customFieldsSaved = FormConnectionFieldsService.updateFields(customFields, connections[0].Id);
+			List<Form_Connection__c> connections = TestDataFactory.generateConnections(true, form.Id,  new List<String>{ 'Account' });
+
+			List<Form_Connection__c> connectionsSaved = FormConnectionsService.save(new List<Form_Connection__c>(), connections);
+
+			List<Form_Connection_Field__c> customFields = TestDataFactory.generateCustomConnectionFields(connections[0].Id, new Map<String, String>{ 'Name' => 'Testing' });
+
+			List<Form_Connection_Field__c> customFieldsSaved = FormConnectionFieldsService.updateFields(customFields, connections[0].Id);
+
+		}
 
     }
 
     @isTest
     public static void shouldDeleteFieldOnConnectionUpdate() {
 
-        Form_Connection__c connection = [SELECT Id FROM Form_Connection__c];
+		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+		
+		System.runAs(user) {
 
-        List<Form_Connection_Field__c> beforeFields = [SELECT Id FROM Form_Connection_Field__c];
+			Form_Connection__c connection = [SELECT Id FROM Form_Connection__c];
 
-        System.assertEquals(1, beforeFields.size());
+			List<Form_Connection_Field__c> beforeFields = [SELECT Id FROM Form_Connection_Field__c];
 
-        Test.startTest();   
+			System.assertEquals(1, beforeFields.size());
 
-            connection.Salesforce_Object__c = 'Case';     
-            			
-			List<Form_Connection__c> connectionsSaved = FormConnectionsService.save(new List<Form_Connection__c>(), new List<Form_Connection__c>{ connection });
-        
-        Test.stopTest(); 
+			Test.startTest();   
 
-        List<Form_Connection_Field__c> afterFields = [SELECT Id FROM Form_Connection_Field__c];
+				connection.Salesforce_Object__c = 'Case';     
+							
+				List<Form_Connection__c> connectionsSaved = FormConnectionsService.save(new List<Form_Connection__c>(), new List<Form_Connection__c>{ connection });
+			
+			Test.stopTest(); 
 
-        System.assertEquals(0, afterFields.size());
+			List<Form_Connection_Field__c> afterFields = [SELECT Id FROM Form_Connection_Field__c];
+
+			System.assertEquals(0, afterFields.size());
+		
+		}
 
     }
 

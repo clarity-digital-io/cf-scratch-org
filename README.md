@@ -19,8 +19,6 @@ sfdx force:auth:web:login -a PkgOrg
 
 sfdx force:org:create -a forms-pkg -s -f config/project-scratch-def.json
 
-sfdx force:org:create -a formsPkgTest -n -f config/project-scratch-def.json
-
 sfdx force:org:open -u formsPkgTest
 
 sfdx force:source:convert \
@@ -51,7 +49,7 @@ sfdx force:package1:version:create \
     -i 0336g00000061bb \
     -n "Beta 2020" \
     -v "1.2" \
-    -d "Managed beta release." \
+    -d "Managed mobile beta release." \
     -u PkgOrg \
     -w 15
 
@@ -64,28 +62,43 @@ sfdx force:package:install \
 
 sfdx force:user:permset:assign -u formsPkgTest -n "Clarity_Forms_Builder"
 
-sfdx force:package:version:promote --package "ClarityForms@1.0"
+sfdx force:package:version:promote --package "ClarityForms@1.2.0" -v clarity-force-devhub
+
+## package test
+
+sfdx force:org:create -a formsPkgTest -n -f config/project-scratch-def.json
+
+sfdx force:org:create -a formsPkgTest -n -f config/project-scratch-def.json
+
+sfdx force:package:install \
+    -p 04t6g000008OMWEAA4 \
+    -u formsPkgTest \
+    -w 15
+
+sfdx force:user:permset:assign -u formsPkgTest -n "Clarity_Forms_Builder"
 
 ## Dev, Build and Test
 sfdx force:auth:web:login --setdefaultdevhubusername --setalias clarity-force-devhub
 
 sfdx force:org:list --all
 
-sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias mobile-test-prod-two --durationdays 60 //clarity-forms-pkg
+sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias mobile-prod --durationdays 30 //clarity-forms-pkg
 
-sfdx force:alias:set mobile-test-prod-two=test-lanivcw2dtmk@example.com
+sfdx force:alias:set mobile-prod=test-uleodqcqwlmf@example.com
 
-sfdx force:config:set defaultusername=mobile-test-prod-two
+sfdx force:config:set defaultusername=mobile-prod
 
 sfdx force:source:push -f
 
 sfdx force:org:open -u PkgOrg
 
-sfdx force:user:password:generate --targetusername mobile-test-prod-two
+sfdx force:user:password:generate --targetusername mobile-prod
 
-sfdx force:user:display --targetusername mobile-test-prod-two
+sfdx force:user:display --targetusername mobile-prod
 
+sfdx force:org:delete -u test-45lbll6ypkok@example.com
 sfdx force:org:delete -u test-lanivcw2dtmk@example.com
+sfdx force:org:delete -u test-m6qgscp39jgu@example.com
 
 ## Mobile Settings Controller Should:
 
@@ -118,10 +131,29 @@ sfdx force:apex:class:create -n SetupControllerUnitTest -d force-app/main/defaul
 
 sfdx force:apex:class:create -n ResponsesUnitofWorkHelper -d force-app/main/default/classes/domains/helpers
 
+sfdx force:apex:class:create -n PicklistHelper -d force-app/main/default/classes/services/helpers
+
+sfdx force:apex:class:create -n Picklist -d force-app/main/default/classes/services/models
+
+Question
+sObjectName
+Name
+Picklist_Values[]
+
+sfdx force:apex:class:create -n PicklistValue -d force-app/main/default/classes/services/models
+
+Picklist
+Value
+API_Name
+
+
 ## Resources
 
 sfdx force:data:soql:query -q "Select Id, MemberName From SourceMember Where MemberType = 'ConnectedApp'" -t
 sfdx force:data:record:delete -s SourceMember -i0MZ5400000E2q3SGAR -t
+
+
+sfdx force:data:soql:query -q "Select Id, Name From Account" -t
 
 ## Description of Files and Directories
 

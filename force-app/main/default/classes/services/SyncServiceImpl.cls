@@ -110,6 +110,8 @@ public class SyncServiceImpl implements ISyncService {
 
 		List<Question__c> questions = QuestionsService.getFormsQuestions(formIds);
 
+		List<Picklist> preparedPicklist = PicklistHelper.getValues(questions);
+
 		List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormIds(formIds);
 
 		Map<Id, List<Question__c>> formQuestions = new Map<Id, List<Question__c>>();
@@ -144,6 +146,7 @@ public class SyncServiceImpl implements ISyncService {
 
 		connect.org = organization;
 		connect.forms = preparedForms;
+		connect.picklist = preparedPicklist;
 		connect.groups = new List<Checklist_Group__c>();
 
 		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
