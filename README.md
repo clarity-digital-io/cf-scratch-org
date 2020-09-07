@@ -135,6 +135,9 @@ sfdx force:apex:class:create -n PicklistHelper -d force-app/main/default/classes
 
 sfdx force:apex:class:create -n Picklist -d force-app/main/default/classes/services/models
 
+sfdx force:apex:class:create -n Sync -d force-app/main/default/classes/services/models
+
+
 Question
 sObjectName
 Name

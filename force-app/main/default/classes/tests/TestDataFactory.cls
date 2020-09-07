@@ -134,6 +134,11 @@ public class TestDataFactory {
 					Order__c = order
 				);
 
+				if(type == 'PICKLIST') {
+					question.Salesforce_Object__c = 'Account';
+					question.Salesforce_Field__c = 'Type';
+				}
+
 				newQuestions.add(question);
 
 				order++; 

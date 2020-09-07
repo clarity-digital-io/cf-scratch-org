@@ -28,7 +28,7 @@ public with sharing class Forms extends fflib_SObjectDomain implements IForms {
 			}
 		}
 
-		if(publishedFormIds.size() > 0) {
+		if(publishedFormIds.size() > 0 && !System.Test.isRunningTest()) {
 			syncPublishedForm(publishedFormIds);
 		}
 

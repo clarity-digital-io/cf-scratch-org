@@ -9,6 +9,7 @@ public class PicklistHelper {
 		for(Question__c question : questions) {
 
 			if(question.Type__c == 'PICKLIST') {
+				System.debug('question: ' + question); 
 
 				if(picklistQuestions.containsKey(question.Salesforce_Object__c)) {
 					picklistQuestions.get(question.Salesforce_Object__c).add(question.Salesforce_Field__c);
@@ -19,10 +20,11 @@ public class PicklistHelper {
 
 		}
 		
+		System.debug('picklistQuestions: ' + picklistQuestions); 
 
 		for(String sObjectName : picklistQuestions.keySet()) {
-
-			SObjectType sObjType = ((SObject)Type.forName(objectType).newInstance()).getSObjectType();
+			System.debug('sObjectName: ' + sObjectName); 
+			SObjectType sObjType = ((SObject)Type.forName(sObjectName).newInstance()).getSObjectType();
 
 			Schema.DescribeSObjectResult result = sObjType.getDescribe();
 	
@@ -34,23 +36,35 @@ public class PicklistHelper {
 
 				Picklist pl = new Picklist(); 
 
-				pl.sObject = sObjectName;
+				pl.sObjectName = sObjectName;
 				pl.Name = picklist; 
 				pl.PicklistValues = new List<PicklistValue>();
 
 				Schema.DescribeFieldResult fieldResult = fields.get(picklist).getDescribe();
 
+				Schema.SObjectField control = fieldResult.getController();
+
+				if(control != null) {
+
+					Schema.DescribeFieldResult controlField =  control.getDescribe();
+					pl.Controller = controlField.getName();
+
+				}
+				
 				List<Schema.PicklistEntry> ple = fieldResult.getPicklistValues();
 
 				for(Schema.PicklistEntry pickListVal : ple){
 
-					PicklistValue plv = new Picklist(); 
+					if(pickListVal.isActive()) {
 
-					plv.Label = pickListVal.getLabel();
-					plv.APIName = pickListVal.getValue();
-					
-					pl.PicklistValues.add(plv); 
-					
+						PicklistValue plv = new PicklistValue(); 
+
+						plv.Label = pickListVal.getLabel();
+						plv.APIName = pickListVal.getValue();
+						
+						pl.PicklistValues.add(plv); 
+					}
+
 				}
 
 				allPicklists.add(pl); 
