@@ -43,6 +43,18 @@ public class QuestionsSelector extends fflib_SObjectSelector implements IQuestio
 		return (List<Question__c>) Database.query( query.toSOQL() );
 	}  
 
+	public List<Question__c> selectByFormIds(Set<Id> formIds){
+
+		String lookup = 'Lookup'; 
+		String reference = 'REFERENCE';
+
+		fflib_QueryFactory query = newQueryFactory();
+		query.setCondition('Form__c IN :formIds');
+		query.setCondition('Type__c = :lookup OR Type__c = :reference');
+
+		return (List<Question__c>) Database.query( query.toSOQL() );
+	}  
+
 	public List<Question__c> selectWithAllDetailsByIds(Set<Id> formIds){
 		fflib_QueryFactory query = newQueryFactory();
 		query.setCondition('Form__c IN :formIds');

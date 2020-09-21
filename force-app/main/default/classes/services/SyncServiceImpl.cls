@@ -112,7 +112,7 @@ public class SyncServiceImpl implements ISyncService {
 		List<Form__c> forms = FormsService.getFormByIds(formIds);
 
 		List<Question__c> questions = QuestionsService.getFormsQuestions(formIds);
-		System.debug('questions: ' + questions); 
+
 		List<Picklist> preparedPicklist = PicklistHelper.getValues(questions);
 
 		List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormIds(formIds);
@@ -154,7 +154,7 @@ public class SyncServiceImpl implements ISyncService {
 
 		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
 
-		HttpResponse response = Sync.connectPublishedForms(connect, organization.Id);
+		HttpResponse vresponse = Sync.connectPublishedForms(connect, organization.Id);
 
 		String body = response.getBody(); 
 
@@ -171,11 +171,125 @@ public class SyncServiceImpl implements ISyncService {
 		uow.commitWork();	
 
 	}
+
+	//sObject - Connection as objects and fields
+	public static List<sObject> getOfflineFromConnections() {
+
+		Map<String, Set<String>> sObjectFields = new Map<String, Set<String>>();
+
+		List<Form_Connection__c> connections = FormConnectionsSelector.newInstance().selectConnectionsByFormStatus('Published');
+
+		for(Form_Connection__c connection : connections) {
+
+			if(sObjectFields.containsKey(connection.Salesforce_Object__c)) {
+
+				Set<String> fields = sObjectFields.get(connection.Salesforce_Object__c);
+				
+				for(Form_Connection_Field__c field : connection.Form_Connection_Fields__r) {
+					fields.add(field.Salesforce_Field__c);
+				}
+
+			} else {
+
+				Set<String> fields = new Set<String>();
+
+				for(Form_Connection_Field__c field : connection.Form_Connection_Fields__r) {
+					fields.add(field.Salesforce_Field__c);
+				}
+
+				sObjectFields.put(connection.Salesforce_Object__c, fields);
+
+			}
+
+		}
+
+		List<sObject> records = getRecords(sObjectFields); 
+
+		return records; 
+
+	}
+
+	//sObject - These are from record group questions or lookup questions
+	public static List<sObject> getOfflineFromQuestions() {
+		
+		Map<String, Set<String>> sObjectFields = new Map<String, Set<String>>();
+
+		List<Form__c> forms = FormsSelector.newInstance().selectByStatus('Published');
+
+		Set<Id> formIds = new Set<Id>(); 
+		
+		for(Form__c form : forms) {
+			formIds.add(form.Id); 
+		}
+
+		List<Question__c> questions = QuestionsSelector.newInstance().selectByFormIds(formIds);
+
+		for(Question__c question : questions) {
+
+			Set<String> fields = new Set<String>();
+
+			if(question.Salesforce_Object__c == 'Case') {
+				fields.add('Subject');
+			} else {
+				fields.add('Name');
+			}
+
+			sObjectFields.put(question.Salesforce_Object__c, fields);
+
+		}
+
+		List<sObject> records = getRecords(sObjectFields); 
+
+		return records; 
+
+	}
+
+	//sObject - Latest Accounts
+	public static List<sObject> getOfflineFromAccounts() {
+		
+		List<sObject> accounts = AccountsSelector.newInstance().selectOffline();
+
+		return accounts; 
+
+	}
+
+	public static List<sObject> getRecords(Map<String, Set<String>> sObjectFields) {
+
+		List<sObject> records = new List<sObject>(); 
+
+		Integer MAX_RESULTS = 500;
+
+		for(String sObjectName : sObjectFields.keySet()) {
+
+			Set<String> fields = sObjectFields.get(sObjectName); 
+
+			String sFields = String.join(new List<String>(fields), ', ');
+
+			List<sObject> sfRecords = Database.query('SELECT Id, ' + sFields + ' FROM ' + sObjectName + ' WITH SECURITY_ENFORCED LIMIT :MAX_RESULTS');
+
+			records.addAll(sfRecords);
+		}
+
+		return records; 
+
+	}
 	
 	@future(callout=true) 
 	public static void process(String userId) {
 
-		Sync.process(userId); 
+		List<sObject> sObjectConnections = getOfflineFromConnections();
+	
+		List<sObject> sObjectQuestions = getOfflineFromQuestions();
+		
+		List<sObject> sObjectAccounts = getOfflineFromAccounts();
+
+		List<sObject> records = new List<sObject>(); 
+
+		records.addAll(sObjectConnections);
+		records.addAll(sObjectQuestions);
+		records.addAll(sObjectAccounts);
+		
+		Sync.process(userId, records); 
 
 	}
 

@@ -10,7 +10,9 @@ public class AccountsSelector extends fflib_SObjectSelector implements IAccounts
 			Account.Name,
 			Account.BillingAddress,
 			Account.Phone,
-			Account.Checklist_Group__c
+			Account.Checklist_Group__c,
+			Account.LastModifiedDate,
+			Account.CreatedDate
 	   };
 	}
 
@@ -25,6 +27,15 @@ public class AccountsSelector extends fflib_SObjectSelector implements IAccounts
 		query.selectField('Checklist_Group__c');
 		query.addOrdering('CreatedDate', fflib_QueryFactory.SortOrder.DESCENDING);
 		query.setLimit( 100 );
+   
+		return (List<Account>) Database.query( query.toSOQL() );
+	}  
+
+	public List<Account> selectOffline(){
+		fflib_QueryFactory query = newQueryFactory();
+
+		query.addOrdering('CreatedDate', fflib_QueryFactory.SortOrder.DESCENDING);
+		query.setLimit( 500 );
    
 		return (List<Account>) Database.query( query.toSOQL() );
 	}  

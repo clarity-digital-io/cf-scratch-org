@@ -66,22 +66,31 @@ public class Sync {
 		return response; 
 	}
 
-	@future(callout=true) 
-	public static void process(String userId) {
+	public static void process(String userId, List<sObject> records) {
 
 		Mobile_API__mdt api = getAPI();
-		//need a way to query for lookups / connections / record groups / apps we will need
-		List<Account> accounts = [SELECT Id, Name, OwnerId, Type, LastModifiedDate, CreatedDate FROM Account];
 		
 		Http http = new Http();
 		HttpRequest request = new HttpRequest();
 		request.setEndpoint(api.URL__c + '/sync/' + userId );
-		request.setBody(JSON.serialize(accounts));
+		request.setBody(JSON.serialize(records));
 		request.setHeader('Content-Type', 'application/json');
 		request.setMethod('POST');
 		HttpResponse response = http.send(request);
 
 	}
+
 }
 
+//accounts
+//for apps we can get the last 500 on modified/created 
+//on apps section can set to online mode and query from salesforce if offline or essentials (not primary salesforce) get from realm
+
+//connection 
+//this is for offline mode
+//get latest 500 records for
+
+//question 
+//this is for offline mode
+//get latest 500 records for
 
