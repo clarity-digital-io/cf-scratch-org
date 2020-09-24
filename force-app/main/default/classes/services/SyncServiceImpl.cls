@@ -154,7 +154,7 @@ public class SyncServiceImpl implements ISyncService {
 
 		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
 
-		HttpResponse vresponse = Sync.connectPublishedForms(connect, organization.Id);
+		HttpResponse response = Sync.connectPublishedForms(connect, organization.Id);
 
 		String body = response.getBody(); 
 

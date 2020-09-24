@@ -23,7 +23,8 @@ public class QuestionsSelector extends fflib_SObjectSelector implements IQuestio
 			Question__c.FreeText_Type__c,
 			Question__c.Form__c,
 			Question__c.Record_Group__c,
-			Question__c.Prefill_Type__c
+			Question__c.Prefill_Type__c,
+			Question__c.Attachment_Type__c
 		};
 	}
 
