@@ -4,7 +4,7 @@ public class TestDataFactory {
 
 		Profile p = [SELECT Id FROM Profile WHERE Name = 'Standard User']; 
 
-		User user = new User(
+		User u = new User(
 			Alias = 'test_cl', 
 			Email= 'test@clarityforms.io',
 			EmailEncodingKey='UTF-8', 
@@ -16,11 +16,12 @@ public class TestDataFactory {
 			UserName= 'test_cl@clarityforms.io'
 		); 
 
-		insert user; 
+		User user = UsersService.save(u);
 
 		PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = 'Clarity_Forms_Builder' LIMIT 1];
-		
-		insert new PermissionSetAssignment(AssigneeId = user.id, PermissionSetId = ps.Id);
+
+		//User Service Impl savePermissionAssignment
+		UsersService.assignPermissionSet(user, ps);
 
 		return user; 
 
@@ -30,7 +31,7 @@ public class TestDataFactory {
 
 		Profile p = [SELECT Id FROM Profile WHERE Name = 'Standard User']; 
 
-		User user = new User(
+		User u = new User(
 			Alias = 'test_cln', 
 			Email= 'test_cln@clarityforms.io',
 			EmailEncodingKey='UTF-8', 
@@ -42,7 +43,7 @@ public class TestDataFactory {
 			UserName= 'test_cln@clarityforms.io'
 		); 
 
-		insert user; 
+		User user = UsersService.save(u);
 
 		return user; 
 

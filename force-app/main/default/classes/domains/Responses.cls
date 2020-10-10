@@ -3,7 +3,7 @@ public with sharing class Responses extends fflib_SObjectDomain implements IResp
 	public void saveConnection(fflib_ISObjectUnitOfWork uow, sObject record, Form_Connection_Process__c connectionStatus)
 	{
 
-		ResponsesUnitofWorkHelper responseWork = new ResponsesUnitofWorkHelper();
+		ResponsesUnitofWorkHelper responseWork = new ResponsesUnitofWorkHelper(uow);
 
 		uow.registerWork(responseWork);
 

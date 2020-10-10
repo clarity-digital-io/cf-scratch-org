@@ -6,12 +6,15 @@ public class ResponsesUnitofWorkHelper implements fflib_SObjectUnitOfWork.IDoWor
 	private sObject connection_record;
 	private List<Response__c> responses;
 	private Form_Connection_Process__c connection_status;
-
-    public ResponsesUnitofWorkHelper()
+	private fflib_ISObjectUnitOfWork uow; 
+	
+	// need to create a service to handle these new uow can't use uow here
+    public ResponsesUnitofWorkHelper(fflib_ISObjectUnitOfWork iuow)
     {  
 		responses = new List<Response__c>();
 		connection_record = null;
 		connection_status = null;
+		uow = iuow; 
     }
      
     public void registerResponseConnections(sObject srecord, List<Response__c> records, Form_Connection_Process__c connectionStatus)
@@ -29,7 +32,7 @@ public class ResponsesUnitofWorkHelper implements fflib_SObjectUnitOfWork.IDoWor
 			connection_status.Status__c = 'Failed';
 			connection_status.Description__c = connection_record.Id;
 	
-			ConnectionProcessResult = Database.upsert(connection_status, false);  
+			ResponseProcessService.saveConnectionProcess(connection_status); 
 
 			return; 
 
@@ -55,14 +58,14 @@ public class ResponsesUnitofWorkHelper implements fflib_SObjectUnitOfWork.IDoWor
 	
 			}
 	
-			ResponseResults = Database.upsert(updateResponses, false);  
+			ResponseProcessService.saveResponse(updateResponses); 
 			
 		}
 
 		connection_status.Status__c = 'Success';
 		connection_status.Salesforce_Connection_Object__c = connection_record.Id;
 
-		ConnectionProcessResult = Database.upsert(connection_status, false);  
+		ResponseProcessService.saveConnectionProcess(connection_status); 
                
     }
 }

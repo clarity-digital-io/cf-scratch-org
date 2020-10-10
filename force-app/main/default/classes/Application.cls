@@ -15,7 +15,9 @@ public class Application {
 				Form_Connection_Field__c.sObjectType,
 				ContentVersion.sObjectType,
 				ContentDocumentLink.sObjectType,
-				Log__c.sObjectType
+				Log__c.sObjectType,
+				User.sObjectType,
+				PermissionSetAssignment.sObjectType
 			}
 		); 
 
@@ -31,7 +33,9 @@ public class Application {
 				IResponseConnectionsService.class => ResponseConnectionsServiceImpl.class,
 				IAnswersService.class => AnswersServiceImpl.class,
 				IAccountsService.class => AccountsServiceImpl.class,
-				IChecklistGroupsService.class => ChecklistGroupsServiceImpl.class
+				IChecklistGroupsService.class => ChecklistGroupsServiceImpl.class,
+				IUsersService.class => UsersServiceImpl.class,
+				IResponseProcessService.class => ResponseProcessServiceImpl.class
 			}
 		);
 

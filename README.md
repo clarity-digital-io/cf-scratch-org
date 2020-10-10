@@ -138,6 +138,16 @@ sfdx force:apex:class:create -n Picklist -d force-app/main/default/classes/servi
 
 sfdx force:apex:class:create -n Sync -d force-app/main/default/classes/services/models
 
+sfdx force:apex:class:create -n Sync -d force-app/main/default/classes/services/models
+
+sfdx force:apex:class:create -n UsersServiceImpl -d force-app/main/default/classes/services
+sfdx force:apex:class:create -n UsersService -d force-app/main/default/classes/services
+sfdx force:apex:class:create -n IUsersService -d force-app/main/default/classes/services
+
+sfdx force:apex:class:create -n ResponseProcessServiceImpl -d force-app/main/default/classes/services
+sfdx force:apex:class:create -n ResponseProcessService -d force-app/main/default/classes/services
+sfdx force:apex:class:create -n IResponseProcessService -d force-app/main/default/classes/services
+
 
 Question
 sObjectName
