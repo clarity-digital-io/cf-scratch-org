@@ -1,5 +1,0 @@
-<design:component label="Clarity Form Answers">
-
-    <design:attribute name="recordId" label="Clarity Form Id" description="Pass in the Form Id to display Form Response Answers." />
-
-</design:component>
