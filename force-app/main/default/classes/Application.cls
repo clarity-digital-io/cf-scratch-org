@@ -17,7 +17,8 @@ public class Application {
 				ContentDocumentLink.sObjectType,
 				Log__c.sObjectType,
 				User.sObjectType,
-				PermissionSetAssignment.sObjectType
+				PermissionSetAssignment.sObjectType,
+				Opportunity.sObjectType
 			}
 		); 
 
@@ -54,7 +55,8 @@ public class Application {
 				Answer__c.sObjectType => AnswersSelector.class,
 				ContentVersion.sObjectType => ContentVersionsSelector.class,
 				Checklist_Group__c.sObjectType => ChecklistGroupsSelector.class,
-				Account.sObjectType => AccountsSelector.class
+				Account.sObjectType => AccountsSelector.class,
+				Opportunity.sObjectType => OpportunitiesSelector.class
 			}
 		);
 

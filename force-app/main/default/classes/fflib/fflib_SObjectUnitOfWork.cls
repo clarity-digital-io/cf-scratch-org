@@ -143,7 +143,7 @@ public virtual class fflib_SObjectUnitOfWork
      */
     public fflib_SObjectUnitOfWork(List<Schema.SObjectType> sObjectTypes)
     {
-        this(sObjectTypes, new SimpleDML());
+        this(sObjectTypes, new fflib_SecureDML());
     }
 
     public fflib_SObjectUnitOfWork(List<Schema.SObjectType> sObjectTypes, IDML dml)

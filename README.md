@@ -148,6 +148,12 @@ sfdx force:apex:class:create -n ResponseProcessServiceImpl -d force-app/main/def
 sfdx force:apex:class:create -n ResponseProcessService -d force-app/main/default/classes/services
 sfdx force:apex:class:create -n IResponseProcessService -d force-app/main/default/classes/services
 
+OpportunitiesSelector
+
+sfdx force:apex:class:create -n IOpportunitiesSelector -d force-app/main/default/classes/selectors
+
+sfdx force:apex:class:create -n OpportunitiesSelector -d force-app/main/default/classes/selectors
+
 
 Question
 sObjectName

@@ -1,0 +1,10 @@
+<template>
+	<template if:true={isAttachment}>
+		<p class="slds-p-around_xx-small slds-section__title slds-theme_shade">{answer.forms__Question__r.forms__Title__c}</p>
+		<img src={attachmentUrl} />
+	</template>
+	<template if:true={isText}>
+		<p class="slds-p-around_xx-small slds-section__title slds-theme_shade">{answer.forms__Question__r.forms__Title__c}</p>
+		<p class="slds-p-around_xx-small">{answer.forms__Answer__c}</p>
+	</template>
+</template>
