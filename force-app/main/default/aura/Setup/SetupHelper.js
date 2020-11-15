@@ -1,7 +1,13 @@
 ({
+	getOrganizationInformation: function(cmp, event) {
+
+		cmp.set('v.loading', true);
+
+		// check if trial or first time making call to management org
+	},
 	getSetupInformation: function(cmp, event) {
 
-		//cmp.set('v.loading', true);
+		cmp.set('v.loading', true);
 
 		let action = cmp.get("c.getSetup");
 
@@ -34,7 +40,7 @@
 
 		cmp.set('v.mobileLicense', { IsAPIConnected: true })
 
-		//$A.enqueueAction(action);
+		$A.enqueueAction(action);
 
 	}
 })

@@ -1,5 +1,8 @@
 ({
 	doInit: function(cmp, event, helper) {
+		helper.getOrganizationInformation(cmp, event);
+	},
+	setup: function(cmp, event, helper) {
 		helper.getSetupInformation(cmp, event);
 	},
 	handleRefresh: function(cmp, event, helper) {

@@ -3,11 +3,6 @@
     background: #000;
 }
 
-.THIS .slds-card {
-    background: #00305C !important;
-    border: #00305C !important;
-}
-
 .THIS h2 {
     color: #fff;
 }
@@ -23,4 +18,22 @@
 
 .THIS .x-large {
     height: 300px;
+}
+
+.THIS illustration-holder {
+	background: #fff; 
+}
+
+.THIS .setup_platform {
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.THIS .ul-list {
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left; 
 }
