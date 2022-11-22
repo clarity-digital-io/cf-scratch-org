@@ -11,6 +11,48 @@
             ],
             "c/imageControl": [
                 "imageControl/imageControl.js"
+            ],
+            "c/responseReview": [
+                "responseReview/responseReview.js"
+            ],
+            "c/responseReviewAnswer": [
+                "responseReviewAnswer/responseReviewAnswer.js"
+            ],
+            "c/responseForm": [
+                "responseForm/responseForm.js"
+            ],
+            "c/responseFormList": [
+                "responseFormList/responseFormList.js"
+            ],
+            "c/modal": [
+                "modal/modal.js"
+            ],
+            "c/responseFormQuestion": [
+                "responseFormQuestion/responseFormQuestion.js"
+            ],
+            "c/lookup": [
+                "lookup/lookup.js"
+            ],
+            "c/responseHelpers": [
+                "responseHelpers/responseHelpers.js"
+            ],
+            "c/responseFormConnections": [
+                "responseFormConnections/responseFormConnections.js"
+            ],
+            "c/responseFormQuestions": [
+                "responseFormQuestions/responseFormQuestions.js"
+            ],
+            "c/responseFormConnection": [
+                "responseFormConnection/responseFormConnection.js"
+            ],
+            "c/responseFormEdit": [
+                "responseFormEdit/responseFormEdit.js"
+            ],
+            "c/responseFormNew": [
+                "responseFormNew/responseFormNew.js"
+            ],
+            "c/recordGroup": [
+                "recordGroup/recordGroup.js"
             ]
         }
     },
@@ -21,6 +63,11 @@
     "typeAcquisition": {
         "include": [
             "jest"
+        ]
+    },
+    "paths": {
+        "c/*": [
+            "*"
         ]
     }
 }

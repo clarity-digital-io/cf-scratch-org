@@ -1,5 +1,0 @@
-<design:component label="Clarity Form Response View">
-
-    <design:attribute name="recordId" label="Clarity Form Response Id" description="Pass in the Response Id to display Form Response View." />
-
-</design:component>

@@ -40,7 +40,7 @@
 			let action = cmp.get("c.deleteForm");
 
 			action.setParams({
-					recordId: cmp.get("v.recordId")
+					formId: cmp.get("v.recordId")
 			});
 
 			action.setCallback(this, function (response) {
@@ -93,11 +93,10 @@
 	},
 	handlePublishForm: function(cmp, event, helper) {
 
-
 			let action = cmp.get("c.publishForm");
 
 			action.setParams({
-					recordId: cmp.get("v.recordId")
+					formId: cmp.get("v.recordId")
 			});
 
 			cmp.set('v.loading', true); 
@@ -120,25 +119,31 @@
 			$A.enqueueAction(action);
 
 	},
-	handleNewFormResponse: function(cmp, event, helper) {
+	handleSetDraft: function(cmp, event) {
+		let action = cmp.get("c.setToDraft");
 
-			$A.createComponents([
-					["forms:FormResponse", { "formName": cmp.get("v.form.Name") }]
-			],
-			function(components, status) {
-					if (status === "SUCCESS") {
+		action.setParams({
+				recordId: cmp.get("v.recordId")
+		});
 
-							let formResponse = components[0];
+		cmp.set('v.loading', true); 
 
-							cmp.find('overlayLib').showCustomModal({
-									header: cmp.get("v.form.Name"),
-									cssClass: "clarityModal",
-									body: formResponse, 
-									showCloseButton: true
-							})
+		action.setCallback(this, function (response) {
 
-					}
-			});
+				let state = response.getState();
+		
+				cmp.set('v.loading', false); 
 
-	},
+				if (state === "SUCCESS") {
+				
+						var form = response.getReturnValue();
+
+						cmp.set('v.form', form); 
+
+				}
+		}); 
+
+		$A.enqueueAction(action);
+	}
+
 })

@@ -6,7 +6,6 @@
         cmp.set('v.columns', [
             {label: 'Name', fieldName: 'name', type: 'text'},
             {label: 'Status', fieldName: 'status', type: 'text'}, 
-            {label: 'Percentage Complete', fieldName: 'completed', type: 'text'},
             {label: 'Start Date', fieldName: 'start', type: 'date'}, 
             {label: 'Submitted Date', fieldName: 'submittedDate', type: 'date'}, 
             { type: 'action', typeAttributes: { rowActions: rowActions } }
@@ -23,9 +22,6 @@
         switch (actionName) {
             case 'View':
                 helper.handleViewResponse(cmp, event, record);
-                break;
-            case 'Edit':
-                helper.handleEditResponse(cmp, event, record);
                 break;
             case 'Delete':
                 helper.handleDeleteResponse(cmp, event, record);

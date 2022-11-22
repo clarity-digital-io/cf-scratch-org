@@ -9,7 +9,7 @@
 
         cmp.set('v.loading', true); 
 
-		action.setCallback(this, function (response) {
+				action.setCallback(this, function (response) {
 
             let state = response.getState();
         

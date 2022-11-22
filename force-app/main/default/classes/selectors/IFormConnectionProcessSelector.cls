@@ -1,0 +1,1 @@
+public interface IFormConnectionProcessSelector extends fflib_ISObjectSelector {}

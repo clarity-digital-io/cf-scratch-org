@@ -1,0 +1,15 @@
+<template>
+    
+	<template if:true={questions}>
+		<template for:each={questions} for:item='question'>
+			<template if:true={question.active}>
+				<div key={question.Id} class='slds-p-around_xx-small'>
+
+					<c-response-form-question onanswerchange={handleChange} question={question} response-id={responseId}></c-response-form-question>
+	
+				</div>
+			</template>
+		</template>
+	</template>
+
+</template>

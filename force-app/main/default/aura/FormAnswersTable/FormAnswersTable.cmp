@@ -1,4 +1,4 @@
-<aura:component controller="FormController" implements="force:lightningQuickActionwithoutheader,lightning:actionOverride">
+<aura:component controller="FormSummaryController" implements="force:lightningQuickActionwithoutheader,lightning:actionOverride">
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:attribute name="data" type="Object"/>

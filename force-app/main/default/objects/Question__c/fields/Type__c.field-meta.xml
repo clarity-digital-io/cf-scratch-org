@@ -21,24 +21,9 @@
                 <label>Comment</label>
             </value>
             <value>
-                <fullName>Star</fullName>
-                <default>false</default>
-                <label>Star</label>
-            </value>
-            <value>
                 <fullName>Dropdown</fullName>
                 <default>false</default>
                 <label>Dropdown</label>
-            </value>
-            <value>
-                <fullName>Ranking</fullName>
-                <default>false</default>
-                <label>Ranking</label>
-            </value>
-            <value>
-                <fullName>NetPromoterScore</fullName>
-                <default>false</default>
-                <label>NetPromoterScore</label>
             </value>
             <value>
                 <fullName>Slider</fullName>
@@ -84,11 +69,6 @@
                 <fullName>Attachments</fullName>
                 <default>false</default>
                 <label>Attachments</label>
-            </value>
-            <value>
-                <fullName>ConnectedObject</fullName>
-                <default>false</default>
-                <label>ConnectedObject</label>
             </value>
             <value>
                 <fullName>BOOLEAN</fullName>
@@ -204,6 +184,11 @@
                 <fullName>InputField</fullName>
                 <default>false</default>
                 <label>InputField</label>
+            </value>
+            <value>
+                <fullName>GeoLocation</fullName>
+                <default>false</default>
+                <label>GeoLocation</label>
             </value>
         </valueSetDefinition>
     </valueSet>

@@ -1,4 +1,4 @@
-<aura:component access="global" controller="FormController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionwithoutheader,lightning:actionOverride">
+<aura:component access="global" controller="FormSummaryController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionwithoutheader,lightning:actionOverride">
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:attribute name="detail" type="Object" default="{}" />
@@ -39,7 +39,7 @@
                             <lightning:buttonGroup>
 
                                 <aura:if isTrue="{!v.form.forms__Status__c == 'Published'}">
-                                    <lightning:button label="New Form Response" onclick="{!c.handleNewFormResponse}" />
+                                    <lightning:button label="Set to Draft" onclick="{!c.handleSetDraft}" />
                                     <aura:set attribute="else">
                                         <lightning:button label="Publish Form" onclick="{!c.handlePublishForm}" />
                                     </aura:set>
@@ -70,12 +70,11 @@
                 <lightning:tabset selectedTabId="responses">
                     <lightning:tab label="Responses" id="responses">
 
-                        <c:FormResponseTable formName="{!v.form.Name}" formId="{!v.recordId}" />
+                        <c:FormResponseTable formName="{!v.form.Name}" recordId="{!v.recordId}" />
 
                     </lightning:tab>
                     <lightning:tab label="Results" id="results">
                         
-                        <!-- <c:FormAnswersTable recordId="{!v.recordId}" /> -->
                         <c:formAnswers recordId="{!v.recordId}" />    
 
                     </lightning:tab>

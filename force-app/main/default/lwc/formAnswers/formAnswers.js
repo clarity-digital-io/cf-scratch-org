@@ -1,5 +1,5 @@
 import { api, track, LightningElement } from 'lwc';
-import getAnswerColumns from '@salesforce/apex/FormController.getAnswerColumns';
+import getAnswerColumns from '@salesforce/apex/FormSummaryController.getAnswerColumns';
 
 export default class formAnswers extends LightningElement {
     @api recordId;

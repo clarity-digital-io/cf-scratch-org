@@ -19,11 +19,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Answer__c</field>
+                <field>Question__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Form__c</field>
+                <field>Answer_UUID__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>

@@ -82,6 +82,10 @@
                 <behavior>Edit</behavior>
                 <field>FreeText_Type__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Attachment_Type__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns/>
         <style>TwoColumnsTopToBottom</style>
@@ -117,14 +121,6 @@
     <relatedLists>
         <fields>NAME</fields>
         <relatedList>Question_Option__c.Question__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Flow__c.Question__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Flow_Design__c.Question__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
