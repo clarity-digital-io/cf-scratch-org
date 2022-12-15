@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "prettier": "prettier --apex-standalone-parser built-in --write \"**/*.{cls,trigger}\"",
+    "prettier-verify": "prettier --check \"**/*.{cls,trigger}\""
+  },
+  "dependencies": {
+    "prettier": "^2.8.0",
+    "prettier-plugin-apex": "^1.11.0"
+  }
+}

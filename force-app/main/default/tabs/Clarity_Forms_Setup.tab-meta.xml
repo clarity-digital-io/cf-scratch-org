@@ -3,6 +3,5 @@
     <description>Setup Tools for Clarity Forms</description>
     <flexiPage>Clarity_Forms_Wizard</flexiPage>
     <label>Clarity Forms Setup</label>
-    <mobileReady>false</mobileReady>
     <motif>Custom20: Airplane</motif>
 </CustomTab>

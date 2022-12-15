@@ -1,4 +1,4 @@
 {
-    "defaultdevhubusername": "clarity-force-devhub",
-    "defaultusername": "mobile-prod"
+  "defaultusername": "mobile-prod",
+  "defaultdevhubusername": "clarity-digital-devhub"
 }

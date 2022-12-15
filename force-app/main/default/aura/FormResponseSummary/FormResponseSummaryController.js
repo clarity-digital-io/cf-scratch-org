@@ -32,7 +32,7 @@
 	},
 	edit: function(cmp, event, helper) {
 			
-			window.open ('/forms/FormBuilderApp.app?recordId=' + cmp.get('v.recordId'),'_self',false)
+			window.open ('/cforms/FormBuilderApp.app?recordId=' + cmp.get('v.recordId'),'_self',false)
 
 	},
 	delete: function(cmp, event, helper) {

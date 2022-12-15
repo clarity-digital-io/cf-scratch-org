@@ -2,7 +2,7 @@
     "landing-pages" : [
         {
             "path": "index.html",
-            "apex-controller": "forms.BuilderController"
+            "apex-controller": "cforms.BuilderController"
         }
     ]
 }

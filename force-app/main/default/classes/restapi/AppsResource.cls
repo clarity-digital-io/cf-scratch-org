@@ -2,8 +2,7 @@
 global with sharing class AppsResource {
 	
 	@HttpGet
-    global static List<App> getApps() {
-
+  global static List<App> getApps() {
 		/**
 		 * Will query by params 
 		 * param searchTerm
@@ -12,12 +11,10 @@ global with sharing class AppsResource {
 		 * param limit
 		 */
 
-        RestRequest req = RestContext.request;
-
+    RestRequest req = RestContext.request;
 		RestResponse res = RestContext.response;
 
 		List<Account> accounts = AccountsService.getAccountsWithChecklistGroups();
-
 		Set<Id> checkListGroupIds = new Set<Id>();
 
 		for(Account account : accounts) {
@@ -25,7 +22,6 @@ global with sharing class AppsResource {
 		}
 
 		List<Checklist_Group__c> checklists = ChecklistGroupsSelector.newInstance().selectByIdWithForms(checkListGroupIds);
-
 		Map<Id, Checklist_Group__c> checkListGroups = new Map<Id, Checklist_Group__c>();
 
 		for(Checklist_Group__c checklist : checklists) {
@@ -43,7 +39,7 @@ global with sharing class AppsResource {
 			apps.add(app); 
 		}
 
-        return apps;
+    return apps;
 
 	}
 

@@ -2,16 +2,10 @@
   "packageDirectories": [
     {
       "path": "force-app",
-	  "default": true,
-	  "package": "ClarityForms",
-	  "versionName": "Spring '20",
-	  "versionNumber": "1.2.0"
+      "default": true
     }
   ],
-  "namespace": "forms",
+  "namespace": "cforms",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "45.0",
-  "packageAliases": {
-	"ClarityForms@1.2.0": "04t6g000008OMWEAA4"
-  }
+  "sourceApiVersion": "48.0"
 }

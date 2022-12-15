@@ -1,7 +1,7 @@
 ({
 	getOrganizationInformation: function(cmp, event) {
 
-		cmp.set('v.loading', true);
+		// cmp.set('v.loading', true);
 
 		// check if trial or first time making call to management org
 	},
