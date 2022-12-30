@@ -1,65 +1,56 @@
 public with sharing class FormSummaryController {
+  @AuraEnabled
+  public static Form__c getForm(String recordId) {
+    Form__c form = FormsService.getFormById(recordId);
 
-    @AuraEnabled
-    public static Form__c getForm(String recordId) {
+    return form;
+  }
 
-		Form__c form = FormsService.getFormById(recordId); 
+  @AuraEnabled
+  public static List<Response__c> getFormResponses(String formId) {
+    List<Response__c> responses = ResponsesService.getResponsesByFormId(formId);
 
-		return form; 
+    return responses;
+  }
 
-    }
+  @AuraEnabled
+  public static String deleteFormResponse(String responseId) {
+    Id deletedResponseId = ResponsesService.deleteById(responseId);
 
-    @AuraEnabled
-    public static List<Response__c> getFormResponses(String formId){
+    return deletedResponseId;
+  }
 
-		List<Response__c> responses = ResponsesService.getResponsesByFormId(formId);
+  @AuraEnabled
+  public static String deleteForm(String formId) {
+    Id deletedFormId = FormsService.deleteById(formId);
 
-        return responses; 
+    return deletedFormId;
+  }
 
-    }
+  @AuraEnabled
+  public static Form__c publishForm(String formId) {
+    Form__c form = FormsService.publishForm(formId);
 
-    @AuraEnabled
-    public static String deleteFormResponse(String responseId){
+    return form;
+  }
 
-		Id deletedResponseId = ResponsesService.deleteById(responseId);
-        
-        return deletedResponseId;
-    }
+  @AuraEnabled
+  public static Form__c setToDraft(String recordId) {
+    Form__c form = FormsService.setToDraft(recordId);
 
-    @AuraEnabled
-    public static String deleteForm(String formId){
+    return form;
+  }
 
-		Id deletedFormId = FormsService.deleteById(formId);
+  @AuraEnabled(cacheable=true)
+  public static Map<String, List<Map<String, String>>> getAnswerColumns(
+    String recordId,
+    Integer offset
+  ) {
+    Map<String, List<Map<String, String>>> table = ResponsesService.getResultAnswersByFormId(
+      recordId,
+      offset
+    );
 
-        return deletedFormId;
-
-	}
-
-    @AuraEnabled
-    public static Form__c publishForm(String formId){
-
-		Form__c form = FormsService.publishForm(formId); 
-
-	    return form;
-
-	}
-	
-	@AuraEnabled
-    public static Form__c setToDraft(String recordId){
-
-		Form__c form = FormsService.setToDraft(recordId); 
-
-	    return form;
-
-    }
-
-    @AuraEnabled(cacheable=true)
-    public static  Map<String, List<Map<String, String>>> getAnswerColumns(String recordId, Integer offset){
-
-		Map<String, List<Map<String, String>>> table = ResponsesService.getResultAnswersByFormId(recordId, offset); 
-
-        return table;
-
-    }
-    
+    return table;
+  }
 }

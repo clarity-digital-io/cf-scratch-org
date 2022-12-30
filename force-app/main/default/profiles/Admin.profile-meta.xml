@@ -130,6 +130,18 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FieldsSelector</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FieldsService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FieldsServiceImpl</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>Form</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -223,6 +235,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>IContentVersionsSelector</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>IFieldsSelector</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>IFieldsService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -988,27 +1008,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Form__c.Has_Thank_You__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Form__c.Label__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Form__c.Multi_Page_Info__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Form__c.Multi_Page_Val__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Form__c.Multi_Page__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1029,11 +1029,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Form__c.Sync_Status__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Form__c.Thank_You_Redirect__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
