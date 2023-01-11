@@ -1,24 +1,38 @@
 public with sharing class BuilderController {
-  @RemoteAction
-  public static List<String> saveAll(List<List<String>> values) {
-    // questions
-    String sForm = values[0];
-    String sQuestions = values[1];
+  // @RemoteAction
+  // public static List<String> saveAll(String sForm, List<List<String>> values) {
+  //   // questions
+  //   List<String> sQuestions = values[0];
+  //   List<String> sQuestionOptions = values[1];
+  //   List<String> sQuestionCriteria = values[2];
+  //   List<String> sQuestionPictureOptions = values[3];
 
-    String sQuestionOptions = values[3];
-    String sQuestionCriteria = values[4];
-    String sQuestionPictureOptions = values[5];
+  //   List<Question__c> parsedQuestions = (List<Question__c>) JSON.deserialize(
+  //     sQuestions,
+  //     List<Question__c>.class
+  //   );
 
-    List<Question__c> parsedQuestions = (List<Question__c>) JSON.deserialize(
-      sQuestions,
-      List<Question__c>.class
-    );
+  //   List<Question__c> parsedQuestionOptions = (List<Question_Option__c>) JSON.deserialize(
+  //     sQuestionOptions,
+  //     List<Question_Option__c>.class
+  //   );
 
-    return new List<String>();
-  }
+  //   List<Question__c> parsedQuestionCriteria = (List<Question_Criteria__c>) JSON.deserialize(
+  //     sQuestionCriteria,
+  //     List<Question_Criteria__c>.class
+  //   );
+
+  //   List<Question__c> parsedQuestionPictureOptions = (List<Question_Option__c>) JSON.deserialize(
+  //     sQuestionPictureOptions,
+  //     List<Question_Option__c>.class
+  //   );
+
+  //   return new List<String>();
+  // }
 
   @RemoteAction
   public static List<Field__mdt> getAvailableFields() {
+    // need to filter these by subscription level
     List<Field__mdt> fields = FieldsService.getAvailableFields();
 
     return fields;
@@ -330,7 +344,7 @@ public with sharing class BuilderController {
   public static List<String> getSObjectsAvailable() {
     List<String> lookups = new List<String>();
 
-    Map<String, Schema.SObjectType> sObjectsAvailable = Schema.getpublicDescribe();
+    Map<String, Schema.SObjectType> sObjectsAvailable = Schema.getGlobalDescribe();
 
     for (Schema.SObjectType so : sObjectsAvailable.values()) {
       //checkfls

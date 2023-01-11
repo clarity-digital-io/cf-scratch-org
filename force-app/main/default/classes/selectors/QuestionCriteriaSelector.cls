@@ -9,7 +9,6 @@ public class QuestionCriteriaSelector extends fflib_SObjectSelector implements I
       Question_Criteria__c.Name,
       Question_Criteria__c.Question__c,
       Question_Criteria__c.Field__c,
-      Question_Criteria__c.Field_Type__c,
       Question_Criteria__c.Operator__c,
       Question_Criteria__c.Type__c,
       Question_Criteria__c.Value__c

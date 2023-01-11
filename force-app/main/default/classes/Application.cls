@@ -16,7 +16,8 @@ public class Application {
       Log__c.sObjectType,
       User.sObjectType,
       PermissionSetAssignment.sObjectType,
-      Opportunity.sObjectType
+      Opportunity.sObjectType,
+      Field__mdt.SObjectType
     }
   );
 

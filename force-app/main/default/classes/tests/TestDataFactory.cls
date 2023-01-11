@@ -189,7 +189,6 @@ public class TestDataFactory {
     Question_Criteria__c criterion = new Question_Criteria__c(
       Question__c = questions[0].Id,
       Field__c = questions[1].Id, //controller
-      Field_Type__c = questions[0].Type__c,
       Operator__c = 'Equals',
       Type__c = 'Number',
       Value__c = '1'
@@ -200,7 +199,6 @@ public class TestDataFactory {
     Question_Criteria__c criterion2 = new Question_Criteria__c(
       Question__c = questions[0].Id,
       Field__c = questions[2].Id, //controller
-      Field_Type__c = questions[0].Type__c,
       Operator__c = 'Equals',
       Type__c = 'Number',
       Value__c = '10'

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
         <apexClass>ConnectionCreateJob</apexClass>
@@ -12,8 +12,15 @@
         <apexClass>FormSummaryController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <description
-  >All Permissions to Build, Use and Distribute Clarity Forms and Responses.</description>
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
+        <name>Field__mdt</name>
+    </customMetadataTypeAccesses>
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
+        <name>Subscription_Level__mdt</name>
+    </customMetadataTypeAccesses>
+    <description>All Permissions to Build, Use and Distribute Clarity Forms and Responses.</description>
     <fieldPermissions>
         <editable>true</editable>
         <field>Answer__c.Answer__c</field>
@@ -86,8 +93,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field
-    >Form_Connection_Process__c.Salesforce_Connection_Object__c</field>
+        <field>Form_Connection_Process__c.Salesforce_Connection_Object__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
