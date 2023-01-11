@@ -1,66 +1,93 @@
 public with sharing class Responses extends fflib_SObjectDomain implements IResponses {
+  public void saveConnection(
+    fflib_ISObjectUnitOfWork uow,
+    sObject record,
+    Form_Connection_Process__c connectionStatus
+  ) {
+    ResponsesUnitofWorkHelper responseWork = new ResponsesUnitofWorkHelper(uow);
 
-	public void saveConnection(fflib_ISObjectUnitOfWork uow, sObject record, Form_Connection_Process__c connectionStatus)
-	{
+    uow.registerWork(responseWork);
 
-		ResponsesUnitofWorkHelper responseWork = new ResponsesUnitofWorkHelper(uow);
+    uow.registerNew(record);
 
-		uow.registerWork(responseWork);
+    responseWork.registerResponseConnections(
+      record,
+      (List<Response__c>) Records,
+      connectionStatus
+    );
+  }
 
-		uow.registerNew(record);
+  public static IResponses newInstance(List<Response__c> recordList) {
+    return (IResponses) Application.Domain.newInstance(recordList);
+  }
 
-		responseWork.registerResponseConnections(record, (List<Response__c>) Records, connectionStatus);
+  public static IResponses newInstance(Set<Id> recordIdSet) {
+    return (IResponses) Application.Domain.newInstance(recordIdSet);
+  }
 
-	}
+  public Responses(List<Response__c> sObjectList) {
+    // Domain classes are initialised with lists to enforce bulkification throughout
+    super(sObjectList);
+  }
 
-	public static IResponses newInstance(List<Response__c> recordList)
-	{
-		return (IResponses) Application.Domain.newInstance(recordList);
-	}
+  public class Constructor implements fflib_SObjectDomain.IConstructable {
+    public fflib_SObjectDomain construct(List<SObject> sObjectList) {
+      return new Responses(sObjectList);
+    }
+  }
 
-	public static IResponses newInstance(Set<Id> recordIdSet)
-	{
-		return (IResponses) Application.Domain.newInstance(recordIdSet);
-	}
-	
-	public Responses(List<Response__c> sObjectList)
-	{
-		// Domain classes are initialised with lists to enforce bulkification throughout
-		super(sObjectList);
-	}
+  public override void onAfterUpdate(Map<Id, sObject> existingRecords) {
+    for (sObject oldSo : existingRecords.values()) {
+      Response__c oldResponse = (Response__c) oldSo;
+      Response__c newResponse = (Response__c) Trigger.newMap
+        .get(oldResponse.Id);
 
-	public class Constructor implements fflib_SObjectDomain.IConstructable
-	{
-		public fflib_SObjectDomain construct(List<SObject> sObjectList)
-		{
-			return new Responses(sObjectList);
-		}
-	}
+      if (
+        oldResponse.Status__c == 'Submitted' ||
+        newResponse.Status__c != 'Submitted'
+      )
+        return;
 
-	public override void onAfterUpdate(Map<Id, sObject> existingRecords) {
-		
-		for(sObject oldSo : existingRecords.values()) {
-			Response__c oldResponse = (Response__c) oldSo; 
-			Response__c newResponse = (Response__c) Trigger.newMap.get(oldResponse.Id); 
+      List<Form_Connection__c> connections = ConnectionRecordProcess.Connections.containsKey(
+          newResponse.Form__c
+        )
+        ? ConnectionRecordProcess.Connections.get(newResponse.Form__c)
+        : new List<Form_Connection__c>();
 
-			if(oldResponse.Status__c == 'Submitted' || newResponse.Status__c != 'Submitted') return; 
+      if (connections == null || connections.size() == 0)
+        return;
 
-			List<Form_Connection__c> connections = ConnectionRecordProcess.Connections.containsKey(newResponse.Form__c) ? ConnectionRecordProcess.Connections.get(newResponse.Form__c) : new List<Form_Connection__c>();
+      Map<Id, Response_Connection__c> responseConnections = ConnectionRecordProcess.ResponseConnections.containsKey(
+          newResponse.Id
+        )
+        ? ConnectionRecordProcess.ResponseConnections.get(newResponse.Id)
+        : new Map<Id, Response_Connection__c>();
 
-			if(connections == null || connections.size() == 0) return;
+      Map<Id, Answer__c> answersByQuestions = ConnectionRecordProcess.ResponseAnswers.containsKey(
+          newResponse.Id
+        )
+        ? ConnectionRecordProcess.ResponseAnswers.get(newResponse.Id)
+        : new Map<Id, Answer__c>();
 
-			Map<Id, Response_Connection__c> responseConnections = ConnectionRecordProcess.ResponseConnections.containsKey(newResponse.Id) ? ConnectionRecordProcess.ResponseConnections.get(newResponse.Id) : new Map<Id, Response_Connection__c>();
+      Map<Id, Form_Connection_Process__c> processByConnections = ConnectionRecordProcess.ResponseConnectionProcess.containsKey(
+          newResponse.Id
+        )
+        ? ConnectionRecordProcess.ResponseConnectionProcess.get(newResponse.Id)
+        : new Map<Id, Form_Connection_Process__c>();
 
-			Map<Id, Answer__c> answersByQuestions = ConnectionRecordProcess.ResponseAnswers.containsKey(newResponse.Id) ? ConnectionRecordProcess.ResponseAnswers.get(newResponse.Id) : new Map<Id, Answer__c>();
+      Map<String, Id> storedResults = new Map<String, Id>();
 
-			Map<Id, Form_Connection_Process__c> processByConnections = ConnectionRecordProcess.ResponseConnectionProcess.containsKey(newResponse.Id) ? ConnectionRecordProcess.ResponseConnectionProcess.get(newResponse.Id) : new Map<Id, Form_Connection_Process__c>(); 
-
-			Map<String, Id> storedResults = new Map<String, Id>();
-
-			System.enqueueJob(new ConnectionCreateJob(0, connections, responseConnections, answersByQuestions, processByConnections, storedResults, newResponse));
-
-		}
-
-	}
-
+      System.enqueueJob(
+        new ConnectionCreateJob(
+          0,
+          connections,
+          responseConnections,
+          answersByQuestions,
+          processByConnections,
+          storedResults,
+          newResponse
+        )
+      );
+    }
+  }
 }

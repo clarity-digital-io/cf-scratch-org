@@ -1,1 +1,2 @@
-public interface IResponseConnectionsService {}
+public interface IResponseConnectionsService {
+}

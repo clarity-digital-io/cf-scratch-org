@@ -1,3 +1,3 @@
 public interface IChecklistGroupsService {
-	List<Checklist_Group__c> getGroups();
+  List<Checklist_Group__c> getGroups();
 }

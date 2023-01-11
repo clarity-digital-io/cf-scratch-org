@@ -1,8 +1,8 @@
 <template>
-    <template if:true={value}>
-        <template for:each={value} for:item="v">
-            <c-image-control key={v} url={v} alt-text="Image Not Found">
-            </c-image-control>
-        </template>
+  <template if:true={value}>
+    <template for:each={value} for:item="v">
+      <c-image-control key={v} url={v} alt-text="Image Not Found">
+      </c-image-control>
     </template>
+  </template>
 </template>

@@ -1,11 +1,17 @@
 <template>
-	
-	<template if:true={isEdit}>
-		<c-response-form-edit is-community={isCommunity} form-id={formId} response-id={responseId}></c-response-form-edit>
-	</template>
+  <template if:true={isEdit}>
+    <c-response-form-edit
+      is-community={isCommunity}
+      form-id={formId}
+      response-id={responseId}
+    ></c-response-form-edit>
+  </template>
 
-	<template if:true={isNew}>
-		<c-response-form-new is-community={isCommunity} record-id={recordId} form-id={formId}></c-response-form-new>
-	</template>
-
+  <template if:true={isNew}>
+    <c-response-form-new
+      is-community={isCommunity}
+      record-id={recordId}
+      form-id={formId}
+    ></c-response-form-new>
+  </template>
 </template>

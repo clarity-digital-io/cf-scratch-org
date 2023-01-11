@@ -1,59 +1,73 @@
 public class AnswersServiceImpl implements IAnswersService {
+  public List<Answer__c> save(List<Answer__c> parsedAnswers) {
+    fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(
+      new fflib_SecureDML()
+    );
 
-	public List<Answer__c> save(List<Answer__c> parsedAnswers) {
+    uow.registerUpsert(parsedAnswers);
 
-		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
-		
-		uow.registerUpsert(parsedAnswers);
+    uow.commitWork();
 
-		uow.commitWork();	
+    return parsedAnswers;
+  }
 
-		return parsedAnswers;
+  public List<Answer__c> save(
+    List<Answer__c> parsedAnswers,
+    Schema.sObjectField uniqueExternalField
+  ) {
+    fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(
+      new fflib_SecureDML()
+    );
 
-	}
+    uow.registerUpsert(parsedAnswers, uniqueExternalField);
 
-	public List<Answer__c> save(List<Answer__c> parsedAnswers, Schema.sObjectField uniqueExternalField) {
+    uow.commitWork();
 
-		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
-		
-		uow.registerUpsert(parsedAnswers, uniqueExternalField);
+    return parsedAnswers;
+  }
 
-		uow.commitWork();	
+  public List<Answer__c> save(
+    List<ContentVersion> attachments,
+    String questionId,
+    String responseId
+  ) {
+    fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(
+      new fflib_SecureDML()
+    );
 
-		return parsedAnswers;
+    IContentVersions cvs = ContentVersions.newInstance(attachments);
 
-	}
+    cvs.save(uow);
 
-	public List<Answer__c> save(List<ContentVersion> attachments, String questionId, String responseId) {
+    uow.commitWork();
 
-		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
+    List<Answer__c> answers = AnswersSelector.newInstance()
+      .selectByCustomQuery(
+        'Response__c = :responseId AND Question__c = :questionId',
+        questionId,
+        responseId
+      );
 
-		IContentVersions cvs = ContentVersions.newInstance(attachments);				
+    return answers;
+  }
 
-		cvs.save(uow);
+  public List<Answer__c> save(
+    List<ContentVersion> attachments,
+    List<String> answerIds
+  ) {
+    fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(
+      new fflib_SecureDML()
+    );
 
-		uow.commitWork();	
+    IContentVersions cvs = ContentVersions.newInstance(attachments);
 
-		List<Answer__c> answers = AnswersSelector.newInstance().selectByCustomQuery('Response__c = :responseId AND Question__c = :questionId', questionId, responseId);
+    cvs.save(uow);
 
-		return answers;
+    uow.commitWork();
 
-	}
+    List<Answer__c> answers = AnswersSelector.newInstance()
+      .selectByCustomQuery('UUID__c IN :answerIds', answerIds);
 
-	public List<Answer__c> save(List<ContentVersion> attachments, List<String> answerIds) {
-
-		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
-
-		IContentVersions cvs = ContentVersions.newInstance(attachments);				
-
-		cvs.save(uow);
-
-		uow.commitWork();	
-
-		List<Answer__c> answers = AnswersSelector.newInstance().selectByCustomQuery('UUID__c IN :answerIds', answerIds);
-
-		return answers;
-
-	}
-
+    return answers;
+  }
 }

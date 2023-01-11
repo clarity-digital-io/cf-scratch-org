@@ -1,58 +1,66 @@
-<aura:component access="global" controller="SetupController" implements="flexipage:availableForAllPageTypes">
+<aura:component
+  access="global"
+  controller="SetupController"
+  implements="flexipage:availableForAllPageTypes"
+>
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 
-  <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+  <aura:attribute name="mobileAccess" type="Boolean" default="false" />
 
-	<aura:attribute name="mobileAccess" type="Boolean" default="false" />
+  <aura:attribute name="activated" type="Boolean" default="false" />
 
-	<aura:attribute name="activated" type="Boolean" default="false" />
-	
-	<aura:attribute name="licenses" type="List" default="[]" />
+  <aura:attribute name="licenses" type="List" default="[]" />
 
-	<aura:attribute name="builderLicense" type="Object" default="{}" />
-	<aura:attribute name="mobileLicense" type="Object" default="{}" />
-    <aura:attribute name="loading" type="Boolean" default="false" />
+  <aura:attribute name="builderLicense" type="Object" default="{}" />
+  <aura:attribute name="mobileLicense" type="Object" default="{}" />
+  <aura:attribute name="loading" type="Boolean" default="false" />
 
-	<lightning:layout pullToBoundary="medium">
-		
-		<lightning:layoutItem flexibility="auto" padding="horizontal-medium">
-			<lightning:card class="slds-card_boundary">
-				<div class="slds-p-around_medium">
+  <lightning:layout pullToBoundary="medium">
+    <lightning:layoutItem flexibility="auto" padding="horizontal-medium">
+      <lightning:card class="slds-card_boundary">
+        <div class="slds-p-around_medium">
+          <div
+            class="slds-illustration slds-illustration_large"
+            aria-hidden="true"
+          >
+            <img
+              src="/img/chatter/OpenRoad.svg"
+              class="slds-illustration__svg"
+              alt=""
+            />
+          </div>
+          <div class="setup_platform">
+            <h3 class="slds-m-vertical_large slds-text-heading_large">
+              Get Started with Clarity Forms
+            </h3>
+            <p class="slds-m-vertical_large">
+              Clarity Forms provides Salesforce native functionality to gather
+              the information you need.
+            </p>
+            <ul class="slds-m-vertical_xx-large ul-list slds-list_dotted">
+              <li>Prefilled Forms</li>
+              <li>Offline Forms with Clarity Forms Mobile</li>
+            </ul>
 
-					<div class="slds-illustration slds-illustration_large" aria-hidden="true">
-						<img src="/img/chatter/OpenRoad.svg" class="slds-illustration__svg" alt=""/>
+            <p class="slds-m-vertical_xx-large">
+              <aura:if isTrue="{! v.loading }">
+                <lightning:spinner alternativeText="Loading" />
+                <aura:set attribute="else">
+                  <div class="slds-p-around_medium">
+                    <lightning:button
+                      variant="brand"
+                      onclick="{!c.setup}"
+                      label="Start"
+                    />
+                  </div>
+                </aura:set>
+              </aura:if>
+            </p>
+          </div>
+        </div>
+      </lightning:card>
 
-				</div>
-				<div class="setup_platform">
-						<h3 class="slds-m-vertical_large slds-text-heading_large">Get Started with Clarity Forms</h3>
-						<p class="slds-m-vertical_large">
-							Clarity Forms provides Salesforce native functionality to gather the information you need. 
-						</p>
-						<ul class="slds-m-vertical_xx-large ul-list slds-list_dotted">
-							<li>
-								Prefilled Forms
-							</li>
-							<li>
-								Offline Forms with Clarity Forms Mobile
-							</li>
-						</ul>
-
-						<p class="slds-m-vertical_xx-large">
-							
-							<aura:if isTrue="{! v.loading }">
-								<lightning:spinner alternativeText="Loading" />
-								<aura:set attribute="else">
-									<div class="slds-p-around_medium">
-										<lightning:button variant="brand" onclick="{!c.setup}" label="Start"/>
-									</div>	
-								</aura:set>
-							</aura:if>
-							
-						</p>
-				</div>
-			</div>
-	</lightning:card>
-
-<!-- 		
+      <!-- 		
 			<lightning:card class="slds-card_boundary"  title="Clarity Forms">
 				<aura:set attribute="actions">
 
@@ -104,11 +112,10 @@
 					
 				</div>
 			</lightning:card> -->
-		</lightning:layoutItem>
+    </lightning:layoutItem>
+  </lightning:layout>
 
-	</lightning:layout>
-
-	<!-- <lightning:layout pullToBoundary="medium" verticalAlign="stretch" multipleRows="true" class="x-large">
+  <!-- <lightning:layout pullToBoundary="medium" verticalAlign="stretch" multipleRows="true" class="x-large">
 
 		<lightning:layoutItem flexibility="auto" padding="horizontal-medium">
 			<lightning:card class="slds-card_boundary"  title="Connect Clarity Forms Mobile">
@@ -171,5 +178,4 @@
 		</lightning:layoutItem>
 
 	</lightning:layout> -->
-
-</aura:component>	
+</aura:component>

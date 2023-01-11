@@ -1,9 +1,17 @@
 {
   "scripts": {
-    "prettier": "prettier --apex-standalone-parser built-in --write \"**/*.{cls,trigger}\"",
-    "prettier-verify": "prettier --check \"**/*.{cls,trigger}\""
+    "lint": "npm run lint:lwc && npm run lint:aura",
+    "lint:aura": "eslint **/aura/**",
+    "lint:lwc": "eslint **/lwc/**",
+    "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
+    "prettier:verify": "prettier --list-different \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\""
   },
   "dependencies": {
+    "@prettier/plugin-xml": "2.2.0",
+    "@salesforce/eslint-config-lwc": "3.3.3",
+    "@salesforce/eslint-plugin-aura": "^2.1.0",
+    "eslint": "8.21.0",
+    "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.8.0",
     "prettier-plugin-apex": "^1.11.0"
   }

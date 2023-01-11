@@ -1,82 +1,88 @@
 @isTest
 public class AttachmentsResourceUnitTest {
+  @TestSetup
+  public static void setup() {
+    User user = TestDataFactory.generateUserWithBuilderPermissions();
 
-	@TestSetup
-	public static void setup(){
-		
-		User user = TestDataFactory.generateUserWithBuilderPermissions(); 
+    System.runAs(user) {
+      Form__c form = TestDataFactory.generateForm();
 
-		System.runAs(user) {
+      Form__c updatedForm = FormsService.updateForm(form);
 
-			Form__c form = TestDataFactory.generateForm(); 
+      List<Question__c> newQuestions = TestDataFactory.generateAttachmentQuestions(
+        form,
+        5
+      );
 
-			Form__c updatedForm = FormsService.updateForm(form);
+      List<Question__c> questions = QuestionsService.saveQuestions(
+        newQuestions
+      );
 
-			List<Question__c> newQuestions = TestDataFactory.generateAttachmentQuestions(form, 5);
+      updatedForm.Status__c = 'Published';
 
-			List<Question__c> questions = QuestionsService.saveQuestions(newQuestions);
+      Form__c publishedForm = FormsService.updateForm(updatedForm);
 
-			updatedForm.Status__c = 'Published';
+      Response__c response = ResponseController.createResponse(
+        publishedForm.Id,
+        JSON.serialize(new Map<String, String>())
+      );
+    }
 
-			Form__c publishedForm = FormsService.updateForm(updatedForm);
+  }
 
-			Response__c response = ResponseController.createResponse( publishedForm.Id, JSON.serialize(new Map<String, String>()) );
+  @isTest
+  public static void shouldUpdateAttachments() {
+    User user = [
+      SELECT Id
+      FROM USER
+      WHERE UserName = 'test_cl@clarityforms.io'
+      LIMIT 1
+    ];
 
-		}
+    System.runAs(user) {
+      Response__c response = [SELECT Id, UUID__c FROM Response__c LIMIT 1];
 
-	}
+      List<Question__c> questions = [SELECT Id FROM Question__c LIMIT 5];
 
-	@isTest
-	public static void shouldUpdateAttachments() {
-		
-		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+      Map<String, String> data = new Map<String, String>();
 
-		System.runAs(user) {
+      List<Attachment> attachments = new List<Attachment>();
 
-			Response__c response = [SELECT Id, UUID__c FROM Response__c LIMIT 1];
+      for (Question__c question : questions) {
+        Attachment attachment = new Attachment();
 
-			List<Question__c> questions = [SELECT Id FROM Question__c LIMIT 5];
+        attachment.UUID = 'UUID-' + question.Id;
+        attachment.Name = 'Test';
+        attachment.Base64 = 'Base64';
+        attachment.Question = question.Id;
+        attachment.Response = response.UUID__c;
+        attachment.Path = 'Path';
 
-			Map<String, String> data = new Map<String, String>();
+        attachments.add(attachment);
+      }
 
-			List<Attachment> attachments = new List<Attachment>();
+      data.put('data', JSON.serialize(attachments));
 
-			for(Question__c question : questions) {
-				
-				Attachment attachment = new Attachment();
+      RestRequest request = new RestRequest();
 
-				attachment.UUID = 'UUID-' + question.Id;
-				attachment.Name = 'Test';
-				attachment.Base64 = 'Base64';
-				attachment.Question = question.Id;
-				attachment.Response = response.UUID__c;
-				attachment.Path = 'Path';
+      request.httpMethod = 'POST';
+      request.requestBody = Blob.valueOf(JSON.serialize(data));
 
-				attachments.add(attachment); 
+      RestContext.request = request;
 
-			}
+      AttachmentsResource.updateAttachments();
 
-			data.put('data', JSON.serialize(attachments));
+      List<Answer__c> updatedAttachments = [
+        SELECT Id, ContentVersion__c
+        FROM Answer__c
+      ];
 
-			RestRequest request = new RestRequest();
+      System.assertEquals(attachments.size(), updatedAttachments.size());
 
-			request.httpMethod = 'POST';
-			request.requestBody = Blob.valueOf(JSON.serialize(data));
+      List<ContentVersion> cvs = [SELECT Id FROM ContentVersion];
 
-			RestContext.request = request;
+      System.assertEquals(attachments.size(), cvs.size());
+    }
 
-			AttachmentsResource.updateAttachments();
-
-			List<Answer__c> updatedAttachments = [SELECT Id, ContentVersion__c FROM Answer__c];
-			
-			System.assertEquals(attachments.size(), updatedAttachments.size());
-
-			List<ContentVersion> cvs = [SELECT Id FROM ContentVersion];
-
-			System.assertEquals(attachments.size(), cvs.size());
-
-		}
-
-	} 
-	
+  }
 }

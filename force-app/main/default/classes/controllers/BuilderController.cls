@@ -1,13 +1,31 @@
-global with sharing class BuilderController {
+public with sharing class BuilderController {
   @RemoteAction
-  global static List<Field__mdt> getAvailableFields() {
+  public static List<String> saveAll(List<List<String>> values) {
+    // questions
+    String sForm = values[0];
+    String sQuestions = values[1];
+
+    String sQuestionOptions = values[3];
+    String sQuestionCriteria = values[4];
+    String sQuestionPictureOptions = values[5];
+
+    List<Question__c> parsedQuestions = (List<Question__c>) JSON.deserialize(
+      sQuestions,
+      List<Question__c>.class
+    );
+
+    return new List<String>();
+  }
+
+  @RemoteAction
+  public static List<Field__mdt> getAvailableFields() {
     List<Field__mdt> fields = FieldsService.getAvailableFields();
 
     return fields;
   }
 
   @RemoteAction
-  global static List<String> save(String sQuestions) {
+  public static List<String> save(String sQuestions) {
     List<Question__c> parsedQuestions = (List<Question__c>) JSON.deserialize(
       sQuestions,
       List<Question__c>.class
@@ -27,7 +45,7 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static Form__c getForm(List<String> pFormId) {
+  public static Form__c getForm(List<String> pFormId) {
     String formId = pFormId[0];
 
     Form__c form = FormsService.getFormById(formId);
@@ -36,7 +54,7 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static Form__c updateForm(String sForm) {
+  public static Form__c updateForm(String sForm) {
     Form__c parsedForm = (Form__c) JSON.deserialize(sForm, Form__c.class);
 
     Form__c form = FormsService.updateForm(parsedForm);
@@ -45,7 +63,7 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static List<Question__c> getQuestions(String formId) {
+  public static List<Question__c> getQuestions(String formId) {
     List<Question__c> questions = QuestionsService.getFormQuestions(
       (Id) formId
     );
@@ -54,7 +72,7 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static String saveQuestion(String sQuestion) {
+  public static String saveQuestion(String sQuestion) {
     Question__c parsedQuestion = (Question__c) JSON.deserialize(
       sQuestion,
       Question__c.class
@@ -74,7 +92,7 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static Map<String, List<sObject>> saveQuestionWithOptions(
+  public static Map<String, List<sObject>> saveQuestionWithOptions(
     String sQuestion,
     String sQuestionOptions
   ) {
@@ -97,7 +115,7 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static Map<String, List<sObject>> saveQuestionWithCriteria(
+  public static Map<String, List<sObject>> saveQuestionWithCriteria(
     String sQuestion,
     String sCriteria
   ) {
@@ -120,7 +138,7 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static List<Question__c> saveRecordGroupFields(
+  public static List<Question__c> saveRecordGroupFields(
     String sRecordGroupFields,
     String relatedRecordGroupId
   ) {
@@ -138,7 +156,7 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static List<Form_Connection__c> getConnections(String formId) {
+  public static List<Form_Connection__c> getConnections(String formId) {
     List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormId(
       formId
     );
@@ -147,7 +165,7 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static Map<String, List<Object>> getConnectionFieldMapping(
+  public static Map<String, List<Object>> getConnectionFieldMapping(
     String connectionId,
     String objectType
   ) {
@@ -202,7 +220,7 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static List<Form_Connection__c> saveConnections(List<String> connect) {
+  public static List<Form_Connection__c> saveConnections(List<String> connect) {
     String sConnections = connect[0];
     String formId = connect[1];
     String sRemoved = connect[2];
@@ -234,7 +252,7 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static Map<String, List<Object>> saveActiveFieldConnections(
+  public static Map<String, List<Object>> saveActiveFieldConnections(
     String sActiveConnectionFields,
     String connectionId
   ) {
@@ -268,7 +286,7 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static List<Question__c> pageQuestionsDelete(
+  public static List<Question__c> pageQuestionsDelete(
     String sQuestions,
     String formId
   ) {
@@ -286,7 +304,7 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static List<Question__c> deleteQuestion(
+  public static List<Question__c> deleteQuestion(
     String sQuestions,
     String sDeleteQuestionId
   ) {
@@ -309,14 +327,13 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static List<String> getSObjectsAvailable() {
+  public static List<String> getSObjectsAvailable() {
     List<String> lookups = new List<String>();
 
-    Map<String, Schema.SObjectType> sObjectsAvailable = Schema.getGlobalDescribe();
+    Map<String, Schema.SObjectType> sObjectsAvailable = Schema.getpublicDescribe();
 
     for (Schema.SObjectType so : sObjectsAvailable.values()) {
       //checkfls
-
       if (
         so.getDescribe().isCreateable() &&
         so.getDescribe().isUpdateable() &&
@@ -331,7 +348,7 @@ global with sharing class BuilderController {
 
   //maybe update this to pojo for easier deserialization and to make cleaner
   @RemoteAction
-  global static Map<String, Map<String, Map<String, String>>> getSObjectFields(
+  public static Map<String, Map<String, Map<String, String>>> getSObjectFields(
     String objectType
   ) {
     SObjectType sObjType = ((SObject) Type.forName(objectType).newInstance())
@@ -368,6 +385,8 @@ global with sharing class BuilderController {
       Boolean isDefaultedOnCreate = fieldResult.isDefaultedOnCreate();
       Boolean isAccessible = fieldResult.isAccessible();
       Boolean isUpdateable = fieldResult.isUpdateable();
+
+      // this can be updated to stripInaccessible
 
       if (
         !isFieldReq &&

@@ -1,58 +1,55 @@
 @isTest
 public class AppsResourceUnitTest {
+  @TestSetup
+  public static void setup() {
+    User user = TestDataFactory.generateUserWithBuilderPermissions();
 
-	@TestSetup
-	public static void setup(){
+    System.runAs(user) {
+      List<Checklist_Group__c> groups = TestDataFactory.generateChecklistGroups(
+        3
+      );
 
-		User user = TestDataFactory.generateUserWithBuilderPermissions(); 
+      insert groups;
 
-		System.runAs(user) {
-		
-			List<Checklist_Group__c> groups = TestDataFactory.generateChecklistGroups(3);
+      List<Form__c> forms = TestDataFactory.generateFormsWithGroup(groups);
 
-			insert groups; 
+      upsert forms;
 
-			List<Form__c> forms = TestDataFactory.generateFormsWithGroup(groups); 
+      List<Account> accounts = TestDataFactory.generateApps(groups);
 
-			upsert forms; 
+      insert accounts;
 
-			List<Account> accounts = TestDataFactory.generateApps(groups);
+      Account account = new Account(Name = 'No Group');
 
-			insert accounts;
+      insert account;
+    }
 
-			Account account = new Account(
-				Name = 'No Group'
-			);
+  }
 
-			insert account; 
+  @isTest
+  public static void shouldGetApps() {
+    User user = [
+      SELECT Id
+      FROM USER
+      WHERE UserName = 'test_cl@clarityforms.io'
+      LIMIT 1
+    ];
 
-		}
+    System.runAs(user) {
+      List<Account> accounts = [SELECT Id FROM Account];
 
-	}
+      System.assertEquals(accounts.size(), 4);
 
-	@isTest
-	public static void shouldGetApps() {
+      RestRequest request = new RestRequest();
 
-		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+      request.httpMethod = 'GET';
+      RestContext.request = request;
 
-		System.runAs(user) {
+      List<App> apps = AppsResource.getApps();
 
-			List<Account> accounts = [SELECT Id FROM Account];
+      //return number of apps (accounts in this case with checklist);
+      System.assertEquals(accounts.size() - 1, apps.size());
+    }
 
-			System.assertEquals(accounts.size(), 4);
-			
-			RestRequest request = new RestRequest();
-
-			request.httpMethod = 'GET';
-			RestContext.request = request;
-
-			List<App> apps = AppsResource.getApps();
-
-			//return number of apps (accounts in this case with checklist);
-			System.assertEquals(accounts.size() - 1, apps.size());
-
-		}
-
-	} 
-	
+  }
 }

@@ -1,30 +1,22 @@
 public with sharing class SetupController {
+  @AuraEnabled(cacheable=true)
+  public static String getSetup() {
+    String response = SyncService.getOrganizationInformation();
 
-	@AuraEnabled
-	public static String getSetup(){
+    return response;
+  }
 
-		String response = SyncService.getOrganizationInformation(); 
+  @AuraEnabled
+  public static String createConnect() {
+    String response = SyncService.connectOrganization();
 
-		return response; 
+    return response;
+  }
 
-	}
+  @AuraEnabled
+  public static String registerUsers() {
+    String response = SyncService.registerUsers();
 
-	@AuraEnabled
-	public static String createConnect(){
-
-		String response = SyncService.connectOrganization(); 
-
-		return response; 
-
-	}
-
-	@AuraEnabled
-	public static String registerUsers() {
-
-		String response = SyncService.registerUsers(); 
-
-		return response; 
-
-	}
-
+    return response;
+  }
 }

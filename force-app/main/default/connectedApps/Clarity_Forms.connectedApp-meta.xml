@@ -1,13 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
     <contactEmail>ben@claritydigital.io</contactEmail>
     <description>Clarity Forms Auth</description>
     <label>Clarity Forms</label>
-    <logoUrl>https://customization-nosoftware-60-dev-ed.scratch.file.force.com/servlet/servlet.ImageServer?id=01501000000LNbq&amp;oid=00D010000008b6Q</logoUrl>
+    <logoUrl
+  >https://customization-nosoftware-60-dev-ed.scratch.file.force.com/servlet/servlet.ImageServer?id=01501000000LNbq&amp;oid=00D010000008b6Q</logoUrl>
     <oauthConfig>
-        <callbackUrl>https://test.salesforce.com/services/oauth2/success</callbackUrl>
-        <consumerKey>3MVG9_I_oWkIqLrnnIx0dkKTzKvwTPXPCg991i.v6HkpS7ts1fN9QRp_HY4H9.quDEXvYVxYDW52l_7raucWL</consumerKey>
+        <callbackUrl
+    >https://test.salesforce.com/services/oauth2/success</callbackUrl>
+        <consumerKey
+    >3MVG9hrgdTdWwemeifO8WWR1g3RBILS2oIA_a2DTN5YUopMF86Vgi.1wev3HMYAdmn7H8nomBl5.nMaogFepR</consumerKey>
         <isAdminApproved>false</isAdminApproved>
-        <scopes>Full</scopes>
+        <scopes>Api</scopes>
+        <scopes>Web</scopes>
+        <scopes>RefreshToken</scopes>
     </oauthConfig>
+    <startUrl>cf-mobile-alpha://</startUrl>
 </ConnectedApp>

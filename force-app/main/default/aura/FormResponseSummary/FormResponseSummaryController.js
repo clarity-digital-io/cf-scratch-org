@@ -1,149 +1,132 @@
 ({
-	doInit: function(cmp, event, helper) {
+  doInit: function (cmp, event, helper) {
+    let action = cmp.get("c.getForm");
 
-			let action = cmp.get("c.getForm");
+    action.setParams({
+      recordId: cmp.get("v.recordId")
+    });
 
-			action.setParams({
-					recordId: cmp.get("v.recordId")
-			});
+    action.setCallback(this, function (response) {
+      let state = response.getState();
 
-			action.setCallback(this, function (response) {
+      if (state === "SUCCESS") {
+        var form = response.getReturnValue();
+        if (!cmp.get("v.recordId")) {
+          cmp.set("v.recordId", form.Id);
+        }
+        cmp.set("v.form", form);
 
-					let state = response.getState();
-			
-					if (state === "SUCCESS") {
-					
-							var form = response.getReturnValue();
-							if(!cmp.get("v.recordId")) {
-								cmp.set("v.recordId", form.Id);
-							}
-							cmp.set('v.form', form); 
+        var workspaceAPI = cmp.find("workspace");
+        workspaceAPI.getEnclosingTabId().then(function (response) {
+          cmp.set("v.tabId", response);
+        });
+      }
+    });
 
-							var workspaceAPI = cmp.find("workspace");
-							workspaceAPI.getEnclosingTabId().then(function(response){
-								cmp.set("v.tabId", response);
-							});
+    $A.enqueueAction(action);
+  },
+  edit: function (cmp, event, helper) {
+    window.open(
+      "/cforms/FormBuilderApp.app?recordId=" + cmp.get("v.recordId"),
+      "_self",
+      false
+    );
+  },
+  delete: function (cmp, event, helper) {
+    let action = cmp.get("c.deleteForm");
 
-					}
-			}); 
+    action.setParams({
+      formId: cmp.get("v.recordId")
+    });
 
-			$A.enqueueAction(action);
+    action.setCallback(this, function (response) {
+      let state = response.getState();
 
-	},
-	edit: function(cmp, event, helper) {
-			
-			window.open ('/cforms/FormBuilderApp.app?recordId=' + cmp.get('v.recordId'),'_self',false)
+      if (state === "SUCCESS") {
+        if (cmp.get("v.tabId") != null) {
+          var workspaceAPI = cmp.find("workspace");
 
-	},
-	delete: function(cmp, event, helper) {
+          workspaceAPI
+            .getFocusedTabInfo()
+            .then(function (response) {
+              var focusedTabId = response.tabId;
+              workspaceAPI.closeTab({ tabId: focusedTabId });
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
 
-			let action = cmp.get("c.deleteForm");
+        var navService = cmp.find("navService");
 
-			action.setParams({
-					formId: cmp.get("v.recordId")
-			});
+        var pageReference = {
+          type: "standard__objectPage",
+          attributes: {
+            objectApiName: "forms__Form__c",
+            actionName: "list"
+          },
+          state: {
+            filterName: "Recent"
+          }
+        };
 
-			action.setCallback(this, function (response) {
+        navService.navigate(pageReference);
+      } else {
+        cmp.find("notifLib").showNotice({
+          variant: "error",
+          header: "Error",
+          title: "Failed to delete",
+          message: response.getError()[0].message
+        });
+      }
+    });
 
-					let state = response.getState();
-			
-					if (state === "SUCCESS") {
+    $A.enqueueAction(action);
+  },
+  handlePublishForm: function (cmp, event, helper) {
+    let action = cmp.get("c.publishForm");
 
-						if(cmp.get('v.tabId') != null) {
-							var workspaceAPI = cmp.find("workspace");
+    action.setParams({
+      formId: cmp.get("v.recordId")
+    });
 
-							workspaceAPI.getFocusedTabInfo().then(function(response) {
-								var focusedTabId = response.tabId;
-								workspaceAPI.closeTab({tabId: focusedTabId});
-							})
-							.catch(function(error) {
-									console.log(error);
-							});
-						}
-					
-						var navService = cmp.find("navService");
+    cmp.set("v.loading", true);
 
-						var pageReference = {
-								type: 'standard__objectPage',
-								attributes: {
-										objectApiName: 'forms__Form__c',
-										actionName: 'list'
-								},
-								state: {
-									filterName: "Recent"
-								}
-						};
+    action.setCallback(this, function (response) {
+      let state = response.getState();
 
-						navService.navigate(pageReference);
+      cmp.set("v.loading", false);
 
-					} else {
+      if (state === "SUCCESS") {
+        var form = response.getReturnValue();
 
-							cmp.find('notifLib').showNotice({
-									"variant": "error",
-									"header": "Error",
-									"title": "Failed to delete",
-									"message": response.getError()[0].message
-							});
-					}
-					
-			}); 
+        cmp.set("v.form", form);
+      }
+    });
 
-			$A.enqueueAction(action);
+    $A.enqueueAction(action);
+  },
+  handleSetDraft: function (cmp, event) {
+    let action = cmp.get("c.setToDraft");
 
-	},
-	handlePublishForm: function(cmp, event, helper) {
+    action.setParams({
+      recordId: cmp.get("v.recordId")
+    });
 
-			let action = cmp.get("c.publishForm");
+    cmp.set("v.loading", true);
 
-			action.setParams({
-					formId: cmp.get("v.recordId")
-			});
+    action.setCallback(this, function (response) {
+      let state = response.getState();
 
-			cmp.set('v.loading', true); 
+      cmp.set("v.loading", false);
 
-			action.setCallback(this, function (response) {
+      if (state === "SUCCESS") {
+        var form = response.getReturnValue();
 
-					let state = response.getState();
-			
-					cmp.set('v.loading', false); 
+        cmp.set("v.form", form);
+      }
+    });
 
-					if (state === "SUCCESS") {
-					
-							var form = response.getReturnValue();
-
-							cmp.set('v.form', form); 
-
-					}
-			}); 
-
-			$A.enqueueAction(action);
-
-	},
-	handleSetDraft: function(cmp, event) {
-		let action = cmp.get("c.setToDraft");
-
-		action.setParams({
-				recordId: cmp.get("v.recordId")
-		});
-
-		cmp.set('v.loading', true); 
-
-		action.setCallback(this, function (response) {
-
-				let state = response.getState();
-		
-				cmp.set('v.loading', false); 
-
-				if (state === "SUCCESS") {
-				
-						var form = response.getReturnValue();
-
-						cmp.set('v.form', form); 
-
-				}
-		}); 
-
-		$A.enqueueAction(action);
-	}
-
-})
+    $A.enqueueAction(action);
+  }
+});

@@ -1,9 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
-    <applicationVisibilities>
-        <application>Clarity_Forms</application>
-        <visible>true</visible>
-    </applicationVisibilities>
     <classAccesses>
         <apexClass>ConnectionCreateJob</apexClass>
         <enabled>true</enabled>
@@ -12,7 +8,8 @@
         <apexClass>FormSummaryController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <description>Permission set for users that need access to Clarity Forms Mobile.</description>
+    <description
+  >Permission set for users that need access to Clarity Forms Mobile.</description>
     <fieldPermissions>
         <editable>false</editable>
         <field>Answer__c.Answer__c</field>
@@ -65,7 +62,8 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Form_Connection_Process__c.Salesforce_Connection_Object__c</field>
+        <field
+    >Form_Connection_Process__c.Salesforce_Connection_Object__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -87,11 +85,6 @@
         <editable>false</editable>
         <field>Form_Connection__c.Type__c</field>
         <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Form__c.Description__c</field>
-        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>

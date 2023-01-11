@@ -1,1 +1,2 @@
-public interface IFormConnections extends fflib_ISObjectDomain {}
+public interface IFormConnections extends fflib_ISObjectDomain {
+}

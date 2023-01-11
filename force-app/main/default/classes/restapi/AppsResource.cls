@@ -24,7 +24,7 @@ global with sharing class AppsResource {
       .selectByIdWithForms(checkListGroupIds);
     Map<Id, Checklist_Group__c> checkListGroups = new Map<Id, Checklist_Group__c>();
 
-    for (Checklist_Group__c checklistGroup : checklistGroups) {
+    for (Checklist_Group__c checklistGroup : checklists) {
       checkListGroups.put(checklistGroup.Id, checklistGroup);
     }
 
@@ -37,7 +37,7 @@ global with sharing class AppsResource {
       App app = new App();
       app.record = account;
       app.checklistGroup = checklistGroup;
-      app.forms = checklist.Forms__r;
+      app.forms = checklistGroup.Forms__r;
       apps.add(app);
     }
 

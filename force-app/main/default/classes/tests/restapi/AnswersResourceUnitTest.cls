@@ -1,77 +1,79 @@
 @isTest
 public class AnswersResourceUnitTest {
+  @TestSetup
+  public static void setup() {
+    User user = TestDataFactory.generateUserWithBuilderPermissions();
 
-	@TestSetup
-	public static void setup(){
-		
-		User user = TestDataFactory.generateUserWithBuilderPermissions(); 
+    System.runAs(user) {
+      Form__c form = TestDataFactory.generateForm();
 
-		System.runAs(user) {
+      Form__c updatedForm = FormsService.updateForm(form);
 
-			Form__c form = TestDataFactory.generateForm(); 
+      List<Question__c> newQuestions = TestDataFactory.generateQuestions(
+        new List<Form__c>{ form }
+      );
 
-			Form__c updatedForm = FormsService.updateForm(form);
+      List<Question__c> questions = QuestionsService.saveQuestions(
+        newQuestions
+      );
 
-			List<Question__c> newQuestions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
+      updatedForm.Status__c = 'Published';
 
-			List<Question__c> questions = QuestionsService.saveQuestions(newQuestions);
+      Form__c publishedForm = FormsService.updateForm(updatedForm);
 
-			updatedForm.Status__c = 'Published';
+      Response__c response = ResponseController.createResponse(
+        publishedForm.Id,
+        JSON.serialize(new Map<String, String>())
+      );
+    }
 
-			Form__c publishedForm = FormsService.updateForm(updatedForm);
+  }
 
-			Response__c response = ResponseController.createResponse( publishedForm.Id, JSON.serialize(new Map<String, String>()) );
+  @isTest
+  public static void shouldUpdateAnswers() {
+    User user = [
+      SELECT Id
+      FROM USER
+      WHERE UserName = 'test_cl@clarityforms.io'
+      LIMIT 1
+    ];
 
-		}
+    System.runAs(user) {
+      Response__c response = [SELECT Id, UUID__c FROM Response__c LIMIT 1];
 
-	}
+      List<Question__c> questions = [SELECT Id FROM Question__c LIMIT 5];
 
-	@isTest
-	public static void shouldUpdateAnswers() {
-		
-		User user = [SELECT Id FROM USER WHERE UserName = 'test_cl@clarityforms.io' Limit 1];
+      Map<String, String> data = new Map<String, String>();
 
-		System.runAs(user) {
+      List<Answer> answers = new List<Answer>();
 
-			Response__c response = [SELECT Id, UUID__c FROM Response__c LIMIT 1];
+      for (Question__c question : questions) {
+        Answer answer = new Answer();
 
-			List<Question__c> questions = [SELECT Id FROM Question__c LIMIT 5];
+        answer.UUID = 'UUID-' + question.Id;
+        answer.Name = 'Test';
+        answer.Answer = 'Answer';
+        answer.Question = question.Id;
+        answer.Response = response.UUID__c;
 
-			Map<String, String> data = new Map<String, String>();
+        answers.add(answer);
+      }
 
-			List<Answer> answers = new List<Answer>();
+      data.put('data', JSON.serialize(answers));
 
-			for(Question__c question : questions) {
-				
-				Answer answer = new Answer();
+      RestRequest request = new RestRequest();
 
-				answer.UUID = 'UUID-' + question.Id;
-				answer.Name = 'Test';
-				answer.Answer = 'Answer';
-				answer.Question = question.Id;
-				answer.Response = response.UUID__c;
+      request.httpMethod = 'POST';
+      request.requestBody = Blob.valueOf(JSON.serialize(data));
 
-				answers.add(answer); 
+      RestContext.request = request;
 
-			}
+      AnswersResource.updateAnswers();
 
-			data.put('data', JSON.serialize(answers));
+      List<Answer__c> updatedAnswers = [SELECT Id FROM Answer__c];
 
-			RestRequest request = new RestRequest();
+      System.assertEquals(answers.size(), updatedAnswers.size());
+    }
 
-			request.httpMethod = 'POST';
-			request.requestBody = Blob.valueOf(JSON.serialize(data));
-
-			RestContext.request = request;
-
-			AnswersResource.updateAnswers();
-
-			List<Answer__c> updatedAnswers = [SELECT Id FROM Answer__c];
-
-			System.assertEquals(answers.size(), updatedAnswers.size());
-
-		}
-
-	} 
-	
+  }
 }

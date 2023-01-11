@@ -1,1 +1,2 @@
-public interface IFormConnectionProcessSelector extends fflib_ISObjectSelector {}
+public interface IFormConnectionProcessSelector extends fflib_ISObjectSelector {
+}

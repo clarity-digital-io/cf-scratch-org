@@ -1,7 +1,7 @@
 public interface ISyncService {
-	String registerUsers();
-	String connectOrganization();
-	String getOrganizationInformation();
-	void process(String userId);
-	void connectOrganizationForms(Set<Id> formIds);
+  String registerUsers();
+  String connectOrganization();
+  String getOrganizationInformation();
+  void process(String userId);
+  void connectOrganizationForms(Set<Id> formIds);
 }

@@ -1,3 +1,3 @@
 public interface IAccountsService {
-	List<Account> getAccountsWithChecklistGroups();
+  List<Account> getAccountsWithChecklistGroups();
 }

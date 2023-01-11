@@ -1,4 +1,4 @@
 <aura:component implements="force:lightningQuickAction,force:hasRecordId">
-	<aura:attribute name="recordId" type="String" />
-    <c:responseFormList recordId="{!v.recordId}"></c:responseFormList>
+  <aura:attribute name="recordId" type="String" />
+  <c:responseFormList recordId="{!v.recordId}"></c:responseFormList>
 </aura:component>

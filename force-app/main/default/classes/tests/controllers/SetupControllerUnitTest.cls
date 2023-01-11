@@ -1,36 +1,30 @@
 @isTest
 public class SetupControllerUnitTest {
-	
-	@TestSetup
-	public static void setup(){
-		
-		User user = TestDataFactory.generateUserWithBuilderPermissions(); 
+  @TestSetup
+  public static void setup() {
+    User user = TestDataFactory.generateUserWithBuilderPermissions();
 
-		System.runAs(user) {
+    System.runAs(user) {
+      Form__c form = TestDataFactory.generateForm();
 
-			Form__c form = TestDataFactory.generateForm(); 
-			
-			List<Question__c> newQuestions = TestDataFactory.generateQuestions(new List<Form__c>{ form });
+      List<Question__c> newQuestions = TestDataFactory.generateQuestions(
+        new List<Form__c>{ form }
+      );
 
-			BuilderController.save(JSON.serialize(newQuestions));
+      BuilderController.save(JSON.serialize(newQuestions));
+    }
 
-		}
-		
-	}
+  }
 
-	@isTest
-	public static void shouldGetSetup() {
+  @isTest
+  public static void shouldGetSetup() {
+  }
 
-	}
+  @isTest
+  public static void shouldCreateConnect() {
+  }
 
-	@isTest
-	public static void shouldCreateConnect() {
-		
-	}
-
-	@isTest
-	public static void shouldRegisterUsers() {
-		
-	}
-
+  @isTest
+  public static void shouldRegisterUsers() {
+  }
 }

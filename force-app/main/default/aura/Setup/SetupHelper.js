@@ -1,46 +1,39 @@
 ({
-	getOrganizationInformation: function(cmp, event) {
+  getOrganizationInformation: function (cmp, event) {
+    // cmp.set('v.loading', true);
+    // check if trial or first time making call to management org
+  },
+  getSetupInformation: function (cmp, event) {
+    cmp.set("v.loading", true);
 
-		// cmp.set('v.loading', true);
+    let action = cmp.get("c.getSetup");
 
-		// check if trial or first time making call to management org
-	},
-	getSetupInformation: function(cmp, event) {
+    action.setCallback(this, function (response) {
+      let state = response.getState();
 
-		cmp.set('v.loading', true);
+      if (state === "SUCCESS") {
+        let licenses = JSON.parse(response.getReturnValue());
 
-		let action = cmp.get("c.getSetup");
+        licenses.forEach((license) => {
+          if (license.Type == "Mobile") {
+            let mobileLicense = license;
+            let withinLicensePeriod =
+              new Date(license.ExpirationDate) < Date.now();
+            cmp.set("v.mobileLicense", mobileLicense);
+            cmp.set("v.mobileAccess", withinLicensePeriod);
+          } else {
+            let builderLicense = license;
+            cmp.set("v.builderLicense", builderLicense);
+          }
+        });
 
-		action.setCallback(this, function (response) {
+        cmp.set("v.licenses", licenses);
+        cmp.set("v.loading", false);
+      }
+    });
 
-				let state = response.getState();
-		
-				if (state === "SUCCESS") {
-				 
-					let licenses = JSON.parse(response.getReturnValue());
+    cmp.set("v.mobileLicense", { IsAPIConnected: true });
 
-					licenses.forEach(license => {
-						if(license.Type == 'Mobile') {
-							let mobileLicense = license;
-							let withinLicensePeriod = new Date(license.ExpirationDate) < Date.now();
-							cmp.set('v.mobileLicense', mobileLicense); 
-							cmp.set('v.mobileAccess', withinLicensePeriod); 
-						} else {
-							let builderLicense = license; 
-							cmp.set('v.builderLicense', builderLicense); 
-						}
-					})
-
-					cmp.set('v.licenses', licenses); 
-					cmp.set('v.loading', false);
-
-				}
-
-		}); 
-
-		cmp.set('v.mobileLicense', { IsAPIConnected: true })
-
-		$A.enqueueAction(action);
-
-	}
-})
+    $A.enqueueAction(action);
+  }
+});

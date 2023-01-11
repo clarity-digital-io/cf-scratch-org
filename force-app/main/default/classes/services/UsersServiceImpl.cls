@@ -1,26 +1,28 @@
 public class UsersServiceImpl implements IUsersService {
+  public User save(User u) {
+    fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(
+      new fflib_SecureDML()
+    );
 
-	public User save(User u) {
+    uow.registerNew(u);
 
-		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
+    uow.commitWork();
 
-		uow.registerNew(u);
+    return u;
+  }
 
-		uow.commitWork();	
+  public void assignPermissionSet(User u, PermissionSet ps) {
+    fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(
+      new fflib_SecureDML()
+    );
 
-		return u;
-	}
+    PermissionSetAssignment psa = new PermissionSetAssignment(
+      AssigneeId = u.Id,
+      PermissionSetId = ps.Id
+    );
 
-	public void assignPermissionSet(User u, PermissionSet ps) {
+    uow.registerNew(psa);
 
-		fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(new fflib_SecureDML());
-
-		PermissionSetAssignment psa = new PermissionSetAssignment(AssigneeId = u.Id, PermissionSetId = ps.Id); 
-
-		uow.registerNew(psa);
-
-		uow.commitWork();	
-
-	}
-
+    uow.commitWork();
+  }
 }

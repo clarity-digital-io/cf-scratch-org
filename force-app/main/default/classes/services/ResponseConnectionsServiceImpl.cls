@@ -1,1 +1,2 @@
-public with sharing class ResponseConnectionsServiceImpl implements IResponseConnectionsService {}
+public with sharing class ResponseConnectionsServiceImpl implements IResponseConnectionsService {
+}

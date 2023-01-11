@@ -59,7 +59,9 @@ public class BuilderControllerUnitTest {
 
       Test.startTest();
 
-      Form__c form = BuilderController.getForm(existingFormId);
+      Form__c form = BuilderController.getForm(
+        new List<String>{ existingFormId }
+      );
 
       Test.stopTest();
 

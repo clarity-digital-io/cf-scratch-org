@@ -1,59 +1,67 @@
 @RestResource(urlMapping='/v1/Responses')
 global with sharing class ResponsesResource {
+  @HttpDelete
+  global static List<String> deleteResponses() {
+    RestRequest req = RestContext.request;
 
-	@HttpDelete
-	global static List<String> deleteResponses() {
+    RestResponse res = RestContext.response;
 
-		RestRequest req = RestContext.request;
+    String body = req.requestBody.toString();
 
-		RestResponse res = RestContext.response;
+    List<String> parsedUUIDs = (List<String>) JSON.deserialize(
+      body,
+      List<String>.class
+    );
 
-		String body = req.requestBody.toString();
+    List<String> deletedResponses = ResponsesService.deleteResponsesByUUIDs(
+      parsedUUIDs
+    );
 
-		List<String> parsedUUIDs = (List<String>)JSON.deserialize(body, List<String>.class);
+    return parsedUUIDs;
+  }
 
-		List<String> deletedResponses = ResponsesService.deleteResponsesByUUIDs(parsedUUIDs);
+  @HttpPost
+  global static String updateResponses() {
+    RestRequest req = RestContext.request;
 
-		return parsedUUIDs; 
-	}
-	
-	@HttpPost
-    global static String updateResponses() {
+    RestResponse res = RestContext.response;
 
-        RestRequest req = RestContext.request;
+    String body = req.requestBody.toString();
 
-		RestResponse res = RestContext.response;
-		
-		String body = req.requestBody.toString();
+    Map<String, String> data = (Map<String, String>) JSON.deserialize(
+      body,
+      Map<String, String>.class
+    );
 
-		Map<String, String> data = (Map<String, String>)JSON.deserialize(body, Map<String, String>.class);
+    String responses = data.get('data');
 
-		String responses = data.get('data');
+    List<Response> parsedResponses = (List<Response>) JSON.deserialize(
+      responses,
+      List<Response>.class
+    );
 
-		List<Response> parsedResponses = (List<Response>)JSON.deserialize(responses, List<Response>.class);
+    List<Response__c> readyResponses = new List<Response__c>();
 
-		List<Response__c> readyResponses = new List<Response__c>();
+    for (Response parsedResponse : parsedResponses) {
+      Id ownerId = Id.valueOf(parsedResponse.OwnerId);
 
-		for(Response parsedResponse : parsedResponses) {
+      Response__c response = new Response__c(
+        OwnerId = ownerId,
+        Status__c = parsedResponse.Status,
+        UUID__c = parsedResponse.UUID,
+        Form__c = parsedResponse.Form
+      );
+      readyResponses.add(response);
+    }
 
-			Id ownerId = Id.valueOf(parsedResponse.OwnerId); 
+    Schema.DescribeFieldResult unique = Response__c.UUID__c.getDescribe();
+    Schema.sObjectField uniqueExternalField = unique.getSObjectField();
 
-			Response__c response = new Response__c(
-				OwnerId = ownerId,
-				Status__c = parsedResponse.Status,
-				UUID__c = parsedResponse.UUID,
-				Form__c = parsedResponse.Form
-			);
-			readyResponses.add(response); 
-		}
+    List<Response__c> savedResponses = ResponsesService.save(
+      readyResponses,
+      uniqueExternalField
+    );
 
-		Schema.DescribeFieldResult unique = Response__c.UUID__c.getDescribe();
-		Schema.sObjectField uniqueExternalField = unique.getSObjectField();
-
-		List<Response__c> savedResponses = ResponsesService.save(readyResponses, uniqueExternalField); 
-
-        return 'Success';
-
-	}
-
+    return 'Success';
+  }
 }

@@ -518,19 +518,24 @@ img {
   background: url("/assets/images/group_avatar_96.png") top left/cover no-repeat;
 }
 .slds-avatar.slds-avatar_group-image-medium {
-  background: url("/assets/images/group_avatar_160.png") top left/cover no-repeat;
+  background: url("/assets/images/group_avatar_160.png") top left/cover
+    no-repeat;
 }
 .slds-avatar.slds-avatar_group-image-large {
-  background: url("/assets/images/group_avatar_200.png") top left/cover no-repeat;
+  background: url("/assets/images/group_avatar_200.png") top left/cover
+    no-repeat;
 }
 .slds-avatar.slds-avatar_profile-image-small {
-  background: url("/assets/images/profile_avatar_96.png") top left/cover no-repeat;
+  background: url("/assets/images/profile_avatar_96.png") top left/cover
+    no-repeat;
 }
 .slds-avatar.slds-avatar_profile-image-medium {
-  background: url("/assets/images/profile_avatar_160.png") top left/cover no-repeat;
+  background: url("/assets/images/profile_avatar_160.png") top left/cover
+    no-repeat;
 }
 .slds-avatar.slds-avatar_profile-image-large {
-  background: url("/assets/images/profile_avatar_200.png") top left/cover no-repeat;
+  background: url("/assets/images/profile_avatar_200.png") top left/cover
+    no-repeat;
 }
 .slds-avatar_x-small {
   width: 1.25rem;
@@ -716,7 +721,10 @@ img {
   margin-left: -1px;
 }
 
-.slds-button-group .slds-button_brand + .slds-button_last .slds-button_icon-brand,
+.slds-button-group
+  .slds-button_brand
+  + .slds-button_last
+  .slds-button_icon-brand,
 .slds-button-group-list li:last-child .slds-button_icon-brand {
   -webkit-box-shadow: inset 1px 0 0 white;
   box-shadow: inset 1px 0 0 white;
@@ -1826,7 +1834,10 @@ a.slds-button--inverse:focus {
 }
 .slds-checkbox [type="checkbox"]:checked + .slds-checkbox_faux:after,
 .slds-checkbox [type="checkbox"]:checked ~ .slds-checkbox_faux:after,
-.slds-checkbox [type="checkbox"]:checked + .slds-checkbox__label .slds-checkbox_faux:after {
+.slds-checkbox
+  [type="checkbox"]:checked
+  + .slds-checkbox__label
+  .slds-checkbox_faux:after {
   display: block;
   content: "";
   height: 0.25rem;
@@ -1843,7 +1854,10 @@ a.slds-button--inverse:focus {
 }
 .slds-checkbox [type="checkbox"]:focus + .slds-checkbox_faux,
 .slds-checkbox [type="checkbox"]:focus ~ .slds-checkbox_faux,
-.slds-checkbox [type="checkbox"]:focus + .slds-checkbox__label .slds-checkbox_faux {
+.slds-checkbox
+  [type="checkbox"]:focus
+  + .slds-checkbox__label
+  .slds-checkbox_faux {
   content: "";
   border-color: #1589ee;
   -webkit-box-shadow: 0 0 3px #0070d2;
@@ -1851,13 +1865,19 @@ a.slds-button--inverse:focus {
 }
 .slds-checkbox [type="checkbox"]:focus:checked > .slds-checkbox_faux,
 .slds-checkbox [type="checkbox"]:focus:checked ~ .slds-checkbox_faux,
-.slds-checkbox [type="checkbox"]:focus:checked + .slds-checkbox__label .slds-checkbox_faux {
+.slds-checkbox
+  [type="checkbox"]:focus:checked
+  + .slds-checkbox__label
+  .slds-checkbox_faux {
   border-color: #1589ee;
   background-color: white;
 }
 .slds-checkbox [type="checkbox"]:indeterminate + .slds-checkbox_faux:after,
 .slds-checkbox [type="checkbox"]:indeterminate ~ .slds-checkbox_faux:after,
-.slds-checkbox [type="checkbox"]:indeterminate + .slds-checkbox__label .slds-checkbox_faux:after {
+.slds-checkbox
+  [type="checkbox"]:indeterminate
+  + .slds-checkbox__label
+  .slds-checkbox_faux:after {
   content: "";
   display: block;
   position: absolute;
@@ -1873,13 +1893,19 @@ a.slds-button--inverse:focus {
 }
 .slds-checkbox [type="checkbox"][disabled] + .slds-checkbox_faux,
 .slds-checkbox [type="checkbox"][disabled] ~ .slds-checkbox_faux,
-.slds-checkbox [type="checkbox"][disabled] + .slds-checkbox__label .slds-checkbox_faux {
+.slds-checkbox
+  [type="checkbox"][disabled]
+  + .slds-checkbox__label
+  .slds-checkbox_faux {
   background-color: #ecebea;
   border-color: #c9c7c5;
 }
 .slds-checkbox [type="checkbox"][disabled] + .slds-checkbox_faux:after,
 .slds-checkbox [type="checkbox"][disabled] ~ .slds-checkbox_faux:after,
-.slds-checkbox [type="checkbox"][disabled] + .slds-checkbox__label .slds-checkbox_faux:after {
+.slds-checkbox
+  [type="checkbox"][disabled]
+  + .slds-checkbox__label
+  .slds-checkbox_faux:after {
   border-color: #969492;
 }
 .slds-checkbox.slds-checkbox_stacked .slds-checkbox__label {
@@ -1909,25 +1935,47 @@ a.slds-button--inverse:focus {
 
 .slds-has-error .slds-checkbox [type="checkbox"] + .slds-checkbox_faux,
 .slds-has-error .slds-checkbox [type="checkbox"] ~ .slds-checkbox_faux,
-.slds-has-error .slds-checkbox [type="checkbox"] + .slds-checkbox__label .slds-checkbox_faux {
+.slds-has-error
+  .slds-checkbox
+  [type="checkbox"]
+  + .slds-checkbox__label
+  .slds-checkbox_faux {
   border-color: #c23934;
   border-width: 2px;
 }
 .slds-has-error .slds-checkbox [type="checkbox"]:checked + .slds-checkbox_faux,
 .slds-has-error .slds-checkbox [type="checkbox"]:checked ~ .slds-checkbox_faux,
-.slds-has-error .slds-checkbox [type="checkbox"]:checked + .slds-checkbox__label .slds-checkbox_faux {
+.slds-has-error
+  .slds-checkbox
+  [type="checkbox"]:checked
+  + .slds-checkbox__label
+  .slds-checkbox_faux {
   border-color: #c23934;
   background-color: white;
 }
-.slds-has-error .slds-checkbox [type="checkbox"]:checked + .slds-checkbox_faux:after,
-.slds-has-error .slds-checkbox [type="checkbox"]:checked ~ .slds-checkbox_faux:after,
-.slds-has-error .slds-checkbox [type="checkbox"]:checked + .slds-checkbox__label .slds-checkbox_faux:after {
+.slds-has-error
+  .slds-checkbox
+  [type="checkbox"]:checked
+  + .slds-checkbox_faux:after,
+.slds-has-error
+  .slds-checkbox
+  [type="checkbox"]:checked
+  ~ .slds-checkbox_faux:after,
+.slds-has-error
+  .slds-checkbox
+  [type="checkbox"]:checked
+  + .slds-checkbox__label
+  .slds-checkbox_faux:after {
   border-color: #d4504c;
 }
 
 .slds-form-element .slds-checkbox [type="checkbox"] + .slds-checkbox_faux,
 .slds-form-element .slds-checkbox [type="checkbox"] ~ .slds-checkbox_faux,
-.slds-form-element .slds-checkbox [type="checkbox"] + .slds-checkbox__label .slds-checkbox_faux {
+.slds-form-element
+  .slds-checkbox
+  [type="checkbox"]
+  + .slds-checkbox__label
+  .slds-checkbox_faux {
   margin-right: 0.5rem;
 }
 .slds-checkbox_standalone {
@@ -1963,7 +2011,8 @@ a.slds-button--inverse:focus {
 }
 .slds-combobox_container.slds-has-icon-only .slds-combobox__input,
 .slds-combobox_container.slds-has-icon-only .slds-combobox__input:focus,
-.slds-combobox_container.slds-has-icon-only .slds-combobox__input.slds-has-focus {
+.slds-combobox_container.slds-has-icon-only
+  .slds-combobox__input.slds-has-focus {
   width: 0;
   pointer-events: auto;
 }
@@ -2113,8 +2162,10 @@ a.slds-button--inverse:focus {
 }
 [class*="slds-input-has-icon_left"] .slds-combobox__input[value],
 [class*="slds-input-has-icon--left"] .slds-combobox__input[value],
-[class*="slds-input-has-icon_left"] .slds-combobox__input.slds-combobox__input-value,
-[class*="slds-input-has-icon--left"] .slds-combobox__input.slds-combobox__input-value {
+[class*="slds-input-has-icon_left"]
+  .slds-combobox__input.slds-combobox__input-value,
+[class*="slds-input-has-icon--left"]
+  .slds-combobox__input.slds-combobox__input-value {
   padding-left: 2.25rem;
 }
 .slds-combobox__input-entity-icon {
@@ -2217,10 +2268,14 @@ a.slds-button--inverse:focus {
 .slds-combobox-group .slds-combobox_object-switcher__button.slds-has-focus {
   z-index: 1;
 }
-.slds-combobox-group.slds-has-selection .slds-combobox-addon_start .slds-combobox__input {
+.slds-combobox-group.slds-has-selection
+  .slds-combobox-addon_start
+  .slds-combobox__input {
   border-bottom-left-radius: 0;
 }
-.slds-combobox-group.slds-has-selection .slds-combobox-addon_end .slds-combobox__input {
+.slds-combobox-group.slds-has-selection
+  .slds-combobox-addon_end
+  .slds-combobox__input {
   border-bottom-right-radius: 0;
 }
 .slds-combobox-group.slds-has-selection ~ .slds-listbox_selection-group {
@@ -2313,7 +2368,9 @@ a.slds-button--inverse:focus {
 .slds-has-inline-listbox .slds-listbox_object-switcher ~ .slds-listbox_inline,
 .slds-has-inline-listbox .slds-combobox_container__icon ~ .slds-listbox_inline,
 .slds-has-object-switcher .slds-listbox_object-switcher ~ .slds-listbox_inline,
-.slds-has-object-switcher .slds-combobox_container__icon ~ .slds-listbox_inline {
+.slds-has-object-switcher
+  .slds-combobox_container__icon
+  ~ .slds-listbox_inline {
   margin-left: 0.5rem;
 }
 .slds-has-inline-listbox.slds-has-icon_left,
@@ -2442,10 +2499,23 @@ a.slds-button--inverse:focus {
 .slds-table_bordered tbody th {
   border-top: 1px solid #dddbda;
 }
-.slds-table_bordered:not(.slds-no-row-hover) tbody tr:hover > td:not(.slds-has-focus),
-.slds-table_bordered:not(.slds-no-row-hover) tbody tr:hover > th:not(.slds-has-focus),
-.slds-table_bordered:not(.slds-no-row-hover) tbody tr:focus > td:not(.slds-has-focus),
-.slds-table_bordered:not(.slds-no-row-hover) tbody tr:focus > th:not(.slds-has-focus) > th:not(.slds-has-focus) {
+.slds-table_bordered:not(.slds-no-row-hover)
+  tbody
+  tr:hover
+  > td:not(.slds-has-focus),
+.slds-table_bordered:not(.slds-no-row-hover)
+  tbody
+  tr:hover
+  > th:not(.slds-has-focus),
+.slds-table_bordered:not(.slds-no-row-hover)
+  tbody
+  tr:focus
+  > td:not(.slds-has-focus),
+.slds-table_bordered:not(.slds-no-row-hover)
+  tbody
+  tr:focus
+  > th:not(.slds-has-focus)
+  > th:not(.slds-has-focus) {
   -webkit-box-shadow: #dddbda 0 -1px 0 inset, #dddbda 0 1px 0 inset;
   box-shadow: #dddbda 0 -1px 0 inset, #dddbda 0 1px 0 inset;
 }
@@ -2474,7 +2544,8 @@ a.slds-button--inverse:focus {
 .slds-table_fixed-layout .slds-cell-shrink {
   width: 3rem;
 }
-.slds-table_fixed-layout .slds-cell-shrink:nth-child(n).slds-cell-shrink:nth-child(n) {
+.slds-table_fixed-layout
+  .slds-cell-shrink:nth-child(n).slds-cell-shrink:nth-child(n) {
   padding-left: 0;
   padding-right: 0;
 }
@@ -2498,7 +2569,9 @@ a.slds-button--inverse:focus {
 .slds-is-sortable .slds-th__action:focus .slds-is-sortable__icon,
 .slds-is-sortable.slds-has-focus .slds-th__action .slds-is-sortable__icon,
 .slds-is-sortable.slds-has-focus .slds-th__action:hover .slds-is-sortable__icon,
-.slds-is-sortable.slds-has-focus .slds-th__action:focus .slds-is-sortable__icon {
+.slds-is-sortable.slds-has-focus
+  .slds-th__action:focus
+  .slds-is-sortable__icon {
   display: inline-block;
   fill: #0070d2;
 }
@@ -2694,12 +2767,24 @@ a.slds-button--inverse:focus {
   bottom: 0;
   right: 0;
   width: 50%;
-  background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), color-stop(69%, white));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(rgba(255, 255, 255, 0)),
+    color-stop(69%, white)
+  );
   background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 69%);
 }
 
 [class*="slds-table_column-"] tr:hover td .slds-truncate:after {
-  background: -webkit-gradient(linear, left top, right top, from(rgba(250, 250, 249, 0)), color-stop(69%, #fafaf9));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(rgba(250, 250, 249, 0)),
+    color-stop(69%, #fafaf9)
+  );
   background: linear-gradient(to right, rgba(250, 250, 249, 0) 0%, #fafaf9 69%);
 }
 .slds-table_resizable-cols thead th {
@@ -2800,7 +2885,10 @@ a.slds-button--inverse:focus {
 .slds-table_edit .slds-cell-error {
   padding-left: 0;
 }
-.slds-table_edit:not(.slds-no-cell-focus) tbody tr:hover > .slds-cell-edit.slds-has-focus {
+.slds-table_edit:not(.slds-no-cell-focus)
+  tbody
+  tr:hover
+  > .slds-cell-edit.slds-has-focus {
   background-color: white;
   -webkit-box-shadow: #0070d2 0 0 0 1px inset;
   box-shadow: #0070d2 0 0 0 1px inset;
@@ -3057,19 +3145,25 @@ a.slds-button--inverse:focus {
   box-shadow: 0 0 3px #0070d2;
   border-style: solid;
 }
-.slds-file-selector__input:focus ~ .slds-file-selector__body > .slds-file-selector__button {
+.slds-file-selector__input:focus
+  ~ .slds-file-selector__body
+  > .slds-file-selector__button {
   -webkit-box-shadow: 0 0 3px #0070d2;
   box-shadow: 0 0 3px #0070d2;
 }
 .slds-file-selector__input[disabled] ~ .slds-file-selector__body {
   color: #dddbda;
 }
-.slds-file-selector__input[disabled] ~ .slds-file-selector__body > .slds-file-selector__button {
+.slds-file-selector__input[disabled]
+  ~ .slds-file-selector__body
+  > .slds-file-selector__button {
   background: #e0e5ee;
   border-color: rgba(0, 0, 0, 0);
   color: white;
 }
-.slds-file-selector__input[disabled] ~ .slds-file-selector__body > .slds-file-selector__body-icon {
+.slds-file-selector__input[disabled]
+  ~ .slds-file-selector__body
+  > .slds-file-selector__body-icon {
   fill: currentColor;
 }
 .slds-file-selector__button {
@@ -3304,7 +3398,8 @@ a.slds-button--inverse:focus {
 }
 .slds-form-element_horizontal:not(.slds-form-element_readonly),
 .slds-form_horizontal .slds-form-element:not(.slds-form-element_readonly),
-.slds-form_stacked .slds-form-element_horizontal:not(.slds-form-element_readonly) {
+.slds-form_stacked
+  .slds-form-element_horizontal:not(.slds-form-element_readonly) {
   margin-bottom: 0.5rem;
 }
 .slds-form-element_horizontal:not([class*="slds-size"]),
@@ -3331,14 +3426,24 @@ a.slds-button--inverse:focus {
   padding-top: 1.25rem;
 }
 @media (min-width: 48em) {
-  .slds-form-element_horizontal.slds-form-element_1-col .slds-form-element__label,
-  .slds-form_horizontal .slds-form-element.slds-form-element_1-col .slds-form-element__label,
-  .slds-form_stacked .slds-form-element_horizontal.slds-form-element_1-col .slds-form-element__label {
+  .slds-form-element_horizontal.slds-form-element_1-col
+    .slds-form-element__label,
+  .slds-form_horizontal
+    .slds-form-element.slds-form-element_1-col
+    .slds-form-element__label,
+  .slds-form_stacked
+    .slds-form-element_horizontal.slds-form-element_1-col
+    .slds-form-element__label {
     max-width: calc((50% - 33.333%) - 1.25rem);
   }
-  .slds-form-element_horizontal.slds-form-element_1-col .slds-form-element__control,
-  .slds-form_horizontal .slds-form-element.slds-form-element_1-col .slds-form-element__control,
-  .slds-form_stacked .slds-form-element_horizontal.slds-form-element_1-col .slds-form-element__control {
+  .slds-form-element_horizontal.slds-form-element_1-col
+    .slds-form-element__control,
+  .slds-form_horizontal
+    .slds-form-element.slds-form-element_1-col
+    .slds-form-element__control,
+  .slds-form_stacked
+    .slds-form-element_horizontal.slds-form-element_1-col
+    .slds-form-element__control {
     padding-left: calc((50% - 33.333%) - (0.25rem * 2));
   }
 }
@@ -3360,9 +3465,17 @@ a.slds-button--inverse:focus {
     padding-left: 33%;
     clear: none;
   }
-  .slds-form-element_horizontal .slds-form-element__control .slds-form-element__control,
-  .slds-form_horizontal .slds-form-element .slds-form-element__control .slds-form-element__control,
-  .slds-form_stacked .slds-form-element_horizontal .slds-form-element__control .slds-form-element__control {
+  .slds-form-element_horizontal
+    .slds-form-element__control
+    .slds-form-element__control,
+  .slds-form_horizontal
+    .slds-form-element
+    .slds-form-element__control
+    .slds-form-element__control,
+  .slds-form_stacked
+    .slds-form-element_horizontal
+    .slds-form-element__control
+    .slds-form-element__control {
     padding-left: 0;
   }
   .slds-form-element_horizontal .slds-form-element__icon,
@@ -3376,26 +3489,64 @@ a.slds-button--inverse:focus {
   .slds-form_stacked .slds-form-element_horizontal .slds-checkbox_standalone {
     padding: 0.25rem 0;
   }
-  .slds-form-element_horizontal .slds-checkbox:not(.slds-checkbox_stacked) .slds-form-element__label,
+  .slds-form-element_horizontal
+    .slds-checkbox:not(.slds-checkbox_stacked)
+    .slds-form-element__label,
   .slds-form-element_horizontal .slds-radio .slds-form-element__label,
-  .slds-form_horizontal .slds-form-element .slds-checkbox:not(.slds-checkbox_stacked) .slds-form-element__label,
-  .slds-form_horizontal .slds-form-element .slds-radio .slds-form-element__label,
-  .slds-form_stacked .slds-form-element_horizontal .slds-checkbox:not(.slds-checkbox_stacked) .slds-form-element__label,
-  .slds-form_stacked .slds-form-element_horizontal .slds-radio .slds-form-element__label {
+  .slds-form_horizontal
+    .slds-form-element
+    .slds-checkbox:not(.slds-checkbox_stacked)
+    .slds-form-element__label,
+  .slds-form_horizontal
+    .slds-form-element
+    .slds-radio
+    .slds-form-element__label,
+  .slds-form_stacked
+    .slds-form-element_horizontal
+    .slds-checkbox:not(.slds-checkbox_stacked)
+    .slds-form-element__label,
+  .slds-form_stacked
+    .slds-form-element_horizontal
+    .slds-radio
+    .slds-form-element__label {
     position: relative;
     float: none;
     max-width: 100%;
     width: auto;
   }
-  .slds-form-element_horizontal .slds-form-element__row .slds-form-element__label,
-  .slds-form-element_horizontal .slds-form-element__row .slds-form-element__control,
-  .slds-form-element_horizontal .slds-dueling-list__column .slds-form-element__label,
-  .slds-form_horizontal .slds-form-element .slds-form-element__row .slds-form-element__label,
-  .slds-form_horizontal .slds-form-element .slds-form-element__row .slds-form-element__control,
-  .slds-form_horizontal .slds-form-element .slds-dueling-list__column .slds-form-element__label,
-  .slds-form_stacked .slds-form-element_horizontal .slds-form-element__row .slds-form-element__label,
-  .slds-form_stacked .slds-form-element_horizontal .slds-form-element__row .slds-form-element__control,
-  .slds-form_stacked .slds-form-element_horizontal .slds-dueling-list__column .slds-form-element__label {
+  .slds-form-element_horizontal
+    .slds-form-element__row
+    .slds-form-element__label,
+  .slds-form-element_horizontal
+    .slds-form-element__row
+    .slds-form-element__control,
+  .slds-form-element_horizontal
+    .slds-dueling-list__column
+    .slds-form-element__label,
+  .slds-form_horizontal
+    .slds-form-element
+    .slds-form-element__row
+    .slds-form-element__label,
+  .slds-form_horizontal
+    .slds-form-element
+    .slds-form-element__row
+    .slds-form-element__control,
+  .slds-form_horizontal
+    .slds-form-element
+    .slds-dueling-list__column
+    .slds-form-element__label,
+  .slds-form_stacked
+    .slds-form-element_horizontal
+    .slds-form-element__row
+    .slds-form-element__label,
+  .slds-form_stacked
+    .slds-form-element_horizontal
+    .slds-form-element__row
+    .slds-form-element__control,
+  .slds-form_stacked
+    .slds-form-element_horizontal
+    .slds-dueling-list__column
+    .slds-form-element__label {
     width: auto;
     max-width: 100%;
     -ms-flex-preferred-size: auto;
@@ -3411,13 +3562,27 @@ a.slds-button--inverse:focus {
     clear: none;
   }
   .slds-form-element_horizontal .slds-input-has-icon_left .slds-input__icon,
-  .slds-form_horizontal .slds-form-element .slds-input-has-icon_left .slds-input__icon,
-  .slds-form_stacked .slds-form-element_horizontal .slds-input-has-icon_left .slds-input__icon {
+  .slds-form_horizontal
+    .slds-form-element
+    .slds-input-has-icon_left
+    .slds-input__icon,
+  .slds-form_stacked
+    .slds-form-element_horizontal
+    .slds-input-has-icon_left
+    .slds-input__icon {
     left: calc(33% + 0.75rem);
   }
-  .slds-form-element_horizontal .slds-input-has-icon_left-right .slds-input__icon_left,
-  .slds-form_horizontal .slds-form-element .slds-input-has-icon_left-right .slds-input__icon_left,
-  .slds-form_stacked .slds-form-element_horizontal .slds-input-has-icon_left-right .slds-input__icon_left {
+  .slds-form-element_horizontal
+    .slds-input-has-icon_left-right
+    .slds-input__icon_left,
+  .slds-form_horizontal
+    .slds-form-element
+    .slds-input-has-icon_left-right
+    .slds-input__icon_left,
+  .slds-form_stacked
+    .slds-form-element_horizontal
+    .slds-input-has-icon_left-right
+    .slds-input__icon_left {
     left: calc(33% + 0.75rem);
   }
 }
@@ -3460,7 +3625,8 @@ a.slds-button--inverse:focus {
 }
 .slds-form-element_stacked:not(.slds-form-element_readonly),
 .slds-form_stacked .slds-form-element:not(.slds-form-element_readonly),
-.slds-form_horizontal .slds-form-element_stacked:not(.slds-form-element_readonly) {
+.slds-form_horizontal
+  .slds-form-element_stacked:not(.slds-form-element_readonly) {
   margin-bottom: 0.5rem;
 }
 .slds-form-element_stacked:not(.slds-is-editing),
@@ -6593,12 +6759,20 @@ a.slds-button--inverse:focus {
   visibility: visible;
   opacity: 1;
 }
-.slds-dropdown-trigger > [class*="slds-button_icon"] ~ .slds-dropdown_left[class*="slds-nubbin"],
-.slds-dropdown-trigger > [class*="slds-button--icon"] ~ .slds-dropdown--left[class*="slds-nubbin"] {
+.slds-dropdown-trigger
+  > [class*="slds-button_icon"]
+  ~ .slds-dropdown_left[class*="slds-nubbin"],
+.slds-dropdown-trigger
+  > [class*="slds-button--icon"]
+  ~ .slds-dropdown--left[class*="slds-nubbin"] {
   left: -0.5rem;
 }
-.slds-dropdown-trigger > [class*="slds-button_icon"] ~ .slds-dropdown_right[class*="slds-nubbin"],
-.slds-dropdown-trigger > [class*="slds-button--icon"] ~ .slds-dropdown--right[class*="slds-nubbin"] {
+.slds-dropdown-trigger
+  > [class*="slds-button_icon"]
+  ~ .slds-dropdown_right[class*="slds-nubbin"],
+.slds-dropdown-trigger
+  > [class*="slds-button--icon"]
+  ~ .slds-dropdown--right[class*="slds-nubbin"] {
   right: -0.5rem;
 }
 .slds-dropdown {
@@ -6702,7 +6876,10 @@ a.slds-button--inverse:focus {
   color: rgba(255, 255, 255, 0.5);
   background-color: transparent;
 }
-.slds-dropdown_inverse .slds-dropdown__item > a[aria-disabled="true"] > a[aria-disabled="true"] {
+.slds-dropdown_inverse
+  .slds-dropdown__item
+  > a[aria-disabled="true"]
+  > a[aria-disabled="true"] {
   color: rgba(255, 255, 255, 0.15);
   cursor: default;
 }
@@ -7102,24 +7279,39 @@ a.slds-button--inverse:focus {
   border-color: #c9c7c5;
 }
 .slds-radio [type="radio"][disabled] ~ .slds-radio_faux:after,
-.slds-radio [type="radio"][disabled] + .slds-radio__label .slds-radio_faux:after {
+.slds-radio
+  [type="radio"][disabled]
+  + .slds-radio__label
+  .slds-radio_faux:after {
   background: #969492;
 }
 
 .slds-has-error .slds-radio [type="radio"] + .slds-radio_faux,
 .slds-has-error .slds-radio [type="radio"] ~ .slds-radio_faux,
-.slds-has-error .slds-radio [type="radio"] + .slds-radio__label .slds-radio_faux {
+.slds-has-error
+  .slds-radio
+  [type="radio"]
+  + .slds-radio__label
+  .slds-radio_faux {
   border-color: #c23934;
   border-width: 2px;
 }
 .slds-has-error .slds-radio [type="radio"]:checked + .slds-radio_faux,
 .slds-has-error .slds-radio [type="radio"]:checked ~ .slds-radio_faux,
-.slds-has-error .slds-radio [type="radio"]:checked + .slds-radio__label .slds-radio_faux {
+.slds-has-error
+  .slds-radio
+  [type="radio"]:checked
+  + .slds-radio__label
+  .slds-radio_faux {
   background: white;
 }
 .slds-has-error .slds-radio [type="radio"]:checked + .slds-radio_faux:after,
 .slds-has-error .slds-radio [type="radio"]:checked ~ .slds-radio_faux:after,
-.slds-has-error .slds-radio [type="radio"]:checked + .slds-radio__label .slds-radio_faux:after {
+.slds-has-error
+  .slds-radio
+  [type="radio"]:checked
+  + .slds-radio__label
+  .slds-radio_faux:after {
   background: #d4504c;
 }
 
@@ -7421,55 +7613,64 @@ a.slds-button--inverse:focus {
 .slds-rich-text-editor__textarea li.ql-indent-1:not(.ql-direction-rtl) {
   padding-left: 4.5em;
 }
-.slds-rich-text-editor__textarea li.ql-indent-1.ql-direction-rtl.ql-align-right {
+.slds-rich-text-editor__textarea
+  li.ql-indent-1.ql-direction-rtl.ql-align-right {
   padding-right: 4.5em;
 }
 .slds-rich-text-editor__textarea li.ql-indent-2:not(.ql-direction-rtl) {
   padding-left: 7.5em;
 }
-.slds-rich-text-editor__textarea li.ql-indent-2.ql-direction-rtl.ql-align-right {
+.slds-rich-text-editor__textarea
+  li.ql-indent-2.ql-direction-rtl.ql-align-right {
   padding-right: 7.5em;
 }
 .slds-rich-text-editor__textarea li.ql-indent-3:not(.ql-direction-rtl) {
   padding-left: 10.5em;
 }
-.slds-rich-text-editor__textarea li.ql-indent-3.ql-direction-rtl.ql-align-right {
+.slds-rich-text-editor__textarea
+  li.ql-indent-3.ql-direction-rtl.ql-align-right {
   padding-right: 10.5em;
 }
 .slds-rich-text-editor__textarea li.ql-indent-4:not(.ql-direction-rtl) {
   padding-left: 13.5em;
 }
-.slds-rich-text-editor__textarea li.ql-indent-4.ql-direction-rtl.ql-align-right {
+.slds-rich-text-editor__textarea
+  li.ql-indent-4.ql-direction-rtl.ql-align-right {
   padding-right: 13.5em;
 }
 .slds-rich-text-editor__textarea li.ql-indent-5:not(.ql-direction-rtl) {
   padding-left: 16.5em;
 }
-.slds-rich-text-editor__textarea li.ql-indent-5.ql-direction-rtl.ql-align-right {
+.slds-rich-text-editor__textarea
+  li.ql-indent-5.ql-direction-rtl.ql-align-right {
   padding-right: 16.5em;
 }
 .slds-rich-text-editor__textarea li.ql-indent-6:not(.ql-direction-rtl) {
   padding-left: 19.5em;
 }
-.slds-rich-text-editor__textarea li.ql-indent-6.ql-direction-rtl.ql-align-right {
+.slds-rich-text-editor__textarea
+  li.ql-indent-6.ql-direction-rtl.ql-align-right {
   padding-right: 19.5em;
 }
 .slds-rich-text-editor__textarea li.ql-indent-7:not(.ql-direction-rtl) {
   padding-left: 22.5em;
 }
-.slds-rich-text-editor__textarea li.ql-indent-7.ql-direction-rtl.ql-align-right {
+.slds-rich-text-editor__textarea
+  li.ql-indent-7.ql-direction-rtl.ql-align-right {
   padding-right: 22.5em;
 }
 .slds-rich-text-editor__textarea li.ql-indent-8:not(.ql-direction-rtl) {
   padding-left: 25.5em;
 }
-.slds-rich-text-editor__textarea li.ql-indent-8.ql-direction-rtl.ql-align-right {
+.slds-rich-text-editor__textarea
+  li.ql-indent-8.ql-direction-rtl.ql-align-right {
   padding-right: 25.5em;
 }
 .slds-rich-text-editor__textarea li.ql-indent-9:not(.ql-direction-rtl) {
   padding-left: 28.5em;
 }
-.slds-rich-text-editor__textarea li.ql-indent-9.ql-direction-rtl.ql-align-right {
+.slds-rich-text-editor__textarea
+  li.ql-indent-9.ql-direction-rtl.ql-align-right {
   padding-right: 28.5em;
 }
 
@@ -8035,7 +8236,9 @@ a.slds-button--inverse:focus {
 .slds-panel__body .slds-tabs-mobile:first-child {
   margin-top: -0.75rem;
 }
-.slds-panel__body .slds-tabs-mobile:first-child .slds-tabs-mobile__item:first-child {
+.slds-panel__body
+  .slds-tabs-mobile:first-child
+  .slds-tabs-mobile__item:first-child {
   border-top: 0;
 }
 .slds-tabs-mobile {
@@ -8166,7 +8369,10 @@ a.slds-button--inverse:focus {
   -ms-flex-item-align: center;
   align-self: center;
 }
-.slds-table_tree .slds-button:not(.slds-th__action-button).slds-button:not(.slds-th__action-button) {
+.slds-table_tree
+  .slds-button:not(.slds-th__action-button).slds-button:not(
+    .slds-th__action-button
+  ) {
   margin-top: 0;
 }
 .slds-table_tree [aria-level="1"] > .slds-tree__item {
@@ -8269,7 +8475,10 @@ a.slds-button--inverse:focus {
   -webkit-box-shadow: #1589ee 4px 0 0 inset;
   box-shadow: #1589ee 4px 0 0 inset;
 }
-[dir="rtl"] .slds-tree [role="treeitem"][aria-selected="true"] > .slds-tree__item {
+[dir="rtl"]
+  .slds-tree
+  [role="treeitem"][aria-selected="true"]
+  > .slds-tree__item {
   -webkit-box-shadow: #1589ee -4px 0 0 inset;
   box-shadow: #1589ee -4px 0 0 inset;
 }
