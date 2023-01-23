@@ -127,15 +127,6 @@ global with sharing class BuilderController {
   }
 
   @RemoteAction
-  global static Form__c getForm(List<String> pFormId) {
-    String formId = pFormId[0];
-
-    Form__c form = FormsService.getFormById(formId);
-
-    return form;
-  }
-
-  @RemoteAction
   global static List<Question__c> getQuestions(List<String> sFormVersionId) {
     String formVersionId = sFormVersionId[0];
     List<Question__c> questions = QuestionsService.getFormVersionQuestions(

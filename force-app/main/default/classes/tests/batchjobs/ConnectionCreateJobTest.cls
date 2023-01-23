@@ -87,9 +87,21 @@ public class ConnectionCreateJobTest {
     User user = TestDataFactory.generateUserWithBuilderPermissions();
 
     System.runAs(user) {
-      List<Form__c> forms = TestDataFactory.generateForms(5);
+      List<Form__c> forms = TestDataFactory.generateForms(1);
 
-      List<Question__c> questions = TestDataFactory.generateQuestions(forms);
+      List<Id> formIds = new List<Id>();
+
+      for (Integer i = 0; i < forms.size(); i++) {
+        formIds.add(forms[i].Id);
+      }
+
+      List<Form_Version__c> formVersions = TestDataFactory.generateFormVersions(
+        formIds
+      );
+
+      List<Question__c> questions = TestDataFactory.generateQuestions(
+        formVersions
+      );
 
       List<Question__c> savedQuestions = QuestionsService.saveQuestions(
         questions

@@ -66,24 +66,25 @@ public class TestDataFactory {
     return forms;
   }
 
-  // public static Form_Version__c generateFormVersion() {
-  //   Form__c form = FormsService.updateForm(
-  //     new Form__c(Title__c = 'Clarity Form', Status__c = 'Draft')
-  //   );
+  public static Form_Version__c generateFormVersion(String formId) {
+    Form_Version__c formVersion = FormVersionsService.updateFormVersion(
+      new Form_Version__c(Form__c = formId)
+    );
 
-  //   return form;
-  // }
+    return formVersion;
+  }
 
-  // public static List<Form_Version__c> generateFormVersions(Integer count) {
-  //   List<Form_Version__c> formVersions = new List<Form_Version__c>();
+  public static List<Form_Version__c> generateFormVersions(List<Id> formIds) {
+    List<Form_Version__c> formVersions = new List<Form_Version__c>();
 
-  //   for (Integer i = 0; i < count; i++) {
-  //     Form__c form = generateForm();
-  //     forms.add(form);
-  //   }
+    for (Integer i = 0; i < formIds.size(); i++) {
+      Id formId = formIds[0];
+      Form_Version__c formVersion = generateFormVersion(formId);
+      formVersions.add(formVersion);
+    }
 
-  //   return formVersions;
-  // }
+    return formVersions;
+  }
 
   public static List<Form__c> generateFormsWithGroup(
     List<Checklist_Group__c> groups

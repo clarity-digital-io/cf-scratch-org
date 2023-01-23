@@ -1,9 +1,18 @@
 public with sharing class FormSummaryController {
   @AuraEnabled
-  public static Form__c getForm(String recordId) {
-    Form__c form = FormsService.getFormById(recordId);
+  public static Form__c getForm(String formId) {
+    Form__c form = FormsService.getFormById(formId);
 
     return form;
+  }
+
+  @AuraEnabled
+  public static List<Form_Version__c> getFormVersionsByFormId(String formId) {
+    List<Form_Version__c> formVersions = FormVersionsService.getFormVersionsByFormId(
+      formId
+    );
+
+    return formVersions;
   }
 
   @AuraEnabled
@@ -16,13 +25,6 @@ public with sharing class FormSummaryController {
 
     return responses;
   }
-
-  // @AuraEnabled
-  // public static List<Response__c> getFormResponses(String formId) {
-  //   List<Response__c> responses = ResponsesService.getResponsesByFormId(formId);
-
-  //   return responses;
-  // }
 
   @AuraEnabled
   public static String deleteFormResponse(String responseId) {

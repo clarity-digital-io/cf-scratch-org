@@ -12,7 +12,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Clarity_Form__c</field>
+                <field>Form__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>
@@ -49,6 +49,18 @@
     <relatedLists>
         <fields>NAME</fields>
         <relatedList>Question__c.Form_Version__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Form__c.Active_Form_Version__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Form_Connection__c.Form_Version__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Response__c.Form_Version__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

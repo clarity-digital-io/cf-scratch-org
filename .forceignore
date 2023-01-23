@@ -16,7 +16,7 @@ ConnectedApp
 
 ### Ignore Profiles... You should be working with Permission Sets
 # Do not use custom profiles that come with the scratch orgs
-**/profiles/Custom*Profile.profile-meta.xml
+**/profiles/**
 
 # Do not accept changes to the Admin profile when pulling. Reminds you of adding things to the permission sets
 Admin.profile

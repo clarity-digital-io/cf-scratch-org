@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Checklist__c</fullName>
+    <fullName>Form_Version__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
-    <label>Clarity Checklist</label>
-    <referenceTo>Checklist__c</referenceTo>
-    <relationshipLabel>Responses</relationshipLabel>
-    <relationshipName>Responses</relationshipName>
+    <label>Clarity Form Version</label>
+    <referenceTo>Form_Version__c</referenceTo>
+    <relationshipLabel>Clarity Form Responses</relationshipLabel>
+    <relationshipName>Clarity_Form_Responses</relationshipName>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <trackTrending>false</trackTrending>

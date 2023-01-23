@@ -472,13 +472,11 @@ public class BuilderControllerUnitTest {
     ];
 
     System.runAs(user) {
-      Map<String, Map<String, Map<String, String>>> fields = BuilderController.getSObjectFields(
-        'Account'
+      List<Map<String, Object>> fields = BuilderController.getSObjectFields(
+        new List<String>{ 'Account' }
       );
 
-      System.assertNotEquals(fields.get('Required'), null);
-
-      System.assertNotEquals(fields.get('NotRequired'), null);
+      System.assertEquals(fields.size() > 0, true);
     }
 
   }

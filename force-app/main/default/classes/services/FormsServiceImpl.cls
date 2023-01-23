@@ -11,7 +11,7 @@ public class FormsServiceImpl implements IFormsService {
 
   public Form__c getFormById(String formId) {
     List<Form__c> forms = FormsSelector.newInstance()
-      .selectByIdWithFormVersions(formId);
+      .selectById(new Set<Id>{ formId });
     return forms[0];
   }
 
@@ -50,7 +50,6 @@ public class FormsServiceImpl implements IFormsService {
     );
 
     uow.registerUpsert(form);
-    // Commit updates to questions
     uow.commitWork();
 
     return form;

@@ -7,8 +7,16 @@ public class FormSummaryControllerUnitTest {
     System.runAs(user) {
       Form__c form = TestDataFactory.generateForm();
 
+      insert form;
+
+      Form_Version__c formVersion = TestDataFactory.generateFormVersion(
+        form.Id
+      );
+
+      insert formVersion;
+
       List<Question__c> newQuestions = TestDataFactory.generateQuestions(
-        new List<Form__c>{ form }
+        new List<Form_Version__c>{ formVersion }
       );
 
       BuilderController.save(JSON.serialize(newQuestions));
@@ -56,16 +64,20 @@ public class FormSummaryControllerUnitTest {
     ];
 
     System.runAs(user) {
-      Form__c existingForm = [SELECT Id FROM Form__c LIMIT 1];
+      Form_Version__c existingFormVersion = [
+        SELECT Id
+        FROM Form_Version__c
+        LIMIT 1
+      ];
 
-      Id formId = existingForm.Id;
+      Id formVersionId = existingFormVersion.Id;
 
       List<Response__c> existingResponses = [SELECT Id FROM Response__c];
 
       Test.startTest();
 
-      List<Response__c> responses = FormSummaryController.getFormResponses(
-        formId
+      List<Response__c> responses = FormSummaryController.getFormVersionResponses(
+        formVersionId
       );
 
       Test.stopTest();

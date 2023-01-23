@@ -8,7 +8,13 @@ public class FormVersionsSelector extends fflib_SObjectSelector implements IForm
   }
 
   public List<Form_Version__c> selectById(Set<Id> recordIds) {
-    return (List<Form_Version__c>) selectSObjectsById(recordIds);
+    fflib_QueryFactory query = newQueryFactory();
+    query.setCondition('Id IN :recordIds');
+
+    new QuestionsSelector()
+      .addQueryFactorySubselect(query, 'cforms__Questions__r');
+
+    return (List<Form_Version__c>) Database.query(query.toSOQL());
   }
 
   public List<Form_Version__c> selectByFormId(Id formId) {

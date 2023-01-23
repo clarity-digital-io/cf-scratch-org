@@ -3,12 +3,12 @@ public with sharing class FormVersionsService {
     return service().updateFormVersion(formVersion);
   }
 
-  public static List<Form_Version__c> getFormVersionsByFormId(String formId) {
-    return service().getFormVersionsByFormId(formId);
-  }
-
   public static Form_Version__c getFormVersionById(String formVersionId) {
     return service().getFormVersionById(formVersionId);
+  }
+
+  public static List<Form_Version__c> getFormVersionsByFormId(String formId) {
+    return service().getFormVersionsByFormId(formId);
   }
 
   public static List<Form_Version__c> getFormVersionsByIds(

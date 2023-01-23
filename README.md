@@ -6,9 +6,11 @@ sfdx force:org:list --all
 
 sfdx force:org:create --definitionfile config/project-scratch-def.json --setdefaultusername --setalias cf-scratch-org --durationdays 30
 
-sfdx force:alias:set cf-scratch-org=test-7n0glslr7plg@example.com
+sfdx force:alias:set cf-scratch-org=test-nejrxnhx7feu@example.com
+sfdx force:alias:set cf-scratch-org-old=test-5vl9dfsbumim@example.com
 
 sfdx force:config:set defaultusername=cf-scratch-org
+sfdx force:config:set defaultusername=cf-scratch-org-old
 
 sfdx force:source:push -f
 
