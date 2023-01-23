@@ -6,11 +6,14 @@ public interface IResponsesService {
     List<Response__c> responses,
     Schema.sObjectField uniqueExternalField
   );
-  Response__c create(String formId);
-  Response__c create(String formId, Map<String, String> connectionRecordIds);
+  Response__c create(String formVersionId);
+  Response__c create(
+    String formVersionId,
+    Map<String, String> connectionRecordIds
+  );
   Response__c getResponseWithDetailsById(String responseId);
   Response__c getResponseById(String responseId);
-  List<Response__c> getResponsesByFormId(String formId);
+  List<Response__c> getResponsesByFormVersionId(String formVersionId);
   List<Response__c> getResponses();
   List<Response__c> getResponsesByOwner(List<String> userIds);
   List<Response__c> getResponsesByConnectedId(String recordId);
@@ -18,7 +21,7 @@ public interface IResponsesService {
     String responseId,
     List<Map<String, String>> connections
   );
-  Map<String, List<Map<String, String>>> getResultAnswersByFormId(
+  Map<String, List<Map<String, String>>> getResultAnswersByFormVersionId(
     String recordId,
     Integer offset
   );

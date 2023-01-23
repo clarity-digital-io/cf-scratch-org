@@ -37,9 +37,9 @@ public with sharing class ResponseController {
   }
 
   @AuraEnabled(cacheable=true)
-  public static List<Form_Connection__c> getConnections(String formId) {
-    List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormId(
-      formId
+  public static List<Form_Connection__c> getConnections(String formVersionId) {
+    List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormVersionId(
+      formVersionId
     );
 
     return connections;
@@ -47,7 +47,9 @@ public with sharing class ResponseController {
 
   @AuraEnabled(cacheable=true)
   public static List<Question__c> getQuestions(String recordId) {
-    List<Question__c> questions = QuestionsService.getFormQuestions(recordId);
+    List<Question__c> questions = QuestionsService.getFormVersionQuestions(
+      recordId
+    );
 
     List<Question> questionList = new List<Question>();
 

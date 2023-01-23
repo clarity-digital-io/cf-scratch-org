@@ -8,7 +8,7 @@
 
     if (name == "Back") {
       window.open(
-        "/lightning/r/forms_Form__c/" + formId + "/view",
+        "/lightning/r/cforms_Form__c/" + formId + "/view",
         "_self",
         false
       );

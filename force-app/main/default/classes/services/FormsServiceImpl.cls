@@ -11,7 +11,7 @@ public class FormsServiceImpl implements IFormsService {
 
   public Form__c getFormById(String formId) {
     List<Form__c> forms = FormsSelector.newInstance()
-      .selectWithQuestions(new Set<Id>{ formId });
+      .selectByIdWithFormVersions(formId);
     return forms[0];
   }
 
@@ -76,5 +76,20 @@ public class FormsServiceImpl implements IFormsService {
     Form__c form = updateForm(forms[0]);
 
     return form;
+  }
+
+  public void setActiveFormVersion(String formId, String formVersionId) {
+    fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(
+      new fflib_SecureDML()
+    );
+
+    List<Form__c> forms = FormsSelector.newInstance()
+      .selectById(new Set<Id>{ formId });
+    Form__c form = forms[0];
+    form.Active_Form_Version__c = formVersionId;
+
+    uow.registerUpsert(form);
+
+    uow.commitWork();
   }
 }

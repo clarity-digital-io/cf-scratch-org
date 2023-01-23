@@ -13,12 +13,23 @@ public class FormsSelector extends fflib_SObjectSelector implements IFormsSelect
       Form__c.CreatedById.Name,
       Form__c.Description__c,
       Form__c.End_Date__c,
-      Form__c.Checklist_Group__c
+      Form__c.Checklist_Group__c,
+      Form__c.Active_Form_Version__c
     };
   }
 
   public List<Form__c> selectById(Set<Id> recordIds) {
     return (List<Form__c>) selectSObjectsById(recordIds);
+  }
+
+  public List<Form__c> selectByIdWithFormVersions(Id recordId) {
+    fflib_QueryFactory query = newQueryFactory();
+    query.setCondition('Id = :recordId');
+
+    new ResponsesSelector()
+      .addQueryFactorySubselect(query, 'cforms__Form_Versions__r');
+
+    return (List<Form__c>) Database.query(query.toSOQL());
   }
 
   public List<Form__c> selectByIdWithResponses(Id recordId) {
@@ -44,6 +55,10 @@ public class FormsSelector extends fflib_SObjectSelector implements IFormsSelect
   public List<Form__c> selectByStatus(String status) {
     fflib_QueryFactory query = newQueryFactory();
     query.setCondition('Status__c = :status');
+
+    new QuestionsSelector()
+      .addQueryFactorySubselect(query, 'cforms__Form_Versions__r');
+
     return (List<Form__c>) Database.query(query.toSOQL());
   }
 
@@ -58,16 +73,6 @@ public class FormsSelector extends fflib_SObjectSelector implements IFormsSelect
       .addQueryFactorySubselect(query, 'cforms__Responses__r')
       .selectField('CreatedById.Name')
       .selectField('Form__c.Title__c');
-
-    return (List<Form__c>) Database.query(query.toSOQL());
-  }
-
-  public List<Form__c> selectWithQuestions(Set<Id> formIds) {
-    fflib_QueryFactory query = newQueryFactory();
-    query.setCondition('Id IN :formIds');
-
-    new QuestionsSelector()
-      .addQueryFactorySubselect(query, 'cforms__Questions__r');
 
     return (List<Form__c>) Database.query(query.toSOQL());
   }

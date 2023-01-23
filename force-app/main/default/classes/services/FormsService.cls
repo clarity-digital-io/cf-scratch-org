@@ -35,6 +35,10 @@ public with sharing class FormsService {
     return service().deleteById(recordId);
   }
 
+  public static void setActiveFormVersion(String formId, String formVersionId) {
+    service().setActiveFormVersion(formId, formVersionId);
+  }
+
   public static IFormsService service() {
     return (IFormsService) Application.service.newInstance(IFormsService.class);
   }

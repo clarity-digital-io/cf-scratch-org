@@ -1059,11 +1059,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Question_Criteria__c.Field_Type__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Question_Criteria__c.Field__c</field>
         <readable>false</readable>
     </fieldPermissions>

@@ -11,8 +11,10 @@ public with sharing class ResponsesService {
     return service().getResponseWithDetailsById(responseId);
   }
 
-  public static List<Response__c> getResponsesByFormId(String responseId) {
-    return service().getResponsesByFormId(responseId);
+  public static List<Response__c> getResponsesByFormVersionId(
+    String responseId
+  ) {
+    return service().getResponsesByFormVersionId(responseId);
   }
 
   public static List<Response__c> getResponsesByConnectedId(String recordId) {
@@ -23,15 +25,15 @@ public with sharing class ResponsesService {
     return service().getResponseById(responseId);
   }
 
-  public static Response__c create(String formId) {
-    return service().create(formId);
+  public static Response__c create(String formVersionId) {
+    return service().create(formVersionId);
   }
 
   public static Response__c create(
-    String formId,
+    String formVersionId,
     Map<String, String> connectionRecordIds
   ) {
-    return service().create(formId, connectionRecordIds);
+    return service().create(formVersionId, connectionRecordIds);
   }
 
   public static Response__c save(
@@ -64,11 +66,11 @@ public with sharing class ResponsesService {
     return service().deleteResponsesByUUIDs(UUIDs);
   }
 
-  public static Map<String, List<Map<String, String>>> getResultAnswersByFormId(
+  public static Map<String, List<Map<String, String>>> getResultAnswersByFormVersionId(
     String recordId,
     Integer offset
   ) {
-    return service().getResultAnswersByFormId(recordId, offset);
+    return service().getResultAnswersByFormVersionId(recordId, offset);
   }
 
   public static sObject upsertConnectionSObject(

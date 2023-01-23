@@ -5,6 +5,7 @@ public with sharing class FieldsSelector extends fflib_SObjectSelector implement
 
   public List<Schema.SObjectField> getSObjectFieldList() {
     return new List<Schema.SObjectField>{
+      Field__mdt.DeveloperName,
       Field__mdt.Level__c,
       Field__mdt.Type__c
     };

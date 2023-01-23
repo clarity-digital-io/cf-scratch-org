@@ -8,7 +8,7 @@ public class FormConnectionsServiceImpl implements IFormConnectionsService {
       .selectById(new Set<Id>{ responseId });
 
     List<Form_Connection__c> allFormConnections = FormConnectionsSelector.newInstance()
-      .selectConnectionsByFormId(response[0].Form__c);
+      .selectConnectionsByFormVersionId(response[0].Form_Version__c);
 
     Set<Id> connectionIds = new Set<Id>();
 
@@ -38,28 +38,19 @@ public class FormConnectionsServiceImpl implements IFormConnectionsService {
     return requiredConnections;
   }
 
-  public List<Form_Connection__c> getConnectionsByFormId(String formId) {
+  public List<Form_Connection__c> getConnectionsByFormVersionId(
+    String formVersionId
+  ) {
     List<Form_Connection__c> connections = FormConnectionsSelector.newInstance()
-      .selectConnectionsByFormId(formId);
+      .selectConnectionsByFormVersionId(formVersionId);
     return connections;
   }
 
-  public List<Form_Connection__c> getConnectionsByFormIds(Set<Id> formIds) {
+  public List<Form_Connection__c> getConnectionsByFormVersionIds(
+    Set<Id> formVersionIds
+  ) {
     List<Form_Connection__c> connections = FormConnectionsSelector.newInstance()
-      .selectConnectionsByFormIds(formIds);
-    return connections;
-  }
-
-  public List<Form_Connection__c> getConnectionsByFormName(String formName) {
-    List<Form__c> forms = FormsSelector.newInstance().selectByName(formName);
-    List<Form_Connection__c> connections = FormConnectionsSelector.newInstance()
-      .selectConnectionsByFormId(forms[0].Id);
-    return connections;
-  }
-
-  public List<Form_Connection__c> getConnectionsByFormStatus(String status) {
-    List<Form_Connection__c> connections = FormConnectionsSelector.newInstance()
-      .selectConnectionsByFormStatus(status);
+      .selectConnectionsByFormVersionIds(formVersionIds);
     return connections;
   }
 

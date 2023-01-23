@@ -11,7 +11,7 @@ public with sharing class FormConnectionsSelector extends fflib_SObjectSelector 
       Form_Connection__c.Result_Holder__c,
       Form_Connection__c.Salesforce_Object__c,
       Form_Connection__c.Type__c,
-      Form_Connection__c.Form__c
+      Form_Connection__c.Form_Version__c
     };
   }
 
@@ -23,16 +23,18 @@ public with sharing class FormConnectionsSelector extends fflib_SObjectSelector 
     return (List<Form_Connection__c>) Database.query(query.toSOQL());
   }
 
-  public List<Form_Connection__c> selectConnectionsByFormIds(Set<Id> formIds) {
-    fflib_QueryFactory query = newQueryFactory();
-    query.setCondition('Form__c IN :formIds');
+  // public List<Form_Connection__c> selectConnectionsByFormIds(Set<Id> formIds) {
+  //   fflib_QueryFactory query = newQueryFactory();
+  //   query.setCondition('Form__c IN :formIds');
 
-    return (List<Form_Connection__c>) Database.query(query.toSOQL());
-  }
+  //   return (List<Form_Connection__c>) Database.query(query.toSOQL());
+  // }
 
-  public List<Form_Connection__c> selectConnectionsByFormId(String formId) {
+  public List<Form_Connection__c> selectConnectionsByFormVersionId(
+    String formVersionId
+  ) {
     fflib_QueryFactory query = newQueryFactory();
-    query.setCondition('Form__c = :formId');
+    query.setCondition('Form_Version__c = :formVersionId');
 
     new FormConnectionFieldsSelector()
       .addQueryFactorySubselect(query, 'cforms__Form_Connection_Fields__r');
@@ -40,9 +42,11 @@ public with sharing class FormConnectionsSelector extends fflib_SObjectSelector 
     return (List<Form_Connection__c>) Database.query(query.toSOQL());
   }
 
-  public List<Form_Connection__c> selectConnectionsByFormStatus(String status) {
+  public List<Form_Connection__c> selectConnectionsByFormVersionIds(
+    Set<Id> formVersionIds
+  ) {
     fflib_QueryFactory query = newQueryFactory();
-    query.setCondition('Form__r.Status__c = :status');
+    query.setCondition('Form_Version__c IN :formVersionIds');
 
     new FormConnectionFieldsSelector()
       .addQueryFactorySubselect(query, 'cforms__Form_Connection_Fields__r');

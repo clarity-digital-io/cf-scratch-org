@@ -144,7 +144,7 @@ public class ConnectionCreateJobTest {
       List<Question__c> commentQuestions1 = [
         SELECT Id, Type__c, Title__c
         FROM Question__c
-        WHERE Type__c = 'Comment' AND Form__c = :forms[3].Id
+        WHERE Type__c = 'Comment' AND Form_Version__c = :forms[3].Id
       ];
       List<Map<String, String>> fields3 = new List<Map<String, Id>>();
       fields3.add(new Map<String, String>{ 'Name' => commentQuestions1[0].Id });
@@ -161,7 +161,7 @@ public class ConnectionCreateJobTest {
       List<Question__c> commentQuestions2 = [
         SELECT Id, Type__c, Title__c
         FROM Question__c
-        WHERE Type__c = 'Comment' AND Form__c = :forms[4].Id
+        WHERE Type__c = 'Comment' AND Form_Version__c = :forms[4].Id
       ];
 
       List<Map<String, String>> customFields3 = new List<Map<String, String>>();

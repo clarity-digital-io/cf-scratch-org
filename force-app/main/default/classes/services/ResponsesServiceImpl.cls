@@ -11,9 +11,9 @@ public class ResponsesServiceImpl implements IResponsesService {
     return responses[0];
   }
 
-  public List<Response__c> getResponsesByFormId(String formId) {
+  public List<Response__c> getResponsesByFormVersionId(String formVersionId) {
     List<Response__c> responses = ResponsesSelector.newInstance()
-      .selectByFormId(new Set<Id>{ formId });
+      .selectByFormVersionId(new Set<Id>{ formVersionId });
     return responses;
   }
 
@@ -49,7 +49,7 @@ public class ResponsesServiceImpl implements IResponsesService {
     return responses;
   }
 
-  public Response__c create(String formId) {
+  public Response__c create(String formVersionId) {
     //Doesn't meet UUID V4 Standards
     Blob b = Crypto.GenerateAESKey(128);
     String h = EncodingUtil.ConvertTohex(b);
@@ -69,7 +69,7 @@ public class ResponsesServiceImpl implements IResponsesService {
     );
 
     Response__c newResponse = new Response__c(
-      Form__c = formId,
+      Form_Version__c = formVersionId,
       Status__c = 'New',
       UUID__c = guid
     );
@@ -82,7 +82,7 @@ public class ResponsesServiceImpl implements IResponsesService {
   }
 
   public Response__c create(
-    String formId,
+    String formVersionId,
     Map<String, String> connectionRecordIds
   ) {
     //Doesn't meet UUID V4 Standards
@@ -100,7 +100,7 @@ public class ResponsesServiceImpl implements IResponsesService {
       h.substring(20);
 
     Response__c newResponse = new Response__c(
-      Form__c = formId,
+      Form_Version__c = formVersionId,
       Status__c = 'New',
       UUID__c = guid
     );
@@ -255,7 +255,7 @@ public class ResponsesServiceImpl implements IResponsesService {
     return responses[0].Id;
   }
 
-  public Map<String, List<Map<String, String>>> getResultAnswersByFormId(
+  public Map<String, List<Map<String, String>>> getResultAnswersByFormVersionId(
     String recordId,
     Integer offset
   ) {

@@ -8,4 +8,5 @@ public interface IFormsService {
   Form__c getFormByName(String formName);
   Form__c updateForm(Form__c form);
   List<Form__c> getFormsByStatus(String status);
+  void setActiveFormVersion(String formId, String formVersionId);
 }

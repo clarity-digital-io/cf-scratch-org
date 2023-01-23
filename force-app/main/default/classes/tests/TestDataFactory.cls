@@ -50,9 +50,7 @@ public class TestDataFactory {
   }
 
   public static Form__c generateForm() {
-    Form__c form = FormsService.updateForm(
-      new Form__c(Title__c = 'Clarity Form', Status__c = 'Draft')
-    );
+    Form__c form = new Form__c(Title__c = 'Clarity Form', Status__c = 'Draft');
 
     return form;
   }
@@ -67,6 +65,25 @@ public class TestDataFactory {
 
     return forms;
   }
+
+  // public static Form_Version__c generateFormVersion() {
+  //   Form__c form = FormsService.updateForm(
+  //     new Form__c(Title__c = 'Clarity Form', Status__c = 'Draft')
+  //   );
+
+  //   return form;
+  // }
+
+  // public static List<Form_Version__c> generateFormVersions(Integer count) {
+  //   List<Form_Version__c> formVersions = new List<Form_Version__c>();
+
+  //   for (Integer i = 0; i < count; i++) {
+  //     Form__c form = generateForm();
+  //     forms.add(form);
+  //   }
+
+  //   return formVersions;
+  // }
 
   public static List<Form__c> generateFormsWithGroup(
     List<Checklist_Group__c> groups
@@ -111,15 +128,17 @@ public class TestDataFactory {
     return accounts;
   }
 
-  public static List<Question__c> generateQuestions(List<Form__c> forms) {
+  public static List<Question__c> generateQuestions(
+    List<Form_Version__c> formVersions
+  ) {
     List<Question__c> newQuestions = new List<Question__c>();
 
     Integer order = 0;
 
-    for (Form__c form : forms) {
+    for (Form_Version__c formVersion : formVersions) {
       for (String type : Types) {
         Question__c question = new Question__c(
-          Form__c = form.Id,
+          Form_Version__c = formVersion.Id,
           Title__c = 'Title: ' + type,
           Type__c = type,
           Order__c = order
@@ -140,14 +159,14 @@ public class TestDataFactory {
   }
 
   public static List<Question__c> generateAttachmentQuestions(
-    Form__c form,
+    Form_Version__c formVersion,
     Integer count
   ) {
     List<Question__c> newQuestions = new List<Question__c>();
 
     for (Integer i = 0; i < count; i++) {
       Question__c question = new Question__c(
-        Form__c = form.Id,
+        Form_Version__c = formVersion.Id,
         Title__c = 'Attachment: ' + i,
         Type__c = 'Attachments',
         Order__c = i
@@ -209,9 +228,9 @@ public class TestDataFactory {
     return criteria;
   }
 
-  public static Question__c generateRecordGroup(Form__c form) {
+  public static Question__c generateRecordGroup(Form_Version__c formVersion) {
     Question__c question = new Question__c(
-      Form__c = form.Id,
+      Form_Version__c = formVersion.Id,
       Title__c = 'Title: RecordGroup',
       Type__c = 'RecordGroup',
       Salesforce_Object__c = 'Opportunity',
@@ -234,7 +253,7 @@ public class TestDataFactory {
 
     for (String field : fields) {
       Question__c newField = new Question__c(
-        Form__c = question.Form__c,
+        Form_Version__c = question.Form_Version__c,
         Salesforce_Field__c = field,
         Title__c = 'Title: ' + types[order],
         Type__c = types[order],

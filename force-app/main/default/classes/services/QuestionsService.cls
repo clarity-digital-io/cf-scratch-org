@@ -3,12 +3,22 @@ public with sharing class QuestionsService {
     return service().getQuestions();
   }
 
-  public static List<Question__c> getFormsQuestions(Set<Id> formIds) {
-    return service().getFormsQuestions(formIds);
+  public static List<Question__c> getFormVersionsQuestions(
+    Set<Id> formVersionIds
+  ) {
+    return service().getFormVersionsQuestions(formVersionIds);
   }
 
-  public static List<Question__c> getFormQuestions(Id formId) {
-    return service().getFormQuestions(formId);
+  public static List<Question__c> getFormVersionQuestions(Id formVersionId) {
+    return service().getFormVersionQuestions(formVersionId);
+  }
+
+  public static List<Question__c> save(
+    List<Question__c> questions,
+    List<Question_Option__c> questionOptions,
+    List<Question_Criteria__c> questionCriteria
+  ) {
+    return service().save(questions, questionOptions, questionCriteria);
   }
 
   public static List<Question__c> saveRecordGroup(

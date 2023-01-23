@@ -27,93 +27,94 @@ public class SyncServiceImpl implements ISyncService {
   }
 
   public static String connectOrganization() {
-    Organization organization = [
-      SELECT Id, Name
-      FROM Organization
-      WITH SECURITY_ENFORCED
-      LIMIT 1
-    ];
+    // Organization organization = [
+    //   SELECT Id, Name
+    //   FROM Organization
+    //   WITH SECURITY_ENFORCED
+    //   LIMIT 1
+    // ];
 
-    List<Checklist_Group__c> groups = ChecklistGroupsService.getGroups();
+    // List<Checklist_Group__c> groups = ChecklistGroupsService.getGroups();
 
-    List<Form> preparedForms = new List<Form>();
+    // List<Form> preparedForms = new List<Form>();
 
-    List<Form__c> forms = FormsService.getFormsByStatus('Published');
+    // List<Form__c> forms = FormsService.getFormsByStatus('Published');
 
-    List<Question__c> questions = QuestionsService.getQuestions();
+    // List<Question__c> questions = QuestionsService.getQuestions();
 
-    List<Picklist> preparedPicklist = PicklistHelper.getValues(questions);
+    // List<Picklist> preparedPicklist = PicklistHelper.getValues(questions);
 
-    List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormStatus(
-      'Published'
-    );
+    // List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormStatus(
+    //   'Published'
+    // );
 
-    Map<Id, List<Question__c>> formQuestions = new Map<Id, List<Question__c>>();
+    // Map<Id, List<Question__c>> formQuestions = new Map<Id, List<Question__c>>();
 
-    Map<Id, List<Form_Connection__c>> formConnections = new Map<Id, List<Form_Connection__c>>();
+    // Map<Id, List<Form_Connection__c>> formConnections = new Map<Id, List<Form_Connection__c>>();
 
-    for (Question__c question : questions) {
-      if (formQuestions.get(question.Form__c) != null) {
-        formQuestions.get(question.Form__c).add(question);
-      } else {
-        formQuestions.put(question.Form__c, new List<Question__c>{ question });
-      }
-    }
+    // for (Question__c question : questions) {
+    //   if (formQuestions.get(question.Form_Version__c) != null) {
+    //     formQuestions.get(question.Form__c).add(question);
+    //   } else {
+    //     formQuestions.put(question.Form__c, new List<Question__c>{ question });
+    //   }
+    // }
 
-    for (Form_Connection__c connection : connections) {
-      if (formConnections.get(connection.Form__c) != null) {
-        formConnections.get(connection.Form__c).add(connection);
-      } else {
-        formConnections.put(
-          connection.Form__c,
-          new List<Form_Connection__c>{ connection }
-        );
-      }
-    }
+    // for (Form_Connection__c connection : connections) {
+    //   if (formConnections.get(connection.Form__c) != null) {
+    //     formConnections.get(connection.Form__c).add(connection);
+    //   } else {
+    //     formConnections.put(
+    //       connection.Form__c,
+    //       new List<Form_Connection__c>{ connection }
+    //     );
+    //   }
+    // }
 
-    for (Form__c form : forms) {
-      Form preparedForm = new Form();
-      preparedForm.form = form;
-      preparedForm.questions = formQuestions.containsKey(form.Id)
-        ? formQuestions.get(form.Id)
-        : new List<Question__c>();
-      preparedForm.connections = formConnections.containsKey(form.Id)
-        ? formConnections.get(form.Id)
-        : new List<Form_Connection__c>();
-      preparedForms.add(preparedForm);
-    }
+    // for (Form__c form : forms) {
+    //   Form preparedForm = new Form();
+    //   preparedForm.form = form;
+    //   preparedForm.questions = formQuestions.containsKey(form.Id)
+    //     ? formQuestions.get(form.Id)
+    //     : new List<Question__c>();
+    //   preparedForm.connections = formConnections.containsKey(form.Id)
+    //     ? formConnections.get(form.Id)
+    //     : new List<Form_Connection__c>();
+    //   preparedForms.add(preparedForm);
+    // }
 
-    Connect connect = new Connect();
+    // Connect connect = new Connect();
 
-    connect.org = organization;
-    connect.forms = preparedForms;
-    connect.picklists = preparedPicklist;
-    connect.groups = groups;
+    // connect.org = organization;
+    // connect.forms = preparedForms;
+    // connect.picklists = preparedPicklist;
+    // connect.groups = groups;
 
-    fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(
-      new fflib_SecureDML()
-    );
+    // fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(
+    //   new fflib_SecureDML()
+    // );
 
-    HttpResponse response = Sync.connectOrganization(connect, organization.Id);
+    // HttpResponse response = Sync.connectOrganization(connect, organization.Id);
 
-    String body = response.getBody();
+    // String body = response.getBody();
 
-    Map<String, String> parsedBody = (Map<String, String>) JSON.deserialize(
-      body,
-      Map<String, String>.class
-    );
+    // Map<String, String> parsedBody = (Map<String, String>) JSON.deserialize(
+    //   body,
+    //   Map<String, String>.class
+    // );
 
-    Log__c log = new Log__c(
-      Job_Id__c = parsedBody.get('id'),
-      Status__c = 'In Progress',
-      Type__c = 'Connect'
-    );
+    // Log__c log = new Log__c(
+    //   Job_Id__c = parsedBody.get('id'),
+    //   Status__c = 'In Progress',
+    //   Type__c = 'Connect'
+    // );
 
-    uow.registerUpsert(log);
+    // uow.registerUpsert(log);
 
-    uow.commitWork();
+    // uow.commitWork();
 
-    return response.getBody();
+    // return response.getBody();
+    return '';
   }
 
   public static String getOrganizationInformation() {
@@ -129,7 +130,7 @@ public class SyncServiceImpl implements ISyncService {
     return response.getBody();
   }
 
-  public static void connectOrganizationForms(Set<Id> formIds) {
+  public static void connectOrganizationForms(Set<Id> formVersionIds) {
     Organization organization = [
       SELECT Id, Name
       FROM Organization
@@ -139,14 +140,18 @@ public class SyncServiceImpl implements ISyncService {
 
     List<Form> preparedForms = new List<Form>();
 
-    List<Form__c> forms = FormsService.getFormByIds(formIds);
+    List<Form_Version__c> formVersions = FormVersionsService.getFormVersionsByIds(
+      formVersionIds
+    );
 
-    List<Question__c> questions = QuestionsService.getFormsQuestions(formIds);
+    List<Question__c> questions = QuestionsService.getFormVersionsQuestions(
+      formVersionIds
+    );
 
     List<Picklist> preparedPicklist = PicklistHelper.getValues(questions);
 
-    List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormIds(
-      formIds
+    List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormVersionIds(
+      formVersionIds
     );
 
     Map<Id, List<Question__c>> formQuestions = new Map<Id, List<Question__c>>();
@@ -154,32 +159,35 @@ public class SyncServiceImpl implements ISyncService {
     Map<Id, List<Form_Connection__c>> formConnections = new Map<Id, List<Form_Connection__c>>();
 
     for (Question__c question : questions) {
-      if (formQuestions.get(question.Form__c) != null) {
-        formQuestions.get(question.Form__c).add(question);
+      if (formQuestions.get(question.Form_Version__c) != null) {
+        formQuestions.get(question.Form_Version__c).add(question);
       } else {
-        formQuestions.put(question.Form__c, new List<Question__c>{ question });
+        formQuestions.put(
+          question.Form_Version__c,
+          new List<Question__c>{ question }
+        );
       }
     }
 
     for (Form_Connection__c connection : connections) {
-      if (formConnections.get(connection.Form__c) != null) {
-        formConnections.get(connection.Form__c).add(connection);
+      if (formConnections.get(connection.Form_Version__c) != null) {
+        formConnections.get(connection.Form_Version__c).add(connection);
       } else {
         formConnections.put(
-          connection.Form__c,
+          connection.Form_Version__c,
           new List<Form_Connection__c>{ connection }
         );
       }
     }
 
-    for (Form__c form : forms) {
+    for (Form_Version__c formVersion : formVersions) {
       Form preparedForm = new Form();
-      preparedForm.form = form;
-      preparedForm.questions = formQuestions.containsKey(form.Id)
-        ? formQuestions.get(form.Id)
+      preparedForm.formVersion = formVersion;
+      preparedForm.questions = formQuestions.containsKey(formVersion.Id)
+        ? formQuestions.get(formVersion.Id)
         : new List<Question__c>();
-      preparedForm.connections = formConnections.containsKey(form.Id)
-        ? formConnections.get(form.Id)
+      preparedForm.connections = formConnections.containsKey(formVersion.Id)
+        ? formConnections.get(formVersion.Id)
         : new List<Form_Connection__c>();
       preparedForms.add(preparedForm);
     }
@@ -222,8 +230,10 @@ public class SyncServiceImpl implements ISyncService {
   public static List<sObject> getOfflineFromConnections() {
     Map<String, Set<String>> sObjectFields = new Map<String, Set<String>>();
 
-    List<Form_Connection__c> connections = FormConnectionsSelector.newInstance()
-      .selectConnectionsByFormStatus('Published');
+    // List<Form_Connection__c> connections = FormConnectionsSelector.newInstance()
+    //   .selectConnectionsByFormStatus('Published');
+
+    List<Form_Connection__c> connections = new List<Form_Connection__c>();
 
     for (Form_Connection__c connection : connections) {
       if (sObjectFields.containsKey(connection.Salesforce_Object__c)) {
@@ -265,8 +275,16 @@ public class SyncServiceImpl implements ISyncService {
       formIds.add(form.Id);
     }
 
+    List<Form_Version__c> formVersions = new List<Form_Version__c>();
+
+    Set<Id> formVersionIds = new Set<Id>();
+
+    for (Form_Version__c formVersion : formVersions) {
+      formVersionIds.add(formVersion.Id);
+    }
+
     List<Question__c> questions = QuestionsSelector.newInstance()
-      .selectByFormIds(formIds);
+      .selectByFormVersionIds(formVersionIds);
 
     for (Question__c question : questions) {
       Set<String> fields = new Set<String>();

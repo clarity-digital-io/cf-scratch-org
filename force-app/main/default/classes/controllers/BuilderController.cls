@@ -1,37 +1,114 @@
-public with sharing class BuilderController {
-  // @RemoteAction
-  // public static List<String> saveAll(String sForm, List<List<String>> values) {
-  //   // questions
-  //   List<String> sQuestions = values[0];
-  //   List<String> sQuestionOptions = values[1];
-  //   List<String> sQuestionCriteria = values[2];
-  //   List<String> sQuestionPictureOptions = values[3];
+global with sharing class BuilderController {
+  @RemoteAction
+  global static List<String> save(String sFormVersion, List<String> values) {
+    String sQuestions = values[0];
+    String sQuestionOptions = values[1];
+    String sQuestionCriteria = values[2];
+    String sQuestionPictureOptions = values[3];
+    String sFormConnections = values[4];
+    String sFormConnectionFields = values[5];
 
-  //   List<Question__c> parsedQuestions = (List<Question__c>) JSON.deserialize(
-  //     sQuestions,
-  //     List<Question__c>.class
-  //   );
+    Form_Version__c parsedFormVersion = (Form_Version__c) JSON.deserialize(
+      sFormVersion,
+      Form__c.class
+    );
 
-  //   List<Question__c> parsedQuestionOptions = (List<Question_Option__c>) JSON.deserialize(
-  //     sQuestionOptions,
-  //     List<Question_Option__c>.class
-  //   );
+    List<Question__c> parsedQuestions = (List<Question__c>) JSON.deserialize(
+      sQuestions,
+      List<Question__c>.class
+    );
 
-  //   List<Question__c> parsedQuestionCriteria = (List<Question_Criteria__c>) JSON.deserialize(
-  //     sQuestionCriteria,
-  //     List<Question_Criteria__c>.class
-  //   );
+    List<Question_Option__c> parsedQuestionOptions = (List<Question_Option__c>) JSON.deserialize(
+      sQuestionOptions,
+      List<Question_Option__c>.class
+    );
 
-  //   List<Question__c> parsedQuestionPictureOptions = (List<Question_Option__c>) JSON.deserialize(
-  //     sQuestionPictureOptions,
-  //     List<Question_Option__c>.class
-  //   );
+    List<Question_Criteria__c> parsedQuestionCriteria = (List<Question_Criteria__c>) JSON.deserialize(
+      sQuestionCriteria,
+      List<Question_Criteria__c>.class
+    );
 
-  //   return new List<String>();
-  // }
+    List<Question_Option__c> parsedQuestionPictureOptions = (List<Question_Option__c>) JSON.deserialize(
+      sQuestionPictureOptions,
+      List<Question_Option__c>.class
+    );
+
+    List<Form_Connection__c> parsedFormConnections = (List<Form_Connection__c>) JSON.deserialize(
+      sFormConnections,
+      List<Form_Connection__c>.class
+    );
+
+    List<Form_Connection_Field__c> parsedFormConnectionFields = (List<Form_Connection_Field__c>) JSON.deserialize(
+      sFormConnectionFields,
+      List<Form_Connection_Field__c>.class
+    );
+
+    Form_Version__c formVersion = FormVersionsService.updateFormVersion(
+      parsedFormVersion
+    );
+
+    // questions
+    QuestionsService.save(
+      parsedQuestions,
+      parsedQuestionOptions,
+      parsedQuestionCriteria
+    );
+
+    return new List<String>();
+
+    // picture questions
+    // parsedQuestionPictureOptions
+
+    // form connections
+    // FormConnections.save(parsedFormConnections, parsedFormConnectionFields);
+
+    // if (parsedQuestions.size() > 0) {
+    // }
+    // List<Question__c> questions = QuestionsService.saveQuestions(
+    //   parsedQuestions
+    // );
+
+    // Map<String, List<sObject>> results = QuestionsService.saveQuestionWithDetails(
+    //   parsedQuestion,
+    //   parsedQuestionOptions
+    // );
+
+    // Map<String, List<sObject>> results = QuestionsService.saveQuestionWithCriteriaDetails(
+    //   parsedQuestion,
+    //   parsedQuestionCriteria
+    // );
+
+    // List<String> saved = new List<String>();
+
+    // for (SObject question : questions) {
+    //   saved.add((ID) question.get('Id'));
+    // }
+
+    // return saved;
+  }
 
   @RemoteAction
-  public static List<Field__mdt> getAvailableFields() {
+  global static List<String> getSObjectsAvailable(List<String> test) {
+    List<String> lookups = new List<String>();
+
+    Map<String, Schema.SObjectType> sObjectsAvailable = Schema.getGlobalDescribe();
+
+    for (Schema.SObjectType so : sObjectsAvailable.values()) {
+      //checkfls
+      if (
+        so.getDescribe().isCreateable() &&
+        so.getDescribe().isUpdateable() &&
+        so.getDescribe().isAccessible()
+      ) {
+        lookups.add(so.getDescribe().getName());
+      }
+    }
+
+    return lookups;
+  }
+
+  @RemoteAction
+  global static List<Field__mdt> getAvailableFields(List<String> test) {
     // need to filter these by subscription level
     List<Field__mdt> fields = FieldsService.getAvailableFields();
 
@@ -39,27 +116,18 @@ public with sharing class BuilderController {
   }
 
   @RemoteAction
-  public static List<String> save(String sQuestions) {
-    List<Question__c> parsedQuestions = (List<Question__c>) JSON.deserialize(
-      sQuestions,
-      List<Question__c>.class
+  global static Form_Version__c getFormVersion(List<String> pFormVersionId) {
+    String formVersionId = pFormVersionId[0];
+
+    Form_Version__c formVersion = FormVersionsService.getFormVersionById(
+      formVersionId
     );
 
-    List<Question__c> questions = QuestionsService.saveQuestions(
-      parsedQuestions
-    );
-
-    List<String> saved = new List<String>();
-
-    for (SObject question : questions) {
-      saved.add((ID) question.get('Id'));
-    }
-
-    return saved;
+    return formVersion;
   }
 
   @RemoteAction
-  public static Form__c getForm(List<String> pFormId) {
+  global static Form__c getForm(List<String> pFormId) {
     String formId = pFormId[0];
 
     Form__c form = FormsService.getFormById(formId);
@@ -68,91 +136,17 @@ public with sharing class BuilderController {
   }
 
   @RemoteAction
-  public static Form__c updateForm(String sForm) {
-    Form__c parsedForm = (Form__c) JSON.deserialize(sForm, Form__c.class);
-
-    Form__c form = FormsService.updateForm(parsedForm);
-
-    return parsedForm;
-  }
-
-  @RemoteAction
-  public static List<Question__c> getQuestions(String formId) {
-    List<Question__c> questions = QuestionsService.getFormQuestions(
-      (Id) formId
+  global static List<Question__c> getQuestions(List<String> sFormVersionId) {
+    String formVersionId = sFormVersionId[0];
+    List<Question__c> questions = QuestionsService.getFormVersionQuestions(
+      (Id) formVersionId
     );
 
     return questions;
   }
 
   @RemoteAction
-  public static String saveQuestion(String sQuestion) {
-    Question__c parsedQuestion = (Question__c) JSON.deserialize(
-      sQuestion,
-      Question__c.class
-    );
-
-    List<Question__c> questions = QuestionsService.saveQuestions(
-      new List<Question__c>{ parsedQuestion }
-    );
-
-    List<String> saved = new List<String>();
-
-    for (SObject question : questions) {
-      saved.add((ID) question.get('Id'));
-    }
-
-    return saved[0];
-  }
-
-  @RemoteAction
-  public static Map<String, List<sObject>> saveQuestionWithOptions(
-    String sQuestion,
-    String sQuestionOptions
-  ) {
-    Question__c parsedQuestion = (Question__c) JSON.deserialize(
-      sQuestion,
-      Question__c.class
-    );
-
-    List<Question_Option__c> parsedQuestionOptions = (List<Question_Option__c>) JSON.deserialize(
-      sQuestionOptions,
-      List<Question_Option__c>.class
-    );
-
-    Map<String, List<sObject>> results = QuestionsService.saveQuestionWithDetails(
-      parsedQuestion,
-      parsedQuestionOptions
-    );
-
-    return results;
-  }
-
-  @RemoteAction
-  public static Map<String, List<sObject>> saveQuestionWithCriteria(
-    String sQuestion,
-    String sCriteria
-  ) {
-    Question__c parsedQuestion = (Question__c) JSON.deserialize(
-      sQuestion,
-      Question__c.class
-    );
-
-    List<Question_Criteria__c> parsedCriteria = (List<Question_Criteria__c>) JSON.deserialize(
-      sCriteria,
-      List<Question_Criteria__c>.class
-    );
-
-    Map<String, List<sObject>> results = QuestionsService.saveQuestionWithCriteriaDetails(
-      parsedQuestion,
-      parsedCriteria
-    );
-
-    return results;
-  }
-
-  @RemoteAction
-  public static List<Question__c> saveRecordGroupFields(
+  global static List<Question__c> saveRecordGroupFields(
     String sRecordGroupFields,
     String relatedRecordGroupId
   ) {
@@ -170,16 +164,16 @@ public with sharing class BuilderController {
   }
 
   @RemoteAction
-  public static List<Form_Connection__c> getConnections(String formId) {
-    List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormId(
-      formId
+  global static List<Form_Connection__c> getConnections(String formVersionId) {
+    List<Form_Connection__c> connections = FormConnectionsService.getConnectionsByFormVersionId(
+      formVersionId
     );
 
     return connections;
   }
 
   @RemoteAction
-  public static Map<String, List<Object>> getConnectionFieldMapping(
+  global static Map<String, List<Object>> getConnectionFieldMapping(
     String connectionId,
     String objectType
   ) {
@@ -234,7 +228,7 @@ public with sharing class BuilderController {
   }
 
   @RemoteAction
-  public static List<Form_Connection__c> saveConnections(List<String> connect) {
+  global static List<Form_Connection__c> saveConnections(List<String> connect) {
     String sConnections = connect[0];
     String formId = connect[1];
     String sRemoved = connect[2];
@@ -266,7 +260,7 @@ public with sharing class BuilderController {
   }
 
   @RemoteAction
-  public static Map<String, List<Object>> saveActiveFieldConnections(
+  global static Map<String, List<Object>> saveActiveFieldConnections(
     String sActiveConnectionFields,
     String connectionId
   ) {
@@ -300,7 +294,7 @@ public with sharing class BuilderController {
   }
 
   @RemoteAction
-  public static List<Question__c> pageQuestionsDelete(
+  global static List<Question__c> pageQuestionsDelete(
     String sQuestions,
     String formId
   ) {
@@ -318,7 +312,7 @@ public with sharing class BuilderController {
   }
 
   @RemoteAction
-  public static List<Question__c> deleteQuestion(
+  global static List<Question__c> deleteQuestion(
     String sQuestions,
     String sDeleteQuestionId
   ) {
@@ -340,93 +334,86 @@ public with sharing class BuilderController {
     return updatedQuestions;
   }
 
-  @RemoteAction
-  public static List<String> getSObjectsAvailable() {
-    List<String> lookups = new List<String>();
-
-    Map<String, Schema.SObjectType> sObjectsAvailable = Schema.getGlobalDescribe();
-
-    for (Schema.SObjectType so : sObjectsAvailable.values()) {
-      //checkfls
-      if (
-        so.getDescribe().isCreateable() &&
-        so.getDescribe().isUpdateable() &&
-        so.getDescribe().isAccessible()
-      ) {
-        lookups.add(so.getDescribe().getName());
-      }
-    }
-
-    return lookups;
-  }
-
   //maybe update this to pojo for easier deserialization and to make cleaner
+  // @RemoteAction
+  // global static Map<String, Map<String, Map<String, String>>> getSObjectFields(
   @RemoteAction
-  public static Map<String, Map<String, Map<String, String>>> getSObjectFields(
-    String objectType
+  global static List<Map<String, Object>> getSObjectFields(
+    List<String> objectType
   ) {
-    SObjectType sObjType = ((SObject) Type.forName(objectType).newInstance())
+    SObjectType sObjType = ((SObject) Type.forName(objectType[0]).newInstance())
       .getSObjectType();
 
     Schema.DescribeSObjectResult result = sObjType.getDescribe();
 
     Map<String, Schema.SObjectField> fields = result.fields.getMap();
 
-    Map<String, Map<String, Map<String, String>>> requiredFields = new Map<String, Map<String, Map<String, String>>>();
+    List<Map<String, Object>> sObjectFields = new List<Map<String, Object>>();
 
-    requiredFields.put('Required', new Map<String, Map<String, String>>());
-    requiredFields.put('NotRequired', new Map<String, Map<String, String>>());
+    // Map<String, Map<String, Map<String, String>>> requiredFields = new Map<String, Map<String, Map<String, String>>>();
+
+    // requiredFields.put('Required', new Map<String, Map<String, String>>());
+    // requiredFields.put('NotRequired', new Map<String, Map<String, String>>());
 
     for (String fieldName : fields.keySet()) {
       Schema.SObjectField field = fields.get(fieldName);
-
-      Schema.DescribeFieldResult fieldResult = field.getDescribe();
-
-      String relationshipName = fieldResult.getRelationshipName();
-
+      Schema.DescribeFieldResult fieldDescribeResult = field.getDescribe();
+      String relationshipName = fieldDescribeResult.getRelationshipName();
       String referenceName = null;
 
       if (relationshipName != null) {
-        for (Schema.SObjectType reference : fieldResult.getReferenceTo()) {
+        for (
+          Schema.SObjectType reference : fieldDescribeResult.getReferenceTo()
+        ) {
           referenceName = reference.getDescribe().getName();
         }
       }
 
-      Schema.DisplayType type = fieldResult.getType();
+      Schema.DisplayType type = fieldDescribeResult.getType();
 
-      Boolean isFieldReq = fieldResult.isNillable();
-      Boolean isFieldCreateable = fieldResult.isCreateable();
-      Boolean isDefaultedOnCreate = fieldResult.isDefaultedOnCreate();
-      Boolean isAccessible = fieldResult.isAccessible();
-      Boolean isUpdateable = fieldResult.isUpdateable();
+      Boolean isFieldReq = fieldDescribeResult.isNillable();
+      Boolean isFieldCreateable = fieldDescribeResult.isCreateable();
+      Boolean isDefaultedOnCreate = fieldDescribeResult.isDefaultedOnCreate();
+      Boolean isAccessible = fieldDescribeResult.isAccessible();
+      Boolean isUpdateable = fieldDescribeResult.isUpdateable();
 
-      // this can be updated to stripInaccessible
+      if (!isDefaultedOnCreate && isFieldCreateable && isAccessible) {
+        Map<String, Object> sObjectField = new Map<String, Object>{
+          'field' => '' + field,
+          'required' => isFieldReq,
+          'type' => '' + type,
+          'reference' => referenceName != null ? '' + referenceName : null,
+          'prefill' => isDefaultedOnCreate
+        };
 
-      if (
-        !isFieldReq &&
-        isFieldCreateable &&
-        !isDefaultedOnCreate &&
-        isAccessible
-      ) {
-        requiredFields.get('Required')
-          .put(
-            '' + field,
-            new Map<String, String>{ '' + type => '' + referenceName }
-          );
-      } else if (
-        isFieldCreateable &&
-        !isDefaultedOnCreate &&
-        isAccessible &&
-        isUpdateable
-      ) {
-        requiredFields.get('NotRequired')
-          .put(
-            '' + field,
-            new Map<String, String>{ '' + type => '' + referenceName }
-          );
+        sObjectFields.add(sObjectField);
       }
+
+      // if (
+      //   !isFieldReq &&
+      //   isFieldCreateable &&
+      //   !isDefaultedOnCreate &&
+      //   isAccessible
+      // ) {
+      //   requiredFields.get('Required')
+      //     .put(
+      //       '' + field,
+      //       new Map<String, String>{ '' + type => '' + referenceName }
+      //     );
+      // } else if (
+      //   isFieldCreateable &&
+      //   !isDefaultedOnCreate &&
+      //   isAccessible &&
+      //   isUpdateable
+      // ) {
+      //   requiredFields.get('NotRequired')
+      //     .put(
+      //       '' + field,
+      //       new Map<String, String>{ '' + type => '' + referenceName }
+      //     );
+      // }
     }
 
-    return requiredFields;
+    return sObjectFields;
   }
 }

@@ -18,9 +18,13 @@ sfdx force:user:password:generate --targetusername cf-scratch-org
 
 sfdx force:user:display --targetusername cf-scratch-org
 
+## Assign persmission set
+
+sfdx force:user:permset:assign -n Clarity_Forms_Builder -u cf-scratch-org
+
 ## Delete scratch org
 
-sfdx force:org:delete -u test-vkriuxsmyqff@example.com
+sfdx force:org:delete -u test-7n0glslr7plg@example.com
 
 ## Use Cases
 

@@ -20,10 +20,10 @@ public class QuestionsSelector extends fflib_SObjectSelector implements IQuestio
       Question__c.Salesforce_Object__c,
       Question__c.Logic__c,
       Question__c.FreeText_Type__c,
-      Question__c.Form__c,
       Question__c.Record_Group__c,
       Question__c.Prefill_Type__c,
-      Question__c.Attachment_Type__c
+      Question__c.Attachment_Type__c,
+      Question__c.Form_Version__c
     };
   }
 
@@ -43,20 +43,20 @@ public class QuestionsSelector extends fflib_SObjectSelector implements IQuestio
     return (List<Question__c>) Database.query(query.toSOQL());
   }
 
-  public List<Question__c> selectByFormIds(Set<Id> formIds) {
+  public List<Question__c> selectByFormVersionIds(Set<Id> formVersionIds) {
     String lookup = 'Lookup';
     String reference = 'REFERENCE';
 
     fflib_QueryFactory query = newQueryFactory();
-    query.setCondition('Form__c IN :formIds');
+    query.setCondition('Form_Version__c IN :formVersionIds');
     query.setCondition('Type__c = :lookup OR Type__c = :reference');
 
     return (List<Question__c>) Database.query(query.toSOQL());
   }
 
-  public List<Question__c> selectWithAllDetailsByIds(Set<Id> formIds) {
+  public List<Question__c> selectWithAllDetailsByIds(Set<Id> formVersionIds) {
     fflib_QueryFactory query = newQueryFactory();
-    query.setCondition('Form__c IN :formIds');
+    query.setCondition('Form_Version__c IN :formVersionIds');
     query.addOrdering('Order__c', fflib_QueryFactory.SortOrder.ASCENDING);
 
     new QuestionOptionsSelector()

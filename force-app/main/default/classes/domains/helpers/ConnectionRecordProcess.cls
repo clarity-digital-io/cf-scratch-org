@@ -13,14 +13,14 @@ public class ConnectionRecordProcess {
       if (Connections == null) {
         Connections = new Map<Id, List<Form_Connection__c>>();
 
-        Set<Id> formIds = new Set<Id>();
+        Set<Id> formVersionIds = new Set<Id>();
 
         for (Response__c response : (List<Response__c>) Trigger.new) {
-          formIds.add(response.cforms__Form__c);
+          formVersionIds.add(response.cforms__Form_Version__c);
         }
 
         List<Form_Connection__c> formConnections = FormConnectionsSelector.newInstance()
-          .selectConnectionsByFormIds(formIds);
+          .selectConnectionsByFormVersionIds(formVersionIds);
 
         for (Form_Connection__c connection : formConnections) {
           if (Connections.get(connection.Form__c) == null) {

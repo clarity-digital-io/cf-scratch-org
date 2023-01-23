@@ -5,26 +5,16 @@ public with sharing class FormConnectionsService {
     return service().getConnectionsByResponseId(responseId);
   }
 
-  public static List<Form_Connection__c> getConnectionsByFormId(String formId) {
-    return service().getConnectionsByFormId(formId);
+  public static List<Form_Connection__c> getConnectionsByFormVersionId(
+    String formVersionId
+  ) {
+    return service().getConnectionsByFormVersionId(formVersionId);
   }
 
-  public static List<Form_Connection__c> getConnectionsByFormIds(
-    Set<Id> formIds
+  public static List<Form_Connection__c> getConnectionsByFormVersionIds(
+    Set<Id> formVersionIds
   ) {
-    return service().getConnectionsByFormIds(formIds);
-  }
-
-  public static List<Form_Connection__c> getConnectionsByFormName(
-    String formName
-  ) {
-    return service().getConnectionsByFormName(formName);
-  }
-
-  public static List<Form_Connection__c> getConnectionsByFormStatus(
-    String status
-  ) {
-    return service().getConnectionsByFormStatus(status);
+    return service().getConnectionsByFormVersionIds(formVersionIds);
   }
 
   public static List<Form_Connection__c> save(

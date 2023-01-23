@@ -2,6 +2,7 @@ public class Application {
   public static final fflib_Application.UnitOfWorkFactory unitOfWork = new fflib_Application.UnitOfWorkFactory(
     new List<SObjectType>{
       Form__c.sObjectType,
+      Form_Version__c.sObjectType,
       Question__c.sObjectType,
       Question_Option__c.sObjectType,
       Response__c.sObjectType,
@@ -16,14 +17,14 @@ public class Application {
       Log__c.sObjectType,
       User.sObjectType,
       PermissionSetAssignment.sObjectType,
-      Opportunity.sObjectType,
-      Field__mdt.SObjectType
+      Opportunity.sObjectType
     }
   );
 
   public static final fflib_Application.ServiceFactory service = new fflib_Application.ServiceFactory(
     new Map<Type, Type>{
       IFormsService.class => FormsServiceImpl.class,
+      IFormVersionsService.class => FormVersionsServiceImpl.class,
       IFormConnectionsService.class => FormConnectionsServiceImpl.class,
       IFormConnectionFieldsService.class => FormConnectionFieldsServiceImpl.class,
       IResponsesService.class => ResponsesServiceImpl.class,
@@ -42,6 +43,7 @@ public class Application {
   public static final fflib_Application.SelectorFactory selector = new fflib_Application.SelectorFactory(
     new Map<SObjectType, Type>{
       Form__c.sObjectType => FormsSelector.class,
+      Form_Version__c.sObjectType => FormVersionsSelector.class,
       Form_Connection__c.sObjectType => FormConnectionsSelector.class,
       Form_Connection_Process__c.sObjectType => FormConnectionProcessSelector.class,
       Form_Connection_Field__c.sObjectType => FormConnectionFieldsSelector.class,
@@ -63,6 +65,7 @@ public class Application {
     Application.Selector,
     new Map<SObjectType, Type>{
       Form__c.sObjectType => Forms.Constructor.class,
+      Form_Version__c.sObjectType => FormVersions.Constructor.class,
       Response__c.sObjectType => Responses.Constructor.class,
       Form_Connection__c.sObjectType => FormConnections.Constructor.class,
       ContentVersion.sObjectType => ContentVersions.Constructor.class,

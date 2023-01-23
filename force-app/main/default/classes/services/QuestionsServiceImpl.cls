@@ -5,15 +5,15 @@ public class QuestionsServiceImpl implements IQuestionsService {
     return questions;
   }
 
-  public List<Question__c> getFormsQuestions(Set<Id> formIds) {
+  public List<Question__c> getFormVersionsQuestions(Set<Id> formversionIds) {
     List<Question__c> questions = QuestionsSelector.newInstance()
-      .selectWithAllDetailsByIds(formIds);
+      .selectWithAllDetailsByIds(formVersionIds);
     return questions;
   }
 
-  public List<Question__c> getFormQuestions(Id formId) {
+  public List<Question__c> getFormVersionQuestions(Id formVersionId) {
     List<Question__c> questions = QuestionsSelector.newInstance()
-      .selectWithAllDetailsByIds(new Set<Id>{ formId });
+      .selectWithAllDetailsByIds(new Set<Id>{ formVersionId });
     return questions;
   }
 
@@ -166,6 +166,43 @@ public class QuestionsServiceImpl implements IQuestionsService {
 
     List<Question__c> questions = QuestionsSelector.newInstance()
       .selectWithAllDetailsByIds(new Set<Id>{ formId });
+
+    return questions;
+  }
+
+  public List<Question__c> save(
+    List<Question__c> questions,
+    List<Question_Option__c> questionOptions,
+    List<Question_Criteria__c> questionCriteria
+  ) {
+    fflib_ISObjectUnitOfWork uow = Application.UnitOfWork.newInstance(
+      new fflib_SecureDML()
+    );
+
+    uow.registerUpsert(questions);
+
+    Map<String, Question__c> externalIdToQuestion = new Map<String, Question__c>();
+
+    // Add External Id only to Question__c in Builder
+    for (Question__c question : questions) {
+      externalIdToQuestion.put(question.ExternalBuilderId__c, question);
+    }
+
+    // register options
+    for (Question_Option__c option : questionOptions) {
+      Question__c question = externalIdToQuestion.get(option.Question__c);
+      option.Question__c = question.Id;
+      uow.registerNew(option, Question_Option__c.Question__c, question);
+    }
+
+    // register criteria
+    for (Question_Criteria__c criterion : questionCriteria) {
+      Question__c question = externalIdToQuestion.get(criterion.Question__c);
+      criterion.Question__c = question.Id;
+      uow.registerNew(criterion, Question_Criteria__c.Question__c, question);
+    }
+
+    uow.commitWork();
 
     return questions;
   }
